@@ -1,15 +1,16 @@
 #landing-page {
     background-color: #000;
-    box-sizing: border-box;
+    overflow-y: hidden;
+    max-height: 100vh;
+}
+
+app-header-component {
+    z-index: 100;
+    position: relative;
 }
 
 #landing-cards {
-    display: flex;
-    height: 100vh;
-    align-items: center;
-    justify-content: center;
-}
-
-.landing-card {
-    margin: 150px;
+    z-index: 50;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 }
