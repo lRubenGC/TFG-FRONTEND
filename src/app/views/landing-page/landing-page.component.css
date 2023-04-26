@@ -13,4 +13,5 @@ app-header-component {
     z-index: 50;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    cursor: pointer;
 }
