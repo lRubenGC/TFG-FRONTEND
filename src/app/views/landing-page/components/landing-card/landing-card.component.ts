@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-landing-card',
@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingCardComponent implements OnInit {
 
+  @Input() config = {
+    backgroundImg: '',
+    popImg: '',
+    linkTo: ''
+  }
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  goTo(link: string) {
+    console.log(link);
   }
 
 }
