@@ -1,7 +1,6 @@
 #landing-page {
-    background-color: #000;
     overflow-y: hidden;
-    max-height: 100vh;
+    height: 100vh;
 }
 
 app-header-component {
@@ -10,8 +9,13 @@ app-header-component {
 }
 
 #landing-cards {
+    width: 75%;
     z-index: 50;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    cursor: pointer;
+    margin: 50px auto;
+}
+
+.landing-card {
+    padding: 20px;
 }

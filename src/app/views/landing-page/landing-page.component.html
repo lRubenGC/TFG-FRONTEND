@@ -2,13 +2,15 @@
     <!-- Header -->
     <app-header-component></app-header-component>
 
-    <!-- 3 Car section cards -->
-    <div id="landing-cards">
-        <app-landing-card 
-            *ngFor="let card of landingCards"
-            class="landing-card"
-            [config]="card">
-        </app-landing-card>
+    <div id="landing-body">
+        <!-- 3 Car section cards -->
+        <div id="landing-cards">
+            <app-landing-card 
+                *ngFor="let card of landingCards"
+                class="landing-card"
+                [config]="card">
+            </app-landing-card>
+        </div>
     </div>
 
 </div>

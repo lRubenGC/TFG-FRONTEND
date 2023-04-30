@@ -9,18 +9,18 @@ export class LandingPageComponent implements OnInit {
 
   landingCards = [
     {
-      backgroundImg: 'https://w0.peakpx.com/wallpaper/632/776/HD-wallpaper-hotwheels-wall-car-hotwheels-thumbnail.jpg',
-      popImg: 'https://i.imgur.com/2u3EXCX.png',
+      backgroundImg: '../../../assets/landing_basic.png',
+      popImg: '../../../assets/landing_basic_pop.png',
       linkTo: 'basic'
     },
     {
-      backgroundImg: 'https://i.ytimg.com/vi/erVXf-9wpNI/maxresdefault.jpg',
-      popImg: 'https://i.imgur.com/2u3EXCX.png',
+      backgroundImg: '../../../assets/landing_premium.png',
+      popImg: '../../../assets/landing_premium_pop(2).png',
       linkTo: 'premium'
     },
     {
-      backgroundImg: 'https://preview.redd.it/swq3kqbgkqh41.jpg?auto=webp&s=4ff33bf4e1b08db0e9bec1754d81721bfb48a90a',
-      popImg: 'https://i.imgur.com/2u3EXCX.png',
+      backgroundImg: '../../../assets/landing_custom(0).png',
+      popImg: '../../../assets/landing_custom_pop.png',
       linkTo: 'custom'
     }
   ]
