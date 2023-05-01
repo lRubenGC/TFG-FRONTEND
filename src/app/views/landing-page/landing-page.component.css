@@ -8,14 +8,12 @@ app-header-component {
     position: relative;
 }
 
+#landing-body {
+    text-align: center;
+}
+
 #landing-cards {
-    width: 75%;
     z-index: 50;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    margin: 50px auto;
-}
-
-.landing-card {
-    padding: 20px;
 }
