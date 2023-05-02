@@ -1,3 +1,13 @@
+h1 {
+    text-align: left;
+    margin: 0;
+    margin-left: 10px;
+}
+
+h1::first-letter {
+    color: var(--dark-primary-100);
+}
+
 article {
     position: relative;
     transition: all .3s ease;
@@ -7,13 +17,13 @@ article {
 article img:first-child {
     object-fit: cover;
     width: 100%;
-    max-height: 400px;
+    max-height: 250px;
 }
 
 article img:last-child {
     position: absolute;
     width: 300px;
-    bottom: 10%;
+    bottom: 20%;
     left: 0;
     right: 0;
     margin: auto;
@@ -23,8 +33,7 @@ article img:last-child {
 }
 
 article:hover {
-    transform:
-        perspective(250px) translateY(-5%) translateZ(0);
+    transform: perspective(250px) translateZ(0);
 }
 
 article::before {
@@ -36,9 +45,10 @@ article::before {
     background-image: linear-gradient(to bottom,
             transparent 10%,
             rgba(0, 0, 0, 0.5) 50%,
-            rgba(0, 0, 0) 95%);
+            rgba(0, 0, 0) 90%);
     opacity: 0;
     transition: all .3s ease;
+    margin-bottom: 1.2%;
 }
 
 article:hover::before {

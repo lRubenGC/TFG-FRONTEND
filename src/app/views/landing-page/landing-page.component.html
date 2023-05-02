@@ -3,9 +3,13 @@
     <app-header-component></app-header-component>
 
     <div id="landing-body">
-        <!-- Welcome message -->
-        <h2>Welcome to Cold Wheels!</h2>
-        
+
+        <!-- Welcome section -->
+        <div id="landing-welcome">
+            <h1>Welcome</h1>
+            <img src="../../../assets/landing_welcome_img.png" alt="landing-welcome-img">
+        </div>
+
         <!-- 3 Car section cards -->
         <div id="landing-cards">
             <app-landing-card 
@@ -14,6 +18,7 @@
                 [config]="card">
             </app-landing-card>
         </div>
+        
     </div>
 
 </div>

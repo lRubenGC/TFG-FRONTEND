@@ -10,7 +10,8 @@ export class LandingCardComponent implements OnInit {
   @Input() config = {
     backgroundImg: '',
     popImg: '',
-    linkTo: ''
+    linkTo: '',
+    title: ''
   }
 
   constructor() { }

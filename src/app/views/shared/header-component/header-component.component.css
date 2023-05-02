@@ -11,15 +11,13 @@ header {
     height: 100px;
 }
 
+#header-logo {
+    margin-left: 20px;
+}
+
 ul {
     display: flex;
     list-style: none;
-}
-
-img {
-    width: 70px;
-    cursor: pointer;
-    margin: 20px;
 }
 
 li {
@@ -47,7 +45,7 @@ li:last-child {
     outline: none;
     border-radius: 25px;
     transition: all .5s ease-in-out;
-    background-color: #22a6b3;
+    background-color: var(--dark-primary-100);
     padding-right: 40px;
     color: #fff;
 }

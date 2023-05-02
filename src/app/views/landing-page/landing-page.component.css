@@ -12,8 +12,26 @@ app-header-component {
     text-align: center;
 }
 
+#landing-welcome {
+    height: 400px;
+}
+
+#landing-body h1 {
+    position: absolute;
+}
+
+#landing-body img {
+    max-height: 100%;
+}
+
 #landing-cards {
     z-index: 50;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    width: 80%;
+    margin: 80px auto;
+}
+
+.landing-card {
+    padding: 0 25px;
 }
