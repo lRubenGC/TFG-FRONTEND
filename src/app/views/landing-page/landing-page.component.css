@@ -1,27 +1,21 @@
 #landing-page {
     overflow-y: hidden;
+    overflow-x: hidden;
     height: 100vh;
 }
 
-app-header-component {
-    z-index: 100;
-    position: relative;
-}
-
-#landing-body {
+#landing-welcome {
+    height: 55vh;
     text-align: center;
 }
 
-#landing-welcome {
-    height: 400px;
-}
-
-#landing-body h1 {
-    position: absolute;
-}
-
-#landing-body img {
+#landing-welcome img {
     max-height: 100%;
+    z-index: 10;
+}
+
+#landing-welcome #landing-welcome-text {
+    text-align: left;
 }
 
 #landing-cards {
@@ -29,7 +23,7 @@ app-header-component {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     width: 80%;
-    margin: 80px auto;
+    margin: 40px auto;
 }
 
 .landing-card {
