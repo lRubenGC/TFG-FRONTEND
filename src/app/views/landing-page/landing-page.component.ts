@@ -9,20 +9,20 @@ export class LandingPageComponent implements OnInit {
 
   landingCards = [
     {
-      backgroundImg: '../../../assets/landing_basic.png',
-      popImg: '../../../assets/landing_basic_pop.png',
+      backgroundImg: '../../../assets/landing_page/basic_bg.png',
+      popImg: '../../../assets/landing_page/basic_pop.png',
       linkTo: 'basic',
       title: 'Mainline'
     },
     {
-      backgroundImg: '../../../assets/landing_premium.png',
-      popImg: '../../../assets/landing_premium_pop(2).png',
+      backgroundImg: '../../../assets/landing_page/premium_bg.png',
+      popImg: '../../../assets/landing_page/premium_pop.png',
       linkTo: 'premium',
       title: 'Premium'
     },
     {
-      backgroundImg: '../../../assets/landing_custom(0).png',
-      popImg: '../../../assets/landing_custom_pop.png',
+      backgroundImg: '../../../assets/landing_page/custom_bg.png',
+      popImg: '../../../assets/landing_page/custom_pop.png',
       linkTo: 'custom',
       title: 'Custom'
     }
