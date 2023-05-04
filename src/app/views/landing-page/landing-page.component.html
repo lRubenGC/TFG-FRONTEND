@@ -6,21 +6,21 @@
 
         <!-- Welcome section -->
         <div id="landing-welcome">
-            <img src="../../../assets/landing_welcome_img.png" alt="landing-welcome-img">
+            <span>·</span>
             <div id="landing-welcome-text">
-                <h1>Welcome</h1>
+                <h1>Welcome to Cold Wheels</h1>
+                <p>Here you will be able to track your diecast collection, create an account
+                    <button id="button-account">Here</button>
+                </p>
             </div>
         </div>
 
         <!-- 3 Car section cards -->
         <div id="landing-cards">
-            <app-landing-card 
-                *ngFor="let card of landingCards"
-                class="landing-card"
-                [config]="card">
+            <app-landing-card *ngFor="let card of landingCards" class="landing-card" [config]="card">
             </app-landing-card>
         </div>
-        
+
     </div>
 
 </div>

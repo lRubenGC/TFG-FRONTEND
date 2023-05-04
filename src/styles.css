@@ -22,9 +22,12 @@
     --light-bg-300:#c2c2c2;
 }
 
-body {
+* {
     margin: 0;
     padding: 0;
+}
+
+body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida  Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     background: var(--dark-bg-100);
     color: var(--dark-text-100);
