@@ -39,14 +39,31 @@
 * {
     margin: 0;
     padding: 0;
+    font-size: 18px;
+    font-family: 'Inter';
 }
 
 body {
-    /* font-family: 'Inter'; */
     background: var(--dark-bg-100);
     color: var(--dark-text-100);
 }
 
-h1, h2 {
+h1, h2, h3, h4 {
     font-family: 'DMSerif';
+}
+
+h1 {
+    font-size: 38px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+h3 {
+    font-size: 26px;
+}
+
+h4 {
+    font-size: 22px;
 }
