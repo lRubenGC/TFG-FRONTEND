@@ -7,7 +7,6 @@
     position: absolute;
     background-color: transparent;
     width: 100vw;
-
 }
 
 /* Rest of views */
@@ -17,7 +16,7 @@ header {
     align-items: center;
     background-color: var(--dark-bg-100);
     color: var(--dark-text-100);
-    height: 100px;
+    height: 70px;
 }
 
 #header-logo {
@@ -45,6 +44,11 @@ button {
     color: white;
     border: none;
     cursor: pointer;
+    font-size: 18px;
+}
+
+i {
+    font-size: 18px;
 }
 
 .search-box {
@@ -65,6 +69,7 @@ button {
     background-color: transparent;
     padding-right: 40px;
     color: #fff;
+    font-size: 18px;
 }
 
 .input-search::placeholder {
