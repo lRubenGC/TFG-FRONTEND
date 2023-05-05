@@ -4,8 +4,10 @@ h2 {
     margin-left: 10px;
 }
 
-h2::first-letter {
+span {
     color: var(--dark-primary-100);
+    font-family: 'DMSerif';
+    font-size: 30px;
 }
 
 article {
