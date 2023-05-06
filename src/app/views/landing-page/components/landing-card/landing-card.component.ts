@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing-card',
@@ -14,13 +15,13 @@ export class LandingCardComponent implements OnInit {
     title: ''
   }
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
   goTo(link: string) {
-    console.log(link);
+    this.router.navigate([link]);
   }
 
 }

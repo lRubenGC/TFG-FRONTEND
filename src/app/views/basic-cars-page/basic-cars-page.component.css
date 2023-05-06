@@ -1,0 +1,18 @@
+#basic-cars-land-section {
+    display: flex;
+    margin: 20px 50px 0;
+    justify-content: space-between;
+}
+
+#basic-explanation {
+    width: 50%;
+}
+
+#basic-filter-section {
+    width: 25%;
+}
+
+select {
+    width: 100%;
+    text-align: center;
+}

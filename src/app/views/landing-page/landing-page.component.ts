@@ -12,7 +12,7 @@ export class LandingPageComponent implements OnInit {
       backgroundImg: '../../../assets/landing_page/basic_bg.png',
       popImg: '../../../assets/landing_page/basic_pop.png',
       linkTo: 'list-basic',
-      title: 'Mainline'
+      title: 'Basic'
     },
     {
       backgroundImg: '../../../assets/landing_page/premium_bg.png',
