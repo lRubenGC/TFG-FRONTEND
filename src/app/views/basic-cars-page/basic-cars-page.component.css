@@ -1,18 +1,68 @@
 #basic-cars-land-section {
     display: flex;
-    margin: 20px 50px 0;
     justify-content: space-between;
+    background: url('../../../assets/landing_page/welcome_bg.png');
+    background-position: center center;
+    background-size: cover;
+    padding: 2em;
 }
 
 #basic-explanation {
+    margin: 3em 6em 0;
     width: 50%;
 }
 
 #basic-filter-section {
+    margin: 3em 6em 0;
     width: 25%;
 }
 
+.basic-filter-item {
+    margin-top: 1em;
+}
+
 select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0;
+    background: var(--dark-bg-200);
+    flex: 1;
+    padding: 0 .5em;
+    color: #fff;
+    cursor: pointer;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+.car-select {
+    position: relative;
+    display: flex;
     width: 100%;
-    text-align: center;
+    height: 3em;
+    line-height: 3;
+    background: var(--dark-bg-100);
+    overflow: hidden;
+    border-radius: .25em;
+}
+
+.car-select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 1em;
+    background: var(--dark-bg-100);
+    pointer-events: none;
+    transition: .25s all ease;
+}
+
+.car-select:hover::after {
+    color: var(--dark-primary-100);
+
 }

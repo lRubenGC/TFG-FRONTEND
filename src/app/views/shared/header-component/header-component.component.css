@@ -2,21 +2,20 @@
     box-sizing: border-box;
 }
 
-/* If view is Landing Page */
+/* If view is Landing Page
 .header-absolute {
-    position: absolute;
-    background-color: transparent;
-    width: 100vw;
-}
+
+} */
 
 /* Rest of views */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--dark-bg-100);
-    color: var(--dark-text-100);
     height: 70px;
+    position: absolute;
+    background-color: transparent;
+    width: 100vw;
 }
 
 #header-logo {

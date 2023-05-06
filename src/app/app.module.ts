@@ -28,6 +28,8 @@ import { NotificationCarComponentComponent } from './views/shared/notification-c
 // USER PAGES
 import { UserProfileComponent } from './views/user/user-profile/user-profile.component';
 import { UserConfigComponent } from './views/user/user-config/user-config.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -62,7 +64,9 @@ import { UserConfigComponent } from './views/user/user-config/user-config.compon
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

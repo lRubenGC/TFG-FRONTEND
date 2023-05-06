@@ -21,20 +21,35 @@
     
             <!-- Filter section -->
             <section id="basic-filter-section">
-                <h3>Filters</h3>
-                <hr>
-                <h4>Year</h4>
-                <select name="" id="">
-                    <option value="">2018</option>
-                    <option value="">2019</option>
-                </select>
+
+                <div class="basic-filter-item">
+                    <h3>Year</h3>
+                    <div class="car-select">
+                        <select name="" id="" [(ngModel)]="selectedYear" (change)="getCars(selectedYear)">
+                            <option *ngFor="let year of availableYears" [value]="year">{{ year }}</option>
+                        </select>
+                          
+                    </div>
+                </div>
+
+                <div class="basic-filter-item">
+                    <h3>Serie</h3>
+                    <div class="car-select">
+                        <select name="" id="">
+                            <option *ngFor="let serie of availableSeries" [value]="serie">{{ serie }}</option>
+                        </select>
+                    </div>
+                </div>
+
             </section>
 
         </div>
 
 
         <!-- Car list -->
-
+        <div id="basic-cars-list">
+            <!-- <h2 *ngFor="let car of cars">{{ car.model_name }}</h2> -->
+        </div>
 
     </div>
 
