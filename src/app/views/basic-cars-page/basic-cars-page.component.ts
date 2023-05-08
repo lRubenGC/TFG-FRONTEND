@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BasicCarsService } from './basic-cars.service';
 import { msgCardInterface } from 'src/app/models/shared.interface';
-import { lastValueFrom } from 'rxjs';
+import { Subscription, lastValueFrom } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-basic-cars-page',
@@ -23,14 +24,33 @@ export class BasicCarsPageComponent implements OnInit {
     button: false,
   }
 
-  constructor(private basicCarsService: BasicCarsService, private translate: TranslateService) {
-    translate.setDefaultLang('en');
-    translate.use('es');
-  }
+  private subscription!: Subscription;
 
-  async ngOnInit() {
+  constructor(
+    private basicCarsService: BasicCarsService,
+    private translate: TranslateService,
+    private languageService: LanguageService
+  ) {}
+
+  ngOnInit() {
     this.getCars(this.selectedYear);
 
+    this.subscription = this.languageService.languageChanged$.subscribe(lang => {
+      this.translate.use(lang);
+      this.changeLanguage();
+    })
+
+    this.changeLanguage();
+  }
+
+  getCars(year: string) {
+    this.basicCarsService.getCarsByYear(year).subscribe(cars => {
+      this.cars = cars;
+      console.log(cars);
+    })
+  }
+
+  async changeLanguage() {
     const cardTitle = this.translate.get('BASIC_CARS_TITLE');
     this.msg_card.title = await lastValueFrom(cardTitle);
 
@@ -42,13 +62,6 @@ export class BasicCarsPageComponent implements OnInit {
 
     const cardDesc3 = this.translate.get('BASIC_CARS_DESCRIPTION_3');
     this.msg_card.description[2] = await lastValueFrom(cardDesc3);
-  }
-
-  getCars(year: string) {
-    this.basicCarsService.getCarsByYear(year).subscribe(cars => {
-      this.cars = cars;
-      console.log(cars);
-    })
   }
 
 }

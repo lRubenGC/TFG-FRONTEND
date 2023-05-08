@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Subscription } from 'rxjs';
 
+import { LanguageService } from "../../services/language.service";
 import { landingCardInterface } from 'src/app/models/landingPage.interface';
 import { msgCardInterface } from 'src/app/models/shared.interface';
 
@@ -11,7 +12,7 @@ import { msgCardInterface } from 'src/app/models/shared.interface';
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.css']
 })
-export class LandingPageComponent implements OnInit {
+export class LandingPageComponent implements OnInit, OnDestroy {
 
   landingCards: landingCardInterface[] = [
     {
@@ -41,12 +42,23 @@ export class LandingPageComponent implements OnInit {
     buttonName: ''
   }
 
-  constructor(private translate: TranslateService) {
-    translate.setDefaultLang('en');
-    translate.use('es');
+  private subscription!: Subscription;
+
+  constructor(
+    private translate: TranslateService,
+    private languageService: LanguageService,
+  ) {}
+
+  ngOnInit() {
+    this.subscription = this.languageService.languageChanged$.subscribe(lang => {
+      this.translate.use(lang);
+      this.changeLanguage();
+    })
+
+    this.changeLanguage();
   }
 
-  async ngOnInit() {
+  async changeLanguage() {
     const cardTitle = this.translate.get('LANDING_CARD_TITLE');
     this.msg_card.title = await lastValueFrom(cardTitle);
 
@@ -64,6 +76,10 @@ export class LandingPageComponent implements OnInit {
 
     const cardButton = this.translate.get('LANDING_CARD_BUTTON');
     this.msg_card.buttonName = await lastValueFrom(cardButton);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

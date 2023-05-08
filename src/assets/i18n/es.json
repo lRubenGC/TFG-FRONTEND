@@ -8,5 +8,13 @@
     "BASIC_CARS_TITLE": "Linea Básica",
     "BASIC_CARS_DESCRIPTION_1": "Cada año salen cientos de coches básicos, los cuales pertenecen a diferentes series (Exotics, Retro racers, etc)",
     "BASIC_CARS_DESCRIPTION_2": "También hay series especiales, como los Red edition",
-    "BASIC_CARS_DESCRIPTION_3": "Y por otra parte existen los tesoros (Treasure hunts y Super treasure hunts) que son muy dificiles de encontrar"
+    "BASIC_CARS_DESCRIPTION_3": "Y por otra parte existen los tesoros (Treasure hunts y Super treasure hunts) que son muy dificiles de encontrar",
+    "HEADER_ABOUT": "Sobre CW",
+    "HEADER_ACCOUNT": "Cuenta",
+    "HEADER_LANGUAGE": "Idioma",
+    "HEADER_SEARCH": "Buscar un coche...",
+    "HEADER_ENGLISH": "Inglés",
+    "HEADER_SPANISH": "Español",
+    "BASIC_CARS_YEAR": "Año",
+    "BASIC_CARS_SERIE": "Serie"
 }

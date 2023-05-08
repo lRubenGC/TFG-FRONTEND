@@ -4,17 +4,23 @@
     <div (click)="returnHome()" id="header-logo">
         <h1>CW</h1>
     </div>
-    
+
     <!-- Items -->
     <ul>
         <!-- Search Bar -->
         <li>
             <div class="search-box">
                 <button class="btn-search"><i class="fas fa-search"></i></button>
-                <input type="text" class="input-search" placeholder="Search a car...">
+                <input type="text" class="input-search" placeholder="{{ 'HEADER_SEARCH' | translate }}">
             </div>
         </li>
-        <li><button>About</button></li>
-        <li><button>Account</button></li>
+        <li><button (click)="toggleDropdown()" id="dropdown-button">{{ 'HEADER_LANGUAGE' | translate }} &dtrif;</button>
+            <div #headerDropdown class="dropdown-content" [ngClass]="{'show': !dropdownOpen}">
+                <a (click)="toggleLanguage('en')">{{ 'HEADER_ENGLISH' | translate }}</a>
+                <a (click)="toggleLanguage('es')">{{ 'HEADER_SPANISH' | translate }}</a>
+            </div>
+        </li>
+        <li><button>{{ 'HEADER_ABOUT' | translate }}</button></li>
+        <li><button>{{ 'HEADER_ACCOUNT' | translate }}</button></li>
     </ul>
 </header>

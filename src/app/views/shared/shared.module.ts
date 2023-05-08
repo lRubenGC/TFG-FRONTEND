@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { TranslateModule } from '@ngx-translate/core';
+
 import { HeaderComponent } from './header-component/header.component';
 import { MsgCardComponent } from './msg-card/msg-card.component';
 
@@ -11,7 +14,8 @@ import { MsgCardComponent } from './msg-card/msg-card.component';
     MsgCardComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    TranslateModule
   ],
   exports: [
     HeaderComponent,

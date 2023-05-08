@@ -16,7 +16,7 @@
 
 .a-button {
     width: fit-content;
-    margin: auto;
+    margin: 1rem auto 0;
     padding: 0.5em 1.7em;
     border: 0.16em solid rgba(255, 255, 255, 0);
     background-color: var(--dark-bg-100-opacity);

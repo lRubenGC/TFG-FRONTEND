@@ -16,7 +16,7 @@
             <section id="basic-filter-section">
 
                 <div class="basic-filter-item">
-                    <h3>Year</h3>
+                    <h3>{{ 'BASIC_CARS_YEAR' | translate }}</h3>
                     <div class="car-select">
                         <select name="" id="" [(ngModel)]="selectedYear" (change)="getCars(selectedYear)">
                             <option *ngFor="let year of availableYears" [value]="year">{{ year }}</option>
@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="basic-filter-item">
-                    <h3>Serie</h3>
+                    <h3>{{ 'BASIC_CARS_SERIE' | translate }}</h3>
                     <div class="car-select">
                         <select name="" id="">
                             <option *ngFor="let serie of availableSeries" [value]="serie">{{ serie }}</option>

@@ -4,17 +4,17 @@
     background: url('../../../assets/images/landing_page/welcome_bg.png');
     background-position: center center;
     background-size: cover;
+    align-items: center;
     padding: 2em;
 }
 
 #basic-explanation {
-    margin: 3em 6em 0;
-    width: 50%;
+    margin: 5em 6em 0;
 }
 
 #basic-filter-section {
     margin: 3em 6em 0;
-    width: 25%;
+    width: 25em;
 }
 
 .basic-filter-item {

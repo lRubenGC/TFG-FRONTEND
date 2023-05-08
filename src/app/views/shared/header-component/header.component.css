@@ -47,6 +47,30 @@ button {
     font-size: 18px;
 }
 
+.show {
+    display: none;
+}
+
+.dropdown-content {
+    position: absolute;
+    margin-top: .2rem;
+    background-color: var(--dark-bg-100);
+    min-width: 8rem;
+    overflow: auto;
+    z-index: 500;
+}
+
+.dropdown-content a {
+    color: #fff;
+    padding: .8rem .6rem;
+    text-decoration: none;
+    display: block;
+}
+
+a:hover {
+    border: 1px solid var(--dark-primary-100);
+}
+
 i {
     font-size: 18px;
 }
