@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BasicCarsService } from './basic-cars.service';
 import { msgCardInterface } from 'src/app/models/shared.interface';
+import { lastValueFrom } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-basic-cars-page',
@@ -16,19 +18,30 @@ export class BasicCarsPageComponent implements OnInit {
   availableSeries = [];
 
   msg_card: msgCardInterface = {
-    // Linea Básica
-    title: 'Basic Line',
-    // Cada año salen cientos de coches básicos, los cuales pertenecen a diferentes series (Exotics, Retro racers, etc).
-    // También hay series especiales, como los Red edition.
-    // Y por otra parte existen los tesoros (Treasure hunts y Super treasure hunts) que son muy dificiles de encontrar.
-    description: ['Every year hundreds of basic cars come out, which belong to different series (Exotics, Retro racers, etc)', 'There are also special series, such as the Red edition.', 'And on the other hand there are treasures (Treasure hunts and Super treasure hunts) that are very difficult to find.'],
+    title: '',
+    description: [],
     button: false,
   }
 
-  constructor(private basicCarsService: BasicCarsService) { }
+  constructor(private basicCarsService: BasicCarsService, private translate: TranslateService) {
+    translate.setDefaultLang('en');
+    translate.use('es');
+  }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.getCars(this.selectedYear);
+
+    const cardTitle = this.translate.get('BASIC_CARS_TITLE');
+    this.msg_card.title = await lastValueFrom(cardTitle);
+
+    const cardDescr1 = this.translate.get('BASIC_CARS_DESCRIPTION_1');
+    this.msg_card.description[0] = await lastValueFrom(cardDescr1);
+
+    const cardDesc2 = this.translate.get('BASIC_CARS_DESCRIPTION_2');
+    this.msg_card.description[1] = await lastValueFrom(cardDesc2);
+
+    const cardDesc3 = this.translate.get('BASIC_CARS_DESCRIPTION_3');
+    this.msg_card.description[2] = await lastValueFrom(cardDesc3);
   }
 
   getCars(year: string) {

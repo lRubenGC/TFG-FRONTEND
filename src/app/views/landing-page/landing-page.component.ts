@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+
+import { lastValueFrom } from 'rxjs';
+
 import { landingCardInterface } from 'src/app/models/landingPage.interface';
 import { msgCardInterface } from 'src/app/models/shared.interface';
 
@@ -11,38 +15,56 @@ export class LandingPageComponent implements OnInit {
 
   landingCards: landingCardInterface[] = [
     {
-      backgroundImg: '../../../assets/landing_page/basic_bg.png',
-      popImg: '../../../assets/landing_page/basic_pop.png',
+      backgroundImg: '../../../assets/images/landing_page/basic_bg.png',
+      popImg: '../../../assets/images/landing_page/basic_pop.png',
       linkTo: 'basic-cars',
       title: 'Basic'
     },
     {
-      backgroundImg: '../../../assets/landing_page/premium_bg.png',
-      popImg: '../../../assets/landing_page/premium_pop.png',
+      backgroundImg: '../../../assets/images/landing_page/premium_bg.png',
+      popImg: '../../../assets/images/landing_page/premium_pop.png',
       linkTo: 'premium-cars',
       title: 'Premium'
     },
     {
-      backgroundImg: '../../../assets/landing_page/custom_bg.png',
-      popImg: '../../../assets/landing_page/custom_pop.png',
+      backgroundImg: '../../../assets/images/landing_page/custom_bg.png',
+      popImg: '../../../assets/images/landing_page/custom_pop.png',
       linkTo: 'custom-cars',
       title: 'Custom'
     }
   ]
 
-
   msg_card: msgCardInterface = {
-    // Bienvenido a Cold Wheels
-    title: 'Welcome to Cold Wheels',
-    // Una aplicacion web para coleccionistas creada por otro coleccionista. Haz clic en las imágenes de abajo para ver los distintos tipos de coches. Aquí podrás registrar tu colección o añadir coches a tu lista de deseados. Estas listas son públicas, por lo que podrás compartirlas. También podrás subir tus coches personalizados y ver los de los demás.
-    description: ['A web application for collectors created by another collector', 'Click on the images below to see the different types of cars', 'Here you can register your collection or add cars to your wish list. These lists are public, so you can share them', 'You will also be able to upload your custom cars and see those of others'],
+    title: '',
+    description: [],
     button: true,
-    buttonName: 'Sign Up'
+    buttonName: ''
   }
 
-  constructor() { }
+  constructor(private translate: TranslateService) {
+    translate.setDefaultLang('en');
+    translate.use('es');
+  }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    const cardTitle = this.translate.get('LANDING_CARD_TITLE');
+    this.msg_card.title = await lastValueFrom(cardTitle);
+
+    const cardDescr1 = this.translate.get('LANDING_CARD_DESCRIPTION_1');
+    this.msg_card.description[0] = await lastValueFrom(cardDescr1);
+
+    const cardDesc2 = this.translate.get('LANDING_CARD_DESCRIPTION_2');
+    this.msg_card.description[1] = await lastValueFrom(cardDesc2);
+
+    const cardDesc3 = this.translate.get('LANDING_CARD_DESCRIPTION_3');
+    this.msg_card.description[2] = await lastValueFrom(cardDesc3);
+
+    const cardDescr4 = this.translate.get('LANDING_CARD_DESCRIPTION_4');
+    this.msg_card.description[3] = await lastValueFrom(cardDescr4);
+
+    const cardButton = this.translate.get('LANDING_CARD_BUTTON');
+    this.msg_card.buttonName = await lastValueFrom(cardButton);
   }
 
 }
+
