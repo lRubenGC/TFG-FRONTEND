@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { landingCardInterface } from 'src/app/models/landingPage.interface';
 
 @Component({
   selector: 'app-landing-card',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LandingCardComponent implements OnInit {
 
-  @Input() config = {
+  @Input() config: landingCardInterface = {
     backgroundImg: '',
     popImg: '',
     linkTo: '',

@@ -6,19 +6,17 @@
 
         <!-- Welcome section -->
         <div id="landing-welcome">
-            <br>
-            <div id="landing-welcome-text">
-                <!-- Bienvenido a Cold Wheels -->
-                <h2>Welcome to Cold Wheels</h2>
-                <!-- Esta es una aplicacion web para coleccionistas creada por otro coleccionista. Aqui puedes ver los coches básicos y premium, y añadirlos a la lista de tu Coleccion/Deseados. Podrás compartir tu perfil para que otras personas puedan ver tus colecciones. También podrás subir tus coches personalizados y ver los de los demás -->
-                <p>This is a collector web application created by another collector. Here you can explore the basic and premium cars so you can add them to your Collection/Wish list. You will be able to share your profile so other people can see your collections. You will also be able to upload your custom cars and see those of others.</p>
-                <a class="a-button">Sign Up<button class="button-account"></button></a>
-            </div>
+            <app-msg-card
+                [config]="msg_card"
+            ></app-msg-card>
         </div>
 
         <!-- 3 Car section cards -->
         <div id="landing-cards">
-            <app-landing-card *ngFor="let card of landingCards" class="landing-card" [config]="card">
+            <app-landing-card
+                *ngFor="let card of landingCards"
+                class="landing-card"
+                [config]="card">
             </app-landing-card>
         </div>
 

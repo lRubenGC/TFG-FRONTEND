@@ -24,7 +24,7 @@ import { AuthModule } from './views/auth/auth.module';
     BrowserModule,
     AppRoutingModule,
 
-    // Views
+    // App Modules
     AuthModule,
     BasicCarsPageModule,
     CustomCarsModule,

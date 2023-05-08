@@ -20,6 +20,7 @@ header {
 
 #header-logo {
     margin: 0 30px;
+    cursor: pointer;
 }
 
 ul {

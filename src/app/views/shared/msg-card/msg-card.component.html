@@ -1,0 +1,9 @@
+<div class="msg-card-container">
+    <div id="welcome-text">
+        <h2>{{ config.title }}</h2>
+        <p *ngFor="let description of config.description">{{ description }}</p>
+        <a *ngIf="config.button" class="a-button">{{ config.buttonName }}
+            <button class="button-account"></button>
+        </a>
+    </div>
+</div>
