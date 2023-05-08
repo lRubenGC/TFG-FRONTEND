@@ -11,19 +11,19 @@ export class LandingPageComponent implements OnInit {
     {
       backgroundImg: '../../../assets/landing_page/basic_bg.png',
       popImg: '../../../assets/landing_page/basic_pop.png',
-      linkTo: 'list-basic',
+      linkTo: 'basic-cars',
       title: 'Basic'
     },
     {
       backgroundImg: '../../../assets/landing_page/premium_bg.png',
       popImg: '../../../assets/landing_page/premium_pop.png',
-      linkTo: 'list-premium',
+      linkTo: 'premium-cars',
       title: 'Premium'
     },
     {
       backgroundImg: '../../../assets/landing_page/custom_bg.png',
       popImg: '../../../assets/landing_page/custom_pop.png',
-      linkTo: 'list-custom',
+      linkTo: 'custom-cars',
       title: 'Custom'
     }
   ]

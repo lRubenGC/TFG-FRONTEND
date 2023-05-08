@@ -10,10 +10,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { BasicCarsPageModule } from './views/basic-cars-page/basic-cars-page.module';
 import { CustomCarsModule } from './views/custom-cars/custom-cars.module';
 import { LandingPageModule } from './views/landing-page/landing-page.module';
-import { LoginPageModule } from './views/login-page/login-page.module';
 import { PremiumCarsPageModule } from './views/premium-cars-page/premium-cars-page.module';
 import { SharedModule } from './views/shared/shared.module';
 import { UserModule } from './views/user/user.module';
+import { AuthModule } from './views/auth/auth.module';
 
 
 @NgModule({
@@ -25,10 +25,10 @@ import { UserModule } from './views/user/user.module';
     AppRoutingModule,
 
     // Views
+    AuthModule,
     BasicCarsPageModule,
     CustomCarsModule,
     LandingPageModule,
-    LoginPageModule,
     PremiumCarsPageModule,
     SharedModule,
     UserModule

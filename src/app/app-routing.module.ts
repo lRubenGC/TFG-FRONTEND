@@ -2,18 +2,33 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { LandingPageComponent } from './views/landing-page/landing-page.component';
-import { LoginPageComponent } from './views/login-page/login-page.component';
-import { BasicCarsPageComponent } from './views/basic-cars-page/basic-cars-page.component';
-import { PremiumCarsPageComponent } from './views/premium-cars-page/premium-cars-page.component';
-import { CustomCarsPageComponent } from './views/custom-cars/custom-cars-page/custom-cars-page.component';
 
 const routes: Routes = [
-  { path: '', component: LandingPageComponent },
-  { path: 'list-basic', component: BasicCarsPageComponent },
-  { path: 'list-premium', component: PremiumCarsPageComponent },
-  { path: 'list-custom', component: CustomCarsPageComponent },
-  { path: 'login', component: LoginPageComponent },
-  { path: '**', redirectTo: '' },
+  {
+    path: '',
+    component: LandingPageComponent
+  },
+  { 
+    path: 'basic-cars',
+    loadChildren: () => import('./views/basic-cars-page/basic-cars-routing.module').then(m => m.BasicCarsRoutingModule)
+  },
+  { 
+    path: 'premium-cars',
+    loadChildren: () => import('./views/premium-cars-page/premium-cars-routing.module').then(m => m.PremiumCarsRoutingModule)
+  },
+  { 
+    path: 'custom-cars',
+    loadChildren: () => import('./views/custom-cars/custom-cars-routing.module').then(m => m.CustomCarsRoutingModule)
+  },
+  { 
+    path: 'auth',
+    loadChildren: () => import('./views/auth/auth-routing.module').then(m => m.AuthRoutingModule)
+  },
+  {
+    path: '**',
+    redirectTo: ''
+  }
+  
 ];
 
 @NgModule({
