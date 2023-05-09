@@ -42,6 +42,7 @@
     padding: 0;
     font-size: 16px;
     font-family: 'Inter';
+
 }
 
 body {
@@ -50,7 +51,8 @@ body {
 }
 
 h1, h2, h3, h4 {
-    font-family: 'DMSerif';
+    /* font-family: 'DMSerif'; */
+    font-family: 'Righteous', sans-serif;
 }
 
 h1 {
@@ -67,4 +69,53 @@ h3 {
 
 h4 {
     font-size: 22px;
+}
+
+/* Series squares */
+.baja-blazers {
+    background: linear-gradient(#C38A31, #E3C405);
+}
+
+.hw-dream-garage {
+    background: linear-gradient(#5C5C59, #9A9A9A);
+}
+
+.experimotors {
+    background: linear-gradient(#ECFF04, #E2E60A);
+}
+
+.hw-metro {
+    background: linear-gradient(#D9D9D9, #9E9E9E);
+}
+
+.batman {
+    background: linear-gradient(#090551, #130D8C);
+}
+
+.hw-screen-time {
+    background: linear-gradient(#5916A0, #551A91);
+}
+
+.tooned {
+    background: linear-gradient(#36B1DF, #319BC2);
+}
+
+.fast-foodie {
+    background: linear-gradient(#EAEE19, #D8DC12);
+}
+
+.hw-turbo {
+    background: linear-gradient(#D7D408, #DEDB1C);
+}
+
+.red-edition {
+    background: linear-gradient(#DC0E0E, #FF0000);
+}
+
+.street-beasts {
+    background: linear-gradient(#117BC5, #2592DF);
+}
+
+.hw-ride-ons {
+    background: linear-gradient(#117BC5, #2592DF);
 }

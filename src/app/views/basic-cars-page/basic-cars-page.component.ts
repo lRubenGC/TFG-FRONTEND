@@ -4,6 +4,7 @@ import { msgCardInterface } from 'src/app/models/shared.interface';
 import { Subscription, lastValueFrom } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from 'src/app/services/language.service';
+import { basicCarInterface } from 'src/app/models/cardTypes.interface';
 
 @Component({
   selector: 'app-basic-cars-page',
@@ -12,7 +13,7 @@ import { LanguageService } from 'src/app/services/language.service';
 })
 export class BasicCarsPageComponent implements OnInit {
 
-  cars = [];
+  cars: basicCarInterface[] = [];
   selectedYear: string = '2022';
 
   availableYears = ['2022', '2021', '2020', '2019', '2018', '2017'];
@@ -45,9 +46,21 @@ export class BasicCarsPageComponent implements OnInit {
 
   getCars(year: string) {
     this.basicCarsService.getCarsByYear(year).subscribe(cars => {
+      cars = cars.map((car: basicCarInterface) => {
+        const series = car.series.split(',');
+        const serie_class = series[0].replace(/ /g, '-').toLowerCase();
+
+        return {
+          ...car,
+          series,
+          serie_class
+        }
+      });
+
       this.cars = cars;
-      console.log(cars);
     })
+
+
   }
 
   async changeLanguage() {

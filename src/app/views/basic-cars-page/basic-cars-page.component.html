@@ -3,7 +3,7 @@
     <app-header></app-header>
 
     <div id="basic-cars-body">
-        
+
         <!-- Landing section -->
         <div id="basic-cars-land-section">
 
@@ -11,7 +11,7 @@
             <section id="basic-explanation">
                 <app-msg-card [config]="msg_card"></app-msg-card>
             </section>
-    
+
             <!-- Filter section -->
             <section id="basic-filter-section">
 
@@ -21,7 +21,7 @@
                         <select name="" id="" [(ngModel)]="selectedYear" (change)="getCars(selectedYear)">
                             <option *ngFor="let year of availableYears" [value]="year">{{ year }}</option>
                         </select>
-                          
+
                     </div>
                 </div>
 
@@ -38,11 +38,27 @@
 
         </div>
 
-
         <!-- Car list -->
         <div id="basic-cars-list">
-            <!-- <h2 *ngFor="let car of cars">{{ car.model_name }}</h2> -->
+
+            <!-- Car item -->
+            <div class="basic-car-item" *ngFor="let car of cars">
+                <h4 [ngClass]="car.model_name.length > 22 ? 'small-title' : ''">{{ car.model_name }}</h4>
+                <img class="banner-image" [src]="car.img" [alt]="car.model_name" />
+                <p class="car-item-subtitle">{{ car.col }} - {{ car.version }}</p>
+                <div class="car-serie-wrapper">
+                    <div class="serie-square" [ngClass]="car.serie_class"></div>
+                    <p>{{ car.series[0] }}</p>
+                </div>
+
+                <!-- <div class="button-wrapper">
+                    <button class="btn outline">DETAILS</button>
+                    <button class="btn fill">BUY NOW</button>
+                </div> -->
+            </div>
+
         </div>
+
 
     </div>
 
