@@ -8,13 +8,13 @@ import { basicCarInterface } from 'src/app/models/cardTypes.interface';
 })
 export class BasicCarsService {
 
-  private apiUrl = 'http://localhost:3000/cars';
+  private apiUrl = 'http://localhost:8000/api';
 
   constructor(private http: HttpClient) { }
   
 
   getCarsByYear(year: string): Observable<any> {
-    // return this.http.get(`${this.apiUrl}/basic-cars/?year=${year}`);
-    return this.http.get(`${this.apiUrl}`);
+    return this.http.get(`${this.apiUrl}/basic-cars/?year=${year}`);
+    // return this.http.get(`${this.apiUrl}`);
   }
 }

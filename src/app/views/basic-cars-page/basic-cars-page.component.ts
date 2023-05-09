@@ -46,7 +46,7 @@ export class BasicCarsPageComponent implements OnInit {
 
   getCars(year: string) {
     this.basicCarsService.getCarsByYear(year).subscribe(cars => {
-      cars = cars.map((car: basicCarInterface) => {
+      cars = cars.cars.map((car: basicCarInterface) => {
         const series = car.series.split(',');
         const serie_class = series[0].replace(/ /g, '-').toLowerCase();
 
