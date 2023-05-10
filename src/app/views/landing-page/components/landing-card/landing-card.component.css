@@ -1,3 +1,7 @@
+.land-card-title {
+    margin-bottom: .1rem;
+}
+
 h2 {
     text-align: left;
     margin: 0;
@@ -6,7 +10,7 @@ h2 {
 
 span {
     color: var(--dark-primary-100);
-    font-family: 'DMSerif';
+    font-family: 'Righteous', sans-serif;
     font-size: 30px;
 }
 

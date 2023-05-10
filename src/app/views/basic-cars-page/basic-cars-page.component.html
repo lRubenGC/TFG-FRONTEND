@@ -18,7 +18,7 @@
                 <div class="basic-filter-item">
                     <h3>{{ 'BASIC_CARS_YEAR' | translate }}</h3>
                     <div class="car-select">
-                        <select name="" id="" [(ngModel)]="selectedYear" (change)="getCars(selectedYear)">
+                        <select [(ngModel)]="selectedYear" (change)="getCars(selectedYear)">
                             <option *ngFor="let year of availableYears" [value]="year">{{ year }}</option>
                         </select>
 
@@ -28,7 +28,12 @@
                 <div class="basic-filter-item">
                     <h3>{{ 'BASIC_CARS_SERIE' | translate }}</h3>
                     <div class="car-select">
-                        <select name="" id="">
+                        <select [(ngModel)]="selectedSerie" (change)="filterSerie(selectedSerie)">
+                            <option value="All">All</option>
+                            <option value="Treasure Hunt">Treasure Hunt</option>
+                            <option value="Super Treasure Hunt">Super Treasure Hunt</option>
+                            <option value="Red Edition">Red Edition</option>
+                            <option value="Walmart Exclusive">Zamac</option>
                             <option *ngFor="let serie of availableSeries" [value]="serie">{{ serie }}</option>
                         </select>
                     </div>
@@ -42,13 +47,17 @@
         <div id="basic-cars-list">
 
             <!-- Car item -->
-            <div class="basic-car-item" *ngFor="let car of cars">
-                <h4 [ngClass]="car.model_name.length > 22 ? 'small-title' : ''">{{ car.model_name }}</h4>
+            <div class="basic-car-item" *ngFor="let car of showedCars">
+                <div class="item-car-title">
+                    <img *ngIf="car.series[1] == 'Treasure Hunt'" src="../../../assets/images/shared/th.png" alt="th icon" class="item-car-th">
+                    <img *ngIf="car.series[1] == 'Super Treasure Hunt'" src="../../../assets/images/shared/sth.png" alt="th icon" class="item-car-th">
+                    <h4 [ngClass]="car.model_name.length > 22 ? 'small-title' : ''">{{ car.model_name }}</h4>
+                </div>
                 <img class="banner-image" [src]="car.img" [alt]="car.model_name" />
-                <p class="car-item-subtitle">{{ car.col }} - {{ car.version }}</p>
+                <p class="car-item-subtitle">{{ car.col }} - {{ car.version }} - {{ car.car_id }}</p>
                 <div class="car-serie-wrapper">
                     <div class="serie-square" [ngClass]="car.serie_class"></div>
-                    <p>{{ car.series[0] }}</p>
+                    <p>{{ car.series[0] }} - {{ car.col_serie }}</p>
                 </div>
 
                 <!-- <div class="button-wrapper">

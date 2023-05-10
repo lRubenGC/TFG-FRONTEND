@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BasicCarsService } from './basic-cars.service';
 import { msgCardInterface } from 'src/app/models/shared.interface';
-import { Subscription, lastValueFrom } from 'rxjs';
+import { Subscription, lastValueFrom, switchMap } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from 'src/app/services/language.service';
 import { basicCarInterface } from 'src/app/models/cardTypes.interface';
@@ -14,9 +14,12 @@ import { basicCarInterface } from 'src/app/models/cardTypes.interface';
 export class BasicCarsPageComponent implements OnInit {
 
   cars: basicCarInterface[] = [];
-  selectedYear: string = '2022';
+  showedCars: basicCarInterface[] = [];
 
-  availableYears = ['2022', '2021', '2020', '2019', '2018', '2017'];
+  selectedYear: string = '2022';
+  selectedSerie: string = 'All';
+
+  availableYears = ['2022', '2021', '2020', '2019', '2018'];
   availableSeries = [];
 
   msg_card: msgCardInterface = {
@@ -45,8 +48,8 @@ export class BasicCarsPageComponent implements OnInit {
   }
 
   getCars(year: string) {
-    this.basicCarsService.getCarsByYear(year).subscribe(cars => {
-      cars = cars.cars.map((car: basicCarInterface) => {
+    this.basicCarsService.getCarsByYear(year).subscribe(res => {
+      const cars = res.cars.map((car: basicCarInterface) => {
         const series = car.series.split(',');
         const serie_class = series[0].replace(/ /g, '-').toLowerCase();
 
@@ -58,9 +61,44 @@ export class BasicCarsPageComponent implements OnInit {
       });
 
       this.cars = cars;
+      this.showedCars = cars;
+    });
+
+    this.getAvailableSeries(year);
+    this.resetSeries();
+
+  }
+
+  getAvailableSeries(year: string) {
+    this.basicCarsService.getAvailableSeries(year).subscribe(res => {
+      const series = res.series.split(',');
+      this.availableSeries = series.sort();
     })
+  }
 
+  filterSerie(serie: string) {
+    switch (serie) {
+      case 'All':
+        this.showedCars = this.cars;
+        break;
 
+      case 'Treasure Hunt':
+      case 'Super Treasure Hunt':
+        this.showedCars = this.cars.filter(car => car.series.includes(serie));
+        break;
+
+      case 'Walmart Exclusive':
+        this.showedCars = this.cars.filter(car => car.series.includes(serie));
+        break;
+
+      default:
+        this.showedCars = this.cars.filter(car => car.series[0] === serie);
+        break;
+    }
+  }
+
+  resetSeries() {
+    this.selectedSerie = 'All';
   }
 
   async changeLanguage() {
