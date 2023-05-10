@@ -26,8 +26,8 @@ export class HeaderComponent implements OnInit {
     this.elementRef.nativeElement.ownerDocument.body.addEventListener('click', this.onBodyClick.bind(this));
   }
 
-  returnHome(): void {
-    this.router.navigate(['/']);
+  goTo(link: string): void {
+    this.router.navigate([link]);
   }
 
   toggleDropdown(): void {

@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPageComponent implements OnInit {
 
+  loginActivo = true;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  toggleLogin() {
+    this.loginActivo = !this.loginActivo;
   }
 
 }

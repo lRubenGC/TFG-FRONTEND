@@ -1,7 +1,7 @@
 <!-- <header [ngClass]="{'header-absolute': isHomePage()}"> -->
 <header>
     <!-- Logo -->
-    <div (click)="returnHome()" id="header-logo">
+    <div (click)="goTo('/')" id="header-logo">
         <h1>CW</h1>
     </div>
 
@@ -21,6 +21,6 @@
             </div>
         </li>
         <li><button>{{ 'HEADER_ABOUT' | translate }}</button></li>
-        <li><button>{{ 'HEADER_ACCOUNT' | translate }}</button></li>
+        <li><button (click)="goTo('auth')" >{{ 'HEADER_ACCOUNT' | translate }}</button></li>
     </ul>
 </header>

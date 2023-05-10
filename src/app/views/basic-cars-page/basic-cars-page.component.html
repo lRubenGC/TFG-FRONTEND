@@ -53,7 +53,7 @@
                     <img *ngIf="car.series[1] == 'Super Treasure Hunt'" src="../../../assets/images/shared/sth.png" alt="th icon" class="item-car-th">
                     <h4 [ngClass]="car.model_name.length > 22 ? 'small-title' : ''">{{ car.model_name }}</h4>
                 </div>
-                <img class="banner-image" [src]="car.img" [alt]="car.model_name" />
+                <img loading="lazy" class="banner-image" [src]="car.img" [alt]="car.model_name" />
                 <p class="car-item-subtitle">{{ car.col }} - {{ car.version }} - {{ car.car_id }}</p>
                 <div class="car-serie-wrapper">
                     <div class="serie-square" [ngClass]="car.serie_class"></div>
