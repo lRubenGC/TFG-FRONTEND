@@ -5,6 +5,8 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { RecoverPasswordComponent } from './recover-password/recover-password.component';
 import { SharedModule } from '../shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -16,6 +18,8 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     CommonModule,
     SharedModule,
+    HttpClientModule,
+    ReactiveFormsModule,
     TranslateModule
   ]
 })
