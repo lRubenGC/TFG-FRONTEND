@@ -16,5 +16,15 @@
     "HEADER_ENGLISH": "EN",
     "HEADER_SPANISH": "ES",
     "BASIC_CARS_YEAR": "Año",
-    "BASIC_CARS_SERIE": "Serie"
+    "BASIC_CARS_SERIE": "Serie",
+    "LOGIN_TITLE": "Bienvenido de nuevo!",
+    "LOGIN_SIGNIN": "Inicia Sesión",
+    "LOGIN_USERNAME": "Nombre de usuario",
+    "LOGIN_EMAIL": "Correo electrónico",
+    "LOGIN_PASSWORD": "Contraseña",
+    "LOGIN_FORGOT": "¿Olvidaste la contraseña?",
+    "REGISTER_TITLE": "Crea una Cuenta",
+    "REGISTER_SIGNUP": "Regístrate",
+    "REGISTER_OVERLAY_TITLE": "¿Todavía no tienes una Cuenta?",
+    "LOGIN_OVERLAY_TITLE": "¿Ya tienes una cuenta?"
 }

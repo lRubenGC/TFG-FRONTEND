@@ -7,19 +7,21 @@
 
         <div class="form-container sign-up-container">
             <form>
-                <input type="text" placeholder="Name" />
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
-                <button>Sign Up</button>
+                <h1>{{ 'REGISTER_TITLE' | translate }}</h1>
+                <input type="text" placeholder="{{ 'LOGIN_USERNAME' | translate }}" />
+                <input type="email" placeholder="{{ 'LOGIN_EMAIL' | translate}}" />
+                <input type="password" placeholder="{{ 'LOGIN_PASSWORD' | translate}}" />
+                <button>{{ 'REGISTER_SIGNUP' | translate }}</button>
             </form>
         </div>
 
         <div class="form-container sign-in-container">
             <form>
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
-                <button>Sign In</button>
-                <p>Forgot your password?</p>
+                <h1>{{ 'LOGIN_TITLE' | translate }}</h1>
+                <input type="email" placeholder="{{ 'LOGIN_EMAIL' | translate}}" />
+                <input type="password" placeholder="{{ 'LOGIN_PASSWORD' | translate}}" />
+                <button>{{ 'LOGIN_SIGNIN' | translate }}</button>
+                <p class="password-forgot">{{ 'LOGIN_FORGOT' | translate }}</p>
             </form>
         </div>
 
@@ -27,15 +29,13 @@
             <div class="overlay">
 
                 <div class="overlay-panel overlay-left">
-                    <h1>Welcome Back!</h1>
-                    <p>To keep connected with us please login with your personal info</p>
-                    <button (click)="toggleLogin()" class="ghost" id="signIn">Sign In</button>
+                    <h1 class="overlay-texts">{{ 'LOGIN_OVERLAY_TITLE' | translate }}</h1>
+                    <button class="ghost overlay-texts" (click)="toggleLogin()" id="signIn">{{ 'LOGIN_SIGNIN' | translate }}</button>
                 </div>
 
                 <div class="overlay-panel overlay-right">
-                    <h1>Hello, Friend!</h1>
-                    <p>Enter your personal details and start journey with us</p>
-                    <button (click)="toggleLogin()" class="ghost" id="signUp">Sign Up</button>
+                    <h1 class="overlay-texts">{{ 'REGISTER_OVERLAY_TITLE' | translate }}</h1>
+                    <button class="ghost overlay-texts" (click)="toggleLogin()" id="signUp">{{ 'REGISTER_SIGNUP' | translate }}</button>
                 </div>
 
             </div>

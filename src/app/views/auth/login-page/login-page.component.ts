@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-login-page',
@@ -9,7 +10,7 @@ export class LoginPageComponent implements OnInit {
 
   loginActivo = true;
 
-  constructor() { }
+  constructor(private languageService: LanguageService) { }
 
   ngOnInit(): void {
   }
