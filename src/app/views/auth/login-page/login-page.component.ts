@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LanguageService } from 'src/app/services/language.service';
 import { AuthService } from '../auth.service';
+import { isValidPassword } from 'src/app/helpers/auth';
 
 @Component({
   selector: 'app-login-page',
@@ -16,6 +17,8 @@ export class LoginPageComponent implements OnInit {
   loginError = false;
   loginErrorMsg = '';
   registerError = false;
+  loginSuccess = false;
+  loginSuccessMsg = '';
 
   constructor(
     private languageService: LanguageService,
@@ -48,7 +51,12 @@ export class LoginPageComponent implements OnInit {
           password: this.loginForm.value.login_password,
         })
         .subscribe(
-          (res) => console.log(res),
+          (res) => {
+            console.log(res);
+            this.loginError = false;
+            this.loginSuccess = true;
+            this.loginSuccessMsg = 'Successful Login'
+          },
           (err) => {
             this.loginErrorMsg = err.error.msg;
             this.loginError = true;
@@ -77,10 +85,18 @@ export class LoginPageComponent implements OnInit {
   }
 
   loginFormInvalid() {
-    if (!this.loginForm.valid) {
-      return true;
+    console.log(this.loginForm.value.login_email);
+    console.log(this.loginForm.value.login_password);
+    if (this.loginForm.invalid) {
+      return false;
     }
-    return false;
+
+    if (isValidPassword(this.loginForm.value.login_password.length)) {
+      return false;
+    }
+
+    console.log('ahora');
+    return true;
   }
 
 }

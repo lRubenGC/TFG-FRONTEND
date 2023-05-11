@@ -1,6 +1,7 @@
 export interface msgCardInterface {
     title: string;
     description: string[];
-    button: boolean,
-    buttonName?: string
+    button: boolean;
+    buttonName?: string;
+    buttonLink?: string;
 }

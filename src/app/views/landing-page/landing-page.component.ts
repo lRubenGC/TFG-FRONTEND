@@ -39,7 +39,8 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     title: '',
     description: [],
     button: true,
-    buttonName: ''
+    buttonName: '',
+    buttonLink: '/auth'
   }
 
   private subscription!: Subscription;

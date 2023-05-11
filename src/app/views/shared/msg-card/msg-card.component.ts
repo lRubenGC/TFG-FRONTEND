@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { msgCardInterface } from 'src/app/models/shared.interface';
 
 @Component({
@@ -11,13 +12,17 @@ export class MsgCardComponent implements OnInit {
   @Input() config: msgCardInterface = {
     title: '',
     description: [''],
-    button: false,
-    buttonName: ''
+    button: false
   }
 
-  constructor() { }
+  constructor(private router: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  goTo(link: string) {
+    if (this.config.buttonLink) {
+      this.router.navigate([link]);
+    }
   }
 
 }
