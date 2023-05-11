@@ -20,7 +20,8 @@
                 <h1>{{ 'LOGIN_TITLE' | translate }}</h1>
                 <input type="email" formControlName="login_email" placeholder="{{ 'LOGIN_EMAIL' | translate}}" />
                 <input type="password" formControlName="login_password" placeholder="{{ 'LOGIN_PASSWORD' | translate}}" />
-                <button type="submit" [disabled]="loginForm.invalid">{{ 'LOGIN_SIGNIN' | translate }}</button>
+                <button type="submit" [disabled]="loginFormInvalid">{{ 'LOGIN_SIGNIN' | translate }}</button>
+                <p *ngIf="loginError" class="login-error-msg">{{loginErrorMsg}}</p>
                 <p class="password-forgot">{{ 'LOGIN_FORGOT' | translate }}</p>
             </form>
         </div>

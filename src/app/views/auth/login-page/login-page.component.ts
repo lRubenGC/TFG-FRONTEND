@@ -13,6 +13,10 @@ export class LoginPageComponent implements OnInit {
   loginForm!: FormGroup;
   loginActivo = true;
 
+  loginError = false;
+  loginErrorMsg = '';
+  registerError = false;
+
   constructor(
     private languageService: LanguageService,
     private formBuilder: FormBuilder,
@@ -30,7 +34,11 @@ export class LoginPageComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loginForm.valueChanges.subscribe(() => {
+      this.loginFormInvalid();
+    })
+  }
 
   submitLogin() {
     if (this.loginForm.valid) {
@@ -41,7 +49,10 @@ export class LoginPageComponent implements OnInit {
         })
         .subscribe(
           (res) => console.log(res),
-          (err) => console.log(err.error)
+          (err) => {
+            this.loginErrorMsg = err.error.msg;
+            this.loginError = true;
+          }
         );
     }
   }
@@ -64,4 +75,12 @@ export class LoginPageComponent implements OnInit {
   toggleLogin() {
     this.loginActivo = !this.loginActivo;
   }
+
+  loginFormInvalid() {
+    if (!this.loginForm.valid) {
+      return true;
+    }
+    return false;
+  }
+
 }
