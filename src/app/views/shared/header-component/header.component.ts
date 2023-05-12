@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 import { LanguageService } from '../../../services/language.service';
+import { decodeToken } from 'src/app/helpers/generics';
+import { UserService } from '../../../services/user.service';
+import { userInterface } from 'src/app/models/user.interface';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +14,10 @@ import { LanguageService } from '../../../services/language.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
+
   dropdownOpen = false;
+  userLoggedIn = false;
+  user!: userInterface;
 
   @ViewChild('headerDropdown') headerDropdown!: ElementRef;
 
@@ -20,10 +26,12 @@ export class HeaderComponent implements OnInit {
     private elementRef: ElementRef, 
     private translate: TranslateService,
     private languageService: LanguageService,
+    private userService: UserService
     ) {}
 
   ngOnInit(): void {
     this.elementRef.nativeElement.ownerDocument.body.addEventListener('click', this.onBodyClick.bind(this));
+    this.toggleAccount();
   }
 
   goTo(link: string): void {
@@ -49,4 +57,20 @@ export class HeaderComponent implements OnInit {
     this.translate.use(lang);
     this.languageService.changeLanguage(lang);
   }
+
+  async toggleAccount(): Promise<void> {
+    const { hasToken, userId } = decodeToken();
+  
+    if (hasToken && userId) {
+      try {
+        const userData: userInterface = await this.userService.getUserData(userId).toPromise();
+        this.user = userData;
+        
+        this.userLoggedIn = true;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+  
 }

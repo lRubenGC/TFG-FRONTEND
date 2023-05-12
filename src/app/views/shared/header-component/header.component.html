@@ -21,6 +21,7 @@
             </div>
         </li>
         <li><button>{{ 'HEADER_ABOUT' | translate }}</button></li>
-        <li><button (click)="goTo('auth')" >{{ 'HEADER_ACCOUNT' | translate }}</button></li>
+        <li *ngIf="!userLoggedIn" ><button (click)="goTo('auth')" >{{ 'HEADER_ACCOUNT' | translate }}</button></li>
+        <li *ngIf="userLoggedIn" ><button (click)="goTo('')" >{{ user.user.username }} &dtrif;</button></li>
     </ul>
 </header>

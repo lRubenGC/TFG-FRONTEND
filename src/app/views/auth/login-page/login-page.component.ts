@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LanguageService } from 'src/app/services/language.service';
 import { AuthService } from '../auth.service';
-import { isValidPassword } from 'src/app/helpers/auth';
+import { isValidPassword, isValidEmail, isValidUsername } from 'src/app/helpers/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -16,14 +17,21 @@ export class LoginPageComponent implements OnInit {
 
   loginError = false;
   loginErrorMsg = '';
+
   registerError = false;
+  registerErrorMsg = '';
+
   loginSuccess = false;
   loginSuccessMsg = '';
+
+  registerSuccess = false;
+  registerSuccessMsg = '';
 
   constructor(
     private languageService: LanguageService,
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.registerForm = this.formBuilder.group({
       register_username: ['', Validators.required],
@@ -38,27 +46,34 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loginForm.valueChanges.subscribe(() => {
-      this.loginFormInvalid();
-    })
+    // this.loginForm.valueChanges.subscribe(() => {
+    //   this.loginFormInvalid();
+    // })
   }
 
   submitLogin() {
-    if (this.loginForm.valid) {
+    const email = this.loginForm.value.login_email;
+    const password = this.loginForm.value.login_password;
+
+    if (this.loginFormValid(email, password)) {
       this.authService
         .login({
-          email: this.loginForm.value.login_email,
-          password: this.loginForm.value.login_password,
+          email,
+          password
         })
         .subscribe(
           (res) => {
-            console.log(res);
-            this.loginError = false;
             this.loginSuccess = true;
-            this.loginSuccessMsg = 'Successful Login'
+            this.loginSuccessMsg = 'LOGIN_SUCCESFUL'
+
+            localStorage.setItem('cw-token', res.token);
+
+            this.router.navigate(['/']);
           },
           (err) => {
-            this.loginErrorMsg = err.error.msg;
+            if (err.error.err === 1) {
+              this.loginErrorMsg = 'LOGIN_BAD_REQUEST';
+            } else this.loginErrorMsg = 'UNEXPECTED_ERROR'
             this.loginError = true;
           }
         );
@@ -66,16 +81,35 @@ export class LoginPageComponent implements OnInit {
   }
 
   submitRegister() {
-    if (this.registerForm.valid) {
+    const username = this.registerForm.value.register_username;
+    const email = this.registerForm.value.register_email;
+    const password = this.registerForm.value.register_password;
+
+    if (this.registerFormValid(username, email, password)) {
       this.authService
         .register({
-          username: this.registerForm.value.register_username,
-          email: this.registerForm.value.register_email,
-          password: this.registerForm.value.register_password,
+          username,
+          email,
+          password,
         })
         .subscribe(
-          (res) => console.log(res),
-          (err) => console.log(err.error)
+          (res) => {
+            this.registerSuccess = true;
+            this.registerSuccessMsg = 'REGISTER_SUCCESFUL'
+          },
+          (err) => {
+            if (err.error.errors[0].param === 'username') {
+              this.registerErrorMsg = 'USERNAME_IN_USE';
+              this.registerError = true;
+              return;
+            }
+
+            if (err.error.errors[0].param === 'email') {
+              this.registerErrorMsg = 'EMAIL_IN_USE';
+              this.registerError = true;
+              return;
+            }
+          }
         );
     }
   }
@@ -84,18 +118,43 @@ export class LoginPageComponent implements OnInit {
     this.loginActivo = !this.loginActivo;
   }
 
-  loginFormInvalid() {
-    console.log(this.loginForm.value.login_email);
-    console.log(this.loginForm.value.login_password);
-    if (this.loginForm.invalid) {
+  loginFormValid(email: string, password: string) {    
+    if (!isValidEmail(email)) {
+      this.loginError = true;
+      this.loginErrorMsg = 'LOGIN_BAD_EMAIL'
       return false;
     }
 
-    if (isValidPassword(this.loginForm.value.login_password.length)) {
+    if (!isValidPassword(password)) {
+      this.loginError = true;
+      this.loginErrorMsg = 'LOGIN_BAD_PASSWORD'
       return false;
     }
 
-    console.log('ahora');
+    this.loginError = false;
+    return true;
+  }
+
+  registerFormValid(username: string, email: string, password: string) {    
+    if (!isValidUsername(username)) {
+      this.registerError = true;
+      this.registerErrorMsg = 'LOGIN_BAD_USERNAME'
+      return false;
+    }
+
+    if (!isValidEmail(email)) {
+      this.registerError = true;
+      this.registerErrorMsg = 'LOGIN_BAD_EMAIL'
+      return false;
+    }
+
+    if (!isValidPassword(password)) {
+      this.registerError = true;
+      this.registerErrorMsg = 'LOGIN_BAD_PASSWORD'
+      return false;
+    }
+
+    this.registerError = false;
     return true;
   }
 

@@ -1,19 +1,35 @@
 <div id="login-page">
-    <!-- Header -->
-    <app-header></app-header>
-    <br>
+<br>
 
-    <div class="container" id="login-component" [ngClass]="!loginActivo ? 'right-panel-active' : ''">
+    <div
+        [ngClass]="!loginActivo ? 'right-panel-active' : ''"
+        class="container"
+        id="login-component">
 
         <!-- Register Form -->
         <div class="form-container sign-up-container">
             <form [formGroup]="registerForm" (ngSubmit)="submitRegister()">
                 <h1>{{ 'REGISTER_TITLE' | translate }}</h1>
-                <input type="text" formControlName="register_username" placeholder="{{ 'LOGIN_USERNAME' | translate }}" />
-                <input type="email" formControlName="register_email" placeholder="{{ 'LOGIN_EMAIL' | translate}}" />
-                <input type="password" formControlName="register_password" placeholder="{{ 'LOGIN_PASSWORD' | translate}}" />
+                <input
+                    type="text"
+                    formControlName="register_username"
+                    placeholder="{{ 'LOGIN_USERNAME' | translate }}" />
+                <input
+                    type="email"
+                    formControlName="register_email"
+                    placeholder="{{ 'LOGIN_EMAIL' | translate}}" />
+                <input
+                    type="password"
+                    formControlName="register_password"
+                    placeholder="{{ 'LOGIN_PASSWORD' | translate}}" />
 
-                <button type="submit" [disabled]="registerForm.invalid">{{ 'REGISTER_SIGNUP' | translate }}</button>
+                <button
+                    type="submit"
+                    >{{ 'REGISTER_SIGNUP' | translate }}</button>
+                    
+                <p *ngIf="registerError" class="auth-notification auth-error">{{ registerErrorMsg | translate }}</p>
+                <p *ngIf="registerSuccess" class="auth-notification auth-success">{{ registerSuccessMsg | translate }}</p>
+
             </form>
         </div>
 
@@ -21,29 +37,40 @@
         <div class="form-container sign-in-container">
             <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
                 <h1>{{ 'LOGIN_TITLE' | translate }}</h1>
-                <input type="email" formControlName="login_email" placeholder="{{ 'LOGIN_EMAIL' | translate}}" />
-                <input type="password" formControlName="login_password" placeholder="{{ 'LOGIN_PASSWORD' | translate}}" />
-                
-                <button type="submit" >{{ 'LOGIN_SIGNIN' | translate }}</button>
+                <input
+                    type="email"
+                    formControlName="login_email"
+                    placeholder="{{ 'LOGIN_EMAIL' | translate}}" />
+                <input
+                    type="password"
+                    formControlName="login_password"
+                    placeholder="{{ 'LOGIN_PASSWORD' | translate}}" />
 
-                <p *ngIf="loginError" class="auth-notification auth-error">{{ loginErrorMsg }}</p>
-                <p *ngIf="loginSuccess" class="auth-notification auth-success">{{ loginSuccessMsg }}</p>
+                <button> {{ 'LOGIN_SIGNIN' | translate }} </button>
+
+                <p *ngIf="loginError" class="auth-notification auth-error">{{ loginErrorMsg | translate }}</p>
+                <p *ngIf="loginSuccess" class="auth-notification auth-success">{{ loginSuccessMsg | translate }}</p>
 
                 <p class="password-forgot">{{ 'LOGIN_FORGOT' | translate }}</p>
             </form>
         </div>
 
+        <!-- Overlay -->
         <div class="overlay-container">
             <div class="overlay">
 
+                <!-- Login Overlay -->
                 <div class="overlay-panel overlay-left">
                     <h1 class="overlay-texts">{{ 'LOGIN_OVERLAY_TITLE' | translate }}</h1>
-                    <button class="ghost overlay-texts" (click)="toggleLogin()" id="signIn">{{ 'LOGIN_SIGNIN' | translate }}</button>
+                    <button class="ghost overlay-texts" (click)="toggleLogin()" id="signIn">{{ 'LOGIN_SIGNIN' |
+                        translate }}</button>
                 </div>
 
+                <!-- Register Overlay -->
                 <div class="overlay-panel overlay-right">
                     <h1 class="overlay-texts">{{ 'REGISTER_OVERLAY_TITLE' | translate }}</h1>
-                    <button class="ghost overlay-texts" (click)="toggleLogin()" id="signUp">{{ 'REGISTER_SIGNUP' | translate }}</button>
+                    <button class="ghost overlay-texts" (click)="toggleLogin()" id="signUp">{{ 'REGISTER_SIGNUP' |
+                        translate }}</button>
                 </div>
 
             </div>
