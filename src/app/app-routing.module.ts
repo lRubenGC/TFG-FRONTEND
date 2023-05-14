@@ -9,20 +9,24 @@ const routes: Routes = [
     component: LandingPageComponent
   },
   { 
-    path: 'basic-cars',
-    loadChildren: () => import('./views/basic-cars-page/basic-cars-routing.module').then(m => m.BasicCarsRoutingModule)
+    path: 'auth',
+    loadChildren: () => import('./views/auth/auth-routing.module').then(m => m.AuthRoutingModule)
   },
   { 
-    path: 'premium-cars',
-    loadChildren: () => import('./views/premium-cars-page/premium-cars-routing.module').then(m => m.PremiumCarsRoutingModule)
+    path: 'basic-cars',
+    loadChildren: () => import('./views/basic-cars-page/basic-cars-routing.module').then(m => m.BasicCarsRoutingModule)
   },
   { 
     path: 'custom-cars',
     loadChildren: () => import('./views/custom-cars/custom-cars-routing.module').then(m => m.CustomCarsRoutingModule)
   },
   { 
-    path: 'auth',
-    loadChildren: () => import('./views/auth/auth-routing.module').then(m => m.AuthRoutingModule)
+    path: 'premium-cars',
+    loadChildren: () => import('./views/premium-cars-page/premium-cars-routing.module').then(m => m.PremiumCarsRoutingModule)
+  },
+  { 
+    path: 'user',
+    loadChildren: () => import('./views/user/user-routing.module').then(m => m.UserRoutingModule)
   },
   {
     path: '**',
