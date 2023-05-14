@@ -16,11 +16,13 @@ import { AuthService } from '../../auth/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  dropdownOpen = false;
+  langDropdownOpen = false;
+  accDropdownOpen = false;
   userLoggedIn = false;
   user!: userInterface;
 
-  @ViewChild('headerDropdown') headerDropdown!: ElementRef;
+  @ViewChild('langDropdown') langDropdown!: ElementRef;
+  @ViewChild('accDropdown') accDropdown!: ElementRef;
 
   constructor(
     private authService: AuthService,
@@ -51,21 +53,29 @@ export class HeaderComponent implements OnInit {
     this.router.navigate([link]);
   }
 
-  toggleDropdown(): void {
-    this.dropdownOpen = !this.dropdownOpen;
-  }
-
-  closeDropdown(): void {
-    this.dropdownOpen = false;
-  }
-
-  // Closes dropdown if clicks in body but not in dropdown
-  onBodyClick(event: any): void {  
-    if (event.target.id !== 'dropdown-button') {
-      this.closeDropdown();
+  // Toggles dropdown received and close others
+  toggleDropdown(dropdown: string): void {
+    if (dropdown === 'lang') {
+      this.langDropdownOpen = !this.langDropdownOpen;
+      this.accDropdownOpen = false;
+      return;
+    }
+    
+    if (dropdown === 'acc') {
+      this.accDropdownOpen = !this.accDropdownOpen;
+      this.langDropdownOpen = false;
     }
   }
 
+  // Closes dropdown if clicks in body but not in dropdown
+  onBodyClick(event: any): void {
+    if (!event.target.classList.contains('dropdown-button')) {
+      this.langDropdownOpen = false;
+      this.accDropdownOpen = false;
+    }
+  }
+
+  // Changes language
   toggleLanguage(lang: string): void {
     this.translate.use(lang);
     this.languageService.changeLanguage(lang);
@@ -83,7 +93,14 @@ export class HeaderComponent implements OnInit {
       } catch (error) {
         console.log(error);
       }
-    }
+    } else this.userLoggedIn = false;
+  }
+
+  logOut() {
+    localStorage.removeItem('cw-token');
+    this.authService.setUserLoggedIn(false);
+    this.checkUserLoggedIn();
+    
   }
   
 }

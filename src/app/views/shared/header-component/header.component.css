@@ -19,7 +19,7 @@ header {
 }
 
 #header-logo {
-    margin: 0 30px;
+    margin-left: 2rem;
     cursor: pointer;
 }
 
@@ -40,7 +40,7 @@ li {
 }
 
 li:last-child {
-    margin-right: 30px;
+    margin-right: 2rem;
 }
 
 button {
@@ -55,9 +55,15 @@ button {
     display: none;
 }
 
+.dropdown-container {
+    position: relative;
+}
+
 .dropdown-content {
     position: absolute;
-    margin-top: .2rem;
+    top: 100%;
+    right: 0;
+    margin-top: .4rem;
     background-color: var(--dark-bg-100);
     min-width: 5rem;
     overflow: auto;
@@ -67,9 +73,14 @@ button {
 
 .dropdown-content a {
     color: #fff;
-    padding: .8rem .6rem;
+    padding: .8rem;
+    padding-right: 1rem;
     text-decoration: none;
     display: block;
+    cursor: pointer;
+    white-space: nowrap;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 a:hover {

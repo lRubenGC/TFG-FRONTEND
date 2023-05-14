@@ -7,6 +7,7 @@
 
     <!-- Items -->
     <ul>
+
         <!-- Search Bar -->
         <li>
             <div class="search-box">
@@ -14,14 +15,36 @@
                 <input type="text" class="input-search" placeholder="{{ 'HEADER_SEARCH' | translate }}">
             </div>
         </li>
-        <li><button (click)="toggleDropdown()" id="dropdown-button">{{ 'HEADER_LANGUAGE' | translate }} &dtrif;</button>
-            <div #headerDropdown class="dropdown-content" [ngClass]="{'show': !dropdownOpen}">
+
+        <!-- Language Dropdown -->
+        <div class="dropdown-container">
+            <button (click)="toggleDropdown('lang')" class="dropdown-button">{{ 'HEADER_LANGUAGE' | translate }}
+                &dtrif;</button>
+            <div #langDropdown class="dropdown-content" [ngClass]="{'show': !langDropdownOpen}">
                 <a (click)="toggleLanguage('en')">{{ 'HEADER_ENGLISH' | translate }}</a>
                 <a (click)="toggleLanguage('es')">{{ 'HEADER_SPANISH' | translate }}</a>
             </div>
-        </li>
+        </div>
+
+
+        <!-- About CW -->
         <li><button>{{ 'HEADER_ABOUT' | translate }}</button></li>
-        <li *ngIf="!userLoggedIn" ><button (click)="goTo('auth')" >{{ 'HEADER_ACCOUNT' | translate }}</button></li>
-        <li *ngIf="userLoggedIn" ><button (click)="goTo('')" >{{ user.user.username }} &dtrif;</button></li>
+
+        <!-- Log In -->
+        <li *ngIf="!userLoggedIn"><button (click)="goTo('auth')">{{ 'HEADER_ACCOUNT' | translate }}</button></li>
+
+        <!-- Account Dropdown -->
+        <li *ngIf="userLoggedIn">
+            <div class="dropdown-container">
+                <button (click)="toggleDropdown('acc')" class="dropdown-button">{{ user.user.username }}
+                    &dtrif;</button>
+                <div #accDropdown class="dropdown-content" [ngClass]="{'show': !accDropdownOpen}">
+                    <a>{{ 'HEADER_MY_PROFILE' | translate }}</a>
+                    <a>{{ 'HEADER_MY_SETTINGS' | translate }}</a>
+                    <a (click)="logOut()">{{ 'HEADER_LOGOUT' | translate }}</a>
+                </div>
+            </div>
+        </li>
+
     </ul>
 </header>
