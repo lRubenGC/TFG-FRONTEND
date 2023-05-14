@@ -1,5 +1,6 @@
 import jwtDecode from 'jwt-decode';
 
+// Gets token and decodes it
 export function decodeToken(): tokenObject {
     const token = localStorage.getItem('cw-token');
     if (token) {
@@ -16,6 +17,8 @@ export function decodeToken(): tokenObject {
         hasToken: false
     }
 }
+
+
 
 export interface tokenDecoded {
     id: number;

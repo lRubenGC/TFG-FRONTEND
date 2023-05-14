@@ -11,7 +11,9 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  getUserData(id: number): Observable<userInterface | any> {
-    return this.http.get(`${this.apiUrl}/users/${id}`);
+  async getUserData(id: number): Promise<userInterface | any> {
+    const response = await this.http.get(`${this.apiUrl}/users/${id}`).toPromise();
+    return response as userInterface;
   }
+  
 }

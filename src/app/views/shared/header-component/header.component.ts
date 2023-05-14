@@ -7,6 +7,7 @@ import { LanguageService } from '../../../services/language.service';
 import { decodeToken } from 'src/app/helpers/generics';
 import { UserService } from '../../../services/user.service';
 import { userInterface } from 'src/app/models/user.interface';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -22,16 +23,28 @@ export class HeaderComponent implements OnInit {
   @ViewChild('headerDropdown') headerDropdown!: ElementRef;
 
   constructor(
-    private router: Router,
+    private authService: AuthService,
     private elementRef: ElementRef, 
-    private translate: TranslateService,
     private languageService: LanguageService,
-    private userService: UserService
+    private router: Router,
+    private translate: TranslateService,
+    private userService: UserService,
     ) {}
 
   ngOnInit(): void {
+    // Event for close Dropdowns
     this.elementRef.nativeElement.ownerDocument.body.addEventListener('click', this.onBodyClick.bind(this));
-    this.toggleAccount();
+
+    // Event for display User Dropdown
+    this.authService.getUserLoggedIn().subscribe((loggedIn: boolean) => {
+      if (loggedIn) {
+        this.checkUserLoggedIn();
+      }
+    })
+
+    // Checks if user is logged for display the Dropdown
+    this.checkUserLoggedIn();
+
   }
 
   goTo(link: string): void {
@@ -58,12 +71,12 @@ export class HeaderComponent implements OnInit {
     this.languageService.changeLanguage(lang);
   }
 
-  async toggleAccount(): Promise<void> {
+  async checkUserLoggedIn(): Promise<void> {
     const { hasToken, userId } = decodeToken();
   
-    if (hasToken && userId) {
+    if ( hasToken && userId ) {
       try {
-        const userData: userInterface = await this.userService.getUserData(userId).toPromise();
+        const userData: userInterface = await this.userService.getUserData(userId);
         this.user = userData;
         
         this.userLoggedIn = true;

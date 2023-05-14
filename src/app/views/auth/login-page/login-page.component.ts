@@ -63,11 +63,17 @@ export class LoginPageComponent implements OnInit {
         })
         .subscribe(
           (res) => {
+            // Login Notification
             this.loginSuccess = true;
             this.loginSuccessMsg = 'LOGIN_SUCCESFUL'
 
+            // Save token in Local Storage
             localStorage.setItem('cw-token', res.token);
 
+            // Dispatch login event
+            this.authService.setUserLoggedIn(true);
+
+            // Redirect
             this.router.navigate(['/']);
           },
           (err) => {
