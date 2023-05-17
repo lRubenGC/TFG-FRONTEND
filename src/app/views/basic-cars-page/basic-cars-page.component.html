@@ -43,24 +43,10 @@
         <!-- Car list -->
         <div id="basic-cars-list">
 
-            <!-- Car item -->
-            <div class="basic-car-item" *ngFor="let car of showedCars">
-                <div class="item-car-title">
-                    <img *ngIf="car.series[1] == 'Treasure Hunt'" src="../../../assets/images/shared/th.png" alt="th icon" class="item-car-th">
-                    <img *ngIf="car.series[1] == 'Super Treasure Hunt'" src="../../../assets/images/shared/sth.png" alt="th icon" class="item-car-th">
-                    <h4 [ngClass]="car.model_name.length > 22 ? 'small-title' : ''">{{ car.model_name }}</h4>
-                </div>
-                <img loading="lazy" class="banner-image" [src]="car.img" [alt]="car.model_name" />
-                <p class="car-item-subtitle">{{ car.col }} - {{ car.version }} - {{ car.car_id }}</p>
-                <div class="car-serie-wrapper">
-                    <div class="serie-square" [ngClass]="car.serie_class"></div>
-                    <p>{{ car.series[0] }} - {{ car.col_serie }}</p>
-                </div>
+            <!-- Car items -->
+            <div *ngFor="let car of showedCars" >
+                <app-basic-card [car]="car" ></app-basic-card>
 
-                <!-- <div class="button-wrapper">
-                    <button class="btn outline">DETAILS</button>
-                    <button class="btn fill">BUY NOW</button>
-                </div> -->
             </div>
 
         </div>

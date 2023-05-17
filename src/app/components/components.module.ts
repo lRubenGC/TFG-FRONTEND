@@ -5,23 +5,25 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-import { BasicCarsPageComponent } from './basic-cars-page.component';
-import { SharedModule } from '../shared/shared.module';
-import { ComponentsModule } from 'src/app/components/components.module';
+import { BasicCardComponent } from './basic-card/basic-card.component';
+import { PremiumCardComponent } from './premium-card/premium-card.component';
 
 
 
 @NgModule({
   declarations: [
-    BasicCarsPageComponent
+    BasicCardComponent,
+    PremiumCardComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     HttpClientModule,
     TranslateModule,
-    SharedModule,
-    ComponentsModule
+  ],
+  exports: [
+    BasicCardComponent,
+    PremiumCardComponent
   ]
 })
-export class BasicCarsPageModule { }
+export class ComponentsModule { }

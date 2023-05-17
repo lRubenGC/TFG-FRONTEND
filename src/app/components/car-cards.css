@@ -1,0 +1,26 @@
+.img-container {
+    position: relative;
+    display: inline-block;
+}
+
+.car-card-button {
+    position: absolute;
+    top: 70%;
+    transform: translateY(-50%);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.add-to-wishlist {
+    width: 45%;
+    left: .5rem;
+    background-color: orangered;
+
+}
+
+.add-to-collection {
+    width: 45%;
+    right: .5rem;
+    background-color: green;
+}
