@@ -19,7 +19,6 @@
     transition: opacity .3s, visibility .3s;
 }
 
-
 .img-container:hover .car-card-button {
     opacity: 1;
     visibility: visible;
@@ -33,13 +32,30 @@
 .add-to-wishlist {
     width: 45%;
     left: .5rem;
-    border: 2px solid rgb(255, 69, 0);
-    background-color: rgba(255, 69, 0, 0.4);
+    border: 2px solid var(--dark-primary-100);
+    background-color: rgba(132, 41, 8, 0.6);
 }
 
 .add-to-collection {
     width: 45%;
     right: .5rem;
     border: 2px solid rgb(23, 194, 35);
-    background-color: rgba(23, 194, 35, 0.4);
+    background-color: rgba(5, 82, 10, 0.6);
 }
+
+/* .car-collected-data {
+    text-align: center;
+    margin: auto;
+    margin-top: .5rem;
+    width: 80%;
+    height: .5rem;
+    border-radius: 1rem;
+}
+
+.car-collected-has {
+    background-color: rgb(23, 194, 35);
+}
+
+.car-collected-wants {
+    background-color: var(--dark-primary-100);
+} */

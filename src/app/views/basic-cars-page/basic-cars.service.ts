@@ -20,4 +20,8 @@ export class BasicCarsService {
     return this.http.get(`${this.apiUrl}/available-series?main=${year}`);
   }
 
+  getUserCars(idUser: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/user-basic-cars/${idUser}`);
+  }
+
 }

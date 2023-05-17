@@ -4,7 +4,8 @@ import { msgCardInterface } from 'src/app/models/shared.interface';
 import { Subscription, lastValueFrom, switchMap } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from 'src/app/services/language.service';
-import { basicCarInterface } from 'src/app/models/cardTypes.interface';
+import { basicCarInterface, basicCarShowedInterface } from 'src/app/models/cardTypes.interface';
+import { decodeToken } from 'src/app/helpers/generics';
 
 @Component({
   selector: 'app-basic-cars-page',
@@ -13,8 +14,10 @@ import { basicCarInterface } from 'src/app/models/cardTypes.interface';
 })
 export class BasicCarsPageComponent implements OnInit {
 
-  cars: basicCarInterface[] = [];
-  showedCars: basicCarInterface[] = [];
+  userToken = decodeToken();
+
+  cars: any[] = [];
+  showedCars: any[] = [];
 
   selectedYear: string = '2022';
   selectedSerie: string = 'All';
@@ -43,7 +46,7 @@ export class BasicCarsPageComponent implements OnInit {
       this.translate.use(lang);
       this.changeLanguage();
     })
-
+    
     this.changeLanguage();
   }
 
@@ -60,13 +63,20 @@ export class BasicCarsPageComponent implements OnInit {
         }
       });
 
-      this.cars = cars;
-      this.showedCars = cars;
+      this.getUserCars().then((userCars: any) => {
+        // userCars.map();
+        console.log(userCars)
+
+        this.cars = cars;
+        this.showedCars = cars;
+      }).catch(error => {
+        console.error(error);
+      });
+
     });
 
     this.getAvailableSeries(year);
     this.resetSeries();
-
   }
 
   getAvailableSeries(year: string) {
@@ -101,6 +111,19 @@ export class BasicCarsPageComponent implements OnInit {
     this.selectedSerie = 'All';
   }
 
+  getUserCars() {
+    return new Promise((resolve, reject) => {
+      if (this.userToken.hasToken && this.userToken.userId) {
+        this.basicCarsService.getUserCars(this.userToken.userId).subscribe(res => {
+          resolve(res.userCars);
+        }, error => {
+          reject(error);
+        });
+      }
+    });
+  }
+  
+
   async changeLanguage() {
     const cardTitle = this.translate.get('BASIC_CARS_TITLE');
     this.msg_card.title = await lastValueFrom(cardTitle);
@@ -113,6 +136,9 @@ export class BasicCarsPageComponent implements OnInit {
 
     const cardDesc3 = this.translate.get('BASIC_CARS_DESCRIPTION_3');
     this.msg_card.description[2] = await lastValueFrom(cardDesc3);
+
+    const cardDesc4 = this.translate.get('BASIC_CARS_DESCRIPTION_4');
+    this.msg_card.description[3] = await lastValueFrom(cardDesc4);
   }
 
 }

@@ -100,8 +100,9 @@ export class LoginPageComponent implements OnInit {
         })
         .subscribe(
           (res) => {
-            this.registerSuccess = true;
-            this.registerSuccessMsg = 'REGISTER_SUCCESFUL'
+            this.loginSuccess = true;
+            this.loginSuccessMsg = 'REGISTER_SUCCESFUL'
+            this.toggleLogin();
           },
           (err) => {
             if (err.error.errors[0].param === 'username') {

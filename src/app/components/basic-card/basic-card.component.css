@@ -12,6 +12,16 @@
     text-align: center;
     justify-content: center;
     align-items: center;
+    text-shadow: 2px 2px 2px #000;
+
+}
+
+.item-car-title-collected {
+    color: rgb(39, 221, 51);
+}
+
+.item-car-title-wanted {
+    color: var(--dark-primary-200);
 }
 
 .item-car-title h4 {
@@ -65,47 +75,3 @@
     border-radius: .2rem;
     margin-right: .3rem;
 }
-
-/* .btn {
-    border: none;
-    padding: 12px 24px;
-    border-radius: 24px;
-    font-size: 12px;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    cursor: pointer;
-}
-
-.btn+.btn {
-    margin-left: 10px;
-}
-
-.outline {
-    background: transparent;
-    color: rgba(0, 212, 255, 0.9);
-    border: 1px solid rgba(0, 212, 255, 0.6);
-    transition: all .3s ease;
-
-}
-
-.outline:hover {
-    transform: scale(1.125);
-    color: rgba(255, 255, 255, 0.9);
-    border-color: rgba(255, 255, 255, 0.9);
-    transition: all .3s ease;
-}
-
-.fill {
-    background: rgba(0, 212, 255, 0.9);
-    color: rgba(255, 255, 255, 0.95);
-    filter: drop-shadow(0);
-    font-weight: bold;
-    transition: all .3s ease;
-}
-
-.fill:hover {
-    transform: scale(1.125);
-    border-color: rgba(255, 255, 255, 0.9);
-    filter: drop-shadow(0 10px 5px rgba(0, 0, 0, 0.125));
-    transition: all .3s ease;
-} */
