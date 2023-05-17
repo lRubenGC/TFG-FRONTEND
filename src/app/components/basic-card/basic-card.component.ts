@@ -5,7 +5,7 @@ import { basicCarInterface } from 'src/app/models/cardTypes.interface';
 @Component({
   selector: 'app-basic-card',
   templateUrl: './basic-card.component.html',
-  styleUrls: ['./basic-card.component.css', '../car-cards.css']
+  styleUrls: ['./basic-card.component.css', '../styles/car-cards.css']
 })
 export class BasicCardComponent implements OnInit {
 
@@ -16,4 +16,8 @@ export class BasicCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  test() {
+    console.log(this.car.id);
+    console.log(localStorage.getItem('cw-token'));
+  }
 }

@@ -8,8 +8,8 @@
     <div class="img-container">
         <img loading="lazy" class="banner-image" [src]="car.img" [alt]="car.model_name" />
         <div class="car-card-button-wrapper">
-            <button class="car-card-button add-to-wishlist">Añadir a Deseados</button>
-            <button class="car-card-button add-to-collection">Añadir a Coleccion</button>
+            <button (click)="test()" class="car-card-button add-to-wishlist">Añadir a Deseados</button>
+            <button (click)="test()" class="car-card-button add-to-collection">Añadir a Coleccion</button>
         </div>
     </div>
 
