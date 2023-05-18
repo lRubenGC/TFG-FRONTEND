@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { decodeToken } from 'src/app/helpers/generics';
 
-import { basicCarInterface } from 'src/app/models/cardTypes.interface';
+import { basicCarInterface, basicCarShowedInterface } from 'src/app/models/cardTypes.interface';
 import { CarsService } from '../services/cars.service';
 
 @Component({
@@ -11,7 +11,8 @@ import { CarsService } from '../services/cars.service';
 })
 export class BasicCardComponent implements OnInit {
 
-  @Input() car!: basicCarInterface;
+  @Output() carAdded: EventEmitter<any> = new EventEmitter<any>();
+  @Input() car!: basicCarShowedInterface;
 
   userToken = decodeToken();
   carCollected = false;
@@ -31,16 +32,29 @@ export class BasicCardComponent implements OnInit {
     if (this.userToken.hasToken && this.userToken.userId) {
       this.carsService
         .addBasicCar(parseInt(this.car.id), this.userToken.userId, carBody)
-        .subscribe((res) => {
-          if (carBody.hasCar) {
-            this.carCollected = true;
-          } else if (carBody.wantsCar) {
-            this.carWanted = true;
+        .subscribe(
+          (res) => {
+            if (carBody.hasCar) {
+              this.carCollected = true;
+              // Dispatch event to parent
+              this.carAdded.emit({
+                car_id: this.car.id,
+                added: 'hasCar'
+              });
+            } else if (carBody.wantsCar) {
+              this.carWanted = true;
+              // Dispatch event to parent
+              this.carAdded.emit({
+                car_id: this.car.id,
+                added: 'wantsCar'
+              });
+            }
+
+          },
+          (err) => {
+            console.log(err.status);
           }
-        },
-        (err) => {
-          console.log(err.status)
-        })
+        );
     }
   }
 

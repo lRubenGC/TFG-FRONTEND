@@ -64,8 +64,19 @@ export class BasicCarsPageComponent implements OnInit {
       });
 
       this.getUserCars().then((userCars: any) => {
-        // userCars.map();
-        console.log(userCars)
+        userCars.carsOwned.forEach((carOwned: any) => {
+          const matchedCar = cars.find((car: any) => car.id === carOwned.id);
+          if (matchedCar) {
+            matchedCar.has_car = true;
+          }
+        });
+
+        userCars.carsWished.forEach((carWished: any) => {
+          const matchedCar = cars.find((car: any) => car.id === carWished.id);
+          if (matchedCar) {
+            matchedCar.wants_car = true;
+          }
+        });
 
         this.cars = cars;
         this.showedCars = cars;
@@ -115,7 +126,7 @@ export class BasicCarsPageComponent implements OnInit {
     return new Promise((resolve, reject) => {
       if (this.userToken.hasToken && this.userToken.userId) {
         this.basicCarsService.getUserCars(this.userToken.userId).subscribe(res => {
-          resolve(res.userCars);
+          resolve(res);
         }, error => {
           reject(error);
         });
@@ -123,6 +134,15 @@ export class BasicCarsPageComponent implements OnInit {
     });
   }
   
+  updateCarProperty(carAdded: any) {
+    const carToUpdate = this.cars.find((car) => car.id === carAdded.car_id);
+
+    if (carAdded.added === 'hasCar') {
+      carToUpdate.hasCar = true;
+    } else if (carAdded.added === 'wantsCar') {
+      carToUpdate.wantsCar = true;
+    }
+  }
 
   async changeLanguage() {
     const cardTitle = this.translate.get('BASIC_CARS_TITLE');

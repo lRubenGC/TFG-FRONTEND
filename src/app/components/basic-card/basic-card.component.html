@@ -2,9 +2,11 @@
     <!-- Car Title -->
     <div 
         class="item-car-title"
-        [ngClass]="carCollected ? 'item-car-title-collected' : ''"
-        [ngClass]="carWanted ? 'item-car-title-wanted' : ''"
-        >
+        [ngClass]="{
+        'item-car-title-collected': carCollected || car.has_car,
+        'item-car-title-wanted': carWanted || car.wants_car
+        }"
+    >  
         <img *ngIf="car.series[1] == 'Treasure Hunt'" src="../../../assets/images/shared/th.png" alt="th icon" class="item-car-th">
         <img *ngIf="car.series[1] == 'Super Treasure Hunt'" src="../../../assets/images/shared/sth.png" alt="th icon" class="item-car-th">
         <h4 [ngClass]="car.model_name.length > 22 ? 'small-title' : ''">{{ car.model_name }}</h4>
@@ -27,7 +29,7 @@
     </div>
 
     <!-- Collected Data -->
-    <!-- <div *ngIf="carCollected" class="car-collected-data car-collected-has"></div>
-    <div *ngIf="carWanted" class="car-collected-data car-collected-wants"></div> -->
+    <!-- <div *ngIf="car.has_car" class="car-collected-data car-collected-has"></div>
+    <div *ngIf="car.wants_car" class="car-collected-data car-collected-wants"></div> -->
 
 </div>
