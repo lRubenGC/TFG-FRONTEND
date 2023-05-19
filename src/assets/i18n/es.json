@@ -39,5 +39,9 @@
     "LOGIN_SUCCESFUL": "Inicio de sesión exitoso. Redireccionando...",
     "USERNAME_IN_USE": "Ese Username ya está en uso",
     "EMAIL_IN_USE": "Ese Email ya está en uso",
-    "REGISTER_SUCCESFUL": "Registro exitoso. Ya puedes Iniciar Sesión"
+    "REGISTER_SUCCESFUL": "Registro exitoso. Ya puedes Iniciar Sesión",
+    "ADD_CAR_COLLECTION": "Añadir a Coleccion",
+    "ADD_CAR_WISHED": "Añadir a Deseados",
+    "REMOVE_CAR_X": "Eliminar"
+
 }

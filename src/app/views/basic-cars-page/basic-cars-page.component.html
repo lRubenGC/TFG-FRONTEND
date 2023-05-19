@@ -45,8 +45,7 @@
 
             <!-- Car items -->
             <div *ngFor="let car of showedCars" >
-                <app-basic-card [car]="car" (carAdded)="updateCarProperty($event)" ></app-basic-card>
-
+                <app-basic-card [car]="car"></app-basic-card>
             </div>
 
         </div>

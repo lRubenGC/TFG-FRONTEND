@@ -15,8 +15,6 @@ export class BasicCardComponent implements OnInit {
   @Input() car!: basicCarShowedInterface;
 
   userToken = decodeToken();
-  carCollected = false;
-  carWanted = false;
 
   constructor(
     private carsService: CarsService
@@ -35,27 +33,20 @@ export class BasicCardComponent implements OnInit {
         .subscribe(
           (res) => {
             if (carBody.hasCar) {
-              this.carCollected = true;
-              // Dispatch event to parent
-              this.carAdded.emit({
-                car_id: this.car.id,
-                added: 'hasCar'
-              });
+              this.car.has_car = true;
             } else if (carBody.wantsCar) {
-              this.carWanted = true;
-              // Dispatch event to parent
-              this.carAdded.emit({
-                car_id: this.car.id,
-                added: 'wantsCar'
-              });
+              this.car.wants_car = true;
             }
-
           },
           (err) => {
             console.log(err.status);
           }
         );
     }
+  }
+
+  removeCar() {
+    console.log('borrado')
   }
 
 }

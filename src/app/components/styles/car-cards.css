@@ -17,6 +17,8 @@
     text-shadow: 2px 2px 2px #000;
     cursor: pointer;
     transition: opacity .3s, visibility .3s;
+    padding: .5rem;
+    width: 40%;
 }
 
 .img-container:hover .car-card-button {
@@ -29,18 +31,29 @@
     transition: opacity .3s;
 }
 
+.car-card-button-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .add-to-wishlist {
-    width: 45%;
-    left: .5rem;
+    left: 1rem;
     border: 2px solid var(--dark-primary-100);
     background-color: rgba(132, 41, 8, 0.6);
 }
 
 .add-to-collection {
-    width: 45%;
-    right: .5rem;
+    right: 1rem;
     border: 2px solid rgb(23, 194, 35);
     background-color: rgba(5, 82, 10, 0.6);
+}
+
+.remove-from-x {
+    width: 45%;
+    padding: .8rem 0;
+    border: 2px solid rgb(255, 20, 20);
+    background-color: rgba(177, 16, 16, 0.6);
 }
 
 /* .car-collected-data {

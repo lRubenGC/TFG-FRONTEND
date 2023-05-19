@@ -39,5 +39,8 @@
     "LOGIN_SUCCESFUL": "Successful Login. Redirecting...",
     "USERNAME_IN_USE": "That username is already in use",
     "EMAIL_IN_USE": "That email is already in use",
-    "REGISTER_SUCCESFUL": "Successful register. You can Log In now"
+    "REGISTER_SUCCESFUL": "Successful register. You can Log In now",
+    "ADD_CAR_COLLECTION": "Add to Collection",
+    "ADD_CAR_WISHED": "Add to Wishlist",
+    "REMOVE_CAR_X": "Remove"
 }

@@ -133,16 +133,6 @@ export class BasicCarsPageComponent implements OnInit {
       }
     });
   }
-  
-  updateCarProperty(carAdded: any) {
-    const carToUpdate = this.cars.find((car) => car.id === carAdded.car_id);
-
-    if (carAdded.added === 'hasCar') {
-      carToUpdate.hasCar = true;
-    } else if (carAdded.added === 'wantsCar') {
-      carToUpdate.wantsCar = true;
-    }
-  }
 
   async changeLanguage() {
     const cardTitle = this.translate.get('BASIC_CARS_TITLE');
