@@ -42,5 +42,7 @@
     "REGISTER_SUCCESFUL": "Successful register. You can Log In now",
     "ADD_CAR_COLLECTION": "Add to Collection",
     "ADD_CAR_WISHED": "Add to Wishlist",
-    "REMOVE_CAR_X": "Remove"
+    "REMOVE_CAR_X": "Remove",
+    "GN_UNEXPECTED_ERROR": "Unexpected error, talk to the administrator please",
+    "GN_TOKEN_EXPIRED": "You cannot add a car without an account. Please log in"
 }

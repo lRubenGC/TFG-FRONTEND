@@ -42,6 +42,7 @@
     "REGISTER_SUCCESFUL": "Registro exitoso. Ya puedes Iniciar Sesión",
     "ADD_CAR_COLLECTION": "Añadir a Coleccion",
     "ADD_CAR_WISHED": "Añadir a Deseados",
-    "REMOVE_CAR_X": "Eliminar"
-
+    "REMOVE_CAR_X": "Eliminar",
+    "GN_UNEXPECTED_ERROR": "Error inesperado, hable con el administrador por favor",
+    "GN_TOKEN_EXPIRED": "No puedes añadir un coche sin cuenta. Inicia sesión por favor"
 }
