@@ -12,9 +12,8 @@ import { CarsService } from '../services/cars.service';
 export class BasicCardComponent implements OnInit {
 
   @Output() carAdded: EventEmitter<any> = new EventEmitter<any>();
+  @Output() errorEvent = new EventEmitter<string>();
   @Input() car!: basicCarShowedInterface;
-
-  userToken = decodeToken();
 
   constructor(
     private carsService: CarsService
@@ -27,9 +26,9 @@ export class BasicCardComponent implements OnInit {
   addCar(hasCar: any) {
     const carBody = hasCar ? { hasCar: true, wantsCar: false } : { hasCar: false, wantsCar: true };
 
-    if (this.userToken.hasToken && this.userToken.userId) {
+    if (this.car.token) {
       this.carsService
-        .addBasicCar(parseInt(this.car.id), this.userToken.userId, carBody)
+        .addBasicCar(parseInt(this.car.id), this.car.token, carBody)
         .subscribe(
           (res) => {
             if (carBody.hasCar) {
@@ -39,14 +38,47 @@ export class BasicCardComponent implements OnInit {
             }
           },
           (err) => {
-            console.log(err.status);
+            console.error(err)
+            
+            switch (err.status) {
+              case 401:
+                this.errorEvent.emit('GN_TOKEN_EXPIRED');
+                break;
+              default:
+                this.errorEvent.emit('GN_UNEXPECTED_ERROR');
+            }
+            
           }
         );
+    } else {
+      this.errorEvent.emit('GN_TOKEN_EXPIRED');
     }
   }
 
   removeCar() {
-    console.log('borrado')
+    if (this.car.token) {
+      this.carsService
+      .removeBasicCar(parseInt(this.car.id), this.car.token)
+      .subscribe(
+        (res) => {
+          if (this.car.has_car) {
+            this.car.has_car = false;
+          } else if (this.car.wants_car) {
+            this.car.wants_car = false;
+          }
+        },
+        (err) => {
+          switch (err.status) {
+            case 401:
+              this.errorEvent.emit('GN_TOKEN_EXPIRED');
+              break;
+            default:
+              this.errorEvent.emit('GN_UNEXPECTED_ERROR');
+          }
+          
+        }
+      );
+    }
   }
 
 }

@@ -45,12 +45,15 @@
 
             <!-- Car items -->
             <div *ngFor="let car of showedCars" >
-                <app-basic-card [car]="car"></app-basic-card>
+                <app-basic-card (errorEvent)="enableErrorMsg($event)" [car]="car"></app-basic-card>
             </div>
 
         </div>
 
 
     </div>
+
+    <!-- Possible error notification -->
+    <app-global-notification *ngIf="error" [notificationMsg]="errorMsg"></app-global-notification>
 
 </div>

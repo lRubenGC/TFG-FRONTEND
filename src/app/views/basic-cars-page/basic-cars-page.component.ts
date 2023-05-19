@@ -25,6 +25,9 @@ export class BasicCarsPageComponent implements OnInit {
   availableYears = ['2022', '2021', '2020', '2019', '2018'];
   availableSeries = [];
 
+  error = false;
+  errorMsg = '';
+
   msg_card: msgCardInterface = {
     title: '',
     description: [],
@@ -63,26 +66,39 @@ export class BasicCarsPageComponent implements OnInit {
         }
       });
 
-      this.getUserCars().then((userCars: any) => {
-        userCars.carsOwned.forEach((carOwned: any) => {
-          const matchedCar = cars.find((car: any) => car.id === carOwned.id);
-          if (matchedCar) {
-            matchedCar.has_car = true;
-          }
-        });
+      // If user is logged, gets the cars of the user and changes the values of the cars
+      if (this.userToken.hasToken && this.userToken.userId) {
+        this.getUserCars().then((userCars: any) => {
+          userCars.carsOwned.forEach((carOwned: any) => {
+            const matchedCar = cars.find((car: any) => car.id === carOwned.id);
+            if (matchedCar) {
+              matchedCar.has_car = true;
+            }
+          });
+  
+          userCars.carsWished.forEach((carWished: any) => {
+            const matchedCar = cars.find((car: any) => car.id === carWished.id);
+            if (matchedCar) {
+              matchedCar.wants_car = true;
+            }
+          });
 
-        userCars.carsWished.forEach((carWished: any) => {
-          const matchedCar = cars.find((car: any) => car.id === carWished.id);
-          if (matchedCar) {
-            matchedCar.wants_car = true;
-          }
+          const finalCars = cars.map((car: any) => {
+            return {
+              ...car,
+              token: this.userToken.userId
+            }
+          })
+  
+          this.cars = finalCars;
+          this.showedCars = finalCars;
+        }).catch(error => {
+          console.error(error);
         });
-
+      } else {
         this.cars = cars;
         this.showedCars = cars;
-      }).catch(error => {
-        console.error(error);
-      });
+      }
 
     });
 
@@ -133,6 +149,16 @@ export class BasicCarsPageComponent implements OnInit {
       }
     });
   }
+
+  enableErrorMsg(msg: string | any) {
+    this.error = true;
+    if (typeof msg === 'string') {
+      this.errorMsg = msg;
+    } else {
+      this.errorMsg = 'GN_UNEXPECTED_ERROR';
+    }
+  }
+  
 
   async changeLanguage() {
     const cardTitle = this.translate.get('BASIC_CARS_TITLE');

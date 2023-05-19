@@ -83,7 +83,7 @@ export class HeaderComponent implements OnInit {
 
   async checkUserLoggedIn(): Promise<void> {
     const { hasToken, userId } = decodeToken();
-  
+    
     if ( hasToken && userId ) {
       try {
         const userData: userInterface = await this.userService.getUserData(userId);
@@ -91,7 +91,7 @@ export class HeaderComponent implements OnInit {
         
         this.userLoggedIn = true;
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     } else this.userLoggedIn = false;
   }
@@ -100,7 +100,7 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('cw-token');
     this.authService.setUserLoggedIn(false);
     this.checkUserLoggedIn();
-    
+    window.location.reload();
   }
   
 }

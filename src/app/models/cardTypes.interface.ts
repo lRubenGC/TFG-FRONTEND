@@ -26,4 +26,5 @@ export interface basicCarShowedInterface {
     serie_class: string;
     has_car: boolean;
     wants_car: boolean;
+    token: number;
 }
