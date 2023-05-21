@@ -1,1 +1,68 @@
-<p>premium-cars-page works!</p>
+<div id="premium-cars-page">
+    <div id="premium-cars-body">
+
+        <!-- Landing section -->
+        <div id="premium-cars-land-section">
+
+            <!-- Explanation section -->
+            <section id="premium-explanation">
+                <app-msg-card [config]="msg_card"></app-msg-card>
+            </section>
+
+            <!-- Filter section -->
+            <section *ngIf="isSerieSelected" id="premium-filter-section">
+
+                <div class="premium-filter-item">
+                    <h3>{{ 'PREMIUM_CARS_SECONDARY_SERIE' | translate }}</h3>
+                    <div class="car-select">
+                        <select [(ngModel)]="selectedSecondarySerie" (change)="filterSerie(selectedSecondarySerie)">
+                            <option value="All">All</option>
+                            <option *ngFor="let serie of availableSecondarySeries" [value]="serie">{{ serie }}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="premium-filter-item">
+                    <h3>{{ 'PREMIUM_CARS_YEAR' | translate }}</h3>
+                    <div class="car-select">
+                        <select [(ngModel)]="selectedYear" (change)="getCars(selectedYear)">
+                            <option *ngFor="let year of availableYears" [value]="year">{{ year }}</option>
+                        </select>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+
+        <div *ngIf="isSerieSelected" class="return-button-container">
+            <button (click)="disableSerieSelected()" class="return-button">Return</button>
+        </div>
+
+        <!-- Main Serie Selector -->
+        <div *ngIf="!isSerieSelected" id="premium-cars-selector">
+            
+            <!-- Series items -->
+            <div *ngFor="let pill of premiumPills">
+                <app-premium-pill [data]="pill" (serieSelected)="getCars($event)"></app-premium-pill>
+            </div>
+
+        </div>
+
+        <!-- Car list -->
+        <div *ngIf="isSerieSelected" id="premium-cars-list">
+
+            <!-- Car items -->
+            <div *ngFor="let car of showedCars" >
+                <app-premium-card (errorEvent)="enableErrorMsg($event)" [car]="car"></app-premium-card>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <!-- Possible error notification -->
+    <app-global-notification *ngIf="error" [notificationMsg]="errorMsg"></app-global-notification>
+
+</div>

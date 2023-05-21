@@ -8,6 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { BasicCardComponent } from './basic-card/basic-card.component';
 import { PremiumCardComponent } from './premium-card/premium-card.component';
 import { GlobalNotificationComponent } from './global-notification/global-notification.component';
+import { PremiumPillComponent } from './premium-pill/premium-pill.component';
 
 
 
@@ -15,7 +16,8 @@ import { GlobalNotificationComponent } from './global-notification/global-notifi
   declarations: [
     BasicCardComponent,
     PremiumCardComponent,
-    GlobalNotificationComponent
+    PremiumPillComponent,
+    GlobalNotificationComponent,
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,8 @@ import { GlobalNotificationComponent } from './global-notification/global-notifi
   exports: [
     BasicCardComponent,
     PremiumCardComponent,
-    GlobalNotificationComponent
+    PremiumPillComponent,
+    GlobalNotificationComponent,
   ]
 })
 export class ComponentsModule { }

@@ -28,3 +28,32 @@ export interface basicCarShowedInterface {
     wants_car: boolean;
     token: number;
 }
+
+export interface premiumCarInterface {
+    id: string;
+    car_id: string;
+    model_name: string;
+    main_serie: string;
+    secondary_serie: string;
+    col_serie: string;
+    year: string;
+    brand: string;
+    img: string;
+    card_img: string;
+}
+
+export interface premiumCarShowedInterface {
+    id: string;
+    car_id: string;
+    model_name: string;
+    main_serie: string;
+    secondary_serie: string;
+    col_serie: string;
+    year: string;
+    brand: string;
+    img: string;
+    card_img: string;
+    has_car: boolean;
+    wants_car: boolean;
+    token: number;
+}

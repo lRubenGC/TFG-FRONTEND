@@ -6,8 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { BasicCarsPageComponent } from './basic-cars-page.component';
-import { SharedModule } from '../shared/shared.module';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -20,8 +20,8 @@ import { ComponentsModule } from 'src/app/components/components.module';
     FormsModule,
     HttpClientModule,
     TranslateModule,
+    ComponentsModule,
     SharedModule,
-    ComponentsModule
   ]
 })
 export class BasicCarsPageModule { }

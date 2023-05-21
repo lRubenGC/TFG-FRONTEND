@@ -8,7 +8,7 @@
     "LANDING_CARD_BUTTON": "Inicia Sesión",
     "BASIC_CARS_TITLE": "Linea Básica",
     "BASIC_CARS_DESCRIPTION_1": "Cada año salen cientos de coches básicos, los cuales pertenecen a diferentes series (Exotics, Retro racers, etc)",
-    "BASIC_CARS_DESCRIPTION_2": "También hay series especiales, como los Red edition",
+    "BASIC_CARS_DESCRIPTION_2": "También hay series especiales, como los Red edition, Zamac...",
     "BASIC_CARS_DESCRIPTION_3": "Y por otra parte existen los tesoros (Treasure hunts y Super treasure hunts) que son muy dificiles de encontrar",
     "BASIC_CARS_DESCRIPTION_4": "Puedes añadir los coches pasando el cursor por encima de la imagen y usando los botones",
     "HEADER_ABOUT": "Sobre CW",
@@ -44,5 +44,8 @@
     "ADD_CAR_WISHED": "Añadir a Deseados",
     "REMOVE_CAR_X": "Eliminar",
     "GN_UNEXPECTED_ERROR": "Error inesperado, hable con el administrador por favor",
-    "GN_TOKEN_EXPIRED": "No puedes añadir un coche sin cuenta. Inicia sesión por favor"
+    "GN_TOKEN_EXPIRED": "No puedes añadir un coche sin cuenta. Inicia sesión por favor",
+    "PREMIUM_CARS_YEAR": "Año",
+    "PREMIUM_CARS_MAIN_SERIE": "Serie Principal",
+    "PREMIUM_CARS_SECONDARY_SERIE": "Serie Secundaria"
 }

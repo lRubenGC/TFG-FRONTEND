@@ -16,16 +16,7 @@ export class CarsService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'r-token': token!
-    })
-
-    const options = {
-      headers,
-      body: {
-        BasicCarId: id_car,
-        hasCar: carBody.hasCar,
-        wantsCar: carBody.wantsCar
-      }
-    }
+    });
 
     return this.http.post(`${this.apiUrl}/user-basic-cars/${id_user}`, {
       BasicCarId: id_car,
@@ -49,6 +40,37 @@ export class CarsService {
     }
 
     return this.http.delete(`${this.apiUrl}/user-basic-cars/${id_user}`, options);
+  }
+
+  addPremiumCar(id_car: number, id_user: number, carBody: any): Observable<any> {
+    const token = localStorage.getItem('cw-token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'r-token': token!
+    });
+
+    return this.http.post(`${this.apiUrl}/user-premium-cars/${id_user}`, {
+      PremiumCarId: id_car,
+      hasCar: carBody.hasCar,
+      wantsCar: carBody.wantsCar
+    }, { headers });
+  }
+
+  removePremiumCar(id_car: number, id_user: number): Observable<any> {
+    const token = localStorage.getItem('cw-token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'r-token': token!
+    })
+
+    const options = {
+      headers,
+      body: {
+        PremiumCarId: id_car
+      }
+    }
+
+    return this.http.delete(`${this.apiUrl}/user-premium-cars/${id_user}`, options);
   }
   
 }

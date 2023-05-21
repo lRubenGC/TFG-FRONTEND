@@ -1,1 +1,34 @@
-<p>premium-card works!</p>
+<div class="premium-car-item">
+    <!-- Car Title -->
+    <div 
+        class="item-car-title"
+        [ngClass]="{
+        'item-car-title-collected': car.has_car,
+        'item-car-title-wanted': car.wants_car
+        }"
+    >  
+        <h4 [ngClass]="car.model_name.length > 22 ? 'small-title' : ''">{{ car.model_name }}</h4>
+    </div>
+    
+    <!-- Img Container -->
+    <div class="img-container">
+        <!-- <img loading="lazy" class="banner-image" [src]="car.img" [alt]="car.model_name" /> -->
+        <img loading="lazy" class="card-image" [src]="car.card_img" [alt]="car.model_name" />
+        <div class="car-card-button-wrapper">
+            <button *ngIf="!car.has_car && !car.wants_car" (click)="addCar(false)" class="car-card-button add-to-wishlist">{{ 'ADD_CAR_WISHED' | translate }}</button>
+            <button *ngIf="!car.has_car && !car.wants_car" (click)="addCar(true)" class="car-card-button add-to-collection">{{ 'ADD_CAR_COLLECTION' | translate }}</button>
+            <button *ngIf="car.has_car || car.wants_car" (click)="removeCar()" class="car-card-button remove-from-x">{{ 'REMOVE_CAR_X' | translate }}</button>
+        </div>
+    </div>
+
+    <!-- Car Description -->
+    <div class="car-serie-wrapper">
+        <p>{{ car.secondary_serie }} - {{ car.col_serie }}</p>
+    </div>
+    <p class="car-item-subtitle">{{ car.car_id }}</p>
+
+    <!-- Collected Data -->
+    <!-- <div *ngIf="car.has_car" class="car-collected-data car-collected-has"></div>
+    <div *ngIf="car.wants_car" class="car-collected-data car-collected-wants"></div> -->
+
+</div>

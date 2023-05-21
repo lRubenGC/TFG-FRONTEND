@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BasicCarsService } from './basic-cars.service';
 import { msgCardInterface } from 'src/app/models/shared.interface';
-import { Subscription, lastValueFrom, switchMap } from 'rxjs';
+import { Subscription, lastValueFrom } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from 'src/app/services/language.service';
 import { basicCarInterface, basicCarShowedInterface } from 'src/app/models/cardTypes.interface';

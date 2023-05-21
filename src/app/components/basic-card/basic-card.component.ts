@@ -11,7 +11,6 @@ import { CarsService } from '../services/cars.service';
 })
 export class BasicCardComponent implements OnInit {
 
-  @Output() carAdded: EventEmitter<any> = new EventEmitter<any>();
   @Output() errorEvent = new EventEmitter<string>();
   @Input() car!: basicCarShowedInterface;
 
