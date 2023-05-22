@@ -20,6 +20,7 @@
 
 .premium-filter-item {
     margin-top: 1em;
+    min-width: 17rem;
 }
 
 .premium-filter-item h3 {

@@ -16,20 +16,20 @@
                     <h3>{{ 'PREMIUM_CARS_SECONDARY_SERIE' | translate }}</h3>
                     <div class="car-select">
                         <select [(ngModel)]="selectedSecondarySerie" (change)="filterSerie(selectedSecondarySerie)">
-                            <option value="All">All</option>
+                            <option selected value="All">All</option>
                             <option *ngFor="let serie of availableSecondarySeries" [value]="serie">{{ serie }}</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="premium-filter-item">
+                <!-- <div class="premium-filter-item">
                     <h3>{{ 'PREMIUM_CARS_YEAR' | translate }}</h3>
                     <div class="car-select">
                         <select [(ngModel)]="selectedYear" (change)="getCars(selectedYear)">
                             <option *ngFor="let year of availableYears" [value]="year">{{ year }}</option>
                         </select>
                     </div>
-                </div>
+                </div> -->
 
             </section>
 

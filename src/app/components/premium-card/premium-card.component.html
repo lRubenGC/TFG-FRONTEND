@@ -22,10 +22,12 @@
     </div>
 
     <!-- Car Description -->
-    <div class="car-serie-wrapper">
-        <p>{{ car.secondary_serie }} - {{ car.col_serie }}</p>
-    </div>
-    <p class="car-item-subtitle">{{ car.car_id }}</p>
+    <p *ngIf="car.secondary_serie.length > 0"><span class="premium-car-description">Serie</span>: {{ car.secondary_serie }}</p>
+    <p>
+        <span><span class="premium-car-description">Year</span>: {{ car.year }}</span>
+        <span *ngIf="car.col_serie.length > 0"> / <span class="premium-car-description">Col</span>: {{ car.col_serie }}</span>
+    </p>
+    <p><span class="premium-car-description">Car Id</span>: {{ car.car_id }}</p>
 
     <!-- Collected Data -->
     <!-- <div *ngIf="car.has_car" class="car-collected-data car-collected-has"></div>

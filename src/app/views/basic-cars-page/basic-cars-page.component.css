@@ -20,6 +20,7 @@
 
 .basic-filter-item {
     margin-top: 1em;
+    min-width: 20rem;
 }
 
 .basic-filter-item h3 {

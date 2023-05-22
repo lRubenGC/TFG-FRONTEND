@@ -53,6 +53,15 @@ export class HeaderComponent implements OnInit {
     this.router.navigate([link]);
   }
 
+  async goToUserProfile() {
+    const tokenDecoded = decodeToken();
+    if (tokenDecoded.hasToken && tokenDecoded.userId) {
+      const user = await this.userService.getUserData(tokenDecoded.userId);
+      const username = user.user.username;
+      this.router.navigate([`user/profile/${username}`]);
+    }
+  }
+
   // Toggles dropdown received and close others
   toggleDropdown(dropdown: string): void {
     if (dropdown === 'lang') {

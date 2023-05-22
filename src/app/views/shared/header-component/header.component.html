@@ -39,7 +39,7 @@
                 <button (click)="toggleDropdown('acc')" class="dropdown-button">{{ user.user.username }}
                     &dtrif;</button>
                 <div #accDropdown class="dropdown-content" [ngClass]="{'show': !accDropdownOpen}">
-                    <a (click)="goTo('user/profile')">{{ 'HEADER_MY_PROFILE' | translate }}</a>
+                    <a (click)="goToUserProfile()">{{ 'HEADER_MY_PROFILE' | translate }}</a>
                     <a (click)="goTo('user/config')">{{ 'HEADER_MY_SETTINGS' | translate }}</a>
                     <a (click)="logOut()">{{ 'HEADER_LOGOUT' | translate }}</a>
                 </div>

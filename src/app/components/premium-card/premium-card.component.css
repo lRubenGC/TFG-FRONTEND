@@ -75,3 +75,11 @@
     justify-content: center;
     align-items: center;
 }
+
+span {
+    font-size: 1em;
+}
+
+.premium-car-description {
+    font-weight: 600;
+}

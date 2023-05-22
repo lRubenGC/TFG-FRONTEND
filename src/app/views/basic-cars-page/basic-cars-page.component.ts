@@ -175,6 +175,9 @@ export class BasicCarsPageComponent implements OnInit {
 
     const cardDesc4 = this.translate.get('BASIC_CARS_DESCRIPTION_4');
     this.msg_card.description[3] = await lastValueFrom(cardDesc4);
+
+    const cardDesc5 = this.translate.get('BASIC_CARS_DESCRIPTION_5');
+    this.msg_card.description[3] = await lastValueFrom(cardDesc5);
   }
 
 }

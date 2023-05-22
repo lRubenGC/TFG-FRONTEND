@@ -11,6 +11,7 @@
     "BASIC_CARS_DESCRIPTION_2": "También hay series especiales, como los Red edition, Zamac...",
     "BASIC_CARS_DESCRIPTION_3": "Y por otra parte existen los tesoros (Treasure hunts y Super treasure hunts) que son muy dificiles de encontrar",
     "BASIC_CARS_DESCRIPTION_4": "Puedes añadir los coches pasando el cursor por encima de la imagen y usando los botones",
+    "BASIC_CARS_DESCRIPTION_5": "Por ahora no están todos los años disponibles, poco a poco se irán añadiendo los que faltan",
     "HEADER_ABOUT": "Sobre CW",
     "HEADER_ACCOUNT": "Iniciar Sesión",
     "HEADER_LANGUAGE": "Idioma",
@@ -47,5 +48,11 @@
     "GN_TOKEN_EXPIRED": "No puedes añadir un coche sin cuenta. Inicia sesión por favor",
     "PREMIUM_CARS_YEAR": "Año",
     "PREMIUM_CARS_MAIN_SERIE": "Serie Principal",
-    "PREMIUM_CARS_SECONDARY_SERIE": "Serie Secundaria"
+    "PREMIUM_CARS_SECONDARY_SERIE": "Serie Secundaria",
+    "PREMIUM_CARS_TITLE": "Coches Premium",
+    "PREMIUM_CARS_DESCRIPTION_1": "Los coches premium son distintos a los de la linea básica, por lo general tienen distinta capa de pintura, ruedas de goma y diferentes detalles más",
+    "PREMIUM_CARS_DESCRIPTION_2": "Están agrupados por temáticas o Series Principales (Car Culture, Boulevard...) y dentro de cada, se suelen separar en Series Secundarias",
+    "PREMIUM_CARS_DESCRIPTION_3": "Aquí puedes explorar los coches existentes y guardarlos a tu colección o a tu lista de deseados",
+    "PREMIUM_CARS_DESCRIPTION_4": "Por ahora no están publicados todos los coches, poco a poco se irán publicando los que faltan."
+
 }

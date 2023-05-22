@@ -10,6 +10,8 @@ export class GlobalNotificationComponent implements OnInit {
 
   @Input() notificationMsg: string = '';
 
+  isNotificationVisible = true;
+
   constructor(
   ) { }
 
@@ -17,6 +19,8 @@ export class GlobalNotificationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  
+  disableMsg() {
+    this.isNotificationVisible = false;
+  }
 
 }

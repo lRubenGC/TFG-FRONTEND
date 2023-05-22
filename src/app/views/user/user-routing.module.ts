@@ -11,7 +11,7 @@ const routes: Routes = [
       component: UserConfigComponent
     },
     {
-      path: 'profile',
+      path: 'profile/:username',
       component: UserProfileComponent
     },
     {

@@ -146,17 +146,8 @@ export class PremiumCarsPageComponent implements OnInit {
         this.showedCars = this.cars;
         break;
 
-      case 'Treasure Hunt':
-      case 'Super Treasure Hunt':
-        this.showedCars = this.cars.filter(car => car.series.includes(serie));
-        break;
-
-      case 'Walmart Exclusive':
-        this.showedCars = this.cars.filter(car => car.series.includes(serie));
-        break;
-
       default:
-        this.showedCars = this.cars.filter(car => car.series[0] === serie);
+        this.showedCars = this.cars.filter((car: premiumCarInterface) => car.secondary_serie === serie);
         break;
     }
   }
@@ -188,19 +179,19 @@ export class PremiumCarsPageComponent implements OnInit {
   
 
   async changeLanguage() {
-    const cardTitle = this.translate.get('BASIC_CARS_TITLE');
+    const cardTitle = this.translate.get('PREMIUM_CARS_TITLE');
     this.msg_card.title = await lastValueFrom(cardTitle);
 
-    const cardDescr1 = this.translate.get('BASIC_CARS_DESCRIPTION_1');
+    const cardDescr1 = this.translate.get('PREMIUM_CARS_DESCRIPTION_1');
     this.msg_card.description[0] = await lastValueFrom(cardDescr1);
 
-    const cardDesc2 = this.translate.get('BASIC_CARS_DESCRIPTION_2');
+    const cardDesc2 = this.translate.get('PREMIUM_CARS_DESCRIPTION_2');
     this.msg_card.description[1] = await lastValueFrom(cardDesc2);
 
-    const cardDesc3 = this.translate.get('BASIC_CARS_DESCRIPTION_3');
+    const cardDesc3 = this.translate.get('PREMIUM_CARS_DESCRIPTION_3');
     this.msg_card.description[2] = await lastValueFrom(cardDesc3);
 
-    const cardDesc4 = this.translate.get('BASIC_CARS_DESCRIPTION_4');
+    const cardDesc4 = this.translate.get('PREMIUM_CARS_DESCRIPTION_4');
     this.msg_card.description[3] = await lastValueFrom(cardDesc4);
   }
 
