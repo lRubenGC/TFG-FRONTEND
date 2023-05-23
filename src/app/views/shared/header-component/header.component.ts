@@ -16,6 +16,9 @@ import { AuthService } from '../../auth/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
+  @ViewChild('searchInput') searchInput!: ElementRef;
+  carSearched = '';
+
   langDropdownOpen = false;
   accDropdownOpen = false;
   userLoggedIn = false;
@@ -47,6 +50,24 @@ export class HeaderComponent implements OnInit {
     // Checks if user is logged for display the Dropdown
     this.checkUserLoggedIn();
 
+  }
+
+  searchCar() {
+    // If there is no data, it means that search bar is closed, so search bar gets opened
+    if (this.carSearched.trim().length <= 0) {
+      this.searchInput.nativeElement.focus();
+      return;
+    }
+
+    // If there is data, search bar gets closed
+    this.searchInput.nativeElement.blur();
+
+    // Gets data and cleans the input
+    const query = this.carSearched;
+    this.carSearched = '';
+
+    // Navigates to the view with the search data
+    this.router.navigate([`/search/${query}`]);
   }
 
   goTo(link: string): void {

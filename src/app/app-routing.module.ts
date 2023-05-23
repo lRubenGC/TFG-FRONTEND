@@ -25,6 +25,10 @@ const routes: Routes = [
     loadChildren: () => import('./views/premium-cars-page/premium-cars-routing.module').then(m => m.PremiumCarsRoutingModule)
   },
   { 
+    path: 'search/:query',
+    loadChildren: () => import('./views/search-results/search-results-routing.module').then(m => m.SearchResultsRoutingModule)
+  },
+  { 
     path: 'user',
     loadChildren: () => import('./views/user/user-routing.module').then(m => m.UserRoutingModule)
   },

@@ -10,7 +10,11 @@ export class AppComponent {
   title = 'TFG-FRONTEND';
 
   constructor(private translate: TranslateService) {
-    translate.setDefaultLang('en');
+    const lang = localStorage.getItem('cw-lang');
+    if (lang) {
+      translate.setDefaultLang(lang)
+    } else translate.setDefaultLang('en');
   }
+  
 
 }

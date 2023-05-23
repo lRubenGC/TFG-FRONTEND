@@ -17,6 +17,7 @@ import { PremiumCarsPageModule } from './views/premium-cars-page/premium-cars-pa
 import { SharedModule } from './views/shared/shared.module';
 import { UserModule } from './views/user/user.module';
 import { AuthModule } from './views/auth/auth.module';
+import { SearchResultsPageModule } from './views/search-results/search-results-page.module';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { AuthModule } from './views/auth/auth.module';
     CustomCarsModule,
     LandingPageModule,
     PremiumCarsPageModule,
+    SearchResultsPageModule,
     SharedModule,
     UserModule
   ],

@@ -11,8 +11,15 @@
         <!-- Search Bar -->
         <li>
             <div class="search-box">
-                <button class="btn-search"><i class="fas fa-search"></i></button>
-                <input type="text" class="input-search" placeholder="{{ 'HEADER_SEARCH' | translate }}">
+                <button (click)="searchCar()" class="btn-search"><i class="fas fa-search"></i></button>
+                <input
+                    #searchInput
+                    [(ngModel)]="carSearched"
+                    (keyup.enter)="searchCar()"
+                    type="text"
+                    class="input-search"
+                    placeholder="{{ 'HEADER_SEARCH' | translate }}"
+                >
             </div>
         </li>
 
