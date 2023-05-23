@@ -1,0 +1,32 @@
+<div id="search-results-page">
+
+    <!-- Landing section (Just for an img) -->
+    <div id="search-results-land-section"></div>
+
+    <!-- Basic Cars -->
+    <section *ngIf="basicCars.length > 0" class="search-results-car-list" >
+        <h1>Basic Cars</h1>
+        <hr>
+        <div id="basic-cars-search-list">
+            <div *ngFor="let car of basicCars">
+                <app-basic-card (errorEvent)="enableErrorMsg($event)" [car]="car"></app-basic-card>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Premium Cars -->
+    <section *ngIf="premiumCars.length > 0" class="search-results-car-list" >
+        <h1>Premium Cars</h1>
+        <hr>
+        <div id="premium-cars-search-list">
+            <div *ngFor="let car of premiumCars">
+                <app-premium-card (errorEvent)="enableErrorMsg($event)" [car]="car"></app-premium-card>
+            </div>
+        </div>
+    </section>
+
+    <!-- Possible error notification -->
+    <app-global-notification *ngIf="error" [notificationMsg]="errorMsg"></app-global-notification>
+
+</div>

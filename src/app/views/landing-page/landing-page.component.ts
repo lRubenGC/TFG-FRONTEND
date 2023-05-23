@@ -6,6 +6,8 @@ import { lastValueFrom, Subscription } from 'rxjs';
 import { LanguageService } from "../../services/language.service";
 import { landingCardInterface } from 'src/app/models/landingPage.interface';
 import { msgCardInterface } from 'src/app/models/shared.interface';
+import { decodeToken } from 'src/app/helpers/generics';
+import { userInterface } from 'src/app/models/user.interface';
 
 @Component({
   selector: 'app-landing-page',
@@ -13,6 +15,8 @@ import { msgCardInterface } from 'src/app/models/shared.interface';
   styleUrls: ['./landing-page.component.css']
 })
 export class LandingPageComponent implements OnInit, OnDestroy {
+
+  userLoggedIn = decodeToken().hasToken;
 
   landingCards: landingCardInterface[] = [
     {
@@ -38,7 +42,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   msg_card: msgCardInterface = {
     title: '',
     description: [],
-    button: true,
+    button: !this.userLoggedIn,
     buttonName: '',
     buttonLink: '/auth'
   }

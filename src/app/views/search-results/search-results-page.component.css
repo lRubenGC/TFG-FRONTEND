@@ -1,0 +1,35 @@
+#search-results-land-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('src/assets/images/login_page/login_bg.png');
+    background-position: center;
+    background-size: cover;
+    align-items: center;
+    padding: 5em;
+}
+
+#basic-cars-search-list {
+    padding: 2rem 6rem;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fill,minmax(16rem, 1fr));
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#premium-cars-search-list {
+    padding: 2rem 5rem;
+    display: grid;
+    gap: 4rem;
+    grid-template-columns: repeat(auto-fill,minmax(12rem, 1fr));
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0 50px;
+}
+
+.search-results-car-list {
+    margin: 2rem 1rem;
+}
