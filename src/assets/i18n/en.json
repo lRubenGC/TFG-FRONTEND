@@ -40,12 +40,12 @@
     "LOGIN_SUCCESFUL": "Successful Login. Redirecting...",
     "USERNAME_IN_USE": "That username is already in use",
     "EMAIL_IN_USE": "That email is already in use",
-    "REGISTER_SUCCESFUL": "Successful register. You can Log In now",
+    "REGISTER_SUCCESFUL": "Successful register. You can Sign In now",
     "ADD_CAR_COLLECTION": "Add to Collection",
     "ADD_CAR_WISHED": "Add to Wishlist",
     "REMOVE_CAR_X": "Remove",
     "GN_UNEXPECTED_ERROR": "Unexpected error, talk to the administrator please",
-    "GN_TOKEN_EXPIRED": "You cannot add a car without an account. Please log in",
+    "GN_TOKEN_EXPIRED": "You cannot add a car without an account. Please sign in",
     "PREMIUM_CARS_YEAR": "Year",
     "PREMIUM_CARS_MAIN_SERIE": "Main Serie",
     "PREMIUM_CARS_SECONDARY_SERIE": "Secondary Serie",
@@ -53,5 +53,8 @@
     "PREMIUM_CARS_DESCRIPTION_1": "Premium cars are different from the basic line, they usually have a different layer of paint, rubber wheels and different details.",
     "PREMIUM_CARS_DESCRIPTION_2": "They are grouped by theme or Main Series (Car Culture, Boulevard...) and within each one, they are usually separated into Secondary Series",
     "PREMIUM_CARS_DESCRIPTION_3": "Here you can browse existing cars and save them to your collection or wishlist",
-    "PREMIUM_CARS_DESCRIPTION_4": "For now not all the cars are published, little by little the remaining ones will be published."
+    "PREMIUM_CARS_DESCRIPTION_4": "For now not all the cars are published, little by little the remaining ones will be published.",
+    "SEARCH_BASIC_CARS": "Basic Cars",
+    "SEARCH_PREMIUM_CARS": "Premium Cars",
+    "SEARCH_NO_CARS": "There aren't cars named:"
 }

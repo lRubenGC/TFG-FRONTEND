@@ -5,7 +5,7 @@
 
     <!-- Basic Cars -->
     <section *ngIf="basicCars.length > 0" class="search-results-car-list" >
-        <h1>Basic Cars</h1>
+        <h1>{{ 'SEARCH_BASIC_CARS' | translate }}</h1>
         <hr>
         <div id="basic-cars-search-list">
             <div *ngFor="let car of basicCars">
@@ -17,13 +17,18 @@
 
     <!-- Premium Cars -->
     <section *ngIf="premiumCars.length > 0" class="search-results-car-list" >
-        <h1>Premium Cars</h1>
+        <h1>{{ 'SEARCH_PREMIUM_CARS' | translate }}</h1>
         <hr>
         <div id="premium-cars-search-list">
             <div *ngFor="let car of premiumCars">
                 <app-premium-card (errorEvent)="enableErrorMsg($event)" [car]="car"></app-premium-card>
             </div>
         </div>
+    </section>
+
+    <section *ngIf="basicCars.length === 0 && premiumCars.length === 0" class="search-results-car-list">
+        <h1>{{ 'SEARCH_NO_CARS' | translate }} {{ query }}</h1>
+        <hr>
     </section>
 
     <!-- Possible error notification -->

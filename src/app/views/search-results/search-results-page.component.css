@@ -31,5 +31,9 @@
 }
 
 .search-results-car-list {
-    margin: 2rem 1rem;
+    margin: 2rem;
+}
+
+h1 {
+    margin-left: 1rem;
 }

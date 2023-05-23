@@ -53,6 +53,9 @@
     "PREMIUM_CARS_DESCRIPTION_1": "Los coches premium son distintos a los de la linea básica, por lo general tienen distinta capa de pintura, ruedas de goma y diferentes detalles más",
     "PREMIUM_CARS_DESCRIPTION_2": "Están agrupados por temáticas o Series Principales (Car Culture, Boulevard...) y dentro de cada, se suelen separar en Series Secundarias",
     "PREMIUM_CARS_DESCRIPTION_3": "Aquí puedes explorar los coches existentes y guardarlos a tu colección o a tu lista de deseados",
-    "PREMIUM_CARS_DESCRIPTION_4": "Por ahora no están publicados todos los coches, poco a poco se irán publicando los que faltan."
+    "PREMIUM_CARS_DESCRIPTION_4": "Por ahora no están publicados todos los coches, poco a poco se irán publicando los que faltan.",
+    "SEARCH_BASIC_CARS": "Coches Básicos",
+    "SEARCH_PREMIUM_CARS": "Coches Premium",
+    "SEARCH_NO_CARS": "No existen coches llamados:"
 
 }

@@ -20,6 +20,7 @@ export class SearchResultsPageComponent implements OnInit, OnDestroy {
   // Subscription for refresh the search bar data
   private routeParamsSubscription!: Subscription;
 
+  query = '';
   basicCars: basicCarShowedInterface[] = [];
   premiumCars: premiumCarShowedInterface[] = [];
 
@@ -36,6 +37,7 @@ export class SearchResultsPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // Gets the query and runs searchCars()
     this.routeParamsSubscription = this.route.params.subscribe((params: Params) => {
+      this.query = params['query'];
       this.searchCars(params['query']);
     });
   }
