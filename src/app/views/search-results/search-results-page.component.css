@@ -2,11 +2,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url('src/assets/images/login_page/login_bg.png');
+    background: url('src/assets/images/search-results/bg.png');
     background-position: center;
     background-size: cover;
-    align-items: center;
-    padding: 5em;
+    padding: 6em;
 }
 
 #basic-cars-search-list {

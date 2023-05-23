@@ -18,7 +18,7 @@
     cursor: pointer;
     transition: opacity .3s, visibility .3s;
     padding: .5rem;
-    width: 40%;
+    width: 47%;
 }
 
 .img-container:hover .car-card-button {
@@ -38,13 +38,13 @@
 }
 
 .add-to-wishlist {
-    left: 1rem;
+    left: .3rem;
     border: 2px solid var(--dark-primary-100);
     background-color: rgba(132, 41, 8, 0.6);
 }
 
 .add-to-collection {
-    right: 1rem;
+    right: .3rem;
     border: 2px solid rgb(23, 194, 35);
     background-color: rgba(5, 82, 10, 0.6);
 }

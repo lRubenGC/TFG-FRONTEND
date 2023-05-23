@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { BasicCarsService } from '../basic-cars-page/basic-cars.service';
 import { PremiumCarsService } from '../premium-cars-page/premium-cars.service';
 import { decodeToken } from 'src/app/helpers/generics';
-import { basicCarShowedInterface } from 'src/app/models/cardTypes.interface';
+import { basicCarInterface, basicCarShowedInterface } from 'src/app/models/cardTypes.interface';
 import { premiumCarShowedInterface } from 'src/app/models/cardTypes.interface';
 
 @Component({
@@ -55,6 +55,16 @@ export class SearchResultsPageComponent implements OnInit, OnDestroy {
       
       // Gets Basic and Premiums cars
       this.searchResultsService.getCars(query).subscribe(res => {
+        const basicCars = res.basicCars.map((car: basicCarInterface) => {
+          const series = car.series.split(',');
+          const serie_class = series[0].replace(/ /g, '-').toLowerCase();
+  
+          return {
+            ...car,
+            series,
+            serie_class
+          }
+        });
 
         // If user is logged in
         if (this.userToken.hasToken && this.userToken.userId) {
@@ -62,20 +72,20 @@ export class SearchResultsPageComponent implements OnInit, OnDestroy {
           // Gets cars that user has in his lists for print them correctly
           this.getUserBasicCars().then((userCars: any) => {
             userCars.carsOwned.forEach((carOwned: any) => {
-              const matchedCar = res.basicCars.find((car: any) => car.id === carOwned.id);
+              const matchedCar = basicCars.find((car: any) => car.id === carOwned.id);
               if (matchedCar) {
                 matchedCar.has_car = true;
               }
             });
     
             userCars.carsWished.forEach((carWished: any) => {
-              const matchedCar = res.basicCars.find((car: any) => car.id === carWished.id);
+              const matchedCar = basicCars.find((car: any) => car.id === carWished.id);
               if (matchedCar) {
                 matchedCar.wants_car = true;
               }
             });
   
-            const finalCars = res.basicCars.map((car: any) => {
+            const finalCars = basicCars.map((car: any) => {
               return {
                 ...car,
                 token: this.userToken.userId
@@ -116,7 +126,7 @@ export class SearchResultsPageComponent implements OnInit, OnDestroy {
           });
 
         } else {
-          this.basicCars = res.basicCars;
+          this.basicCars = basicCars;
           this.premiumCars = res.premiumCars;
         }
       })
