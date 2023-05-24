@@ -56,6 +56,10 @@
     background-color: rgba(177, 16, 16, 0.6);
 }
 
+.car-description {
+    font-weight: 600;
+}
+
 /* .car-collected-data {
     text-align: center;
     margin: auto;

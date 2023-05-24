@@ -28,6 +28,7 @@
         <div class="serie-square" [ngClass]="car.serie_class"></div>
         <p>{{ car.series[0] }} - {{ car.col_serie }}</p>
     </div>
+    <p *ngIf="car.search">{{ car.year }}</p>
 
     <!-- Collected Data -->
     <!-- <div *ngIf="car.has_car" class="car-collected-data car-collected-has"></div>

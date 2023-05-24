@@ -49,6 +49,11 @@
 
         </div>
 
+        <div *ngIf="isSerieSelected" class="premium-view-title">
+            <h2>{{ selectedMainSerie }}</h2>
+            <hr>
+        </div>
+
         <!-- Car list -->
         <div *ngIf="isSerieSelected" id="premium-cars-list">
 

@@ -90,6 +90,8 @@ export class PremiumCarsPageComponent implements OnInit {
   }
 
   getCars(main_serie: string) {
+    this.setMainSerieTitle(main_serie);
+
     this.premiumCarsService.getCars(main_serie).subscribe(res => {
       this.isSerieSelected = true;
       const cars = res.cars;
@@ -138,6 +140,21 @@ export class PremiumCarsPageComponent implements OnInit {
       const series = res.series.split(',');
       this.availableSecondarySeries = series.sort();
     })
+  }
+
+  setMainSerieTitle(main_serie: string) {
+    switch (main_serie) {
+      case 'Fast %26 Furious':
+        this.selectedMainSerie = 'Fast & Furious';
+        break;
+
+      case 'Fast %26 Furious - Premium':
+        this.selectedMainSerie = 'Fast & Furious - Premium';
+        break;
+
+      default:
+        this.selectedMainSerie = main_serie;
+    }
   }
 
   filterSerie(serie: string) {

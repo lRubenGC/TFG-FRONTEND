@@ -27,6 +27,7 @@ export interface basicCarShowedInterface {
     has_car: boolean;
     wants_car: boolean;
     token: number;
+    search?: boolean;
 }
 
 export interface premiumCarInterface {
@@ -56,4 +57,5 @@ export interface premiumCarShowedInterface {
     has_car: boolean;
     wants_car: boolean;
     token: number;
+    search?: boolean;
 }

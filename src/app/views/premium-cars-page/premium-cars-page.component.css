@@ -74,6 +74,16 @@ select::-ms-expand {
     color: var(--dark-primary-100);
 }
 
+.premium-view-title {
+    text-align: center;
+    margin: 2rem auto 0;
+    width: 85%;
+}
+
+.premium-view-title h2 {
+    margin-bottom: 5px;
+}
+
 #premium-cars-list {
     padding: 2rem 5rem;
     display: grid;

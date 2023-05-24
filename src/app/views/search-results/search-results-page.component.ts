@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { BasicCarsService } from '../basic-cars-page/basic-cars.service';
 import { PremiumCarsService } from '../premium-cars-page/premium-cars.service';
 import { decodeToken } from 'src/app/helpers/generics';
-import { basicCarInterface, basicCarShowedInterface } from 'src/app/models/cardTypes.interface';
+import { basicCarInterface, basicCarShowedInterface, premiumCarInterface } from 'src/app/models/cardTypes.interface';
 import { premiumCarShowedInterface } from 'src/app/models/cardTypes.interface';
 
 @Component({
@@ -62,7 +62,18 @@ export class SearchResultsPageComponent implements OnInit, OnDestroy {
           return {
             ...car,
             series,
-            serie_class
+            serie_class,
+            search: true
+          }
+        });
+
+        // Order car asc
+        basicCars.sort((a: any, b: any) => a.year - b.year);
+
+        const premiumCars = res.premiumCars.map((car: premiumCarInterface) => {
+          return {
+            ...car,
+            search: true
           }
         });
 
@@ -100,20 +111,20 @@ export class SearchResultsPageComponent implements OnInit, OnDestroy {
           // Same for Premium cars
           this.getUserPremiumCars().then((userCars: any) => {
             userCars.carsOwned.forEach((carOwned: any) => {
-              const matchedCar = res.premiumCars.find((car: any) => car.id === carOwned.id);
+              const matchedCar = premiumCars.find((car: any) => car.id === carOwned.id);
               if (matchedCar) {
                 matchedCar.has_car = true;
               }
             });
     
             userCars.carsWished.forEach((carWished: any) => {
-              const matchedCar = res.premiumCars.find((car: any) => car.id === carWished.id);
+              const matchedCar = premiumCars.find((car: any) => car.id === carWished.id);
               if (matchedCar) {
                 matchedCar.wants_car = true;
               }
             });
   
-            const finalCars = res.premiumCars.map((car: any) => {
+            const finalCars = premiumCars.map((car: any) => {
               return {
                 ...car,
                 token: this.userToken.userId
@@ -127,7 +138,7 @@ export class SearchResultsPageComponent implements OnInit, OnDestroy {
 
         } else {
           this.basicCars = basicCars;
-          this.premiumCars = res.premiumCars;
+          this.premiumCars = premiumCars;
         }
       })
     }
