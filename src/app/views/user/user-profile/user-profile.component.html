@@ -1,1 +1,58 @@
-<h2>Perfil de {{username}}</h2>
+<br>
+<div id="user-profile-page">
+    <div id="user-profile-body">
+        <!-- Landing section -->
+        <section id="user-profile-land-section">
+
+            <!-- Profile data -->
+            <div class="profile-data-name">
+                <img class="user-profile-pic" src="../../../../assets/images/user-profile/no-img.jpg" alt="">
+                <h4>{{username}}</h4>
+            </div>
+
+            <!-- Cars data -->
+            <div class="profile-data-cars">
+                <div class="data-cars-item">
+                    <p class="data-item-number">55</p>
+                    <p>Basic</p>
+                </div>
+
+                <div class="vertical-divider"></div>
+                
+                <div class="data-cars-item">
+                    <p class="data-item-number">15</p>
+                    <p>Premium</p>
+                </div>
+                
+                <div class="vertical-divider"></div>
+
+                <div class="data-cars-item">
+                    <p class="data-item-number">2</p>
+                    <p>Custom</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Car menu -->
+        <section class="car-menu-list-container">
+            <div class="car-menu-list">
+                <div class="car-menu-item">Basic</div>
+                <div class="car-menu-item">Premium</div>
+                <div class="car-menu-item">Custom</div>
+            </div>
+        </section>
+
+        <!-- Car list -->
+        <section id="user-cars-list">
+
+
+        </section>
+
+
+    </div>
+
+    <!-- Possible error notification -->
+    <!-- <app-global-notification *ngIf="error" [notificationMsg]="errorMsg"></app-global-notification> -->
+
+</div>

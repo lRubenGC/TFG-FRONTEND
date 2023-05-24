@@ -1,0 +1,73 @@
+#user-profile-body {
+    width: 80vw;
+    margin: 5em auto;
+}
+
+#user-profile-land-section {
+    display: flex;
+    justify-content: center;
+}
+
+.profile-data-name {
+    display: flex;
+}
+
+.profile-data-name img {
+    width: 10%;
+    border-radius: 100px;
+}
+
+.profile-data-name h4 {
+    margin-left: 20px;
+}
+
+.profile-data-cars {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.data-cars-item {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    text-align: center;
+    justify-content: center;
+}
+
+.data-item-number {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.vertical-divider {
+    width: 1px;
+    height: 50%;
+    background-color: rgb(143, 143, 143);
+}
+
+.car-menu-list-container {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.car-menu-list {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    border: 1px solid rgb(143, 143, 143);
+    border-radius: 5px;
+    padding: 5px 15px;
+}
+
+.car-menu-item {
+    padding: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.car-menu-item:hover {
+    color: var(--dark-primary-200);
+}
