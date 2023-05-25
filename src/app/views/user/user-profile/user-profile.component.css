@@ -4,6 +4,10 @@
 }
 
 #user-profile-land-section {
+    background: url('../../../../assets/images/login_page/login_bg.png');
+    background-position: center;
+    padding: 2rem;
+    border-radius: 5px;
     display: flex;
     justify-content: center;
 }
@@ -47,6 +51,10 @@
     background-color: rgb(143, 143, 143);
 }
 
+.vertical-divider-menu {
+    height: 80%;
+}
+
 .car-menu-list-container {
     margin-top: 2rem;
     display: flex;
@@ -56,6 +64,7 @@
 .car-menu-list {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 1rem;
     border: 1px solid rgb(143, 143, 143);
     border-radius: 5px;
@@ -70,4 +79,18 @@
 
 .car-menu-item:hover {
     color: var(--dark-primary-200);
+}
+
+.car-menu-item-selected {
+    border-bottom: 1px solid var(--dark-primary-100);
+}
+
+.user-basic-cars-list {
+    padding: 2rem 6rem;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fill,minmax(16rem, 1fr));
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserConfigComponent } from './user-config/user-config.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 
 
@@ -11,7 +12,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     UserConfigComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ComponentsModule
   ]
 })
 export class UserModule { }

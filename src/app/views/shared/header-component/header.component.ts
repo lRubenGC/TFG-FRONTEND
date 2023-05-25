@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
   langDropdownOpen = false;
   accDropdownOpen = false;
   userLoggedIn = false;
-  user!: userInterface;
+  user!: any;
 
   @ViewChild('langDropdown') langDropdown!: ElementRef;
   @ViewChild('accDropdown') accDropdown!: ElementRef;

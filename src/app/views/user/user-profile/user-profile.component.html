@@ -7,27 +7,27 @@
             <!-- Profile data -->
             <div class="profile-data-name">
                 <img class="user-profile-pic" src="../../../../assets/images/user-profile/no-img.jpg" alt="">
-                <h4>{{username}}</h4>
+                <h4>{{ user?.username }}</h4>
             </div>
 
             <!-- Cars data -->
             <div class="profile-data-cars">
                 <div class="data-cars-item">
-                    <p class="data-item-number">55</p>
+                    <p class="data-item-number">{{ basicCarsOwned.length }}</p>
                     <p>Basic</p>
                 </div>
 
                 <div class="vertical-divider"></div>
                 
                 <div class="data-cars-item">
-                    <p class="data-item-number">15</p>
+                    <p class="data-item-number">{{ premiumCarsOwned.length }}</p>
                     <p>Premium</p>
                 </div>
                 
                 <div class="vertical-divider"></div>
 
                 <div class="data-cars-item">
-                    <p class="data-item-number">2</p>
+                    <p class="data-item-number">{{ customCarsOwned.length }}</p>
                     <p>Custom</p>
                 </div>
             </div>
@@ -37,15 +37,68 @@
         <!-- Car menu -->
         <section class="car-menu-list-container">
             <div class="car-menu-list">
-                <div class="car-menu-item">Basic</div>
-                <div class="car-menu-item">Premium</div>
-                <div class="car-menu-item">Custom</div>
+                <div
+                    class="car-menu-item"
+                    [ngClass]="carsType == 'basic' ? 'car-menu-item-selected' : ''"
+                    (click)="changeCarType('basic')"
+                    >Basic</div>
+                <div
+                    class="car-menu-item"
+                    [ngClass]="carsType == 'premium' ? 'car-menu-item-selected' : ''"
+                    (click)="changeCarType('premium')"
+                    >Premium</div>
+                <div
+                    class="car-menu-item"
+                    [ngClass]="carsType == 'custom' ? 'car-menu-item-selected' : ''"
+                    (click)="changeCarType('custom')"
+                    >Custom</div>
+
+                <div class="vertical-divider vertical-divider-menu"></div>
+
+                <div
+                    class="car-menu-item"
+                    [ngClass]="collectedType == 'owned' ? 'car-menu-item-selected' : ''"
+                    (click)="changeCarCollected('owned')"
+                    >Owned</div>
+                <div
+                    *ngIf="carsType !== 'custom'"
+                    class="car-menu-item"
+                    [ngClass]="collectedType == 'wished' ? 'car-menu-item-selected' : ''"
+                    (click)="changeCarCollected('wished')"
+                    >Wished</div>
             </div>
         </section>
 
         <!-- Car list -->
         <section id="user-cars-list">
 
+            <!-- Basic Cars Owned-->
+            <div *ngIf="carsType === 'basic' && collectedType === 'owned'" class="user-basic-cars-list">
+                <div *ngFor="let car of basicCarsOwned">
+                    <app-basic-card (errorEvent)="enableErrorMsg($event)" [car]="car"></app-basic-card>
+                </div>
+            </div>
+
+            <!-- Basic Cars Wished-->
+            <div *ngIf="carsType === 'basic' && collectedType === 'wished'" class="user-basic-cars-list">
+                <div *ngFor="let car of basicCarsWished">
+                    <app-basic-card (errorEvent)="enableErrorMsg($event)" [car]="car"></app-basic-card>
+                </div>
+            </div>
+
+            <!-- Premium Cars Owned-->
+            <div *ngIf="carsType === 'premium' && collectedType === 'owned'" class="user-basic-cars-list">
+                <div *ngFor="let car of premiumCarsOwned">
+                    <app-premium-card (errorEvent)="enableErrorMsg($event)" [car]="car"></app-premium-card>
+                </div>
+            </div>
+
+            <!-- Premium Cars Wished-->
+            <div *ngIf="carsType === 'premium' && collectedType === 'wished'" class="user-basic-cars-list">
+                <div *ngFor="let car of premiumCarsWished">
+                    <app-premium-card (errorEvent)="enableErrorMsg($event)" [car]="car"></app-premium-card>
+                </div>
+            </div>
 
         </section>
 

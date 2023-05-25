@@ -7,7 +7,6 @@ import { LanguageService } from "../../services/language.service";
 import { landingCardInterface } from 'src/app/models/landingPage.interface';
 import { msgCardInterface } from 'src/app/models/shared.interface';
 import { decodeToken } from 'src/app/helpers/generics';
-import { userInterface } from 'src/app/models/user.interface';
 
 @Component({
   selector: 'app-landing-page',
