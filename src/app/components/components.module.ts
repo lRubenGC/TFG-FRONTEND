@@ -10,6 +10,7 @@ import { PremiumCardComponent } from './premium-card/premium-card.component';
 import { GlobalNotificationComponent } from './global-notification/global-notification.component';
 import { PremiumPillComponent } from './premium-pill/premium-pill.component';
 import { UserCardComponent } from './user-card/user-card.component';
+import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
 
 
 
@@ -19,7 +20,8 @@ import { UserCardComponent } from './user-card/user-card.component';
     PremiumCardComponent,
     PremiumPillComponent,
     GlobalNotificationComponent,
-    UserCardComponent
+    ScrollToTopComponent,
+    UserCardComponent,
   ],
   imports: [
     CommonModule,
@@ -32,6 +34,7 @@ import { UserCardComponent } from './user-card/user-card.component';
     PremiumCardComponent,
     PremiumPillComponent,
     GlobalNotificationComponent,
+    ScrollToTopComponent,
     UserCardComponent
   ]
 })

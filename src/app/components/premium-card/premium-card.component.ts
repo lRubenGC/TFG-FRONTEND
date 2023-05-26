@@ -9,6 +9,7 @@ import { CarsService } from '../services/cars.service';
 })
 export class PremiumCardComponent implements OnInit {
 
+  @Output() deleteCar = new EventEmitter<premiumCarShowedInterface>();
   @Output() errorEvent = new EventEmitter<string>();
   @Input() car!: premiumCarShowedInterface;
 
@@ -63,6 +64,9 @@ export class PremiumCardComponent implements OnInit {
           } else if (this.car.wants_car) {
             this.car.wants_car = false;
           }
+
+          this.deleteCar.emit(this.car);
+
         },
         (err) => {
           switch (err.status) {

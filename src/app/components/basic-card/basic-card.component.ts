@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { decodeToken } from 'src/app/helpers/generics';
 
-import { basicCarInterface, basicCarShowedInterface } from 'src/app/models/cardTypes.interface';
+import { basicCarShowedInterface } from 'src/app/models/cardTypes.interface';
 import { CarsService } from '../services/cars.service';
 
 @Component({
@@ -11,6 +10,7 @@ import { CarsService } from '../services/cars.service';
 })
 export class BasicCardComponent implements OnInit {
 
+  @Output() deleteCar = new EventEmitter<basicCarShowedInterface>();
   @Output() errorEvent = new EventEmitter<string>();
   @Input() car!: basicCarShowedInterface;
 
@@ -65,6 +65,8 @@ export class BasicCardComponent implements OnInit {
           } else if (this.car.wants_car) {
             this.car.wants_car = false;
           }
+
+          this.deleteCar.emit(this.car);
         },
         (err) => {
           switch (err.status) {

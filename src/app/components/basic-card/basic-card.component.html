@@ -3,8 +3,8 @@
     <div 
         class="item-car-title"
         [ngClass]="{
-        'item-car-title-collected': car.has_car,
-        'item-car-title-wanted': car.wants_car
+        'item-car-title-collected': car.has_car && !car.profile_view,
+        'item-car-title-wanted': car.wants_car && !car.profile_view
         }"
     >  
         <img *ngIf="car.series[1] == 'Treasure Hunt'" src="../../../assets/images/shared/th.png" alt="th icon" class="item-car-th">
@@ -16,9 +16,9 @@
     <div class="img-container">
         <img loading="lazy" class="banner-image" [src]="car.img" [alt]="car.model_name" />
         <div class="car-card-button-wrapper">
-            <button *ngIf="!car.has_car && !car.wants_car" (click)="addCar(false)" class="car-card-button add-to-wishlist">{{ 'ADD_CAR_WISHED' | translate }}</button>
-            <button *ngIf="!car.has_car && !car.wants_car" (click)="addCar(true)" class="car-card-button add-to-collection">{{ 'ADD_CAR_COLLECTION' | translate }}</button>
-            <button *ngIf="car.has_car || car.wants_car" (click)="removeCar()" class="car-card-button remove-from-x">{{ 'REMOVE_CAR_X' | translate }}</button>
+            <button *ngIf="!car.has_car && !car.wants_car && !car.user_profile" (click)="addCar(false)" class="car-card-button add-to-wishlist">{{ 'ADD_CAR_WISHED' | translate }}</button>
+            <button *ngIf="!car.has_car && !car.wants_car && !car.user_profile" (click)="addCar(true)" class="car-card-button add-to-collection">{{ 'ADD_CAR_COLLECTION' | translate }}</button>
+            <button *ngIf="(car.has_car || car.wants_car) && car.user_profile" (click)="removeCar()" class="car-card-button remove-from-x">{{ 'REMOVE_CAR_X' | translate }}</button>
         </div>
     </div>
 

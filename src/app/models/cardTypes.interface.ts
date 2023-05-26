@@ -28,6 +28,8 @@ export interface basicCarShowedInterface {
     wants_car: boolean;
     token: number;
     search?: boolean;
+    user_profile?: boolean;
+    profile_view?: boolean;
 }
 
 export interface premiumCarInterface {
@@ -58,4 +60,6 @@ export interface premiumCarShowedInterface {
     wants_car: boolean;
     token: number;
     search?: boolean;
+    user_profile?: boolean;
+    profile_view?: boolean;
 }

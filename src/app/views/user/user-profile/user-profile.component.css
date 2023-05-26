@@ -113,6 +113,17 @@
     text-align: center;
 }
 
+.user-premium-cars-list {
+    padding: 2rem 5rem;
+    display: grid;
+    gap: 4rem;
+    grid-template-columns: repeat(auto-fill,minmax(12rem, 1fr));
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0 50px;
+}
+
 
 @media only screen and (max-width: 600px) {
     #user-profile-land-section {
