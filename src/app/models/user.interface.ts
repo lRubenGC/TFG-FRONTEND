@@ -5,6 +5,8 @@ export interface userInterface {
     status: boolean;
     recoverToken: string | null;
     recoverTokenDate: string | null;
+    img: string;
+    bg_img: string;
 }
 
 export interface userInterfaceApi {

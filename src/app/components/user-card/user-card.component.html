@@ -1,4 +1,6 @@
 <div class="user-item" (click)="visitUser()">
-    <img src="../../../assets/images/user-profile/no-img.jpg" alt="">
-    <h3>{{ user.username }}</h3>
+    <div class="profile-img-container">
+        <img class="user-profile-pic circular-image" [src]="user.img ? user.img : 'assets/images/user-profile/no-user-profile.jpg'" alt="">
+    </div>
+    <h4>{{ user.username }}</h4>
 </div>
