@@ -9,6 +9,7 @@ import { BasicCardComponent } from './basic-card/basic-card.component';
 import { PremiumCardComponent } from './premium-card/premium-card.component';
 import { GlobalNotificationComponent } from './global-notification/global-notification.component';
 import { PremiumPillComponent } from './premium-pill/premium-pill.component';
+import { UserCardComponent } from './user-card/user-card.component';
 
 
 
@@ -18,6 +19,7 @@ import { PremiumPillComponent } from './premium-pill/premium-pill.component';
     PremiumCardComponent,
     PremiumPillComponent,
     GlobalNotificationComponent,
+    UserCardComponent
   ],
   imports: [
     CommonModule,
@@ -30,6 +32,7 @@ import { PremiumPillComponent } from './premium-pill/premium-pill.component';
     PremiumCardComponent,
     PremiumPillComponent,
     GlobalNotificationComponent,
+    UserCardComponent
   ]
 })
 export class ComponentsModule { }

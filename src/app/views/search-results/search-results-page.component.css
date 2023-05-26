@@ -36,3 +36,33 @@
 h1 {
     margin-left: 1rem;
 }
+
+.car-menu-list-container {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.car-menu-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    border: 1px solid rgb(143, 143, 143);
+    border-radius: 5px;
+    padding: 5px 15px;
+}
+
+.car-menu-item {
+    padding: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.car-menu-item:hover {
+    color: var(--dark-primary-200);
+}
+
+.car-menu-item-selected {
+    border-bottom: 1px solid var(--dark-primary-100);
+}

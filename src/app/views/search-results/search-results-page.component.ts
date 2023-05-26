@@ -21,8 +21,12 @@ export class SearchResultsPageComponent implements OnInit, OnDestroy {
   private routeParamsSubscription!: Subscription;
 
   query = '';
+  searchType = 'cars';
+
   basicCars: basicCarShowedInterface[] = [];
   premiumCars: premiumCarShowedInterface[] = [];
+
+  users = [];
 
   error = false;
   errorMsg = '';
@@ -39,6 +43,7 @@ export class SearchResultsPageComponent implements OnInit, OnDestroy {
     this.routeParamsSubscription = this.route.params.subscribe((params: Params) => {
       this.query = params['query'];
       this.searchCars(params['query']);
+      this.searchUsers(params['query']);
     });
   }
 
@@ -49,6 +54,13 @@ export class SearchResultsPageComponent implements OnInit, OnDestroy {
     }
   }
   
+  searchUsers(query: string) {
+    if (query) {
+      this.searchResultsService.getUsers(query).subscribe(res => {
+        this.users = res.users;
+      })
+    }
+  }
 
   searchCars(query: string) {
     if (query) {
@@ -166,6 +178,10 @@ export class SearchResultsPageComponent implements OnInit, OnDestroy {
         });
       }
     });
+  }
+
+  changeSearchType(type: string) {
+    this.searchType = type;
   }
 
   enableErrorMsg(msg: string | any) {

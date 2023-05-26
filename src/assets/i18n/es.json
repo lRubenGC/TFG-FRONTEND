@@ -17,7 +17,7 @@
     "HEADER_LANGUAGE": "Idioma",
     "HEADER_MY_PROFILE": "Mi Perfil",
     "HEADER_MY_SETTINGS": "Ajustes",
-    "HEADER_SEARCH": "Buscar un coche...",
+    "HEADER_SEARCH": "Buscar...",
     "HEADER_ENGLISH": "EN",
     "HEADER_SPANISH": "ES",
     "HEADER_LOGOUT": "Desconectarse",
@@ -56,6 +56,15 @@
     "PREMIUM_CARS_DESCRIPTION_4": "Por ahora no están publicados todos los coches, poco a poco se irán publicando los que faltan.",
     "SEARCH_BASIC_CARS": "Coches Básicos",
     "SEARCH_PREMIUM_CARS": "Coches Premium",
-    "SEARCH_NO_CARS": "No existen coches llamados:"
+    "SEARCH_USERS": "Usuarios",
+    "SEARCH_NO_CARS": "No existen coches llamados:",
+    "SEARCH_NO_USERS": "No existen usuarios llamados:",
+    "USER_PROFILE_BASIC_MENU": "Básicos",
+    "USER_PROFILE_PREMIUM_MENU": "Premium",
+    "USER_PROFILE_CUSTOM_MENU": "Custom",
+    "USER_PROFILE_OWNED_MENU": "En propiedad",
+    "USER_PROFILE_WISHED_MENU": "Deseados",
+    "SEARCH_RESULTS_CARS": "Coches",
+    "SEARCH_RESULTS_USERS": "Usuarios"
 
 }

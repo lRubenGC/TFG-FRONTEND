@@ -3,33 +3,66 @@
     <!-- Landing section (Just for an img) -->
     <div id="search-results-land-section"></div>
 
-    <!-- Basic Cars -->
-    <section *ngIf="basicCars.length > 0" class="search-results-car-list" >
-        <h1>{{ 'SEARCH_BASIC_CARS' | translate }}</h1>
-        <hr>
-        <div id="basic-cars-search-list">
-            <div *ngFor="let car of basicCars">
-                <app-basic-card (errorEvent)="enableErrorMsg($event)" [car]="car"></app-basic-card>
-            </div>
-        </div>
-
-    </section>
-
-    <!-- Premium Cars -->
-    <section *ngIf="premiumCars.length > 0" class="search-results-car-list" >
-        <h1>{{ 'SEARCH_PREMIUM_CARS' | translate }}</h1>
-        <hr>
-        <div id="premium-cars-search-list">
-            <div *ngFor="let car of premiumCars">
-                <app-premium-card (errorEvent)="enableErrorMsg($event)" [car]="car"></app-premium-card>
-            </div>
+    <section class="car-menu-list-container">
+        <div class="car-menu-list">
+            <div class="car-menu-item" [ngClass]="searchType === 'cars' ? 'car-menu-item-selected' : ''"
+                (click)="changeSearchType('cars')">{{ 'SEARCH_RESULTS_CARS' | translate }}</div>
+            <div class="car-menu-item" [ngClass]="searchType === 'users' ? 'car-menu-item-selected' : ''"
+                (click)="changeSearchType('users')">{{ 'SEARCH_RESULTS_USERS' | translate }}</div>
         </div>
     </section>
 
-    <section *ngIf="basicCars.length === 0 && premiumCars.length === 0" class="search-results-car-list">
-        <h1>{{ 'SEARCH_NO_CARS' | translate }} {{ query }}</h1>
-        <hr>
-    </section>
+    <!-- Cars Search -->
+    <div *ngIf="searchType === 'cars'">
+        <!-- Basic Cars -->
+        <section *ngIf="basicCars.length > 0" class="search-results-car-list">
+            <h1>{{ 'SEARCH_BASIC_CARS' | translate }}</h1>
+            <hr>
+            <div id="basic-cars-search-list">
+                <div *ngFor="let car of basicCars">
+                    <app-basic-card (errorEvent)="enableErrorMsg($event)" [car]="car"></app-basic-card>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Premium Cars -->
+        <section *ngIf="premiumCars.length > 0" class="search-results-car-list">
+            <h1>{{ 'SEARCH_PREMIUM_CARS' | translate }}</h1>
+            <hr>
+            <div id="premium-cars-search-list">
+                <div *ngFor="let car of premiumCars">
+                    <app-premium-card (errorEvent)="enableErrorMsg($event)" [car]="car"></app-premium-card>
+                </div>
+            </div>
+        </section>
+
+        <section *ngIf="basicCars.length === 0 && premiumCars.length === 0" class="search-results-car-list">
+            <h1>{{ 'SEARCH_NO_CARS' | translate }} {{ query }}</h1>
+            <hr>
+        </section>
+    </div>
+
+    <!-- Users Search -->
+    <div *ngIf="searchType === 'users'">
+
+        <!-- Users List -->
+        <section *ngIf="users.length > 0" class="search-results-car-list">
+            <h1>{{ 'SEARCH_USERS' | translate }}</h1>
+            <hr>
+            <div id="basic-cars-search-list">
+                <div *ngFor="let user of users">
+                    <app-user-card [user]="user"></app-user-card>
+                </div>
+            </div>
+
+        </section>
+
+        <section *ngIf="users.length === 0" class="search-results-car-list">
+            <h1>{{ 'SEARCH_NO_USERS' | translate }} {{ query }}</h1>
+            <hr>
+        </section>
+    </div>
 
     <!-- Possible error notification -->
     <app-global-notification *ngIf="error" [notificationMsg]="errorMsg"></app-global-notification>

@@ -16,4 +16,8 @@ export class SearchResultsService {
     return this.http.get(`${this.apiUrl}/search/cars/${query}`);
   }
 
+  getUsers(query: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/search/users/${query}`);
+  }
+
 }

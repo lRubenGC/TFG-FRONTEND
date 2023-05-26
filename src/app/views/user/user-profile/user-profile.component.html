@@ -14,21 +14,21 @@
             <div class="profile-data-cars">
                 <div class="data-cars-item">
                     <p class="data-item-number">{{ basicCarsOwned.length }}</p>
-                    <p>Basic</p>
+                    <p>{{ 'USER_PROFILE_BASIC_MENU' | translate }}</p>
                 </div>
 
                 <div class="vertical-divider"></div>
                 
                 <div class="data-cars-item">
                     <p class="data-item-number">{{ premiumCarsOwned.length }}</p>
-                    <p>Premium</p>
+                    <p>{{ 'USER_PROFILE_PREMIUM_MENU' | translate }}</p>
                 </div>
                 
                 <div class="vertical-divider"></div>
 
                 <div class="data-cars-item">
                     <p class="data-item-number">{{ customCarsOwned.length }}</p>
-                    <p>Custom</p>
+                    <p>{{ 'USER_PROFILE_CUSTOM_MENU' | translate }}</p>
                 </div>
             </div>
 
@@ -41,17 +41,17 @@
                     class="car-menu-item"
                     [ngClass]="carsType == 'basic' ? 'car-menu-item-selected' : ''"
                     (click)="changeCarType('basic')"
-                    >Basic</div>
+                    >{{ 'USER_PROFILE_BASIC_MENU' | translate }}</div>
                 <div
                     class="car-menu-item"
                     [ngClass]="carsType == 'premium' ? 'car-menu-item-selected' : ''"
                     (click)="changeCarType('premium')"
-                    >Premium</div>
+                    >{{ 'USER_PROFILE_PREMIUM_MENU' | translate }}</div>
                 <div
                     class="car-menu-item"
                     [ngClass]="carsType == 'custom' ? 'car-menu-item-selected' : ''"
                     (click)="changeCarType('custom')"
-                    >Custom</div>
+                    >{{ 'USER_PROFILE_CUSTOM_MENU' | translate }}</div>
 
                 <div class="vertical-divider vertical-divider-menu"></div>
 
@@ -59,13 +59,13 @@
                     class="car-menu-item"
                     [ngClass]="collectedType == 'owned' ? 'car-menu-item-selected' : ''"
                     (click)="changeCarCollected('owned')"
-                    >Owned</div>
+                    >{{ 'USER_PROFILE_OWNED_MENU' | translate }}</div>
                 <div
                     *ngIf="carsType !== 'custom'"
                     class="car-menu-item"
                     [ngClass]="collectedType == 'wished' ? 'car-menu-item-selected' : ''"
                     (click)="changeCarCollected('wished')"
-                    >Wished</div>
+                    >{{ 'USER_PROFILE_WISHED_MENU' | translate }}</div>
             </div>
         </section>
 

@@ -17,7 +17,7 @@
     "HEADER_LANGUAGE": "Language",
     "HEADER_MY_PROFILE": "My Profile",
     "HEADER_MY_SETTINGS": "Settings",
-    "HEADER_SEARCH": "Search a car...",
+    "HEADER_SEARCH": "Search...",
     "HEADER_ENGLISH": "EN",
     "HEADER_SPANISH": "ES",
     "HEADER_LOGOUT": "Log Out",
@@ -56,5 +56,14 @@
     "PREMIUM_CARS_DESCRIPTION_4": "For now not all the cars are published, little by little the remaining ones will be published.",
     "SEARCH_BASIC_CARS": "Basic Cars",
     "SEARCH_PREMIUM_CARS": "Premium Cars",
-    "SEARCH_NO_CARS": "There aren't cars named:"
+    "SEARCH_USERS": "Users",
+    "SEARCH_NO_CARS": "There aren't cars named:",
+    "SEARCH_NO_USERS": "There aren't users named:",
+    "USER_PROFILE_BASIC_MENU": "Basic",
+    "USER_PROFILE_PREMIUM_MENU": "Premium",
+    "USER_PROFILE_CUSTOM_MENU": "Custom",
+    "USER_PROFILE_OWNED_MENU": "Owned",
+    "USER_PROFILE_WISHED_MENU": "Wished",
+    "SEARCH_RESULTS_CARS": "Cars",
+    "SEARCH_RESULTS_USERS": "Users"
 }
