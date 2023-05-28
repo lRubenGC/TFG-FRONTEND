@@ -65,6 +65,8 @@
     "USER_PROFILE_OWNED_MENU": "En propiedad",
     "USER_PROFILE_WISHED_MENU": "Deseados",
     "SEARCH_RESULTS_CARS": "Coches",
-    "SEARCH_RESULTS_USERS": "Usuarios"
-
+    "SEARCH_RESULTS_USERS": "Usuarios",
+    "FILTER_ALL": "Todos",
+    "USER_EDIT_PROFILE": "Editar Perfil",
+    "CONFIG_UPDATE": "Actualizar"
 }

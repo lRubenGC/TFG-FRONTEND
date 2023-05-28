@@ -17,5 +17,7 @@ export interface userInterfaceApi {
         status: boolean;
         recoverToken: string | null;
         recoverTokenDate: string | null;
+        img: string;
+        bg_img: string;
     }
 }

@@ -1,0 +1,61 @@
+#user-config-view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.user-config-container {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 80px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+h1 {
+    color: #000;
+}
+
+button {
+    border-radius: 20px;
+    border: 1px solid var(--dark-bg-100);
+    background-color: var(--dark-bg-100);
+    color: #FFF;
+    padding: 1rem 2rem;
+    letter-spacing: 1px;
+    transition: transform 80ms ease-in;
+    cursor: pointer;
+    margin-top: .5rem;
+    font-weight: bold;
+}
+
+input {
+    background-color: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+}
+
+button:hover {
+    color: var(--dark-primary-100);
+    transition: .2s ease;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+button:focus {
+    outline: none;
+}
+
+.img-inputs-container {
+    display: flex;
+    gap: 1rem;
+    color: #000;
+}

@@ -1,1 +1,30 @@
-<p>user-config works!</p>
+<div id="user-config-view">
+
+    <form [formGroup]="configForm" (ngSubmit)="submitForm()" class="user-config-container">
+        <h1>{{ 'USER_EDIT_PROFILE' | translate }}</h1>
+
+        <input
+            type="text"
+            formControlName="username"
+            placeholder="{{ 'LOGIN_USERNAME' | translate }}" />
+        <input
+            type="email"
+            formControlName="email"
+            placeholder="{{ 'LOGIN_EMAIL' | translate}}" />
+        <input
+            type="password"
+            formControlName="password"
+            placeholder="{{ 'LOGIN_PASSWORD' | translate}}" />
+
+        <div class="img-inputs-container">
+            <p>Img</p>
+            <p>Img</p>
+        </div>
+
+        <button
+            type="submit"
+            >{{ 'CONFIG_UPDATE' | translate }}</button>
+
+    </form>
+
+</div>

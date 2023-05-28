@@ -26,7 +26,7 @@
                     <h3>{{ 'BASIC_CARS_SERIE' | translate }}</h3>
                     <div class="car-select">
                         <select [(ngModel)]="selectedSerie" (change)="filterSerie(selectedSerie)">
-                            <option value="All">All</option>
+                            <option value="All">{{ 'FILTER_ALL' | translate }}</option>
                             <option value="Treasure Hunt">Treasure Hunt</option>
                             <option value="Super Treasure Hunt">Super Treasure Hunt</option>
                             <option value="Red Edition">Red Edition</option>

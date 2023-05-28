@@ -5,7 +5,6 @@ import { PremiumCarsService } from '../../premium-cars-page/premium-cars.service
 import { UserService } from '../../../services/user.service';
 import { userInterface } from 'src/app/models/user.interface';
 import { basicCarInterface, basicCarShowedInterface, premiumCarInterface, premiumCarShowedInterface } from 'src/app/models/cardTypes.interface';
-import { carsType, collectedType } from 'src/app/models/user-profile';
 import { decodeToken } from 'src/app/helpers/generics';
 
 @Component({
@@ -16,16 +15,31 @@ import { decodeToken } from 'src/app/helpers/generics';
 export class UserProfileComponent implements OnInit {
 
   user?: userInterface;
+  userVisitor = false;
 
   carsType = 'basic';
   collectedType = 'owned';
 
   basicCarsOwned: basicCarShowedInterface[] = [];
+  basicCarsOwnedShowed: basicCarShowedInterface[] = [];
   basicCarsWished: basicCarShowedInterface[] = [];
+  basicCarsWishedShowed: basicCarShowedInterface[] = [];
   premiumCarsOwned: premiumCarShowedInterface[] = [];
-  premiumCarsWished:premiumCarShowedInterface[] = [];
+  premiumCarsOwnedShowed: premiumCarShowedInterface[] = [];
+  premiumCarsWished: premiumCarShowedInterface[] = [];
+  premiumCarsWishedShowed: premiumCarShowedInterface[] = [];
   
   customCarsOwned = [];
+
+  selectedYear = 'all';
+  selectedSerie = '';
+  selectedMainSerie = 'all';
+  selectedSecondarySerie = '';
+  availableYears = ['2022', '2021', '2020', '2019', '2018'];
+  availableSeries = [];
+  availableMainSeries = ['Boulevard (original)', 'Boulevard (reboot)', 'Car Culture', 'Fast & Furious (Premium)', 'Fast & Furious', 'Pop Culture'];
+  availableSecondarySeries = [];
+
 
   error = false;
   errorMsg = '';
@@ -51,10 +65,13 @@ export class UserProfileComponent implements OnInit {
 
       const tokenDecoded = decodeToken();
 
+      // If user visitor is owner of profile
       if (tokenDecoded.userId === this.user?.id) {
+        this.userVisitor = true;
         this.getUserBasicCars(true);
         this.getUserPremiumCars(true);
       } else {
+        this.userVisitor = false;
         this.getUserBasicCars(false);
         this.getUserPremiumCars(false);
       }
@@ -123,7 +140,9 @@ export class UserProfileComponent implements OnInit {
         });
 
         this.basicCarsOwned = basicCarsOwned;
+        this.basicCarsOwnedShowed = basicCarsOwned;
         this.basicCarsWished = basicCarsWished;
+        this.basicCarsWishedShowed = basicCarsWished;
       })
     }
   }
@@ -174,7 +193,9 @@ export class UserProfileComponent implements OnInit {
 
 
         this.premiumCarsOwned = premiumCarsOwned;
+        this.premiumCarsOwnedShowed = premiumCarsOwned;
         this.premiumCarsWished = premiumCarsWished;
+        this.premiumCarsWishedShowed = premiumCarsWished;
       })
     }
   }
@@ -236,6 +257,83 @@ export class UserProfileComponent implements OnInit {
         break;
     }
     
+  }
+
+  filterYear(year: string) {
+    this.selectedYear = year;
+    this.selectedSerie = 'all';
+    this.getAvailableSeries(year);
+
+    if (year === 'all') {
+      this.basicCarsOwnedShowed = this.basicCarsOwned;
+      this.basicCarsWishedShowed = this.basicCarsWished;
+      this.selectedSerie = '';
+      return;
+    }
+
+    this.basicCarsOwnedShowed = this.basicCarsOwned.filter(car => car.year === year);
+    this.basicCarsWishedShowed = this.basicCarsWished.filter(car => car.year === year);
+  }
+
+  filterSerie(serie: string) {
+    if (serie === 'all') {
+      this.basicCarsOwnedShowed = this.basicCarsOwned.filter(car => car.year === this.selectedYear);
+      this.basicCarsWishedShowed = this.basicCarsWished.filter(car => car.year === this.selectedYear);
+      return;
+    }
+
+    this.basicCarsOwnedShowed = this.basicCarsOwned.filter(car => {
+      return car.year === this.selectedYear && car.series[0] === serie
+    });
+
+    this.basicCarsWishedShowed = this.basicCarsWished.filter(car => {
+      return car.year === this.selectedYear && car.series[0] === serie
+    });
+  }
+
+  getAvailableSeries(year: string) {
+    this.basicCarsService.getAvailableSeries(year).subscribe(res => {
+      const series = res.series.split(',');
+      this.availableSeries = series.sort();
+    })
+  }
+
+  filterPremiumSerie(serie: string) {
+    this.selectedMainSerie = serie;
+    this.selectedSecondarySerie = '';
+    this.getAvailablePremiumSeries(serie);
+
+    if (serie === 'all') {
+      this.premiumCarsOwnedShowed = this.premiumCarsOwned;
+      this.premiumCarsWishedShowed = this.premiumCarsWished;
+      this.selectedSecondarySerie = '';
+      return;
+    }
+
+    this.premiumCarsOwnedShowed = this.premiumCarsOwned.filter(car => car.main_serie === serie);
+    this.premiumCarsWishedShowed = this.premiumCarsWished.filter(car => car.main_serie === serie);
+  }
+
+  filterPremiumSecundarySerie(serie: string) {
+    if (serie === 'all') {
+      this.premiumCarsOwnedShowed = this.premiumCarsOwned.filter(car => car.main_serie === this.selectedMainSerie);
+      this.premiumCarsWishedShowed = this.premiumCarsWished.filter(car => car.main_serie === this.selectedMainSerie);
+      return;
+    }
+
+    this.premiumCarsOwnedShowed = this.premiumCarsOwned.filter(car => car.secondary_serie === serie);
+    this.premiumCarsWishedShowed = this.premiumCarsWished.filter(car => car.secondary_serie === serie);
+  }
+
+  getAvailablePremiumSeries(main_serie: string) {
+    this.premiumCarsService.getAvailableSeries(main_serie).subscribe(res => {
+      const series = res.series.split(',');
+      this.availableSecondarySeries = series.sort();
+    })
+  }
+
+  goToConfig() {
+    this.router.navigate(['/user/config']);
   }
 
 }
