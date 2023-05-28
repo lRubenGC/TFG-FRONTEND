@@ -102,7 +102,31 @@ export class LoginPageComponent implements OnInit {
           (res) => {
             this.loginSuccess = true;
             this.loginSuccessMsg = 'REGISTER_SUCCESFUL'
-            this.toggleLogin();
+
+            // Login automatically
+            this.authService
+            .login({
+              email,
+              password
+            })
+            .subscribe(
+              (res) => {
+                // Save token in Local Storage
+                localStorage.setItem('cw-token', res.token);
+    
+                // Dispatch login event
+                this.authService.setUserLoggedIn(true);
+    
+                // Redirect
+                this.router.navigate(['/']);
+              },
+              (err) => {
+                if (err.error.err === 1) {
+                  this.loginErrorMsg = 'LOGIN_BAD_REQUEST';
+                } else this.loginErrorMsg = 'UNEXPECTED_ERROR'
+                this.loginError = true;
+              }
+            );
           },
           (err) => {
             if (err.error.errors[0].param === 'username') {
