@@ -62,7 +62,8 @@ export class BasicCarsPageComponent implements OnInit {
         return {
           ...car,
           series,
-          serie_class
+          serie_class,
+          user_profile: true
         }
       });
 

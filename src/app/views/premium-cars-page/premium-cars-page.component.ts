@@ -94,7 +94,12 @@ export class PremiumCarsPageComponent implements OnInit {
 
     this.premiumCarsService.getCars(main_serie).subscribe(res => {
       this.isSerieSelected = true;
-      const cars = res.cars;
+      const cars = res.cars.map((car: premiumCarInterface) => {
+        return {
+          ...car,
+          user_profile: true,
+        }
+      });
       
       // If user is logged, gets the cars of the user and changes the values of the cars
       if (this.userToken.hasToken && this.userToken.userId) {

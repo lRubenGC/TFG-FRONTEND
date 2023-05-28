@@ -75,7 +75,8 @@ export class SearchResultsPageComponent implements OnInit, OnDestroy {
             ...car,
             series,
             serie_class,
-            search: true
+            search: true,
+            user_profile: true,
           }
         });
 
@@ -85,7 +86,8 @@ export class SearchResultsPageComponent implements OnInit, OnDestroy {
         const premiumCars = res.premiumCars.map((car: premiumCarInterface) => {
           return {
             ...car,
-            search: true
+            search: true,
+            user_profile: true,
           }
         });
 

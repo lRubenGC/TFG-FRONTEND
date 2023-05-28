@@ -90,7 +90,6 @@ export class UserProfileComponent implements OnInit {
               search: true,
               user_profile: false,
               profile_view: true,
-              has_car: true,
             }
           }
         });

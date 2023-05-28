@@ -23,13 +23,14 @@ export interface basicCarShowedInterface {
     img: string;
     brand: string;
     year: string;
-    serie_class: string;
-    has_car: boolean;
-    wants_car: boolean;
-    token: number;
-    search?: boolean;
-    user_profile?: boolean;
-    profile_view?: boolean;
+    // ^ car properties from backend ^
+    serie_class: string; // property for printing a colored square
+    has_car: boolean; // property that confirms user has car
+    wants_car: boolean; // property that confirms user wants car
+    token: number; // id of user
+    search?: boolean; // property to show year property in card
+    profile_view?: boolean; // property that confirms that card is used in user_profile view
+    user_profile?: boolean; // property that confirms that user is in his own profile
 }
 
 export interface premiumCarInterface {
@@ -56,6 +57,7 @@ export interface premiumCarShowedInterface {
     brand: string;
     img: string;
     card_img: string;
+    // ^ car properties from backend ^
     has_car: boolean;
     wants_car: boolean;
     token: number;
