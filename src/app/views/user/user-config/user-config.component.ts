@@ -16,6 +16,8 @@ export class UserConfigComponent implements OnInit {
   userToken = decodeToken();
   data!: userInterfaceApi;
 
+  images: File[] | null[] = [null, null];
+
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
@@ -43,8 +45,17 @@ export class UserConfigComponent implements OnInit {
     console.log('a')
   }
 
-  onFileSelected(img: string) {
-    console.log(img)
+  onImageChanged(index: number, file: File | null) {
+    this.images[index] = file;
+  }
+
+  async callApi() {
+    const formData = new FormData();
+    this.images.forEach((image, index) => {
+      if (image) {
+        formData.append(`image${index}`, image);
+      }
+    });
   }
 
 }

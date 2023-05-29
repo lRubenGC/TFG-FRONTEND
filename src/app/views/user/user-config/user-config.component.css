@@ -58,4 +58,5 @@ button:focus {
     display: flex;
     gap: 1rem;
     color: #000;
+    margin: 25px 0;
 }

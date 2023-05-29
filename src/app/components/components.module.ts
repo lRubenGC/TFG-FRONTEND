@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { TranslateModule } from '@ngx-translate/core';
@@ -11,6 +11,7 @@ import { GlobalNotificationComponent } from './global-notification/global-notifi
 import { PremiumPillComponent } from './premium-pill/premium-pill.component';
 import { UserCardComponent } from './user-card/user-card.component';
 import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
+import { UploadImgComponent } from './upload-img/upload-img.component';
 
 
 
@@ -22,11 +23,13 @@ import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
     GlobalNotificationComponent,
     ScrollToTopComponent,
     UserCardComponent,
+    UploadImgComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     TranslateModule,
   ],
   exports: [
@@ -35,7 +38,8 @@ import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
     PremiumPillComponent,
     GlobalNotificationComponent,
     ScrollToTopComponent,
-    UserCardComponent
+    UserCardComponent,
+    UploadImgComponent,
   ]
 })
 export class ComponentsModule { }

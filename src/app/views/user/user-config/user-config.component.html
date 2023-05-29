@@ -1,6 +1,5 @@
 <div id="user-config-view">
-
-    <form [formGroup]="configForm" (ngSubmit)="submitForm()" class="user-config-container">
+    <form [formGroup]="configForm" class="user-config-container">
         <h1>{{ 'USER_EDIT_PROFILE' | translate }}</h1>
 
         <input
@@ -16,15 +15,17 @@
             formControlName="password"
             placeholder="{{ 'LOGIN_PASSWORD' | translate}}" />
 
-        <div class="img-inputs-container">
-            <p>Img</p>
-            <p>Img</p>
+        <div class="img-inputs-container" *ngIf="data">
+            <div class="img-input">
+                <h4>Img logo</h4>
+                <app-upload-img [imagePrev]="data.user.img" (imageChanged)="onImageChanged(0, $event)"></app-upload-img>
+            </div>
+            <div class="img_bg-input">
+                <h4>Img banner</h4>
+                <app-upload-img [imagePrev]="data.user.bg_img" (imageChanged)="onImageChanged(1, $event)"></app-upload-img>
+            </div>
         </div>
 
-        <button
-            type="submit"
-            >{{ 'CONFIG_UPDATE' | translate }}</button>
-
+        <button type="button" (click)="submitForm()">{{ 'CONFIG_UPDATE' | translate }}</button>
     </form>
-
 </div>

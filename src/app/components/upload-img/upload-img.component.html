@@ -1,0 +1,6 @@
+<div class="image-input-container">
+    <input type="file" (change)="onFileSelected($event)" #fileInput hidden />
+    <img *ngIf="previewUrl" [src]="previewUrl" class="image-preview" />
+    <button *ngIf="previewUrl" (click)="onDeleteImage()" class="delete-button">X</button>
+    <button (click)="fileInput.click()" class="upload-button">{{ 'CONFIG_UPLOAD_IMG' | translate }}</button>
+</div>

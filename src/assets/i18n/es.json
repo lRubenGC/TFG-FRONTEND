@@ -68,5 +68,6 @@
     "SEARCH_RESULTS_USERS": "Usuarios",
     "FILTER_ALL": "Todos",
     "USER_EDIT_PROFILE": "Editar Perfil",
-    "CONFIG_UPDATE": "Actualizar"
+    "CONFIG_UPDATE": "Actualizar",
+    "CONFIG_UPLOAD_IMG": "Subir imagen"
 }
