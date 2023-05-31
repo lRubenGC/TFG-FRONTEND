@@ -2,12 +2,6 @@
     box-sizing: border-box;
 }
 
-/* If view is Landing Page
-.header-absolute {
-
-} */
-
-/* Rest of views */
 header {
     display: flex;
     justify-content: space-between;
@@ -16,6 +10,10 @@ header {
     position: absolute;
     background-color: transparent;
     width: 100%;
+}
+
+.header-block {
+    position: relative;
 }
 
 #header-logo {

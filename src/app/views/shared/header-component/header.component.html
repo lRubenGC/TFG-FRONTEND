@@ -1,5 +1,5 @@
 <!-- <header [ngClass]="{'header-absolute': isHomePage()}"> -->
-<header>
+<header [ngClass]="{ 'header-block': isBlockView() }">
     <!-- Logo -->
     <div (click)="goTo('/')" id="header-logo">
         <h1>CW</h1>

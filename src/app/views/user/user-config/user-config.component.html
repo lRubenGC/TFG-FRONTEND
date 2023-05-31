@@ -2,27 +2,39 @@
     <form [formGroup]="configForm" class="user-config-container">
         <h1>{{ 'USER_EDIT_PROFILE' | translate }}</h1>
 
-        <input
-            type="text"
-            formControlName="username"
-            placeholder="{{ 'LOGIN_USERNAME' | translate }}" />
-        <input
-            type="email"
-            formControlName="email"
-            placeholder="{{ 'LOGIN_EMAIL' | translate}}" />
-        <input
-            type="password"
-            formControlName="password"
-            placeholder="{{ 'LOGIN_PASSWORD' | translate}}" />
+        <div class="user-config-item">
+            <label>{{ 'LOGIN_USERNAME' | translate }}:</label>
+            <input
+                type="text"
+                formControlName="username"
+                placeholder="{{ 'LOGIN_USERNAME' | translate }}" />
+        </div>
+
+        <div class="user-config-item">
+            <label>{{ 'LOGIN_EMAIL' | translate }}:</label>
+            <input
+                type="email"
+                formControlName="email"
+                placeholder="{{ 'LOGIN_EMAIL' | translate}}" />
+        </div>
+
+
+        <div class="user-config-item">
+            <label>{{ 'LOGIN_PASSWORD' | translate }}:</label>
+            <input
+                type="password"
+                formControlName="password"
+                placeholder="{{ 'LOGIN_PASSWORD' | translate}}" />
+        </div>
 
         <div class="img-inputs-container" *ngIf="data">
             <div class="img-input">
-                <h4>Img logo</h4>
+                <h4>{{ 'CONFIG_IMG_PROFILE' | translate }}</h4>
                 <app-upload-img [imagePrev]="data.user.img" (imageChanged)="onImageChanged(0, $event)"></app-upload-img>
             </div>
             <div class="img_bg-input">
-                <h4>Img banner</h4>
-                <app-upload-img [imagePrev]="data.user.bg_img" (imageChanged)="onImageChanged(1, $event)"></app-upload-img>
+                <h4>{{ 'CONFIG_IMG_BANNER' | translate }}</h4>
+                <app-upload-img [imagePrev]="data.user.bg_img" [imageBanner]="true" (imageChanged)="onImageChanged(1, $event)"></app-upload-img>
             </div>
         </div>
 

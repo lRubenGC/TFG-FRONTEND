@@ -1,4 +1,4 @@
-<div class="image-input-container">
+<div class="image-input-container" [ngClass]="imageBanner ? 'image-banner-container' : ''">
     <input type="file" (change)="onFileSelected($event)" #fileInput hidden />
     <img *ngIf="previewUrl" [src]="previewUrl" class="image-preview" />
     <button *ngIf="previewUrl" (click)="onDeleteImage()" class="delete-button">X</button>

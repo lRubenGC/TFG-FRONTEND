@@ -5,10 +5,14 @@
     justify-content: center;
     border: 2px dashed #ccc;
     border-radius: 5px;
-    padding: 20px;
-    width: 200px;
-    height: 200px;
+    padding: 30px;
+    width: 125px;
+    height: 125px;
     position: relative;
+}
+
+.image-banner-container {
+    width: 250px;
 }
 
 .image-preview {
@@ -24,7 +28,7 @@
     border-radius: 5px;
     padding: 5px 10px;
     cursor: pointer;
-    margin-top: 5px;
+    margin-top: 10px;
 
     &:hover {
         background-color: #00356f;

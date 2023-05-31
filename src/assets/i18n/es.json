@@ -69,5 +69,7 @@
     "FILTER_ALL": "Todos",
     "USER_EDIT_PROFILE": "Editar Perfil",
     "CONFIG_UPDATE": "Actualizar",
-    "CONFIG_UPLOAD_IMG": "Subir imagen"
+    "CONFIG_UPLOAD_IMG": "Subir imagen",
+    "CONFIG_IMG_PROFILE": "Imagen de Perfil",
+    "CONFIG_IMG_BANNER": "Imagen de Fondo"
 }

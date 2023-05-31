@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class UploadImgComponent implements OnInit {
 
   @Input() imagePrev: string | undefined = '';
+  @Input() imageBanner: boolean = false;
   @Output() imageChanged = new EventEmitter<File | null>();
   previewUrl!: string | ArrayBuffer | null | undefined;
   

@@ -132,5 +132,10 @@ export class HeaderComponent implements OnInit {
     this.checkUserLoggedIn();
     window.location.reload();
   }
+
+  isBlockView() {
+    const currentUrl = this.router.url;
+    return currentUrl === '/user/config';
+  }
   
 }
