@@ -21,3 +21,9 @@ export interface userInterfaceApi {
         bg_img: string;
     }
 }
+
+export interface userUpdateRequest {
+    username?: string;
+    email?: string;
+    password?: string;
+}

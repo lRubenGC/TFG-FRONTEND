@@ -71,5 +71,8 @@
     "CONFIG_UPDATE": "Actualizar",
     "CONFIG_UPLOAD_IMG": "Subir imagen",
     "CONFIG_IMG_PROFILE": "Imagen de Perfil",
-    "CONFIG_IMG_BANNER": "Imagen de Fondo"
+    "CONFIG_IMG_BANNER": "Imagen de Fondo",
+    "CONFIG_DESCR": "(Rellena únicamente los campos que quieres cambiar)",
+    "CONFIG_USER_UPDATED": "Datos actualizados correctamente",
+    "CONFIG_EMPTY_VALUES": "No has cambiado los datos"
 }

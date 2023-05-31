@@ -28,7 +28,7 @@
     margin-right: 5px;
 }
 
-h1 {
+h1, p {
     color: #000;
 }
 
@@ -74,6 +74,25 @@ button:focus {
     align-items: center;
     text-align: center;
 }
+
+.notification {
+    color: #fff;
+    margin-top: 1rem;
+    padding: .75rem 0;
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.notification-error {
+    background-color: #eb2222;
+}
+
+.notification-success {
+    background-color: rgb(27, 135, 27);
+}
+
+
 
 @media (max-width: 768px) {
     .user-config-container {

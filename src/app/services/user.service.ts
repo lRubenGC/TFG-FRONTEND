@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { userInterfaceApi } from '../models/user.interface';
+import { userInterfaceApi, userUpdateRequest } from '../models/user.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +19,28 @@ export class UserService {
   async getUserByUsername(username: string): Promise<userInterfaceApi | any> {
     const response = await this.http.get(`${this.apiUrl}/users/username/${username}`).toPromise();
     return response as userInterfaceApi;
+  }
+
+  updateUser(id_user: number, userParams: userUpdateRequest): Observable<any> {
+    const token = localStorage.getItem('cw-token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'r-token': token!
+    });
+
+    const requestBody: userUpdateRequest = {}
+
+    if (userParams.username) {
+      requestBody.username = userParams.username;
+    }
+    if (userParams.email) {
+      requestBody.email = userParams.email;
+    }
+    if (userParams.password) {
+      requestBody.password = userParams.password;
+    }
+
+    return this.http.put(`${this.apiUrl}/users/${id_user}`, requestBody, { headers });
   }
   
 }
