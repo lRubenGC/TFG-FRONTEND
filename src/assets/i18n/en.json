@@ -69,10 +69,13 @@
     "FILTER_ALL": "All",
     "USER_EDIT_PROFILE": "Edit Profile",
     "CONFIG_UPDATE": "Update",
-    "CONFIG_UPLOAD_IMG": "Upload Image",
+    "CONFIG_UPLOAD_IMG": "Update Image",
+    "CONFIG_DELETE_IMG": "Delete Image",
     "CONFIG_IMG_PROFILE": "Profile Image",
     "CONFIG_IMG_BANNER": "Banner Image",
     "CONFIG_DESCR": "(Fill only the fields you want to change)",
     "CONFIG_USER_UPDATED": "Data updated successfully",
-    "CONFIG_EMPTY_VALUES": "You have not changed the data"
+    "CONFIG_USER_UPDATING": "Data updating... Please wait",
+    "CONFIG_EMPTY_VALUES": "You have not changed the data",
+    "CONFIG_IMG_DELETED": "Image deleted successfully"
 }

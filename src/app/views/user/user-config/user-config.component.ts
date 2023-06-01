@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { decodeToken } from 'src/app/helpers/generics';
 import { userInterfaceApi, userUpdateRequest } from 'src/app/models/user.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { isValidEmail, isValidPassword, isValidUsername } from 'src/app/helpers/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-config',
@@ -11,6 +12,10 @@ import { isValidEmail, isValidPassword, isValidUsername } from 'src/app/helpers/
   styleUrls: ['./user-config.component.css']
 })
 export class UserConfigComponent implements OnInit {
+
+  @Output() deleteImageEvent: EventEmitter<any> = new EventEmitter();
+
+  @ViewChild('submitButton', { static: true }) submitButtonRef!: ElementRef;
 
   configForm!: FormGroup;
 
@@ -24,9 +29,13 @@ export class UserConfigComponent implements OnInit {
   formSuccess = false;
   successMsg = '';
 
+  imgDeleted = false;
+  bgDeleted = false;
+
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
+    private router: Router,
   ) {
     this.configForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -47,7 +56,15 @@ export class UserConfigComponent implements OnInit {
     }
   }
 
-  submitForm() {
+  async submitForm() {
+    // restart notifications
+    this.formError = false;
+    this.formSuccess = false;
+
+    // disable submit button
+    this.submitButtonRef.nativeElement.disabled = true;
+
+
     // data of user
     const user = this.data.user;
     
@@ -58,11 +75,15 @@ export class UserConfigComponent implements OnInit {
 
     const bodyRequest: userUpdateRequest = {}
 
-
+    // validations
     if (username !== user.username) {
       if (!isValidUsername(username)) {
         this.errorMsg = 'LOGIN_BAD_USERNAME';
         this.formError = true;
+        this.formSuccess = false;
+      
+        // activate submit button
+        this.submitButtonRef.nativeElement.disabled = false;
         return;
       }
 
@@ -73,6 +94,10 @@ export class UserConfigComponent implements OnInit {
       if (!isValidEmail(email)) {
         this.errorMsg = 'LOGIN_BAD_EMAIL';
         this.formError = true;
+        this.formSuccess = false;
+      
+        // activate submit button
+        this.submitButtonRef.nativeElement.disabled = false;
         return;
       }
 
@@ -83,60 +108,135 @@ export class UserConfigComponent implements OnInit {
       if (!isValidPassword(password)) {
         this.errorMsg = 'LOGIN_BAD_PASSWORD';
         this.formError = true;
+        this.formSuccess = false;
+      
+        // activate submit button
+        this.submitButtonRef.nativeElement.disabled = false;
         return;
       }
 
       bodyRequest.password = password;
     }
 
-    if (Object.keys(bodyRequest).length === 0) {
+
+    if (Object.keys(bodyRequest).length === 0 && this.images[0] === null && this.images[1] === null) {
       this.errorMsg = 'CONFIG_EMPTY_VALUES';
       this.formError = true;
+      this.formSuccess = false;
+
+      // activate submit button
+      this.submitButtonRef.nativeElement.disabled = false;
       return;
     }
 
     this.formError = false;
 
-    this.userService.updateUser(user.id, bodyRequest)
-      .subscribe(
-        (res) => {
-          this.successMsg = 'CONFIG_USER_UPDATED';
-          this.formSuccess = true;
+    try {
+      // update imgs
+      if (this.images[0] !== null || this.images[1] !== null) {
+        await this.updateImgs();
+      }
+      
+      // update data (username | email | password)
+      if (Object.keys(bodyRequest).length > 0) {
+        await this.userService.updateUser(user.id, bodyRequest).toPromise();
+        this.successMsg = 'CONFIG_USER_UPDATED';
+        this.formSuccess = true;
+      }
+  
+      // Reload page after successful updates
+      setTimeout(() => {
+        location.reload();
+      }, 1000);
+      this.router.navigate(['/']);
 
-          setTimeout(() => {
-            location.reload();
-          }, 1000);
-          
-        },
-        (err) => {
-          console.error(err);
+      // activate submit button
+      this.submitButtonRef.nativeElement.disabled = false;
+      
+    } catch (err: any) {
+      console.error(err);
+      
+      if (err.error.errors[0].param === 'username') {
+        this.errorMsg = 'USERNAME_IN_USE';
+        this.formError = true;
+        return;
+      }
+  
+      if (err.error.errors[0].param === 'email') {
+        this.errorMsg = 'EMAIL_IN_USE';
+        this.formError = true;
+        return;
+      }
+    }
 
-          if (err.error.errors[0].param === 'username') {
-            this.errorMsg = 'USERNAME_IN_USE';
-            this.formError = true;
-            return;
-          }
+    // update imgs
+    if (this.images[0] !== null || this.images[1] !== null) {
+      this.updateImgs();
+    }
 
-          if (err.error.errors[0].param === 'email') {
-            this.errorMsg = 'EMAIL_IN_USE';
-            this.formError = true;
-            return;
-          }
-        }
-      );
   }
 
   onImageChanged(index: number, file: File | null) {
     this.images[index] = file;
   }
 
-  async callApi() {
+  async updateImgs() {
+    // object
     const formData = new FormData();
+  
+    // if an img is in input, adds it to the object
     this.images.forEach((image, index) => {
       if (image) {
         formData.append(`image${index}`, image);
       }
     });
+  
+    try {
+      // if object contains profile img, uploads it
+      if (formData.has('image0')) {
+        const image0 = formData.get('image0') as File;
+        await this.userService.updateImg(this.data.user.id, image0).toPromise();
+        this.deleteImageEvent.emit();
+      }
+  
+      // if object contains banner img, uploads it
+      if (formData.has('image1')) {
+        const image1 = formData.get('image1') as File;
+        await this.userService.updateImg(this.data.user.id, image1, true).toPromise();
+        this.deleteImageEvent.emit();
+      }
+
+      this.successMsg = 'CONFIG_USER_UPDATED';
+      this.formSuccess = true;
+
+    } catch (err) {
+      console.error(err);
+    }
   }
+
+  async deleteImg(type: number) {
+    if (type === 1 && this.data.user.img !== null) {
+      try {
+      await this.userService.deleteImg(this.data.user.id).toPromise();
+      this.successMsg = 'CONFIG_IMG_DELETED';
+      this.formSuccess = true;
+      this.imgDeleted = true;
+
+      } catch (err) {
+        console.error(err);
+      }
+    } else if (type === 2 && this.data.user.bg_img !== null) {
+      try {
+        await this.userService.deleteImg(this.data.user.id, true).toPromise();
+        this.successMsg = 'CONFIG_IMG_DELETED';
+        this.formSuccess = true;
+        this.bgDeleted = true;
+
+        } catch (err) {
+          console.error(err);
+        }
+    }
+  }
+  
 
 }

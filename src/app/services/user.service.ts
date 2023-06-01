@@ -42,5 +42,31 @@ export class UserService {
 
     return this.http.put(`${this.apiUrl}/users/${id_user}`, requestBody, { headers });
   }
+
+  updateImg(id_user: number, file: File, bg: boolean = false): Observable<any> {
+    const token = localStorage.getItem('cw-token');
+    const headers = new HttpHeaders({ 'r-token': token! });
+    const formData = new FormData();
+    
+    formData.append('file', file);
+  
+    if (bg) {
+      return this.http.post(`${this.apiUrl}/users/bg-img/${id_user}`, formData, { headers });
+    }
+    
+    return this.http.post(`${this.apiUrl}/users/img/${id_user}`, formData, { headers });
+  }
+
+  deleteImg(id_user: number, bg: boolean = false): Observable<any> {
+    const token = localStorage.getItem('cw-token');
+    const headers = new HttpHeaders({ 'r-token': token! });    
+  
+    if (bg) {
+      return this.http.delete(`${this.apiUrl}/users/bg-img/${id_user}`, { headers });
+    }
+    
+    return this.http.delete(`${this.apiUrl}/users/img/${id_user}`, { headers });
+  }
+  
   
 }

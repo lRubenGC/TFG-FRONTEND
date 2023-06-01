@@ -32,7 +32,7 @@ h1, p {
     color: #000;
 }
 
-button {
+.button-update-config {
     border-radius: 20px;
     border: 1px solid var(--dark-bg-100);
     background-color: var(--dark-bg-100);
@@ -45,6 +45,11 @@ button {
     font-weight: bold;
 }
 
+button.button-update-config[disabled] {
+    cursor: not-allowed;
+    color: var(--dark-bg-100);
+  }
+
 input {
     background-color: #eee;
     border: none;
@@ -53,16 +58,45 @@ input {
     width: 100%;
 }
 
-button:hover {
+.img-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5em;
+    margin-bottom: 5px;
+}
+
+.button-delete-config {
+    color: #fff;
+    background-color: #dc3545;
+    border: none;
+    padding: 10px ;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-delete-config:hover {
+    background-color: #c82333;
+}
+
+.button-delete-config i {
+    font-size: 15px;
+}
+
+.button-update-config:hover {
     color: var(--dark-primary-100);
     transition: .2s ease;
 }
 
-button:active {
+.button-update-config:active {
     transform: scale(0.95);
 }
 
-button:focus {
+.button-update-config:focus {
     outline: none;
 }
 

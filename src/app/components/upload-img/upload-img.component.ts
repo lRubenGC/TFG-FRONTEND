@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-upload-img',
@@ -9,6 +9,7 @@ export class UploadImgComponent implements OnInit {
 
   @Input() imagePrev: string | undefined = '';
   @Input() imageBanner: boolean = false;
+  @Input() deleteImage!: boolean;
   @Output() imageChanged = new EventEmitter<File | null>();
   previewUrl!: string | ArrayBuffer | null | undefined;
   
@@ -17,6 +18,14 @@ export class UploadImgComponent implements OnInit {
       this.previewUrl = this.imagePrev;
     }
   }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['deleteImage'] && changes['deleteImage'].currentValue) {
+      this.onDeleteImage();
+      this.deleteImage = false;
+    }
+  }
+  
 
   onFileSelected(event: Event) {
     const target = event.target as HTMLInputElement
@@ -34,6 +43,7 @@ export class UploadImgComponent implements OnInit {
     }
   
   }
+
   onDeleteImage() {
     this.previewUrl = null;
     this.imageChanged.emit(null);

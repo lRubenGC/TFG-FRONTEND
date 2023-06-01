@@ -33,16 +33,35 @@
 
         <div class="img-inputs-container" *ngIf="data">
             <div class="img-input">
-                <h4>{{ 'CONFIG_IMG_PROFILE' | translate }}</h4>
-                <app-upload-img [imagePrev]="data.user.img" (imageChanged)="onImageChanged(0, $event)"></app-upload-img>
+                <div class="img-title-container">
+                    <h4>{{ 'CONFIG_IMG_PROFILE' | translate }}</h4>
+                    <button (click)="deleteImg(1)" class="button-delete-config">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <app-upload-img
+                    [imagePrev]="data.user.img"
+                    [deleteImage]="imgDeleted"
+                    (imageChanged)="onImageChanged(0, $event)"></app-upload-img>
             </div>
+
             <div class="img_bg-input">
-                <h4>{{ 'CONFIG_IMG_BANNER' | translate }}</h4>
-                <app-upload-img [imagePrev]="data.user.bg_img" [imageBanner]="true" (imageChanged)="onImageChanged(1, $event)"></app-upload-img>
+                <div class="img-title-container">
+                    <h4>{{ 'CONFIG_IMG_BANNER' | translate }}</h4>
+                    <button (click)="deleteImg(2)"class="button-delete-config">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+
+                <app-upload-img
+                    [imagePrev]="data.user.bg_img"
+                    [imageBanner]="true"
+                    [deleteImage]="bgDeleted"
+                    (imageChanged)="onImageChanged(1, $event)"></app-upload-img>
             </div>
         </div>
 
-        <button type="button" (click)="submitForm()">{{ 'CONFIG_UPDATE' | translate }}</button>
+        <button #submitButton type="button" class="button-update-config" (click)="submitForm()">{{ 'CONFIG_UPDATE' | translate }}</button>
 
         <p *ngIf="formError" class="notification notification-error">{{ errorMsg | translate }}</p>
         <p *ngIf="formSuccess" class="notification notification-success">{{ successMsg | translate }}</p>
