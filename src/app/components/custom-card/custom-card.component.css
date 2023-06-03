@@ -1,0 +1,80 @@
+.custom-car-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin: 1.2em auto;
+    transition: 0.3s;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.item-car-title {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 2px 2px 2px #000;
+}
+
+.banner-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: .6rem;
+}
+
+.custom-car-item h4 {
+    margin-bottom: .5rem;
+}
+
+.small-title {
+    font-size: 1rem;
+}
+
+.img-and-upvotes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.custom-img-container {
+    height: 220px;
+    overflow: hidden;
+    flex-grow: 1;
+    cursor: pointer;
+}
+
+.upvotes {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: auto;
+    margin-left: 1em;
+}
+
+.upvote-button {
+    width: 20px;
+    align-self: center;
+    color: tomato;
+}
+
+.upvote-button:hover {
+    cursor: pointer;
+}
+
+.custom-car-user-creator {
+    text-align: left;
+    margin-left: .5em;
+    margin-top: .5em;
+}
+
+.custom-car-user-creator h4 {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.custom-car-user-creator h4:hover {
+    transition: .2s;
+    color: var(--dark-primary-200);
+}

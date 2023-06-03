@@ -1,1 +1,12 @@
-<p>custom-cars-page works!</p>
+<br>
+<div id="custom-cars-view">
+    <!-- Car list -->
+    <div id="custom-cars-list">
+
+        <!-- Car items -->
+        <div *ngFor="let car of cars" >
+            <app-custom-card (errorEvent)="enableErrorMsg($event)" [car]="car"></app-custom-card>
+        </div>
+
+    </div>
+</div>

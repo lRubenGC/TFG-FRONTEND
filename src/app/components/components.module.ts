@@ -12,12 +12,14 @@ import { PremiumPillComponent } from './premium-pill/premium-pill.component';
 import { UserCardComponent } from './user-card/user-card.component';
 import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
 import { UploadImgComponent } from './upload-img/upload-img.component';
+import { CustomCardComponent } from './custom-card/custom-card.component';
 
 
 
 @NgModule({
   declarations: [
     BasicCardComponent,
+    CustomCardComponent,
     PremiumCardComponent,
     PremiumPillComponent,
     GlobalNotificationComponent,
@@ -34,6 +36,7 @@ import { UploadImgComponent } from './upload-img/upload-img.component';
   ],
   exports: [
     BasicCardComponent,
+    CustomCardComponent,
     PremiumCardComponent,
     PremiumPillComponent,
     GlobalNotificationComponent,

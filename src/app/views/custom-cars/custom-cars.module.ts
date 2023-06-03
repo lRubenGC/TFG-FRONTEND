@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { UploadCustomCarPageComponent } from './upload-custom-car-page/upload-custom-car-page.component';
 import { CustomCarsPageComponent } from './custom-cars-page/custom-cars-page.component';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 
 
@@ -12,7 +13,8 @@ import { CustomCarsPageComponent } from './custom-cars-page/custom-cars-page.com
     UploadCustomCarPageComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ComponentsModule
   ]
 })
 export class CustomCarsModule { }

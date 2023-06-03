@@ -1,0 +1,17 @@
+#custom-cars-view {
+    width: 90%;
+    margin: 2rem auto;
+}
+
+#custom-cars-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-gap: 5em;
+    padding: 1em;
+}
+
+@media screen and (max-width: 600px) {
+    #custom-cars-list {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}

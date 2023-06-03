@@ -27,7 +27,7 @@ export class BasicCardComponent implements OnInit {
 
     if (this.car.token) {
       this.carsService
-        .addBasicCar(parseInt(this.car.id), this.car.token, carBody)
+        .addBasicCar(this.car.id, this.car.token, carBody)
         .subscribe(
           (res) => {
             if (carBody.hasCar) {
@@ -57,7 +57,7 @@ export class BasicCardComponent implements OnInit {
   removeCar() {
     if (this.car.token) {
       this.carsService
-      .removeBasicCar(parseInt(this.car.id), this.car.token)
+      .removeBasicCar(this.car.id, this.car.token)
       .subscribe(
         (res) => {
           if (this.car.has_car) {

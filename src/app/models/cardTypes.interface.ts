@@ -1,5 +1,5 @@
 export interface basicCarInterface {
-    id: string;
+    id: number;
     car_id: string;
     col: string;
     model_name: string;
@@ -13,7 +13,7 @@ export interface basicCarInterface {
 }
 
 export interface basicCarShowedInterface {
-    id: string;
+    id: number;
     car_id: string;
     col: string;
     model_name: string;
@@ -34,7 +34,7 @@ export interface basicCarShowedInterface {
 }
 
 export interface premiumCarInterface {
-    id: string;
+    id: number;
     car_id: string;
     model_name: string;
     main_serie: string;
@@ -47,7 +47,7 @@ export interface premiumCarInterface {
 }
 
 export interface premiumCarShowedInterface {
-    id: string;
+    id: number;
     car_id: string;
     model_name: string;
     main_serie: string;
@@ -64,4 +64,16 @@ export interface premiumCarShowedInterface {
     search?: boolean;
     user_profile?: boolean;
     profile_view?: boolean;
+}
+
+export interface customCarInterface {
+    id: number;
+    car_id: string;
+    model_name: string;
+    year: string;
+    brand: string;
+    imgs: any;
+    upvotes: number;
+    userCreator: number;
+    createdAt: Date;
 }

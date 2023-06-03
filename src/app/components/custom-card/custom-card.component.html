@@ -1,0 +1,26 @@
+<div class="custom-car-item">
+
+    <!-- Car Title -->
+    <div class="item-car-title">  
+        <h4 [ngClass]="car.model_name.length > 22 ? 'small-title' : ''">{{ car.model_name }}</h4>
+    </div>
+    
+    <!-- Img and upvotes Container -->
+    <div class="img-and-upvotes">
+        <!-- Img Container -->
+        <div class="custom-img-container">
+            <img loading="lazy" class="banner-image" [src]="car.imgs[0]" [alt]="car.model_name"/>
+        </div>
+        
+        <!-- Upvotes -->
+        <div class="upvotes">
+            <p>{{ car.upvotes }}</p>
+            <img class="upvote-button" src="../../../assets/images/custom_cars_page/arrow-big-up-line-filled.svg" alt="upvote">
+        </div>
+    </div>
+
+    <div class="custom-car-user-creator">
+        <h4>{{ car.userCreator }}</h4>
+    </div>
+
+</div>

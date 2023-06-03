@@ -26,7 +26,7 @@ export class PremiumCardComponent implements OnInit {
 
     if (this.car.token) {
       this.carsService
-        .addPremiumCar(parseInt(this.car.id), this.car.token, carBody)
+        .addPremiumCar(this.car.id, this.car.token, carBody)
         .subscribe(
           (res) => {
             if (carBody.hasCar) {
@@ -56,7 +56,7 @@ export class PremiumCardComponent implements OnInit {
   removeCar() {
     if (this.car.token) {
       this.carsService
-      .removePremiumCar(parseInt(this.car.id), this.car.token)
+      .removePremiumCar(this.car.id, this.car.token)
       .subscribe(
         (res) => {
           if (this.car.has_car) {
