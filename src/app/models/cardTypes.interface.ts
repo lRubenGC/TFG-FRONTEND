@@ -76,4 +76,6 @@ export interface customCarInterface {
     upvotes: number;
     userCreator: number;
     createdAt: Date;
+    userId?: number;
+    voted?: boolean;
 }

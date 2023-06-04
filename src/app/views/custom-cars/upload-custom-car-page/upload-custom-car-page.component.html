@@ -1,1 +1,82 @@
-<p>upload-custom-car-page works!</p>
+<div id="custom-cars-upload">
+    <form [formGroup]="customCarForm" class="custom-cars-container">
+        <h1>{{ 'POST_CUSTOM_CAR' | translate }}</h1>
+        
+        <div class="custom-cars-item">
+            <label>{{ 'CUSTOM_CAR_ID_CAR' | translate }}:</label>
+            <input
+                type="text"
+                formControlName="car_id"
+                placeholder="{{ 'CUSTOM_CAR_ID_CAR' | translate }}"
+                (keydown.enter)="submitForm()" />
+        </div>
+
+        <div class="custom-cars-item">
+            <label>{{ 'CUSTOM_CAR_MODEL_NAME' | translate }}:</label>
+            <input
+                type="text"
+                formControlName="model_name"
+                placeholder="{{ 'CUSTOM_CAR_MODEL_NAME' | translate}}"
+                (keydown.enter)="submitForm()" />
+        </div>
+
+        <div class="custom-cars-item">
+            <label>{{ 'CUSTOM_CAR_YEAR' | translate }}:</label>
+            <input
+                type="text"
+                formControlName="year"
+                placeholder="{{ 'CUSTOM_CAR_YEAR' | translate}}"
+                (keydown.enter)="submitForm()" />
+        </div>
+
+        <div class="custom-cars-item">
+            <label>{{ 'CUSTOM_CAR_BRAND' | translate }}:</label>
+            <input
+                type="text"
+                formControlName="brand"
+                placeholder="{{ 'CUSTOM_CAR_BRAND' | translate}}"
+                (keydown.enter)="submitForm()" />
+        </div>
+
+        <button #uploadButton type="button" class="button-update-custom" (click)="submitForm()">{{ 'POST_CUSTOM_CAR_BUTTON' | translate }}</button>
+
+
+        <p *ngIf="formError" class="notification notification-error">{{ errorMsg | translate }}</p>
+        <p *ngIf="formSuccess" class="notification notification-success">{{ successMsg | translate }}</p>
+
+
+    </form>
+
+</div>
+
+<section *ngIf="customCarUploaded">
+    <div class="img-inputs-container">
+        <div class="img-input">
+            <div class="img-title-container">
+                <h4>{{ 'CONFIG_IMG_PROFILE' | translate }}</h4>
+                <button (click)="deleteImg(1)" class="button-delete-config">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+            <app-upload-img
+                [imagePrev]="data.user.img"
+                [deleteImage]="imgDeleted"
+                (imageChanged)="onImageChanged(0, $event)"></app-upload-img>
+        </div>
+
+        <div class="img-input">
+            <div class="img-title-container">
+                <h4>{{ 'CONFIG_IMG_BANNER' | translate }}</h4>
+                <button (click)="deleteImg(2)"class="button-delete-config">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+
+            <app-upload-img
+                [imagePrev]="data.user.bg_img"
+                [imageBanner]="true"
+                [deleteImage]="bgDeleted"
+                (imageChanged)="onImageChanged(1, $event)"></app-upload-img>
+        </div>
+    </div>
+</section>

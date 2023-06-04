@@ -77,5 +77,21 @@
     "CONFIG_USER_UPDATED": "Data updated successfully",
     "CONFIG_USER_UPDATING": "Data updating... Please wait",
     "CONFIG_EMPTY_VALUES": "You have not changed the data",
-    "CONFIG_IMG_DELETED": "Image deleted successfully"
+    "CONFIG_IMG_DELETED": "Image deleted successfully",
+    "GN_TOKEN_EXPIRED_VOTE": "You cannot vote a car without an account. Please sign in",
+    "FILTER_BY": "Filter by",
+    "UPVOTES": "Upvotes",
+    "DATE_RECENTS": "Date (Newers)",
+    "DATE_OLDERS": "Date (Olders)",
+    "CUSTOM_CAR_ID_CAR": "Car Id",
+    "CUSTOM_CAR_MODEL_NAME": "Model name",
+    "CUSTOM_CAR_YEAR": "Year",
+    "CUSTOM_CAR_BRAND": "Brand",
+    "POST_CUSTOM_CAR": "Post custom car",
+    "POST_CUSTOM_CAR_BUTTON": "Upload",
+    "POST_CUSTOM_CAR_BAD_ID": "Introduce a valid ID",
+    "POST_CUSTOM_CAR_BAD_MODEL": "Introduce a valid Model name",
+    "POST_CUSTOM_CAR_BAD_YEAR": "Introduce a valid Year",
+    "POST_CUSTOM_CAR_BAD_BRAND": "Introduce a valid Brand",
+    "CUSTOM_CAR_UPLOADED": "Custom car uploaded successfully"
 }

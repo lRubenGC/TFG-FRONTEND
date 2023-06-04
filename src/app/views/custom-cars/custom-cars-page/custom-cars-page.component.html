@@ -1,5 +1,30 @@
 <br>
 <div id="custom-cars-view">
+
+    <!-- Custom cars header -->
+    <section id="custom-cars-header">
+        <!-- Filter section -->
+        <section id="custom-filter-section">
+    
+            <div class="custom-filter-item">
+                <h3>{{ 'FILTER_BY' | translate }}</h3>
+                <div class="car-select">
+                    <select [(ngModel)]="selectedFilter" (change)="filterCars()">
+                        <option value="date_recents">{{ 'DATE_RECENTS' | translate }}</option>
+                        <option value="date_olders">{{ 'DATE_OLDERS' | translate }}</option>
+                        <option value="upvotes">{{ 'UPVOTES' | translate }}</option>
+                    </select>
+    
+                </div>
+            </div>
+    
+        </section>
+
+        <!-- Upload car button -->
+        <button class="custom-cars-upload-button" (click)="uploadCar()">Upload Car</button>
+
+    </section>
+
     <!-- Car list -->
     <div id="custom-cars-list">
 
@@ -9,4 +34,7 @@
         </div>
 
     </div>
+
+    <!-- Possible error notification -->
+    <app-global-notification *ngIf="error" [notificationMsg]="errorMsg"></app-global-notification>
 </div>

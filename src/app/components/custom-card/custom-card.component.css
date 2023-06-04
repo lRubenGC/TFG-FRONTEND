@@ -56,7 +56,6 @@
 .upvote-button {
     width: 20px;
     align-self: center;
-    color: tomato;
 }
 
 .upvote-button:hover {
@@ -76,5 +75,9 @@
 
 .custom-car-user-creator h4:hover {
     transition: .2s;
+    color: var(--dark-primary-200);
+}
+
+.car-voted {
     color: var(--dark-primary-200);
 }

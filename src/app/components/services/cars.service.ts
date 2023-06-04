@@ -71,5 +71,38 @@ export class CarsService {
 
     return this.http.delete(`${this.apiUrl}/user-premium-cars/${id_user}`, options);
   }
+
+  voteCustomCar(id_car: number, id_user: number): Observable<any> {
+    const token = localStorage.getItem('cw-token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'r-token': token!
+    });
+
+    return this.http.post(`${this.apiUrl}/custom-cars/vote/${id_user}`, {
+      customCarId: id_car
+    }, { headers });
+  }
+
+  unvoteCustomCar(id_car: number, id_user: number): Observable<any> {
+    const token = localStorage.getItem('cw-token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'r-token': token!
+    })
+
+    const options = {
+      headers,
+      body: {
+        customCarId: id_car
+      }
+    }
+
+    return this.http.delete(`${this.apiUrl}/custom-cars/vote/${id_user}`, options);
+  }
+
+  getUserVotes(userId: number): Observable<number[]> {
+    return this.http.get<number[]>(`${this.apiUrl}/custom-cars/user-votes/${userId}`);
+  }
   
 }

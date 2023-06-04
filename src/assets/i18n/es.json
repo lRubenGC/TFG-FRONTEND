@@ -77,5 +77,21 @@
     "CONFIG_USER_UPDATED": "Datos actualizados correctamente",
     "CONFIG_USER_UPDATING": "Datos actualizandose... Por favor espera",
     "CONFIG_EMPTY_VALUES": "No has cambiado los datos",
-    "CONFIG_IMG_DELETED": "Imagen eliminada con éxito"
+    "CONFIG_IMG_DELETED": "Imagen eliminada con éxito",
+    "GN_TOKEN_EXPIRED_VOTE": "No puedes votar un coche sin cuenta. Inicia sesión por favor",
+    "FILTER_BY": "Filtar por",
+    "UPVOTES": "Votos positivos",
+    "DATE_RECENTS": "Fecha (Mas recientes)",
+    "DATE_OLDERS": "Fecha (Mas antiguos)",
+    "CUSTOM_CAR_ID_CAR": "Id del Coche",
+    "CUSTOM_CAR_MODEL_NAME": "Nombre del Modelo",
+    "CUSTOM_CAR_YEAR": "Año",
+    "CUSTOM_CAR_BRAND": "Marca",
+    "POST_CUSTOM_CAR": "Subir coche custom",
+    "POST_CUSTOM_CAR_BUTTON": "Subir",
+    "POST_CUSTOM_CAR_BAD_ID": "Introduce un ID válido",
+    "POST_CUSTOM_CAR_BAD_MODEL": "Introduce un Modelo válido",
+    "POST_CUSTOM_CAR_BAD_YEAR": "Introduce un año válido",
+    "POST_CUSTOM_CAR_BAD_BRAND": "Introduce una marca válida",
+    "CUSTOM_CAR_UPLOADED": "Coche custom subido con éxito"
 }
