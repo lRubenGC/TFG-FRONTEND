@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from 'src/app/services/user.service';
 import { CustomCarsService } from '../custom-cars.service';
 import { decodeToken } from 'src/app/helpers/generics';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-upload-custom-car-page',
@@ -23,10 +23,14 @@ export class UploadCustomCarPageComponent implements OnInit {
   successMsg = '';
 
   customCarUploaded = false;
+  customCarId = 0;
+
+  imageUploaded = false;
 
   constructor(
     private customCarsService: CustomCarsService,
     private formBuilder: FormBuilder,
+    private router: Router,
   ) {
     this.customCarForm = this.formBuilder.group({
       car_id: ['', Validators.required],
@@ -106,7 +110,9 @@ export class UploadCustomCarPageComponent implements OnInit {
     try {
       if (this.userToken.hasToken && this.userToken.userId) {
         const res = await this.customCarsService.uploadCustomCar(this.userToken.userId, bodyRequest).toPromise();
-        console.log(res.customCar.id)
+        // save id of custom car for upload imgs
+        this.customCarId = res.customCar.id;
+
         this.successMsg = 'CUSTOM_CAR_UPLOADED';
         this.formSuccess = true;
   
@@ -132,12 +138,17 @@ export class UploadCustomCarPageComponent implements OnInit {
     }
   }
 
-  deleteImg(img: number) {
-
+  uploadImg(file: File | null) {
+    if (this.userToken.hasToken && this.userToken.userId && file && this.customCarId !== 0) {
+      this.imageUploaded = true;
+      this.customCarsService.uploadImg(this.userToken.userId, this.customCarId, file).toPromise();
+      this.formSuccess = true;
+      this.successMsg = 'CUSTOM_CAR_IMG_UPLOADED';
+    }
   }
 
-  onImageChanged(index: number, file: File | null) {
-    // this.images[index] = file;
+  goBack() {
+    this.router.navigate(['/custom-cars']);
   }
 
 }

@@ -61,10 +61,10 @@ input {
 
 .notification {
     color: #fff;
-    margin-top: 1rem;
     padding: .75rem 0;
     border-radius: 10px;
-    width: 100%;
+    width: 50%;
+    margin: 1em auto;
     text-align: center;
 }
 
@@ -89,6 +89,47 @@ input {
     outline: none;
 }
 
+.img-upload-section {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.img-upload-section h1 {
+    color: #fff;
+}
+
+.img-inputs-container {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+}
+
+.img-upload-section-header {
+    margin: 2em 0 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.custom-cars-upload-images {
+    align-self: flex-end;
+    padding: .4em 1.5em;
+    border: 0.16em solid var(--dark-primary-100);
+    background-color: var(--dark-bg-100-opacity);
+    color: #fff;
+    border-radius: 10px;
+    box-sizing: border-box;
+    text-shadow: 4px 4px 4px #000;
+    transition: all 0.2s;
+    cursor: pointer;
+    height: 3em;
+}
+
+.custom-cars-upload-images:hover {
+    background-color: var(--dark-primary-100);
+    text-shadow: none;
+}
 
 
 @media (max-width: 768px) {

@@ -41,42 +41,38 @@
         <button #uploadButton type="button" class="button-update-custom" (click)="submitForm()">{{ 'POST_CUSTOM_CAR_BUTTON' | translate }}</button>
 
 
-        <p *ngIf="formError" class="notification notification-error">{{ errorMsg | translate }}</p>
-        <p *ngIf="formSuccess" class="notification notification-success">{{ successMsg | translate }}</p>
-
-
     </form>
 
 </div>
 
-<section *ngIf="customCarUploaded">
-    <div class="img-inputs-container">
-        <div class="img-input">
-            <div class="img-title-container">
-                <h4>{{ 'CONFIG_IMG_PROFILE' | translate }}</h4>
-                <button (click)="deleteImg(1)" class="button-delete-config">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </div>
-            <app-upload-img
-                [imagePrev]="data.user.img"
-                [deleteImage]="imgDeleted"
-                (imageChanged)="onImageChanged(0, $event)"></app-upload-img>
-        </div>
+<section class="img-upload-section" *ngIf="customCarUploaded">
 
-        <div class="img-input">
-            <div class="img-title-container">
-                <h4>{{ 'CONFIG_IMG_BANNER' | translate }}</h4>
-                <button (click)="deleteImg(2)"class="button-delete-config">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </div>
-
-            <app-upload-img
-                [imagePrev]="data.user.bg_img"
-                [imageBanner]="true"
-                [deleteImage]="bgDeleted"
-                (imageChanged)="onImageChanged(1, $event)"></app-upload-img>
-        </div>
+    <div class="img-upload-section-header">
+        <h1>Car images</h1>
+        <button *ngIf="imageUploaded" class="custom-cars-upload-images" (click)="goBack()">{{ 'CUSTOM_CAR_FINISH' | translate }}</button>
     </div>
+    
+    <div class="img-inputs-container">
+
+        <div class="img-input">
+            <app-upload-img (imageChanged)="uploadImg($event)"></app-upload-img>
+        </div>
+
+        <div class="img-input">
+            <app-upload-img (imageChanged)="uploadImg($event)"></app-upload-img>
+        </div>
+
+        <div class="img-input">
+            <app-upload-img (imageChanged)="uploadImg($event)"></app-upload-img>
+        </div>
+
+        <div class="img-input">
+            <app-upload-img (imageChanged)="uploadImg($event)"></app-upload-img>
+        </div>
+
+    </div>
+
 </section>
+
+<p *ngIf="formError" class="notification notification-error">{{ errorMsg | translate }}</p>
+<p *ngIf="formSuccess" class="notification notification-success">{{ successMsg | translate }}</p>

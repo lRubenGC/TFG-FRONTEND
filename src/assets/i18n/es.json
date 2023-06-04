@@ -93,5 +93,7 @@
     "POST_CUSTOM_CAR_BAD_MODEL": "Introduce un Modelo válido",
     "POST_CUSTOM_CAR_BAD_YEAR": "Introduce un año válido",
     "POST_CUSTOM_CAR_BAD_BRAND": "Introduce una marca válida",
-    "CUSTOM_CAR_UPLOADED": "Coche custom subido con éxito"
+    "CUSTOM_CAR_UPLOADED": "Coche custom subido con éxito",
+    "CUSTOM_CAR_FINISH": "Subir imágenes",
+    "CUSTOM_CAR_IMG_UPLOADED": "Imagen subida con éxito"
 }

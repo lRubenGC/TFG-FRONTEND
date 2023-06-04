@@ -32,4 +32,14 @@ export class CustomCarsService {
     }, { headers });
   }
 
+  uploadImg(id_user: number, id_car: number, file: File): Observable<any> {
+    const token = localStorage.getItem('cw-token');
+    const headers = new HttpHeaders({ 'r-token': token! });
+    const formData = new FormData();
+    
+    formData.append('file', file);
+    
+    return this.http.post(`${this.apiUrl}/custom-cars/upload/${id_user}/${id_car}`, formData, { headers });
+  }
+
 }
