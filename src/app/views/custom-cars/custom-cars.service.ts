@@ -12,8 +12,11 @@ export class CustomCarsService {
   constructor(private http: HttpClient) { }
   
 
-  getCustomCars(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/custom-cars`);
+  getCustomCars(userCreator?: number): Observable<any> {
+    if (!userCreator) {
+      return this.http.get(`${this.apiUrl}/custom-cars`);
+    }
+    return this.http.get(`${this.apiUrl}/custom-cars?userCreator=${userCreator}`);
   }
 
   uploadCustomCar(id_user: number, carBody: any): Observable<any> {

@@ -92,7 +92,7 @@
     "POST_CUSTOM_CAR_BAD_ID": "Introduce a valid ID",
     "POST_CUSTOM_CAR_BAD_MODEL": "Introduce a valid Model name",
     "POST_CUSTOM_CAR_BAD_YEAR": "Introduce a valid Year",
-    "POST_CUSTOM_CAR_BAD_BRAND": "Introduce a valid Brand",
+    "POST_CUSTOM_CAR_BAD_BRAND": "Introduce a valid Brand (Toyota, Jeep, Ford...)",
     "CUSTOM_CAR_UPLOADED": "Custom car uploaded successfully",
     "CUSTOM_CAR_FINISH": "Upload images",
     "CUSTOM_CAR_IMG_UPLOADED": "Image uploaded successfully"

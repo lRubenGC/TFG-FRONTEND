@@ -6,11 +6,13 @@ import { CustomCarsPageComponent } from './custom-cars-page/custom-cars-page.com
 import { ComponentsModule } from 'src/app/components/components.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CustomCarDetailedComponent } from './custom-car-detailed/custom-car-detailed.component';
 
 
 
 @NgModule({
   declarations: [
+    CustomCarDetailedComponent,
     CustomCarsPageComponent,
     UploadCustomCarPageComponent,
   ],

@@ -30,7 +30,7 @@
 
         <!-- Car items -->
         <div *ngFor="let car of cars" >
-            <app-custom-card (errorEvent)="enableErrorMsg($event)" [car]="car"></app-custom-card>
+            <app-custom-card (errorEvent)="enableErrorMsg($event)" [userProfile]="false" [car]="car"></app-custom-card>
         </div>
 
     </div>

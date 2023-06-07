@@ -13,6 +13,7 @@ import { CarsService } from '../services/cars.service';
 export class CustomCardComponent implements OnInit {
 
   @Input() car!: customCarInterface;
+  @Input() userProfile!: boolean;
   @Output() errorEvent = new EventEmitter<string>();
 
   constructor(
@@ -62,6 +63,10 @@ export class CustomCardComponent implements OnInit {
 
   goToCreatorProfile() {
     this.router.navigate([`/user/profile/${this.car.userCreator}`]);
+  }
+
+  goToCustomCarView() {
+    this.router.navigate([`/custom-cars/car/${this.car.id}`]);
   }
 
 }

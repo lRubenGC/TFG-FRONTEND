@@ -162,6 +162,13 @@
                 </div>
             </div>
 
+            <!-- Custom Cars Owned-->
+            <div *ngIf="carsType === 'custom'" class="user-custom-cars-list">
+                <div *ngFor="let car of customCarsOwned">
+                    <app-custom-card (errorEvent)="enableErrorMsg($event)" [userProfile]="true" [car]="car"></app-custom-card>
+                </div>
+            </div>
+
         </section>
 
 

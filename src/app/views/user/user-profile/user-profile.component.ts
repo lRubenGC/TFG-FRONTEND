@@ -4,8 +4,9 @@ import { BasicCarsService } from '../../basic-cars-page/basic-cars.service';
 import { PremiumCarsService } from '../../premium-cars-page/premium-cars.service';
 import { UserService } from '../../../services/user.service';
 import { userInterface } from 'src/app/models/user.interface';
-import { basicCarInterface, basicCarShowedInterface, premiumCarInterface, premiumCarShowedInterface } from 'src/app/models/cardTypes.interface';
+import { basicCarInterface, basicCarShowedInterface, customCarInterface, premiumCarInterface, premiumCarShowedInterface } from 'src/app/models/cardTypes.interface';
 import { decodeToken } from 'src/app/helpers/generics';
+import { CustomCarsService } from '../../custom-cars/custom-cars.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -45,10 +46,11 @@ export class UserProfileComponent implements OnInit {
   errorMsg = '';
 
   constructor(
+    private basicCarsService: BasicCarsService,
+    private customCarsService: CustomCarsService,
+    private premiumCarsService: PremiumCarsService,
     private route: ActivatedRoute,
     private router: Router,
-    private basicCarsService: BasicCarsService,
-    private premiumCarsService: PremiumCarsService,
     private userService: UserService,
   ) { }
 
@@ -74,6 +76,10 @@ export class UserProfileComponent implements OnInit {
         this.userVisitor = false;
         this.getUserBasicCars(false);
         this.getUserPremiumCars(false);
+      }
+      
+      if (this.user){
+        this.getCustomCars(this.user.id);
       }
 
     });
@@ -330,6 +336,24 @@ export class UserProfileComponent implements OnInit {
       const series = res.series.split(',');
       this.availableSecondarySeries = series.sort();
     })
+  }
+
+  getCustomCars(userCreator: number) {
+    this.customCarsService.getCustomCars(userCreator).subscribe(
+      (res) => {
+        const customCars = res.cars.map((car: customCarInterface) => {
+          return {
+            ...car,
+            imgs: car.imgs.split(','),
+          };
+        });
+
+        this.customCarsOwned = customCars;
+      },
+      (err: string) => {
+        console.error(err);
+      }
+    );
   }
 
   goToConfig() {

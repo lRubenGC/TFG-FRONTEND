@@ -6,20 +6,20 @@
     </div>
     
     <!-- Img and upvotes Container -->
-    <div class="img-and-upvotes">
+    <div class="img-and-upvotes" (click)="goToCustomCarView()">
         <!-- Img Container -->
         <div class="custom-img-container">
             <img loading="lazy" class="banner-image" [src]="car.imgs[0]" [alt]="car.model_name"/>
         </div>
         
         <!-- Upvotes -->
-        <div class="upvotes">
+        <div *ngIf="!userProfile" class="upvotes">
             <p [ngClass]="car.voted ? 'car-voted' : ''">{{ car.upvotes }}</p>
             <img (click)="voteCar()" class="upvote-button" src="../../../assets/images/custom_cars_page/arrow-big-up-line-filled.svg" alt="upvote">
         </div>
     </div>
 
-    <div class="custom-car-user-creator">
+    <div *ngIf="!userProfile" class="custom-car-user-creator">
         <h4 (click)="goToCreatorProfile()">{{ car.userCreator }}</h4>
     </div>
 
