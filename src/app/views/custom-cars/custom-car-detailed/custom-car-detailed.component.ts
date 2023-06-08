@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { customCarInterface } from 'src/app/models/cardTypes.interface';
 import { CustomCarsService } from '../custom-cars.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-custom-car-detailed',
@@ -18,15 +19,19 @@ export class CustomCarDetailedComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private carService: CustomCarsService,
+    private router: Router,
+    private userService: UserService,
     ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     const carId = this.route.snapshot.paramMap.get('carId');
     this.carService.getCarById(Number(carId)).subscribe(
-      (res) => {
+      async (res) => {
+        const userCreator = await this.userService.getUserData(res.car.userCreator);
         this.car = {
           ...res.car,
-          imgs: res.car.imgs.split(',')
+          imgs: res.car.imgs.split(','),
+          userCreator: userCreator.user.username
         }
       },
       (error) => this.enableErrorMsg(error)
@@ -47,6 +52,10 @@ export class CustomCarDetailedComponent implements OnInit {
     } else {
       this.currentImageIndex = this.car.imgs.length - 2;
     }
+  }
+
+  goToCreatorProfile() {
+    this.router.navigate([`/user/profile/${this.car.userCreator}`]);
   }
 
   enableErrorMsg(msg: string | any) {

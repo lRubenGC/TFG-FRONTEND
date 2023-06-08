@@ -81,6 +81,7 @@
     "GN_TOKEN_EXPIRED_VOTE": "No puedes votar un coche sin cuenta. Inicia sesión por favor",
     "FILTER_BY": "Filtar por",
     "UPVOTES": "Votos positivos",
+    "CREATED_AT": "Creado el",
     "DATE_RECENTS": "Fecha (Mas recientes)",
     "DATE_OLDERS": "Fecha (Mas antiguos)",
     "CUSTOM_CAR_ID_CAR": "Id del Coche",

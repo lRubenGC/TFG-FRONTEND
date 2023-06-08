@@ -6,9 +6,9 @@
     </div>
     
     <!-- Img and upvotes Container -->
-    <div class="img-and-upvotes" (click)="goToCustomCarView()">
+    <div class="img-and-upvotes">
         <!-- Img Container -->
-        <div class="custom-img-container">
+        <div class="custom-img-container" (click)="goToCustomCarView()">
             <img loading="lazy" class="banner-image" [src]="car.imgs[0]" [alt]="car.model_name"/>
         </div>
         

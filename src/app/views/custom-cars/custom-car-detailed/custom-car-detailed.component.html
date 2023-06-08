@@ -4,10 +4,22 @@
     <div class="car-detailed-container" *ngIf="car">
 
       <div class="car-details">
-        <h2>{{ car.model_name }}</h2>
-        <p>{{ car.year }}</p>
-        <p>{{ car.brand }}</p>  
-        <p>Created at: {{ car.createdAt | date }}</p>
+
+        <div class="car-details-item">
+          <h2>{{ car.model_name }}</h2>
+          <p>{{ car.year }}</p>
+          <p>{{ car.car_id }}</p>
+          <p>{{ car.brand }}</p>  
+          <p>{{ 'CREATED_AT' | translate }}: {{ car.createdAt | date }}</p>
+        </div>
+
+        <hr>
+
+        <div class="car-details-item">
+          <h2 class="user-creator" (click)="goToCreatorProfile()">{{ car.userCreator }}</h2>
+          <p>{{ 'UPVOTES' | translate }}: <span class="car-upvotes">{{ car.upvotes }}</span></p>
+        </div>
+
       </div>
   
       <div class="carousel">
@@ -19,10 +31,7 @@
         <button class="nav-button" (click)="nextImage()">&#10095;</button>
       </div>
 
-      <div class="user-data-votes">
-        <h2>{{ car.userCreator }}</h2>
-        <p>{{ car.upvotes }}</p>
-      </div>
+
 
     </div>
   

@@ -4,10 +4,11 @@
 
 .car-detailed-container {
     display: grid;
-    grid-template-columns: 20% 70% 10%;
+    grid-template-columns: 20% 80%
 }
 
-.car-details {
+.car-details-item {
+    padding: 1em;
 }
 
 .car-images {
@@ -30,7 +31,7 @@
 
 .image-container {
     width: 80%;
-    height: 400px;
+    height: 600px;
     display: flex;
     /* align-items: center;
     overflow: hidden; */
@@ -50,3 +51,21 @@
     cursor: pointer;
     padding: 0.5em;
 }
+
+.user-creator {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.user-creator:hover {
+    color: var(--dark-primary-200);
+    transition: .2s ease;
+}
+
+@media screen and (max-width: 900px) {
+    .car-detailed-container {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
