@@ -1,42 +1,47 @@
 <br>
 <div id="custom-car-detailed">
 
-    <div class="car-detailed-container" *ngIf="car">
+  <button (click)="goTo('goBack')" class="go-back-button">{{ 'GO_BACK' | translate }}</button>
 
-      <div class="car-details">
+  <div class="car-detailed-container" *ngIf="car">
 
-        <div class="car-details-item">
-          <h2>{{ car.model_name }}</h2>
-          <p>{{ car.year }}</p>
-          <p>{{ car.car_id }}</p>
-          <p>{{ car.brand }}</p>  
-          <p>{{ 'CREATED_AT' | translate }}: {{ car.createdAt | date }}</p>
-        </div>
+    <div class="car-details">
 
-        <hr>
-
-        <div class="car-details-item">
-          <h2 class="user-creator" (click)="goToCreatorProfile()">{{ car.userCreator }}</h2>
-          <p>{{ 'UPVOTES' | translate }}: <span class="car-upvotes">{{ car.upvotes }}</span></p>
-        </div>
-
+      <div class="car-details-item">
+        <h2>{{ car.model_name }}</h2>
+        <p>{{ car.year }}</p>
+        <p>{{ car.car_id }}</p>
+        <p>{{ car.brand }}</p>  
+        <p>{{ 'CREATED_AT' | translate }}: {{ car.createdAt | date }}</p>
       </div>
-  
-      <div class="carousel">
-        <!-- Images -->
-        <button class="nav-button" (click)="prevImage()">&#10094;</button>
-        <div class="image-container">
-          <img [src]="car.imgs[currentImageIndex]" (click)="nextImage()" alt="Car image">
+
+      <hr>
+
+      <div class="car-details-item">
+        <h2 class="user-creator" (click)="goTo('userCreator')">{{ car.userCreator }}</h2>
+        <div class="upvotes-container">
+          <p>{{ 'UPVOTES' | translate }}: <span [ngClass]="car.voted ? 'car-voted' : ''" class="car-upvotes">{{ car.upvotes }}</span></p>
+          <img (click)="voteCar()" class="upvote-button" src="../../../assets/images/custom_cars_page/arrow-big-up-line-filled.svg" alt="upvote">
         </div>
-        <button class="nav-button" (click)="nextImage()">&#10095;</button>
       </div>
+
+    </div>
+
+    <div class="carousel">
+      <!-- Images -->
+      <button class="nav-button" (click)="prevImage()">&#10094;</button>
+      <div class="image-container">
+        <img [src]="car.imgs[currentImageIndex]" (click)="nextImage()" alt="Car image">
+      </div>
+      <button class="nav-button" (click)="nextImage()">&#10095;</button>
+    </div>
 
 
 
     </div>
   
     <!-- Possible error notification -->
-    <!-- <app-global-notification *ngIf="error" [notificationMsg]="errorMsg"></app-global-notification> -->
+    <app-global-notification *ngIf="error" [notificationMsg]="errorMsg"></app-global-notification>
 </div>
   
   

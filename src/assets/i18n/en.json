@@ -96,5 +96,7 @@
     "POST_CUSTOM_CAR_BAD_BRAND": "Introduce a valid Brand (Toyota, Jeep, Ford...)",
     "CUSTOM_CAR_UPLOADED": "Custom car uploaded successfully",
     "CUSTOM_CAR_FINISH": "Upload images",
-    "CUSTOM_CAR_IMG_UPLOADED": "Image uploaded successfully"
+    "CUSTOM_CAR_IMG_UPLOADED": "Image uploaded successfully",
+    "GO_BACK": "Go back",
+    "WRONG_CUSTOM_ID_CAR": "There is no custom car with that ID"
 }

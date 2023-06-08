@@ -96,5 +96,7 @@
     "POST_CUSTOM_CAR_BAD_BRAND": "Introduce una marca válida (Toyota, Jeep, Ford...)",
     "CUSTOM_CAR_UPLOADED": "Coche custom subido con éxito",
     "CUSTOM_CAR_FINISH": "Subir imágenes",
-    "CUSTOM_CAR_IMG_UPLOADED": "Imagen subida con éxito"
+    "CUSTOM_CAR_IMG_UPLOADED": "Imagen subida con éxito",
+    "GO_BACK": "Volver",
+    "WRONG_CUSTOM_ID_CAR": "No existe ningun coche personalizado con ese ID"
 }

@@ -5,6 +5,7 @@ import { customCarInterface } from 'src/app/models/cardTypes.interface';
 import { decodeToken } from 'src/app/helpers/generics';
 import { CarsService } from 'src/app/components/services/cars.service';
 import { Router } from '@angular/router';
+import { mapAndSortCustomCars } from '../../../helpers/map-cars';
 
 @Component({
   selector: 'app-custom-cars-page',
@@ -24,7 +25,7 @@ export class CustomCarsPageComponent implements OnInit {
 
   constructor(
     private customCarsService: CustomCarsService,
-    private carService: CarsService,
+    private carsService: CarsService,
     private router: Router,
   ) { }
 
@@ -34,44 +35,26 @@ export class CustomCarsPageComponent implements OnInit {
 
 
   getCustomCars() {
-    this.customCarsService.getCustomCars().subscribe(
-      (res) => {
-        if (this.userToken.hasToken && this.userToken.userId) {
-          forkJoin({
+    if (this.userToken.hasToken && this.userToken.userId) {
+        forkJoin({
             cars: this.customCarsService.getCustomCars(),
-            userVotes: this.carService.getUserVotes(this.userToken.userId)
-          }).subscribe(({ cars, userVotes }) => {
-            let customCars = cars.cars.map((car: customCarInterface) => {
-              return {
-                ...car,
-                imgs: car.imgs.split(','),
-                userId: this.userToken.userId,
-                voted: userVotes.includes(car.id)
-              };
-            });
-  
-            // sort by 'createdAt' in descending order (most recent first)
-            customCars.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-            this.cars = customCars;
-          });
-        } else {
-          let customCars = res.cars.map((car: customCarInterface) => {
-            return {
-              ...car,
-              imgs: car.imgs.split(','),
-            }
-          });
-  
-          // sort by 'createdAt' in descending order (most recent first)
-          customCars.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-          this.cars = customCars;
-        }
-      },
-      (err) => {
-        console.error(err);
-      }
-    );
+            userVotes: this.carsService.getUserVotes(this.userToken.userId)
+        }).subscribe(({ cars, userVotes }) => {
+          if (this.userToken.userId) {
+            this.cars = mapAndSortCustomCars(cars, userVotes, this.userToken.userId);
+          }
+        }, (err) => {
+            console.error(err);
+        });
+    } else {
+        this.customCarsService.getCustomCars().subscribe((res) => {
+            this.cars = mapAndSortCustomCars(res);
+        }, (err) => {
+            console.error(err);
+        });
+    }
   }
+
 
   uploadCar() {
     this.router.navigate(['/custom-cars/upload']);
@@ -86,8 +69,6 @@ export class CustomCarsPageComponent implements OnInit {
       this.cars.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
     }
   }
-  
-  
 
   enableErrorMsg(msg: string | any) {
     this.error = true;
