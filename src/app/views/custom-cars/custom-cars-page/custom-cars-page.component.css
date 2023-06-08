@@ -18,7 +18,6 @@
 
 #custom-filter-section {
     margin-left: 10em;
-    width: 20em;
 }
 
 .custom-cars-upload-button {
@@ -95,8 +94,18 @@ select::-ms-expand {
     color: var(--dark-primary-100);
 }
 
+@media screen and (max-width: 900px) {
+    #custom-filter-section {
+        margin-left: 5em;
+    }
+
+    .custom-cars-upload-button {
+        height: 4em;
+    }
+}
+
 @media screen and (max-width: 600px) {
-    #custom-cars-list {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    #custom-filter-section {
+        margin-left: 0;
     }
 }

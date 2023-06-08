@@ -19,6 +19,10 @@ export class CustomCarsService {
     return this.http.get(`${this.apiUrl}/custom-cars?userCreator=${userCreator}`);
   }
 
+  getCarById(carId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/custom-cars/${carId}`);
+  }
+
   uploadCustomCar(id_user: number, carBody: any): Observable<any> {
     const token = localStorage.getItem('cw-token');
     const headers = new HttpHeaders({
