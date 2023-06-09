@@ -7,6 +7,8 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomCarDetailedComponent } from './custom-car-detailed/custom-car-detailed.component';
+import { SharedModule } from '../shared/shared.module';
+import { EditCustomCarComponent } from './edit-custom-car/edit-custom-car.component';
 
 
 
@@ -14,6 +16,7 @@ import { CustomCarDetailedComponent } from './custom-car-detailed/custom-car-det
   declarations: [
     CustomCarDetailedComponent,
     CustomCarsPageComponent,
+    EditCustomCarComponent,
     UploadCustomCarPageComponent,
   ],
   imports: [
@@ -21,6 +24,7 @@ import { CustomCarDetailedComponent } from './custom-car-detailed/custom-car-det
     ComponentsModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
     TranslateModule,
   ]
 })

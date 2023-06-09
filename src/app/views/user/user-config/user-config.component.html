@@ -35,20 +35,21 @@
             <div class="img-input">
                 <div class="img-title-container">
                     <h4>{{ 'CONFIG_IMG_PROFILE' | translate }}</h4>
-                    <button (click)="deleteImg(1)" class="button-delete-config">
+                    <button (click)="deleteImg($event, 1)" class="button-delete-config">
                         <i class="fas fa-trash"></i>
                     </button>
                 </div>
                 <app-upload-img
                     [imagePrev]="data.user.img"
                     [deleteImage]="imgDeleted"
+                    [displayUploadButton]="true"
                     (imageChanged)="onImageChanged(0, $event)"></app-upload-img>
             </div>
 
             <div class="img_bg-input">
                 <div class="img-title-container">
                     <h4>{{ 'CONFIG_IMG_BANNER' | translate }}</h4>
-                    <button (click)="deleteImg(2)"class="button-delete-config">
+                    <button (click)="deleteImg($event, 2)"class="button-delete-config">
                         <i class="fas fa-trash"></i>
                     </button>
                 </div>
@@ -57,6 +58,7 @@
                     [imagePrev]="data.user.bg_img"
                     [imageBanner]="true"
                     [deleteImage]="bgDeleted"
+                    [displayUploadButton]="true"
                     (imageChanged)="onImageChanged(1, $event)"></app-upload-img>
             </div>
         </div>
@@ -68,4 +70,7 @@
 
 
     </form>
+
+    <!-- Spinner -->
+    <app-spinner [isLoading]="isLoading"></app-spinner>
 </div>

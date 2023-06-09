@@ -29,13 +29,14 @@ export class UserConfigComponent implements OnInit {
   formSuccess = false;
   successMsg = '';
 
+  isLoading: boolean = false;
+
   imgDeleted = false;
   bgDeleted = false;
 
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
-    private router: Router,
   ) {
     this.configForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -132,6 +133,7 @@ export class UserConfigComponent implements OnInit {
     this.formError = false;
 
     try {
+      this.isLoading = true;
       // update imgs
       if (this.images[0] !== null || this.images[1] !== null) {
         await this.updateImgs();
@@ -142,13 +144,10 @@ export class UserConfigComponent implements OnInit {
         await this.userService.updateUser(user.id, bodyRequest).toPromise();
         this.successMsg = 'CONFIG_USER_UPDATED';
         this.formSuccess = true;
+        setTimeout(() => {
+          location.reload();
+        }, 2000);
       }
-  
-      // Reload page after successful updates
-      setTimeout(() => {
-        location.reload();
-      }, 1000);
-      this.router.navigate(['/']);
 
       // activate submit button
       this.submitButtonRef.nativeElement.disabled = false;
@@ -167,6 +166,8 @@ export class UserConfigComponent implements OnInit {
         this.formError = true;
         return;
       }
+    } finally {
+      this.isLoading = false;
     }
 
     // update imgs
@@ -177,6 +178,7 @@ export class UserConfigComponent implements OnInit {
   }
 
   onImageChanged(index: number, file: File | null) {
+    this.formError = false;
     this.images[index] = file;
   }
 
@@ -214,9 +216,24 @@ export class UserConfigComponent implements OnInit {
     }
   }
 
-  async deleteImg(type: number) {
+  async deleteImg(event: any, type: number) {
+    this.formError = false;
+    if (event.pointerType === '') {
+      return;
+    }
+    if (type === 1 && this.data.user.img === null) {
+      this.errorMsg = 'CANNOT_DELETE_NO_IMG';
+      this.formError = true;
+      return;
+    } else if (type === 2 && this.data.user.bg_img === null) {
+      this.errorMsg = 'CANNOT_DELETE_NO_IMG';
+      this.formError = true;
+      return;
+    }
+
     if (type === 1 && this.data.user.img !== null) {
       try {
+      this.isLoading = true;
       await this.userService.deleteImg(this.data.user.id).toPromise();
       this.successMsg = 'CONFIG_IMG_DELETED';
       this.formSuccess = true;
@@ -224,9 +241,12 @@ export class UserConfigComponent implements OnInit {
 
       } catch (err) {
         console.error(err);
+      } finally {
+        this.isLoading = false;
       }
     } else if (type === 2 && this.data.user.bg_img !== null) {
       try {
+        this.isLoading = true;
         await this.userService.deleteImg(this.data.user.id, true).toPromise();
         this.successMsg = 'CONFIG_IMG_DELETED';
         this.formSuccess = true;
@@ -234,6 +254,8 @@ export class UserConfigComponent implements OnInit {
 
         } catch (err) {
           console.error(err);
+        } finally {
+          this.isLoading = false;
         }
     }
   }

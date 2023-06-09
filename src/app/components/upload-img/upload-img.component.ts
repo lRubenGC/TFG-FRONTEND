@@ -7,9 +7,10 @@ import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@
 })
 export class UploadImgComponent implements OnInit {
 
-  @Input() imagePrev: string | undefined = '';
+  @Input() imagePrev: string | undefined | null = '';
   @Input() imageBanner: boolean = false;
   @Input() deleteImage!: boolean;
+  @Input() displayUploadButton: boolean = false;
   @Output() imageChanged = new EventEmitter<File | null>();
   previewUrl!: string | ArrayBuffer | null | undefined;
   

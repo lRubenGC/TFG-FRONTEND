@@ -1,24 +1,25 @@
 <br>
 <div id="custom-car-detailed">
 
-  <button (click)="goTo('goBack')" class="go-back-button">{{ 'GO_BACK' | translate }}</button>
+  <div class="go-back-button-container">
+    <button (click)="goTo('goBack')" class="go-back-button">{{ 'GO_BACK' | translate }}</button>
+    <button *ngIf="isUserCreatorViewer" (click)="goTo('editCar')" class="go-back-button">{{ 'CUSTOM_CAR_EDIT' | translate }}</button>
+  </div>
 
   <div class="car-detailed-container" *ngIf="car">
 
     <div class="car-details">
 
       <div class="car-details-item">
-        <h2>{{ car.model_name }}</h2>
-        <p>{{ car.year }}</p>
-        <p>{{ car.car_id }}</p>
-        <p>{{ car.brand }}</p>  
+        <h2>{{ 'CUSTOM_CAR_MODEL_NAME' | translate }}: {{ car.model_name }}</h2>
+        <p>{{ 'BASIC_CARS_YEAR' | translate }}: {{ car.year }}</p>
+        <p>{{ 'CUSTOM_CAR_ID_CAR' | translate }}: {{ car.car_id }}</p>
+        <p>{{ 'CUSTOM_CAR_BRAND' | translate }}: {{ car.brand }}</p>  
         <p>{{ 'CREATED_AT' | translate }}: {{ car.createdAt | date }}</p>
       </div>
 
-      <hr>
-
       <div class="car-details-item">
-        <h2 class="user-creator" (click)="goTo('userCreator')">{{ car.userCreator }}</h2>
+        <h3>{{ 'CUSTOM_CAR_AUTHOR' | translate }}: <span class="user-creator" (click)="goTo('userCreator')">{{ car.userCreator }}</span></h3>
         <div class="upvotes-container">
           <p>{{ 'UPVOTES' | translate }}: <span [ngClass]="car.voted ? 'car-voted' : ''" class="car-upvotes">{{ car.upvotes }}</span></p>
           <img (click)="voteCar()" class="upvote-button" src="../../../assets/images/custom_cars_page/arrow-big-up-line-filled.svg" alt="upvote">

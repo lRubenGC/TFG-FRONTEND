@@ -21,6 +21,8 @@ export class CustomCarDetailedComponent implements OnInit {
   error = false;
   errorMsg = '';
 
+  isUserCreatorViewer = false;
+
   currentImageIndex = 0;
 
   constructor(
@@ -40,7 +42,6 @@ export class CustomCarDetailedComponent implements OnInit {
       this.errorMsg = 'WRONG_CUSTOM_ID_CAR';
       this.error = true;
     }
-
   }
 
   getCustomCar(carId: number) {
@@ -49,18 +50,29 @@ export class CustomCarDetailedComponent implements OnInit {
           car: this.customCarsService.getCarById(carId),
           userVotes: this.carsService.getUserVotes(this.userToken.userId),
       }).subscribe(({ car, userVotes }) => {
-      this.getOwnerUsername(car.car.id);
-        this.car = {
-          ...car.car,
-          imgs: car.car.imgs.split(','),
-          voted: userVotes.includes(car.car.id)
-        }
+        this.userService.getUserData(car.car.userCreator).then(userCreatorData => {
+
+          this.checkUserViewer(this.userToken.userId!, car.car.userCreator);
+
+          this.car = {
+            ...car.car,
+            imgs: car.car.imgs.split(','),
+            userCreator: userCreatorData.user.username,
+            voted: userVotes.includes(car.car.id)
+          }
+        });
       }, (err) => {
           console.error(err);
       });
     } else {
-        this.customCarsService.getCustomCars().subscribe((res) => {
-            this.car = mapAndSortCustomCars(res);
+        this.customCarsService.getCarById(carId).subscribe((res) => {
+          this.userService.getUserData(res.car.userCreator).then(userCreatorData => {
+            this.car = {
+              ...res.car,
+              imgs: res.car.imgs.split(','),
+              userCreator: userCreatorData.user.username,
+            }
+          });
         }, (err) => {
             console.error(err);
         });
@@ -68,13 +80,10 @@ export class CustomCarDetailedComponent implements OnInit {
   }
 
 
-  async getOwnerUsername(userId: number) {
-    console.log(userId)
-    const userCreator = await this.userService.getUserData(userId);
-      this.car = {
-        ...this.car,
-        userCreator: userCreator.user.username
-      }
+  checkUserViewer(userVisitorId: number, userCreatorId: number) {
+    if (userVisitorId === userCreatorId) {
+      this.isUserCreatorViewer = true;
+    }
   }
 
 
@@ -104,7 +113,9 @@ export class CustomCarDetailedComponent implements OnInit {
       case 'goBack':
         this.router.navigate([`/custom-cars`]);
         break;
-
+      case 'editCar':
+        this.router.navigate([`/custom-cars/edit/${this.car.id}`]);
+        break;
     }
   }
 

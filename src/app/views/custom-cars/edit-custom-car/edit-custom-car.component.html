@@ -1,0 +1,116 @@
+<br>
+<div id="edit-custom-car-view">
+    <form [formGroup]="editCarForm" class="edit-custom-car-container">
+        <h1>{{ 'EDIT_CUSTOM_CAR' | translate }}</h1>
+        <p>{{ 'CONFIG_DESCR' | translate }}</p>
+
+        <div class="edit-custom-car-item">
+            <label>{{ 'CUSTOM_CAR_ID_CAR' | translate }}:</label>
+            <input
+                type="text"
+                formControlName="car_id"
+                placeholder="{{ 'CUSTOM_CAR_ID_CAR' | translate }}"
+                (keydown.enter)="submitForm()" />
+        </div>
+
+        <div class="edit-custom-car-item">
+            <label>{{ 'CUSTOM_CAR_MODEL_NAME' | translate }}:</label>
+            <input
+                type="text"
+                formControlName="model_name"
+                placeholder="{{ 'CUSTOM_CAR_MODEL_NAME' | translate }}"
+                (keydown.enter)="submitForm()" />
+        </div>
+
+        <div class="edit-custom-car-item">
+            <label>{{ 'CUSTOM_CAR_YEAR' | translate }}:</label>
+            <input
+                type="text"
+                formControlName="year"
+                placeholder="{{ 'CUSTOM_CAR_YEAR' | translate }}"
+                (keydown.enter)="submitForm()" />
+        </div>
+
+        <div class="edit-custom-car-item">
+            <label>{{ 'CUSTOM_CAR_BRAND' | translate }}:</label>
+            <input
+                type="text"
+                formControlName="brand"
+                placeholder="{{ 'CUSTOM_CAR_BRAND' | translate }}"
+                (keydown.enter)="submitForm()" />
+        </div>
+
+        <div class="img-inputs-container" *ngIf="carData">
+
+            <div class="img-input">
+                <div class="img-title-container">
+                    <h4>{{ 'EDIT_CUSTOM_CAR_IMAGE1' | translate }}</h4>
+                    <button (click)="deleteImg($event, 0)" class="button-delete-config">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+
+                <app-upload-img
+                    [imagePrev]="carData.imgs[0]"
+                    [deleteImage]="img1Deleted"
+                    [displayUploadButton]="true"
+                    (imageChanged)="onImageChanged(0, $event)"></app-upload-img>
+            </div>
+
+            <div class="img-input">
+                <div class="img-title-container">
+                    <h4>{{ 'EDIT_CUSTOM_CAR_IMAGE2' | translate }}</h4>
+                    <button (click)="deleteImg($event, 1)" class="button-delete-config">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                
+                <app-upload-img
+                    [imagePrev]="carData.imgs[1]"
+                    [deleteImage]="img2Deleted"
+                    [displayUploadButton]="true"
+                    (imageChanged)="onImageChanged(1, $event)"></app-upload-img>
+            </div>
+
+            <div class="img-input">
+                <div class="img-title-container">
+                    <h4>{{ 'EDIT_CUSTOM_CAR_IMAGE3' | translate }}</h4>
+                    <button (click)="deleteImg($event, 2)" class="button-delete-config">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                
+                <app-upload-img
+                    [imagePrev]="carData.imgs[2]"
+                    [deleteImage]="img3Deleted"
+                    [displayUploadButton]="true"
+                    (imageChanged)="onImageChanged(2, $event)"></app-upload-img>
+            </div>
+
+            <div class="img-input">
+                <div class="img-title-container">
+                    <h4>{{ 'EDIT_CUSTOM_CAR_IMAGE4' | translate }}</h4>
+                    <button (click)="deleteImg($event, 3)" class="button-delete-config">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                
+                <app-upload-img
+                    [imagePrev]="carData.imgs[3]"
+                    [deleteImage]="img4Deleted"
+                    [displayUploadButton]="true"
+                    (imageChanged)="onImageChanged(3, $event)"></app-upload-img>
+            </div>
+
+        </div>
+
+        <button #submitButton type="button" class="button-update-config" (click)="submitForm()">{{ 'CONFIG_UPDATE' | translate }}</button>
+
+        <p *ngIf="formError" class="notification notification-error">{{ errorMsg | translate }}</p>
+        <p *ngIf="formSuccess" class="notification notification-success">{{ successMsg | translate }}</p>
+
+    </form>
+
+    <!-- Spinner -->
+    <app-spinner [isLoading]="isLoading"></app-spinner>
+</div>

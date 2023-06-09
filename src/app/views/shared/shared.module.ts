@@ -6,6 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { HeaderComponent } from './header-component/header.component';
 import { MsgCardComponent } from './msg-card/msg-card.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 
 
@@ -13,6 +14,7 @@ import { MsgCardComponent } from './msg-card/msg-card.component';
   declarations: [
     HeaderComponent,
     MsgCardComponent,
+    SpinnerComponent,
   ],
   imports: [
     CommonModule,
@@ -22,6 +24,7 @@ import { MsgCardComponent } from './msg-card/msg-card.component';
   exports: [
     HeaderComponent,
     MsgCardComponent,
+    SpinnerComponent,
   ]
 })
 export class SharedModule { }

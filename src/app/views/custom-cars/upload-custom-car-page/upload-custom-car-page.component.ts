@@ -17,15 +17,17 @@ export class UploadCustomCarPageComponent implements OnInit {
 
   userToken = decodeToken();
 
-  formError = false;
-  errorMsg = '';
-  formSuccess = false;
-  successMsg = '';
+  formError: boolean = false;
+  errorMsg: string = '';
+  formSuccess: boolean = false;
+  successMsg: string = '';
 
-  customCarUploaded = false;
-  customCarId = 0;
+  isLoading: boolean = false;
 
-  imageUploaded = false;
+  customCarUploaded: boolean = false;
+  customCarId: number = 0;
+
+  imageUploaded: boolean = false;
 
   constructor(
     private customCarsService: CustomCarsService,
@@ -145,14 +147,22 @@ export class UploadCustomCarPageComponent implements OnInit {
     }
   }
 
-  uploadImg(file: File | null) {
-    if (this.userToken.hasToken && this.userToken.userId && file && this.customCarId !== 0) {
-      this.imageUploaded = true;
-      this.customCarsService.uploadImg(this.userToken.userId, this.customCarId, file).toPromise();
-      this.formSuccess = true;
-      this.successMsg = 'CUSTOM_CAR_IMG_UPLOADED';
+  async uploadImg(file: File | null) {
+    try {
+      if (this.userToken.hasToken && this.userToken.userId && file && this.customCarId !== 0) {
+        this.isLoading = true;
+        this.imageUploaded = true;
+        await this.customCarsService.uploadImg(this.userToken.userId, this.customCarId, file).toPromise();
+        this.formSuccess = true;
+        this.successMsg = 'CUSTOM_CAR_IMG_UPLOADED';
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      this.isLoading = false;
     }
   }
+  
 
   goBack() {
     this.router.navigate(['/custom-cars']);

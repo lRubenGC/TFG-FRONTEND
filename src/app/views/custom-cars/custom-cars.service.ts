@@ -49,4 +49,13 @@ export class CustomCarsService {
     return this.http.post(`${this.apiUrl}/custom-cars/upload/${id_user}/${id_car}`, formData, { headers });
   }
 
+  deleteImg(id_user: number, id_car: number, id_img: string): Observable<any> {
+    const token = localStorage.getItem('cw-token');
+    const headers = new HttpHeaders({ 'r-token': token! });
+        
+    return this.http.post(`${this.apiUrl}/custom-cars/delete/${id_user}/${id_car}`, {
+      imgId: id_img
+    }, { headers });
+  }
+
 }

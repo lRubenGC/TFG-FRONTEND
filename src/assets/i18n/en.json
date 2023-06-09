@@ -69,7 +69,7 @@
     "FILTER_ALL": "All",
     "USER_EDIT_PROFILE": "Edit Profile",
     "CONFIG_UPDATE": "Update",
-    "CONFIG_UPLOAD_IMG": "Update Image",
+    "CONFIG_UPLOAD_IMG": "Upload Image",
     "CONFIG_DELETE_IMG": "Delete Image",
     "CONFIG_IMG_PROFILE": "Profile Image",
     "CONFIG_IMG_BANNER": "Banner Image",
@@ -95,8 +95,16 @@
     "POST_CUSTOM_CAR_BAD_YEAR": "Introduce a valid Year",
     "POST_CUSTOM_CAR_BAD_BRAND": "Introduce a valid Brand (Toyota, Jeep, Ford...)",
     "CUSTOM_CAR_UPLOADED": "Custom car uploaded successfully",
-    "CUSTOM_CAR_FINISH": "Upload images",
+    "CUSTOM_CAR_FINISH": "Finish",
     "CUSTOM_CAR_IMG_UPLOADED": "Image uploaded successfully",
     "GO_BACK": "Go back",
-    "WRONG_CUSTOM_ID_CAR": "There is no custom car with that ID"
+    "WRONG_CUSTOM_ID_CAR": "There is no custom car with that ID",
+    "CANNOT_DELETE_NO_IMG": "There is no image in the database to delete",
+    "CUSTOM_CAR_AUTHOR": "Author",
+    "CUSTOM_CAR_EDIT": "Edit",
+    "EDIT_CUSTOM_CAR": "Edit custom car",
+    "EDIT_CUSTOM_CAR_IMAGE1": "Image 1",
+    "EDIT_CUSTOM_CAR_IMAGE2": "Image 2",
+    "EDIT_CUSTOM_CAR_IMAGE3": "Image 3",
+    "EDIT_CUSTOM_CAR_IMAGE4": "Image 4"
 }
