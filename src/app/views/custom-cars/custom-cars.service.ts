@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { customCarUpdateRequest } from 'src/app/models/cardTypes.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,31 @@ export class CustomCarsService {
       brand: carBody.brand,
       imgs: 'value'
     }, { headers });
+  }
+
+  updateCustomCar(id_user: number, id_car: number, userParams: customCarUpdateRequest): Observable<any> {
+    const token = localStorage.getItem('cw-token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'r-token': token!
+    });
+
+    const requestBody: customCarUpdateRequest = {}
+
+    if (userParams.car_id) {
+      requestBody.car_id = userParams.car_id;
+    }
+    if (userParams.model_name) {
+      requestBody.model_name = userParams.model_name;
+    }
+    if (userParams.year) {
+      requestBody.year = userParams.year;
+    }
+    if (userParams.brand) {
+      requestBody.brand = userParams.brand;
+    }
+
+    return this.http.put(`${this.apiUrl}/custom-cars/update/${id_user}/${id_car}`, requestBody, { headers });
   }
 
   uploadImg(id_user: number, id_car: number, file: File): Observable<any> {

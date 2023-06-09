@@ -79,3 +79,10 @@ export interface customCarInterface {
     userId?: number;
     voted?: boolean;
 }
+
+export interface customCarUpdateRequest {
+    car_id?: string;
+    model_name?: string;
+    year?: number;
+    brand?: string;
+}
