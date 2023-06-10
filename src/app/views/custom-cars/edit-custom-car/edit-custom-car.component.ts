@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CustomCarsService } from '../custom-cars.service';
 import { customCarInterface } from 'src/app/models/cardTypes.interface';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { decodeToken } from 'src/app/helpers/generics';
 import { isValidYear } from 'src/app/helpers/custom-car-validators';
@@ -41,6 +41,7 @@ export class EditCustomCarComponent implements OnInit {
     private customCarsService: CustomCarsService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
+    private router: Router,
   ) {
     this.editCarForm = this.formBuilder.group({
       car_id: ['', Validators.required],
@@ -124,34 +125,37 @@ export class EditCustomCarComponent implements OnInit {
       bodyRequest.model_name = model_name;
     }
 
-    if (year.length > 0) {
-      if (!isValidYear(year)) {
-        this.errorMsg = 'POST_CUSTOM_CAR_BAD_YEAR';
-        this.formError = true;
-        this.formSuccess = false;
-      
-        // activate submit button
-        this.submitButtonRef.nativeElement.disabled = false;
-        return;
+    if (year !== carData.year) {
+      if (year.length > 0) {
+        if (!isValidYear(year)) {
+          this.errorMsg = 'POST_CUSTOM_CAR_BAD_YEAR';
+          this.formError = true;
+          this.formSuccess = false;
+        
+          // activate submit button
+          this.submitButtonRef.nativeElement.disabled = false;
+          return;
+        }
+  
+        bodyRequest.year = year;
       }
-
-      bodyRequest.year = year;
     }
 
-    if (brand.length > 0) {
-      if (brand.length < 3) {
-        this.errorMsg = 'POST_CUSTOM_CAR_BAD_BRAND';
-        this.formError = true;
-        this.formSuccess = false;
-      
-        // activate submit button
-        this.submitButtonRef.nativeElement.disabled = false;
-        return;
+    if (brand !== carData.brand) {
+      if (brand.length > 0) {
+        if (brand.length < 3) {
+          this.errorMsg = 'POST_CUSTOM_CAR_BAD_BRAND';
+          this.formError = true;
+          this.formSuccess = false;
+        
+          // activate submit button
+          this.submitButtonRef.nativeElement.disabled = false;
+          return;
+        }
+  
+        bodyRequest.brand = brand;
       }
-
-      bodyRequest.brand = brand;
     }
-
 
     if (Object.keys(bodyRequest).length === 0 && this.images[0] === null && this.images[1] === null && this.images[2] === null && this.images[3] === null) {
       this.errorMsg = 'CONFIG_EMPTY_VALUES';
@@ -168,8 +172,8 @@ export class EditCustomCarComponent implements OnInit {
     try {
       this.isLoading = true;
       // update imgs
-      if (this.images[0] !== null || this.images[1] !== null) {
-        // await this.updateImgs();
+      if (this.images[0] !== null || this.images[1] !== null || this.images[2] !== null || this.images[3] !== null) {
+        await this.updateImgs();
       }
       
       // update data (username | email | password)
@@ -177,6 +181,7 @@ export class EditCustomCarComponent implements OnInit {
         await this.customCarsService.updateCustomCar(this.userToken.userId!, this.carData.id, bodyRequest).toPromise();
         this.successMsg = 'CONFIG_USER_UPDATED';
         this.formSuccess = true;
+
         setTimeout(() => {
           location.reload();
         }, 2000);
@@ -202,19 +207,53 @@ export class EditCustomCarComponent implements OnInit {
     } finally {
       this.isLoading = false;
     }
+  }
 
-    // update imgs
-    if (this.images[0] !== null || this.images[1] !== null) {
-      // this.updateImgs();
+  async updateImgs() {
+    // object
+    const formData = new FormData();
+  
+    // if an img is in input, adds it to the object
+    this.images.forEach((image, index) => {
+      if (image) {
+        formData.append(`image${index}`, image);
+      }
+    });
+  
+    try {
+      let imgUploaded = false;
+
+      // loop uploading img if exists
+      if (this.userToken.hasToken && this.userToken.userId) {
+        for (let i = 0; i < this.images.length; i++) {
+          const file = formData.get(`image${i}`);
+          if (file instanceof File) {
+            imgUploaded = true;
+            await this.customCarsService.uploadImg(this.userToken.userId, this.carData.id, file).toPromise();
+  
+          }
+        }
+  
+        if (imgUploaded) {
+          this.successMsg = 'CUSTOM_CAR_IMG_UPLOADED';
+          this.formSuccess = true;
+        }
+      }
+
+    } catch (err) {
+      console.error(err);
     }
-
   }
 
   deleteImg(event: any, type: number) {
     this.formError = false;
     this.formSuccess = false;
 
-    if (!this.deleteImgValidations(event, type)) {
+    if (event.explicitOriginalTarget.className !== 'button-delete-config' && event.explicitOriginalTarget.className !== 'fas fa-trash') {
+      return;
+    }
+
+    if (!this.deleteImgValidations(type)) {
       return;
     }
 
@@ -235,11 +274,7 @@ export class EditCustomCarComponent implements OnInit {
   }
 
   // returns false if imgs are not valid
-  deleteImgValidations(ev: any, type: number): boolean {
-    if (ev.pointerType === '') {
-      return false;
-    }
-
+  deleteImgValidations(type: number): boolean {
     if (type === 0 && (this.carData.imgs[0] === '' || this.carData.imgs[0] === undefined)) {
       this.errorMsg = 'CANNOT_DELETE_NO_IMG';
       this.formError = true;
@@ -297,6 +332,11 @@ export class EditCustomCarComponent implements OnInit {
   onImageChanged(index: number, file: File | null) {
     this.formError = false;
     this.images[index] = file;
+  }
+
+
+  goBack() {
+    this.router.navigate([`/custom-cars/car/${this.carData.id}`]);
   }
 
 

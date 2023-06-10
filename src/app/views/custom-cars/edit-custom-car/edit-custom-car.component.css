@@ -15,6 +15,22 @@
     margin-top: 40px;
 }
 
+.edit-custom-car-title-container {
+    display: flex;
+    gap: 1em;
+}
+
+.go-back-button {
+    padding: 0 1.5em;
+    background-color: var(--dark-bg-100);
+    border: transparent;
+    color: #fff;
+    border-radius: 10px;
+    box-sizing: border-box;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
 .edit-custom-car-item {
     display: flex;
     width: 100%;

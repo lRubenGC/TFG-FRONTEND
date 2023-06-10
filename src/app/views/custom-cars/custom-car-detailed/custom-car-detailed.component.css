@@ -35,16 +35,19 @@
 }
 
 .image-container {
-    width: 80%;
-    height: 100%;
+    width: 800px;
+    height: 500px;
     display: flex;
-    /* align-items: center;
-    overflow: hidden; */
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    background-color: #061b29;
 }
 
-.carousel img {
+.image-container img {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: contain;
     cursor: pointer;
 }
