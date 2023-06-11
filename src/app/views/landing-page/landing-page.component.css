@@ -1,22 +1,16 @@
-#landing-page {
-    overflow-y: hidden;
-    overflow-x: hidden;
-    height: 100vh;
-}
-
 #landing-welcome {
     height: 60vh;
     text-align: center;
     background: url('../../../assets/images/landing_page/welcome_bg.png');
     background-position: center center;
     background-size: cover;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    align-items: center;
+    display: flex;
+    justify-content: center;
 }
 
 app-msg-card {
-    grid-column: 2 / 5 span;
+    margin: 80px 40px 0;
+
 }
 
 #landing-cards {
@@ -27,4 +21,22 @@ app-msg-card {
 
 .landing-card {
     padding: 0 25px;
+}
+
+@media only screen and (max-width: 900px) {
+    #landing-cards {
+        flex-direction: column;
+        gap: 2em;
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #landing-welcome {
+        height: 80vh;
+    }
+
+    #landing-cards {
+        width: 90%;
+    }
 }
