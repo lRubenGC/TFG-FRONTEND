@@ -64,7 +64,7 @@ button {
     right: 0;
     margin-top: .4rem;
     background-color: var(--dark-bg-100);
-    min-width: 5rem;
+    min-width: 6rem;
     overflow: auto;
     z-index: 500;
     border: 1px solid var(--dark-primary-100);

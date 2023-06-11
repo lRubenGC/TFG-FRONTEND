@@ -1,4 +1,71 @@
-<div id="login-page">
+<div class="mobile-form" *ngIf="isSmallScreen; else largeScreen">
+<br>
+    <!-- Register Form -->
+    <div *ngIf="!loginActivo" class="form-container sign-up-container">
+        <form [formGroup]="registerForm" (ngSubmit)="submitRegister()">
+            <h1>{{ 'REGISTER_TITLE' | translate }}</h1>
+            <input
+                type="text"
+                formControlName="register_username"
+                placeholder="{{ 'LOGIN_USERNAME' | translate }}" />
+            <input
+                type="email"
+                formControlName="register_email"
+                placeholder="{{ 'LOGIN_EMAIL' | translate}}" />
+            <input
+                type="password"
+                formControlName="register_password"
+                placeholder="{{ 'LOGIN_PASSWORD' | translate}}" />
+
+            <button
+                type="submit"
+                >{{ 'REGISTER_SIGNUP' | translate }}</button>
+                
+            <p *ngIf="registerError" class="auth-notification auth-error">{{ registerErrorMsg | translate }}</p>
+            <p *ngIf="registerSuccess" class="auth-notification auth-success">{{ registerSuccessMsg | translate }}</p>
+
+        </form>
+    </div>
+
+    <!-- Login Form -->
+    <div *ngIf="loginActivo" class="form-container sign-in-container">
+        <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+            <h1>{{ 'LOGIN_TITLE' | translate }}</h1>
+            <input
+                type="email"
+                formControlName="login_email"
+                placeholder="{{ 'LOGIN_EMAIL' | translate}}" />
+            <input
+                type="password"
+                formControlName="login_password"
+                placeholder="{{ 'LOGIN_PASSWORD' | translate}}" />
+
+            <button> {{ 'LOGIN_SIGNIN' | translate }} </button>
+
+            <p *ngIf="loginError" class="auth-notification auth-error">{{ loginErrorMsg | translate }}</p>
+            <p *ngIf="loginSuccess" class="auth-notification auth-success">{{ loginSuccessMsg | translate }}</p>
+
+            <!-- <p class="password-forgot">{{ 'LOGIN_FORGOT' | translate }}</p> -->
+        </form>
+    </div>
+
+
+    <div class="toggle-button-mobile-container">
+        <!-- Login toggle button -->
+        <button class="toggle-button-mobile" *ngIf="!loginActivo" (click)="toggleLogin()" id="signIn">{{ 'LOGIN_SIGNIN' |
+            translate }}</button>
+    
+        <!-- Register toggle button -->
+        <button class="toggle-button-mobile" *ngIf="loginActivo" (click)="toggleLogin()" id="signUp">{{ 'REGISTER_SIGNUP' |
+            translate }}</button>
+    </div>
+
+    
+</div>
+
+
+
+<ng-template #largeScreen id="login-page">
 <br>
 
     <div
@@ -78,4 +145,4 @@
 
     </div>
 
-</div>
+</ng-template>

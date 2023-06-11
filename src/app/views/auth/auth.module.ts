@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LayoutModule } from '@angular/cdk/layout';
 
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RecoverPasswordComponent } from './recover-password/recover-password.component';
@@ -20,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     SharedModule,
     HttpClientModule,
     ReactiveFormsModule,
-    TranslateModule
+    TranslateModule,
+    LayoutModule,
   ]
 })
 export class AuthModule { }

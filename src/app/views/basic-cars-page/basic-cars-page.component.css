@@ -83,3 +83,12 @@ select::-ms-expand {
     justify-content: center;
     text-align: center;
 }
+
+@media (max-width: 768px) {
+    #basic-cars-list {
+        padding: 1em;
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fill,minmax(8rem, 1fr));
+    }
+}

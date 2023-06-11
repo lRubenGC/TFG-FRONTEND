@@ -5,6 +5,8 @@ import { AuthService } from '../auth.service';
 import { isValidPassword, isValidEmail, isValidUsername } from 'src/app/helpers/auth';
 import { Router } from '@angular/router';
 import { GenericAuthService } from 'src/app/services/generic-auth.service';
+import { Subscription } from 'rxjs';
+import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 
 @Component({
   selector: 'app-login-page',
@@ -12,6 +14,9 @@ import { GenericAuthService } from 'src/app/services/generic-auth.service';
   styleUrls: ['./login-page.component.css'],
 })
 export class LoginPageComponent implements OnInit {
+  isSmallScreen = false;
+  private breakpointSubscription?: Subscription;
+
   registerForm!: FormGroup;
   loginForm!: FormGroup;
   loginActivo = true;
@@ -29,6 +34,7 @@ export class LoginPageComponent implements OnInit {
   registerSuccessMsg = '';
 
   constructor(
+    private breakpointObserver: BreakpointObserver,
     private languageService: LanguageService,
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -48,9 +54,15 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.loginForm.valueChanges.subscribe(() => {
-    //   this.loginFormInvalid();
-    // })
+    this.breakpointSubscription = this.breakpointObserver.observe([
+      Breakpoints.XSmall
+    ]).subscribe(result => {
+      this.isSmallScreen = result.matches;
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.breakpointSubscription?.unsubscribe();
   }
 
   submitLogin() {
