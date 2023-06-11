@@ -10,6 +10,7 @@ header {
     position: absolute;
     background-color: transparent;
     width: 100%;
+    z-index: 999;
 }
 
 .header-block {
@@ -154,7 +155,7 @@ i {
     right: 15px;
 }
 
-@media only screen and (max-width: 900px) {
+@media (max-width: 900px) {
     #mobile-menu {
         display: block;
     }

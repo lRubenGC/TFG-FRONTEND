@@ -68,19 +68,19 @@ article:hover img:last-child {
     transform: translateY(10%);
 }
 
-@media only screen and (max-width: 1300px) {
+@media (max-width: 1300px) {
     article img:last-child {
         width: 200px;
     }
 }
 
-@media only screen and (max-width: 900px) {
+@media (max-width: 900px) {
     article img:last-child {
         width: 300px;
     }
 }
 
-@media only screen and (max-width: 600px) {
+@media (max-width: 600px) {
     article img:last-child {
         width: 250px;
     }

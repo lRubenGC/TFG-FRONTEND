@@ -23,7 +23,7 @@ app-msg-card {
     padding: 0 25px;
 }
 
-@media only screen and (max-width: 900px) {
+@media (max-width: 900px) {
     #landing-cards {
         flex-direction: column;
         gap: 2em;
@@ -31,7 +31,7 @@ app-msg-card {
     }
 }
 
-@media only screen and (max-width: 600px) {
+@media (max-width: 600px) {
     #landing-welcome {
         height: 80vh;
     }

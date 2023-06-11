@@ -94,7 +94,7 @@ select::-ms-expand {
     color: var(--dark-primary-100);
 }
 
-@media screen and (max-width: 900px) {
+@media (max-width: 900px) {
     #custom-filter-section {
         margin-left: 5em;
     }
@@ -104,7 +104,7 @@ select::-ms-expand {
     }
 }
 
-@media screen and (max-width: 600px) {
+@media (max-width: 600px) {
     #custom-filter-section {
         margin-left: 0;
     }

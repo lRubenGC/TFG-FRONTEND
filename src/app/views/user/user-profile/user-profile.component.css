@@ -219,7 +219,7 @@ select:disabled {
     background-color: #000;
 }
 
-@media only screen and (max-width: 600px) {
+@media (max-width: 600px) {
     #user-profile-land-section {
         flex-direction: column;
     }

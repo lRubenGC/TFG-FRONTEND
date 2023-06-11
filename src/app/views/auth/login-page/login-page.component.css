@@ -1,6 +1,5 @@
 #login-component {
-    margin: 0 auto;
-    margin-top: 10rem;
+    margin: 10rem auto 0;
 }
 
 button {
@@ -208,3 +207,10 @@ h1.overlay-texts {
     background-color: rgb(27, 135, 27);
 }
 
+@media (max-width: 1250px) {
+    .container {
+        max-width: 80%;
+    }
+}
+
+  
