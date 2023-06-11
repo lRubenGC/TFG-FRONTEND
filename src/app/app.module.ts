@@ -18,6 +18,7 @@ import { SharedModule } from './views/shared/shared.module';
 import { UserModule } from './views/user/user.module';
 import { AuthModule } from './views/auth/auth.module';
 import { SearchResultsPageModule } from './views/search-results/search-results-page.module';
+import { AuthGuard } from './guards/auth.guard';
 
 
 @NgModule({
@@ -28,6 +29,8 @@ import { SearchResultsPageModule } from './views/search-results/search-results-p
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+
+    // Translate Module
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -48,7 +51,9 @@ import { SearchResultsPageModule } from './views/search-results/search-results-p
     SharedModule,
     UserModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

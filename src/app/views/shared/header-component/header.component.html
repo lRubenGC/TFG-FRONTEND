@@ -1,5 +1,10 @@
-<!-- <header [ngClass]="{'header-absolute': isHomePage()}"> -->
-<header [ngClass]="{ 'header-block': isBlockView() }">
+<header #header [ngClass]="{ 'header-block': isBlockView(), 'mobile-menu-open': isMobileMenuOpen }">
+
+    <!-- Mobile Menu Button -->
+    <div id="mobile-menu" (click)="toggleMobileMenu()">
+        <i class="fas fa-bars"></i>
+    </div>
+
     <!-- Logo -->
     <div (click)="goTo('/')" id="header-logo">
         <h1>CW</h1>
@@ -9,7 +14,7 @@
     <ul>
 
         <!-- Search Bar -->
-        <li>
+        <li class="header-item">
             <div class="search-box">
                 <button (click)="searchCar()" class="btn-search"><i class="fas fa-search"></i></button>
                 <input
@@ -24,7 +29,7 @@
         </li>
 
         <!-- Language Dropdown -->
-        <div class="dropdown-container">
+        <div class="dropdown-container header-item">
             <button (click)="toggleDropdown('lang')" class="dropdown-button">{{ 'HEADER_LANGUAGE' | translate }}
                 &dtrif;</button>
             <div #langDropdown class="dropdown-content" [ngClass]="{'show': !langDropdownOpen}">
@@ -35,13 +40,13 @@
 
 
         <!-- About CW -->
-        <li><button>{{ 'HEADER_ABOUT' | translate }}</button></li>
+        <li class="header-item"><button>{{ 'HEADER_ABOUT' | translate }}</button></li>
 
         <!-- Log In -->
-        <li *ngIf="!userLoggedIn"><button (click)="goTo('auth')">{{ 'HEADER_ACCOUNT' | translate }}</button></li>
+        <li class="header-item" *ngIf="!userLoggedIn"><button (click)="goTo('auth')">{{ 'HEADER_ACCOUNT' | translate }}</button></li>
 
         <!-- Account Dropdown -->
-        <li *ngIf="userLoggedIn">
+        <li class="header-item" *ngIf="userLoggedIn">
             <div class="dropdown-container">
                 <button (click)="toggleDropdown('acc')" class="dropdown-button">{{ user.user.username }}
                     &dtrif;</button>

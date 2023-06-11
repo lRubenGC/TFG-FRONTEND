@@ -3,12 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { UserConfigComponent } from './user-config/user-config.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 
 const routes: Routes = [
     {
       path: 'config',
-      component: UserConfigComponent
+      component: UserConfigComponent,
+      canActivate: [AuthGuard]
     },
     {
       path: 'profile/:username',

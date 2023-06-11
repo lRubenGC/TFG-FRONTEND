@@ -8,6 +8,9 @@ import { decodeToken } from 'src/app/helpers/generics';
 import { UserService } from '../../../services/user.service';
 import { userInterface } from 'src/app/models/user.interface';
 import { AuthService } from '../../auth/auth.service';
+import { GenericAuthService } from 'src/app/services/generic-auth.service';
+import { Subscription } from 'rxjs';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-header',
@@ -16,25 +19,34 @@ import { AuthService } from '../../auth/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
+  private subscription!: Subscription;
+
   @ViewChild('searchInput') searchInput!: ElementRef;
+  @ViewChild('header', { static: false }) headerElement!: ElementRef;
+
   carSearched = '';
 
   langDropdownOpen = false;
   accDropdownOpen = false;
   userLoggedIn = false;
+  isMobileMenuOpen = false;
   user!: any;
 
   @ViewChild('langDropdown') langDropdown!: ElementRef;
   @ViewChild('accDropdown') accDropdown!: ElementRef;
 
   constructor(
+    private appService: AppService,
     private authService: AuthService,
+    private genericAuthService: GenericAuthService,
     private elementRef: ElementRef, 
     private languageService: LanguageService,
     private router: Router,
     private translate: TranslateService,
     private userService: UserService,
-    ) {}
+    ) {
+      this.subscription = this.appService.clickObs$.subscribe(ev => this.onBodyClickMenu(event));
+    }
 
   ngOnInit(): void {
     // Event for close Dropdowns
@@ -52,6 +64,10 @@ export class HeaderComponent implements OnInit {
 
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   searchCar() {
     // If there is no data, it means that search bar is closed, so search bar gets opened
     if (this.carSearched.trim().length <= 0) {
@@ -66,16 +82,21 @@ export class HeaderComponent implements OnInit {
     const query = this.carSearched;
     this.carSearched = '';
 
+    this.closeMobileMenu();
+
     // Navigates to the view with the search data
     this.router.navigate([`/search/${query}`]);
   }
 
   goTo(link: string): void {
+    this.closeMobileMenu();
     this.router.navigate([link]);
   }
 
   async goToUserProfile() {
     const tokenDecoded = decodeToken();
+    this.closeMobileMenu();
+
     if (tokenDecoded.hasToken && tokenDecoded.userId) {
       const user = await this.userService.getUserData(tokenDecoded.userId);
       const username = user.user.username;
@@ -105,10 +126,27 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  // Closes mobile menu if clicks in body but not in header
+  onBodyClickMenu(event: any): void {
+    if (!this.headerElement.nativeElement.contains(event.target)) {
+        this.isMobileMenuOpen = false;
+    }
+  }
+
   // Changes language
   toggleLanguage(lang: string): void {
     this.translate.use(lang);
     this.languageService.changeLanguage(lang);
+
+    this.closeMobileMenu();
+  }
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  closeMobileMenu() {
+    this.isMobileMenuOpen = false;
   }
 
   async checkUserLoggedIn(): Promise<void> {
@@ -127,6 +165,11 @@ export class HeaderComponent implements OnInit {
   }
 
   logOut() {
+    this.closeMobileMenu();
+
+    this.genericAuthService.login();
+
+
     localStorage.removeItem('cw-token');
     this.authService.setUserLoggedIn(false);
     this.checkUserLoggedIn();

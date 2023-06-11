@@ -4,6 +4,7 @@ import { CustomCarsPageComponent } from './custom-cars-page/custom-cars-page.com
 import { UploadCustomCarPageComponent } from './upload-custom-car-page/upload-custom-car-page.component';
 import { CustomCarDetailedComponent } from './custom-car-detailed/custom-car-detailed.component';
 import { EditCustomCarComponent } from './edit-custom-car/edit-custom-car.component';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
     },
     {
       path: 'upload',
-      component: UploadCustomCarPageComponent
+      component: UploadCustomCarPageComponent,
+      canActivate: [AuthGuard]
     },
     {
       path: 'car/:carId',
@@ -21,7 +23,8 @@ const routes: Routes = [
     },
     {
       path: 'edit/:carId',
-      component: EditCustomCarComponent
+      component: EditCustomCarComponent,
+      canActivate: [AuthGuard]
     },
     {
       path: '**',

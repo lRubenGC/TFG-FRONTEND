@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RecoverPasswordComponent } from './recover-password/recover-password.component';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 
 const routes: Routes = [
@@ -11,7 +12,8 @@ const routes: Routes = [
     },
     {
       path: 'recover',
-      component: RecoverPasswordComponent
+      component: RecoverPasswordComponent,
+      canActivate: [AuthGuard]
     },
     {
       path: '**',
