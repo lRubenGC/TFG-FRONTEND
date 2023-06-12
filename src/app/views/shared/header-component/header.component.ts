@@ -8,6 +8,7 @@ import { decodeToken } from 'src/app/helpers/generics';
 import { UserService } from '../../../services/user.service';
 import { userInterface } from 'src/app/models/user.interface';
 import { AuthService } from '../../auth/auth.service';
+import { GenericAuthService } from 'src/app/services/generic-auth.service';
 import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/services/app.service';
 
@@ -37,6 +38,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     private appService: AppService,
     private authService: AuthService,
+    private genericAuthService: GenericAuthService,
     private elementRef: ElementRef, 
     private languageService: LanguageService,
     private router: Router,
@@ -164,6 +166,9 @@ export class HeaderComponent implements OnInit {
 
   logOut() {
     this.closeMobileMenu();
+
+    this.genericAuthService.login();
+
 
     localStorage.removeItem('cw-token');
     this.authService.setUserLoggedIn(false);

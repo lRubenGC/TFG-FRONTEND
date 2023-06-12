@@ -4,6 +4,7 @@ import { LanguageService } from 'src/app/services/language.service';
 import { AuthService } from '../auth.service';
 import { isValidPassword, isValidEmail, isValidUsername } from 'src/app/helpers/auth';
 import { Router } from '@angular/router';
+import { GenericAuthService } from 'src/app/services/generic-auth.service';
 import { Subscription } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 
@@ -37,6 +38,7 @@ export class LoginPageComponent implements OnInit {
     private languageService: LanguageService,
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private genericAuthService: GenericAuthService,
     private router: Router
   ) {
     this.registerForm = this.formBuilder.group({
@@ -84,6 +86,7 @@ export class LoginPageComponent implements OnInit {
 
             // Dispatch login event
             this.authService.setUserLoggedIn(true);
+            this.genericAuthService.login();
 
             // Redirect
             this.router.navigate(['/']);
