@@ -13,10 +13,12 @@ export class AuthGuard implements CanActivate {
     ) {}
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+    const token = localStorage.getItem('cw-token');
+
     return this.genericAuthService.isAuthenticated()
       .then(
         (loggedIn: boolean) => {
-          if (loggedIn) {
+          if (loggedIn || token) {
             return true;
           } else {
             this.router.navigate(['/auth']);
