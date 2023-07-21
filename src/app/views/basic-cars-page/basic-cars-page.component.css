@@ -1,20 +1,16 @@
 #basic-cars-land-section {
     display: flex;
+    gap: 10em;
     justify-content: center;
     align-items: center;
     background: url('src/assets/images/basic_cars_page/basic_cars_bg.png');
     background-position: center;
     background-size: cover;
     align-items: center;
-    padding: 8em;
-}
-
-#basic-explanation {
-    margin-right: 10em;
+    padding: 6em 2em;
 }
 
 #basic-filter-section {
-    margin-left: 10em;
     width: 20em;
 }
 
@@ -82,6 +78,13 @@ select::-ms-expand {
     align-items: center;
     justify-content: center;
     text-align: center;
+}
+
+@media (max-width: 1166px) {
+    #basic-cars-land-section {
+        flex-direction: column;
+        gap: 0;
+    }
 }
 
 @media (max-width: 768px) {
