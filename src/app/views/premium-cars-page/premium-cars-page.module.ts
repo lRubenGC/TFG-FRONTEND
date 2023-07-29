@@ -7,7 +7,6 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { ComponentsModule } from 'src/app/components/components.module';
 import { PremiumCarsPageComponent } from './premium-cars-page.component';
-import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -21,7 +20,6 @@ import { SharedModule } from '../shared/shared.module';
     HttpClientModule,
     TranslateModule,
     ComponentsModule,
-    SharedModule,
   ]
 })
 export class PremiumCarsPageModule { }

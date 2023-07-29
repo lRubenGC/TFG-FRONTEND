@@ -7,7 +7,7 @@ import { LanguageService } from '../../../services/language.service';
 import { decodeToken } from 'src/app/helpers/generics';
 import { UserService } from '../../../services/user.service';
 import { userInterface } from 'src/app/models/user.interface';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../../../views/auth/auth.service';
 import { GenericAuthService } from 'src/app/services/generic-auth.service';
 import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/services/app.service';

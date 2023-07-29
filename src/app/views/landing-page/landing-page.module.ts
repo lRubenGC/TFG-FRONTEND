@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { LandingCardComponent } from './components/landing-card/landing-card.component';
 import { LandingPageComponent } from './landing-page.component';
-import { SharedModule } from '../shared/shared.module';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 
 
@@ -14,7 +14,7 @@ import { SharedModule } from '../shared/shared.module';
   ],
   imports: [
     CommonModule,
-    SharedModule
+    ComponentsModule
   ]
 })
 export class LandingPageModule { }

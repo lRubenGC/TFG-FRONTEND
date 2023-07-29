@@ -12,7 +12,6 @@
     
     <!-- Img Container -->
     <div class="img-container">
-        <!-- <img loading="lazy" class="banner-image" [src]="car.img" [alt]="car.model_name" /> -->
         <img loading="lazy" class="card-image" [src]="car.card_img" [alt]="car.model_name" />
         <div class="car-card-button-wrapper">
             <button *ngIf="!car.has_car && !car.wants_car && !car.profile_view" (click)="addCar(false)" class="car-card-button add-to-wishlist">{{ 'ADD_CAR_WISHED' | translate }}</button>

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { customCarInterface } from 'src/app/models/cardTypes.interface';
 import { CustomCarsService } from '../custom-cars.service';
 import { UserService } from 'src/app/services/user.service';
-import { CarsService } from 'src/app/components/services/cars.service';
+import { CarsService } from 'src/app/components/car-cards/services/cars.service';
 import { decodeToken } from 'src/app/helpers/generics';
 import { forkJoin } from 'rxjs';
 import { mapAndSortCustomCars } from 'src/app/helpers/map-cars';

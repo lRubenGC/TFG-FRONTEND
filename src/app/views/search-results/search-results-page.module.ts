@@ -7,7 +7,6 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { SearchResultsPageComponent } from './search-results-page.component';
 import { ComponentsModule } from 'src/app/components/components.module';
-import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -21,7 +20,6 @@ import { SharedModule } from '../shared/shared.module';
     HttpClientModule,
     TranslateModule,
     ComponentsModule,
-    SharedModule,
   ]
 })
 export class SearchResultsPageModule { }

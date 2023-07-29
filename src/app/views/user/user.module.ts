@@ -5,7 +5,6 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -19,7 +18,6 @@ import { SharedModule } from '../shared/shared.module';
     FormsModule,
     ReactiveFormsModule,
     ComponentsModule,
-    SharedModule,
     TranslateModule,
   ]
 })

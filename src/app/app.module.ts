@@ -14,11 +14,11 @@ import { BasicCarsPageModule } from './views/basic-cars-page/basic-cars-page.mod
 import { CustomCarsModule } from './views/custom-cars/custom-cars.module';
 import { LandingPageModule } from './views/landing-page/landing-page.module';
 import { PremiumCarsPageModule } from './views/premium-cars-page/premium-cars-page.module';
-import { SharedModule } from './views/shared/shared.module';
 import { UserModule } from './views/user/user.module';
 import { AuthModule } from './views/auth/auth.module';
 import { SearchResultsPageModule } from './views/search-results/search-results-page.module';
 import { AuthGuard } from './guards/auth.guard';
+import { ComponentsModule } from './components/components.module';
 
 
 @NgModule({
@@ -43,12 +43,12 @@ import { AuthGuard } from './guards/auth.guard';
 
     // App Modules
     AuthModule,
+    ComponentsModule,
     BasicCarsPageModule,
     CustomCarsModule,
     LandingPageModule,
     PremiumCarsPageModule,
     SearchResultsPageModule,
-    SharedModule,
     UserModule
   ],
   providers: [

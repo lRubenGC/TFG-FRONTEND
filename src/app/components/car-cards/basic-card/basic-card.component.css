@@ -7,33 +7,6 @@
     margin: 1.2em auto;
 }
 
-.item-car-title {
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    text-shadow: 2px 2px 2px #000;
-
-}
-
-.item-car-title-collected {
-    color: rgb(39, 221, 51);
-}
-
-.item-car-title-wanted {
-    color: var(--dark-primary-200);
-}
-
-.item-car-title h4 {
-    text-align: center;
-}
-
-.item-car-th {
-    width: 1.7rem;
-    margin-bottom: .5rem;
-    margin-right: .3rem;
-}
-
 .banner-image {
     height: 9rem;
     width: 100%;
