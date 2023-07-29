@@ -35,6 +35,13 @@
     }
 }
 
+@media (max-width: 600px) {
+    .image-input-container {
+        width: 90px;
+        height: 90px;
+    }
+}
+
 // .delete-button {
 //     background-color: #dc3545;
 //     color: #fff;

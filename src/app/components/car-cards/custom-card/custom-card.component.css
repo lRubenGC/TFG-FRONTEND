@@ -1,26 +1,14 @@
 .custom-car-item {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    margin: 1.2em auto;
-    transition: 0.3s;
-    border-radius: 10px;
-    overflow: hidden;
+    margin: 0 5px;
 }
 
 .item-car-title {
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
     text-shadow: 2px 2px 2px #000;
 }
 
 .banner-image {
+    width: 350px;
     height: 100%;
-    width: 100%;
     object-fit: cover;
     border-radius: .6rem;
 }
@@ -79,4 +67,33 @@
 
 .car-voted {
     color: var(--dark-primary-200);
+}
+
+@media only screen and (max-width: 600px) {
+    .custom-car-item {
+        width: 160px;
+        height: auto;
+    }
+
+    .banner-image {
+        width: 100%;
+        height: auto;
+    }
+
+    .custom-img-container {
+        height: auto;
+    }
+
+    .img-and-upvotes {
+        flex-direction: column;
+        gap: .2em;
+    }
+
+    .upvote-button {
+        width: 15px;
+    }
+
+    .custom-car-user-creator {
+        text-align: center;
+    }
 }

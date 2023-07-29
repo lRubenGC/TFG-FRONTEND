@@ -102,6 +102,7 @@ input {
 .img-inputs-container {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 2em;
 }
 
@@ -133,7 +134,20 @@ input {
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
+    .custom-cars-container {
+        margin: 80px 20px 0;
+        padding: 10px;
+    }
+
+    .custom-cars-item {
+        width: 90%;
+    }
+
+    .custom-cars-item input {
+        width: 70%;
+    }
+
     .user-config-container {
         padding: 10px 30px;
         margin-bottom: 20px;
@@ -142,5 +156,9 @@ input {
 
     .user-config-item input {
         width: 60%;
+    }
+    
+    .notification {
+        width: 80%;
     }
 }

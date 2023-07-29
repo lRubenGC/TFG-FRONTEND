@@ -74,6 +74,28 @@ h4 {
     font-size: 22px;
 }
 
+@media only screen and (max-width: 600px) {
+    h1 {
+        font-size: 30px;
+    }
+    
+    h2 {
+        font-size: 24px;
+    }
+    
+    h3 {
+        font-size: 20px;
+    }
+    
+    h4 {
+        font-size: 16px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+}
+
 /* Series squares */
 .baja-blazers {
     background: linear-gradient(#C38A31, #E3C405);
