@@ -82,6 +82,6 @@ article:hover img:last-child {
 
 @media (max-width: 600px) {
     article img:last-child {
-        width: 250px;
+        width: 200px;
     }
 }

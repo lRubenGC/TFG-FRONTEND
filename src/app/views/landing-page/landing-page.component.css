@@ -36,7 +36,7 @@ app-msg-card {
 
 @media (max-width: 600px) {
     #landing-welcome {
-        height: 65vh;
+        height: 60vh;
     }
 
     app-msg-card {

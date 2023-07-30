@@ -27,13 +27,11 @@
     </div>
 
     <!-- Car Description -->
-    <p *ngIf="car.search"><span class="car-description">Main Serie</span>: {{ car.main_serie }}</p>
-    <p *ngIf="car.secondary_serie.length > 0"><span class="car-description">Sec. Serie</span>: {{ car.secondary_serie }}</p>
-    <p>
-        <span><span class="car-description">Year</span>: {{ car.year }}</span>
-        <span *ngIf="car.col_serie.length > 0"> / <span class="car-description">Col</span>: {{ car.col_serie }}</span>
-    </p>
-    <p><span class="car-description">Car Id</span>: {{ car.car_id }}</p>
+    <p *ngIf="car.search"><span class="car-description">{{ 'PREMIUM_CARS_MAIN_SERIE' | translate }}</span>: {{ car.main_serie }}</p>
+    <p *ngIf="car.secondary_serie.length > 0"><span class="car-description">{{ 'PREMIUM_CARS_SECONDARY_SERIE' | translate }}</span>: {{ car.secondary_serie }}</p>
+    <p><span class="car-description">{{ 'PREMIUM_CARS_YEAR' | translate }}</span>: {{ car.year }}</p>
+    <p *ngIf="car.col_serie.length > 0"><span class="car-description">{{ 'PREMIUM_CARS_COL' | translate }}</span>: {{ car.col_serie }}</p>
+    <p><span class="car-description">{{ 'CUSTOM_CAR_ID_CAR' | translate }}</span>: {{ car.car_id }}</p>
 
     <!-- Collected Data -->
     <!-- <div *ngIf="car.has_car" class="car-collected-data car-collected-has"></div>

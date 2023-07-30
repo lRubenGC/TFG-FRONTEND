@@ -2,14 +2,21 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     width: 100%;
     height: 100%;
-    margin: 1.2em auto;
+    margin: 1.2em 0;
+    text-align: center;
+}
+
+.img-container {
+    width: 255px;
+    height: 390px;
 }
 
 .card-image {
-    width: 100%;
-    height: 310px;
+    width: 255px;
+    height: 390px;
     object-fit: cover;
     border-radius: .6rem;
 }
@@ -50,13 +57,30 @@ span {
     top: 70%;
 }
 
+@media (max-width: 1166px) {
+    .img-container {
+        width: 185px;
+        height: 290px;
+    }
+    
+    .card-image {
+        width: 185px;
+        height: 290px;
+    }
+}
+
 @media (max-width: 600px) {
+    .img-container {
+        width: 145px;
+        height: 250px;
+    }
+    
+    .card-image {
+        width: 145px;
+        height: 250px;
+    }
+    
     .car-card-button {
         top: 80%;
     }
-
-    .card-image {
-        height: 260px;
-    }
-
 }

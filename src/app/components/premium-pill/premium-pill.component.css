@@ -27,11 +27,24 @@
     width: 100%;
 }
 
+@media (max-width: 900px) {
+    .serie-pill {
+        padding: 5px;
+        height: 80px;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
+    .serie-pill img {
+        width: 110px;
+    }
+}
+
 @media (max-width: 600px) {
     .serie-pill {
         padding: 5px;
         width: 80vw;
-        height: 60px;
+        height: 80px;
         margin-right: 0;
         margin-left: 0;
     }

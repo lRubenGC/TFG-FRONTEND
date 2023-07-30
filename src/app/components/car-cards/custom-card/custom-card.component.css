@@ -1,4 +1,6 @@
 .custom-car-item {
+    width: 100%;
+    height: 100%;
     margin: 0 5px;
 }
 
@@ -6,9 +8,22 @@
     text-shadow: 2px 2px 2px #000;
 }
 
-.banner-image {
+.img-and-upvotes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 350px;
-    height: 100%;
+}
+
+.custom-img-container {
+    width: 100%;
+    height: 180px;
+    cursor: pointer;
+}
+
+.banner-image {
+    width: 100%;
+    height: 180px;
     object-fit: cover;
     border-radius: .6rem;
 }
@@ -19,19 +34,6 @@
 
 .small-title {
     font-size: 1rem;
-}
-
-.img-and-upvotes {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.custom-img-container {
-    height: 220px;
-    overflow: hidden;
-    flex-grow: 1;
-    cursor: pointer;
 }
 
 .upvotes {
@@ -69,31 +71,156 @@
     color: var(--dark-primary-200);
 }
 
-@media only screen and (max-width: 600px) {
-    .custom-car-item {
-        width: 160px;
-        height: auto;
-    }
-
-    .banner-image {
-        width: 100%;
-        height: auto;
-    }
-
-    .custom-img-container {
-        height: auto;
-    }
-
+@media (max-width: 1270px) {
     .img-and-upvotes {
-        flex-direction: column;
-        gap: .2em;
+        width: 300px;
     }
-
-    .upvote-button {
-        width: 15px;
+    
+    .custom-img-container {
+        height: 160px;
     }
+    
+    .banner-image {
+        height: 160px;
+    }
+}
 
-    .custom-car-user-creator {
-        text-align: center;
+@media (max-width: 1000px) {
+    .img-and-upvotes {
+        width: 260px;
+    }
+    
+    .custom-img-container {
+        height: 140px;
+    }
+    
+    .banner-image {
+        height: 140px;
+    }
+}
+
+@media (max-width: 900px) {
+    .img-and-upvotes {
+        width: 340px;
+    }
+    
+    .custom-img-container {
+        height: 160px;
+    }
+    
+    .banner-image {
+        height: 160px;
+    }
+}
+
+@media (max-width: 770px) {
+    .img-and-upvotes {
+        width: 300px;
+    }
+    
+    .custom-img-container {
+        height: 140px;
+    }
+    
+    .banner-image {
+        height: 140px;
+    }
+}
+
+@media (max-width: 670px) {
+    .img-and-upvotes {
+        width: 280px;
+    }
+    
+    .custom-img-container {
+        height: 130px;
+    }
+    
+    .banner-image {
+        height: 130px;
+    }
+}
+
+@media (max-width: 590px) {
+    .img-and-upvotes {
+        width: 260px;
+    }
+    
+    .custom-img-container {
+        height: 110px;
+    }
+    
+    .banner-image {
+        height: 110px;
+    }
+}
+
+@media (max-width: 560px) {
+    .img-and-upvotes {
+        width: 230px;
+    }
+    
+    .custom-img-container {
+        height: 100px;
+    }
+    
+    .banner-image {
+        height: 100px;
+    }
+}
+
+@media (max-width: 495px) {
+    .img-and-upvotes {
+        width: 200px;
+    }
+    
+    .custom-img-container {
+        height: 90px;
+    }
+    
+    .banner-image {
+        height: 90px;
+    }
+}
+
+@media (max-width: 430px) {
+    .img-and-upvotes {
+        width: 180px;
+    }
+    
+    .custom-img-container {
+        height: 80px;
+    }
+    
+    .banner-image {
+        height: 80px;
+    }
+}
+
+@media (max-width: 385px) {
+    .img-and-upvotes {
+        width: 160px;
+    }
+    
+    .custom-img-container {
+        height: 70px;
+    }
+    
+    .banner-image {
+        height: 70px;
+    }
+}
+
+@media (max-width: 359px) {
+    .img-and-upvotes {
+        width: 150px;
+    }
+    
+    .custom-img-container {
+        height: 60px;
+    }
+    
+    .banner-image {
+        height: 60px;
     }
 }
