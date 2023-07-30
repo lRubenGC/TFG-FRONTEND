@@ -11,17 +11,22 @@
 }
 
 #basic-filter-section {
+    display: flex;
+    flex-wrap: wrap;
     width: 20em;
 }
 
 .basic-filter-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin-top: 1em;
     min-width: 20rem;
 }
 
 .basic-filter-item h3 {
     text-shadow: 4px 4px 4px #000;
-    font-size: 1.8em;
     margin-left: .2em;
 }
 
@@ -71,27 +76,32 @@ select::-ms-expand {
 }
 
 #basic-cars-list {
-    padding: 2rem 6rem;
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: repeat(auto-fill,minmax(16rem, 1fr));
-    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    text-align: center;
+    gap: 3em;
+    padding: 0 10px;
 }
 
 @media (max-width: 1166px) {
     #basic-cars-land-section {
         flex-direction: column;
         gap: 0;
+        padding: 4em 2em 2em;
     }
 }
 
 @media (max-width: 768px) {
     #basic-cars-list {
-        padding: 1em;
-        display: grid;
-        gap: 1rem;
-        grid-template-columns: repeat(auto-fill,minmax(8rem, 1fr));
+        gap: 1em;
+    }
+
+    .car-select {
+        width: 16em;
+        height: 2.5em;
+    }
+
+    .car-select::after {
+        font-size: 14px;
     }
 }

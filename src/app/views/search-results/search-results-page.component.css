@@ -9,13 +9,11 @@
 }
 
 #basic-cars-search-list {
-    padding: 2rem 6rem;
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: repeat(auto-fill,minmax(16rem, 1fr));
-    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    text-align: center;
+    gap: 1em;
+    padding: 0 10px;
 }
 
 #premium-cars-search-list {

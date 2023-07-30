@@ -13,9 +13,15 @@
     </div>
     
     <!-- Img Container -->
-    <div class="img-container">
-        <img loading="lazy" class="banner-image" [src]="car.img" [alt]="car.model_name"/>
-        <div class="car-card-button-wrapper">
+    <div class="img-container" (click)="onCarClick()">
+        <img
+            loading="lazy" 
+            class="banner-image"
+            [src]="car.img"
+            [alt]="car.model_name"
+            [ngClass]="carClicked ? 'car-img-opacity' : ''"
+        />
+        <div class="car-card-button-wrapper" *ngIf="carClicked">
             <button *ngIf="!car.has_car && !car.wants_car && !car.profile_view" (click)="addCar(false)" class="car-card-button add-to-wishlist">{{ 'ADD_CAR_WISHED' | translate }}</button>
             <button *ngIf="!car.has_car && !car.wants_car && !car.profile_view" (click)="addCar(true)" class="car-card-button add-to-collection">{{ 'ADD_CAR_COLLECTION' | translate }}</button>
             <button *ngIf="(car.has_car || car.wants_car) && car.user_profile" (click)="removeCar()" class="car-card-button remove-from-x">{{ 'REMOVE_CAR_X' | translate }}</button>
@@ -23,10 +29,17 @@
     </div>
 
     <!-- Car Description -->
-    <p class="car-item-subtitle">{{ car.col }} - {{ car.version }} - {{ car.car_id }}</p>
-    <div class="car-serie-wrapper">
-        <div class="serie-square" [ngClass]="car.serie_class"></div>
-        <p>{{ car.series[0] }} - {{ car.col_serie }}</p>
+    <div class="car-item-subtitle">
+        <p>#{{ car.col }}</p>
+        <p>{{ car.version }}</p>
+        <p>{{ car.car_id }}</p>
+    </div>
+    <div class="car-series-col-serie">
+        <div class="square-series-wrapper">
+            <div class="serie-square" [ngClass]="car.serie_class"></div>
+            <p>{{ car.series[0] }}</p>
+        </div>
+        <p>{{ car.col_serie }}</p>
     </div>
     <p *ngIf="car.search">{{ car.year }}</p>
 

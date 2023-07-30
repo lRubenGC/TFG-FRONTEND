@@ -10,7 +10,6 @@
 
 app-msg-card {
     margin: 80px 40px 0;
-
 }
 
 #landing-cards {
@@ -24,6 +23,10 @@ app-msg-card {
 }
 
 @media (max-width: 900px) {
+    #landing-welcome {
+        height: 35vh;
+    }
+
     #landing-cards {
         flex-direction: column;
         gap: 2em;
@@ -33,7 +36,11 @@ app-msg-card {
 
 @media (max-width: 600px) {
     #landing-welcome {
-        height: 80vh;
+        height: 65vh;
+    }
+
+    app-msg-card {
+        margin-top: 60px;
     }
 
     #landing-cards {
