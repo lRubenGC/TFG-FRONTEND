@@ -15,7 +15,6 @@
 
 .car-card-button {
     position: absolute;
-    top: 70%;
     transform: translateY(-50%);
     border-radius: 5px;
     font-weight: 600;
@@ -93,10 +92,6 @@
 } */
 
 @media (max-width: 600px) {
-    .car-card-button {
-        top: 60%;
-    }
-
     .add-to-wishlist {
         left: .3rem;
     }

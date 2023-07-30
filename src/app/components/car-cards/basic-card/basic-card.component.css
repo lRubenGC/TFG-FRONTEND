@@ -62,6 +62,10 @@
     align-items: center;
 }
 
+.car-card-button {
+    top: 70%;
+}
+
 @media (max-width: 600px) {
     .img-container {
         height: 5rem;
@@ -76,5 +80,9 @@
     .car-series-col-serie {
         flex-direction: column;
         gap: 0;
+    }
+
+    .car-card-button {
+        top: 20%;
     }
 }

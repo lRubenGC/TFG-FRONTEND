@@ -13,6 +13,8 @@ export class PremiumCardComponent implements OnInit {
   @Output() errorEvent = new EventEmitter<string>();
   @Input() car!: premiumCarShowedInterface;
 
+  carClicked: boolean = false;
+
   constructor(
     private carsService: CarsService,
   ) { }
@@ -80,6 +82,10 @@ export class PremiumCardComponent implements OnInit {
         }
       );
     }
+  }
+
+  onCarClick() {
+    this.carClicked = !this.carClicked;
   }
 
 }

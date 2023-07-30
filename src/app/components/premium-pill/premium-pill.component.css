@@ -26,3 +26,17 @@
     text-align: center;
     width: 100%;
 }
+
+@media (max-width: 600px) {
+    .serie-pill {
+        padding: 5px;
+        width: 80vw;
+        height: 60px;
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    .serie-pill img {
+        width: 100px;
+    }
+}

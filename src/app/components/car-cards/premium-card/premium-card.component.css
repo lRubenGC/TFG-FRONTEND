@@ -45,3 +45,18 @@
 span {
     font-size: 1em;
 }
+
+.car-card-button {
+    top: 70%;
+}
+
+@media (max-width: 600px) {
+    .car-card-button {
+        top: 80%;
+    }
+
+    .card-image {
+        height: 260px;
+    }
+
+}
