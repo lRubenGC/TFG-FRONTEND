@@ -47,10 +47,10 @@
     <div *ngIf="searchType === 'users'">
 
         <!-- Users List -->
-        <section *ngIf="users.length > 0" class="search-results-car-list">
+        <section *ngIf="users.length > 0" class="search-results-user-list">
             <h1>{{ 'SEARCH_USERS' | translate }}</h1>
             <hr>
-            <div id="basic-cars-search-list">
+            <div id="users-search-list">
                 <div *ngFor="let user of users">
                     <app-user-card [user]="user"></app-user-card>
                 </div>
@@ -58,7 +58,7 @@
 
         </section>
 
-        <section *ngIf="users.length === 0" class="search-results-car-list">
+        <section *ngIf="users.length === 0" class="search-results-user-list">
             <h1>{{ 'SEARCH_NO_USERS' | translate }} {{ query }}</h1>
             <hr>
         </section>

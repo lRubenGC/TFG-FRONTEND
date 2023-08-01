@@ -90,12 +90,18 @@ select::-ms-expand {
     color: var(--dark-primary-100);
 }
 
-@media (max-width: 1270px) {
+@media (max-width: 1650px) {
     #custom-cars-list {
-        grid-template-columns: 30% 30% 30%;
+        grid-template-columns: 22% 22% 22% 22%;
         margin-left: 10px;
         margin-right: 10px;
         gap: 2em;
+    }
+}
+
+@media (max-width: 1270px) {
+    #custom-cars-list {
+        grid-template-columns: 30% 30% 30%;
     }
 }
 

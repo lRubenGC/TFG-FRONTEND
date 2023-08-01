@@ -14,7 +14,7 @@
     <ul>
 
         <!-- Search Bar -->
-        <li class="header-item">
+        <li class="header-item search-container">
             <div class="search-box">
                 <button (click)="searchCar()" class="btn-search"><i class="fas fa-search"></i></button>
                 <input
@@ -60,3 +60,5 @@
 
     </ul>
 </header>
+
+<div id="overlay" [ngClass]="{'show-overlay': isMobileMenuOpen}"></div>

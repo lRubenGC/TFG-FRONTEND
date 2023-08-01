@@ -12,7 +12,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 350px;
+    width: 100%;
 }
 
 .custom-img-container {
@@ -71,156 +71,34 @@
     color: var(--dark-primary-200);
 }
 
-@media (max-width: 1270px) {
+@media (max-width: 1650px) {
     .img-and-upvotes {
-        width: 300px;
+        width: 100%;
     }
     
     .custom-img-container {
-        height: 160px;
+        height: 100%;
     }
     
     .banner-image {
-        height: 160px;
+        height: 100%;
     }
 }
 
-@media (max-width: 1000px) {
-    .img-and-upvotes {
-        width: 260px;
-    }
-    
-    .custom-img-container {
-        height: 140px;
-    }
-    
-    .banner-image {
-        height: 140px;
+@media (max-width: 1100px) {
+    .upvote-button {
+        width: 16px;
     }
 }
 
 @media (max-width: 900px) {
-    .img-and-upvotes {
-        width: 340px;
-    }
-    
-    .custom-img-container {
-        height: 160px;
-    }
-    
-    .banner-image {
-        height: 160px;
+    .upvote-button {
+        width: 15px;
     }
 }
 
-@media (max-width: 770px) {
-    .img-and-upvotes {
-        width: 300px;
-    }
-    
-    .custom-img-container {
-        height: 140px;
-    }
-    
-    .banner-image {
-        height: 140px;
-    }
-}
-
-@media (max-width: 670px) {
-    .img-and-upvotes {
-        width: 280px;
-    }
-    
-    .custom-img-container {
-        height: 130px;
-    }
-    
-    .banner-image {
-        height: 130px;
-    }
-}
-
-@media (max-width: 590px) {
-    .img-and-upvotes {
-        width: 260px;
-    }
-    
-    .custom-img-container {
-        height: 110px;
-    }
-    
-    .banner-image {
-        height: 110px;
-    }
-}
-
-@media (max-width: 560px) {
-    .img-and-upvotes {
-        width: 230px;
-    }
-    
-    .custom-img-container {
-        height: 100px;
-    }
-    
-    .banner-image {
-        height: 100px;
-    }
-}
-
-@media (max-width: 495px) {
-    .img-and-upvotes {
-        width: 200px;
-    }
-    
-    .custom-img-container {
-        height: 90px;
-    }
-    
-    .banner-image {
-        height: 90px;
-    }
-}
-
-@media (max-width: 430px) {
-    .img-and-upvotes {
-        width: 180px;
-    }
-    
-    .custom-img-container {
-        height: 80px;
-    }
-    
-    .banner-image {
-        height: 80px;
-    }
-}
-
-@media (max-width: 385px) {
-    .img-and-upvotes {
-        width: 160px;
-    }
-    
-    .custom-img-container {
-        height: 70px;
-    }
-    
-    .banner-image {
-        height: 70px;
-    }
-}
-
-@media (max-width: 359px) {
-    .img-and-upvotes {
-        width: 150px;
-    }
-    
-    .custom-img-container {
-        height: 60px;
-    }
-    
-    .banner-image {
-        height: 60px;
+@media (max-width: 600px) {
+    .upvote-button {
+        width: 13px;
     }
 }
