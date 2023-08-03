@@ -118,6 +118,11 @@
     padding: 5px 15px;
 }
 
+.car-menu-list__group {
+    display: flex;
+    gap: 1em;
+}
+
 .car-menu-item {
     padding: 5px;
     font-size: 1em;
@@ -166,7 +171,6 @@
 
 .basic-filter-item h3 {
     text-shadow: 4px 4px 4px #000;
-    font-size: 1.8em;
     margin-left: .2em;
 }
 
@@ -219,6 +223,19 @@ select:disabled {
     background-color: #000;
 }
 
+@media (max-width: 850px) {
+    #user-filter-basic-section, #user-filter-premium-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+    }
+
+    .basic-filter-item {
+        width: 18em;
+        min-width: 18em;
+    }
+}
+
 @media (max-width: 600px) {
     #user-profile-land-section {
         flex-direction: column;
@@ -237,4 +254,9 @@ select:disabled {
         justify-content: center;
         align-items: center;
     }
-  }
+
+    .car-menu-list__group {
+        flex-direction: column;
+        align-items: center;
+    }
+}
