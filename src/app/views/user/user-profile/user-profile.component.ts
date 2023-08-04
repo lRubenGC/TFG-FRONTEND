@@ -11,7 +11,7 @@ import { CustomCarsService } from '../../custom-cars/custom-cars.service';
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  styleUrls: ['./user-profile.component.css', '../../../styles/cars-list.css']
 })
 export class UserProfileComponent implements OnInit {
 

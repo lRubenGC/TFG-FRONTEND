@@ -10,7 +10,7 @@ import { decodeToken } from 'src/app/helpers/generics';
 @Component({
   selector: 'app-basic-cars-page',
   templateUrl: './basic-cars-page.component.html',
-  styleUrls: ['./basic-cars-page.component.css']
+  styleUrls: ['./basic-cars-page.component.css', '../../styles/cars-list.css']
 })
 export class BasicCarsPageComponent implements OnInit {
 

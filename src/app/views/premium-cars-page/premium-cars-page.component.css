@@ -79,14 +79,6 @@ select::-ms-expand {
     margin-bottom: 5px;
 }
 
-#premium-cars-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(16rem, 1fr));
-    justify-content: center;
-    gap: 3em;
-    margin: 0 20px;
-}
-
 #premium-cars-selector {
     margin: 50px auto;
     display: flex;
@@ -118,11 +110,6 @@ select::-ms-expand {
 }
 
 @media (max-width: 1166px) {
-    #premium-cars-list {
-        grid-template-columns: 25% 25% 25% 25%;
-        gap: 1em;
-    }
-
     #premium-cars-land-section {
         flex-direction: column;
         gap: 0;
@@ -133,17 +120,7 @@ select::-ms-expand {
     }
 }
 
-@media (max-width: 915px) {
-    #premium-cars-list {
-        grid-template-columns: 33% 33% 33%;
-    }
-}
-
 @media (max-width: 620px) {
-    #premium-cars-list {
-        grid-template-columns: 50% 50%;
-    }
-
     #premium-cars-land-section {
         padding-top: 4em;
         padding-bottom: 2em;

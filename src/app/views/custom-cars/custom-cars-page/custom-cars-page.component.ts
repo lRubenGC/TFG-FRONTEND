@@ -10,7 +10,7 @@ import { mapAndSortCustomCars } from '../../../helpers/map-cars';
 @Component({
   selector: 'app-custom-cars-page',
   templateUrl: './custom-cars-page.component.html',
-  styleUrls: ['./custom-cars-page.component.css']
+  styleUrls: ['./custom-cars-page.component.css', '../../../styles/cars-list.css']
 })
 export class CustomCarsPageComponent implements OnInit {
 

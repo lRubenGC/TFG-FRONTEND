@@ -75,32 +75,15 @@ select::-ms-expand {
     color: var(--dark-primary-100);
 }
 
-#basic-cars-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(16rem, 1fr));
-    justify-content: center;
-    gap: 3em;
-    margin: 0 20px;
-}
-
 @media (max-width: 1166px) {
     #basic-cars-land-section {
         flex-direction: column;
         gap: 0;
         padding: 4em 2em 2em;
     }
-
-    #basic-cars-list {
-        grid-template-columns: 33% 33% 33%;
-        gap: 0;
-    }
 }
 
 @media (max-width: 600px) {
-    #basic-cars-list {
-        grid-template-columns: 50% 50%;
-    }
-
     .car-select {
         width: 16em;
         height: 2.5em;

@@ -1,12 +1,3 @@
-#custom-cars-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(21rem, 1fr));
-    justify-content: center;
-    align-items: center;
-    gap: 3em;
-    margin: 40px 80px;
-}
-
 #custom-cars-header {
     display: flex;
     gap: 2rem;
@@ -90,27 +81,7 @@ select::-ms-expand {
     color: var(--dark-primary-100);
 }
 
-@media (max-width: 1650px) {
-    #custom-cars-list {
-        grid-template-columns: 22% 22% 22% 22%;
-        margin-left: 10px;
-        margin-right: 10px;
-        gap: 2em;
-    }
-}
-
-@media (max-width: 1270px) {
-    #custom-cars-list {
-        grid-template-columns: 30% 30% 30%;
-    }
-}
-
 @media (max-width: 900px) {
-    #custom-cars-list {
-        grid-template-columns: 45% 45%;
-        gap: 1em;
-    }
-
     #custom-filter-section {
         margin-left: 5em;
     }
@@ -125,11 +96,6 @@ select::-ms-expand {
     #custom-cars-header {
         flex-direction: column;
         align-items: center;
-    }
-
-    #custom-cars-list {
-        margin-left: 5px;
-        margin-right: 5px;
     }
 
     #custom-filter-section {

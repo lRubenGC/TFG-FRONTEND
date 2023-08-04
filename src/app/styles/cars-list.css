@@ -1,0 +1,77 @@
+.basic-cars-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(16rem, 1fr));
+    justify-content: center;
+    gap: 3em;
+    margin: 0 20px;
+}
+
+.premium-cars-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(16rem, 1fr));
+    justify-content: center;
+    gap: 3em;
+    margin: 0 20px;
+}
+
+.custom-cars-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(21rem, 1fr));
+    justify-content: center;
+    align-items: center;
+    gap: 3em;
+    margin: 40px 80px;
+}
+
+@media (max-width: 1650px) {
+    .custom-cars-list {
+        grid-template-columns: 22% 22% 22% 22%;
+        margin-left: 10px;
+        margin-right: 10px;
+        gap: 2em;
+    }
+}
+
+@media (max-width: 1270px) {
+    .custom-cars-list {
+        grid-template-columns: 30% 30% 30%;
+    }
+}
+
+@media (max-width: 1166px) {
+    .basic-cars-list {
+        grid-template-columns: 33% 33% 33%;
+        gap: 0;
+    }
+
+    .premium-cars-list {
+        grid-template-columns: 24% 24% 24% 24%;
+        gap: 1em;
+    }
+}
+
+@media (max-width: 930px) {
+    .premium-cars-list {
+        grid-template-columns: 33% 33% 33%;
+    }
+
+    .custom-cars-list {
+        grid-template-columns: 45% 45%;
+        gap: 1em;
+    }
+}
+
+@media (max-width: 620px) {
+    .basic-cars-list {
+        grid-template-columns: 50% 50%;
+    }
+
+    .premium-cars-list {
+        grid-template-columns: 50% 50%;
+    }
+
+    .custom-cars-list {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+}

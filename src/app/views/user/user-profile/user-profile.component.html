@@ -139,35 +139,35 @@
         <section id="user-cars-list">
 
             <!-- Basic Cars Owned-->
-            <div *ngIf="carsType === 'basic' && collectedType === 'owned'" class="user-basic-cars-list">
+            <div *ngIf="carsType === 'basic' && collectedType === 'owned'" class="basic-cars-list">
                 <div *ngFor="let car of basicCarsOwnedShowed">
                     <app-basic-card (errorEvent)="enableErrorMsg($event)" [car]="car" (deleteCar)="onDeleteCar($event, 'basic owned')"></app-basic-card>
                 </div>
             </div>
 
             <!-- Basic Cars Wished-->
-            <div *ngIf="carsType === 'basic' && collectedType === 'wished'" class="user-basic-cars-list">
+            <div *ngIf="carsType === 'basic' && collectedType === 'wished'" class="basic-cars-list">
                 <div *ngFor="let car of basicCarsWishedShowed">
                     <app-basic-card (errorEvent)="enableErrorMsg($event)" [car]="car" (deleteCar)="onDeleteCar($event, 'basic wished')"></app-basic-card>
                 </div>
             </div>
 
             <!-- Premium Cars Owned-->
-            <div *ngIf="carsType === 'premium' && collectedType === 'owned'" class="user-premium-cars-list">
+            <div *ngIf="carsType === 'premium' && collectedType === 'owned'" class="premium-cars-list">
                 <div *ngFor="let car of premiumCarsOwnedShowed">
                     <app-premium-card (errorEvent)="enableErrorMsg($event)" [car]="car" (deleteCar)="onDeleteCar($event, 'premium owned')"></app-premium-card>
                 </div>
             </div>
 
             <!-- Premium Cars Wished-->
-            <div *ngIf="carsType === 'premium' && collectedType === 'wished'" class="user-premium-cars-list">
+            <div *ngIf="carsType === 'premium' && collectedType === 'wished'" class="premium-cars-list">
                 <div *ngFor="let car of premiumCarsWishedShowed">
                     <app-premium-card (errorEvent)="enableErrorMsg($event)" [car]="car" (deleteCar)="onDeleteCar($event, 'premium wished')"></app-premium-card>
                 </div>
             </div>
 
             <!-- Custom Cars Owned-->
-            <div *ngIf="carsType === 'custom'" class="user-custom-cars-list">
+            <div *ngIf="carsType === 'custom'" class="custom-cars-list">
                 <div *ngFor="let car of customCarsOwned">
                     <app-custom-card (errorEvent)="enableErrorMsg($event)" [userProfile]="true" [car]="car"></app-custom-card>
                 </div>

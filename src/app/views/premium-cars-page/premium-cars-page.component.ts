@@ -12,7 +12,7 @@ import { premiumCarInterface } from 'src/app/models/cardTypes.interface';
 @Component({
   selector: 'app-premium-cars-page',
   templateUrl: './premium-cars-page.component.html',
-  styleUrls: ['./premium-cars-page.component.css']
+  styleUrls: ['./premium-cars-page.component.css', '../../styles/cars-list.css']
 })
 export class PremiumCarsPageComponent implements OnInit {
 

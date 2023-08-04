@@ -43,3 +43,13 @@ app-msg-card {
         width: 90%;
     }
 }
+
+@media (max-width: 450px) {
+    app-msg-card {
+        margin: 60px 20px 40px;
+    }
+
+    #landing-cards {
+        width: 95%;
+    }
+}

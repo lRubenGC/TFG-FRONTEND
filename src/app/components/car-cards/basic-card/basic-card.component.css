@@ -98,3 +98,15 @@
         top: 60%;
     }
 }
+
+@media (max-width: 360px) {
+    .img-container {
+        height: 4rem;
+        width: 130px;
+    }
+
+    .banner-image {
+        height: 4rem;
+        width: 130px;
+    }
+}

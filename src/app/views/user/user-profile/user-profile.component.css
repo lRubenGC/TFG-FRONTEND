@@ -223,6 +223,12 @@ select:disabled {
     background-color: #000;
 }
 
+@media (max-width: 1200px) {
+    #user-profile-body {
+        width: 100vw;
+    }
+}
+
 @media (max-width: 850px) {
     #user-filter-basic-section, #user-filter-premium-section {
         flex-direction: column;

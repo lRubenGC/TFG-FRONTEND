@@ -50,6 +50,10 @@
     }
 
     .serie-pill img {
+        margin: 0 10px;
+    }
+
+    .serie-pill img {
         width: 100px;
     }
 }
