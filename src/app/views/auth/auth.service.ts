@@ -9,13 +9,12 @@ import { loginInterface, registerInterface } from 'src/app/models/auth.interface
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8000/api';
   private userLoggedIn = new Subject<boolean>();
 
   constructor(private http: HttpClient) {}
 
   login(body: loginInterface): Observable<any> {
-    return this.http.post(`${this.apiUrl}/auth/login`, {
+    return this.http.post(`/auth/login`, {
       email: body.email,
       password: body.password,
     });
@@ -30,7 +29,7 @@ export class AuthService {
   }
 
   register(body: registerInterface): Observable<any> {
-    return this.http.post(`${this.apiUrl}/users`, {
+    return this.http.post(`/users`, {
       username: body.username,
       email: body.email,
       password: body.password,

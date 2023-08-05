@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CarsService {
-  private apiUrl = 'http://localhost:8000/api';
 
   constructor(private http: HttpClient) {}
 
@@ -17,7 +16,7 @@ export class CarsService {
       'r-token': token!
     });
 
-    return this.http.post(`${this.apiUrl}/user-basic-cars/${id_user}`, {
+    return this.http.post(`/user-basic-cars/${id_user}`, {
       BasicCarId: id_car,
       hasCar: carBody.hasCar,
       wantsCar: carBody.wantsCar
@@ -38,7 +37,7 @@ export class CarsService {
       }
     }
 
-    return this.http.delete(`${this.apiUrl}/user-basic-cars/${id_user}`, options);
+    return this.http.delete(`/user-basic-cars/${id_user}`, options);
   }
 
   addPremiumCar(id_car: number, id_user: number, carBody: any): Observable<any> {
@@ -48,7 +47,7 @@ export class CarsService {
       'r-token': token!
     });
 
-    return this.http.post(`${this.apiUrl}/user-premium-cars/${id_user}`, {
+    return this.http.post(`/user-premium-cars/${id_user}`, {
       PremiumCarId: id_car,
       hasCar: carBody.hasCar,
       wantsCar: carBody.wantsCar
@@ -69,7 +68,7 @@ export class CarsService {
       }
     }
 
-    return this.http.delete(`${this.apiUrl}/user-premium-cars/${id_user}`, options);
+    return this.http.delete(`/user-premium-cars/${id_user}`, options);
   }
 
   voteCustomCar(id_car: number, id_user: number): Observable<any> {
@@ -79,7 +78,7 @@ export class CarsService {
       'r-token': token!
     });
 
-    return this.http.post(`${this.apiUrl}/custom-cars/vote/${id_user}`, {
+    return this.http.post(`/custom-cars/vote/${id_user}`, {
       customCarId: id_car
     }, { headers });
   }
@@ -98,11 +97,11 @@ export class CarsService {
       }
     }
 
-    return this.http.delete(`${this.apiUrl}/custom-cars/vote/${id_user}`, options);
+    return this.http.delete(`/custom-cars/vote/${id_user}`, options);
   }
 
   getUserVotes(userId: number): Observable<number[]> {
-    return this.http.get<number[]>(`${this.apiUrl}/custom-cars/user-votes/${userId}`);
+    return this.http.get<number[]>(`/custom-cars/user-votes/${userId}`);
   }
   
 }

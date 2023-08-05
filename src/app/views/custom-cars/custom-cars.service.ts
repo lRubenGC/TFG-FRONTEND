@@ -8,20 +8,18 @@ import { customCarUpdateRequest } from 'src/app/models/cardTypes.interface';
 })
 export class CustomCarsService {
 
-  private apiUrl = 'http://localhost:8000/api';
-
   constructor(private http: HttpClient) { }
   
 
   getCustomCars(userCreator?: number): Observable<any> {
     if (!userCreator) {
-      return this.http.get(`${this.apiUrl}/custom-cars`);
+      return this.http.get(`/custom-cars`);
     }
-    return this.http.get(`${this.apiUrl}/custom-cars?userCreator=${userCreator}`);
+    return this.http.get(`/custom-cars?userCreator=${userCreator}`);
   }
 
   getCarById(carId: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/custom-cars/${carId}`);
+    return this.http.get(`/custom-cars/${carId}`);
   }
 
   uploadCustomCar(id_user: number, carBody: any): Observable<any> {
@@ -31,7 +29,7 @@ export class CustomCarsService {
       'r-token': token!
     });
 
-    return this.http.post(`${this.apiUrl}/custom-cars/${id_user}`, {
+    return this.http.post(`/custom-cars/${id_user}`, {
       car_id: carBody.car_id,
       model_name: carBody.model_name,
       year: carBody.year,
@@ -62,7 +60,7 @@ export class CustomCarsService {
       requestBody.brand = userParams.brand;
     }
 
-    return this.http.put(`${this.apiUrl}/custom-cars/update/${id_user}/${id_car}`, requestBody, { headers });
+    return this.http.put(`/custom-cars/update/${id_user}/${id_car}`, requestBody, { headers });
   }
 
   uploadImg(id_user: number, id_car: number, file: File): Observable<any> {
@@ -72,14 +70,14 @@ export class CustomCarsService {
     
     formData.append('file', file);
     
-    return this.http.post(`${this.apiUrl}/custom-cars/upload/${id_user}/${id_car}`, formData, { headers });
+    return this.http.post(`/custom-cars/upload/${id_user}/${id_car}`, formData, { headers });
   }
 
   deleteImg(id_user: number, id_car: number, id_img: string): Observable<any> {
     const token = localStorage.getItem('cw-token');
     const headers = new HttpHeaders({ 'r-token': token! });
         
-    return this.http.post(`${this.apiUrl}/custom-cars/delete/${id_user}/${id_car}`, {
+    return this.http.post(`/custom-cars/delete/${id_user}/${id_car}`, {
       imgId: id_img
     }, { headers });
   }

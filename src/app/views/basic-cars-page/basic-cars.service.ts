@@ -7,21 +7,19 @@ import { Observable } from 'rxjs';
 })
 export class BasicCarsService {
 
-  private apiUrl = 'http://localhost:8000/api';
-
   constructor(private http: HttpClient) { }
   
 
   getCarsByYear(year: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/basic-cars/?year=${year}`);
+    return this.http.get(`/basic-cars/?year=${year}`);
   }
 
   getAvailableSeries(year: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/available-series?main=${year}`);
+    return this.http.get(`/available-series?main=${year}`);
   }
 
   getUserCars(idUser: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/user-basic-cars/${idUser}`);
+    return this.http.get(`/user-basic-cars/${idUser}`);
   }
 
 }

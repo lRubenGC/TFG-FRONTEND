@@ -7,17 +7,15 @@ import { Observable } from 'rxjs';
 })
 export class SearchResultsService {
 
-  private apiUrl = 'http://localhost:8000/api';
-
   constructor(private http: HttpClient) { }
   
 
   getCars(query: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/search/cars/${query}`);
+    return this.http.get(`/search/cars/${query}`);
   }
 
   getUsers(query: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/search/users/${query}`);
+    return this.http.get(`/search/users/${query}`);
   }
 
 }
