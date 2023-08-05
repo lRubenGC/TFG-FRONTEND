@@ -13,6 +13,10 @@ const routes: Routes = [
     loadChildren: () => import('./views/auth/auth-routing.module').then(m => m.AuthRoutingModule)
   },
   { 
+    path: 'about',
+    loadChildren: () => import('./views/about-cw/about-cw-routing.module').then(m => m.AboutCWRoutingModule)
+  },
+  { 
     path: 'basic-cars',
     loadChildren: () => import('./views/basic-cars-page/basic-cars-routing.module').then(m => m.BasicCarsRoutingModule)
   },

@@ -107,5 +107,12 @@
     "EDIT_CUSTOM_CAR_IMAGE1": "Image 1",
     "EDIT_CUSTOM_CAR_IMAGE2": "Image 2",
     "EDIT_CUSTOM_CAR_IMAGE3": "Image 3",
-    "EDIT_CUSTOM_CAR_IMAGE4": "Image 4"
+    "EDIT_CUSTOM_CAR_IMAGE4": "Image 4",
+    "ABOUT_CW_PARAGRAPH1": "Hello everyone and welcome to Cold Wheels. My name is Ruben, and among other things I am a web developer and collector.",
+    "ABOUT_CW_PARAGRAPH2": "As a collector, I have always missed a tool to help me keep track of my collection, especially when I started, I didn't know how the cars were organized, basic series, premium, by years, by secondary series... I looked for it and didn't find much.",
+    "ABOUT_CW_PARAGRAPH3": "As a developer, to finish my studies, I needed to create a web project, I thought about the aforementioned and that's how Cold Wheels was born. I asked on Reddit if people liked the idea and to my surprise there were several people who supported it, so I got to work. I finished the course and everything went very well.",
+    "ABOUT_CW_PARAGRAPH4": "After a few weeks of rest, I resumed the project because there were still some things missing and, above all, I was missing the most important thing, hosting the project on a server and using the application. This has a monthly economic cost that I can amortize for a few months, but not for a longer time.",
+    "ABOUT_CW_PARAGRAPH5": "That is why any financial contribution would be a great help. I am not looking to make money with this, but I would like all of us to be able to keep this application online.",
+    "ABOUT_CW_PARAGRAPH6": "The application is not finished, there are still many cars missing, which I will be adding over time. (If you have any preferences, let me know at my email (rdevgc@gmail.com). I would also like to add that any criticism, opinion, proposal... is welcome.",
+    "ABOUT_CW_PARAGRAPH7": "Thank you very much for reading."
 }

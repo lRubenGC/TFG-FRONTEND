@@ -19,6 +19,7 @@ import { AuthModule } from './views/auth/auth.module';
 import { SearchResultsPageModule } from './views/search-results/search-results-page.module';
 import { AuthGuard } from './guards/auth.guard';
 import { ComponentsModule } from './components/components.module';
+import { AboutCWModule } from './views/about-cw/about-cw-page.module';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { ComponentsModule } from './components/components.module';
     }),
 
     // App Modules
+    AboutCWModule,
     AuthModule,
     ComponentsModule,
     BasicCarsPageModule,

@@ -40,7 +40,7 @@
 
 
         <!-- About CW -->
-        <li class="header-item"><button>{{ 'HEADER_ABOUT' | translate }}</button></li>
+        <li class="header-item"><button (click)="goTo('about')">{{ 'HEADER_ABOUT' | translate }}</button></li>
 
         <!-- Log In -->
         <li class="header-item" *ngIf="!userLoggedIn"><button (click)="goTo('auth')">{{ 'HEADER_ACCOUNT' | translate }}</button></li>
