@@ -227,6 +227,10 @@ select:disabled {
     #user-profile-body {
         width: 100vw;
     }
+
+    #user-profile-land-section {
+        margin: 0 2em;
+    }
 }
 
 @media (max-width: 850px) {
@@ -245,6 +249,7 @@ select:disabled {
 @media (max-width: 600px) {
     #user-profile-land-section {
         flex-direction: column;
+        margin: 0 1em;
     }
 
     .profile-img-container {
@@ -264,5 +269,12 @@ select:disabled {
     .car-menu-list__group {
         flex-direction: column;
         align-items: center;
+    }
+}
+
+@media (max-width: 350px) {
+    .profile-img-container {
+        width: 60px;
+        height: 60px;
     }
 }

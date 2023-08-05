@@ -126,20 +126,39 @@ input {
     background-color: rgb(27, 135, 27);
 }
 
-
-
 @media (max-width: 768px) {
     .user-config-container {
-        padding: 10px 30px;
-        margin-bottom: 20px;
-        margin-top: 20px;
+        padding: 10px;
+        margin: 10px 20px;
+        width: 100%;
+    }
+
+    .user-config-item label {
+        width: 20%;
     }
 
     .user-config-item input {
-        width: 60%;
     }
 
     .img-inputs-container {
         flex-direction: column;
+    }
+}
+
+@media (max-width: 630px) {
+    .user-config-item label {
+        width: 30%;
+    }
+}
+
+@media (max-width: 500px) {
+    .user-config-item label {
+        width: 40%;
+    }
+}
+
+@media (max-width: 415px) {
+    .user-config-item label {
+        width: 50%;
     }
 }

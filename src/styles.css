@@ -125,20 +125,16 @@ h4 {
         font-size: 16px;
     }
 
-    p {
-        font-size: 13px;
-    }
-    
-    button {
-        font-size: 13px;
-    }
-
-    select {
-        font-size: 13px;
-    }
-
+    p,
+    button,
+    select,
     option {
         font-size: 13px;
+    }
+
+    label,
+    input {
+        font-size: 14px;
     }
 }
 
