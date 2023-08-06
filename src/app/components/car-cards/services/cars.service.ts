@@ -16,7 +16,7 @@ export class CarsService {
       'r-token': token!
     });
 
-    return this.http.post(`:8000/api/user-basic-cars/${id_user}`, {
+    return this.http.post(`/api/user-basic-cars/${id_user}`, {
       BasicCarId: id_car,
       hasCar: carBody.hasCar,
       wantsCar: carBody.wantsCar
@@ -37,7 +37,7 @@ export class CarsService {
       }
     }
 
-    return this.http.delete(`:8000/api/user-basic-cars/${id_user}`, options);
+    return this.http.delete(`/api/user-basic-cars/${id_user}`, options);
   }
 
   addPremiumCar(id_car: number, id_user: number, carBody: any): Observable<any> {
@@ -47,7 +47,7 @@ export class CarsService {
       'r-token': token!
     });
 
-    return this.http.post(`:8000/api/user-premium-cars/${id_user}`, {
+    return this.http.post(`/api/user-premium-cars/${id_user}`, {
       PremiumCarId: id_car,
       hasCar: carBody.hasCar,
       wantsCar: carBody.wantsCar
@@ -68,7 +68,7 @@ export class CarsService {
       }
     }
 
-    return this.http.delete(`:8000/api/user-premium-cars/${id_user}`, options);
+    return this.http.delete(`/api/user-premium-cars/${id_user}`, options);
   }
 
   voteCustomCar(id_car: number, id_user: number): Observable<any> {
@@ -78,7 +78,7 @@ export class CarsService {
       'r-token': token!
     });
 
-    return this.http.post(`:8000/api/custom-cars/vote/${id_user}`, {
+    return this.http.post(`/api/custom-cars/vote/${id_user}`, {
       customCarId: id_car
     }, { headers });
   }
@@ -97,11 +97,11 @@ export class CarsService {
       }
     }
 
-    return this.http.delete(`:8000/api/custom-cars/vote/${id_user}`, options);
+    return this.http.delete(`/api/custom-cars/vote/${id_user}`, options);
   }
 
   getUserVotes(userId: number): Observable<number[]> {
-    return this.http.get<number[]>(`:8000/api/custom-cars/user-votes/${userId}`);
+    return this.http.get<number[]>(`/api/custom-cars/user-votes/${userId}`);
   }
   
 }
