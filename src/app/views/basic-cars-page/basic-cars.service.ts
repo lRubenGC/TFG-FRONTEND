@@ -11,15 +11,15 @@ export class BasicCarsService {
   
 
   getCarsByYear(year: string): Observable<any> {
-    return this.http.get(`/basic-cars/?year=${year}`);
+    return this.http.get(`/api/basic-cars/?year=${year}`);
   }
 
   getAvailableSeries(year: string): Observable<any> {
-    return this.http.get(`/available-series?main=${year}`);
+    return this.http.get(`/api/available-series?main=${year}`);
   }
 
   getUserCars(idUser: number): Observable<any> {
-    return this.http.get(`/user-basic-cars/${idUser}`);
+    return this.http.get(`/api/user-basic-cars/${idUser}`);
   }
 
 }

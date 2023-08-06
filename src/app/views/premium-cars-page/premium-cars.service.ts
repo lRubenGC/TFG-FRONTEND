@@ -11,15 +11,15 @@ export class PremiumCarsService {
   
 
   getCars(main_serie: string): Observable<any> {
-    return this.http.get(`/premium-cars/?main_serie=${main_serie}`);
+    return this.http.get(`/api/premium-cars/?main_serie=${main_serie}`);
   }
 
   getAvailableSeries(main: string): Observable<any> {
-    return this.http.get(`/available-series?main=${main}`);
+    return this.http.get(`/api/available-series?main=${main}`);
   }
 
   getUserCars(idUser: number): Observable<any> {
-    return this.http.get(`/user-premium-cars/${idUser}`);
+    return this.http.get(`/api/user-premium-cars/${idUser}`);
   }
 
 }

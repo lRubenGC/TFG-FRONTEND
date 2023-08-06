@@ -10,12 +10,12 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   async getUserData(id: number): Promise<userInterfaceApi | any> {
-    const response = await this.http.get(`/users/${id}`).toPromise();
+    const response = await this.http.get(`/api/users/${id}`).toPromise();
     return response as userInterfaceApi;
   }
 
   async getUserByUsername(username: string): Promise<userInterfaceApi | any> {
-    const response = await this.http.get(`/users/username/${username}`).toPromise();
+    const response = await this.http.get(`/api/users/username/${username}`).toPromise();
     return response as userInterfaceApi;
   }
 
@@ -38,7 +38,7 @@ export class UserService {
       requestBody.password = userParams.password;
     }
 
-    return this.http.put(`/users/${id_user}`, requestBody, { headers });
+    return this.http.put(`/api/users/${id_user}`, requestBody, { headers });
   }
 
   updateImg(id_user: number, file: File, bg: boolean = false): Observable<any> {
@@ -49,10 +49,10 @@ export class UserService {
     formData.append('file', file);
   
     if (bg) {
-      return this.http.post(`/users/bg-img/${id_user}`, formData, { headers });
+      return this.http.post(`/api/users/bg-img/${id_user}`, formData, { headers });
     }
     
-    return this.http.post(`/users/img/${id_user}`, formData, { headers });
+    return this.http.post(`/api/users/img/${id_user}`, formData, { headers });
   }
 
   deleteImg(id_user: number, bg: boolean = false): Observable<any> {
@@ -60,10 +60,10 @@ export class UserService {
     const headers = new HttpHeaders({ 'r-token': token! });    
   
     if (bg) {
-      return this.http.delete(`/users/bg-img/${id_user}`, { headers });
+      return this.http.delete(`/api/users/bg-img/${id_user}`, { headers });
     }
     
-    return this.http.delete(`/users/img/${id_user}`, { headers });
+    return this.http.delete(`/api/users/img/${id_user}`, { headers });
   }
   
   

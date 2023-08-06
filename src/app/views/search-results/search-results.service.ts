@@ -11,11 +11,11 @@ export class SearchResultsService {
   
 
   getCars(query: string): Observable<any> {
-    return this.http.get(`/search/cars/${query}`);
+    return this.http.get(`/api/search/cars/${query}`);
   }
 
   getUsers(query: string): Observable<any> {
-    return this.http.get(`/search/users/${query}`);
+    return this.http.get(`/api/search/users/${query}`);
   }
 
 }
