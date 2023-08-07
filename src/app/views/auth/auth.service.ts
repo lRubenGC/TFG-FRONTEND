@@ -14,7 +14,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(body: loginInterface): Observable<any> {
-    return this.http.post(`http://api.diecasttracker.com:8000/api/auth/login`, {
+    return this.http.post(`https://api.diecasttracker.com/api/auth/login`, {
       email: body.email,
       password: body.password,
     });
@@ -29,7 +29,7 @@ export class AuthService {
   }
 
   register(body: registerInterface): Observable<any> {
-    return this.http.post(`http://api.diecasttracker.com:8000/api/users`, {
+    return this.http.post(`https://api.diecasttracker.com/api/users`, {
       username: body.username,
       email: body.email,
       password: body.password,

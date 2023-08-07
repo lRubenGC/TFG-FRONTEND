@@ -11,15 +11,15 @@ export class BasicCarsService {
   
 
   getCarsByYear(year: string): Observable<any> {
-    return this.http.get(`http://api.diecasttracker.com:8000/api/basic-cars/?year=${year}`);
+    return this.http.get(`https://api.diecasttracker.com/api/basic-cars/?year=${year}`);
   }
 
   getAvailableSeries(year: string): Observable<any> {
-    return this.http.get(`http://api.diecasttracker.com:8000/api/available-series?main=${year}`);
+    return this.http.get(`https://api.diecasttracker.com/api/available-series?main=${year}`);
   }
 
   getUserCars(idUser: number): Observable<any> {
-    return this.http.get(`http://api.diecasttracker.com:8000/api/user-basic-cars/${idUser}`);
+    return this.http.get(`https://api.diecasttracker.com/api/user-basic-cars/${idUser}`);
   }
 
 }

@@ -11,11 +11,11 @@ export class SearchResultsService {
   
 
   getCars(query: string): Observable<any> {
-    return this.http.get(`http://api.diecasttracker.com:8000/api/search/cars/${query}`);
+    return this.http.get(`https://api.diecasttracker.com/api/search/cars/${query}`);
   }
 
   getUsers(query: string): Observable<any> {
-    return this.http.get(`http://api.diecasttracker.com:8000/api/search/users/${query}`);
+    return this.http.get(`https://api.diecasttracker.com/api/search/users/${query}`);
   }
 
 }
