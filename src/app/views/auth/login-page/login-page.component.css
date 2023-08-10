@@ -135,7 +135,7 @@ input {
 }
 
 .overlay {
-    background: url('src/assets/images/login_page/login_bg.png');
+    background: url('src/assets/images/login_page/login_bg.webp');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0 0;

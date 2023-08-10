@@ -33,32 +33,32 @@ export class PremiumCarsPageComponent implements OnInit {
   premiumPills: premiumPillInterface[] = [
     {
       label: 'Boulevard (original)',
-      img: '../../../assets/images/premium_cars_page/boulevard_original_pill.png',
+      img: '../../../assets/images/premium_cars_page/boulevard_original_pill.webp',
       request: 'Boulevard (original)'
     },
     {
       label: 'Boulevard (reboot)',
-      img: '../../../assets/images/premium_cars_page/boulevard_reboot_pill.png',
+      img: '../../../assets/images/premium_cars_page/boulevard_reboot_pill.webp',
       request: 'Boulevard (reboot)'
     },
     {
       label: 'Car Culture',
-      img: '../../../assets/images/premium_cars_page/car_culture_pill.png',
+      img: '../../../assets/images/premium_cars_page/car_culture_pill.webp',
       request: 'Car Culture'
     },
     {
       label: 'Fast & Furious (Premium)',
-      img: '../../../assets/images/premium_cars_page/fast_and_furious_premium.png',
+      img: '../../../assets/images/premium_cars_page/fast_and_furious_premium.webp',
       request: 'Fast %26 Furious - Premium'
     },
     {
       label: 'Fast & Furious',
-      img: '../../../assets/images/premium_cars_page/fast_and_furious.png',
+      img: '../../../assets/images/premium_cars_page/fast_and_furious.webp',
       request: 'Fast %26 Furious'
     },
     {
       label: 'Pop Culture',
-      img: '../../../assets/images/premium_cars_page/pop_culture_pill.png',
+      img: '../../../assets/images/premium_cars_page/pop_culture_pill.webp',
       request: 'Pop Culture'
     },
   ]

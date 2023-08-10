@@ -1,7 +1,7 @@
 #landing-welcome {
     height: 60vh;
     text-align: center;
-    background: url('../../../assets/images/landing_page/welcome_bg.png');
+    background: url('../../../assets/images/landing_page/welcome_bg.webp');
     background-position: center center;
     background-size: cover;
     display: flex;

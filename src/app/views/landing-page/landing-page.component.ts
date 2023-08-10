@@ -19,20 +19,20 @@ export class LandingPageComponent implements OnInit, OnDestroy {
 
   landingCards: landingCardInterface[] = [
     {
-      backgroundImg: '../../../assets/images/landing_page/basic_bg.png',
-      popImg: '../../../assets/images/landing_page/basic_pop.png',
+      backgroundImg: '../../../assets/images/landing_page/basic_bg.webp',
+      popImg: '../../../assets/images/landing_page/basic_pop.webp',
       linkTo: 'basic-cars',
       title: 'Basic'
     },
     {
-      backgroundImg: '../../../assets/images/landing_page/premium_bg.png',
-      popImg: '../../../assets/images/landing_page/premium_pop.png',
+      backgroundImg: '../../../assets/images/landing_page/premium_bg.webp',
+      popImg: '../../../assets/images/landing_page/premium_pop.webp',
       linkTo: 'premium-cars',
       title: 'Premium'
     },
     {
-      backgroundImg: '../../../assets/images/landing_page/custom_bg.png',
-      popImg: '../../../assets/images/landing_page/custom_pop.png',
+      backgroundImg: '../../../assets/images/landing_page/custom_bg.webp',
+      popImg: '../../../assets/images/landing_page/custom_pop.webp',
       linkTo: 'custom-cars',
       title: 'Custom'
     }

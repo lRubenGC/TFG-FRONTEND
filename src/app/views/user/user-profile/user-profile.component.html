@@ -2,12 +2,12 @@
 <div id="user-profile-page">
     <div id="user-profile-body">
         <!-- Landing section -->
-        <section id="user-profile-land-section" [ngStyle]="{'background-image': user?.bg_img ? 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' + user?.bg_img + ')' : 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../../../../assets/images/login_page/login_bg.png)'}">
+        <section id="user-profile-land-section" [ngStyle]="{'background-image': user?.bg_img ? 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' + user?.bg_img + ')' : 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../../../../assets/images/login_page/login_bg.webp)'}">
 
             <!-- Profile data -->
             <div class="profile-data-name">
                 <div class="profile-img-container">
-                    <img class="user-profile-pic circular-image" [src]="user?.img ? user?.img : 'assets/images/user-profile/no-user-profile.jpg'" alt="">
+                    <img class="user-profile-pic circular-image" [src]="user?.img ? user?.img : 'assets/images/user-profile/no-user-profile.webp'" alt="">
                 </div>
                 <div class="profile-data-name-container">
                     <h3>{{ user?.username }}</h3>
