@@ -19,10 +19,10 @@ export class BasicCarsPageComponent implements OnInit {
   cars: any[] = [];
   showedCars: any[] = [];
 
-  selectedYear: string = '2022';
+  selectedYear: string = '2023';
   selectedSerie: string = 'All';
 
-  availableYears = ['2022', '2021', '2020', '2019', '2018'];
+  availableYears = ['2023', '2022', '2021', '2020', '2019', '2018'];
   availableSeries = [];
 
   error = false;
