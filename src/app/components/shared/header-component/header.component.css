@@ -88,7 +88,7 @@ button {
     border: 1px solid var(--dark-primary-100);
 }
 
-.dropdown-content a {
+.dropdown-content button {
     color: #fff;
     padding: .8rem;
     padding-right: 1rem;
@@ -98,9 +98,10 @@ button {
     white-space: nowrap;
     width: 100%;
     box-sizing: border-box;
+    font-size: 1em;
 }
 
-a:hover {
+.dropdown-content button:hover {
     background-color: var(--dark-primary-100);
 }
 

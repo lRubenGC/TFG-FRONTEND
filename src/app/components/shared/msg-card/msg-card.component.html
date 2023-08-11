@@ -4,13 +4,9 @@
         <p *ngFor="let description of config.description">{{ description }}</p>
 
         <!-- Button without Link -->
-        <a *ngIf="config.button && !config.buttonLink" class="a-button">{{ config.buttonName }}
-            <button class="button-account"></button>
-        </a>
+        <button *ngIf="config.button && !config.buttonLink" class="a-button">{{ config.buttonName }}</button>
 
         <!-- Button with Link -->
-        <a (click)="goTo(config.buttonLink)" *ngIf="config.button && config.buttonLink" class="a-button">{{ config.buttonName }}
-            <button class="button-account"></button>
-        </a>
+        <button *ngIf="config.button && config.buttonLink" (click)="goTo(config.buttonLink)" class="a-button">{{ config.buttonName }}</button>
     </div>
 </div>
