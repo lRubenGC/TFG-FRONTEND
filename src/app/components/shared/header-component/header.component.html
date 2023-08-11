@@ -16,7 +16,7 @@
         <!-- Search Bar -->
         <li class="header-item search-container">
             <div class="search-box">
-                <button (click)="searchCar()" class="btn-search"><i class="fas fa-search"></i></button>
+                <button (click)="searchCar()" class="btn-search" aria-label="Search Button"><i class="fas fa-search"></i></button>
                 <input
                     #searchInput
                     [(ngModel)]="carSearched"

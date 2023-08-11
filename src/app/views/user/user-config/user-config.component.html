@@ -35,7 +35,7 @@
             <div class="img-input">
                 <div class="img-title-container">
                     <h4>{{ 'CONFIG_IMG_PROFILE' | translate }}</h4>
-                    <button (click)="deleteImg($event, 1)" class="button-delete-config">
+                    <button (click)="deleteImg($event, 1)" class="button-delete-config" aria-label="Delete image 1 button">
                         <i class="fas fa-trash"></i>
                     </button>
                 </div>
@@ -49,7 +49,7 @@
             <div class="img_bg-input">
                 <div class="img-title-container">
                     <h4>{{ 'CONFIG_IMG_BANNER' | translate }}</h4>
-                    <button (click)="deleteImg($event, 2)"class="button-delete-config">
+                    <button (click)="deleteImg($event, 2)"class="button-delete-config" aria-label="Delete image 2 button">
                         <i class="fas fa-trash"></i>
                     </button>
                 </div>

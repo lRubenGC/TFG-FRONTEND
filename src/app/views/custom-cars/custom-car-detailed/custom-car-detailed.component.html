@@ -30,11 +30,11 @@
 
     <section class="carousel">
       <!-- Images -->
-      <button class="nav-button" (click)="prevImage()">&#10094;</button>
+      <button class="nav-button" (click)="prevImage()" aria-label="Previous image button">&#10094;</button>
       <div class="image-container">
         <img [src]="car.imgs[currentImageIndex]" (click)="nextImage()" alt="Car image">
       </div>
-      <button class="nav-button" (click)="nextImage()">&#10095;</button>
+      <button class="nav-button" (click)="nextImage()" aria-label="Next image button">&#10095;</button>
     </section>
 
 
