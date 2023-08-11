@@ -2,21 +2,21 @@
 <div id="user-profile-page">
     <div id="user-profile-body">
         <!-- Landing section -->
-        <section id="user-profile-land-section" [ngStyle]="{'background-image': user?.bg_img ? 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' + user?.bg_img + ')' : 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../../../../assets/images/login_page/login_bg.webp)'}">
+        <header id="user-profile-land-section" [ngStyle]="{'background-image': user?.bg_img ? 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' + user?.bg_img + ')' : 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../../../../assets/images/login_page/login_bg.webp)'}">
 
             <!-- Profile data -->
-            <div class="profile-data-name">
+            <section class="profile-data-name">
                 <div class="profile-img-container">
-                    <img class="user-profile-pic circular-image" [src]="user?.img ? user?.img : 'assets/images/user-profile/no-user-profile.webp'" alt="">
+                    <img class="user-profile-pic circular-image" [src]="user?.img ? user?.img : 'assets/images/user-profile/no-user-profile.webp'" alt="user profile pic">
                 </div>
                 <div class="profile-data-name-container">
                     <h3>{{ user?.username }}</h3>
                     <button *ngIf="userVisitor" (click)="goToConfig()">{{ 'USER_EDIT_PROFILE' | translate }}</button>
                 </div>
-            </div>
+            </section>
 
             <!-- Cars data -->
-            <div class="profile-data-cars">
+            <section class="profile-data-cars">
                 <div class="data-cars-item">
                     <p class="data-item-number">{{ basicCarsOwned.length }}</p>
                     <p>{{ 'USER_PROFILE_BASIC_MENU' | translate }}</p>
@@ -35,9 +35,9 @@
                     <p class="data-item-number">{{ customCarsOwned.length }}</p>
                     <p>{{ 'USER_PROFILE_CUSTOM_MENU' | translate }}</p>
                 </div>
-            </div>
+            </section>
 
-        </section>
+        </header>
 
         <!-- Car menu -->
         <section class="car-menu-list-container">
@@ -136,44 +136,44 @@
         </section>
 
         <!-- Car list -->
-        <section id="user-cars-list">
+        <main id="user-cars-list">
 
             <!-- Basic Cars Owned-->
-            <div *ngIf="carsType === 'basic' && collectedType === 'owned'" class="basic-cars-list">
+            <section *ngIf="carsType === 'basic' && collectedType === 'owned'" class="basic-cars-list">
                 <div *ngFor="let car of basicCarsOwnedShowed">
                     <app-basic-card (errorEvent)="enableErrorMsg($event)" [car]="car" (deleteCar)="onDeleteCar($event, 'basic owned')"></app-basic-card>
                 </div>
-            </div>
+            </section>
 
             <!-- Basic Cars Wished-->
-            <div *ngIf="carsType === 'basic' && collectedType === 'wished'" class="basic-cars-list">
+            <section *ngIf="carsType === 'basic' && collectedType === 'wished'" class="basic-cars-list">
                 <div *ngFor="let car of basicCarsWishedShowed">
                     <app-basic-card (errorEvent)="enableErrorMsg($event)" [car]="car" (deleteCar)="onDeleteCar($event, 'basic wished')"></app-basic-card>
                 </div>
-            </div>
+            </section>
 
             <!-- Premium Cars Owned-->
-            <div *ngIf="carsType === 'premium' && collectedType === 'owned'" class="premium-cars-list">
+            <section *ngIf="carsType === 'premium' && collectedType === 'owned'" class="premium-cars-list">
                 <div *ngFor="let car of premiumCarsOwnedShowed">
                     <app-premium-card (errorEvent)="enableErrorMsg($event)" [car]="car" (deleteCar)="onDeleteCar($event, 'premium owned')"></app-premium-card>
                 </div>
-            </div>
+            </section>
 
             <!-- Premium Cars Wished-->
-            <div *ngIf="carsType === 'premium' && collectedType === 'wished'" class="premium-cars-list">
+            <section *ngIf="carsType === 'premium' && collectedType === 'wished'" class="premium-cars-list">
                 <div *ngFor="let car of premiumCarsWishedShowed">
                     <app-premium-card (errorEvent)="enableErrorMsg($event)" [car]="car" (deleteCar)="onDeleteCar($event, 'premium wished')"></app-premium-card>
                 </div>
-            </div>
+            </section>
 
             <!-- Custom Cars Owned-->
-            <div *ngIf="carsType === 'custom'" class="custom-cars-list">
+            <section *ngIf="carsType === 'custom'" class="custom-cars-list">
                 <div *ngFor="let car of customCarsOwned">
                     <app-custom-card (errorEvent)="enableErrorMsg($event)" [userProfile]="true" [car]="car"></app-custom-card>
                 </div>
-            </div>
+            </section>
 
-        </section>
+        </main>
 
 
     </div>

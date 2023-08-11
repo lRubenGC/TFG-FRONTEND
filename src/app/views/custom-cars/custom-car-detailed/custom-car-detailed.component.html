@@ -1,14 +1,14 @@
 <br>
 <div id="custom-car-detailed">
 
-  <div class="go-back-button-container">
+  <header class="go-back-button-container">
     <button (click)="goTo('goBack')" class="go-back-button">{{ 'GO_BACK' | translate }}</button>
     <button *ngIf="isUserCreatorViewer" (click)="goTo('editCar')" class="go-back-button">{{ 'CUSTOM_CAR_EDIT' | translate }}</button>
-  </div>
+  </header>
 
-  <div class="car-detailed-container" *ngIf="car">
+  <main class="car-detailed-container" *ngIf="car">
 
-    <div class="car-details">
+    <aside class="car-details">
 
       <div class="car-details-item">
         <h2>{{ 'CUSTOM_CAR_MODEL_NAME' | translate }}: {{ car.model_name }}</h2>
@@ -22,25 +22,25 @@
         <h3>{{ 'CUSTOM_CAR_AUTHOR' | translate }}: <span class="user-creator" (click)="goTo('userCreator')">{{ car.userCreator }}</span></h3>
         <div class="upvotes-container">
           <p>{{ 'UPVOTES' | translate }}: <span [ngClass]="car.voted ? 'car-voted' : ''" class="car-upvotes">{{ car.upvotes }}</span></p>
-          <img (click)="voteCar()" class="upvote-button" src="../../../assets/images/custom_cars_page/arrow-big-up-line-filled.svg" alt="upvote">
+          <img (click)="voteCar()" class="upvote-button" src="../../../assets/images/custom_cars_page/arrow-big-up-line-filled.svg" alt="upvote image">
         </div>
       </div>
 
-    </div>
+    </aside>
 
-    <div class="carousel">
+    <section class="carousel">
       <!-- Images -->
       <button class="nav-button" (click)="prevImage()">&#10094;</button>
       <div class="image-container">
         <img [src]="car.imgs[currentImageIndex]" (click)="nextImage()" alt="Car image">
       </div>
       <button class="nav-button" (click)="nextImage()">&#10095;</button>
-    </div>
+    </section>
 
 
 
-    </div>
+  </main>
   
-    <!-- Possible error notification -->
-    <app-global-notification *ngIf="error" [notificationMsg]="errorMsg"></app-global-notification>
+  <!-- Possible error notification -->
+  <app-global-notification *ngIf="error" [notificationMsg]="errorMsg"></app-global-notification>
 </div>

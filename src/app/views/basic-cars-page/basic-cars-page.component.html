@@ -2,7 +2,7 @@
     <div id="basic-cars-body">
 
         <!-- Landing section -->
-        <div id="basic-cars-land-section">
+        <header id="basic-cars-land-section">
 
             <!-- Explanation section -->
             <section id="basic-explanation">
@@ -38,17 +38,17 @@
 
             </section>
 
-        </div>
+        </header>
 
         <!-- Car list -->
-        <div class="basic-cars-list">
+        <main class="basic-cars-list">
 
             <!-- Car items -->
             <div *ngFor="let car of showedCars" >
                 <app-basic-card (errorEvent)="enableErrorMsg($event)" [car]="car"></app-basic-card>
             </div>
 
-        </div>
+        </main>
 
 
     </div>

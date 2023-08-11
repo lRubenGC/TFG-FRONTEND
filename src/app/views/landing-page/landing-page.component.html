@@ -1,22 +1,22 @@
 <div id="landing-page">
-    <div id="landing-body">
+    <main id="landing-body">
 
         <!-- Welcome section -->
-        <div id="landing-welcome">
+        <header id="landing-welcome">
             <app-msg-card
                 [config]="msg_card"
             ></app-msg-card>
-        </div>
+        </header>
 
         <!-- 3 Car section cards -->
-        <div id="landing-cards">
+        <footer id="landing-cards">
             <app-landing-card
                 *ngFor="let card of landingCards"
                 class="landing-card"
                 [config]="card">
             </app-landing-card>
-        </div>
+        </footer>
 
-    </div>
+    </main>
 
 </div>

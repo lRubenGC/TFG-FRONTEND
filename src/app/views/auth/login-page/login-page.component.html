@@ -1,7 +1,7 @@
-<div class="mobile-form" *ngIf="isSmallScreen; else largeScreen">
+<main class="mobile-form" *ngIf="isSmallScreen; else largeScreen">
 <br>
     <!-- Register Form -->
-    <div *ngIf="!loginActivo" class="form-container sign-up-container">
+    <section *ngIf="!loginActivo" class="form-container sign-up-container">
         <form [formGroup]="registerForm" (ngSubmit)="submitRegister()">
             <h1>{{ 'REGISTER_TITLE' | translate }}</h1>
             <input
@@ -25,10 +25,10 @@
             <p *ngIf="registerSuccess" class="auth-notification auth-success">{{ registerSuccessMsg | translate }}</p>
 
         </form>
-    </div>
+    </section>
 
     <!-- Login Form -->
-    <div *ngIf="loginActivo" class="form-container sign-in-container">
+    <section *ngIf="loginActivo" class="form-container sign-in-container">
         <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
             <h1>{{ 'LOGIN_TITLE' | translate }}</h1>
             <input
@@ -47,7 +47,7 @@
 
             <!-- <p class="password-forgot">{{ 'LOGIN_FORGOT' | translate }}</p> -->
         </form>
-    </div>
+    </section>
 
 
     <div class="toggle-button-mobile-container">
@@ -61,20 +61,20 @@
     </div>
 
     
-</div>
+</main>
 
 
 
 <ng-template #largeScreen id="login-page">
 <br>
 
-    <div
+    <main
         [ngClass]="!loginActivo ? 'right-panel-active' : ''"
         class="container"
         id="login-component">
 
         <!-- Register Form -->
-        <div class="form-container sign-up-container">
+        <section class="form-container sign-up-container">
             <form [formGroup]="registerForm" (ngSubmit)="submitRegister()">
                 <h1>{{ 'REGISTER_TITLE' | translate }}</h1>
                 <input
@@ -98,10 +98,10 @@
                 <p *ngIf="registerSuccess" class="auth-notification auth-success">{{ registerSuccessMsg | translate }}</p>
 
             </form>
-        </div>
+        </section>
 
         <!-- Login Form -->
-        <div class="form-container sign-in-container">
+        <section class="form-container sign-in-container">
             <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
                 <h1>{{ 'LOGIN_TITLE' | translate }}</h1>
                 <input
@@ -120,7 +120,7 @@
 
                 <!-- <p class="password-forgot">{{ 'LOGIN_FORGOT' | translate }}</p> -->
             </form>
-        </div>
+        </section>
 
         <!-- Overlay -->
         <div class="overlay-container">
@@ -143,6 +143,6 @@
             </div>
         </div>
 
-    </div>
+    </main>
 
 </ng-template>

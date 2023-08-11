@@ -15,7 +15,7 @@
         <!-- Upvotes -->
         <div *ngIf="!userProfile" class="upvotes">
             <p [ngClass]="car.voted ? 'car-voted' : ''">{{ car.upvotes }}</p>
-            <img (click)="voteCar()" class="upvote-button" src="../../../assets/images/custom_cars_page/arrow-big-up-line-filled.svg" alt="upvote">
+            <img (click)="voteCar()" class="upvote-button" src="../../../assets/images/custom_cars_page/arrow-big-up-line-filled.svg" alt="upvote image">
         </div>
     </div>
 
