@@ -119,18 +119,9 @@ export class BasicCarsPageComponent implements OnInit {
       case 'All':
         this.showedCars = this.cars;
         break;
-
-      case 'Treasure Hunt':
-      case 'Super Treasure Hunt':
-        this.showedCars = this.cars.filter(car => car.series.includes(serie));
-        break;
-
-      case 'Walmart Exclusive':
-        this.showedCars = this.cars.filter(car => car.series.includes(serie));
-        break;
-
+        
       default:
-        this.showedCars = this.cars.filter(car => car.series[0] === serie);
+        this.showedCars = this.cars.filter(car => car.series.includes(serie));
         break;
     }
   }
