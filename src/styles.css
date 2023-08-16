@@ -386,7 +386,7 @@ h4 {
 }
 
 .hw-roadsters {
-    background: linear-gradient(#000000, #212121);
+    background: linear-gradient(#000000, #4d4d4d);
 }
 
 .nightburnerz {
@@ -471,4 +471,44 @@ h4 {
 
 .hw-digital-circuit {
     background: linear-gradient(#F68500, #FF9213);
+}
+
+.hw\:-the-\'80s {
+    background: linear-gradient(#f600dd, #f530e1);
+}
+
+.brick-rides {
+    background: linear-gradient(#ee2b2b, #ee5050);
+}
+
+.sweet-rides {
+    background: linear-gradient(#f78bec, #feb2f7);
+}
+
+.hw-haulers {
+    background: linear-gradient(#fa9715, #faaa41);
+}
+
+.hw-modified {
+    background: linear-gradient(#000000, #7d7d7d);
+}
+
+.sky-show {
+    background: linear-gradient(#2b0bdd, #5135f0);
+}
+
+.hw-55-race-team {
+    background: linear-gradient(#f5942d, #f2a14a);
+}
+
+.hw-track-champs {
+    background: linear-gradient(#ff8400, #e98b26);
+}
+
+.hw-gassers {
+    background: linear-gradient(#73e163, #9bf18e);
+}
+
+.hw-slammed {
+    background: linear-gradient(#5bed44, #6cee58);
 }
