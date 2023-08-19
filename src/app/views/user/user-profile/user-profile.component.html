@@ -11,10 +11,7 @@
                 </div>
                 <div class="profile-data-name-container">
                     <h3>{{ user?.username }}</h3>
-                    <div class="buttons-profile-container">
-                        <button *ngIf="userVisitor" (click)="goToConfig()">{{ 'USER_EDIT_PROFILE' | translate }}</button>
-                        <button *ngIf="userVisitor" (click)="exportToCsv()">{{ 'USER_EXPORT_TO_CSV' | translate }}</button>
-                    </div>
+                    <button *ngIf="userVisitor" (click)="goToConfig()">{{ 'USER_EDIT_PROFILE' | translate }}</button>
                 </div>
             </section>
 
@@ -41,6 +38,17 @@
             </section>
 
         </header>
+
+        <div *ngIf="userVisitor" class="export-collection-container">
+            <div class="button-and-span">
+                <app-dc-button [buttonTitle]="'USER_EXPORT_TO_CSV'" (click)="exportToCsv()"></app-dc-button>
+                <span>({{ 'USER_DOWNLOAD_DAYS' | translate }})</span>
+            </div>
+            <div *ngIf="exportToCsvError" class="export-collection-error">
+                <p>{{ 'USER_DOWNLOAD_ERROR' | translate }}</p>
+                <span (click)="exportToCsvError = false">&#10005;</span>
+            </div>
+        </div>
 
         <!-- Car menu -->
         <section class="car-menu-list-container">

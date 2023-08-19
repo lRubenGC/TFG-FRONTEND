@@ -46,11 +46,6 @@
     object-fit: cover;
 }
 
-.buttons-profile-container {
-    display: flex;
-    gap: 1em;
-}
-
 .profile-data-name-container {
     display: flex;
     flex-direction: column;
@@ -77,6 +72,39 @@
 .profile-data-name-container button:hover {
     background-color: #020013;
     text-shadow: none;
+}
+
+.export-collection-container {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.button-and-span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.export-collection-container span {
+    font-size: .9em;
+}
+
+.export-collection-error {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 5px 10px;
+    background-color: rgb(255, 48, 48);
+    border-radius: 5px;
+    text-align: center;
+}
+
+.export-collection-error span {
+    font-weight: 600;
+    cursor: pointer;
 }
 
 .profile-data-cars {
@@ -250,16 +278,6 @@ select:disabled {
     .basic-filter-item {
         width: 18em;
         min-width: 18em;
-    }
-
-    .buttons-profile-container {
-        flex-direction: column;
-        align-items: center;
-        margin-top: 10px;
-    }
-
-    .buttons-profile-container button {
-        width: fit-content;
     }
 }
 

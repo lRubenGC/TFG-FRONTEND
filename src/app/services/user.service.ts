@@ -72,16 +72,21 @@ export class UserService {
   async downloadUserCollection(id: number): Promise<void> {
     const token = localStorage.getItem('cw-token');
     const headers = new HttpHeaders({ 'r-token': token! });
-
-    const response = await this.http.get(`${environment.apiBaseUrl}/api/users/get-collection/${id}`, { 
-      responseType: 'blob',
-      headers: headers 
-    }).toPromise();
-
-    if (response) {
-      this.triggerDownload(response, `user_${id}_collection.zip`);
+  
+    try {
+      const response = await this.http.get(`${environment.apiBaseUrl}/api/users/get-collection/${id}`, { 
+        responseType: 'blob',
+        headers: headers 
+      }).toPromise();
+  
+      if (response) {
+        this.triggerDownload(response, `user_${id}_collection.zip`);
+      }
+    } catch (error: any) {
+      throw new Error('Error downloading the user collection');
     }
   }
+  
 
   private triggerDownload(data: Blob, filename: string): void {
     const blob = new Blob([data], { type: 'text/csv' });

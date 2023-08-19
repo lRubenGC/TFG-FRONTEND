@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BasicCarsService } from '../../basic-cars-page/basic-cars.service';
 import { PremiumCarsService } from '../../premium-cars-page/premium-cars.service';
@@ -14,6 +14,8 @@ import { CustomCarsService } from '../../custom-cars/custom-cars.service';
   styleUrls: ['./user-profile.component.css', '../../../styles/cars-list.css']
 })
 export class UserProfileComponent implements OnInit {
+
+  @Output() errorEvent = new EventEmitter<string>();
 
   user?: userInterface;
   userVisitor = false;
@@ -44,6 +46,7 @@ export class UserProfileComponent implements OnInit {
 
   error = false;
   errorMsg = '';
+  exportToCsvError = false;
 
   constructor(
     private basicCarsService: BasicCarsService,
@@ -360,7 +363,10 @@ export class UserProfileComponent implements OnInit {
 
   exportToCsv() {
     if (this.user) {
-      this.userService.downloadUserCollection(this.user.id);
+      this.userService.downloadUserCollection(this.user.id)
+        .catch(err => {
+          this.exportToCsvError = true;
+        })
     }
   }
 
