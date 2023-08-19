@@ -5,6 +5,9 @@ import { Observable, Subject } from 'rxjs';
 
 import { loginInterface, registerInterface } from 'src/app/models/auth.interface';
 
+import { environment } from 'src/environments/environment';
+
+
 @Injectable({
   providedIn: 'root',
 })
@@ -14,7 +17,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(body: loginInterface): Observable<any> {
-    return this.http.post(`https://api.diecasttracker.com/api/auth/login`, {
+    return this.http.post(`${environment.apiBaseUrl}/api/auth/login`, {
       email: body.email,
       password: body.password,
     });
@@ -29,7 +32,7 @@ export class AuthService {
   }
 
   register(body: registerInterface): Observable<any> {
-    return this.http.post(`https://api.diecasttracker.com/api/users`, {
+    return this.http.post(`${environment.apiBaseUrl}/api/users`, {
       username: body.username,
       email: body.email,
       password: body.password,

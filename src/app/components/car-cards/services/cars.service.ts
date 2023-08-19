@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { environment } from 'src/environments/environment';
+
+
 @Injectable({
   providedIn: 'root',
 })
@@ -16,7 +19,7 @@ export class CarsService {
       'r-token': token!
     });
 
-    return this.http.post(`https://api.diecasttracker.com/api/user-basic-cars/${id_user}`, {
+    return this.http.post(`${environment.apiBaseUrl}/api/user-basic-cars/${id_user}`, {
       BasicCarId: id_car,
       hasCar: carBody.hasCar,
       wantsCar: carBody.wantsCar
@@ -37,7 +40,7 @@ export class CarsService {
       }
     }
 
-    return this.http.delete(`https://api.diecasttracker.com/api/user-basic-cars/${id_user}`, options);
+    return this.http.delete(`${environment.apiBaseUrl}/api/user-basic-cars/${id_user}`, options);
   }
 
   addPremiumCar(id_car: number, id_user: number, carBody: any): Observable<any> {
@@ -47,7 +50,7 @@ export class CarsService {
       'r-token': token!
     });
 
-    return this.http.post(`https://api.diecasttracker.com/api/user-premium-cars/${id_user}`, {
+    return this.http.post(`${environment.apiBaseUrl}/api/user-premium-cars/${id_user}`, {
       PremiumCarId: id_car,
       hasCar: carBody.hasCar,
       wantsCar: carBody.wantsCar
@@ -68,7 +71,7 @@ export class CarsService {
       }
     }
 
-    return this.http.delete(`https://api.diecasttracker.com/api/user-premium-cars/${id_user}`, options);
+    return this.http.delete(`${environment.apiBaseUrl}/api/user-premium-cars/${id_user}`, options);
   }
 
   voteCustomCar(id_car: number, id_user: number): Observable<any> {
@@ -78,7 +81,7 @@ export class CarsService {
       'r-token': token!
     });
 
-    return this.http.post(`https://api.diecasttracker.com/api/custom-cars/vote/${id_user}`, {
+    return this.http.post(`${environment.apiBaseUrl}/api/custom-cars/vote/${id_user}`, {
       customCarId: id_car
     }, { headers });
   }
@@ -97,11 +100,11 @@ export class CarsService {
       }
     }
 
-    return this.http.delete(`https://api.diecasttracker.com/api/custom-cars/vote/${id_user}`, options);
+    return this.http.delete(`${environment.apiBaseUrl}/api/custom-cars/vote/${id_user}`, options);
   }
 
   getUserVotes(userId: number): Observable<number[]> {
-    return this.http.get<number[]>(`https://api.diecasttracker.com/api/custom-cars/user-votes/${userId}`);
+    return this.http.get<number[]>(`${environment.apiBaseUrl}/api/custom-cars/user-votes/${userId}`);
   }
   
 }

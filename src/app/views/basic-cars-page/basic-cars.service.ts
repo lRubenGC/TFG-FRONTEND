@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { environment } from 'src/environments/environment';
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,15 +14,15 @@ export class BasicCarsService {
   
 
   getCarsByYear(year: string): Observable<any> {
-    return this.http.get(`https://api.diecasttracker.com/api/basic-cars/?year=${year}`);
+    return this.http.get(`${environment.apiBaseUrl}/api/basic-cars/?year=${year}`);
   }
 
   getAvailableSeries(year: string): Observable<any> {
-    return this.http.get(`https://api.diecasttracker.com/api/available-series?main=${year}`);
+    return this.http.get(`${environment.apiBaseUrl}/api/available-series?main=${year}`);
   }
 
   getUserCars(idUser: number): Observable<any> {
-    return this.http.get(`https://api.diecasttracker.com/api/user-basic-cars/${idUser}`);
+    return this.http.get(`${environment.apiBaseUrl}/api/user-basic-cars/${idUser}`);
   }
 
 }
