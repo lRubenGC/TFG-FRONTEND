@@ -36,7 +36,7 @@
         </header>
 
         <section *ngIf="isSerieSelected" class="return-button-container">
-            <button (click)="disableSerieSelected()" class="return-button">{{ 'GO_BACK' | translate }}</button>
+            <app-dc-button [buttonTitle]="'GO_BACK'" (click)="disableSerieSelected()"></app-dc-button>
         </section>
 
         <!-- Main Serie Selector -->

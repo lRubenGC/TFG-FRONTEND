@@ -8,24 +8,6 @@
     margin-left: 10em;
 }
 
-.custom-cars-upload-button {
-    padding: .4em 1.5em;
-    border: 0.16em solid var(--dark-primary-100);
-    background-color: var(--dark-bg-100-opacity);
-    color: #fff;
-    border-radius: 10px;
-    box-sizing: border-box;
-    text-shadow: 4px 4px 4px #000;
-    transition: all 0.2s;
-    cursor: pointer;
-    height: 3em;
-}
-
-.custom-cars-upload-button:hover {
-    background-color: var(--dark-primary-100);
-    text-shadow: none;
-}
-
 .custom-filter-item {
     margin-top: 1em;
     min-width: 20rem;

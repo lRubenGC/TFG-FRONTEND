@@ -88,25 +88,7 @@ select::-ms-expand {
 
 .return-button-container {
     text-align: center;
-}
-
-.return-button {
     margin-top: 20px;
-    padding: .6em 3em;
-    border: 0.16em solid var(--dark-primary-100);
-    background-color: var(--dark-bg-100-opacity);
-    color: #fff;
-    border-radius: 1em;
-    box-sizing: border-box;
-    text-shadow: 4px 4px 4px #000;
-    transition: all 0.2s;
-    cursor: pointer;
-    font-size: 1.1em;
-}
-
-.return-button:hover {
-    background-color: var(--dark-primary-100);
-    text-shadow: none;
 }
 
 @media (max-width: 1166px) {
@@ -137,10 +119,5 @@ select::-ms-expand {
 
     .car-select::after {
         font-size: 14px;
-    }
-
-    .return-button {
-        font-size: 1em;
-        padding: .6em 2.5em;
     }
 }

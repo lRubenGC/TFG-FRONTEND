@@ -16,6 +16,7 @@ import { CustomCardComponent } from './car-cards/custom-card/custom-card.compone
 import { HeaderComponent } from './shared/header-component/header.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { MsgCardComponent } from './shared/msg-card/msg-card.component';
+import { DCButtonComponent } from './shared/dc-button/dc-button.component';
 
 
 
@@ -23,6 +24,7 @@ import { MsgCardComponent } from './shared/msg-card/msg-card.component';
   declarations: [
     BasicCardComponent,
     CustomCardComponent,
+    DCButtonComponent,
     HeaderComponent,
     MsgCardComponent,
     PremiumCardComponent,
@@ -43,6 +45,7 @@ import { MsgCardComponent } from './shared/msg-card/msg-card.component';
   exports: [
     BasicCardComponent,
     CustomCardComponent,
+    DCButtonComponent,
     HeaderComponent,
     MsgCardComponent,
     PremiumCardComponent,

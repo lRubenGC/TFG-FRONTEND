@@ -1,0 +1,18 @@
+.dc-button {
+  padding: .4em 1.5em;
+  border: 0.16em solid var(--dark-primary-100);
+  background-color: var(--dark-bg-100-opacity);
+  color: #fff;
+  border-radius: 10px;
+  box-sizing: border-box;
+  text-shadow: 4px 4px 4px #000;
+  transition: all 0.2s;
+  cursor: pointer;
+  min-width: 150px;
+  height: 2.75em;
+}
+
+.dc-button:hover {
+  background-color: var(--dark-primary-100);
+  text-shadow: none;
+}
