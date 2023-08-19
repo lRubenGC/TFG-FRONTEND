@@ -46,14 +46,21 @@
     object-fit: cover;
 }
 
+.buttons-profile-container {
+    display: flex;
+    gap: 1em;
+}
+
 .profile-data-name-container {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    align-items: center;
     padding: 10px;
 }
 
+.profile-data-name-container h3 {
+    margin-left: 10px;
+}
 
 .profile-data-name-container button {
     padding: .4em 1.5em;
@@ -243,6 +250,16 @@ select:disabled {
     .basic-filter-item {
         width: 18em;
         min-width: 18em;
+    }
+
+    .buttons-profile-container {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .buttons-profile-container button {
+        width: fit-content;
     }
 }
 

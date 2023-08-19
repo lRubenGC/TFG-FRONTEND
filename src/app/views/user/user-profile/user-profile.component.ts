@@ -78,7 +78,7 @@ export class UserProfileComponent implements OnInit {
         this.getUserPremiumCars(false);
       }
       
-      if (this.user){
+      if (this.user) {
         this.getCustomCars(this.user.id);
       }
 
@@ -356,6 +356,12 @@ export class UserProfileComponent implements OnInit {
 
   goToConfig() {
     this.router.navigate(['/user/config']);
+  }
+
+  exportToCsv() {
+    if (this.user) {
+      this.userService.downloadUserCollection(this.user.id);
+    }
   }
 
 }

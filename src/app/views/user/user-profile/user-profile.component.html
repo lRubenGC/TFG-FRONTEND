@@ -11,7 +11,10 @@
                 </div>
                 <div class="profile-data-name-container">
                     <h3>{{ user?.username }}</h3>
-                    <button *ngIf="userVisitor" (click)="goToConfig()">{{ 'USER_EDIT_PROFILE' | translate }}</button>
+                    <div class="buttons-profile-container">
+                        <button *ngIf="userVisitor" (click)="goToConfig()">{{ 'USER_EDIT_PROFILE' | translate }}</button>
+                        <button *ngIf="userVisitor" (click)="exportToCsv()">{{ 'USER_EXPORT_TO_CSV' | translate }}</button>
+                    </div>
                 </div>
             </section>
 

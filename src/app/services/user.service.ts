@@ -68,6 +68,30 @@ export class UserService {
     
     return this.http.delete(`${environment.apiBaseUrl}/api/users/img/${id_user}`, { headers });
   }
-  
+
+  async downloadUserCollection(id: number): Promise<void> {
+    const token = localStorage.getItem('cw-token');
+    const headers = new HttpHeaders({ 'r-token': token! });
+
+    const response = await this.http.get(`${environment.apiBaseUrl}/api/users/get-collection/${id}`, { 
+      responseType: 'blob',
+      headers: headers 
+    }).toPromise();
+
+    if (response) {
+      this.triggerDownload(response, `user_${id}_collection.zip`);
+    }
+  }
+
+  private triggerDownload(data: Blob, filename: string): void {
+    const blob = new Blob([data], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', filename);
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  }
   
 }
