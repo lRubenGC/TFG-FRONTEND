@@ -2,7 +2,7 @@
     <div id="premium-cars-body">
 
         <!-- Landing section -->
-        <div id="premium-cars-land-section">
+        <header id="premium-cars-land-section">
 
             <!-- Explanation section -->
             <section id="premium-explanation">
@@ -33,37 +33,38 @@
 
             </section>
 
-        </div>
+        </header>
 
-        <div *ngIf="isSerieSelected" class="return-button-container">
+        <section *ngIf="isSerieSelected" class="return-button-container">
             <button (click)="disableSerieSelected()" class="return-button">{{ 'GO_BACK' | translate }}</button>
-        </div>
+        </section>
 
         <!-- Main Serie Selector -->
-        <div *ngIf="!isSerieSelected" id="premium-cars-selector">
+        <main *ngIf="!isSerieSelected" id="premium-cars-selector">
             
             <!-- Series items -->
             <div *ngFor="let pill of premiumPills">
                 <app-premium-pill [data]="pill" (serieSelected)="getCars($event)"></app-premium-pill>
             </div>
 
-        </div>
-
-        <div *ngIf="isSerieSelected" class="premium-view-title">
-            <h2>{{ selectedMainSerie }}</h2>
-            <hr>
-        </div>
-
-        <!-- Car list -->
-        <div *ngIf="isSerieSelected" class="premium-cars-list">
-
-            <!-- Car items -->
-            <div *ngFor="let car of showedCars" >
-                <app-premium-card (errorEvent)="enableErrorMsg($event)" [car]="car"></app-premium-card>
+        </main>
+        
+        <main>
+            <div *ngIf="isSerieSelected" class="premium-view-title">
+                <h2>{{ selectedMainSerie }}</h2>
+                <hr>
             </div>
-
-        </div>
-
+    
+            <!-- Car list -->
+            <div *ngIf="isSerieSelected" class="premium-cars-list">
+    
+                <!-- Car items -->
+                <div *ngFor="let car of showedCars" >
+                    <app-premium-card (errorEvent)="enableErrorMsg($event)" [car]="car"></app-premium-card>
+                </div>
+    
+            </div>
+        </main>
 
     </div>
 

@@ -22,7 +22,7 @@ export class BasicCarsPageComponent implements OnInit {
   selectedYear: string = '2023';
   selectedSerie: string = 'All';
 
-  availableYears = ['2023', '2022', '2021', '2020', '2019', '2018'];
+  availableYears = ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016'];
   availableSeries = [];
 
   error = false;
@@ -119,18 +119,9 @@ export class BasicCarsPageComponent implements OnInit {
       case 'All':
         this.showedCars = this.cars;
         break;
-
-      case 'Treasure Hunt':
-      case 'Super Treasure Hunt':
-        this.showedCars = this.cars.filter(car => car.series.includes(serie));
-        break;
-
-      case 'Walmart Exclusive':
-        this.showedCars = this.cars.filter(car => car.series.includes(serie));
-        break;
-
+        
       default:
-        this.showedCars = this.cars.filter(car => car.series[0] === serie);
+        this.showedCars = this.cars.filter(car => car.series.includes(serie));
         break;
     }
   }

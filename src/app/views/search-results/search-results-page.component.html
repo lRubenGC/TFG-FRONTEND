@@ -1,7 +1,7 @@
 <div id="search-results-page">
 
     <!-- Landing section (Just for an img) -->
-    <div id="search-results-land-section"></div>
+    <header id="search-results-land-section"></header>
 
     <section class="car-menu-list-container">
         <div class="car-menu-list">
@@ -13,7 +13,7 @@
     </section>
 
     <!-- Cars Search -->
-    <div *ngIf="searchType === 'cars'">
+    <main *ngIf="searchType === 'cars'">
         <!-- Basic Cars -->
         <section *ngIf="basicCars.length > 0" class="search-results-car-list">
             <h1>{{ 'SEARCH_BASIC_CARS' | translate }}</h1>
@@ -41,10 +41,10 @@
             <h1>{{ 'SEARCH_NO_CARS' | translate }} {{ query }}</h1>
             <hr>
         </section>
-    </div>
+    </main>
 
     <!-- Users Search -->
-    <div *ngIf="searchType === 'users'">
+    <main *ngIf="searchType === 'users'">
 
         <!-- Users List -->
         <section *ngIf="users.length > 0" class="search-results-user-list">
@@ -62,7 +62,7 @@
             <h1>{{ 'SEARCH_NO_USERS' | translate }} {{ query }}</h1>
             <hr>
         </section>
-    </div>
+    </main>
 
     <!-- Scroll to top Button -->
     <app-scroll-to-top></app-scroll-to-top>

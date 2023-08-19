@@ -1,78 +1,80 @@
-<div id="custom-cars-upload">
-    <form [formGroup]="customCarForm" class="custom-cars-container">
-        <h1>{{ 'POST_CUSTOM_CAR' | translate }}</h1>
+<main>
+    <section id="custom-cars-upload">
+        <form [formGroup]="customCarForm" class="custom-cars-container">
+            <h1>{{ 'POST_CUSTOM_CAR' | translate }}</h1>
+            
+            <div class="custom-cars-item">
+                <label>{{ 'CUSTOM_CAR_ID_CAR' | translate }}:</label>
+                <input
+                    type="text"
+                    formControlName="car_id"
+                    placeholder="{{ 'CUSTOM_CAR_ID_CAR' | translate }}"
+                    (keydown.enter)="submitForm()" />
+            </div>
+
+            <div class="custom-cars-item">
+                <label>{{ 'CUSTOM_CAR_MODEL_NAME' | translate }}:</label>
+                <input
+                    type="text"
+                    formControlName="model_name"
+                    placeholder="{{ 'CUSTOM_CAR_MODEL_NAME' | translate}}"
+                    (keydown.enter)="submitForm()" />
+            </div>
+
+            <div class="custom-cars-item">
+                <label>{{ 'CUSTOM_CAR_YEAR' | translate }}:</label>
+                <input
+                    type="text"
+                    formControlName="year"
+                    placeholder="{{ 'CUSTOM_CAR_YEAR' | translate}}"
+                    (keydown.enter)="submitForm()" />
+            </div>
+
+            <div class="custom-cars-item">
+                <label>{{ 'CUSTOM_CAR_BRAND' | translate }}:</label>
+                <input
+                    type="text"
+                    formControlName="brand"
+                    placeholder="{{ 'CUSTOM_CAR_BRAND' | translate}}"
+                    (keydown.enter)="submitForm()" />
+            </div>
+
+            <button #uploadButton type="button" class="button-update-custom" (click)="submitForm()">{{ 'POST_CUSTOM_CAR_BUTTON' | translate }}</button>
+
+
+        </form>
+
+    </section>
+
+    <section class="img-upload-section" *ngIf="customCarUploaded">
+
+        <div class="img-upload-section-header">
+            <h1>Car images</h1>
+            <button *ngIf="imageUploaded" class="custom-cars-upload-images" (click)="goBack()">{{ 'CUSTOM_CAR_FINISH' | translate }}</button>
+        </div>
         
-        <div class="custom-cars-item">
-            <label>{{ 'CUSTOM_CAR_ID_CAR' | translate }}:</label>
-            <input
-                type="text"
-                formControlName="car_id"
-                placeholder="{{ 'CUSTOM_CAR_ID_CAR' | translate }}"
-                (keydown.enter)="submitForm()" />
+        <div class="img-inputs-container">
+
+            <div class="img-input">
+                <app-upload-img (imageChanged)="uploadImg($event)"></app-upload-img>
+            </div>
+
+            <div class="img-input">
+                <app-upload-img (imageChanged)="uploadImg($event)"></app-upload-img>
+            </div>
+
+            <div class="img-input">
+                <app-upload-img (imageChanged)="uploadImg($event)"></app-upload-img>
+            </div>
+
+            <div class="img-input">
+                <app-upload-img (imageChanged)="uploadImg($event)"></app-upload-img>
+            </div>
+
         </div>
 
-        <div class="custom-cars-item">
-            <label>{{ 'CUSTOM_CAR_MODEL_NAME' | translate }}:</label>
-            <input
-                type="text"
-                formControlName="model_name"
-                placeholder="{{ 'CUSTOM_CAR_MODEL_NAME' | translate}}"
-                (keydown.enter)="submitForm()" />
-        </div>
-
-        <div class="custom-cars-item">
-            <label>{{ 'CUSTOM_CAR_YEAR' | translate }}:</label>
-            <input
-                type="text"
-                formControlName="year"
-                placeholder="{{ 'CUSTOM_CAR_YEAR' | translate}}"
-                (keydown.enter)="submitForm()" />
-        </div>
-
-        <div class="custom-cars-item">
-            <label>{{ 'CUSTOM_CAR_BRAND' | translate }}:</label>
-            <input
-                type="text"
-                formControlName="brand"
-                placeholder="{{ 'CUSTOM_CAR_BRAND' | translate}}"
-                (keydown.enter)="submitForm()" />
-        </div>
-
-        <button #uploadButton type="button" class="button-update-custom" (click)="submitForm()">{{ 'POST_CUSTOM_CAR_BUTTON' | translate }}</button>
-
-
-    </form>
-
-</div>
-
-<section class="img-upload-section" *ngIf="customCarUploaded">
-
-    <div class="img-upload-section-header">
-        <h1>Car images</h1>
-        <button *ngIf="imageUploaded" class="custom-cars-upload-images" (click)="goBack()">{{ 'CUSTOM_CAR_FINISH' | translate }}</button>
-    </div>
-    
-    <div class="img-inputs-container">
-
-        <div class="img-input">
-            <app-upload-img (imageChanged)="uploadImg($event)"></app-upload-img>
-        </div>
-
-        <div class="img-input">
-            <app-upload-img (imageChanged)="uploadImg($event)"></app-upload-img>
-        </div>
-
-        <div class="img-input">
-            <app-upload-img (imageChanged)="uploadImg($event)"></app-upload-img>
-        </div>
-
-        <div class="img-input">
-            <app-upload-img (imageChanged)="uploadImg($event)"></app-upload-img>
-        </div>
-
-    </div>
-
-</section>
+    </section>
+</main>
 
 <!-- Possible errors -->
 <p *ngIf="formError" class="notification notification-error">{{ errorMsg | translate }}</p>

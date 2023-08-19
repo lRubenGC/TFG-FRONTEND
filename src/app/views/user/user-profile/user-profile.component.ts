@@ -36,7 +36,7 @@ export class UserProfileComponent implements OnInit {
   selectedSerie = '';
   selectedMainSerie = 'all';
   selectedSecondarySerie = '';
-  availableYears = ['2022', '2021', '2020', '2019', '2018'];
+  availableYears = ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016'];
   availableSeries = [];
   availableMainSeries = ['Boulevard (original)', 'Boulevard (reboot)', 'Car Culture', 'Fast & Furious (Premium)', 'Fast & Furious', 'Pop Culture'];
   availableSecondarySeries = [];
@@ -281,20 +281,18 @@ export class UserProfileComponent implements OnInit {
     this.basicCarsWishedShowed = this.basicCarsWished.filter(car => car.year === year);
   }
 
-  filterSerie(serie: string) {
-    if (serie === 'all') {
-      this.basicCarsOwnedShowed = this.basicCarsOwned.filter(car => car.year === this.selectedYear);
-      this.basicCarsWishedShowed = this.basicCarsWished.filter(car => car.year === this.selectedYear);
-      return;
-    }
+  filterSerie(serie: string) {    
+    switch (serie) {
+      case 'all':
+        this.basicCarsOwnedShowed = this.basicCarsOwned.filter(car => car.year === this.selectedYear);
+        this.basicCarsWishedShowed = this.basicCarsWished.filter(car => car.year === this.selectedYear);
+        break;
 
-    this.basicCarsOwnedShowed = this.basicCarsOwned.filter(car => {
-      return car.year === this.selectedYear && car.series[0] === serie
-    });
-
-    this.basicCarsWishedShowed = this.basicCarsWished.filter(car => {
-      return car.year === this.selectedYear && car.series[0] === serie
-    });
+      default:
+        this.basicCarsOwnedShowed = this.basicCarsOwned.filter(car => car.series.includes(serie) && car.year === this.selectedYear);
+        this.basicCarsWishedShowed = this.basicCarsWished.filter(car => car.series.includes(serie) && car.year === this.selectedYear);
+        break;
+      }
   }
 
   getAvailableSeries(year: string) {

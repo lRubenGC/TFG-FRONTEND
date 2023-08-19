@@ -16,7 +16,7 @@
         <!-- Search Bar -->
         <li class="header-item search-container">
             <div class="search-box">
-                <button (click)="searchCar()" class="btn-search"><i class="fas fa-search"></i></button>
+                <button (click)="searchCar()" class="btn-search" aria-label="Search Button"><i class="fas fa-search"></i></button>
                 <input
                     #searchInput
                     [(ngModel)]="carSearched"
@@ -29,14 +29,14 @@
         </li>
 
         <!-- Language Dropdown -->
-        <div class="dropdown-container header-item">
+        <li class="dropdown-container header-item">
             <button (click)="toggleDropdown('lang')" class="dropdown-button">{{ 'HEADER_LANGUAGE' | translate }}
                 &dtrif;</button>
             <div #langDropdown class="dropdown-content" [ngClass]="{'show': !langDropdownOpen}">
-                <a (click)="toggleLanguage('en')">{{ 'HEADER_ENGLISH' | translate }}</a>
-                <a (click)="toggleLanguage('es')">{{ 'HEADER_SPANISH' | translate }}</a>
+                <button (click)="toggleLanguage('en')">{{ 'HEADER_ENGLISH' | translate }}</button>
+                <button (click)="toggleLanguage('es')">{{ 'HEADER_SPANISH' | translate }}</button>
             </div>
-        </div>
+        </li>
 
 
         <!-- About DT -->
@@ -51,9 +51,9 @@
                 <button (click)="toggleDropdown('acc')" class="dropdown-button">{{ user.user.username }}
                     &dtrif;</button>
                 <div #accDropdown class="dropdown-content" [ngClass]="{'show': !accDropdownOpen}">
-                    <a (click)="goToUserProfile()">{{ 'HEADER_MY_PROFILE' | translate }}</a>
-                    <a (click)="goTo('user/config')">{{ 'HEADER_MY_SETTINGS' | translate }}</a>
-                    <a (click)="logOut()">{{ 'HEADER_LOGOUT' | translate }}</a>
+                    <button (click)="goToUserProfile()">{{ 'HEADER_MY_PROFILE' | translate }}</button>
+                    <button (click)="goTo('user/config')">{{ 'HEADER_MY_SETTINGS' | translate }}</button>
+                    <button (click)="logOut()">{{ 'HEADER_LOGOUT' | translate }}</button>
                 </div>
             </div>
         </li>

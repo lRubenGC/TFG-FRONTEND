@@ -2,7 +2,7 @@
 <div id="custom-cars-view">
 
     <!-- Custom cars header -->
-    <section id="custom-cars-header">
+    <header id="custom-cars-header">
         <!-- Filter section -->
         <section id="custom-filter-section">
     
@@ -23,17 +23,17 @@
         <!-- Upload car button -->
         <button class="custom-cars-upload-button" (click)="uploadCar()">{{ 'POST_CUSTOM_CAR' | translate }}</button>
 
-    </section>
+    </header>
 
     <!-- Car list -->
-    <div class="custom-cars-list">
+    <main class="custom-cars-list">
 
         <!-- Car items -->
         <div *ngFor="let car of cars" >
             <app-custom-card (errorEvent)="enableErrorMsg($event)" [userProfile]="false" [car]="car"></app-custom-card>
         </div>
 
-    </div>
+    </main>
 
     <!-- Possible error notification -->
     <app-global-notification *ngIf="error" [notificationMsg]="errorMsg"></app-global-notification>
