@@ -4,7 +4,7 @@ import { msgCardInterface } from 'src/app/models/shared.interface';
 import { Subscription, lastValueFrom } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from 'src/app/services/language.service';
-import { basicCarInterface, basicCarShowedInterface } from 'src/app/models/cardTypes.interface';
+import { basicCarInterface } from 'src/app/models/cardTypes.interface';
 import { decodeToken } from 'src/app/helpers/generics';
 
 @Component({
@@ -18,6 +18,9 @@ export class BasicCarsPageComponent implements OnInit {
 
   cars: any[] = [];
   showedCars: any[] = [];
+
+  userCars: any[] = [];
+  userCarsShowed: any[] = [];
 
   selectedYear: string = '2023';
   selectedSerie: string = 'All';
@@ -70,6 +73,9 @@ export class BasicCarsPageComponent implements OnInit {
       // If user is logged, gets the cars of the user and changes the values of the cars
       if (this.userToken.hasToken && this.userToken.userId) {
         this.getUserCars().then((userCars: any) => {
+          this.userCars = userCars.carsOwned.filter((carOwned: any) => carOwned.year === year);
+          this.userCarsShowed = userCars.carsOwned.filter((carOwned: any) => carOwned.year === year);
+
           userCars.carsOwned.forEach((carOwned: any) => {
             const matchedCar = cars.find((car: any) => car.id === carOwned.id);
             if (matchedCar) {
@@ -89,7 +95,7 @@ export class BasicCarsPageComponent implements OnInit {
               ...car,
               token: this.userToken.userId
             }
-          })
+          });
   
           this.cars = finalCars;
           this.showedCars = finalCars;
@@ -117,10 +123,12 @@ export class BasicCarsPageComponent implements OnInit {
   filterSerie(serie: string) {
     switch (serie) {
       case 'All':
+        this.userCarsShowed = this.userCars;
         this.showedCars = this.cars;
         break;
         
       default:
+        this.userCarsShowed = this.userCars.filter(car => car.series.includes(serie));
         this.showedCars = this.cars.filter(car => car.series.includes(serie));
         break;
     }
@@ -170,6 +178,20 @@ export class BasicCarsPageComponent implements OnInit {
 
     const cardDesc5 = this.translate.get('BASIC_CARS_DESCRIPTION_5');
     this.msg_card.description[3] = await lastValueFrom(cardDesc5);
+  }
+
+  onDeleteCar(carDeleted: any) {
+    this.userCars = this.userCars.filter(car => car.id !== carDeleted.id);
+    this.userCarsShowed = this.userCarsShowed.filter(car => car.id !== carDeleted.id);
+  }
+
+  onAddedCar(carAdded: any) {
+    const existingCar = this.userCars.find(car => car.id === carAdded.id);
+
+    if (!existingCar) {
+      this.userCars.push(carAdded);
+      this.userCarsShowed.push(carAdded);
+    }
   }
 
 }

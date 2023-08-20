@@ -10,6 +10,7 @@ import { CarsService } from '../services/cars.service';
 export class PremiumCardComponent implements OnInit {
 
   @Output() deleteCar = new EventEmitter<premiumCarShowedInterface>();
+  @Output() addedCar = new EventEmitter<premiumCarShowedInterface>();
   @Output() errorEvent = new EventEmitter<string>();
   @Input() car!: premiumCarShowedInterface;
 
@@ -33,6 +34,7 @@ export class PremiumCardComponent implements OnInit {
           (res) => {
             if (carBody.hasCar) {
               this.car.has_car = true;
+              this.addedCar.emit(this.car);
             } else if (carBody.wantsCar) {
               this.car.wants_car = true;
             }

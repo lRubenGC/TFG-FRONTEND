@@ -5,8 +5,12 @@
 export const environment = {
   production: false,
   appVersion: '1.1.0',
-  apiBaseUrl: 'http://localhost:8000'
+  apiBaseUrl: 'https://api.diecasttracker.com'
 };
+
+// apiBaseUrl: 'http://localhost:8000'
+// apiBaseUrl: 'https://api.diecasttracker.com'
+
 
 /*
  * For easier debugging in development mode, you can import the following file

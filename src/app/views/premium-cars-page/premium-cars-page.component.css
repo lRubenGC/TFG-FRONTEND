@@ -87,6 +87,10 @@ select::-ms-expand {
 }
 
 .return-button-container {
+    display: flex;
+    gap: 2em;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     margin-top: 20px;
 }

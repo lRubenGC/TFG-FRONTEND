@@ -30,6 +30,16 @@
     margin-left: .2em;
 }
 
+.owned-cars-quantity {
+    display: flex;
+    justify-content: right;
+    padding: 2em 2em 0 2em;
+}
+
+.owned-cars-quantity div {
+    margin-right: 5em;
+}
+
 select {
     -webkit-appearance: none;
     -moz-appearance: none;

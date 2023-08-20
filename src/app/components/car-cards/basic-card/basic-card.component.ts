@@ -11,6 +11,7 @@ import { CarsService } from '../services/cars.service';
 export class BasicCardComponent implements OnInit {
 
   @Output() deleteCar = new EventEmitter<basicCarShowedInterface>();
+  @Output() addedCar = new EventEmitter<basicCarShowedInterface>();
   @Output() errorEvent = new EventEmitter<string>();
   @Input() car!: basicCarShowedInterface;
 
@@ -34,6 +35,7 @@ export class BasicCardComponent implements OnInit {
           (res) => {
             if (carBody.hasCar) {
               this.car.has_car = true;
+              this.addedCar.emit(this.car);
             } else if (carBody.wantsCar) {
               this.car.wants_car = true;
             }

@@ -21,6 +21,9 @@ export class PremiumCarsPageComponent implements OnInit {
   cars: any[] = [];
   showedCars: any[] = [];
 
+  userCars: any[] = [];
+  userCarsShowed: any[] = [];
+
   isSerieSelected: boolean = false;
 
   selectedMainSerie: string = '';
@@ -91,6 +94,7 @@ export class PremiumCarsPageComponent implements OnInit {
 
   getCars(main_serie: string) {
     this.setMainSerieTitle(main_serie);
+    this.selectedSecondarySerie = 'All';
 
     this.premiumCarsService.getCars(main_serie).subscribe(res => {
       this.isSerieSelected = true;
@@ -104,6 +108,9 @@ export class PremiumCarsPageComponent implements OnInit {
       // If user is logged, gets the cars of the user and changes the values of the cars
       if (this.userToken.hasToken && this.userToken.userId) {
         this.getUserCars().then((userCars: any) => {
+          this.userCars = userCars.carsOwned.filter((carOwned: any) => carOwned.main_serie === main_serie);
+          this.userCarsShowed = userCars.carsOwned.filter((carOwned: any) => carOwned.main_serie === main_serie);
+
           userCars.carsOwned.forEach((carOwned: any) => {
             const matchedCar = cars.find((car: any) => car.id === carOwned.id);
             if (matchedCar) {
@@ -165,10 +172,12 @@ export class PremiumCarsPageComponent implements OnInit {
   filterSerie(serie: string) {
     switch (serie) {
       case 'All':
+        this.userCarsShowed = this.userCars;
         this.showedCars = this.cars;
         break;
 
       default:
+        this.userCarsShowed = this.userCars.filter(car => car.secondary_serie.includes(serie));
         this.showedCars = this.cars.filter((car: premiumCarInterface) => car.secondary_serie === serie);
         break;
     }
@@ -215,6 +224,20 @@ export class PremiumCarsPageComponent implements OnInit {
 
     const cardDesc4 = this.translate.get('PREMIUM_CARS_DESCRIPTION_4');
     this.msg_card.description[3] = await lastValueFrom(cardDesc4);
+  }
+
+  onDeleteCar(carDeleted: any) {
+    this.userCars = this.userCars.filter(car => car.id !== carDeleted.id);
+    this.userCarsShowed = this.userCarsShowed.filter(car => car.id !== carDeleted.id);
+  }
+
+  onAddedCar(carAdded: any) {
+    const existingCar = this.userCars.find(car => car.id === carAdded.id);
+
+    if (!existingCar) {
+      this.userCars.push(carAdded);
+      this.userCarsShowed.push(carAdded);
+    }
   }
 
 }
