@@ -6,6 +6,7 @@ import { decodeToken } from 'src/app/helpers/generics';
 import { CarsService } from 'src/app/components/car-cards/services/cars.service';
 import { Router } from '@angular/router';
 import { mapAndSortCustomCars } from '../../../helpers/map-cars';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-custom-cars-page',
@@ -26,6 +27,7 @@ export class CustomCarsPageComponent implements OnInit {
   constructor(
     private customCarsService: CustomCarsService,
     private carsService: CarsService,
+    private loaderService: LoaderService,
     private router: Router,
   ) { }
 
@@ -35,6 +37,8 @@ export class CustomCarsPageComponent implements OnInit {
 
 
   getCustomCars() {
+    this.loaderService.startLoading();
+
     if (this.userToken.hasToken && this.userToken.userId) {
         forkJoin({
             cars: this.customCarsService.getCustomCars(),
@@ -43,13 +47,19 @@ export class CustomCarsPageComponent implements OnInit {
           if (this.userToken.userId) {
             this.cars = mapAndSortCustomCars(cars, userVotes, this.userToken.userId);
           }
+
+          this.loaderService.stopLoading();
         }, (err) => {
+            this.loaderService.stopLoading();
+
             console.error(err);
         });
     } else {
         this.customCarsService.getCustomCars().subscribe((res) => {
             this.cars = mapAndSortCustomCars(res);
+            this.loaderService.stopLoading();
         }, (err) => {
+            this.loaderService.stopLoading();
             console.error(err);
         });
     }

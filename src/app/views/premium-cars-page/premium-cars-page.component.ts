@@ -8,6 +8,7 @@ import { decodeToken } from 'src/app/helpers/generics';
 import { premiumPillInterface } from 'src/app/models/premium.interface';
 import { PremiumCarsService } from './premium-cars.service';
 import { premiumCarInterface } from 'src/app/models/cardTypes.interface';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-premium-cars-page',
@@ -80,6 +81,7 @@ export class PremiumCarsPageComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private languageService: LanguageService,
+    private loaderService: LoaderService,
     private premiumCarsService: PremiumCarsService,
   ) {}
 
@@ -90,13 +92,18 @@ export class PremiumCarsPageComponent implements OnInit {
     })
     
     this.changeLanguage();
+    this.loaderService.stopLoading();
+
   }
 
   getCars(main_serie: string) {
+    
     this.setMainSerieTitle(main_serie);
     this.selectedSecondarySerie = 'All';
-
+    
     this.premiumCarsService.getCars(main_serie).subscribe(res => {
+      this.loaderService.startLoading();
+
       this.isSerieSelected = true;
       const cars = res.cars.map((car: premiumCarInterface) => {
         return {
@@ -135,12 +142,15 @@ export class PremiumCarsPageComponent implements OnInit {
           this.cars = finalCars;
           this.showedCars = finalCars;
         }).catch(error => {
+          this.loaderService.stopLoading();
           console.error(error);
         });
       } else {
         this.cars = cars;
         this.showedCars = cars;
       }
+
+      this.loaderService.stopLoading();
 
     });
 
@@ -170,6 +180,8 @@ export class PremiumCarsPageComponent implements OnInit {
   }
 
   filterSerie(serie: string) {
+    this.loaderService.startLoading();
+
     switch (serie) {
       case 'All':
         this.userCarsShowed = this.userCars;
@@ -181,6 +193,8 @@ export class PremiumCarsPageComponent implements OnInit {
         this.showedCars = this.cars.filter((car: premiumCarInterface) => car.secondary_serie === serie);
         break;
     }
+
+    this.loaderService.stopLoading();
   }
 
   getUserCars() {

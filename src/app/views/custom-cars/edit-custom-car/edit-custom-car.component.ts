@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { decodeToken } from 'src/app/helpers/generics';
 import { isValidYear } from 'src/app/helpers/custom-car-validators';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-edit-custom-car',
@@ -34,12 +35,11 @@ export class EditCustomCarComponent implements OnInit {
   successMsg: string = '';
   formSuccess: boolean = false;
 
-  isLoading: boolean = false;
-
 
   constructor(
     private customCarsService: CustomCarsService,
     private formBuilder: FormBuilder,
+    private loaderService: LoaderService,
     private route: ActivatedRoute,
     private router: Router,
   ) {
@@ -170,7 +170,7 @@ export class EditCustomCarComponent implements OnInit {
     this.formError = false;
 
     try {
-      this.isLoading = true;
+      this.loaderService.startLoading();
       // update imgs
       if (this.images[0] !== null || this.images[1] !== null || this.images[2] !== null || this.images[3] !== null) {
         await this.updateImgs();
@@ -205,7 +205,7 @@ export class EditCustomCarComponent implements OnInit {
         return;
       }
     } finally {
-      this.isLoading = false;
+      this.loaderService.stopLoading();
     }
   }
 
@@ -299,7 +299,7 @@ export class EditCustomCarComponent implements OnInit {
 
   async deleteImgApi(index: number) {
     try {
-      this.isLoading = true;
+      this.loaderService.startLoading();
       const url = this.carData.imgs[index].split('/');
       const img = url[url.length - 1].split('.')[0];
 
@@ -325,7 +325,7 @@ export class EditCustomCarComponent implements OnInit {
       } catch (err) {
         console.error(err);
       } finally {
-        this.isLoading = false;
+      this.loaderService.stopLoading();
       }
   }
 

@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from 'src/app/services/language.service';
 import { basicCarInterface } from 'src/app/models/cardTypes.interface';
 import { decodeToken } from 'src/app/helpers/generics';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-basic-cars-page',
@@ -41,8 +42,9 @@ export class BasicCarsPageComponent implements OnInit {
 
   constructor(
     private basicCarsService: BasicCarsService,
+    private loaderService: LoaderService,
+    private languageService: LanguageService,
     private translate: TranslateService,
-    private languageService: LanguageService
   ) {}
 
   ngOnInit() {
@@ -57,6 +59,8 @@ export class BasicCarsPageComponent implements OnInit {
   }
 
   getCars(year: string) {
+    this.loaderService.startLoading();
+
     this.basicCarsService.getCarsByYear(year).subscribe(res => {
       const cars = res.cars.map((car: basicCarInterface) => {
         const series = car.series.split(',');
@@ -107,6 +111,8 @@ export class BasicCarsPageComponent implements OnInit {
         this.showedCars = cars;
       }
 
+      this.loaderService.stopLoading();
+
     });
 
     this.getAvailableSeries(year);
@@ -121,6 +127,8 @@ export class BasicCarsPageComponent implements OnInit {
   }
 
   filterSerie(serie: string) {
+    this.loaderService.startLoading();
+
     switch (serie) {
       case 'All':
         this.userCarsShowed = this.userCars;
@@ -132,6 +140,8 @@ export class BasicCarsPageComponent implements OnInit {
         this.showedCars = this.cars.filter(car => car.series.includes(serie));
         break;
     }
+
+    this.loaderService.stopLoading();
   }
 
   resetSeries() {

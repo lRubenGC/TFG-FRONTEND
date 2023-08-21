@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { GenericAuthService } from 'src/app/services/generic-auth.service';
 import { Subscription } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-login-page',
@@ -36,6 +37,7 @@ export class LoginPageComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private languageService: LanguageService,
+    private loaderService: LoaderService,
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private genericAuthService: GenericAuthService,
@@ -70,6 +72,8 @@ export class LoginPageComponent implements OnInit {
     const password = this.loginForm.value.login_password;
 
     if (this.loginFormValid(email, password)) {
+      this.loaderService.startLoading();
+
       this.authService
         .login({
           email,
@@ -80,6 +84,8 @@ export class LoginPageComponent implements OnInit {
             // Login Notification
             this.loginSuccess = true;
             this.loginSuccessMsg = 'LOGIN_SUCCESFUL'
+
+            this.loaderService.stopLoading();
 
             // Save token in Local Storage
             localStorage.setItem('cw-token', res.token);
@@ -92,6 +98,8 @@ export class LoginPageComponent implements OnInit {
             this.router.navigate(['/']);
           },
           (err) => {
+            this.loaderService.stopLoading();
+
             if (err.error.err === 1) {
               this.loginErrorMsg = 'LOGIN_BAD_REQUEST';
             } else this.loginErrorMsg = 'UNEXPECTED_ERROR'
@@ -107,6 +115,8 @@ export class LoginPageComponent implements OnInit {
     const password = this.registerForm.value.register_password;
 
     if (this.registerFormValid(username, email, password)) {
+      this.loaderService.startLoading();
+
       this.authService
         .register({
           username,
@@ -117,6 +127,8 @@ export class LoginPageComponent implements OnInit {
           (res) => {
             this.loginSuccess = true;
             this.loginSuccessMsg = 'REGISTER_SUCCESFUL'
+
+            this.loaderService.stopLoading();
 
             // Login automatically
             this.authService
@@ -136,6 +148,8 @@ export class LoginPageComponent implements OnInit {
                 this.router.navigate(['/']);
               },
               (err) => {
+                this.loaderService.stopLoading();
+
                 if (err.error.err === 1) {
                   this.loginErrorMsg = 'LOGIN_BAD_REQUEST';
                 } else this.loginErrorMsg = 'UNEXPECTED_ERROR'
@@ -144,6 +158,8 @@ export class LoginPageComponent implements OnInit {
             );
           },
           (err) => {
+            this.loaderService.stopLoading();
+
             if (err.error.errors[0].param === 'username') {
               this.registerErrorMsg = 'USERNAME_IN_USE';
               this.registerError = true;

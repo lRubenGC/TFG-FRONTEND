@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomCarsService } from '../custom-cars.service';
 import { decodeToken } from 'src/app/helpers/generics';
 import { Router } from '@angular/router';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-upload-custom-car-page',
@@ -22,8 +23,6 @@ export class UploadCustomCarPageComponent implements OnInit {
   formSuccess: boolean = false;
   successMsg: string = '';
 
-  isLoading: boolean = false;
-
   customCarUploaded: boolean = false;
   customCarId: number = 0;
 
@@ -32,6 +31,7 @@ export class UploadCustomCarPageComponent implements OnInit {
   constructor(
     private customCarsService: CustomCarsService,
     private formBuilder: FormBuilder,
+    private loaderService: LoaderService,
     private router: Router,
   ) {
     this.customCarForm = this.formBuilder.group({
@@ -150,7 +150,7 @@ export class UploadCustomCarPageComponent implements OnInit {
   async uploadImg(file: File | null) {
     try {
       if (this.userToken.hasToken && this.userToken.userId && file && this.customCarId !== 0) {
-        this.isLoading = true;
+      this.loaderService.startLoading();
         this.imageUploaded = true;
         await this.customCarsService.uploadImg(this.userToken.userId, this.customCarId, file).toPromise();
         this.formSuccess = true;
@@ -159,7 +159,7 @@ export class UploadCustomCarPageComponent implements OnInit {
     } catch (err) {
       console.error(err);
     } finally {
-      this.isLoading = false;
+      this.loaderService.stopLoading();
     }
   }
   

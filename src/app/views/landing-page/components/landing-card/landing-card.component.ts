@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { landingCardInterface } from 'src/app/models/landingPage.interface';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-landing-card',
@@ -16,12 +17,17 @@ export class LandingCardComponent implements OnInit {
     title: ''
   }
 
-  constructor(private router: Router) { }
+  constructor(
+    private loaderService: LoaderService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
 
   goTo(link: string) {
+    this.loaderService.startLoading();
+
     this.router.navigate([link]);
   }
 
