@@ -1,16 +1,16 @@
 <br>
 <div id="custom-car-detailed">
 
-  <header class="go-back-button-container">
+  <header class="go-back-button-container d_flex justify-content_center gap_1 mb_2">
     <button (click)="goTo('goBack')" class="go-back-button">{{ 'GO_BACK' | translate }}</button>
     <button *ngIf="isUserCreatorViewer" (click)="goTo('editCar')" class="go-back-button">{{ 'CUSTOM_CAR_EDIT' | translate }}</button>
   </header>
 
-  <main class="car-detailed-container" *ngIf="car">
+  <main class="car-detailed-container d_flex justify-content_center align-items_start" *ngIf="car">
 
-    <aside class="car-details">
+    <aside class="car-details d_flex flex-direction_column">
 
-      <div class="car-details-item">
+      <div class="car-details-item p_1">
         <h2>{{ 'CUSTOM_CAR_MODEL_NAME' | translate }}: {{ car.model_name }}</h2>
         <p>{{ 'BASIC_CARS_YEAR' | translate }}: {{ car.year }}</p>
         <p>{{ 'CUSTOM_CAR_ID_CAR' | translate }}: {{ car.car_id }}</p>
@@ -18,21 +18,21 @@
         <p>{{ 'CREATED_AT' | translate }}: {{ car.createdAt | date }}</p>
       </div>
 
-      <div class="car-details-item">
-        <h3>{{ 'CUSTOM_CAR_AUTHOR' | translate }}: <span class="user-creator" (click)="goTo('userCreator')">{{ car.userCreator }}</span></h3>
-        <div class="upvotes-container">
+      <div class="car-details-item p_1">
+        <h3>{{ 'CUSTOM_CAR_AUTHOR' | translate }}: <span class="user-creator d_inline-block c_pointer" (click)="goTo('userCreator')">{{ car.userCreator }}</span></h3>
+        <div class="upvotes-container d_flex">
           <p>{{ 'UPVOTES' | translate }}: <span [ngClass]="car.voted ? 'car-voted' : ''" class="car-upvotes">{{ car.upvotes }}</span></p>
-          <img (click)="voteCar()" class="upvote-button" src="../../../assets/images/custom_cars_page/arrow-big-up-line-filled.svg" alt="upvote image">
+          <img (click)="voteCar()" class="upvote-button c_pointer" src="../../../assets/images/custom_cars_page/arrow-big-up-line-filled.svg" alt="upvote image">
         </div>
       </div>
 
     </aside>
 
-    <section class="carousel">
+    <section class="carousel d_flex justify-content_center align-items_center">
       <!-- Images -->
       <button class="nav-button" (click)="prevImage()" aria-label="Previous image button">&#10094;</button>
-      <div class="image-container">
-        <img [src]="car.imgs[currentImageIndex]" (click)="nextImage()" alt="Car image">
+      <div class="image-container d_flex justify-content_center align-items_center w_100 h_100">
+        <img class="c_pointer object-fit_contain w_75 h_75" [src]="car.imgs[currentImageIndex]" (click)="nextImage()" alt="Car image">
       </div>
       <button class="nav-button" (click)="nextImage()" aria-label="Next image button">&#10095;</button>
     </section>

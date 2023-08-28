@@ -1,9 +1,9 @@
 <div
-    class="user-item"
+    class="user-item d_flex align-items_center c_pointer"
     (click)="visitUser()"
     [ngStyle]="{'background-image': user.bg_img ? 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' + user.bg_img + ')' : 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../../assets/images/login_page/login_bg.webp)'}">
     <div class="profile-img-container">
-        <img class="user-profile-pic circular-image" [src]="user.img ? user.img : 'assets/images/user-profile/no-user-profile.webp'" alt="user image pic">
+        <img class="user-profile-pic w_100 h_100 object-fit_cover" [src]="user.img ? user.img : 'assets/images/user-profile/no-user-profile.webp'" alt="user image pic">
     </div>
-    <h4>{{ user.username }}</h4>
+    <h4 class="ml_2">{{ user.username }}</h4>
 </div>

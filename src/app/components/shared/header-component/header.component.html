@@ -1,4 +1,4 @@
-<header #header [ngClass]="{ 'header-block': isBlockView(), 'mobile-menu-open': isMobileMenuOpen }">
+<header class="d_flex justify-content_between align-items_center" #header [ngClass]="{ 'header-block': isBlockView(), 'mobile-menu-open': isMobileMenuOpen }">
 
     <!-- Mobile Menu Button -->
     <div id="mobile-menu" (click)="toggleMobileMenu()">
@@ -6,12 +6,12 @@
     </div>
 
     <!-- Logo -->
-    <div (click)="goTo('/')" id="header-logo">
+    <div (click)="goTo('/')" id="header-logo" class="c_pointer">
         <h1>DT</h1>
     </div>
 
     <!-- Items -->
-    <ul>
+    <ul class="d_flex align-items_center h_100">
 
         <!-- Search Bar -->
         <li class="header-item search-container">

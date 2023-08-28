@@ -1,6 +1,6 @@
-<div class="image-input-container" [ngClass]="imageBanner ? 'image-banner-container' : ''">
+<div class="image-input-container d_flex flex-direction_column justify-content_center align-items_center" [ngClass]="imageBanner ? 'image-banner-container' : ''">
     <input type="file" (change)="onFileSelected($event)" #fileInput hidden />
-    <img *ngIf="previewUrl" [src]="previewUrl" class="image-preview" alt="image preview"/>
+    <img *ngIf="previewUrl" [src]="previewUrl" class="image-preview object-fit_cover" alt="image preview"/>
     <!-- <button *ngIf="previewUrl" (click)="onDeleteImage()" class="delete-button">X</button> -->
     <button *ngIf="displayUploadButton || !this.previewUrl" (click)="fileInput.click()" class="ui-button upload-button">{{ 'CONFIG_UPLOAD_IMG' | translate }}</button>
 </div>

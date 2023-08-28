@@ -1,18 +1,12 @@
 #basic-cars-land-section {
-    display: flex;
     gap: 10em;
-    justify-content: center;
-    align-items: center;
     background: url('src/assets/images/basic_cars_page/basic_cars_bg.webp');
     background-position: center;
     background-size: cover;
-    align-items: center;
     padding: 6em 2em;
 }
 
 #basic-filter-section {
-    display: flex;
-    flex-wrap: wrap;
     width: 20em;
 }
 
@@ -31,8 +25,6 @@
 }
 
 .owned-cars-quantity {
-    display: flex;
-    justify-content: right;
     padding: 2em 2em 0 2em;
 }
 

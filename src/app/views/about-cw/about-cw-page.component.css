@@ -1,11 +1,6 @@
 .about-cw-page {
-    display: flex;
-    flex-direction: column;
     text-justify: auto;
-    width: 50%;
     margin: 70px auto;
-    gap: 1.5em;
-    text-align: center;
 }
 
 .about-cw-page p {
@@ -15,7 +10,6 @@
 
 .about-cw-page a {
     color: #fff;
-    margin-top: 10px;
     font-size: 25px;
 }
 

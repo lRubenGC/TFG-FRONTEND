@@ -1,26 +1,8 @@
-#edit-custom-car-view {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
 .edit-custom-car-container {
     background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     padding: 20px 80px;
     border-radius: 10px;
     margin-top: 40px;
-}
-
-.edit-custom-car-title-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1em;
 }
 
 .go-back-button {
@@ -121,14 +103,8 @@ input {
 }
 
 .img-inputs-container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    gap: 2rem;
     color: #000;
     margin: 25px 0;
-    align-items: center;
-    justify-content: center;
 }
 
 .notification {

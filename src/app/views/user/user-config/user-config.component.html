@@ -1,10 +1,10 @@
-<main id="user-config-view">
-    <form [formGroup]="configForm" class="user-config-container">
+<main id="user-config-view" class="d_flex justify-content_center align-items_center">
+    <form [formGroup]="configForm" class="user-config-container d_flex justify-content_center align-items_center flex-direction_column">
         <h1>{{ 'USER_EDIT_PROFILE' | translate }}</h1>
         <p>{{ 'CONFIG_DESCR' | translate }}</p>
         
-        <div class="user-config-item">
-            <label>{{ 'LOGIN_USERNAME' | translate }}:</label>
+        <div class="d_flex justify-content_center align-items_center w_100">
+            <label class="user-config-item-label">{{ 'LOGIN_USERNAME' | translate }}:</label>
             <input
                 type="text"
                 formControlName="username"
@@ -12,8 +12,8 @@
                 (keydown.enter)="submitForm()" />
         </div>
 
-        <div class="user-config-item">
-            <label>{{ 'LOGIN_EMAIL' | translate }}:</label>
+        <div class="d_flex justify-content_center align-items_center w_100">
+            <label class="user-config-item-label">{{ 'LOGIN_EMAIL' | translate }}:</label>
             <input
                 type="email"
                 formControlName="email"
@@ -22,8 +22,8 @@
         </div>
 
 
-        <div class="user-config-item">
-            <label>{{ 'LOGIN_PASSWORD' | translate }}:</label>
+        <div class="d_flex justify-content_center align-items_center w_100">
+            <label class="user-config-item-label">{{ 'LOGIN_PASSWORD' | translate }}:</label>
             <input
                 type="password"
                 formControlName="password"
@@ -31,11 +31,11 @@
                 (keydown.enter)="submitForm()" />
         </div>
 
-        <div class="img-inputs-container" *ngIf="data">
+        <div class="img-inputs-container d_flex align-items_center gap_2 text-align_center" *ngIf="data">
             <div class="img-input">
-                <div class="img-title-container">
+                <div class="d_flex justify-content_center align-items_center gap_0_5 mb_0_25">
                     <h4>{{ 'CONFIG_IMG_PROFILE' | translate }}</h4>
-                    <button (click)="deleteImg($event, 1)" class="button-delete-config" aria-label="Delete image 1 button">
+                    <button (click)="deleteImg($event, 1)" class="button-delete-config d_flex justify-content_center align-items_center c_pointer p_0_5" aria-label="Delete image 1 button">
                         <i class="fas fa-trash"></i>
                     </button>
                 </div>
@@ -47,9 +47,9 @@
             </div>
 
             <div class="img_bg-input">
-                <div class="img-title-container">
+                <div class="d_flex justify-content_center align-items_center gap_0_5 mb_0_25">
                     <h4>{{ 'CONFIG_IMG_BANNER' | translate }}</h4>
-                    <button (click)="deleteImg($event, 2)"class="button-delete-config" aria-label="Delete image 2 button">
+                    <button (click)="deleteImg($event, 2)"class="button-delete-config d_flex justify-content_center align-items_center c_pointer p_0_5" aria-label="Delete image 2 button">
                         <i class="fas fa-trash"></i>
                     </button>
                 </div>

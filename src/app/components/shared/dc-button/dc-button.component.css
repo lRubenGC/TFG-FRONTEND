@@ -7,7 +7,6 @@
   box-sizing: border-box;
   text-shadow: 4px 4px 4px #000;
   transition: all 0.2s;
-  cursor: pointer;
   min-width: 150px;
   height: 2.75em;
 }

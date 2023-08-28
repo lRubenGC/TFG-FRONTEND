@@ -2,36 +2,39 @@
 <div id="user-profile-page">
     <div id="user-profile-body">
         <!-- Landing section -->
-        <header id="user-profile-land-section" [ngStyle]="{'background-image': user?.bg_img ? 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' + user?.bg_img + ')' : 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../../../../assets/images/login_page/login_bg.webp)'}">
+        <header
+            id="user-profile-land-section"
+            class="d_flex justify-content_around p_2"
+            [ngStyle]="{'background-image': user?.bg_img ? 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' + user?.bg_img + ')' : 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../../../../assets/images/login_page/login_bg.webp)'}">
 
             <!-- Profile data -->
-            <section class="profile-data-name">
+            <section class="profile-data-name d_flex">
                 <div class="profile-img-container">
-                    <img class="user-profile-pic circular-image" [src]="user?.img ? user?.img : 'assets/images/user-profile/no-user-profile.webp'" alt="user profile pic">
+                    <img class="user-profile-pic w_100 h_100 object-fit_cover" [src]="user?.img ? user?.img : 'assets/images/user-profile/no-user-profile.webp'" alt="user profile pic">
                 </div>
-                <div class="profile-data-name-container">
+                <div class="profile-data-name-container d_flex justify-content_around flex-direction_column p_0_5">
                     <h3>{{ user?.username }}</h3>
                     <button *ngIf="userVisitor" (click)="goToConfig()">{{ 'USER_EDIT_PROFILE' | translate }}</button>
                 </div>
             </section>
 
             <!-- Cars data -->
-            <section class="profile-data-cars">
-                <div class="data-cars-item">
+            <section class="profile-data-cars d_flex justify-content_center align-items_center text-align_center">
+                <div class="data-cars-item d_flex justify-content_center flex-direction_column text-align_center">
                     <p class="data-item-number">{{ basicCarsOwned.length }}</p>
                     <p>{{ 'USER_PROFILE_BASIC_MENU' | translate }}</p>
                 </div>
 
                 <div class="vertical-divider"></div>
                 
-                <div class="data-cars-item">
+                <div class="data-cars-item d_flex justify-content_center flex-direction_column text-align_center">
                     <p class="data-item-number">{{ premiumCarsOwned.length }}</p>
                     <p>{{ 'USER_PROFILE_PREMIUM_MENU' | translate }}</p>
                 </div>
                 
                 <div class="vertical-divider"></div>
 
-                <div class="data-cars-item">
+                <div class="data-cars-item d_flex justify-content_center flex-direction_column text-align_center">
                     <p class="data-item-number">{{ customCarsOwned.length }}</p>
                     <p>{{ 'USER_PROFILE_CUSTOM_MENU' | translate }}</p>
                 </div>
@@ -39,21 +42,21 @@
 
         </header>
 
-        <div *ngIf="userVisitor" class="export-collection-container">
-            <div class="button-and-span">
+        <div *ngIf="userVisitor" class="export-collection-container d_flex flex-direction_column gap_0_5 mt_0_5">
+            <div class="d_flex align-items_center gap_0_25">
                 <app-dc-button [buttonTitle]="'USER_EXPORT_TO_CSV'" (click)="exportToCsv()"></app-dc-button>
                 <span>({{ 'USER_DOWNLOAD_DAYS' | translate }})</span>
             </div>
-            <div *ngIf="exportToCsvError" class="export-collection-error">
+            <div *ngIf="exportToCsvError" class="export-collection-error d_flex justify-content_center gap_0_5 text-align_center">
                 <p>{{ 'USER_DOWNLOAD_ERROR' | translate }}</p>
-                <span (click)="exportToCsvError = false">&#10005;</span>
+                <span (click)="exportToCsvError = false" class="c_pointer">&#10005;</span>
             </div>
         </div>
 
         <!-- Car menu -->
-        <section class="car-menu-list-container">
-            <div class="car-menu-list">
-                <div class="car-menu-list__group">
+        <section class="car-menu-list-container d_flex justify-content_center mt_2">
+            <div class="car-menu-list d_flex justify-content_center align-items_center gap_1">
+                <div class="car-menu-list__group d_flex gap_1">
                     <div
                         class="car-menu-item"
                         [ngClass]="carsType == 'basic' ? 'car-menu-item-selected' : ''"
@@ -90,7 +93,7 @@
         </section>
 
         <!-- Filter section for Basic Cars-->
-        <section *ngIf="carsType === 'basic'" id="user-filter-basic-section">
+        <section *ngIf="carsType === 'basic'" class="d_flex justify-content_center gap_4">
 
             <div class="basic-filter-item">
                 <h3>{{ 'BASIC_CARS_YEAR' | translate }}</h3>
@@ -120,7 +123,7 @@
         </section>
 
         <!-- Filter section for Premium Cars-->
-        <section *ngIf="carsType === 'premium'" id="user-filter-premium-section">
+        <section *ngIf="carsType === 'premium'" class="d_flex justify-content_center gap_4">
 
             <div class="basic-filter-item">
                 <h3>{{ 'PREMIUM_CARS_MAIN_SERIE' | translate }}</h3>

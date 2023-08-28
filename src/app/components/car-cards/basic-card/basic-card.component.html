@@ -1,4 +1,4 @@
-<div class="basic-car-item">
+<div class="basic-car-item d_flex flex-direction_column justify-content_center align-items_center w_100 h_100 text-align_center">
     <!-- Car Title -->
     <div 
         class="item-car-title"
@@ -16,7 +16,7 @@
     <div class="img-container" (click)="onCarClick()">
         <img
             loading="lazy" 
-            class="banner-image"
+            class="banner-image object-fit_cover"
             [src]="car.img"
             [alt]="car.model_name"
             [ngClass]="carClicked ? 'car-img-opacity' : ''"
@@ -29,13 +29,13 @@
     </div>
 
     <!-- Car Description -->
-    <div class="car-item-subtitle">
+    <div class="car-item-subtitle d_flex justify-content_evenly flex_wrap gap_0_25 mt_0_5">
         <p>#{{ car.col }}</p>
         <p>{{ car.version }}</p>
         <p>{{ car.car_id }}</p>
     </div>
-    <div class="car-series-col-serie">
-        <div class="square-series-wrapper">
+    <div class="car-series-col-serie d_flex justify-content_center align-items_center gap_2">
+        <div class="square-series-wrapper d_flex align-items_center">
             <div class="serie-square" [ngClass]="car.serie_class"></div>
             <p>{{ car.series[0] }}</p>
         </div>

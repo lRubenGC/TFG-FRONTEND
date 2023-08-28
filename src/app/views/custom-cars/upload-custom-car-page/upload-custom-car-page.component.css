@@ -1,15 +1,5 @@
-#custom-cars-upload {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .custom-cars-container {
     background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     padding: 20px 80px;
     border-radius: 10px;
     margin-top: 80px;
@@ -29,8 +19,7 @@
     margin-right: 5px;
 }
 
-h1,
-p {
+h1, p {
     color: #000;
     text-align: center;
 }
@@ -100,19 +89,8 @@ input {
     color: #fff;
 }
 
-.img-inputs-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 2em;
-}
-
 .img-upload-section-header {
     margin: 2em 0 1em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1em;
 }
 
 .custom-cars-upload-images {

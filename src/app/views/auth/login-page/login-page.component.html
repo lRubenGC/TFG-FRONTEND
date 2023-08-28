@@ -118,23 +118,23 @@
                 <p *ngIf="loginError" class="auth-notification auth-error">{{ loginErrorMsg | translate }}</p>
                 <p *ngIf="loginSuccess" class="auth-notification auth-success">{{ loginSuccessMsg | translate }}</p>
 
-                <!-- <p class="password-forgot">{{ 'LOGIN_FORGOT' | translate }}</p> -->
+                <!-- <p class="password-forgot c_pointer mt_2">{{ 'LOGIN_FORGOT' | translate }}</p> -->
             </form>
         </section>
 
         <!-- Overlay -->
-        <div class="overlay-container">
+        <div class="overlay-container w_50 h_100">
             <div class="overlay">
 
                 <!-- Login Overlay -->
-                <div class="overlay-panel overlay-left">
+                <div class="overlay-panel d_flex flex-direction_column justify-content_center align-items_center overlay-left text-align_center w_50 h_100">
                     <h1 class="overlay-texts">{{ 'LOGIN_OVERLAY_TITLE' | translate }}</h1>
                     <button class="ghost overlay-texts" (click)="toggleLogin()" id="signIn">{{ 'LOGIN_SIGNIN' |
                         translate }}</button>
                 </div>
 
                 <!-- Register Overlay -->
-                <div class="overlay-panel overlay-right">
+                <div class="overlay-panel d_flex flex-direction_column justify-content_center align-items_center overlay-right text-align_center w_50 h_100">
                     <h1 class="overlay-texts">{{ 'REGISTER_OVERLAY_TITLE' | translate }}</h1>
                     <button class="ghost overlay-texts" (click)="toggleLogin()" id="signUp">{{ 'REGISTER_SIGNUP' |
                         translate }}</button>

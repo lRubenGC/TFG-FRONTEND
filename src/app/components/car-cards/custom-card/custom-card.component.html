@@ -1,4 +1,4 @@
-<div class="custom-car-item">
+<div class="custom-car-item w_100 h_100">
 
     <!-- Car Title -->
     <div class="item-car-title">  
@@ -6,21 +6,21 @@
     </div>
     
     <!-- Img and upvotes Container -->
-    <div class="img-and-upvotes">
+    <div class="img-and-upvotes d_flex justify-content_between align-items_center w_100">
         <!-- Img Container -->
-        <div class="custom-img-container" (click)="goToCustomCarView()">
-            <img loading="lazy" class="banner-image" [src]="car.imgs[0]" [alt]="car.model_name"/>
+        <div class="custom-img-container w_100 c_pointer" (click)="goToCustomCarView()">
+            <img loading="lazy" class="banner-image w_100 object-fit_cover" [src]="car.imgs[0]" [alt]="car.model_name"/>
         </div>
         
         <!-- Upvotes -->
-        <div *ngIf="!userProfile" class="upvotes">
+        <div *ngIf="!userProfile" class="upvotes d_flex ml_1">
             <p [ngClass]="car.voted ? 'car-voted' : ''">{{ car.upvotes }}</p>
-            <img (click)="voteCar()" class="upvote-button" src="../../../assets/images/custom_cars_page/arrow-big-up-line-filled.svg" alt="upvote image">
+            <img (click)="voteCar()" class="upvote-button c_pointer" src="../../../assets/images/custom_cars_page/arrow-big-up-line-filled.svg" alt="upvote image">
         </div>
     </div>
 
     <div *ngIf="!userProfile" class="custom-car-user-creator">
-        <h4 (click)="goToCreatorProfile()">{{ car.userCreator }}</h4>
+        <h4 class="c_pointer" (click)="goToCreatorProfile()">{{ car.userCreator }}</h4>
     </div>
 
 </div>

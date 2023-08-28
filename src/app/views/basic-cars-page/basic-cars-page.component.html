@@ -2,7 +2,7 @@
     <div id="basic-cars-body">
 
         <!-- Landing section -->
-        <header id="basic-cars-land-section">
+        <header id="basic-cars-land-section" class="d_flex justify-content_center align-items_center">
 
             <!-- Explanation section -->
             <section id="basic-explanation">
@@ -10,7 +10,7 @@
             </section>
 
             <!-- Filter section -->
-            <section id="basic-filter-section">
+            <section id="basic-filter-section" class="d_flex flex_wrap">
 
                 <div class="basic-filter-item">
                     <h3>{{ 'BASIC_CARS_YEAR' | translate }}</h3>
@@ -40,9 +40,9 @@
 
         </header>
 
-        <section class="owned-cars-quantity">
+        <section class="owned-cars-quantity d_flex justify-content_end">
             <div *ngIf="userToken.userId"><h4>{{ 'CARS_OWNED_LITERAL' | translate}}: {{ userCarsShowed.length }} / {{ showedCars.length }}</h4></div>
-            <div *ngIf="!userToken.userId"><h4>{{ 'CARS_OWNED_LITERAL' | translate}}: XX / {{ showedCars.length }}</h4></div>
+            <div *ngIf="!userToken.userId"><h4>{{ 'CARS_OWNED_LITERAL' | translate}}: X / {{ showedCars.length }}</h4></div>
         </section>
 
         <!-- Car list -->

@@ -1,16 +1,9 @@
 #premium-cars-land-section {
-    display: flex;
     gap: 10em;
-    justify-content: center;
-    align-items: center;
     background: url('src/assets/images/premium_cars_page/premium_cars_bg.webp');
     background-position: center;
     background-size: cover;
     padding: 6em 2em;
-}
-
-#premium-filter-section {
-    display: flex;
 }
 
 .premium-filter-item {
@@ -70,29 +63,12 @@ select::-ms-expand {
 }
 
 .premium-view-title {
-    text-align: center;
     margin: 2rem auto 0;
     width: 85%;
 }
 
-.premium-view-title h2 {
-    margin-bottom: 5px;
-}
-
-#premium-cars-selector {
+.premium-cars-selector {
     margin: 50px auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.return-button-container {
-    display: flex;
-    gap: 2em;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin-top: 20px;
 }
 
 @media (max-width: 1166px) {

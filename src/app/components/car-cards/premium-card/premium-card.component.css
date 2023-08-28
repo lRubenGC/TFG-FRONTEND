@@ -1,12 +1,5 @@
 .premium-car-item {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
     margin: 1.2em 0;
-    text-align: center;
 }
 
 .img-container {
@@ -17,7 +10,6 @@
 .card-image {
     width: 255px;
     height: 390px;
-    object-fit: cover;
     border-radius: .6rem;
 }
 
@@ -35,18 +27,8 @@
     letter-spacing: 1px;
 }
 
-/* .button-wrapper {
-    margin-top: .5rem;
-} */
-
 .car-item-subtitle {
     margin-top: .5rem;
-}
-
-.car-serie-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 span {

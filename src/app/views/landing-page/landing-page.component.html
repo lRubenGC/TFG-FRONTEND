@@ -2,14 +2,14 @@
     <main id="landing-body">
 
         <!-- Welcome section -->
-        <header id="landing-welcome">
+        <header id="landing-welcome" class="d_flex justify-content_center">
             <app-msg-card
                 [config]="msg_card"
             ></app-msg-card>
         </header>
 
         <!-- 3 Car section cards -->
-        <footer id="landing-cards">
+        <footer id="landing-cards" class="d_flex justify-content_center">
             <app-landing-card
                 *ngFor="let card of landingCards"
                 class="landing-card"

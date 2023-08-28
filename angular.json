@@ -31,7 +31,9 @@
               "src/fonts"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/styles/helpers.css",
+              "src/assets/styles/car-series.css"
             ],
             "scripts": []
           },
@@ -98,7 +100,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/styles/helpers.css",
+              "src/assets/styles/car-series.css"
             ],
             "scripts": []
           }

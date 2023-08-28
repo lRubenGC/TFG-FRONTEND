@@ -1,16 +1,8 @@
 #welcome-text {
     display: flex;
-    flex-direction: column;
     gap: .4rem;
-    justify-content: center;
     background-color: var(--dark-bg-100-opacity);
     border-radius: 1rem;
-    text-align: justify;
-    padding: 2rem;
-}
-
-#welcome-text h2 {
-    text-align: center;
 }
 
 .a-button {

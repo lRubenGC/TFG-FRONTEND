@@ -1,0 +1,374 @@
+/* Clases generales para display */
+.d_flex {
+    display: flex;
+}
+
+.d_grid {
+    display: grid;
+}
+
+.d_block {
+    display: block;
+}
+
+.d_inline-block {
+    display: inline-block;
+}
+
+.d_none {
+    display: none;
+}
+
+/* Clases para justificación de contenido */
+.justify-content_start {
+    justify-content: flex-start;
+}
+
+.justify-content_end {
+    justify-content: flex-end;
+}
+
+.justify-content_center {
+    justify-content: center;
+}
+
+.justify-content_between {
+    justify-content: space-between;
+}
+
+.justify-content_around {
+    justify-content: space-around;
+}
+
+.justify-content_evenly {
+    justify-content: space-evenly;
+}
+
+/* Clases para alineación de items */
+.align-items_start {
+    align-items: flex-start;
+}
+
+.align-items_end {
+    align-items: flex-end;
+}
+
+.align-items_center {
+    align-items: center;
+}
+
+/* Flex direction */
+.flex-direction_column {
+    flex-direction: column;
+}
+
+/* Gap */
+.gap_0_25 {
+    gap: 0.25rem;
+}
+
+.gap_0_5 {
+    gap: 0.5rem;
+}
+
+.gap_0_75 {
+    gap: 0.75rem;
+}
+
+.gap_1 {
+    gap: 1rem;
+}
+
+.gap_1_5 {
+    gap: 1.5rem;
+}
+
+.gap_2 {
+    gap: 2rem;
+}
+
+.gap_3 {
+    gap: 3rem;
+}
+
+.gap_4 {
+    gap: 4rem;
+}
+
+.gap_5 {
+    gap: 5rem;
+}
+
+/* Flex wrap */
+.flex_wrap {
+    flex-wrap: wrap;
+}
+
+/* Espacio disponible en flex containers */
+.flex-grow_0 {
+    flex-grow: 0;
+}
+
+.flex-grow_1 {
+    flex-grow: 1;
+}
+
+/* Margin */
+.m_0_25 {
+    margin: 0.25rem;
+}
+
+.m_0_5 {
+    margin: 0.5rem;
+}
+
+.m_0_75 {
+    margin: 0.75rem;
+}
+
+.m_1 {
+    margin: 1rem;
+}
+
+.m_2 {
+    margin: 2rem;
+}
+
+.mt_0_25 {
+    margin-top: 0.25rem;
+}
+
+.mr_0_25 {
+    margin-right: 0.25rem;
+}
+
+.mb_0_25 {
+    margin-bottom: 0.25rem;
+}
+
+.ml_0_25 {
+    margin-left: 0.25rem;
+}
+
+.mt_0_5 {
+    margin-top: 0.5rem;
+}
+
+.mr_0_5 {
+    margin-right: 0.5rem;
+}
+
+.mb_0_5 {
+    margin-bottom: 0.5rem;
+}
+
+.ml_0_5 {
+    margin-left: 0.5rem;
+}
+
+.mt_0_75 {
+    margin-top: 0.75rem;
+}
+
+.mr_0_75 {
+    margin-right: 0.75rem;
+}
+
+.mb_0_75 {
+    margin-bottom: 0.75rem;
+}
+
+.ml_0_75 {
+    margin-left: 0.75rem;
+}
+
+.mt_1 {
+    margin-top: 1rem;
+}
+
+.mr_1 {
+    margin-right: 1rem;
+}
+
+.mb_1 {
+    margin-bottom: 1rem;
+}
+
+.ml_1 {
+    margin-left: 1rem;
+}
+
+.mt_2 {
+    margin-top: 2rem;
+}
+
+.mr_2 {
+    margin-right: 2rem;
+}
+
+.mb_2 {
+    margin-bottom: 2rem;
+}
+
+.ml_2 {
+    margin-left: 2rem;
+}
+
+/* Padding */
+.p_0_25 {
+    padding: 0.25rem;
+}
+
+.p_0_5 {
+    padding: 0.5rem;
+}
+
+.p_0_75 {
+    padding: 0.75rem;
+}
+
+.p_1 {
+    padding: 1rem;
+}
+
+.p_2 {
+    padding: 2rem;
+}
+
+.pt_0_25 {
+    padding-top: 0.25rem;
+}
+
+.pr_0_25 {
+    padding-right: 0.25rem;
+}
+
+.pb_0_25 {
+    padding-bottom: 0.25rem;
+}
+
+.pl_0_25 {
+    padding-left: 0.25rem;
+}
+
+.pt_0_5 {
+    padding-top: 0.5rem;
+}
+
+.pr_0_5 {
+    padding-right: 0.5rem;
+}
+
+.pb_0_5 {
+    padding-bottom: 0.5rem;
+}
+
+.pl_0_5 {
+    padding-left: 0.5rem;
+}
+
+.pt_0_75 {
+    padding-top: 0.75rem;
+}
+
+.pr_0_75 {
+    padding-right: 0.75rem;
+}
+
+.pb_0_75 {
+    padding-bottom: 0.75rem;
+}
+
+.pl_0_75 {
+    padding-left: 0.75rem;
+}
+
+.pt_1 {
+    padding-top: 1rem;
+}
+
+.pr_1 {
+    padding-right: 1rem;
+}
+
+.pb_1 {
+    padding-bottom: 1rem;
+}
+
+.pl_1 {
+    padding-left: 1rem;
+}
+
+.pt_2 {
+    padding-top: 2rem;
+}
+
+.pr_2 {
+    padding-right: 2rem;
+}
+
+.pb_2 {
+    padding-bottom: 2rem;
+}
+
+.pl_2 {
+    padding-left: 2rem;
+}
+
+
+
+/* Width y height */
+.w_100 {
+    width: 100%;
+}
+
+.h_100 {
+    height: 100%;
+}
+
+.w_75 {
+    width: 75%;
+}
+
+.h_75 {
+    height: 75%;
+}
+
+.w_50 {
+    width: 50%;
+}
+
+.h_50 {
+    height: 50%;
+}
+
+/* Utilities */
+.object-fit_cover {
+    object-fit: cover;
+}
+
+.object-fit_contain {
+    object-fit: contain;
+}
+
+.c_pointer {
+    cursor: pointer;
+}
+
+
+/* Font */
+.text-align_center {
+    text-align: center;
+}
+
+.text-align_left {
+    text-align: left;
+}
+
+.text-align_right {
+    text-align: right;
+}
+
+.text-align_justify {
+    text-align: justify;
+}
