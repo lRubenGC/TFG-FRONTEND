@@ -85,77 +85,70 @@ export class PremiumCarsPageComponent implements OnInit {
     private premiumCarsService: PremiumCarsService,
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.subscription = this.languageService.languageChanged$.subscribe(lang => {
       this.translate.use(lang);
       this.changeLanguage();
     })
-    
-    this.changeLanguage();
-    this.loaderService.stopLoading();
 
+    await this.changeLanguage();
+    this.loaderService.stopLoading();
   }
 
-  getCars(main_serie: string) {
-    
+
+  async getCars(main_serie: string) {
     this.setMainSerieTitle(main_serie);
     this.selectedSecondarySerie = 'All';
-    
-    this.premiumCarsService.getCars(main_serie).subscribe(res => {
-      this.loaderService.startLoading();
+    this.loaderService.startLoading();
 
-      this.isSerieSelected = true;
-      const cars = res.cars.map((car: premiumCarInterface) => {
-        return {
-          ...car,
-          user_profile: true,
+    try {
+        const res = await lastValueFrom(this.premiumCarsService.getCars(main_serie));
+
+        this.isSerieSelected = true;
+        let cars = res.cars.map((car: premiumCarInterface) => ({ ...car, user_profile: true }));
+
+        if (this.userToken.hasToken && this.userToken.userId) {
+            const userCars = await this.getUserCars();
+            this.userCars = userCars.carsOwned.filter((carOwned: any) => carOwned.main_serie === main_serie);
+            this.userCarsShowed = userCars.carsOwned.filter((carOwned: any) => carOwned.main_serie === main_serie);
+
+            userCars.carsOwned.forEach((carOwned: any) => {
+                const matchedCar = cars.find((car: any) => car.id === carOwned.id);
+                if (matchedCar) {
+                    matchedCar.has_car = true;
+                }
+            });
+
+            userCars.carsWished.forEach((carWished: any) => {
+                const matchedCar = cars.find((car: any) => car.id === carWished.id);
+                if (matchedCar) {
+                    matchedCar.wants_car = true;
+                }
+            });
+
+            const finalCars = cars.map((car: any) => {
+                return {
+                    ...car,
+                    token: this.userToken.userId
+                }
+            });
+
+            this.cars = finalCars;
+            this.showedCars = finalCars;
+        } else {
+            this.cars = cars;
+            this.showedCars = cars;
         }
-      });
-      
-      // If user is logged, gets the cars of the user and changes the values of the cars
-      if (this.userToken.hasToken && this.userToken.userId) {
-        this.getUserCars().then((userCars: any) => {
-          this.userCars = userCars.carsOwned.filter((carOwned: any) => carOwned.main_serie === main_serie);
-          this.userCarsShowed = userCars.carsOwned.filter((carOwned: any) => carOwned.main_serie === main_serie);
-
-          userCars.carsOwned.forEach((carOwned: any) => {
-            const matchedCar = cars.find((car: any) => car.id === carOwned.id);
-            if (matchedCar) {
-              matchedCar.has_car = true;
-            }
-          });
-  
-          userCars.carsWished.forEach((carWished: any) => {
-            const matchedCar = cars.find((car: any) => car.id === carWished.id);
-            if (matchedCar) {
-              matchedCar.wants_car = true;
-            }
-          });
-
-          const finalCars = cars.map((car: any) => {
-            return {
-              ...car,
-              token: this.userToken.userId
-            }
-          })
-  
-          this.cars = finalCars;
-          this.showedCars = finalCars;
-        }).catch(error => {
-          this.loaderService.stopLoading();
-          console.error(error);
-        });
-      } else {
-        this.cars = cars;
-        this.showedCars = cars;
-      }
-
-      this.loaderService.stopLoading();
-
-    });
+    } catch (error) {
+        console.error(error);
+        this.enableErrorMsg(error);
+    } finally {
+        this.loaderService.stopLoading();
+    }
 
     this.getAvailableSeries(main_serie);
   }
+
 
   getAvailableSeries(main_serie: string) {
     this.premiumCarsService.getAvailableSeries(main_serie).subscribe(res => {
@@ -197,17 +190,18 @@ export class PremiumCarsPageComponent implements OnInit {
     this.loaderService.stopLoading();
   }
 
-  getUserCars() {
-    return new Promise((resolve, reject) => {
-      if (this.userToken.hasToken && this.userToken.userId) {
-        this.premiumCarsService.getUserCars(this.userToken.userId).subscribe(res => {
-          resolve(res);
-        }, error => {
-          reject(error);
-        });
+  async getUserCars() {
+    if (this.userToken.hasToken && this.userToken.userId) {
+      try {
+        const res = await lastValueFrom(this.premiumCarsService.getUserCars(this.userToken.userId));
+        return res;
+      } catch (error) {
+        throw error;
       }
-    });
+    }
+    return Promise.resolve({});
   }
+
 
   enableErrorMsg(msg: string | any) {
     this.error = true;
@@ -224,20 +218,15 @@ export class PremiumCarsPageComponent implements OnInit {
   
 
   async changeLanguage() {
-    const cardTitle = this.translate.get('PREMIUM_CARS_TITLE');
-    this.msg_card.title = await lastValueFrom(cardTitle);
-
-    const cardDescr1 = this.translate.get('PREMIUM_CARS_DESCRIPTION_1');
-    this.msg_card.description[0] = await lastValueFrom(cardDescr1);
-
-    const cardDesc2 = this.translate.get('PREMIUM_CARS_DESCRIPTION_2');
-    this.msg_card.description[1] = await lastValueFrom(cardDesc2);
-
-    const cardDesc3 = this.translate.get('PREMIUM_CARS_DESCRIPTION_3');
-    this.msg_card.description[2] = await lastValueFrom(cardDesc3);
-
-    const cardDesc4 = this.translate.get('PREMIUM_CARS_DESCRIPTION_4');
-    this.msg_card.description[3] = await lastValueFrom(cardDesc4);
+    try {
+      this.msg_card.title = await lastValueFrom(this.translate.get('PREMIUM_CARS_TITLE'));
+      this.msg_card.description[0] = await lastValueFrom(this.translate.get('PREMIUM_CARS_DESCRIPTION_1'));
+      this.msg_card.description[1] = await lastValueFrom(this.translate.get('PREMIUM_CARS_DESCRIPTION_2'));
+      this.msg_card.description[2] = await lastValueFrom(this.translate.get('PREMIUM_CARS_DESCRIPTION_3'));
+      this.msg_card.description[3] = await lastValueFrom(this.translate.get('PREMIUM_CARS_DESCRIPTION_4'));
+    } catch (error) {
+      console.error('Error changing language:', error);
+    }
   }
 
   onDeleteCar(carDeleted: any) {

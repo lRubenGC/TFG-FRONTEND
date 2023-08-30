@@ -77,6 +77,8 @@ export class HeaderComponent implements OnInit {
       return;
     }
 
+    this.loaderService.startLoading();
+
     // If there is data, search bar gets closed
     this.searchInput.nativeElement.blur();
 

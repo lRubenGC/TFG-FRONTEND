@@ -58,66 +58,63 @@ export class BasicCarsPageComponent implements OnInit {
     this.changeLanguage();
   }
 
-  getCars(year: string) {
+  async getCars(year: string) {
     this.loaderService.startLoading();
-
-    this.basicCarsService.getCarsByYear(year).subscribe(res => {
-      const cars = res.cars.map((car: basicCarInterface) => {
+  
+    try {
+      const carsResponse = await lastValueFrom(this.basicCarsService.getCarsByYear(year));
+      let cars = carsResponse.cars.map((car: basicCarInterface) => {
         const series = car.series.split(',');
         const serie_class = series[0].replace(/ /g, '-').toLowerCase();
-
         return {
           ...car,
           series,
           serie_class,
           user_profile: true
-        }
+        };
       });
-
-      // If user is logged, gets the cars of the user and changes the values of the cars
+  
       if (this.userToken.hasToken && this.userToken.userId) {
-        this.getUserCars().then((userCars: any) => {
-          this.userCars = userCars.carsOwned.filter((carOwned: any) => carOwned.year === year);
-          this.userCarsShowed = userCars.carsOwned.filter((carOwned: any) => carOwned.year === year);
+        const userCarsResponse = await this.getUserCars() as { carsOwned: any[]; carsWished: any[] };
 
-          userCars.carsOwned.forEach((carOwned: any) => {
-            const matchedCar = cars.find((car: any) => car.id === carOwned.id);
-            if (matchedCar) {
-              matchedCar.has_car = true;
-            }
-          });
+        this.userCars = userCarsResponse.carsOwned.filter((carOwned: any) => carOwned.year === year);
+        this.userCarsShowed = userCarsResponse.carsOwned.filter((carOwned: any) => carOwned.year === year);
   
-          userCars.carsWished.forEach((carWished: any) => {
-            const matchedCar = cars.find((car: any) => car.id === carWished.id);
-            if (matchedCar) {
-              matchedCar.wants_car = true;
-            }
-          });
-
-          const finalCars = cars.map((car: any) => {
-            return {
-              ...car,
-              token: this.userToken.userId
-            }
-          });
-  
-          this.cars = finalCars;
-          this.showedCars = finalCars;
-        }).catch(error => {
-          console.error(error);
+        userCarsResponse.carsOwned.forEach((carOwned: any) => {
+          const matchedCar = cars.find((car: any) => car.id === carOwned.id);
+          if (matchedCar) {
+            matchedCar.has_car = true;
+          }
         });
-      } else {
-        this.cars = cars;
-        this.showedCars = cars;
+  
+        userCarsResponse.carsWished.forEach((carWished: any) => {
+          const matchedCar = cars.find((car: any) => car.id === carWished.id);
+          if (matchedCar) {
+            matchedCar.wants_car = true;
+          }
+        });
+  
+        cars = cars.map((car: any) => {
+          return {
+            ...car,
+            token: this.userToken.userId
+          };
+        });
       }
-
+  
+      this.cars = cars;
+      this.showedCars = cars;
+  
+    } catch (error) {
+      console.error(error);
+      this.enableErrorMsg(error);
+    } finally {
       this.loaderService.stopLoading();
-
-    });
-
-    this.getAvailableSeries(year);
-    this.resetSeries();
+      this.getAvailableSeries(year);
+      this.resetSeries();
+    }
   }
+  
 
   getAvailableSeries(year: string) {
     this.basicCarsService.getAvailableSeries(year).subscribe(res => {

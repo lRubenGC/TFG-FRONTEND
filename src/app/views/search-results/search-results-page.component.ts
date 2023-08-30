@@ -7,6 +7,8 @@ import { PremiumCarsService } from '../premium-cars-page/premium-cars.service';
 import { decodeToken } from 'src/app/helpers/generics';
 import { basicCarInterface, basicCarShowedInterface, premiumCarInterface } from 'src/app/models/cardTypes.interface';
 import { premiumCarShowedInterface } from 'src/app/models/cardTypes.interface';
+import { LoaderService } from '../../services/loader.service';
+import { UserCars } from '../../models/userCars.interface';
 
 @Component({
   selector: 'app-search-results',
@@ -34,6 +36,7 @@ export class SearchResultsPageComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private basicCarsService: BasicCarsService,
+    private loaderService: LoaderService,
     private premiumCarsService: PremiumCarsService,
     private searchResultsService: SearchResultsService,
   ) { }
@@ -55,110 +58,109 @@ export class SearchResultsPageComponent implements OnInit, OnDestroy {
   }
   
   searchUsers(query: string) {
-    if (query) {
-      this.searchResultsService.getUsers(query).subscribe(res => {
-        this.users = res.users;
-      })
-    }
+    if (!query) return;
+
+    this.searchResultsService.getUsers(query).subscribe(res => {
+      this.users = res.users;
+    });
   }
 
   searchCars(query: string) {
-    if (query) {
-      
-      // Gets Basic and Premiums cars
-      this.searchResultsService.getCars(query).subscribe(res => {
-        const basicCars = res.basicCars.map((car: basicCarInterface) => {
-          const series = car.series.split(',');
-          const serie_class = series[0].replace(/ /g, '-').toLowerCase();
-  
-          return {
-            ...car,
-            series,
-            serie_class,
-            search: true,
-            user_profile: true,
-          }
+    if (!query) return;
+
+    this.searchResultsService.getCars(query).subscribe(res => {
+      const basicCars = this.processBasicCars(res.basicCars);
+      const premiumCars = this.processPremiumCars(res.premiumCars);
+
+      if (this.userToken.hasToken && this.userToken.userId) {
+        Promise.all([
+          this.processUserBasicCars(basicCars),
+          this.processUserPremiumCars(premiumCars)
+        ]).then(([finalBasicCars, finalPremiumCars]) => {
+          this.basicCars = finalBasicCars;
+          this.premiumCars = finalPremiumCars;
+        }).catch(error => {
+          console.error(error);
+        }).finally(() => {
+          this.loaderService.stopLoading();
         });
+      } else {
+        this.basicCars = basicCars;
+        this.premiumCars = premiumCars;
+        this.loaderService.stopLoading();
+      }
+    });
+  }
 
-        // Order car asc
-        basicCars.sort((a: any, b: any) => a.year - b.year);
+  processBasicCars(cars: any) {
+    return cars.map((car: basicCarInterface) => {
+      const series = car.series.split(',');
+      const serie_class = series[0].replace(/ /g, '-').toLowerCase();
 
-        const premiumCars = res.premiumCars.map((car: premiumCarInterface) => {
-          return {
-            ...car,
-            search: true,
-            user_profile: true,
-          }
-        });
+      return {
+        ...car,
+        series,
+        serie_class,
+        search: true,
+        user_profile: true,
+      };
+    }).sort((a: any, b: any) => a.year - b.year);
+  }
 
-        // If user is logged in
-        if (this.userToken.hasToken && this.userToken.userId) {
+  processPremiumCars(cars: any) {
+    return cars.map((car: premiumCarInterface) => ({
+      ...car,
+      search: true,
+      user_profile: true,
+    }));
+  }
 
-          // Gets cars that user has in his lists for print them correctly
-          this.getUserBasicCars().then((userCars: any) => {
-            userCars.carsOwned.forEach((carOwned: any) => {
-              const matchedCar = basicCars.find((car: any) => car.id === carOwned.id);
-              if (matchedCar) {
-                matchedCar.has_car = true;
-              }
-            });
-    
-            userCars.carsWished.forEach((carWished: any) => {
-              const matchedCar = basicCars.find((car: any) => car.id === carWished.id);
-              if (matchedCar) {
-                matchedCar.wants_car = true;
-              }
-            });
-  
-            const finalCars = basicCars.map((car: any) => {
-              return {
-                ...car,
-                token: this.userToken.userId
-              }
-            })
-    
-            this.basicCars = finalCars;
-          }).catch(error => {
-            console.error(error);
-          });
+  async processUserBasicCars(basicCars: any) {
+    try {
+      const userCars = await this.getUserBasicCars();
+      userCars.carsOwned.forEach((carOwned: any) => {
+        const matchedCar = basicCars.find((car: any) => car.id === carOwned.id);
+        if (matchedCar) matchedCar.has_car = true;
+      });
 
-          // Same for Premium cars
-          this.getUserPremiumCars().then((userCars: any) => {
-            userCars.carsOwned.forEach((carOwned: any) => {
-              const matchedCar = premiumCars.find((car: any) => car.id === carOwned.id);
-              if (matchedCar) {
-                matchedCar.has_car = true;
-              }
-            });
-    
-            userCars.carsWished.forEach((carWished: any) => {
-              const matchedCar = premiumCars.find((car: any) => car.id === carWished.id);
-              if (matchedCar) {
-                matchedCar.wants_car = true;
-              }
-            });
-  
-            const finalCars = premiumCars.map((car: any) => {
-              return {
-                ...car,
-                token: this.userToken.userId
-              }
-            })
-    
-            this.premiumCars = finalCars;
-          }).catch(error => {
-            console.error(error);
-          });
+      userCars.carsWished.forEach((carWished: any) => {
+        const matchedCar = basicCars.find((car: any) => car.id === carWished.id);
+        if (matchedCar) matchedCar.wants_car = true;
+      });
 
-        } else {
-          this.basicCars = basicCars;
-          this.premiumCars = premiumCars;
-        }
-      })
+      return basicCars.map((car: any) => ({
+        ...car,
+        token: this.userToken.userId
+      }));
+    } catch (error) {
+      console.error(error);
     }
   }
 
-  getUserBasicCars() {
+  async processUserPremiumCars(premiumCars: any) {
+    try {
+      const userCars = await this.getUserPremiumCars();
+      userCars.carsOwned.forEach((carOwned: any) => {
+        const matchedCar = premiumCars.find((car: any) => car.id === carOwned.id);
+        if (matchedCar) matchedCar.has_car = true;
+      });
+
+      userCars.carsWished.forEach((carWished: any) => {
+        const matchedCar = premiumCars.find((car: any) => car.id === carWished.id);
+        if (matchedCar) matchedCar.wants_car = true;
+      });
+
+      return premiumCars.map((car: any) => ({
+        ...car,
+        token: this.userToken.userId
+      }));
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+
+  getUserBasicCars(): Promise<UserCars> {
     return new Promise((resolve, reject) => {
       if (this.userToken.hasToken && this.userToken.userId) {
         this.basicCarsService.getUserCars(this.userToken.userId).subscribe(res => {
@@ -170,7 +172,7 @@ export class SearchResultsPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  getUserPremiumCars() {
+  getUserPremiumCars(): Promise<UserCars> {
     return new Promise((resolve, reject) => {
       if (this.userToken.hasToken && this.userToken.userId) {
         this.premiumCarsService.getUserCars(this.userToken.userId).subscribe(res => {
