@@ -76,6 +76,9 @@ export class EditCustomCarComponent implements OnInit {
     });
   }
 
+  ngAfterContentInit() {
+    this.loaderService.stopLoading();
+  }
 
   async submitForm() {
     // restart notifications
@@ -336,6 +339,7 @@ export class EditCustomCarComponent implements OnInit {
 
 
   goBack() {
+    this.loaderService.startLoading();
     this.router.navigate([`/custom-cars/car/${this.carData.id}`]);
   }
 

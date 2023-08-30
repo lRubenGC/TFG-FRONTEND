@@ -67,6 +67,8 @@ export class CustomCarsPageComponent implements OnInit {
 
 
   uploadCar() {
+    this.loaderService.startLoading();
+    
     this.router.navigate(['/custom-cars/upload']);
   }  
 

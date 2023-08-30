@@ -7,6 +7,7 @@ import { userInterface } from 'src/app/models/user.interface';
 import { basicCarInterface, basicCarShowedInterface, customCarInterface, premiumCarInterface, premiumCarShowedInterface } from 'src/app/models/cardTypes.interface';
 import { decodeToken } from 'src/app/helpers/generics';
 import { CustomCarsService } from '../../custom-cars/custom-cars.service';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -51,6 +52,7 @@ export class UserProfileComponent implements OnInit {
   constructor(
     private basicCarsService: BasicCarsService,
     private customCarsService: CustomCarsService,
+    private loaderService: LoaderService,
     private premiumCarsService: PremiumCarsService,
     private route: ActivatedRoute,
     private router: Router,
@@ -58,34 +60,40 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
  ngOnInit() {
-    this.route.paramMap.subscribe(async params => {
-      const username = params.get('username');
-      if (username) {
-        const user = await this.userService.getUserByUsername(username);
-        this.user = user.user;
-      } else {
-        this.error = true;
-        this.router.navigate(['/']);
-      }
+  this.loaderService.startLoading();
 
-      const tokenDecoded = decodeToken();
+  this.route.paramMap.subscribe(async params => {
+    const username = params.get('username');
+    if (username) {
+      const user = await this.userService.getUserByUsername(username);
+      this.user = user.user;
+    } else {
+      this.error = true;
+      this.router.navigate(['/']);
+    }
 
-      // If user visitor is owner of profile
-      if (tokenDecoded.userId === this.user?.id) {
-        this.userVisitor = true;
-        this.getUserBasicCars(true);
-        this.getUserPremiumCars(true);
-      } else {
-        this.userVisitor = false;
-        this.getUserBasicCars(false);
-        this.getUserPremiumCars(false);
-      }
-      
-      if (this.user) {
-        this.getCustomCars(this.user.id);
-      }
+    const tokenDecoded = decodeToken();
 
-    });
+    // If user visitor is owner of profile
+    if (tokenDecoded.userId === this.user?.id) {
+      this.userVisitor = true;
+      this.getUserBasicCars(true);
+      this.getUserPremiumCars(true);
+    } else {
+      this.userVisitor = false;
+      this.getUserBasicCars(false);
+      this.getUserPremiumCars(false);
+    }
+    
+    if (this.user) {
+      this.getCustomCars(this.user.id);
+    }
+
+  });
+  }
+
+  ngAfterContentInit() {
+    this.loaderService.stopLoading();
   }
   
   getUserBasicCars(isUserOwner: boolean) {
@@ -358,6 +366,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   goToConfig() {
+    this.loaderService.startLoading();
     this.router.navigate(['/user/config']);
   }
 

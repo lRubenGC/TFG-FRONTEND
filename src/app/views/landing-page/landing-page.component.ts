@@ -7,6 +7,7 @@ import { LanguageService } from "../../services/language.service";
 import { landingCardInterface } from 'src/app/models/landingPage.interface';
 import { msgCardInterface } from 'src/app/models/shared.interface';
 import { decodeToken } from 'src/app/helpers/generics';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -51,6 +52,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   constructor(
     private translate: TranslateService,
     private languageService: LanguageService,
+    private loaderService: LoaderService,
   ) {}
 
   ngOnInit() {
@@ -60,6 +62,10 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     })
 
     this.changeLanguage();
+  }
+
+  ngAfterContentInit() {
+    this.loaderService.stopLoading();
   }
 
   async changeLanguage() {

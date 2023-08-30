@@ -7,6 +7,7 @@ import { CarsService } from 'src/app/components/car-cards/services/cars.service'
 import { decodeToken } from 'src/app/helpers/generics';
 import { forkJoin } from 'rxjs';
 import { mapAndSortCustomCars } from 'src/app/helpers/map-cars';
+import { LoaderService } from '../../../services/loader.service';
 
 @Component({
   selector: 'app-custom-car-detailed',
@@ -29,6 +30,7 @@ export class CustomCarDetailedComponent implements OnInit {
     private route: ActivatedRoute,
     private carsService: CarsService,
     private customCarsService: CustomCarsService,
+    private loaderService: LoaderService,
     private router: Router,
     private userService: UserService,
     ) {}
@@ -61,7 +63,10 @@ export class CustomCarDetailedComponent implements OnInit {
             voted: userVotes.includes(car.car.id)
           }
         });
+
+        this.loaderService.stopLoading();
       }, (err) => {
+          this.loaderService.stopLoading();
           console.error(err);
       });
     } else {
@@ -73,8 +78,11 @@ export class CustomCarDetailedComponent implements OnInit {
               userCreator: userCreatorData.user.username,
             }
           });
+
+          this.loaderService.stopLoading();
         }, (err) => {
-            console.error(err);
+          this.loaderService.stopLoading();
+          console.error(err);
         });
     }
   }
@@ -106,6 +114,8 @@ export class CustomCarDetailedComponent implements OnInit {
 
 
   goTo(route: string) {
+    this.loaderService.startLoading();
+
     switch (route) {
       case 'userCreator':
         this.router.navigate([`/user/profile/${this.car.userCreator}`]);

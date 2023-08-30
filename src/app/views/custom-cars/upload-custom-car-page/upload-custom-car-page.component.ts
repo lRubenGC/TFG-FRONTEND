@@ -45,6 +45,10 @@ export class UploadCustomCarPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngAfterContentInit() {
+    this.loaderService.stopLoading();
+  }
+
   async submitForm() {
     if (this.userToken.hasToken) {
       // restart notifications

@@ -11,6 +11,7 @@ import { AuthService } from '../../../views/auth/auth.service';
 import { GenericAuthService } from 'src/app/services/generic-auth.service';
 import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/services/app.service';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-header',
@@ -41,6 +42,7 @@ export class HeaderComponent implements OnInit {
     private genericAuthService: GenericAuthService,
     private elementRef: ElementRef, 
     private languageService: LanguageService,
+    private loaderService: LoaderService,
     private router: Router,
     private translate: TranslateService,
     private userService: UserService,
@@ -89,6 +91,10 @@ export class HeaderComponent implements OnInit {
   }
 
   goTo(link: string): void {
+    if (link !== this.router.url) {
+      this.loaderService.startLoading();
+    }
+
     this.closeMobileMenu();
     this.router.navigate([link]);
   }
@@ -165,15 +171,17 @@ export class HeaderComponent implements OnInit {
   }
 
   logOut() {
+    this.loaderService.startLoading();
     this.closeMobileMenu();
 
-    this.genericAuthService.login();
+    this.genericAuthService.logout();
 
 
     localStorage.removeItem('cw-token');
     this.authService.setUserLoggedIn(false);
     this.checkUserLoggedIn();
     window.location.reload();
+    this.loaderService.stopLoading();
   }
 
   isBlockView() {

@@ -40,10 +40,10 @@
 
 
         <!-- About DT -->
-        <li class="header-item"><button (click)="goTo('about')">{{ 'HEADER_ABOUT' | translate }}</button></li>
+        <li class="header-item"><button (click)="goTo('/about')">{{ 'HEADER_ABOUT' | translate }}</button></li>
 
         <!-- Log In -->
-        <li class="header-item" *ngIf="!userLoggedIn"><button (click)="goTo('auth')">{{ 'HEADER_ACCOUNT' | translate }}</button></li>
+        <li class="header-item" *ngIf="!userLoggedIn"><button (click)="goTo('/auth')">{{ 'HEADER_ACCOUNT' | translate }}</button></li>
 
         <!-- Account Dropdown -->
         <li class="header-item" *ngIf="userLoggedIn">
@@ -52,7 +52,7 @@
                     &dtrif;</button>
                 <div #accDropdown class="dropdown-content" [ngClass]="{'show': !accDropdownOpen}">
                     <button (click)="goToUserProfile()">{{ 'HEADER_MY_PROFILE' | translate }}</button>
-                    <button (click)="goTo('user/config')">{{ 'HEADER_MY_SETTINGS' | translate }}</button>
+                    <button (click)="goTo('/user/config')">{{ 'HEADER_MY_SETTINGS' | translate }}</button>
                     <button (click)="logOut()">{{ 'HEADER_LOGOUT' | translate }}</button>
                 </div>
             </div>

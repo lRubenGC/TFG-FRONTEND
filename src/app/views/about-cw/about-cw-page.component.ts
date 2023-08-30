@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-about-cw',
@@ -7,8 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AboutCWPageComponent {
 
-  constructor() {}
+  constructor(
+    private loaderService: LoaderService,
+  ) {}
 
-  
+  ngAfterContentInit() {
+    this.loaderService.stopLoading();
+  }
 
 }

@@ -56,6 +56,10 @@ export class UserConfigComponent implements OnInit {
     }
   }
 
+  ngAfterContentInit() {
+    this.loaderService.stopLoading();
+  }
+
   async submitForm() {
     // restart notifications
     this.formError = false;

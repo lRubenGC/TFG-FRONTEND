@@ -63,6 +63,10 @@ export class LoginPageComponent implements OnInit {
     })
   }
 
+  ngAfterContentInit() {
+    this.loaderService.stopLoading();
+  }
+
   ngOnDestroy(): void {
     this.breakpointSubscription?.unsubscribe();
   }
