@@ -29,6 +29,8 @@ export class UserConfigComponent implements OnInit {
   formSuccess = false;
   successMsg = '';
 
+  buttonDisabled: boolean = false;
+
   imgDeleted = false;
   bgDeleted = false;
 
@@ -66,7 +68,7 @@ export class UserConfigComponent implements OnInit {
     this.formSuccess = false;
 
     // disable submit button
-    this.submitButtonRef.nativeElement.disabled = true;
+    this.buttonDisabled = true;
 
 
     // data of user
@@ -87,7 +89,7 @@ export class UserConfigComponent implements OnInit {
         this.formSuccess = false;
       
         // activate submit button
-        this.submitButtonRef.nativeElement.disabled = false;
+        this.buttonDisabled = false;
         return;
       }
 
@@ -101,7 +103,7 @@ export class UserConfigComponent implements OnInit {
         this.formSuccess = false;
       
         // activate submit button
-        this.submitButtonRef.nativeElement.disabled = false;
+        this.buttonDisabled = false;
         return;
       }
 
@@ -115,7 +117,7 @@ export class UserConfigComponent implements OnInit {
         this.formSuccess = false;
       
         // activate submit button
-        this.submitButtonRef.nativeElement.disabled = false;
+        this.buttonDisabled = false;
         return;
       }
 
@@ -129,7 +131,7 @@ export class UserConfigComponent implements OnInit {
       this.formSuccess = false;
 
       // activate submit button
-      this.submitButtonRef.nativeElement.disabled = false;
+      this.buttonDisabled = false;
       return;
     }
 
@@ -147,13 +149,11 @@ export class UserConfigComponent implements OnInit {
         await this.userService.updateUser(user.id, bodyRequest).toPromise();
         this.successMsg = 'CONFIG_USER_UPDATED';
         this.formSuccess = true;
-        setTimeout(() => {
-          location.reload();
-        }, 2000);
       }
 
       // activate submit button
-      this.submitButtonRef.nativeElement.disabled = false;
+      this.buttonDisabled = false;
+      location.reload();
       
     } catch (err: any) {
       console.error(err);

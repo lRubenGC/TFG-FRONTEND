@@ -18,8 +18,6 @@ export class EditCustomCarComponent implements OnInit {
 
   carData!: customCarInterface;
 
-  @ViewChild('submitButton', { static: true }) submitButtonRef!: ElementRef;
-
   images: File[] | null[] = [null, null, null, null];
 
   img1Deleted: boolean = false;
@@ -34,6 +32,8 @@ export class EditCustomCarComponent implements OnInit {
   formError: boolean = false;
   successMsg: string = '';
   formSuccess: boolean = false;
+
+  updateButtonDisabled: boolean = false;
 
 
   constructor(
@@ -86,7 +86,7 @@ export class EditCustomCarComponent implements OnInit {
     this.formSuccess = false;
 
     // disable submit button
-    this.submitButtonRef.nativeElement.disabled = true;
+    this.updateButtonDisabled = true;
 
     // data of user
     const carData = this.carData;
@@ -107,7 +107,8 @@ export class EditCustomCarComponent implements OnInit {
         this.formSuccess = false;
       
         // activate submit button
-        this.submitButtonRef.nativeElement.disabled = false;
+        this.updateButtonDisabled = false;
+
         return;
       }
 
@@ -121,7 +122,7 @@ export class EditCustomCarComponent implements OnInit {
         this.formSuccess = false;
       
         // activate submit button
-        this.submitButtonRef.nativeElement.disabled = false;
+        this.updateButtonDisabled = false;
         return;
       }
 
@@ -136,7 +137,7 @@ export class EditCustomCarComponent implements OnInit {
           this.formSuccess = false;
         
           // activate submit button
-          this.submitButtonRef.nativeElement.disabled = false;
+          this.updateButtonDisabled = false;
           return;
         }
   
@@ -152,7 +153,7 @@ export class EditCustomCarComponent implements OnInit {
           this.formSuccess = false;
         
           // activate submit button
-          this.submitButtonRef.nativeElement.disabled = false;
+          this.updateButtonDisabled = false;
           return;
         }
   
@@ -166,7 +167,7 @@ export class EditCustomCarComponent implements OnInit {
       this.formSuccess = false;
 
       // activate submit button
-      this.submitButtonRef.nativeElement.disabled = false;
+      this.updateButtonDisabled = false;
       return;
     }
 
@@ -184,14 +185,10 @@ export class EditCustomCarComponent implements OnInit {
         await this.customCarsService.updateCustomCar(this.userToken.userId!, this.carData.id, bodyRequest).toPromise();
         this.successMsg = 'CONFIG_USER_UPDATED';
         this.formSuccess = true;
-
-        setTimeout(() => {
-          location.reload();
-        }, 2000);
       }
 
       // activate submit button
-      this.submitButtonRef.nativeElement.disabled = false;
+      this.updateButtonDisabled = false;
       
     } catch (err: any) {
       console.error(err);
@@ -209,6 +206,7 @@ export class EditCustomCarComponent implements OnInit {
       }
     } finally {
       this.loaderService.stopLoading();
+      location.reload();
     }
   }
 

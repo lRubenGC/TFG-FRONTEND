@@ -18,6 +18,7 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { MsgCardComponent } from './shared/msg-card/msg-card.component';
 import { DCButtonComponent } from './shared/dc-button/dc-button.component';
 import { FilterPillComponent } from './shared/filter-pill/filter-pill.component';
+import { DCSecondaryButtonComponent } from './shared/dc-secondary-button/dc-secondary-button.component';
 
 
 
@@ -26,6 +27,7 @@ import { FilterPillComponent } from './shared/filter-pill/filter-pill.component'
     BasicCardComponent,
     CustomCardComponent,
     DCButtonComponent,
+    DCSecondaryButtonComponent,
     FilterPillComponent,
     HeaderComponent,
     MsgCardComponent,
@@ -48,6 +50,7 @@ import { FilterPillComponent } from './shared/filter-pill/filter-pill.component'
     BasicCardComponent,
     CustomCardComponent,
     DCButtonComponent,
+    DCSecondaryButtonComponent,
     FilterPillComponent,
     HeaderComponent,
     MsgCardComponent,

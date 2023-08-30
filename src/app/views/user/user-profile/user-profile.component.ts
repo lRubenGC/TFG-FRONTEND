@@ -8,6 +8,7 @@ import { basicCarInterface, basicCarShowedInterface, customCarInterface, premium
 import { decodeToken } from 'src/app/helpers/generics';
 import { CustomCarsService } from '../../custom-cars/custom-cars.service';
 import { LoaderService } from 'src/app/services/loader.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-user-profile',
@@ -61,39 +62,97 @@ export class UserProfileComponent implements OnInit {
 
  ngOnInit() {
   this.loaderService.startLoading();
-
+  
   this.route.paramMap.subscribe(async params => {
     const username = params.get('username');
+
     if (username) {
-      const user = await this.userService.getUserByUsername(username);
-      this.user = user.user;
+      try {
+        const userResponse = await this.userService.getUserByUsername(username);
+        this.user = userResponse.user;
+  
+        const tokenDecoded = decodeToken();
+        const isUserOwner = tokenDecoded.userId === this.user?.id;
+        this.userVisitor = isUserOwner;
+  
+        if (this.user) {
+          this.getCustomCars(this.user.id);
+  
+          try {
+            const [basicCarsResponse, premiumCarsResponse] = await Promise.all([
+              this.basicCarsObservable().toPromise(),
+              this.premiumCarsObservable().toPromise()
+            ]);
+            
+            this.processBasicCars(basicCarsResponse, isUserOwner);
+            this.processPremiumCars(premiumCarsResponse, isUserOwner);
+          } catch (err) {
+            console.error(err);
+          }
+        }
+      } catch (error) {
+        console.error('Error al obtener el usuario:', error);
+        this.error = true;
+        this.router.navigate(['/']);
+      } finally {
+        this.loaderService.stopLoading();
+      }
     } else {
       this.error = true;
       this.router.navigate(['/']);
+      this.loaderService.stopLoading();
     }
-
-    const tokenDecoded = decodeToken();
-
-    // If user visitor is owner of profile
-    if (tokenDecoded.userId === this.user?.id) {
-      this.userVisitor = true;
-      this.getUserBasicCars(true);
-      this.getUserPremiumCars(true);
-    } else {
-      this.userVisitor = false;
-      this.getUserBasicCars(false);
-      this.getUserPremiumCars(false);
-    }
-    
-    if (this.user) {
-      this.getCustomCars(this.user.id);
-    }
-
   });
-  }
+  
+ }
 
-  ngAfterContentInit() {
-    this.loaderService.stopLoading();
+ processBasicCars(res: any, isUserOwner: boolean) {
+  const transformCar = (car: basicCarInterface) => {
+    const series = car.series.split(',');
+    const serie_class = series[0].replace(/ /g, '-').toLowerCase();
+
+    return {
+      ...car,
+      series,
+      serie_class,
+      search: true,
+      user_profile: isUserOwner,
+      profile_view: true,
+      has_car: isUserOwner,
+      token: isUserOwner ? this.user!.id : undefined
+    };
+  };
+
+  this.basicCarsOwned = res.carsOwned.map(transformCar);
+  this.basicCarsOwnedShowed = [...this.basicCarsOwned];
+  this.basicCarsWished = res.carsWished.map(transformCar);
+  this.basicCarsWishedShowed = [...this.basicCarsWished];
+}
+
+processPremiumCars(res: any, isUserOwner: boolean) {
+  const transformCar = (car: premiumCarInterface) => {
+    return {
+      ...car,
+      user_profile: isUserOwner,
+      profile_view: true,
+      has_car: isUserOwner,
+      token: isUserOwner ? this.user!.id : undefined
+    };
+  };
+
+  this.premiumCarsOwned = res.carsOwned.map(transformCar);
+  this.premiumCarsOwnedShowed = [...this.premiumCarsOwned];
+  this.premiumCarsWished = res.carsWished.map(transformCar);
+  this.premiumCarsWishedShowed = [...this.premiumCarsWished];
+}
+
+
+  basicCarsObservable() {
+    return this.basicCarsService.getUserCars(this.user!.id);
+  }
+  
+  premiumCarsObservable() {
+    return this.premiumCarsService.getUserCars(this.user!.id);
   }
   
   getUserBasicCars(isUserOwner: boolean) {
@@ -249,6 +308,7 @@ export class UserProfileComponent implements OnInit {
         index = this.basicCarsOwned.findIndex(car => car.id === carEvent.id);
         if (index !== -1) {
           this.basicCarsOwned.splice(index, 1);
+          this.basicCarsOwnedShowed.splice(index, 1);
         }
         break;
       
@@ -256,6 +316,7 @@ export class UserProfileComponent implements OnInit {
         index = this.basicCarsWished.findIndex(car => car.id === carEvent.id);
         if (index !== -1) {
           this.basicCarsWished.splice(index, 1);
+          this.basicCarsWishedShowed.splice(index, 1);
         }
         break;
 
@@ -263,6 +324,7 @@ export class UserProfileComponent implements OnInit {
         index = this.premiumCarsOwned.findIndex(car => car.id === carEvent.id);
         if (index !== -1) {
           this.premiumCarsOwned.splice(index, 1);
+          this.premiumCarsOwnedShowed.splice(index, 1);
         }
         break;
 
@@ -270,6 +332,7 @@ export class UserProfileComponent implements OnInit {
         index = this.premiumCarsWished.findIndex(car => car.id === carEvent.id);
         if (index !== -1) {
           this.premiumCarsWished.splice(index, 1);
+          this.premiumCarsWishedShowed.splice(index, 1);
         }
         break;
     }

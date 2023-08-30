@@ -20,7 +20,7 @@ export class UserService {
   async getUserByUsername(username: string): Promise<userInterfaceApi | any> {
     const response = await this.http.get(`${environment.apiBaseUrl}/api/users/username/${username}`).toPromise();
     return response as userInterfaceApi;
-  }
+  }  
 
   updateUser(id_user: number, userParams: userUpdateRequest): Observable<any> {
     const token = localStorage.getItem('cw-token');

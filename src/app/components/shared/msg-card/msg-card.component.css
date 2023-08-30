@@ -1,25 +1,4 @@
 #welcome-text {
-    display: flex;
-    gap: .4rem;
     background-color: var(--dark-bg-100-opacity);
     border-radius: 1rem;
-}
-
-.a-button {
-    margin: 1rem auto 0;
-    padding: 0.5em 1.7em;
-    border: 0.16em solid var(--dark-primary-100);
-    background-color: var(--dark-bg-100-opacity);
-    color: #fff;
-    border-radius: 2em;
-    box-sizing: border-box;
-    font-weight: 300;
-    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
-    transition: all 0.2s;
-    cursor: pointer;
-}
-
-.a-button:hover {
-    color: #fff;
-    background-color: var(--dark-primary-100);
 }

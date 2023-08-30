@@ -39,7 +39,12 @@
                     (keydown.enter)="submitForm()" />
             </div>
 
-            <button #uploadButton type="button" class="button-update-custom" (click)="submitForm()">{{ 'POST_CUSTOM_CAR_BUTTON' | translate }}</button>
+            <app-dc-secondary-button
+                type="button"
+                (click)="submitForm()"
+                [buttonTitle]="'POST_CUSTOM_CAR_BUTTON'"
+                [buttonDisabled]="buttonDisabled">
+            </app-dc-secondary-button>
 
 
         </form>
@@ -50,7 +55,10 @@
 
         <div class="img-upload-section-header d_flex justify-content_center align-items_center gap_1">
             <h1>Car images</h1>
-            <button *ngIf="imageUploaded" class="custom-cars-upload-images" (click)="goBack()">{{ 'CUSTOM_CAR_FINISH' | translate }}</button>
+            <app-dc-button
+                *ngIf="imageUploaded"
+                [buttonTitle]="'CUSTOM_CAR_FINISH'"
+                (click)="goBack()"></app-dc-button>
         </div>
         
         <div class="img-inputs-container d_flex justify-content_center flex_wrap gap_2">

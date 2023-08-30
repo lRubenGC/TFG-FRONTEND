@@ -63,7 +63,12 @@
             </div>
         </div>
 
-        <button #submitButton type="button" class="button-update-config" (click)="submitForm()">{{ 'CONFIG_UPDATE' | translate }}</button>
+        <app-dc-secondary-button
+            type="button"
+            (click)="submitForm()"
+            [buttonTitle]="'CONFIG_UPDATE'"
+            [buttonDisabled]="buttonDisabled">
+        </app-dc-secondary-button>
 
         <p *ngIf="formError" class="notification notification-error">{{ errorMsg | translate }}</p>
         <p *ngIf="formSuccess" class="notification notification-success">{{ successMsg | translate }}</p>

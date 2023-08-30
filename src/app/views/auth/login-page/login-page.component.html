@@ -1,8 +1,14 @@
-<main class="mobile-form" *ngIf="isSmallScreen; else largeScreen">
 <br>
+
+<!-- Form for mobile screen -->
+<main class="mobile-form" *ngIf="isSmallScreen; else largeScreen">
     <!-- Register Form -->
     <section *ngIf="!loginActivo" class="form-container sign-up-container">
-        <form [formGroup]="registerForm" (ngSubmit)="submitRegister()">
+        <form
+            [formGroup]="registerForm"
+            (ngSubmit)="submitRegister()"
+            class="d_flex justify-content_center align-items_center flex-direction_column h_100 text-align_center"
+        >
             <h1>{{ 'REGISTER_TITLE' | translate }}</h1>
             <input
                 type="text"
@@ -17,9 +23,11 @@
                 formControlName="register_password"
                 placeholder="{{ 'LOGIN_PASSWORD' | translate}}" />
 
-            <button
+            <app-dc-secondary-button
+                [buttonTitle]="'REGISTER_SIGNUP'"
                 type="submit"
-                >{{ 'REGISTER_SIGNUP' | translate }}</button>
+                class="mt_1"
+            ></app-dc-secondary-button>
                 
             <p *ngIf="registerError" class="auth-notification auth-error">{{ registerErrorMsg | translate }}</p>
             <p *ngIf="registerSuccess" class="auth-notification auth-success">{{ registerSuccessMsg | translate }}</p>
@@ -29,7 +37,11 @@
 
     <!-- Login Form -->
     <section *ngIf="loginActivo" class="form-container sign-in-container">
-        <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+        <form
+            [formGroup]="loginForm"
+            (ngSubmit)="submitLogin()"
+            class="d_flex justify-content_center align-items_center flex-direction_column h_100 text-align_center"
+        >
             <h1>{{ 'LOGIN_TITLE' | translate }}</h1>
             <input
                 type="email"
@@ -40,7 +52,11 @@
                 formControlName="login_password"
                 placeholder="{{ 'LOGIN_PASSWORD' | translate}}" />
 
-            <button> {{ 'LOGIN_SIGNIN' | translate }} </button>
+            <app-dc-secondary-button
+                [buttonTitle]="'LOGIN_SIGNIN'"
+                type="submit"
+                class="mt_1"
+            ></app-dc-secondary-button>
 
             <p *ngIf="loginError" class="auth-notification auth-error">{{ loginErrorMsg | translate }}</p>
             <p *ngIf="loginSuccess" class="auth-notification auth-success">{{ loginSuccessMsg | translate }}</p>
@@ -50,24 +66,32 @@
     </section>
 
 
-    <div class="toggle-button-mobile-container">
+    <div class="d_flex justify-content_center">
         <!-- Login toggle button -->
-        <button class="toggle-button-mobile" *ngIf="!loginActivo" (click)="toggleLogin()" id="signIn">{{ 'LOGIN_SIGNIN' |
-            translate }}</button>
+        <app-dc-secondary-button
+            *ngIf="!loginActivo"
+            (click)="toggleLogin()"
+            id="signIn"
+            class="mt_1"
+            [buttonTitle]="'LOGIN_SIGNIN'"
+        ></app-dc-secondary-button>
     
         <!-- Register toggle button -->
-        <button class="toggle-button-mobile" *ngIf="loginActivo" (click)="toggleLogin()" id="signUp">{{ 'REGISTER_SIGNUP' |
-            translate }}</button>
+        <app-dc-secondary-button
+            *ngIf="loginActivo"
+            (click)="toggleLogin()"
+            id="signUp"
+            class="mt_1"
+            [buttonTitle]="'REGISTER_SIGNUP'"
+        ></app-dc-secondary-button>
     </div>
 
     
 </main>
 
 
-
+<!-- Form for PC screen -->
 <ng-template #largeScreen id="login-page">
-<br>
-
     <main
         [ngClass]="!loginActivo ? 'right-panel-active' : ''"
         class="container"
@@ -75,7 +99,11 @@
 
         <!-- Register Form -->
         <section class="form-container sign-up-container">
-            <form [formGroup]="registerForm" (ngSubmit)="submitRegister()">
+            <form
+                [formGroup]="registerForm"
+                (ngSubmit)="submitRegister()"
+                class="d_flex justify-content_center align-items_center flex-direction_column h_100 text-align_center"
+            >
                 <h1>{{ 'REGISTER_TITLE' | translate }}</h1>
                 <input
                     type="text"
@@ -90,9 +118,7 @@
                     formControlName="register_password"
                     placeholder="{{ 'LOGIN_PASSWORD' | translate}}" />
 
-                <button
-                    type="submit"
-                    >{{ 'REGISTER_SIGNUP' | translate }}</button>
+                <app-dc-secondary-button type="submit" [buttonTitle]="'REGISTER_SIGNUP'"></app-dc-secondary-button>
                     
                 <p *ngIf="registerError" class="auth-notification auth-error">{{ registerErrorMsg | translate }}</p>
                 <p *ngIf="registerSuccess" class="auth-notification auth-success">{{ registerSuccessMsg | translate }}</p>
@@ -102,7 +128,11 @@
 
         <!-- Login Form -->
         <section class="form-container sign-in-container">
-            <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+            <form
+                [formGroup]="loginForm"
+                (ngSubmit)="submitLogin()"
+                class="d_flex justify-content_center align-items_center flex-direction_column h_100 text-align_center"
+            >
                 <h1>{{ 'LOGIN_TITLE' | translate }}</h1>
                 <input
                     type="email"
@@ -113,7 +143,7 @@
                     formControlName="login_password"
                     placeholder="{{ 'LOGIN_PASSWORD' | translate}}" />
 
-                <button> {{ 'LOGIN_SIGNIN' | translate }} </button>
+                <app-dc-secondary-button [buttonTitle]="'LOGIN_SIGNIN'"></app-dc-secondary-button>
 
                 <p *ngIf="loginError" class="auth-notification auth-error">{{ loginErrorMsg | translate }}</p>
                 <p *ngIf="loginSuccess" class="auth-notification auth-success">{{ loginSuccessMsg | translate }}</p>
@@ -129,15 +159,21 @@
                 <!-- Login Overlay -->
                 <div class="overlay-panel d_flex flex-direction_column justify-content_center align-items_center overlay-left text-align_center w_50 h_100">
                     <h1 class="overlay-texts">{{ 'LOGIN_OVERLAY_TITLE' | translate }}</h1>
-                    <button class="ghost overlay-texts" (click)="toggleLogin()" id="signIn">{{ 'LOGIN_SIGNIN' |
-                        translate }}</button>
+                    <app-dc-secondary-button
+                        (click)="toggleLogin()"
+                        id="signIn"
+                        [buttonTitle]="'LOGIN_SIGNIN'"
+                    ></app-dc-secondary-button>
                 </div>
 
                 <!-- Register Overlay -->
                 <div class="overlay-panel d_flex flex-direction_column justify-content_center align-items_center overlay-right text-align_center w_50 h_100">
                     <h1 class="overlay-texts">{{ 'REGISTER_OVERLAY_TITLE' | translate }}</h1>
-                    <button class="ghost overlay-texts" (click)="toggleLogin()" id="signUp">{{ 'REGISTER_SIGNUP' |
-                        translate }}</button>
+                    <app-dc-secondary-button
+                        (click)="toggleLogin()"
+                        id="signUp"
+                        [buttonTitle]="'REGISTER_SIGNUP'"    
+                    ></app-dc-secondary-button>
                 </div>
 
             </div>

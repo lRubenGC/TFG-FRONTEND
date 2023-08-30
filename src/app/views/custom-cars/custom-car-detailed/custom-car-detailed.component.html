@@ -2,8 +2,8 @@
 <div id="custom-car-detailed">
 
   <header class="go-back-button-container d_flex justify-content_center gap_1 mb_2">
-    <button (click)="goTo('goBack')" class="go-back-button">{{ 'GO_BACK' | translate }}</button>
-    <button *ngIf="isUserCreatorViewer" (click)="goTo('editCar')" class="go-back-button">{{ 'CUSTOM_CAR_EDIT' | translate }}</button>
+    <app-dc-button (click)="goTo('goBack')" [buttonTitle]="'GO_BACK'"></app-dc-button>
+    <app-dc-button *ngIf="isUserCreatorViewer" (click)="goTo('editCar')" [buttonTitle]="'CUSTOM_CAR_EDIT'"></app-dc-button>
   </header>
 
   <main class="car-detailed-container d_flex justify-content_center align-items_start" *ngIf="car">

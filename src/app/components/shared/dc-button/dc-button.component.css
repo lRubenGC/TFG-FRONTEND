@@ -3,15 +3,19 @@
   border: 0.16em solid var(--dark-primary-100);
   background-color: var(--dark-bg-100-opacity);
   color: #fff;
-  border-radius: 10px;
+  border-radius: 15px;
   box-sizing: border-box;
   text-shadow: 4px 4px 4px #000;
   transition: all 0.2s;
-  min-width: 150px;
-  height: 2.75em;
+  padding: .75rem 2rem;
 }
 
 .dc-button:hover {
   background-color: var(--dark-primary-100);
   text-shadow: none;
+}
+
+.dc-secondary-button[disabled] {
+  cursor: not-allowed;
+  color: var(--dark-bg-100);
 }

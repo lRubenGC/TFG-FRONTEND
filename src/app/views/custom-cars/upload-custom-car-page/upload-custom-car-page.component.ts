@@ -26,6 +26,8 @@ export class UploadCustomCarPageComponent implements OnInit {
   customCarUploaded: boolean = false;
   customCarId: number = 0;
 
+  buttonDisabled: boolean = false;
+
   imageUploaded: boolean = false;
 
   constructor(
@@ -56,7 +58,7 @@ export class UploadCustomCarPageComponent implements OnInit {
       this.formSuccess = false;
   
       // disable submit button
-      this.submitButtonRef.nativeElement.disabled = true;
+      this.buttonDisabled = true;
       
       // data of form
       const car_id = this.customCarForm.get('car_id')?.value;
@@ -71,7 +73,7 @@ export class UploadCustomCarPageComponent implements OnInit {
         this.formSuccess = false;
       
         // activate submit button
-        this.submitButtonRef.nativeElement.disabled = false;
+        this.buttonDisabled = false;
         return;
       }
   
@@ -81,7 +83,7 @@ export class UploadCustomCarPageComponent implements OnInit {
         this.formSuccess = false;
       
         // activate submit button
-        this.submitButtonRef.nativeElement.disabled = false;
+        this.buttonDisabled = false;
         return;
       }
   
@@ -101,7 +103,7 @@ export class UploadCustomCarPageComponent implements OnInit {
         this.formSuccess = false;
       
         // activate submit button
-        this.submitButtonRef.nativeElement.disabled = false;
+        this.buttonDisabled = false;
         return;
       }
   
@@ -124,7 +126,7 @@ export class UploadCustomCarPageComponent implements OnInit {
           this.formSuccess = true;
     
           // activate submit button
-          this.submitButtonRef.nativeElement.disabled = true;
+          this.buttonDisabled = true;
   
           // end form
           this.customCarUploaded = true;
@@ -132,7 +134,7 @@ export class UploadCustomCarPageComponent implements OnInit {
         
       } catch (err: any) {
         console.error(err);
-        this.submitButtonRef.nativeElement.disabled = false;
+        this.buttonDisabled = false;
   
         if (err.error.errors[0].param === 'brand') {
           this.errorMsg = 'POST_CUSTOM_CAR_BAD_BRAND';

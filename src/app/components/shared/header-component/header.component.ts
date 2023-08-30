@@ -102,6 +102,8 @@ export class HeaderComponent implements OnInit {
   }
 
   async goToUserProfile() {
+    this.loaderService.startLoading();
+    
     const tokenDecoded = decodeToken();
     this.closeMobileMenu();
 

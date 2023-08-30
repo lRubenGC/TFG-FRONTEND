@@ -1,3 +1,7 @@
+#custom-cars-view {
+    margin: 0 2rem;
+}
+
 
 @media (max-width: 900px) {
     #custom-filter-section {

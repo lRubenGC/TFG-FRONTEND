@@ -1,12 +1,22 @@
 <div class="msg-card-container">
-    <div id="welcome-text" class="d_flex justify-content_center flex-direction_column text-align_justify p_2">
+
+    <div id="welcome-text" class="d_flex justify-content_center flex-direction_column text-align_justify gap_0_5 p_2">
+
         <h2 class="text-align_center">{{ config.title }}</h2>
+
         <p *ngFor="let description of config.description">{{ description }}</p>
 
         <!-- Button without Link -->
-        <button *ngIf="config.button && !config.buttonLink" class="a-button">{{ config.buttonName }}</button>
+        <!-- <button *ngIf="config.button && !config.buttonLink" class="a-button">{{ config.buttonName }}</button> -->
 
         <!-- Button with Link -->
-        <button *ngIf="config.button && config.buttonLink" (click)="goTo(config.buttonLink)" class="a-button">{{ config.buttonName }}</button>
+        <app-dc-button
+            *ngIf="config.button && config.buttonLink"
+            (click)="goTo(config.buttonLink)"
+            class="mt_1"
+            [buttonTitle]="config.buttonName!">
+        </app-dc-button>
+
     </div>
+
 </div>

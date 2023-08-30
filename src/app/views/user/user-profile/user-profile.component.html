@@ -12,9 +12,13 @@
                 <div class="profile-img-container">
                     <img class="user-profile-pic w_100 h_100 object-fit_cover" [src]="user?.img ? user?.img : 'assets/images/user-profile/no-user-profile.webp'" alt="user profile pic">
                 </div>
-                <div class="profile-data-name-container d_flex justify-content_around flex-direction_column p_0_5">
-                    <h3>{{ user?.username }}</h3>
-                    <button *ngIf="userVisitor" (click)="goToConfig()">{{ 'USER_EDIT_PROFILE' | translate }}</button>
+                <div class="profile-data-name-container d_flex justify-content_around flex-direction_column p_0_5 gap_0_5">
+                    <h3 class="ml_0_5">{{ user?.username }}</h3>
+                    <app-dc-secondary-button
+                        *ngIf="userVisitor"
+                        (click)="goToConfig()"
+                        [buttonTitle]="'USER_EDIT_PROFILE'"
+                    ></app-dc-secondary-button>
                 </div>
             </section>
 
@@ -43,7 +47,7 @@
         </header>
 
         <!-- Export collection -->
-        <div *ngIf="userVisitor" class="export-collection-container d_flex flex-direction_column gap_0_5 mt_0_5">
+        <div *ngIf="userVisitor" class="export-collection-container d_flex flex-direction_column gap_0_5 mt_1">
             <div class="export-collection-main d_flex align-items_center gap_0_25">
                 <app-dc-button [buttonTitle]="'USER_EXPORT_TO_CSV'" (click)="exportToCsv()"></app-dc-button>
                 <span>({{ 'USER_DOWNLOAD_DAYS' | translate }})</span>

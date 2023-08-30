@@ -17,27 +17,6 @@
     overflow: hidden;
 }
 
-.profile-data-name-container h3 {
-    margin-left: 10px;
-}
-
-.profile-data-name-container button {
-    padding: .4em 1.5em;
-    background-color: var(--dark-bg-100);
-    border: transparent;
-    color: #fff;
-    border-radius: 10px;
-    box-sizing: border-box;
-    text-shadow: 4px 4px 4px #000;
-    transition: all 0.2s;
-    cursor: pointer;
-}
-
-.profile-data-name-container button:hover {
-    background-color: #020013;
-    text-shadow: none;
-}
-
 .export-collection-container span {
     font-size: .9em;
 }
@@ -46,6 +25,7 @@
     padding: 5px 10px;
     background-color: rgb(255, 48, 48);
     border-radius: 5px;
+    width: fit-content;
 }
 
 .export-collection-error span {
