@@ -1,17 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-
-
-export interface IFilterPillProps {
-  label: string;
-  options: string[];
-  selected: string;
-  basicDefaultSeries?: boolean;
-}
-
-export interface IBasicDefaultSeries {
-  value: string;
-  text: string;
-}
+import { BasicDefaultSeries, BasicDefaultYears, CustomDefaultOptions, IDefaultSeries, IFilterPillProps, PremiumDefaultSeries } from 'src/app/models/filter-pill';
 
 
 @Component({
@@ -26,28 +14,10 @@ export class FilterPillComponent {
   @Input() props!: IFilterPillProps;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
 
-  basicDefaultSeries: IBasicDefaultSeries[] = [
-    {
-      value: 'All',
-      text: 'FILTER_ALL'
-    },
-    {
-      value: 'Treasure Hunt',
-      text: 'Treasure Hunt'
-    },
-    {
-      value: 'Super Treasure Hunt',
-      text: 'Super Treasure Hunt'
-    },
-    {
-      value: 'Red Edition',
-      text: 'Red Edition'
-    },
-    {
-      value: 'Walmart Exclusive',
-      text: 'Zamac'
-    }
-  ]
+  basicDefaultSeries: IDefaultSeries[] = BasicDefaultSeries;
+  premiumDefaultSeries: IDefaultSeries[] = PremiumDefaultSeries;
+  customDefaultOptions: IDefaultSeries[] = CustomDefaultOptions;
+  basicDefaultYears: IDefaultSeries[] = BasicDefaultYears;
 
   constructor(
   ) { }

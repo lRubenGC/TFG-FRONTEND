@@ -16,7 +16,8 @@
                     [props]="{
                         label: 'BASIC_CARS_YEAR',
                         options: availableYears,
-                        selected: selectedYear
+                        selected: selectedYear,
+                        selectDisabled: false
                     }"
                     (onChange)="getCars($event)"
                 ></app-filter-pill>
@@ -26,7 +27,8 @@
                         label: 'BASIC_CARS_SERIE',
                         options: availableSeries,
                         selected: selectedSerie,
-                        basicDefaultSeries: true
+                        basicDefaultSeries: true,
+                        selectDisabled: false
                     }"
                     (onChange)="filterSerie($event)"
                 ></app-filter-pill>

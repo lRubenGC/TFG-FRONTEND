@@ -5,18 +5,16 @@
     <header id="custom-cars-header" class="d_flex align-items_end gap_2">
         <!-- Filter section -->
         <section id="custom-filter-section" class="ml-0_5">
-    
-            <div class="custom-filter-item">
-                <h3>{{ 'FILTER_BY' | translate }}</h3>
-                <div class="car-select">
-                    <select [(ngModel)]="selectedFilter" (change)="filterCars()">
-                        <option value="date_recents">{{ 'DATE_RECENTS' | translate }}</option>
-                        <option value="date_olders">{{ 'DATE_OLDERS' | translate }}</option>
-                        <option value="upvotes">{{ 'UPVOTES' | translate }}</option>
-                    </select>
-    
-                </div>
-            </div>
+
+            <app-filter-pill
+                    [props]="{
+                        label: 'FILTER_BY',
+                        selected: selectedFilter,
+                        customDefaultOptions: true,
+                        selectDisabled: false
+                    }"
+                    (onChange)="filterCars($event)"
+                ></app-filter-pill>
     
         </section>
 

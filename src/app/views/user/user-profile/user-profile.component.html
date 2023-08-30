@@ -42,8 +42,9 @@
 
         </header>
 
+        <!-- Export collection -->
         <div *ngIf="userVisitor" class="export-collection-container d_flex flex-direction_column gap_0_5 mt_0_5">
-            <div class="d_flex align-items_center gap_0_25">
+            <div class="export-collection-main d_flex align-items_center gap_0_25">
                 <app-dc-button [buttonTitle]="'USER_EXPORT_TO_CSV'" (click)="exportToCsv()"></app-dc-button>
                 <span>({{ 'USER_DOWNLOAD_DAYS' | translate }})</span>
             </div>
@@ -76,7 +77,7 @@
 
                 <div class="vertical-divider vertical-divider-menu"></div>
 
-                <div class="car-menu-list__group">
+                <div class="car-menu-list__group d_flex gap_1">
                     <div
                         class="car-menu-item"
                         [ngClass]="collectedType == 'owned' ? 'car-menu-item-selected' : ''"
@@ -93,64 +94,61 @@
         </section>
 
         <!-- Filter section for Basic Cars-->
-        <section *ngIf="carsType === 'basic'" class="d_flex justify-content_center gap_4">
+        <section *ngIf="carsType === 'basic'" class="filter-section d_flex justify-content_center gap_4">
 
-            <div class="basic-filter-item">
-                <h3>{{ 'BASIC_CARS_YEAR' | translate }}</h3>
-                <div class="car-select">
-                    <select [(ngModel)]="selectedYear" (change)="filterYear(selectedYear)">
-                        <option value="all">{{ 'FILTER_ALL' | translate }}</option>
-                        <option *ngFor="let year of availableYears" [value]="year">{{ year }}</option>
-                    </select>
+            <app-filter-pill
+                    [props]="{
+                    label: 'BASIC_CARS_YEAR',
+                    options: availableYears,
+                    selected: selectedYear,
+                    basicDefaultOptions: true,
+                    selectDisabled: false
+                }"
+                (onChange)="filterYear($event)"
+            ></app-filter-pill>
 
-                </div>
-            </div>
-
-            <div class="basic-filter-item">
-                <h3>{{ 'BASIC_CARS_SERIE' | translate }}</h3>
-                <div class="car-select">
-                    <select [(ngModel)]="selectedSerie" (change)="filterSerie(selectedSerie)" [disabled]="selectedYear === 'all'">
-                        <option value="all">{{ 'FILTER_ALL' | translate }}</option>
-                        <option value="Treasure Hunt">Treasure Hunt</option>
-                        <option value="Super Treasure Hunt">Super Treasure Hunt</option>
-                        <option value="Red Edition">Red Edition</option>
-                        <option value="Walmart Exclusive">Zamac</option>
-                        <option *ngFor="let serie of availableSeries" [value]="serie">{{ serie }}</option>
-                    </select>
-                </div>
-            </div>
+            <app-filter-pill
+                [props]="{
+                    label: 'BASIC_CARS_SERIE',
+                    options: availableSeries,
+                    selected: selectedSerie,
+                    basicDefaultSeries: true,
+                    selectDisabled: selectedYear === 'All'
+                }"
+                (onChange)="filterSerie($event)"
+            ></app-filter-pill>
 
         </section>
 
         <!-- Filter section for Premium Cars-->
-        <section *ngIf="carsType === 'premium'" class="d_flex justify-content_center gap_4">
+        <section *ngIf="carsType === 'premium'" class="filter-section d_flex justify-content_center gap_4">
 
-            <div class="basic-filter-item">
-                <h3>{{ 'PREMIUM_CARS_MAIN_SERIE' | translate }}</h3>
-                <div class="car-select">
-                    <select [(ngModel)]="selectedMainSerie" (change)="filterPremiumSerie(selectedMainSerie)">
-                        <option value="all">All</option>
-                        <option *ngFor="let serie of availableMainSeries" [value]="serie">{{ serie }}</option>
-                    </select>
-                </div>
-            </div>
+            <app-filter-pill
+                [props]="{
+                    label: 'PREMIUM_CARS_MAIN_SERIE',
+                    options: availableMainSeries,
+                    selected: selectedMainSerie,
+                    premiumDefaultSeries: true,
+                    selectDisabled: false
+                }"
+                (onChange)="filterPremiumSerie($event)"
+            ></app-filter-pill>
 
-            <div class="basic-filter-item">
-                <h3>{{ 'PREMIUM_CARS_SECONDARY_SERIE' | translate }}</h3>
-                <div class="car-select">
-                    <select [(ngModel)]="selectedSecondarySerie" (change)="filterPremiumSecundarySerie(selectedSecondarySerie)"
-                    [disabled]="selectedMainSerie === 'all'"
-                    >
-                        <option value="all">All</option>
-                        <option *ngFor="let serie of availableSecondarySeries" [value]="serie">{{ serie }}</option>
-                    </select>
-                </div>
-            </div>
+            <app-filter-pill
+                [props]="{
+                    label: 'PREMIUM_CARS_SECONDARY_SERIE',
+                    options: availableSecondarySeries,
+                    selected: selectedSecondarySerie,
+                    premiumDefaultSeries: true,
+                    selectDisabled: selectedMainSerie === 'All'
+                }"
+                (onChange)="filterPremiumSecundarySerie($event)"
+            ></app-filter-pill>
 
         </section>
 
         <!-- Car list -->
-        <main id="user-cars-list">
+        <main>
 
             <!-- Basic Cars Owned-->
             <section *ngIf="carsType === 'basic' && collectedType === 'owned'" class="basic-cars-list">

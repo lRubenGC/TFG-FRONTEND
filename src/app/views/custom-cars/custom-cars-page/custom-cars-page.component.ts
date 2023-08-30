@@ -70,12 +70,12 @@ export class CustomCarsPageComponent implements OnInit {
     this.router.navigate(['/custom-cars/upload']);
   }  
 
-  filterCars() {
-    if (this.selectedFilter === 'upvotes') {
+  filterCars(ev: any) {
+    if (ev === 'upvotes') {
       this.cars.sort((a, b) => b.upvotes - a.upvotes);
-    } else if (this.selectedFilter === 'date_recents') {
+    } else if (ev === 'date_recents') {
       this.cars.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-    } else if (this.selectedFilter === 'date_olders') {
+    } else if (ev === 'date_olders') {
       this.cars.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
     }
   }
