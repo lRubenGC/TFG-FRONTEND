@@ -1,0 +1,12 @@
+<div class="filter-item">
+    <h3>{{ props.label | translate }}</h3>
+    <div class="car-select">
+      <select [(ngModel)]="props.selected" (change)="handleChange()">
+        <ng-container *ngIf="props.basicDefaultSeries">
+            <option *ngFor="let option of basicDefaultSeries" [value]="option.value">{{ option.text | translate }}</option>
+        </ng-container>
+        <option *ngFor="let option of props.options" [value]="option">{{ option }}</option>
+      </select>
+    </div>
+</div>
+  

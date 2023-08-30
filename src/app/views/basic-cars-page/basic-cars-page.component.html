@@ -12,29 +12,24 @@
             <!-- Filter section -->
             <section id="basic-filter-section" class="d_flex flex_wrap">
 
-                <div class="basic-filter-item">
-                    <h3>{{ 'BASIC_CARS_YEAR' | translate }}</h3>
-                    <div class="car-select">
-                        <select [(ngModel)]="selectedYear" (change)="getCars(selectedYear)">
-                            <option *ngFor="let year of availableYears" [value]="year">{{ year }}</option>
-                        </select>
+                <app-filter-pill
+                    [props]="{
+                        label: 'BASIC_CARS_YEAR',
+                        options: availableYears,
+                        selected: selectedYear
+                    }"
+                    (onChange)="getCars($event)"
+                ></app-filter-pill>
 
-                    </div>
-                </div>
-
-                <div class="basic-filter-item">
-                    <h3>{{ 'BASIC_CARS_SERIE' | translate }}</h3>
-                    <div class="car-select">
-                        <select [(ngModel)]="selectedSerie" (change)="filterSerie(selectedSerie)">
-                            <option value="All">{{ 'FILTER_ALL' | translate }}</option>
-                            <option value="Treasure Hunt">Treasure Hunt</option>
-                            <option value="Super Treasure Hunt">Super Treasure Hunt</option>
-                            <option value="Red Edition">Red Edition</option>
-                            <option value="Walmart Exclusive">Zamac</option>
-                            <option *ngFor="let serie of availableSeries" [value]="serie">{{ serie }}</option>
-                        </select>
-                    </div>
-                </div>
+                <app-filter-pill
+                    [props]="{
+                        label: 'BASIC_CARS_SERIE',
+                        options: availableSeries,
+                        selected: selectedSerie,
+                        basicDefaultSeries: true
+                    }"
+                    (onChange)="filterSerie($event)"
+                ></app-filter-pill>
 
             </section>
 
