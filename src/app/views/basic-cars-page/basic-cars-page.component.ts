@@ -17,21 +17,27 @@ export class BasicCarsPageComponent implements OnInit {
 
   userToken = decodeToken();
 
-  cars: any[] = [];
-  showedCars: any[] = [];
+  cars: any[] = []; // All cars of the year selected
+  showedCars: any[] = []; // Cars to display
 
-  userCars: any[] = [];
-  userCarsShowed: any[] = [];
+  userCars: any[] = []; // All the cars that user owns
+  userCarsShowed: any[] = []; // Cars that user owns to show (for the number)
 
+  // Selected filters
   selectedYear: string = '2023';
   selectedSerie: string = 'All';
+  selectedOwned: string = 'FILTER_ALL';
 
+  // Filter options
   availableYears = ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016'];
   availableSeries = [];
+  ownedCarsFilter = ['FILTER_ALL', 'FILTER_CARS_OWNED', 'FILTER_CARS_NOT_OWNED'];
 
+  // Error handler
   error = false;
   errorMsg = '';
 
+  // Msg Card component
   msg_card: msgCardInterface = {
     title: '',
     description: [],
@@ -124,25 +130,77 @@ export class BasicCarsPageComponent implements OnInit {
   }
 
   filterSerie(serie: string) {
-    this.loaderService.startLoading();
+    this.selectedSerie = serie;
 
-    switch (serie) {
-      case 'All':
-        this.userCarsShowed = this.userCars;
-        this.showedCars = this.cars;
-        break;
-        
-      default:
-        this.userCarsShowed = this.userCars.filter(car => car.series.includes(serie));
-        this.showedCars = this.cars.filter(car => car.series.includes(serie));
-        break;
+    let filteredCars = this.cars;
+    let filteredUserCars = this.userCars;
+
+    if (serie !== 'All') {
+      filteredCars = this.cars.filter(car => car.series.includes(serie));
+      filteredUserCars = this.userCars.filter(car => car.series.includes(serie));
     }
 
-    this.loaderService.stopLoading();
+    switch (this.selectedOwned) {
+      case 'FILTER_CARS_OWNED':
+        this.userCarsShowed = filteredUserCars;
+        this.showedCars = filteredCars.filter(car => car.has_car);
+        break;
+
+      case 'FILTER_CARS_NOT_OWNED':
+        this.userCarsShowed = [];
+        this.showedCars = filteredCars.filter(car => !car.has_car);
+        break;
+  
+      default:
+        this.userCarsShowed = filteredUserCars;
+        this.showedCars = filteredCars;
+        break;
+    }
+  }
+
+  filterSerieOwned(serie: string) {
+    this.selectedOwned = serie;
+
+    if (this.selectedSerie === 'All') {
+      switch (serie) {
+        case 'FILTER_ALL':
+          this.userCarsShowed = this.userCars;
+          this.showedCars = this.cars;
+          break;
+  
+        case 'FILTER_CARS_OWNED':
+          this.userCarsShowed = this.userCars
+          this.showedCars = this.cars.filter(car => car.has_car);
+          break;
+  
+        case 'FILTER_CARS_NOT_OWNED':
+          this.userCarsShowed = [];
+          this.showedCars = this.cars.filter(car => !car.has_car);
+          break;
+      }
+    } else {
+      switch (serie) {
+        case 'FILTER_ALL':
+          this.userCarsShowed = this.userCars.filter(car => car.series.includes(this.selectedSerie));
+          this.showedCars = this.cars.filter(car => car.series.includes(this.selectedSerie));
+          break;
+  
+        case 'FILTER_CARS_OWNED':
+          this.userCarsShowed = this.userCars.filter(car => car.series.includes(this.selectedSerie));
+          this.showedCars = this.cars.filter(car => car.has_car && car.series.includes(this.selectedSerie));
+          break;
+  
+        case 'FILTER_CARS_NOT_OWNED':
+          this.userCarsShowed = [];
+          this.showedCars = this.cars.filter(car => !car.has_car && car.series.includes(this.selectedSerie));
+          break;
+      }
+    }
   }
 
   resetSeries() {
     this.selectedSerie = 'All';
+    this.selectedOwned = 'FILTER_ALL';
   }
 
   getUserCars() {

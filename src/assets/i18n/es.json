@@ -23,6 +23,8 @@
     "HEADER_LOGOUT": "Desconectarse",
     "BASIC_CARS_YEAR": "Año",
     "BASIC_CARS_SERIE": "Serie",
+    "FILTER_CARS_OWNED": "En propiedad",
+    "FILTER_CARS_NOT_OWNED": "No en propiedad",
     "LOGIN_TITLE": "Bienvenido de nuevo!",
     "LOGIN_SIGNIN": "Inicia Sesión",
     "LOGIN_USERNAME": "Username",

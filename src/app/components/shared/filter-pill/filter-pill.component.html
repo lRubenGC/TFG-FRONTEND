@@ -23,7 +23,7 @@
         </ng-container>
 
         <!-- Series passed -->
-        <option *ngFor="let option of props.options" [value]="option">{{ option }}</option>
+        <option *ngFor="let option of props.options" [value]="option">{{ option | translate }}</option>
       </select>
     </div>
 </div>
