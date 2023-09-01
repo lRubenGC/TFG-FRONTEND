@@ -226,7 +226,7 @@ export class PremiumCarsPageComponent implements OnInit {
   
     const combinedFilter = (car: any) => filterBasedOnOwnership(car) && filterBasedOnSerie(car);
   
-    this.userCarsShowed = this.selectedSecondarySerie === 'All' && serie === 'FILTER_CARS_NOT_OWNED' 
+    this.userCarsShowed = serie === 'FILTER_CARS_NOT_OWNED' 
       ? []
       : this.userCars.filter(filterBasedOnSerie);
     this.showedCars = this.cars.filter(combinedFilter);
