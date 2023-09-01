@@ -19,20 +19,20 @@ export class PremiumCarsPageComponent implements OnInit {
 
   userToken = decodeToken();
 
-  cars: any[] = [];
-  showedCars: any[] = [];
+  cars: any[] = []; // All cars of the main serie selected
+  showedCars: any[] = []; // Cars to display
 
-  userCars: any[] = [];
-  userCarsShowed: any[] = [];
+  userCars: any[] = []; // All the cars that user owns
+  userCarsShowed: any[] = []; // Cars that user owns to show (for the number)
 
-  isSerieSelected: boolean = false;
+  isSerieSelected: boolean = false; // When main serie is selected
 
   selectedMainSerie: string = '';
   selectedSecondarySerie: string = 'All';
-  selectedYear: string = '';
+  selectedOwned: string = 'FILTER_ALL';
 
   availableSecondarySeries = [];
-  availableYears = [];
+  ownedCarsFilter = ['FILTER_ALL', 'FILTER_CARS_OWNED', 'FILTER_CARS_NOT_OWNED'];
 
   premiumPills: premiumPillInterface[] = [
     {
@@ -98,7 +98,7 @@ export class PremiumCarsPageComponent implements OnInit {
 
   async getCars(main_serie: string) {
     this.setMainSerieTitle(main_serie);
-    this.selectedSecondarySerie = 'All';
+    this.resetSeries();
     this.loaderService.startLoading();
 
     try {
@@ -173,21 +173,66 @@ export class PremiumCarsPageComponent implements OnInit {
   }
 
   filterSerie(serie: string) {
-    this.loaderService.startLoading();
+    this.selectedSecondarySerie = serie;
 
-    switch (serie) {
-      case 'All':
-        this.userCarsShowed = this.userCars;
-        this.showedCars = this.cars;
-        break;
+    let filteredCars = this.cars;
+    let filteredUserCars = this.userCars;
 
-      default:
-        this.userCarsShowed = this.userCars.filter(car => car.secondary_serie.includes(serie));
-        this.showedCars = this.cars.filter((car: premiumCarInterface) => car.secondary_serie === serie);
-        break;
+    if (serie !== 'All') {
+      filteredCars = this.cars.filter(car => car.secondary_serie.includes(serie));
+      filteredUserCars = this.userCars.filter(car => car.secondary_serie.includes(serie));
     }
 
-    this.loaderService.stopLoading();
+    switch (this.selectedOwned) {
+      case 'FILTER_CARS_OWNED':
+        this.userCarsShowed = filteredUserCars;
+        this.showedCars = filteredCars.filter(car => car.has_car);
+        break;
+
+      case 'FILTER_CARS_NOT_OWNED':
+        this.userCarsShowed = [];
+        this.showedCars = filteredCars.filter(car => !car.has_car);
+        break;
+  
+      default:
+        this.userCarsShowed = filteredUserCars;
+        this.showedCars = filteredCars;
+        break;
+    }
+  }
+
+  filterSerieOwned(serie: string) {
+    this.selectedOwned = serie;
+    
+    const filterBasedOnOwnership = (car: any) => {
+      switch (serie) {
+        case 'FILTER_ALL':
+          return true;
+        case 'FILTER_CARS_OWNED':
+          return car.has_car;
+        case 'FILTER_CARS_NOT_OWNED':
+          return !car.has_car;
+        default:
+          return true;
+      }
+    };
+  
+    const filterBasedOnSerie = (car: any) => {
+      if (this.selectedSecondarySerie === 'All') return true;
+      return car.secondary_serie.includes(this.selectedSecondarySerie);
+    };
+  
+    const combinedFilter = (car: any) => filterBasedOnOwnership(car) && filterBasedOnSerie(car);
+  
+    this.userCarsShowed = this.selectedSecondarySerie === 'All' && serie === 'FILTER_CARS_NOT_OWNED' 
+      ? []
+      : this.userCars.filter(filterBasedOnSerie);
+    this.showedCars = this.cars.filter(combinedFilter);
+  }
+  
+  resetSeries() {
+    this.selectedSecondarySerie = 'All';
+    this.selectedOwned = 'FILTER_ALL';
   }
 
   async getUserCars() {

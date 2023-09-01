@@ -10,7 +10,7 @@
             </section>
 
             <!-- Filter section -->
-            <section *ngIf="isSerieSelected" id="premium-filter-section" class="d_flex">
+            <section *ngIf="isSerieSelected" id="premium-filter-section" class="d_flex flex-direction_column">
 
                 <app-filter-pill
                     [props]="{
@@ -21,6 +21,16 @@
                         selectDisabled: false
                     }"
                     (onChange)="filterSerie($event)"
+                ></app-filter-pill>
+
+                <app-filter-pill
+                    [props]="{
+                        label: 'FILTER_CARS_OWNED',
+                        options: ownedCarsFilter,
+                        selected: selectedOwned,
+                        selectDisabled: false
+                    }"
+                    (onChange)="filterSerieOwned($event)"
                 ></app-filter-pill>
 
             </section>

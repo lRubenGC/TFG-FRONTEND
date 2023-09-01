@@ -160,42 +160,30 @@ export class BasicCarsPageComponent implements OnInit {
 
   filterSerieOwned(serie: string) {
     this.selectedOwned = serie;
-
-    if (this.selectedSerie === 'All') {
+    const filterBasedOnOwnership = (car: any) => {
       switch (serie) {
         case 'FILTER_ALL':
-          this.userCarsShowed = this.userCars;
-          this.showedCars = this.cars;
-          break;
-  
+          return true;
         case 'FILTER_CARS_OWNED':
-          this.userCarsShowed = this.userCars
-          this.showedCars = this.cars.filter(car => car.has_car);
-          break;
-  
+          return car.has_car;
         case 'FILTER_CARS_NOT_OWNED':
-          this.userCarsShowed = [];
-          this.showedCars = this.cars.filter(car => !car.has_car);
-          break;
+          return !car.has_car;
+        default:
+          return true;
       }
-    } else {
-      switch (serie) {
-        case 'FILTER_ALL':
-          this.userCarsShowed = this.userCars.filter(car => car.series.includes(this.selectedSerie));
-          this.showedCars = this.cars.filter(car => car.series.includes(this.selectedSerie));
-          break;
+    };
   
-        case 'FILTER_CARS_OWNED':
-          this.userCarsShowed = this.userCars.filter(car => car.series.includes(this.selectedSerie));
-          this.showedCars = this.cars.filter(car => car.has_car && car.series.includes(this.selectedSerie));
-          break;
+    const filterBasedOnSerie = (car: any) => {
+      if (this.selectedSerie === 'All') return true;
+      return car.series.includes(this.selectedSerie);
+    };
   
-        case 'FILTER_CARS_NOT_OWNED':
-          this.userCarsShowed = [];
-          this.showedCars = this.cars.filter(car => !car.has_car && car.series.includes(this.selectedSerie));
-          break;
-      }
-    }
+    const combinedFilter = (car: any) => filterBasedOnOwnership(car) && filterBasedOnSerie(car);
+  
+    this.userCarsShowed = this.selectedSerie === 'All' && serie === 'FILTER_CARS_NOT_OWNED' 
+      ? [] 
+      : this.userCars.filter(filterBasedOnSerie);
+    this.showedCars = this.cars.filter(combinedFilter);
   }
 
   resetSeries() {
