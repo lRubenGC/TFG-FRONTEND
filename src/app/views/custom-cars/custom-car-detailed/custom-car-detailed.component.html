@@ -20,9 +20,12 @@
 
       <div class="car-details-item p_1">
         <h3>{{ 'CUSTOM_CAR_AUTHOR' | translate }}: <span class="user-creator d_inline-block c_pointer" (click)="goTo('userCreator')">{{ car.userCreator }}</span></h3>
-        <div class="upvotes-container d_flex">
-          <p>{{ 'UPVOTES' | translate }}: <span [ngClass]="car.voted ? 'car-voted' : ''" class="car-upvotes">{{ car.upvotes }}</span></p>
-          <img (click)="voteCar()" class="upvote-button c_pointer" src="../../../assets/images/custom_cars_page/arrow-big-up-line-filled.svg" alt="upvote image">
+        <div class="upvotes-container d_flex gap_0_25">
+          <p>{{ 'UPVOTES' | translate }}:</p>
+            <div class="d_flex align-items_center">
+              <p [ngClass]="car.voted ? 'car-voted' : ''" class="car-upvotes">{{ car.upvotes }}</p>
+              <img (click)="voteCar()" class="upvote-button c_pointer" src="../../../assets/images/custom_cars_page/arrow-big-up-line-filled.svg" alt="upvote image">
+            </div>
         </div>
       </div>
 
