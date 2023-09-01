@@ -1,33 +1,33 @@
-.about-cw-page {
+.info-page {
     text-justify: auto;
     margin: 70px auto;
 }
 
-.about-cw-page p {
+.info-page p {
     text-align: justify;
     font-size: 20px;
 }
 
-.about-cw-page a {
+.info-page a {
     color: #fff;
     font-size: 25px;
 }
 
 @media (max-width: 1300px) {
-    .about-cw-page {
+    .info-page {
         width: 70%;
         gap: 2em;
     }
 }
 
 @media (max-width: 900px) {
-    .about-cw-page p {
+    .info-page p {
         font-size: 18px;
     }
 }
 
 @media (max-width: 450px) {
-    .about-cw-page {
+    .info-page {
         width: 80%;
     }
 }

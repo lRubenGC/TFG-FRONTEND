@@ -30,11 +30,13 @@ export class HeaderComponent implements OnInit {
 
   langDropdownOpen = false;
   accDropdownOpen = false;
+  infoDropdownOpen = false;
   userLoggedIn = false;
   isMobileMenuOpen = false;
   user!: any;
 
   @ViewChild('langDropdown') langDropdown!: ElementRef;
+  @ViewChild('infoDropdown') infoDropdown!: ElementRef;
   @ViewChild('accDropdown') accDropdown!: ElementRef;
 
   constructor(
@@ -120,12 +122,20 @@ export class HeaderComponent implements OnInit {
     if (dropdown === 'lang') {
       this.langDropdownOpen = !this.langDropdownOpen;
       this.accDropdownOpen = false;
+      this.infoDropdownOpen = false;
       return;
     }
     
+    if (dropdown === 'info') {
+      this.infoDropdownOpen = !this.infoDropdownOpen;
+      this.langDropdownOpen = false;
+      this.accDropdownOpen = false;
+    }
+
     if (dropdown === 'acc') {
       this.accDropdownOpen = !this.accDropdownOpen;
       this.langDropdownOpen = false;
+      this.infoDropdownOpen = false;
     }
   }
 
@@ -134,6 +144,7 @@ export class HeaderComponent implements OnInit {
     if (!event.target.classList.contains('dropdown-button')) {
       this.langDropdownOpen = false;
       this.accDropdownOpen = false;
+      this.infoDropdownOpen = false;
     }
   }
 

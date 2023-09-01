@@ -39,8 +39,15 @@
         </li>
 
 
-        <!-- About DT -->
-        <li class="header-item"><button (click)="goTo('/about')">{{ 'HEADER_ABOUT' | translate }}</button></li>
+        <!-- Info Dropdown -->
+        <li class="dropdown-container header-item">
+            <button (click)="toggleDropdown('info')" class="dropdown-button">{{ 'HEADER_INFO' | translate }}
+                &dtrif;</button>
+            <div #infoDropdown class="dropdown-content" [ngClass]="{'show': !infoDropdownOpen}">
+                <button (click)="goTo('/info/about')">{{ 'HEADER_ABOUT' | translate }}</button>
+                <button (click)="goTo('/info/updates')">{{ 'HEADER_UPDATES' | translate }}</button>
+            </div>
+        </li>
 
         <!-- Log In -->
         <li class="header-item" *ngIf="!userLoggedIn"><button (click)="goTo('/auth')">{{ 'HEADER_ACCOUNT' | translate }}</button></li>

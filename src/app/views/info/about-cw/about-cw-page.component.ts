@@ -4,7 +4,7 @@ import { LoaderService } from 'src/app/services/loader.service';
 @Component({
   selector: 'app-about-cw',
   templateUrl: './about-cw-page.component.html',
-  styleUrls: ['./about-cw-page.component.css']
+  styleUrls: ['./about-cw-page.component.css', '../info.styles.css']
 })
 export class AboutCWPageComponent {
 
