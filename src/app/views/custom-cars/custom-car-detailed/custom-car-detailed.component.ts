@@ -4,7 +4,7 @@ import { customCarInterface } from 'src/app/models/cardTypes.interface';
 import { CustomCarsService } from '../custom-cars.service';
 import { UserService } from 'src/app/services/user.service';
 import { CarsService } from 'src/app/components/car-cards/services/cars.service';
-import { decodeToken } from 'src/app/helpers/generics';
+import { decodeToken, tokenObject } from 'src/app/helpers/generics';
 import { forkJoin } from 'rxjs';
 import { mapAndSortCustomCars } from 'src/app/helpers/map-cars';
 import { LoaderService } from '../../../services/loader.service';
@@ -16,7 +16,7 @@ import { LoaderService } from '../../../services/loader.service';
 })
 export class CustomCarDetailedComponent implements OnInit {
   
-  userToken = decodeToken();
+  userToken!: tokenObject;
 
   car!: customCarInterface;
   error = false;
@@ -35,7 +35,9 @@ export class CustomCarDetailedComponent implements OnInit {
     private userService: UserService,
     ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.userToken = await decodeToken();
+
     const carId = Number(this.route.snapshot.paramMap.get('carId'));
 
     if (carId && !isNaN(carId)) {

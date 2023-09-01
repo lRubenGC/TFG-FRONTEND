@@ -1,9 +1,10 @@
 import jwtDecode from 'jwt-decode';
+import { getTokenFromIndexedDB } from './indexedDB';
 
 // Gets token and decodes it
-export function decodeToken(): tokenObject {
-    const token = localStorage.getItem('cw-token');
-
+export async function decodeToken(): Promise<tokenObject> {
+    const token = await getTokenFromIndexedDB();
+    
     if (token) {
       // Decodes token
       const decodedToken: tokenDecoded = jwtDecode(token);

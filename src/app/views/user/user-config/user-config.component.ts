@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { UserService } from '../../../services/user.service';
-import { decodeToken } from 'src/app/helpers/generics';
+import { decodeToken, tokenObject } from 'src/app/helpers/generics';
 import { userInterfaceApi, userUpdateRequest } from 'src/app/models/user.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { isValidEmail, isValidPassword, isValidUsername } from 'src/app/helpers/auth';
@@ -19,7 +19,7 @@ export class UserConfigComponent implements OnInit {
 
   configForm!: FormGroup;
 
-  userToken = decodeToken();
+  userToken!: tokenObject;
   data!: userInterfaceApi;
 
   images: File[] | null[] = [null, null];
@@ -49,6 +49,8 @@ export class UserConfigComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.userToken = await decodeToken();
+    
     if (this.userToken.hasToken && this.userToken.userId) {
       this.data = await this.userService.getUserData(this.userToken.userId);
       this.configForm.patchValue({

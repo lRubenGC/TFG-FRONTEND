@@ -48,8 +48,8 @@
         </header>
 
         <section class="owned-cars-quantity d_flex justify-content_end">
-            <div *ngIf="userToken.userId"><h4>{{ 'CARS_OWNED_LITERAL' | translate}}: {{ userCarsShowed.length }} / {{ showedCars.length }}</h4></div>
-            <div *ngIf="!userToken.userId"><h4>{{ 'CARS_OWNED_LITERAL' | translate}}: X / {{ showedCars.length }}</h4></div>
+            <div *ngIf="userToken?.userId"><h4>{{ 'CARS_OWNED_LITERAL' | translate}}: {{ userCarsShowed.length }} / {{ showedCars.length }}</h4></div>
+            <div *ngIf="!userToken?.userId"><h4>{{ 'CARS_OWNED_LITERAL' | translate}}: X / {{ showedCars.length }}</h4></div>
         </section>
 
         <!-- Car list -->

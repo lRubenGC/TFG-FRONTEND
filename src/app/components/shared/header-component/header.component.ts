@@ -12,6 +12,7 @@ import { GenericAuthService } from 'src/app/services/generic-auth.service';
 import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/services/app.service';
 import { LoaderService } from 'src/app/services/loader.service';
+import { removeTokenFromIndexedDB } from 'src/app/helpers/indexedDB';
 
 @Component({
   selector: 'app-header',
@@ -104,7 +105,7 @@ export class HeaderComponent implements OnInit {
   async goToUserProfile() {
     this.loaderService.startLoading();
     
-    const tokenDecoded = decodeToken();
+    const tokenDecoded = await decodeToken();
     this.closeMobileMenu();
 
     if (tokenDecoded.hasToken && tokenDecoded.userId) {
@@ -160,7 +161,7 @@ export class HeaderComponent implements OnInit {
   }
 
   async checkUserLoggedIn(): Promise<void> {
-    const { hasToken, userId } = decodeToken();
+    const { hasToken, userId } = await decodeToken();
     
     if ( hasToken && userId ) {
       try {
@@ -174,14 +175,14 @@ export class HeaderComponent implements OnInit {
     } else this.userLoggedIn = false;
   }
 
-  logOut() {
+  async logOut() {
     this.loaderService.startLoading();
     this.closeMobileMenu();
 
     this.genericAuthService.logout();
 
 
-    localStorage.removeItem('cw-token');
+    await removeTokenFromIndexedDB();
     this.authService.setUserLoggedIn(false);
     this.checkUserLoggedIn();
     window.location.reload();

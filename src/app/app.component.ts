@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AppService } from './services/app.service';
 import { environment } from "../environments/environment";
+import { initializeDB } from './helpers/indexedDB';
 
 @Component({
   selector: 'app-root',
@@ -15,10 +16,12 @@ export class AppComponent implements OnInit {
       private translate: TranslateService,
       private appService: AppService,
     ) {
-    const lang = localStorage.getItem('cw-lang');
-    if (lang) {
-      translate.setDefaultLang(lang)
-    } else translate.setDefaultLang('en');
+      this.initializeDB();
+
+      const lang = localStorage.getItem('cw-lang');
+      if (lang) {
+        translate.setDefaultLang(lang)
+      } else translate.setDefaultLang('en');
   }
 
   ngOnInit(): void {
@@ -27,6 +30,14 @@ export class AppComponent implements OnInit {
   
   onBodyClick(event: MouseEvent): void {
     this.appService.onBodyClick(event);
+  }
+
+  async initializeDB() {
+    try {
+      await initializeDB();
+    } catch (err) {
+      console.error(err);
+    }
   }
 
 }

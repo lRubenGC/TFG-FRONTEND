@@ -71,7 +71,7 @@ export class UserProfileComponent implements OnInit {
         const userResponse = await this.userService.getUserByUsername(username);
         this.user = userResponse.user;
   
-        const tokenDecoded = decodeToken();
+        const tokenDecoded = await decodeToken();
         const isUserOwner = tokenDecoded.userId === this.user?.id;
         this.userVisitor = isUserOwner;
   

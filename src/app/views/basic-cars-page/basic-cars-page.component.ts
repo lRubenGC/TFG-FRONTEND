@@ -5,7 +5,7 @@ import { Subscription, lastValueFrom } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from 'src/app/services/language.service';
 import { basicCarInterface } from 'src/app/models/cardTypes.interface';
-import { decodeToken } from 'src/app/helpers/generics';
+import { decodeToken, tokenObject } from 'src/app/helpers/generics';
 import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
@@ -15,7 +15,7 @@ import { LoaderService } from 'src/app/services/loader.service';
 })
 export class BasicCarsPageComponent implements OnInit {
 
-  userToken = decodeToken();
+  userToken!: tokenObject;
 
   cars: any[] = []; // All cars of the year selected
   showedCars: any[] = []; // Cars to display
@@ -53,7 +53,8 @@ export class BasicCarsPageComponent implements OnInit {
     private translate: TranslateService,
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.userToken = await decodeToken();
     this.getCars(this.selectedYear);
 
     this.subscription = this.languageService.languageChanged$.subscribe(lang => {

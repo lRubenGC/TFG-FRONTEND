@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomCarsService } from '../custom-cars.service';
-import { decodeToken } from 'src/app/helpers/generics';
+import { decodeToken, tokenObject } from 'src/app/helpers/generics';
 import { Router } from '@angular/router';
 import { LoaderService } from 'src/app/services/loader.service';
 
@@ -16,7 +16,7 @@ export class UploadCustomCarPageComponent implements OnInit {
 
   @ViewChild('uploadButton', { static: true }) submitButtonRef!: ElementRef;
 
-  userToken = decodeToken();
+  userToken!: tokenObject;
 
   formError: boolean = false;
   errorMsg: string = '';
@@ -44,7 +44,8 @@ export class UploadCustomCarPageComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.userToken = await decodeToken();
   }
 
   ngAfterContentInit() {

@@ -4,7 +4,7 @@ import { SearchResultsService } from './search-results.service';
 import { Subscription } from 'rxjs';
 import { BasicCarsService } from '../basic-cars-page/basic-cars.service';
 import { PremiumCarsService } from '../premium-cars-page/premium-cars.service';
-import { decodeToken } from 'src/app/helpers/generics';
+import { decodeToken, tokenObject } from 'src/app/helpers/generics';
 import { basicCarInterface, basicCarShowedInterface, premiumCarInterface } from 'src/app/models/cardTypes.interface';
 import { premiumCarShowedInterface } from 'src/app/models/cardTypes.interface';
 import { LoaderService } from '../../services/loader.service';
@@ -17,7 +17,7 @@ import { UserCars } from '../../models/userCars.interface';
 })
 export class SearchResultsPageComponent implements OnInit, OnDestroy {
 
-  userToken = decodeToken();
+  userToken!: tokenObject;
 
   // Subscription for refresh the search bar data
   private routeParamsSubscription!: Subscription;
@@ -41,7 +41,9 @@ export class SearchResultsPageComponent implements OnInit, OnDestroy {
     private searchResultsService: SearchResultsService,
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.userToken = await decodeToken();
+
     // Gets the query and runs searchCars()
     this.routeParamsSubscription = this.route.params.subscribe((params: Params) => {
       this.query = params['query'];

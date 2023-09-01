@@ -3,7 +3,7 @@ import { CustomCarsService } from '../custom-cars.service';
 import { customCarInterface } from 'src/app/models/cardTypes.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { decodeToken } from 'src/app/helpers/generics';
+import { decodeToken, tokenObject } from 'src/app/helpers/generics';
 import { isValidYear } from 'src/app/helpers/custom-car-validators';
 import { LoaderService } from 'src/app/services/loader.service';
 
@@ -14,7 +14,7 @@ import { LoaderService } from 'src/app/services/loader.service';
 })
 export class EditCustomCarComponent implements OnInit {
 
-  userToken = decodeToken();
+  userToken!: tokenObject;
 
   carData!: customCarInterface;
 
@@ -52,7 +52,9 @@ export class EditCustomCarComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.userToken = await decodeToken();
+
     this.route.paramMap.subscribe(params => {
       const carId = Number(params.get('carId'));
 

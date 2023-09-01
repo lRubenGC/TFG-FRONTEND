@@ -8,6 +8,7 @@ import { GenericAuthService } from 'src/app/services/generic-auth.service';
 import { Subscription } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { LoaderService } from 'src/app/services/loader.service';
+import { setTokenInIndexedDB } from 'src/app/helpers/indexedDB';
 
 @Component({
   selector: 'app-login-page',
@@ -91,8 +92,8 @@ export class LoginPageComponent implements OnInit {
 
             this.loaderService.stopLoading();
 
-            // Save token in Local Storage
-            localStorage.setItem('cw-token', res.token);
+            // Save token in Indexed DB
+            setTokenInIndexedDB(res.token);
 
             // Dispatch login event
             this.authService.setUserLoggedIn(true);
@@ -142,8 +143,8 @@ export class LoginPageComponent implements OnInit {
             })
             .subscribe(
               (res) => {
-                // Save token in Local Storage
-                localStorage.setItem('cw-token', res.token);
+                // Save token in Indexed DB
+                setTokenInIndexedDB(res.token);
     
                 // Dispatch login event
                 this.authService.setUserLoggedIn(true);

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { CustomCarsService } from '../custom-cars.service';
 import { customCarInterface } from 'src/app/models/cardTypes.interface';
-import { decodeToken } from 'src/app/helpers/generics';
+import { decodeToken, tokenObject } from 'src/app/helpers/generics';
 import { CarsService } from 'src/app/components/car-cards/services/cars.service';
 import { Router } from '@angular/router';
 import { mapAndSortCustomCars } from '../../../helpers/map-cars';
@@ -15,7 +15,7 @@ import { LoaderService } from 'src/app/services/loader.service';
 })
 export class CustomCarsPageComponent implements OnInit {
 
-  userToken = decodeToken();
+  userToken!: tokenObject;
 
   cars: customCarInterface[] = [];
   
@@ -31,7 +31,8 @@ export class CustomCarsPageComponent implements OnInit {
     private router: Router,
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.userToken = await decodeToken();
     this.getCustomCars();
   }
 

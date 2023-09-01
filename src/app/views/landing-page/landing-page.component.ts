@@ -16,7 +16,7 @@ import { LoaderService } from 'src/app/services/loader.service';
 })
 export class LandingPageComponent implements OnInit, OnDestroy {
 
-  userLoggedIn = decodeToken().hasToken;
+  userLoggedIn!: boolean;
 
   landingCards: landingCardInterface[] = [
     {
@@ -42,7 +42,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   msg_card: msgCardInterface = {
     title: '',
     description: [],
-    button: !this.userLoggedIn,
+    button: false,
     buttonName: '',
     buttonLink: '/auth'
   }
@@ -55,7 +55,10 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     private loaderService: LoaderService,
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    const token = await decodeToken();
+    this.msg_card.button = !token.hasToken;
+
     this.subscription = this.languageService.languageChanged$.subscribe(lang => {
       this.translate.use(lang);
       this.changeLanguage();
