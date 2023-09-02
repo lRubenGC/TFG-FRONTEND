@@ -1,12 +1,5 @@
 .basic-car-item {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
     margin: 1.2em auto;
-    text-align: center;
 }
 
 .img-container {
@@ -17,7 +10,6 @@
 .banner-image {
     width: 275px;
     height: 9rem;
-    object-fit: cover;
     border-radius: .6rem;
 }
 
@@ -29,37 +21,11 @@
     font-size: .8rem;
 }
 
-.car-item-subtitle {
-    display: flex;
-    justify-content: space-evenly;
-    gap: 5px;
-    flex-wrap: wrap;
-    margin-top: .5rem;
-}
-
-.car-serie-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .serie-square {
     width: .8rem;
     height: .8rem;
     border-radius: .2rem;
     margin-right: .3rem;
-}
-
-.car-series-col-serie {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2em;
-}
-
-.square-series-wrapper {
-    display: flex;
-    align-items: center;
 }
 
 .car-card-button {

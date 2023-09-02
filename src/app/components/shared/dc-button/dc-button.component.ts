@@ -9,8 +9,7 @@ import { Component, Input } from '@angular/core';
 export class DCButtonComponent {
 
   @Input() buttonTitle: string = '';
-
-  isNotificationVisible = true;
+  @Input() buttonDisabled: boolean = false;
 
   constructor(
   ) { }

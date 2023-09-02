@@ -1,7 +1,4 @@
 #search-results-land-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background: url('src/assets/images/search-results/search-results-bg.webp');
     background-position: center;
     background-size: cover;
@@ -31,17 +28,7 @@ h1 {
     margin-left: 1rem;
 }
 
-.car-menu-list-container {
-    margin-top: 2rem;
-    display: flex;
-    justify-content: center;
-}
-
 .car-menu-list {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
     border: 1px solid rgb(143, 143, 143);
     border-radius: 5px;
     padding: 5px 15px;
@@ -50,7 +37,6 @@ h1 {
 .car-menu-item {
     padding: 5px;
     font-size: 1em;
-    cursor: pointer;
 }
 
 .car-menu-item:hover {

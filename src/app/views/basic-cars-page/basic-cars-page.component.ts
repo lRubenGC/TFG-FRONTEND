@@ -5,7 +5,8 @@ import { Subscription, lastValueFrom } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from 'src/app/services/language.service';
 import { basicCarInterface } from 'src/app/models/cardTypes.interface';
-import { decodeToken } from 'src/app/helpers/generics';
+import { decodeToken, tokenObject } from 'src/app/helpers/generics';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-basic-cars-page',
@@ -14,23 +15,29 @@ import { decodeToken } from 'src/app/helpers/generics';
 })
 export class BasicCarsPageComponent implements OnInit {
 
-  userToken = decodeToken();
+  userToken!: tokenObject;
 
-  cars: any[] = [];
-  showedCars: any[] = [];
+  cars: any[] = []; // All cars of the year selected
+  showedCars: any[] = []; // Cars to display
 
-  userCars: any[] = [];
-  userCarsShowed: any[] = [];
+  userCars: any[] = []; // All the cars that user owns
+  userCarsShowed: any[] = []; // Cars that user owns to show (for the number)
 
+  // Selected filters
   selectedYear: string = '2023';
   selectedSerie: string = 'All';
+  selectedOwned: string = 'FILTER_ALL';
 
+  // Filter options
   availableYears = ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016'];
   availableSeries = [];
+  ownedCarsFilter = ['FILTER_ALL', 'FILTER_CARS_OWNED', 'FILTER_CARS_NOT_OWNED'];
 
+  // Error handler
   error = false;
   errorMsg = '';
 
+  // Msg Card component
   msg_card: msgCardInterface = {
     title: '',
     description: [],
@@ -41,11 +48,13 @@ export class BasicCarsPageComponent implements OnInit {
 
   constructor(
     private basicCarsService: BasicCarsService,
+    private loaderService: LoaderService,
+    private languageService: LanguageService,
     private translate: TranslateService,
-    private languageService: LanguageService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.userToken = await decodeToken();
     this.getCars(this.selectedYear);
 
     this.subscription = this.languageService.languageChanged$.subscribe(lang => {
@@ -56,62 +65,63 @@ export class BasicCarsPageComponent implements OnInit {
     this.changeLanguage();
   }
 
-  getCars(year: string) {
-    this.basicCarsService.getCarsByYear(year).subscribe(res => {
-      const cars = res.cars.map((car: basicCarInterface) => {
+  async getCars(year: string) {
+    this.loaderService.startLoading();
+  
+    try {
+      const carsResponse = await lastValueFrom(this.basicCarsService.getCarsByYear(year));
+      let cars = carsResponse.cars.map((car: basicCarInterface) => {
         const series = car.series.split(',');
         const serie_class = series[0].replace(/ /g, '-').toLowerCase();
-
         return {
           ...car,
           series,
           serie_class,
           user_profile: true
-        }
+        };
       });
-
-      // If user is logged, gets the cars of the user and changes the values of the cars
+  
       if (this.userToken.hasToken && this.userToken.userId) {
-        this.getUserCars().then((userCars: any) => {
-          this.userCars = userCars.carsOwned.filter((carOwned: any) => carOwned.year === year);
-          this.userCarsShowed = userCars.carsOwned.filter((carOwned: any) => carOwned.year === year);
+        const userCarsResponse = await this.getUserCars() as { carsOwned: any[]; carsWished: any[] };
 
-          userCars.carsOwned.forEach((carOwned: any) => {
-            const matchedCar = cars.find((car: any) => car.id === carOwned.id);
-            if (matchedCar) {
-              matchedCar.has_car = true;
-            }
-          });
+        this.userCars = userCarsResponse.carsOwned.filter((carOwned: any) => carOwned.year === year);
+        this.userCarsShowed = userCarsResponse.carsOwned.filter((carOwned: any) => carOwned.year === year);
   
-          userCars.carsWished.forEach((carWished: any) => {
-            const matchedCar = cars.find((car: any) => car.id === carWished.id);
-            if (matchedCar) {
-              matchedCar.wants_car = true;
-            }
-          });
-
-          const finalCars = cars.map((car: any) => {
-            return {
-              ...car,
-              token: this.userToken.userId
-            }
-          });
-  
-          this.cars = finalCars;
-          this.showedCars = finalCars;
-        }).catch(error => {
-          console.error(error);
+        userCarsResponse.carsOwned.forEach((carOwned: any) => {
+          const matchedCar = cars.find((car: any) => car.id === carOwned.id);
+          if (matchedCar) {
+            matchedCar.has_car = true;
+          }
         });
-      } else {
-        this.cars = cars;
-        this.showedCars = cars;
+  
+        userCarsResponse.carsWished.forEach((carWished: any) => {
+          const matchedCar = cars.find((car: any) => car.id === carWished.id);
+          if (matchedCar) {
+            matchedCar.wants_car = true;
+          }
+        });
+  
+        cars = cars.map((car: any) => {
+          return {
+            ...car,
+            token: this.userToken.userId
+          };
+        });
       }
-
-    });
-
-    this.getAvailableSeries(year);
-    this.resetSeries();
+  
+      this.cars = cars;
+      this.showedCars = cars;
+  
+    } catch (error) {
+      console.error(error);
+      this.enableErrorMsg(error);
+    } finally {
+      this.loaderService.stopLoading();
+      this.getAvailableSeries(year);
+      this.resetSeries();
+    }
   }
+  
 
   getAvailableSeries(year: string) {
     this.basicCarsService.getAvailableSeries(year).subscribe(res => {
@@ -121,21 +131,65 @@ export class BasicCarsPageComponent implements OnInit {
   }
 
   filterSerie(serie: string) {
-    switch (serie) {
-      case 'All':
-        this.userCarsShowed = this.userCars;
-        this.showedCars = this.cars;
+    this.selectedSerie = serie;
+
+    let filteredCars = this.cars;
+    let filteredUserCars = this.userCars;
+
+    if (serie !== 'All') {
+      filteredCars = this.cars.filter(car => car.series.includes(serie));
+      filteredUserCars = this.userCars.filter(car => car.series.includes(serie));
+    }
+
+    switch (this.selectedOwned) {
+      case 'FILTER_CARS_OWNED':
+        this.userCarsShowed = filteredUserCars;
+        this.showedCars = filteredCars.filter(car => car.has_car);
         break;
-        
+
+      case 'FILTER_CARS_NOT_OWNED':
+        this.userCarsShowed = [];
+        this.showedCars = filteredCars.filter(car => !car.has_car);
+        break;
+  
       default:
-        this.userCarsShowed = this.userCars.filter(car => car.series.includes(serie));
-        this.showedCars = this.cars.filter(car => car.series.includes(serie));
+        this.userCarsShowed = filteredUserCars;
+        this.showedCars = filteredCars;
         break;
     }
   }
 
+  filterSerieOwned(serie: string) {
+    this.selectedOwned = serie;
+    const filterBasedOnOwnership = (car: any) => {
+      switch (serie) {
+        case 'FILTER_ALL':
+          return true;
+        case 'FILTER_CARS_OWNED':
+          return car.has_car;
+        case 'FILTER_CARS_NOT_OWNED':
+          return !car.has_car;
+        default:
+          return true;
+      }
+    };
+  
+    const filterBasedOnSerie = (car: any) => {
+      if (this.selectedSerie === 'All') return true;
+      return car.series.includes(this.selectedSerie);
+    };
+  
+    const combinedFilter = (car: any) => filterBasedOnOwnership(car) && filterBasedOnSerie(car);
+  
+    this.userCarsShowed = serie === 'FILTER_CARS_NOT_OWNED' 
+      ? [] 
+      : this.userCars.filter(filterBasedOnSerie);
+    this.showedCars = this.cars.filter(combinedFilter);
+  }
+
   resetSeries() {
     this.selectedSerie = 'All';
+    this.selectedOwned = 'FILTER_ALL';
   }
 
   getUserCars() {

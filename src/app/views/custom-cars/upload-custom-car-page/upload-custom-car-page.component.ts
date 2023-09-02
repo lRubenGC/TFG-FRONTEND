@@ -1,8 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomCarsService } from '../custom-cars.service';
-import { decodeToken } from 'src/app/helpers/generics';
+import { decodeToken, tokenObject } from 'src/app/helpers/generics';
 import { Router } from '@angular/router';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-upload-custom-car-page',
@@ -15,23 +16,24 @@ export class UploadCustomCarPageComponent implements OnInit {
 
   @ViewChild('uploadButton', { static: true }) submitButtonRef!: ElementRef;
 
-  userToken = decodeToken();
+  userToken!: tokenObject;
 
   formError: boolean = false;
   errorMsg: string = '';
   formSuccess: boolean = false;
   successMsg: string = '';
 
-  isLoading: boolean = false;
-
   customCarUploaded: boolean = false;
   customCarId: number = 0;
+
+  buttonDisabled: boolean = false;
 
   imageUploaded: boolean = false;
 
   constructor(
     private customCarsService: CustomCarsService,
     private formBuilder: FormBuilder,
+    private loaderService: LoaderService,
     private router: Router,
   ) {
     this.customCarForm = this.formBuilder.group({
@@ -42,7 +44,12 @@ export class UploadCustomCarPageComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.userToken = await decodeToken();
+  }
+
+  ngAfterContentInit() {
+    this.loaderService.stopLoading();
   }
 
   async submitForm() {
@@ -52,7 +59,7 @@ export class UploadCustomCarPageComponent implements OnInit {
       this.formSuccess = false;
   
       // disable submit button
-      this.submitButtonRef.nativeElement.disabled = true;
+      this.buttonDisabled = true;
       
       // data of form
       const car_id = this.customCarForm.get('car_id')?.value;
@@ -67,7 +74,7 @@ export class UploadCustomCarPageComponent implements OnInit {
         this.formSuccess = false;
       
         // activate submit button
-        this.submitButtonRef.nativeElement.disabled = false;
+        this.buttonDisabled = false;
         return;
       }
   
@@ -77,7 +84,7 @@ export class UploadCustomCarPageComponent implements OnInit {
         this.formSuccess = false;
       
         // activate submit button
-        this.submitButtonRef.nativeElement.disabled = false;
+        this.buttonDisabled = false;
         return;
       }
   
@@ -97,7 +104,7 @@ export class UploadCustomCarPageComponent implements OnInit {
         this.formSuccess = false;
       
         // activate submit button
-        this.submitButtonRef.nativeElement.disabled = false;
+        this.buttonDisabled = false;
         return;
       }
   
@@ -120,7 +127,7 @@ export class UploadCustomCarPageComponent implements OnInit {
           this.formSuccess = true;
     
           // activate submit button
-          this.submitButtonRef.nativeElement.disabled = true;
+          this.buttonDisabled = true;
   
           // end form
           this.customCarUploaded = true;
@@ -128,7 +135,7 @@ export class UploadCustomCarPageComponent implements OnInit {
         
       } catch (err: any) {
         console.error(err);
-        this.submitButtonRef.nativeElement.disabled = false;
+        this.buttonDisabled = false;
   
         if (err.error.errors[0].param === 'brand') {
           this.errorMsg = 'POST_CUSTOM_CAR_BAD_BRAND';
@@ -150,7 +157,7 @@ export class UploadCustomCarPageComponent implements OnInit {
   async uploadImg(file: File | null) {
     try {
       if (this.userToken.hasToken && this.userToken.userId && file && this.customCarId !== 0) {
-        this.isLoading = true;
+      this.loaderService.startLoading();
         this.imageUploaded = true;
         await this.customCarsService.uploadImg(this.userToken.userId, this.customCarId, file).toPromise();
         this.formSuccess = true;
@@ -159,7 +166,7 @@ export class UploadCustomCarPageComponent implements OnInit {
     } catch (err) {
       console.error(err);
     } finally {
-      this.isLoading = false;
+      this.loaderService.stopLoading();
     }
   }
   

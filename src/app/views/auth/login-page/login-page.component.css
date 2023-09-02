@@ -2,52 +2,9 @@
     margin: 10rem auto 0;
 }
 
-button {
-    border-radius: 20px;
-    border: 1px solid var(--dark-bg-100);
-    background-color: var(--dark-bg-100);
-    color: #FFF;
-    padding: 1rem 2rem;
-    letter-spacing: 1px;
-    transition: transform 80ms ease-in;
-    cursor: pointer;
-    margin-top: .5rem;
-    font-weight: bold;
-}
-
-button:hover {
-    color: var(--dark-primary-100);
-    transition: .2s ease;
-}
-
-button:active {
-    transform: scale(0.95);
-}
-
-button:focus {
-    outline: none;
-}
-
-button.ghost {
-    background-color: var(--dark-bg-100-opacity);
-    border-color: #FFFFFF;
-    border: 2px solid white;
-}
-
-button.ghost:hover {
-    color: var(--dark-primary-100);
-    transition: .2s ease;
-}
-
 form {
     background-color: #FFFFFF;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
     padding: 0 50px;
-    height: 100%;
-    text-align: center;
 }
 
 input {
@@ -56,11 +13,6 @@ input {
     padding: 12px 15px;
     margin: 8px 0;
     width: 100%;
-}
-
-.password-forgot {
-    margin-top: 3rem;
-    cursor: pointer;
 }
 
 .container {
@@ -123,8 +75,6 @@ input {
     position: absolute;
     top: 0;
     left: 50%;
-    width: 50%;
-    height: 100%;
     overflow: hidden;
     transition: transform 0.6s ease-in-out;
     z-index: 100;
@@ -154,14 +104,7 @@ input {
 
 .overlay-panel {
     position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
     top: 0;
-    height: 100%;
-    width: 50%;
     transform: translateX(0);
     transition: transform 0.6s ease-in-out;
 }
@@ -228,21 +171,10 @@ h1.overlay-texts {
 
     .form-container form {
         border-radius: 15px;
-        padding: 50px;
+        padding: 2rem 3rem;
     }
 
     .sign-up-container {
         opacity: 1;
-    }
-
-    .toggle-button-mobile-container {
-        display: flex;
-        justify-content: center;
-    }
-
-    .toggle-button-mobile {
-        margin: 20px 0;
-        border: 1px solid #fff;
-        width: 140px;
     }
 }

@@ -19,7 +19,7 @@ import { AuthModule } from './views/auth/auth.module';
 import { SearchResultsPageModule } from './views/search-results/search-results-page.module';
 import { AuthGuard } from './guards/auth.guard';
 import { ComponentsModule } from './components/components.module';
-import { AboutCWModule } from './views/about-cw/about-cw-page.module';
+import { InfoModule } from './views/info/info.module';
 
 
 @NgModule({
@@ -43,11 +43,11 @@ import { AboutCWModule } from './views/about-cw/about-cw-page.module';
     }),
 
     // App Modules
-    AboutCWModule,
     AuthModule,
     ComponentsModule,
     BasicCarsPageModule,
     CustomCarsModule,
+    InfoModule,
     LandingPageModule,
     PremiumCarsPageModule,
     SearchResultsPageModule,

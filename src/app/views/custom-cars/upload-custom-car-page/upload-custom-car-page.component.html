@@ -1,6 +1,6 @@
 <main>
-    <section id="custom-cars-upload">
-        <form [formGroup]="customCarForm" class="custom-cars-container">
+    <section id="custom-cars-upload" class="d_flex justify-content_center align-items_center">
+        <form [formGroup]="customCarForm" class="custom-cars-container d_flex flex-direction_column justify-content_center align-items_center">
             <h1>{{ 'POST_CUSTOM_CAR' | translate }}</h1>
             
             <div class="custom-cars-item">
@@ -39,7 +39,12 @@
                     (keydown.enter)="submitForm()" />
             </div>
 
-            <button #uploadButton type="button" class="button-update-custom" (click)="submitForm()">{{ 'POST_CUSTOM_CAR_BUTTON' | translate }}</button>
+            <app-dc-secondary-button
+                type="button"
+                (click)="submitForm()"
+                [buttonTitle]="'POST_CUSTOM_CAR_BUTTON'"
+                [buttonDisabled]="buttonDisabled">
+            </app-dc-secondary-button>
 
 
         </form>
@@ -48,12 +53,15 @@
 
     <section class="img-upload-section" *ngIf="customCarUploaded">
 
-        <div class="img-upload-section-header">
+        <div class="img-upload-section-header d_flex justify-content_center align-items_center gap_1">
             <h1>Car images</h1>
-            <button *ngIf="imageUploaded" class="custom-cars-upload-images" (click)="goBack()">{{ 'CUSTOM_CAR_FINISH' | translate }}</button>
+            <app-dc-button
+                *ngIf="imageUploaded"
+                [buttonTitle]="'CUSTOM_CAR_FINISH'"
+                (click)="goBack()"></app-dc-button>
         </div>
         
-        <div class="img-inputs-container">
+        <div class="img-inputs-container d_flex justify-content_center flex_wrap gap_2">
 
             <div class="img-input">
                 <app-upload-img (imageChanged)="uploadImg($event)"></app-upload-img>
@@ -79,6 +87,3 @@
 <!-- Possible errors -->
 <p *ngIf="formError" class="notification notification-error">{{ errorMsg | translate }}</p>
 <p *ngIf="formSuccess" class="notification notification-success">{{ successMsg | translate }}</p>
-
-<!-- Spinner -->
-<app-spinner [isLoading]="isLoading"></app-spinner>

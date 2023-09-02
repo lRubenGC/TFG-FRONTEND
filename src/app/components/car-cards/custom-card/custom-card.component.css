@@ -1,6 +1,4 @@
 .custom-car-item {
-    width: 100%;
-    height: 100%;
     margin: 0 5px;
 }
 
@@ -8,23 +6,12 @@
     text-shadow: 2px 2px 2px #000;
 }
 
-.img-and-upvotes {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
 .custom-img-container {
-    width: 100%;
     height: 180px;
-    cursor: pointer;
 }
 
 .banner-image {
-    width: 100%;
     height: 180px;
-    object-fit: cover;
     border-radius: .6rem;
 }
 
@@ -37,18 +24,12 @@
 }
 
 .upvotes {
-    display: flex;
     margin-bottom: auto;
-    margin-left: 1em;
 }
 
 .upvote-button {
     width: 20px;
     align-self: center;
-}
-
-.upvote-button:hover {
-    cursor: pointer;
 }
 
 .custom-car-user-creator {
@@ -59,7 +40,6 @@
 
 .custom-car-user-creator h4 {
     display: inline-block;
-    cursor: pointer;
 }
 
 .custom-car-user-creator h4:hover {

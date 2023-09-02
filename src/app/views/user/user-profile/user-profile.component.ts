@@ -7,6 +7,8 @@ import { userInterface } from 'src/app/models/user.interface';
 import { basicCarInterface, basicCarShowedInterface, customCarInterface, premiumCarInterface, premiumCarShowedInterface } from 'src/app/models/cardTypes.interface';
 import { decodeToken } from 'src/app/helpers/generics';
 import { CustomCarsService } from '../../custom-cars/custom-cars.service';
+import { LoaderService } from 'src/app/services/loader.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-user-profile',
@@ -34,9 +36,9 @@ export class UserProfileComponent implements OnInit {
   
   customCarsOwned = [];
 
-  selectedYear = 'all';
+  selectedYear = 'All';
   selectedSerie = '';
-  selectedMainSerie = 'all';
+  selectedMainSerie = 'All';
   selectedSecondarySerie = '';
   availableYears = ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016'];
   availableSeries = [];
@@ -51,6 +53,7 @@ export class UserProfileComponent implements OnInit {
   constructor(
     private basicCarsService: BasicCarsService,
     private customCarsService: CustomCarsService,
+    private loaderService: LoaderService,
     private premiumCarsService: PremiumCarsService,
     private route: ActivatedRoute,
     private router: Router,
@@ -58,34 +61,98 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
  ngOnInit() {
-    this.route.paramMap.subscribe(async params => {
-      const username = params.get('username');
-      if (username) {
-        const user = await this.userService.getUserByUsername(username);
-        this.user = user.user;
-      } else {
+  this.loaderService.startLoading();
+  
+  this.route.paramMap.subscribe(async params => {
+    const username = params.get('username');
+
+    if (username) {
+      try {
+        const userResponse = await this.userService.getUserByUsername(username);
+        this.user = userResponse.user;
+  
+        const tokenDecoded = await decodeToken();
+        const isUserOwner = tokenDecoded.userId === this.user?.id;
+        this.userVisitor = isUserOwner;
+  
+        if (this.user) {
+          this.getCustomCars(this.user.id);
+  
+          try {
+            const [basicCarsResponse, premiumCarsResponse] = await Promise.all([
+              this.basicCarsObservable().toPromise(),
+              this.premiumCarsObservable().toPromise()
+            ]);
+            
+            this.processBasicCars(basicCarsResponse, isUserOwner);
+            this.processPremiumCars(premiumCarsResponse, isUserOwner);
+          } catch (err) {
+            console.error(err);
+          }
+        }
+      } catch (error) {
+        console.error('Error al obtener el usuario:', error);
         this.error = true;
         this.router.navigate(['/']);
+      } finally {
+        this.loaderService.stopLoading();
       }
+    } else {
+      this.error = true;
+      this.router.navigate(['/']);
+      this.loaderService.stopLoading();
+    }
+  });
+  
+ }
 
-      const tokenDecoded = decodeToken();
+ processBasicCars(res: any, isUserOwner: boolean) {
+  const transformCar = (car: basicCarInterface) => {
+    const series = car.series.split(',');
+    const serie_class = series[0].replace(/ /g, '-').toLowerCase();
 
-      // If user visitor is owner of profile
-      if (tokenDecoded.userId === this.user?.id) {
-        this.userVisitor = true;
-        this.getUserBasicCars(true);
-        this.getUserPremiumCars(true);
-      } else {
-        this.userVisitor = false;
-        this.getUserBasicCars(false);
-        this.getUserPremiumCars(false);
-      }
-      
-      if (this.user) {
-        this.getCustomCars(this.user.id);
-      }
+    return {
+      ...car,
+      series,
+      serie_class,
+      search: true,
+      user_profile: isUserOwner,
+      profile_view: true,
+      has_car: isUserOwner,
+      token: isUserOwner ? this.user!.id : undefined
+    };
+  };
 
-    });
+  this.basicCarsOwned = res.carsOwned.map(transformCar);
+  this.basicCarsOwnedShowed = [...this.basicCarsOwned];
+  this.basicCarsWished = res.carsWished.map(transformCar);
+  this.basicCarsWishedShowed = [...this.basicCarsWished];
+}
+
+processPremiumCars(res: any, isUserOwner: boolean) {
+  const transformCar = (car: premiumCarInterface) => {
+    return {
+      ...car,
+      user_profile: isUserOwner,
+      profile_view: true,
+      has_car: isUserOwner,
+      token: isUserOwner ? this.user!.id : undefined
+    };
+  };
+
+  this.premiumCarsOwned = res.carsOwned.map(transformCar);
+  this.premiumCarsOwnedShowed = [...this.premiumCarsOwned];
+  this.premiumCarsWished = res.carsWished.map(transformCar);
+  this.premiumCarsWishedShowed = [...this.premiumCarsWished];
+}
+
+
+  basicCarsObservable() {
+    return this.basicCarsService.getUserCars(this.user!.id);
+  }
+  
+  premiumCarsObservable() {
+    return this.premiumCarsService.getUserCars(this.user!.id);
   }
   
   getUserBasicCars(isUserOwner: boolean) {
@@ -241,6 +308,7 @@ export class UserProfileComponent implements OnInit {
         index = this.basicCarsOwned.findIndex(car => car.id === carEvent.id);
         if (index !== -1) {
           this.basicCarsOwned.splice(index, 1);
+          this.basicCarsOwnedShowed.splice(index, 1);
         }
         break;
       
@@ -248,6 +316,7 @@ export class UserProfileComponent implements OnInit {
         index = this.basicCarsWished.findIndex(car => car.id === carEvent.id);
         if (index !== -1) {
           this.basicCarsWished.splice(index, 1);
+          this.basicCarsWishedShowed.splice(index, 1);
         }
         break;
 
@@ -255,6 +324,7 @@ export class UserProfileComponent implements OnInit {
         index = this.premiumCarsOwned.findIndex(car => car.id === carEvent.id);
         if (index !== -1) {
           this.premiumCarsOwned.splice(index, 1);
+          this.premiumCarsOwnedShowed.splice(index, 1);
         }
         break;
 
@@ -262,6 +332,7 @@ export class UserProfileComponent implements OnInit {
         index = this.premiumCarsWished.findIndex(car => car.id === carEvent.id);
         if (index !== -1) {
           this.premiumCarsWished.splice(index, 1);
+          this.premiumCarsWishedShowed.splice(index, 1);
         }
         break;
     }
@@ -270,10 +341,10 @@ export class UserProfileComponent implements OnInit {
 
   filterYear(year: string) {
     this.selectedYear = year;
-    this.selectedSerie = 'all';
+    this.selectedSerie = 'All';
     this.getAvailableSeries(year);
 
-    if (year === 'all') {
+    if (year === 'All') {
       this.basicCarsOwnedShowed = this.basicCarsOwned;
       this.basicCarsWishedShowed = this.basicCarsWished;
       this.selectedSerie = '';
@@ -286,7 +357,7 @@ export class UserProfileComponent implements OnInit {
 
   filterSerie(serie: string) {    
     switch (serie) {
-      case 'all':
+      case 'All':
         this.basicCarsOwnedShowed = this.basicCarsOwned.filter(car => car.year === this.selectedYear);
         this.basicCarsWishedShowed = this.basicCarsWished.filter(car => car.year === this.selectedYear);
         break;
@@ -307,10 +378,10 @@ export class UserProfileComponent implements OnInit {
 
   filterPremiumSerie(serie: string) {
     this.selectedMainSerie = serie;
-    this.selectedSecondarySerie = '';
+    this.selectedSecondarySerie = 'All';
     this.getAvailablePremiumSeries(serie);
 
-    if (serie === 'all') {
+    if (serie === 'All') {
       this.premiumCarsOwnedShowed = this.premiumCarsOwned;
       this.premiumCarsWishedShowed = this.premiumCarsWished;
       this.selectedSecondarySerie = '';
@@ -322,7 +393,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   filterPremiumSecundarySerie(serie: string) {
-    if (serie === 'all') {
+    if (serie === 'All') {
       this.premiumCarsOwnedShowed = this.premiumCarsOwned.filter(car => car.main_serie === this.selectedMainSerie);
       this.premiumCarsWishedShowed = this.premiumCarsWished.filter(car => car.main_serie === this.selectedMainSerie);
       return;
@@ -358,6 +429,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   goToConfig() {
+    this.loaderService.startLoading();
     this.router.navigate(['/user/config']);
   }
 

@@ -1,7 +1,6 @@
-<div *ngIf="isNotificationVisible" class="container">
-    <div class="global-notification-container">
+<div *ngIf="isNotificationVisible" class="container d_flex justify-content_center">
+    <div class="global-notification-container d_flex justify-content_center align-items_center p_0_5 text-align_center">
       <h4>{{ notificationMsg | translate }}</h4>
-      <span class="notification-closer" (click)="disableMsg()">&#10005;</span>
+      <span class="notification-closer c_pointer" (click)="disableMsg()">&#10005;</span>
     </div>
 </div>
-  

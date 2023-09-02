@@ -21,9 +21,6 @@
 }
 
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     height: 70px;
     position: absolute;
     background-color: transparent;
@@ -37,7 +34,6 @@ header {
 
 #header-logo {
     margin-left: 2rem;
-    cursor: pointer;
 }
 
 #header-logo h1 {
@@ -45,10 +41,7 @@ header {
 }
 
 ul {
-    display: flex;
     list-style: none;
-    height: 100%;
-    align-items: center;
 }
 
 li {

@@ -11,6 +11,8 @@ import { AuthService } from '../../../views/auth/auth.service';
 import { GenericAuthService } from 'src/app/services/generic-auth.service';
 import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/services/app.service';
+import { LoaderService } from 'src/app/services/loader.service';
+import { removeTokenFromIndexedDB } from 'src/app/helpers/indexedDB';
 
 @Component({
   selector: 'app-header',
@@ -28,11 +30,13 @@ export class HeaderComponent implements OnInit {
 
   langDropdownOpen = false;
   accDropdownOpen = false;
+  infoDropdownOpen = false;
   userLoggedIn = false;
   isMobileMenuOpen = false;
   user!: any;
 
   @ViewChild('langDropdown') langDropdown!: ElementRef;
+  @ViewChild('infoDropdown') infoDropdown!: ElementRef;
   @ViewChild('accDropdown') accDropdown!: ElementRef;
 
   constructor(
@@ -41,6 +45,7 @@ export class HeaderComponent implements OnInit {
     private genericAuthService: GenericAuthService,
     private elementRef: ElementRef, 
     private languageService: LanguageService,
+    private loaderService: LoaderService,
     private router: Router,
     private translate: TranslateService,
     private userService: UserService,
@@ -75,6 +80,8 @@ export class HeaderComponent implements OnInit {
       return;
     }
 
+    this.loaderService.startLoading();
+
     // If there is data, search bar gets closed
     this.searchInput.nativeElement.blur();
 
@@ -89,12 +96,18 @@ export class HeaderComponent implements OnInit {
   }
 
   goTo(link: string): void {
+    if (link !== this.router.url) {
+      this.loaderService.startLoading();
+    }
+
     this.closeMobileMenu();
     this.router.navigate([link]);
   }
 
   async goToUserProfile() {
-    const tokenDecoded = decodeToken();
+    this.loaderService.startLoading();
+    
+    const tokenDecoded = await decodeToken();
     this.closeMobileMenu();
 
     if (tokenDecoded.hasToken && tokenDecoded.userId) {
@@ -109,12 +122,20 @@ export class HeaderComponent implements OnInit {
     if (dropdown === 'lang') {
       this.langDropdownOpen = !this.langDropdownOpen;
       this.accDropdownOpen = false;
+      this.infoDropdownOpen = false;
       return;
     }
     
+    if (dropdown === 'info') {
+      this.infoDropdownOpen = !this.infoDropdownOpen;
+      this.langDropdownOpen = false;
+      this.accDropdownOpen = false;
+    }
+
     if (dropdown === 'acc') {
       this.accDropdownOpen = !this.accDropdownOpen;
       this.langDropdownOpen = false;
+      this.infoDropdownOpen = false;
     }
   }
 
@@ -123,6 +144,7 @@ export class HeaderComponent implements OnInit {
     if (!event.target.classList.contains('dropdown-button')) {
       this.langDropdownOpen = false;
       this.accDropdownOpen = false;
+      this.infoDropdownOpen = false;
     }
   }
 
@@ -150,7 +172,7 @@ export class HeaderComponent implements OnInit {
   }
 
   async checkUserLoggedIn(): Promise<void> {
-    const { hasToken, userId } = decodeToken();
+    const { hasToken, userId } = await decodeToken();
     
     if ( hasToken && userId ) {
       try {
@@ -164,16 +186,18 @@ export class HeaderComponent implements OnInit {
     } else this.userLoggedIn = false;
   }
 
-  logOut() {
+  async logOut() {
+    this.loaderService.startLoading();
     this.closeMobileMenu();
 
-    this.genericAuthService.login();
+    this.genericAuthService.logout();
 
 
-    localStorage.removeItem('cw-token');
+    await removeTokenFromIndexedDB();
     this.authService.setUserLoggedIn(false);
     this.checkUserLoggedIn();
     window.location.reload();
+    this.loaderService.stopLoading();
   }
 
   isBlockView() {

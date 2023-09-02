@@ -2,36 +2,43 @@
 <div id="user-profile-page">
     <div id="user-profile-body">
         <!-- Landing section -->
-        <header id="user-profile-land-section" [ngStyle]="{'background-image': user?.bg_img ? 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' + user?.bg_img + ')' : 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../../../../assets/images/login_page/login_bg.webp)'}">
+        <header
+            id="user-profile-land-section"
+            class="d_flex justify-content_around p_2"
+            [ngStyle]="{'background-image': user?.bg_img ? 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' + user?.bg_img + ')' : 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../../../../assets/images/login_page/login_bg.webp)'}">
 
             <!-- Profile data -->
-            <section class="profile-data-name">
+            <section class="profile-data-name d_flex">
                 <div class="profile-img-container">
-                    <img class="user-profile-pic circular-image" [src]="user?.img ? user?.img : 'assets/images/user-profile/no-user-profile.webp'" alt="user profile pic">
+                    <img class="user-profile-pic w_100 h_100 object-fit_cover" [src]="user?.img ? user?.img : 'assets/images/user-profile/no-user-profile.webp'" alt="user profile pic">
                 </div>
-                <div class="profile-data-name-container">
-                    <h3>{{ user?.username }}</h3>
-                    <button *ngIf="userVisitor" (click)="goToConfig()">{{ 'USER_EDIT_PROFILE' | translate }}</button>
+                <div class="profile-data-name-container d_flex justify-content_around flex-direction_column p_0_5 gap_0_5">
+                    <h3 class="ml_0_5">{{ user?.username }}</h3>
+                    <app-dc-secondary-button
+                        *ngIf="userVisitor"
+                        (click)="goToConfig()"
+                        [buttonTitle]="'USER_EDIT_PROFILE'"
+                    ></app-dc-secondary-button>
                 </div>
             </section>
 
             <!-- Cars data -->
-            <section class="profile-data-cars">
-                <div class="data-cars-item">
+            <section class="profile-data-cars d_flex justify-content_center align-items_center text-align_center">
+                <div class="data-cars-item d_flex justify-content_center flex-direction_column text-align_center">
                     <p class="data-item-number">{{ basicCarsOwned.length }}</p>
                     <p>{{ 'USER_PROFILE_BASIC_MENU' | translate }}</p>
                 </div>
 
                 <div class="vertical-divider"></div>
                 
-                <div class="data-cars-item">
+                <div class="data-cars-item d_flex justify-content_center flex-direction_column text-align_center">
                     <p class="data-item-number">{{ premiumCarsOwned.length }}</p>
                     <p>{{ 'USER_PROFILE_PREMIUM_MENU' | translate }}</p>
                 </div>
                 
                 <div class="vertical-divider"></div>
 
-                <div class="data-cars-item">
+                <div class="data-cars-item d_flex justify-content_center flex-direction_column text-align_center">
                     <p class="data-item-number">{{ customCarsOwned.length }}</p>
                     <p>{{ 'USER_PROFILE_CUSTOM_MENU' | translate }}</p>
                 </div>
@@ -39,21 +46,22 @@
 
         </header>
 
-        <div *ngIf="userVisitor" class="export-collection-container">
-            <div class="button-and-span">
+        <!-- Export collection -->
+        <div *ngIf="userVisitor" class="export-collection-container d_flex flex-direction_column gap_0_5 mt_1">
+            <div class="export-collection-main d_flex align-items_center gap_0_25">
                 <app-dc-button [buttonTitle]="'USER_EXPORT_TO_CSV'" (click)="exportToCsv()"></app-dc-button>
                 <span>({{ 'USER_DOWNLOAD_DAYS' | translate }})</span>
             </div>
-            <div *ngIf="exportToCsvError" class="export-collection-error">
+            <div *ngIf="exportToCsvError" class="export-collection-error d_flex justify-content_center gap_0_5 text-align_center">
                 <p>{{ 'USER_DOWNLOAD_ERROR' | translate }}</p>
-                <span (click)="exportToCsvError = false">&#10005;</span>
+                <span (click)="exportToCsvError = false" class="c_pointer">&#10005;</span>
             </div>
         </div>
 
         <!-- Car menu -->
-        <section class="car-menu-list-container">
-            <div class="car-menu-list">
-                <div class="car-menu-list__group">
+        <section class="car-menu-list-container d_flex justify-content_center mt_2">
+            <div class="car-menu-list d_flex justify-content_center align-items_center gap_1">
+                <div class="car-menu-list__group d_flex gap_1">
                     <div
                         class="car-menu-item"
                         [ngClass]="carsType == 'basic' ? 'car-menu-item-selected' : ''"
@@ -73,7 +81,7 @@
 
                 <div class="vertical-divider vertical-divider-menu"></div>
 
-                <div class="car-menu-list__group">
+                <div class="car-menu-list__group d_flex gap_1">
                     <div
                         class="car-menu-item"
                         [ngClass]="collectedType == 'owned' ? 'car-menu-item-selected' : ''"
@@ -90,64 +98,61 @@
         </section>
 
         <!-- Filter section for Basic Cars-->
-        <section *ngIf="carsType === 'basic'" id="user-filter-basic-section">
+        <section *ngIf="carsType === 'basic'" class="filter-section d_flex justify-content_center gap_4">
 
-            <div class="basic-filter-item">
-                <h3>{{ 'BASIC_CARS_YEAR' | translate }}</h3>
-                <div class="car-select">
-                    <select [(ngModel)]="selectedYear" (change)="filterYear(selectedYear)">
-                        <option value="all">{{ 'FILTER_ALL' | translate }}</option>
-                        <option *ngFor="let year of availableYears" [value]="year">{{ year }}</option>
-                    </select>
+            <app-filter-pill
+                    [props]="{
+                    label: 'BASIC_CARS_YEAR',
+                    options: availableYears,
+                    selected: selectedYear,
+                    basicDefaultOptions: true,
+                    selectDisabled: false
+                }"
+                (onChange)="filterYear($event)"
+            ></app-filter-pill>
 
-                </div>
-            </div>
-
-            <div class="basic-filter-item">
-                <h3>{{ 'BASIC_CARS_SERIE' | translate }}</h3>
-                <div class="car-select">
-                    <select [(ngModel)]="selectedSerie" (change)="filterSerie(selectedSerie)" [disabled]="selectedYear === 'all'">
-                        <option value="all">{{ 'FILTER_ALL' | translate }}</option>
-                        <option value="Treasure Hunt">Treasure Hunt</option>
-                        <option value="Super Treasure Hunt">Super Treasure Hunt</option>
-                        <option value="Red Edition">Red Edition</option>
-                        <option value="Walmart Exclusive">Zamac</option>
-                        <option *ngFor="let serie of availableSeries" [value]="serie">{{ serie }}</option>
-                    </select>
-                </div>
-            </div>
+            <app-filter-pill
+                [props]="{
+                    label: 'BASIC_CARS_SERIE',
+                    options: availableSeries,
+                    selected: selectedSerie,
+                    basicDefaultSeries: true,
+                    selectDisabled: selectedYear === 'All'
+                }"
+                (onChange)="filterSerie($event)"
+            ></app-filter-pill>
 
         </section>
 
         <!-- Filter section for Premium Cars-->
-        <section *ngIf="carsType === 'premium'" id="user-filter-premium-section">
+        <section *ngIf="carsType === 'premium'" class="filter-section d_flex justify-content_center gap_4">
 
-            <div class="basic-filter-item">
-                <h3>{{ 'PREMIUM_CARS_MAIN_SERIE' | translate }}</h3>
-                <div class="car-select">
-                    <select [(ngModel)]="selectedMainSerie" (change)="filterPremiumSerie(selectedMainSerie)">
-                        <option value="all">All</option>
-                        <option *ngFor="let serie of availableMainSeries" [value]="serie">{{ serie }}</option>
-                    </select>
-                </div>
-            </div>
+            <app-filter-pill
+                [props]="{
+                    label: 'PREMIUM_CARS_MAIN_SERIE',
+                    options: availableMainSeries,
+                    selected: selectedMainSerie,
+                    premiumDefaultSeries: true,
+                    selectDisabled: false
+                }"
+                (onChange)="filterPremiumSerie($event)"
+            ></app-filter-pill>
 
-            <div class="basic-filter-item">
-                <h3>{{ 'PREMIUM_CARS_SECONDARY_SERIE' | translate }}</h3>
-                <div class="car-select">
-                    <select [(ngModel)]="selectedSecondarySerie" (change)="filterPremiumSecundarySerie(selectedSecondarySerie)"
-                    [disabled]="selectedMainSerie === 'all'"
-                    >
-                        <option value="all">All</option>
-                        <option *ngFor="let serie of availableSecondarySeries" [value]="serie">{{ serie }}</option>
-                    </select>
-                </div>
-            </div>
+            <app-filter-pill
+                [props]="{
+                    label: 'PREMIUM_CARS_SECONDARY_SERIE',
+                    options: availableSecondarySeries,
+                    selected: selectedSecondarySerie,
+                    premiumDefaultSeries: true,
+                    selectDisabled: selectedMainSerie === 'All'
+                }"
+                (onChange)="filterPremiumSecundarySerie($event)"
+            ></app-filter-pill>
 
         </section>
 
         <!-- Car list -->
-        <main id="user-cars-list">
+        <main>
 
             <!-- Basic Cars Owned-->
             <section *ngIf="carsType === 'basic' && collectedType === 'owned'" class="basic-cars-list">

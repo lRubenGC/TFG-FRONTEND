@@ -1,0 +1,17 @@
+.info-page {
+    text-justify: auto;
+    margin: 70px auto;
+}
+
+@media (max-width: 1300px) {
+    .info-page {
+        width: 70%;
+        gap: 3em;
+    }
+}
+
+@media (max-width: 450px) {
+    .info-page {
+        width: 80%;
+    }
+}

@@ -2,7 +2,7 @@
     <div id="basic-cars-body">
 
         <!-- Landing section -->
-        <header id="basic-cars-land-section">
+        <header id="basic-cars-land-section" class="d_flex justify-content_center align-items_center">
 
             <!-- Explanation section -->
             <section id="basic-explanation">
@@ -10,45 +10,52 @@
             </section>
 
             <!-- Filter section -->
-            <section id="basic-filter-section">
+            <section id="basic-filter-section" class="d_flex flex_wrap">
 
-                <div class="basic-filter-item">
-                    <h3>{{ 'BASIC_CARS_YEAR' | translate }}</h3>
-                    <div class="car-select">
-                        <select [(ngModel)]="selectedYear" (change)="getCars(selectedYear)">
-                            <option *ngFor="let year of availableYears" [value]="year">{{ year }}</option>
-                        </select>
+                <app-filter-pill
+                    [props]="{
+                        label: 'BASIC_CARS_YEAR',
+                        options: availableYears,
+                        selected: selectedYear,
+                        selectDisabled: false
+                    }"
+                    (onChange)="getCars($event)"
+                ></app-filter-pill>
 
-                    </div>
-                </div>
+                <app-filter-pill
+                    [props]="{
+                        label: 'BASIC_CARS_SERIE',
+                        options: availableSeries,
+                        selected: selectedSerie,
+                        basicDefaultSeries: true,
+                        selectDisabled: false
+                    }"
+                    (onChange)="filterSerie($event)"
+                ></app-filter-pill>
 
-                <div class="basic-filter-item">
-                    <h3>{{ 'BASIC_CARS_SERIE' | translate }}</h3>
-                    <div class="car-select">
-                        <select [(ngModel)]="selectedSerie" (change)="filterSerie(selectedSerie)">
-                            <option value="All">{{ 'FILTER_ALL' | translate }}</option>
-                            <option value="Treasure Hunt">Treasure Hunt</option>
-                            <option value="Super Treasure Hunt">Super Treasure Hunt</option>
-                            <option value="Red Edition">Red Edition</option>
-                            <option value="Walmart Exclusive">Zamac</option>
-                            <option *ngFor="let serie of availableSeries" [value]="serie">{{ serie }}</option>
-                        </select>
-                    </div>
-                </div>
+                <app-filter-pill
+                    [props]="{
+                        label: 'FILTER_CARS_OWNED',
+                        options: ownedCarsFilter,
+                        selected: selectedOwned,
+                        selectDisabled: false
+                    }"
+                    (onChange)="filterSerieOwned($event)"
+                ></app-filter-pill>
 
             </section>
 
         </header>
 
-        <section class="owned-cars-quantity">
-            <div *ngIf="userToken.userId"><h4>{{ 'CARS_OWNED_LITERAL' | translate}}: {{ userCarsShowed.length }} / {{ showedCars.length }}</h4></div>
-            <div *ngIf="!userToken.userId"><h4>{{ 'CARS_OWNED_LITERAL' | translate}}: XX / {{ showedCars.length }}</h4></div>
+        <section class="owned-cars-quantity d_flex justify-content_end">
+            <div *ngIf="userToken?.userId"><h4>{{ 'CARS_OWNED_LITERAL' | translate}}: {{ userCarsShowed.length }} / {{ showedCars.length }}</h4></div>
+            <div *ngIf="!userToken?.userId"><h4>{{ 'CARS_OWNED_LITERAL' | translate}}: X / {{ showedCars.length }}</h4></div>
         </section>
 
         <!-- Car list -->
         <main class="basic-cars-list">
             <!-- Car items -->
-            <div *ngFor="let car of showedCars" >
+            <div *ngFor="let car of showedCars">
                 <app-basic-card
                     (deleteCar)="onDeleteCar($event)"
                     (addedCar)="onAddedCar($event)"

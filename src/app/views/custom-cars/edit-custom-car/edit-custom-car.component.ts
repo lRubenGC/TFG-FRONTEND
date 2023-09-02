@@ -3,8 +3,9 @@ import { CustomCarsService } from '../custom-cars.service';
 import { customCarInterface } from 'src/app/models/cardTypes.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { decodeToken } from 'src/app/helpers/generics';
+import { decodeToken, tokenObject } from 'src/app/helpers/generics';
 import { isValidYear } from 'src/app/helpers/custom-car-validators';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-edit-custom-car',
@@ -13,11 +14,9 @@ import { isValidYear } from 'src/app/helpers/custom-car-validators';
 })
 export class EditCustomCarComponent implements OnInit {
 
-  userToken = decodeToken();
+  userToken!: tokenObject;
 
   carData!: customCarInterface;
-
-  @ViewChild('submitButton', { static: true }) submitButtonRef!: ElementRef;
 
   images: File[] | null[] = [null, null, null, null];
 
@@ -34,12 +33,13 @@ export class EditCustomCarComponent implements OnInit {
   successMsg: string = '';
   formSuccess: boolean = false;
 
-  isLoading: boolean = false;
+  updateButtonDisabled: boolean = false;
 
 
   constructor(
     private customCarsService: CustomCarsService,
     private formBuilder: FormBuilder,
+    private loaderService: LoaderService,
     private route: ActivatedRoute,
     private router: Router,
   ) {
@@ -52,7 +52,9 @@ export class EditCustomCarComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.userToken = await decodeToken();
+
     this.route.paramMap.subscribe(params => {
       const carId = Number(params.get('carId'));
 
@@ -76,6 +78,9 @@ export class EditCustomCarComponent implements OnInit {
     });
   }
 
+  ngAfterContentInit() {
+    this.loaderService.stopLoading();
+  }
 
   async submitForm() {
     // restart notifications
@@ -83,7 +88,7 @@ export class EditCustomCarComponent implements OnInit {
     this.formSuccess = false;
 
     // disable submit button
-    this.submitButtonRef.nativeElement.disabled = true;
+    this.updateButtonDisabled = true;
 
     // data of user
     const carData = this.carData;
@@ -104,7 +109,8 @@ export class EditCustomCarComponent implements OnInit {
         this.formSuccess = false;
       
         // activate submit button
-        this.submitButtonRef.nativeElement.disabled = false;
+        this.updateButtonDisabled = false;
+
         return;
       }
 
@@ -118,7 +124,7 @@ export class EditCustomCarComponent implements OnInit {
         this.formSuccess = false;
       
         // activate submit button
-        this.submitButtonRef.nativeElement.disabled = false;
+        this.updateButtonDisabled = false;
         return;
       }
 
@@ -133,7 +139,7 @@ export class EditCustomCarComponent implements OnInit {
           this.formSuccess = false;
         
           // activate submit button
-          this.submitButtonRef.nativeElement.disabled = false;
+          this.updateButtonDisabled = false;
           return;
         }
   
@@ -149,7 +155,7 @@ export class EditCustomCarComponent implements OnInit {
           this.formSuccess = false;
         
           // activate submit button
-          this.submitButtonRef.nativeElement.disabled = false;
+          this.updateButtonDisabled = false;
           return;
         }
   
@@ -163,14 +169,14 @@ export class EditCustomCarComponent implements OnInit {
       this.formSuccess = false;
 
       // activate submit button
-      this.submitButtonRef.nativeElement.disabled = false;
+      this.updateButtonDisabled = false;
       return;
     }
 
     this.formError = false;
 
     try {
-      this.isLoading = true;
+      this.loaderService.startLoading();
       // update imgs
       if (this.images[0] !== null || this.images[1] !== null || this.images[2] !== null || this.images[3] !== null) {
         await this.updateImgs();
@@ -181,14 +187,10 @@ export class EditCustomCarComponent implements OnInit {
         await this.customCarsService.updateCustomCar(this.userToken.userId!, this.carData.id, bodyRequest).toPromise();
         this.successMsg = 'CONFIG_USER_UPDATED';
         this.formSuccess = true;
-
-        setTimeout(() => {
-          location.reload();
-        }, 2000);
       }
 
       // activate submit button
-      this.submitButtonRef.nativeElement.disabled = false;
+      this.updateButtonDisabled = false;
       
     } catch (err: any) {
       console.error(err);
@@ -205,7 +207,8 @@ export class EditCustomCarComponent implements OnInit {
         return;
       }
     } finally {
-      this.isLoading = false;
+      this.loaderService.stopLoading();
+      location.reload();
     }
   }
 
@@ -299,7 +302,7 @@ export class EditCustomCarComponent implements OnInit {
 
   async deleteImgApi(index: number) {
     try {
-      this.isLoading = true;
+      this.loaderService.startLoading();
       const url = this.carData.imgs[index].split('/');
       const img = url[url.length - 1].split('.')[0];
 
@@ -325,7 +328,7 @@ export class EditCustomCarComponent implements OnInit {
       } catch (err) {
         console.error(err);
       } finally {
-        this.isLoading = false;
+      this.loaderService.stopLoading();
       }
   }
 
@@ -336,6 +339,7 @@ export class EditCustomCarComponent implements OnInit {
 
 
   goBack() {
+    this.loaderService.startLoading();
     this.router.navigate([`/custom-cars/car/${this.carData.id}`]);
   }
 

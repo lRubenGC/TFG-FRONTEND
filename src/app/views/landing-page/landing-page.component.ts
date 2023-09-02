@@ -7,6 +7,7 @@ import { LanguageService } from "../../services/language.service";
 import { landingCardInterface } from 'src/app/models/landingPage.interface';
 import { msgCardInterface } from 'src/app/models/shared.interface';
 import { decodeToken } from 'src/app/helpers/generics';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -15,7 +16,7 @@ import { decodeToken } from 'src/app/helpers/generics';
 })
 export class LandingPageComponent implements OnInit, OnDestroy {
 
-  userLoggedIn = decodeToken().hasToken;
+  userLoggedIn!: boolean;
 
   landingCards: landingCardInterface[] = [
     {
@@ -41,7 +42,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   msg_card: msgCardInterface = {
     title: '',
     description: [],
-    button: !this.userLoggedIn,
+    button: false,
     buttonName: '',
     buttonLink: '/auth'
   }
@@ -51,15 +52,23 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   constructor(
     private translate: TranslateService,
     private languageService: LanguageService,
+    private loaderService: LoaderService,
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    const token = await decodeToken();
+    this.msg_card.button = !token.hasToken;
+
     this.subscription = this.languageService.languageChanged$.subscribe(lang => {
       this.translate.use(lang);
       this.changeLanguage();
     })
 
     this.changeLanguage();
+  }
+
+  ngAfterContentInit() {
+    this.loaderService.stopLoading();
   }
 
   async changeLanguage() {

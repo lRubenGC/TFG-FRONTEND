@@ -2,7 +2,7 @@
     <div id="premium-cars-body">
 
         <!-- Landing section -->
-        <header id="premium-cars-land-section">
+        <header id="premium-cars-land-section" class="d_flex justify-content_center align-items_center">
 
             <!-- Explanation section -->
             <section id="premium-explanation">
@@ -10,41 +10,43 @@
             </section>
 
             <!-- Filter section -->
-            <section *ngIf="isSerieSelected" id="premium-filter-section">
+            <section *ngIf="isSerieSelected" id="premium-filter-section" class="d_flex flex-direction_column">
 
-                <div class="premium-filter-item">
-                    <h3>{{ 'PREMIUM_CARS_SECONDARY_SERIE' | translate }}</h3>
-                    <div class="car-select">
-                        <select [(ngModel)]="selectedSecondarySerie" (change)="filterSerie(selectedSecondarySerie)">
-                            <option selected value="All">All</option>
-                            <option *ngFor="let serie of availableSecondarySeries" [value]="serie">{{ serie }}</option>
-                        </select>
-                    </div>
-                </div>
+                <app-filter-pill
+                    [props]="{
+                        label: 'PREMIUM_CARS_SECONDARY_SERIE',
+                        options: availableSecondarySeries,
+                        selected: selectedSecondarySerie,
+                        premiumDefaultSeries: true,
+                        selectDisabled: false
+                    }"
+                    (onChange)="filterSerie($event)"
+                ></app-filter-pill>
 
-                <!-- <div class="premium-filter-item">
-                    <h3>{{ 'PREMIUM_CARS_YEAR' | translate }}</h3>
-                    <div class="car-select">
-                        <select [(ngModel)]="selectedYear" (change)="getCars(selectedYear)">
-                            <option *ngFor="let year of availableYears" [value]="year">{{ year }}</option>
-                        </select>
-                    </div>
-                </div> -->
+                <app-filter-pill
+                    [props]="{
+                        label: 'FILTER_CARS_OWNED',
+                        options: ownedCarsFilter,
+                        selected: selectedOwned,
+                        selectDisabled: false
+                    }"
+                    (onChange)="filterSerieOwned($event)"
+                ></app-filter-pill>
 
             </section>
 
         </header>
 
-        <section *ngIf="isSerieSelected" class="return-button-container">
+        <section *ngIf="isSerieSelected" class="d_flex justify-content_center align-items_center gap_2 text-align_center mt_1">
             <app-dc-button [buttonTitle]="'GO_BACK'" (click)="disableSerieSelected()"></app-dc-button>
             <div *ngIf="isSerieSelected" class="owned-cars-quantity">
                 <div *ngIf="userToken.userId"><h4>{{ 'CARS_OWNED_LITERAL' | translate}}: {{ userCarsShowed.length }} / {{ showedCars.length }}</h4></div>
-                <div *ngIf="!userToken.userId"><h4>{{ 'CARS_OWNED_LITERAL' | translate}}: XX / {{ showedCars.length }}</h4></div>
+                <div *ngIf="!userToken.userId"><h4>{{ 'CARS_OWNED_LITERAL' | translate}}: X / {{ showedCars.length }}</h4></div>
             </div>
         </section>
 
         <!-- Main Serie Selector -->
-        <main *ngIf="!isSerieSelected" id="premium-cars-selector">
+        <main *ngIf="!isSerieSelected" class="premium-cars-selector d_flex justify-content_center flex_wrap">
             
             <!-- Series items -->
             <div *ngFor="let pill of premiumPills">
@@ -54,8 +56,8 @@
         </main>
         
         <main>
-            <div *ngIf="isSerieSelected" class="premium-view-title">
-                <h2>{{ selectedMainSerie }}</h2>
+            <div *ngIf="isSerieSelected" class="premium-view-title text-align_center">
+                <h2 class="mb_0_25">{{ selectedMainSerie }}</h2>
                 <hr>
             </div>
     

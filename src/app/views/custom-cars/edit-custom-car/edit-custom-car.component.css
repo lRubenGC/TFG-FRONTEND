@@ -1,38 +1,8 @@
-#edit-custom-car-view {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
 .edit-custom-car-container {
     background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     padding: 20px 80px;
     border-radius: 10px;
     margin-top: 40px;
-}
-
-.edit-custom-car-title-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1em;
-}
-
-.go-back-button {
-    background-color: var(--dark-bg-100);
-    border: transparent;
-    color: #fff;
-    border-radius: 10px;
-    box-sizing: border-box;
-    transition: all 0.2s;
-    cursor: pointer;
-    height: 40px;
-    width: 80px;
 }
 
 .edit-custom-car-item {
@@ -51,24 +21,6 @@
 h1, p {
     color: #000;
 }
-
-.button-update-config {
-    border-radius: 20px;
-    border: 1px solid var(--dark-bg-100);
-    background-color: var(--dark-bg-100);
-    color: #FFF;
-    padding: 1rem 2rem;
-    letter-spacing: 1px;
-    transition: transform 80ms ease-in;
-    cursor: pointer;
-    margin-top: .5rem;
-    font-weight: bold;
-}
-
-button.button-update-config[disabled] {
-    cursor: not-allowed;
-    color: var(--dark-bg-100);
-  }
 
 input {
     background-color: #eee;
@@ -121,14 +73,8 @@ input {
 }
 
 .img-inputs-container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    gap: 2rem;
     color: #000;
     margin: 25px 0;
-    align-items: center;
-    justify-content: center;
 }
 
 .notification {

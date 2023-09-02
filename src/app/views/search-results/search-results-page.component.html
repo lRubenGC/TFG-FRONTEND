@@ -1,13 +1,13 @@
 <div id="search-results-page">
 
     <!-- Landing section (Just for an img) -->
-    <header id="search-results-land-section"></header>
+    <header id="search-results-land-section" class="d_flex justify-content_center align-items_center"></header>
 
-    <section class="car-menu-list-container">
-        <div class="car-menu-list">
-            <div class="car-menu-item" [ngClass]="searchType === 'cars' ? 'car-menu-item-selected' : ''"
+    <section class="d_flex justify-content_center mt_2">
+        <div class="car-menu-list d_flex justify-content_center align-items_center gap_1">
+            <div class="car-menu-item c_pointer" [ngClass]="searchType === 'cars' ? 'car-menu-item-selected' : ''"
                 (click)="changeSearchType('cars')">{{ 'SEARCH_RESULTS_CARS' | translate }}</div>
-            <div class="car-menu-item" [ngClass]="searchType === 'users' ? 'car-menu-item-selected' : ''"
+            <div class="car-menu-item c_pointer" [ngClass]="searchType === 'users' ? 'car-menu-item-selected' : ''"
                 (click)="changeSearchType('users')">{{ 'SEARCH_RESULTS_USERS' | translate }}</div>
         </div>
     </section>

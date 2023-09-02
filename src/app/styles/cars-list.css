@@ -42,6 +42,7 @@
     .basic-cars-list {
         grid-template-columns: 33% 33% 33%;
         gap: 0;
+        margin: 0;
     }
 
     .premium-cars-list {

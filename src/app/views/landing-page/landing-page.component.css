@@ -4,17 +4,13 @@
     background: url('../../../assets/images/landing_page/welcome_bg.webp');
     background-position: center center;
     background-size: cover;
-    display: flex;
-    justify-content: center;
 }
 
 app-msg-card {
-    margin: 80px 40px;
+    margin-top: 5rem;
 }
 
 #landing-cards {
-    display: flex;
-    justify-content: center;
     margin: 30px auto;
 }
 

@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { CustomCarsService } from '../custom-cars.service';
 import { customCarInterface } from 'src/app/models/cardTypes.interface';
-import { decodeToken } from 'src/app/helpers/generics';
+import { decodeToken, tokenObject } from 'src/app/helpers/generics';
 import { CarsService } from 'src/app/components/car-cards/services/cars.service';
 import { Router } from '@angular/router';
 import { mapAndSortCustomCars } from '../../../helpers/map-cars';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-custom-cars-page',
@@ -14,7 +15,7 @@ import { mapAndSortCustomCars } from '../../../helpers/map-cars';
 })
 export class CustomCarsPageComponent implements OnInit {
 
-  userToken = decodeToken();
+  userToken!: tokenObject;
 
   cars: customCarInterface[] = [];
   
@@ -26,15 +27,19 @@ export class CustomCarsPageComponent implements OnInit {
   constructor(
     private customCarsService: CustomCarsService,
     private carsService: CarsService,
+    private loaderService: LoaderService,
     private router: Router,
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.userToken = await decodeToken();
     this.getCustomCars();
   }
 
 
   getCustomCars() {
+    this.loaderService.startLoading();
+
     if (this.userToken.hasToken && this.userToken.userId) {
         forkJoin({
             cars: this.customCarsService.getCustomCars(),
@@ -43,13 +48,19 @@ export class CustomCarsPageComponent implements OnInit {
           if (this.userToken.userId) {
             this.cars = mapAndSortCustomCars(cars, userVotes, this.userToken.userId);
           }
+
+          this.loaderService.stopLoading();
         }, (err) => {
+            this.loaderService.stopLoading();
+
             console.error(err);
         });
     } else {
         this.customCarsService.getCustomCars().subscribe((res) => {
             this.cars = mapAndSortCustomCars(res);
+            this.loaderService.stopLoading();
         }, (err) => {
+            this.loaderService.stopLoading();
             console.error(err);
         });
     }
@@ -57,15 +68,17 @@ export class CustomCarsPageComponent implements OnInit {
 
 
   uploadCar() {
+    this.loaderService.startLoading();
+    
     this.router.navigate(['/custom-cars/upload']);
   }  
 
-  filterCars() {
-    if (this.selectedFilter === 'upvotes') {
+  filterCars(ev: any) {
+    if (ev === 'upvotes') {
       this.cars.sort((a, b) => b.upvotes - a.upvotes);
-    } else if (this.selectedFilter === 'date_recents') {
+    } else if (ev === 'date_recents') {
       this.cars.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-    } else if (this.selectedFilter === 'date_olders') {
+    } else if (ev === 'date_olders') {
       this.cars.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
     }
   }

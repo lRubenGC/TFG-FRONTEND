@@ -1,4 +1,4 @@
-<div class="premium-car-item">
+<div class="premium-car-item d_flex justify-content_center align-items_center flex-direction_column w_100 h_100 text-align_center">
     <!-- Car Title -->
     <div 
         class="item-car-title"
@@ -14,7 +14,7 @@
     <div class="img-container" (click)="onCarClick()">
         <img
             loading="lazy"
-            class="card-image"
+            class="card-image object-fit_cover"
             [src]="car.card_img"
             [alt]="car.model_name"
             [ngClass]="carClicked ? 'car-img-opacity' : ''"

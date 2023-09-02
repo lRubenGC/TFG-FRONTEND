@@ -1,10 +1,10 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { UserService } from '../../../services/user.service';
-import { decodeToken } from 'src/app/helpers/generics';
+import { decodeToken, tokenObject } from 'src/app/helpers/generics';
 import { userInterfaceApi, userUpdateRequest } from 'src/app/models/user.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { isValidEmail, isValidPassword, isValidUsername } from 'src/app/helpers/auth';
-import { Router } from '@angular/router';
+import { LoaderService } from '../../../services/loader.service';
 
 @Component({
   selector: 'app-user-config',
@@ -19,7 +19,7 @@ export class UserConfigComponent implements OnInit {
 
   configForm!: FormGroup;
 
-  userToken = decodeToken();
+  userToken!: tokenObject;
   data!: userInterfaceApi;
 
   images: File[] | null[] = [null, null];
@@ -29,7 +29,7 @@ export class UserConfigComponent implements OnInit {
   formSuccess = false;
   successMsg = '';
 
-  isLoading: boolean = false;
+  buttonDisabled: boolean = false;
 
   imgDeleted = false;
   bgDeleted = false;
@@ -37,6 +37,7 @@ export class UserConfigComponent implements OnInit {
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
+    private loaderService: LoaderService,
   ) {
     this.configForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -48,6 +49,8 @@ export class UserConfigComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.userToken = await decodeToken();
+    
     if (this.userToken.hasToken && this.userToken.userId) {
       this.data = await this.userService.getUserData(this.userToken.userId);
       this.configForm.patchValue({
@@ -57,13 +60,17 @@ export class UserConfigComponent implements OnInit {
     }
   }
 
+  ngAfterContentInit() {
+    this.loaderService.stopLoading();
+  }
+
   async submitForm() {
     // restart notifications
     this.formError = false;
     this.formSuccess = false;
 
     // disable submit button
-    this.submitButtonRef.nativeElement.disabled = true;
+    this.buttonDisabled = true;
 
 
     // data of user
@@ -84,7 +91,7 @@ export class UserConfigComponent implements OnInit {
         this.formSuccess = false;
       
         // activate submit button
-        this.submitButtonRef.nativeElement.disabled = false;
+        this.buttonDisabled = false;
         return;
       }
 
@@ -98,7 +105,7 @@ export class UserConfigComponent implements OnInit {
         this.formSuccess = false;
       
         // activate submit button
-        this.submitButtonRef.nativeElement.disabled = false;
+        this.buttonDisabled = false;
         return;
       }
 
@@ -112,7 +119,7 @@ export class UserConfigComponent implements OnInit {
         this.formSuccess = false;
       
         // activate submit button
-        this.submitButtonRef.nativeElement.disabled = false;
+        this.buttonDisabled = false;
         return;
       }
 
@@ -126,14 +133,14 @@ export class UserConfigComponent implements OnInit {
       this.formSuccess = false;
 
       // activate submit button
-      this.submitButtonRef.nativeElement.disabled = false;
+      this.buttonDisabled = false;
       return;
     }
 
     this.formError = false;
 
     try {
-      this.isLoading = true;
+      this.loaderService.startLoading();
       // update imgs
       if (this.images[0] !== null || this.images[1] !== null) {
         await this.updateImgs();
@@ -144,13 +151,11 @@ export class UserConfigComponent implements OnInit {
         await this.userService.updateUser(user.id, bodyRequest).toPromise();
         this.successMsg = 'CONFIG_USER_UPDATED';
         this.formSuccess = true;
-        setTimeout(() => {
-          location.reload();
-        }, 2000);
       }
 
       // activate submit button
-      this.submitButtonRef.nativeElement.disabled = false;
+      this.buttonDisabled = false;
+      location.reload();
       
     } catch (err: any) {
       console.error(err);
@@ -167,7 +172,7 @@ export class UserConfigComponent implements OnInit {
         return;
       }
     } finally {
-      this.isLoading = false;
+      this.loaderService.stopLoading();
     }
 
     // update imgs
@@ -233,7 +238,8 @@ export class UserConfigComponent implements OnInit {
 
     if (type === 1 && this.data.user.img !== null) {
       try {
-      this.isLoading = true;
+      this.loaderService.startLoading();
+      
       await this.userService.deleteImg(this.data.user.id).toPromise();
       this.successMsg = 'CONFIG_IMG_DELETED';
       this.formSuccess = true;
@@ -242,11 +248,12 @@ export class UserConfigComponent implements OnInit {
       } catch (err) {
         console.error(err);
       } finally {
-        this.isLoading = false;
+        this.loaderService.stopLoading();
       }
     } else if (type === 2 && this.data.user.bg_img !== null) {
       try {
-        this.isLoading = true;
+        this.loaderService.startLoading();
+        
         await this.userService.deleteImg(this.data.user.id, true).toPromise();
         this.successMsg = 'CONFIG_IMG_DELETED';
         this.formSuccess = true;
@@ -255,7 +262,7 @@ export class UserConfigComponent implements OnInit {
         } catch (err) {
           console.error(err);
         } finally {
-          this.isLoading = false;
+          this.loaderService.stopLoading();
         }
     }
   }

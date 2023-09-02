@@ -7,24 +7,7 @@
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
-    padding: 2rem;
     border-radius: 5px;
-    display: flex;
-    justify-content: space-around;
-}
-
-#user-profile-land-section::before {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    opacity: 0.5;
-}
-
-.profile-data-name {
-    display: flex;
-}
 
 .profile-img-container {
     width: 100px;
@@ -33,86 +16,23 @@
     overflow: hidden;
 }
 
-.circular-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.profile-data-name-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    padding: 10px;
-}
-
-.profile-data-name-container h3 {
-    margin-left: 10px;
-}
-
-.profile-data-name-container button {
-    padding: .4em 1.5em;
-    background-color: var(--dark-bg-100);
-    border: transparent;
-    color: #fff;
-    border-radius: 10px;
-    box-sizing: border-box;
-    text-shadow: 4px 4px 4px #000;
-    transition: all 0.2s;
-    cursor: pointer;
-}
-
-.profile-data-name-container button:hover {
-    background-color: #020013;
-    text-shadow: none;
-}
-
-.export-collection-container {
-    display: flex;
-    flex-direction: column;
-    width: fit-content;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.button-and-span {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
 .export-collection-container span {
     font-size: .9em;
 }
 
 .export-collection-error {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
     padding: 5px 10px;
     background-color: rgb(255, 48, 48);
     border-radius: 5px;
-    text-align: center;
+    width: fit-content;
 }
 
 .export-collection-error span {
     font-weight: 600;
-    cursor: pointer;
-}
-
-.profile-data-cars {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
 }
 
 .data-cars-item {
-    display: flex;
-    flex-direction: column;
     padding: 0 20px;
-    text-align: center;
-    justify-content: center;
 }
 
 .data-item-number {
@@ -130,25 +50,10 @@
     height: 80%;
 }
 
-.car-menu-list-container {
-    margin-top: 2rem;
-    display: flex;
-    justify-content: center;
-}
-
 .car-menu-list {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
     border: 1px solid rgb(143, 143, 143);
     border-radius: 5px;
     padding: 5px 15px;
-}
-
-.car-menu-list__group {
-    display: flex;
-    gap: 1em;
 }
 
 .car-menu-item {
@@ -165,95 +70,9 @@
     border-bottom: 1px solid var(--dark-primary-100);
 }
 
-.user-basic-cars-list {
-    padding: 2rem 6rem;
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: repeat(auto-fill,minmax(16rem, 1fr));
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.user-premium-cars-list {
-    padding: 2rem 5rem;
-    display: grid;
-    gap: 4rem;
-    grid-template-columns: repeat(auto-fill,minmax(12rem, 1fr));
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin: 0 50px;
-}
-
-#user-filter-basic-section, #user-filter-premium-section {
-    display: flex;
-    justify-content: center;
-    gap: 4em;
-}
-
-.basic-filter-item {
-    margin-top: 1em;
-    min-width: 20rem;
-}
-
-.basic-filter-item h3 {
-    text-shadow: 4px 4px 4px #000;
-    margin-left: .2em;
-}
-
-select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -ms-appearance: none;
-    appearance: none;
-    outline: 0;
-    box-shadow: none;
-    border: 0;
-    background: var(--dark-bg-200);
-    flex: 1;
-    padding: 0 .5em;
-    color: #fff;
-    cursor: pointer;
-}
-
-select::-ms-expand {
-    display: none;
-}
-
-.car-select {
-    position: relative;
-    display: flex;
-    width: 100%;
-    height: 3em;
-    line-height: 3;
-    background: var(--dark-bg-100);
-    overflow: hidden;
-    border-radius: .25em;
-}
-
-.car-select::after {
-    content: '\25BC';
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 0 1em;
-    background: #000000;
-    pointer-events: none;
-    transition: .25s all ease;
-}
-
-.car-select:hover::after {
-    color: var(--dark-primary-100);
-}
-
-select:disabled {
-    background-color: #000;
-}
-
 @media (max-width: 1200px) {
     #user-profile-body {
-        width: 100vw;
+        width: 90vw;
     }
 
     #user-profile-land-section {
@@ -262,15 +81,18 @@ select:disabled {
 }
 
 @media (max-width: 850px) {
-    #user-filter-basic-section, #user-filter-premium-section {
+    .filter-section {
         flex-direction: column;
         align-items: center;
         gap: 0;
     }
+    
+    .export-collection-container {
+        align-items: center;
+    }
 
-    .basic-filter-item {
-        width: 18em;
-        min-width: 18em;
+    .export-collection-main {
+        flex-direction: column;
     }
 }
 

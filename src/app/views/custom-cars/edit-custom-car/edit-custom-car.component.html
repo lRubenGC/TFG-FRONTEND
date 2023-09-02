@@ -1,9 +1,9 @@
 <br>
-<main id="edit-custom-car-view">
-    <form [formGroup]="editCarForm" class="edit-custom-car-container">
-        <div class="edit-custom-car-title-container">
+<main id="edit-custom-car-view" class="d_flex justify-content_center align-items_center text-align_center">
+    <form [formGroup]="editCarForm" class="edit-custom-car-container d_flex flex-direction_column justify-content_center align-items_center">
+        <div class="edit-custom-car-title-container d_flex justify-content_center align-items_center gap_1">
             <h1>{{ 'EDIT_CUSTOM_CAR' | translate }}</h1>
-            <button (click)="goBack()" class="go-back-button">{{ 'GO_BACK' | translate }}</button>
+            <app-dc-secondary-button (click)="goBack()" [buttonTitle]="'GO_BACK_TO_CAR'"></app-dc-secondary-button>
         </div>
 
         <p>{{ 'CONFIG_DESCR' | translate }}</p>
@@ -44,7 +44,7 @@
                 (keydown.enter)="submitForm()" />
         </div>
 
-        <div class="img-inputs-container" *ngIf="carData">
+        <div class="img-inputs-container d_flex justify-content_center align-items_center flex_wrap w_100 gap_2" *ngIf="carData">
 
             <div class="img-input">
                 <div class="img-title-container">
@@ -108,13 +108,14 @@
 
         </div>
 
-        <button #submitButton type="button" class="button-update-config" (click)="submitForm()">{{ 'CONFIG_UPDATE' | translate }}</button>
+        <app-dc-secondary-button
+            (click)="submitForm()"
+            [buttonDisabled]="updateButtonDisabled"
+            [buttonTitle]="'CONFIG_UPDATE'"
+        ></app-dc-secondary-button>
 
         <p *ngIf="formError" class="notification notification-error">{{ errorMsg | translate }}</p>
         <p *ngIf="formSuccess" class="notification notification-success">{{ successMsg | translate }}</p>
 
     </form>
-
-    <!-- Spinner -->
-    <app-spinner [isLoading]="isLoading"></app-spinner>
 </main>

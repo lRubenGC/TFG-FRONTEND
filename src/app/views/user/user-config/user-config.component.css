@@ -1,28 +1,11 @@
-#user-config-view {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .user-config-container {
     background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     padding: 20px 80px;
     border-radius: 10px;
     margin-top: 40px;
 }
 
-.user-config-item {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-}
-
-.user-config-item label {
+.user-config-item-label {
     color: #000;
     width: 25%;
     margin-right: 5px;
@@ -58,25 +41,12 @@ input {
     width: 100%;
 }
 
-.img-title-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: .5em;
-    margin-bottom: 5px;
-}
-
 .button-delete-config {
     color: #fff;
     background-color: #dc3545;
     border: none;
-    padding: 10px ;
     border-radius: 10px;
-    cursor: pointer;
     font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .button-delete-config:hover {
@@ -101,12 +71,8 @@ input {
 }
 
 .img-inputs-container {
-    display: flex;
-    gap: 2rem;
     color: #000;
     margin: 25px 0;
-    align-items: center;
-    text-align: center;
 }
 
 .notification {
@@ -133,11 +99,8 @@ input {
         width: 100%;
     }
 
-    .user-config-item label {
+    .user-config-item-label {
         width: 20%;
-    }
-
-    .user-config-item input {
     }
 
     .img-inputs-container {
@@ -146,19 +109,19 @@ input {
 }
 
 @media (max-width: 630px) {
-    .user-config-item label {
+    .user-config-item-label {
         width: 30%;
     }
 }
 
 @media (max-width: 500px) {
-    .user-config-item label {
+    .user-config-item-label {
         width: 40%;
     }
 }
 
 @media (max-width: 415px) {
-    .user-config-item label {
+    .user-config-item-label {
         width: 50%;
     }
 }

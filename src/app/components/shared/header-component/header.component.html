@@ -1,4 +1,4 @@
-<header #header [ngClass]="{ 'header-block': isBlockView(), 'mobile-menu-open': isMobileMenuOpen }">
+<header class="d_flex justify-content_between align-items_center" #header [ngClass]="{ 'header-block': isBlockView(), 'mobile-menu-open': isMobileMenuOpen }">
 
     <!-- Mobile Menu Button -->
     <div id="mobile-menu" (click)="toggleMobileMenu()">
@@ -6,12 +6,12 @@
     </div>
 
     <!-- Logo -->
-    <div (click)="goTo('/')" id="header-logo">
+    <div (click)="goTo('/')" id="header-logo" class="c_pointer">
         <h1>DT</h1>
     </div>
 
     <!-- Items -->
-    <ul>
+    <ul class="d_flex align-items_center h_100">
 
         <!-- Search Bar -->
         <li class="header-item search-container">
@@ -39,11 +39,18 @@
         </li>
 
 
-        <!-- About DT -->
-        <li class="header-item"><button (click)="goTo('about')">{{ 'HEADER_ABOUT' | translate }}</button></li>
+        <!-- Info Dropdown -->
+        <li class="dropdown-container header-item">
+            <button (click)="toggleDropdown('info')" class="dropdown-button">{{ 'HEADER_INFO' | translate }}
+                &dtrif;</button>
+            <div #infoDropdown class="dropdown-content" [ngClass]="{'show': !infoDropdownOpen}">
+                <button (click)="goTo('/info/about')">{{ 'HEADER_ABOUT' | translate }}</button>
+                <button (click)="goTo('/info/updates')">{{ 'HEADER_UPDATES' | translate }}</button>
+            </div>
+        </li>
 
         <!-- Log In -->
-        <li class="header-item" *ngIf="!userLoggedIn"><button (click)="goTo('auth')">{{ 'HEADER_ACCOUNT' | translate }}</button></li>
+        <li class="header-item" *ngIf="!userLoggedIn"><button (click)="goTo('/auth')">{{ 'HEADER_ACCOUNT' | translate }}</button></li>
 
         <!-- Account Dropdown -->
         <li class="header-item" *ngIf="userLoggedIn">
@@ -52,7 +59,7 @@
                     &dtrif;</button>
                 <div #accDropdown class="dropdown-content" [ngClass]="{'show': !accDropdownOpen}">
                     <button (click)="goToUserProfile()">{{ 'HEADER_MY_PROFILE' | translate }}</button>
-                    <button (click)="goTo('user/config')">{{ 'HEADER_MY_SETTINGS' | translate }}</button>
+                    <button (click)="goTo('/user/config')">{{ 'HEADER_MY_SETTINGS' | translate }}</button>
                     <button (click)="logOut()">{{ 'HEADER_LOGOUT' | translate }}</button>
                 </div>
             </div>
