@@ -91,19 +91,11 @@ h4 {
         font-size: 18px;
     }
 
-    p {
-        font-size: 14px;
-    }
-    
-    button {
-        font-size: 14px;
-    }
-
-    select {
-        font-size: 14px;
-    }
-
-    option {
+    p,
+    button,
+    select,
+    option,
+    li {
         font-size: 14px;
     }
 }
@@ -128,7 +120,8 @@ h4 {
     p,
     button,
     select,
-    option {
+    option,
+    li {
         font-size: 13px;
     }
 
@@ -155,19 +148,11 @@ h4 {
         font-size: 16px;
     }
 
-    p {
-        font-size: 12px;
-    }
-    
-    button {
-        font-size: 12px;
-    }
-
-    select {
-        font-size: 12px;
-    }
-
-    option {
+    p,
+    button,
+    select,
+    option,
+    li {
         font-size: 12px;
     }
 }

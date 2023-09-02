@@ -342,6 +342,14 @@
     height: 50%;
 }
 
+.w_25 {
+    width: 25%;
+}
+
+.h_25 {
+    height: 25%;
+}
+
 /* Utilities */
 .object-fit_cover {
     object-fit: cover;

@@ -125,5 +125,14 @@
     "ABOUT_CW_PARAGRAPH6": "La aplicación no está acabada, todavía faltan muchos coches que iré añadiendo con el tiempo. (Si tenéis alguna preferencia hacédmelo saber a mi mail (rdevgc@gmail.com). Añadir también que cualquier crítica, opinión, propuesta… es bien recibida.",
     "ABOUT_CW_PARAGRAPH7": "Por otra parte, he pensado en adquirir un servidor de imágenes. Ahora las imágenes de los coches son de Internet, con diferentes tamaños y calidad. Con un servidor de alojamiento de imágenes, los coches se verían mucho mejor.",
     "ABOUT_CW_PARAGRAPH8": "Así que si has pensado en colaborar en el proyecto, puedes aportar tu parte en el siguiente enlace. El dinero será invertido en la aplicación. Muchas gracias por leer.",
-    "ABOUT_CW_DONATIONS": "Donar"
+    "ABOUT_CW_DONATIONS": "Donar",
+    "UPDATES_VERSION_101": "Versión 1.0.1 - 20/08/2023",
+    "UPDATES_VERSION_101_1": "Nueva utilidad para poder exportar tu colección en archivo csv (limitado a 1 descarga cada 2 días)",
+    "UPDATES_VERSION_101_2": "Enumeración de coches en propiedad y mostrados (X/XX) en vista Básicos y Premium",
+    "UPDATES_VERSION_102": "Versión 1.0.2 - 03/09/2023",
+    "UPDATES_VERSION_102_1": "Nuevo spinner de carga",
+    "UPDATES_VERSION_102_2": "Nuevo filtro (en propiedad / no en propiedad) en vistas Básicos y Premium",
+    "UPDATES_VERSION_102_3": "Alojar imágenes de los coches básicos de 2022",
+    "UPDATES_VERSION_102_4": "Modularizar código para optimizar la aplicación",
+    "UPDATES_VERSION_102_5": "Mejorar la seguridad de los usuarios cambiando la gestión de los tokens"
 }

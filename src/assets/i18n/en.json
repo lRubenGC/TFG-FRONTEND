@@ -125,5 +125,14 @@
     "ABOUT_CW_PARAGRAPH6": "The application is not finished, there are still many cars missing, which I will be adding over time. (If you have any preferences, let me know at my email (rdevgc@gmail.com). I would also like to add that any criticism, opinion, proposal... is welcome.",
     "ABOUT_CW_PARAGRAPH7": "On the other hand, I have thought about acquiring an image server. Currently, the car images are from the internet, with different sizes and qualities. With an image hosting server, the cars would look much better.",
     "ABOUT_CW_PARAGRAPH8": "So, if you have thought about collaborating on the project, you can contribute your part in the following link. The money will be invested in the application. Thank you very much for reading.",
-    "ABOUT_CW_DONATIONS": "Donate"
+    "ABOUT_CW_DONATIONS": "Donate",
+    "UPDATES_VERSION_101": "Version 1.0.1 - 08/20/2023",
+    "UPDATES_VERSION_101_1": "New utility to export your collection in a csv file (limited to 1 download every 2 days)",
+    "UPDATES_VERSION_101_2": "Enumeration of cars owned and displayed (X/XX) in Basic and Premium views",
+    "UPDATES_VERSION_102": "Version 1.0.2 - 09/03/2023",
+    "UPDATES_VERSION_102_1": "New loading spinner",
+    "UPDATES_VERSION_102_2": "New filter (owned / not owned) in Basic and Premium views",
+    "UPDATES_VERSION_102_3": "Host images of 2022 basic cars",
+    "UPDATES_VERSION_102_4": "Modularize code to optimize the application",
+    "UPDATES_VERSION_102_5": "Improve user security by changing token management"
 }
