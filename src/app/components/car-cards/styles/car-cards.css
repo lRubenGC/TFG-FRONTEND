@@ -28,7 +28,7 @@
 
 .add-to-wishlist {
     left: .5rem;
-    border: 2px solid var(--dark-primary-100);
+    border: 2px solid var(--primary-100);
     background-color: rgba(132, 41, 8, 0.7);
 }
 
@@ -61,7 +61,7 @@
 }
 
 .item-car-title-wanted {
-    color: var(--dark-primary-200);
+    color: var(--primary-200);
 }
 
 .item-car-title h4 {
@@ -88,7 +88,7 @@
 }
 
 .car-collected-wants {
-    background-color: var(--dark-primary-100);
+    background-color: var(--primary-100);
 } */
 
 @media (max-width: 600px) {

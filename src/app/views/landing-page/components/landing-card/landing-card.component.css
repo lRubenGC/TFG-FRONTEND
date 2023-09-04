@@ -3,7 +3,7 @@
 }
 
 span {
-    color: var(--dark-primary-100);
+    color: var(--primary-100);
     font-family: 'Righteous', sans-serif;
     font-size: 30px;
 }

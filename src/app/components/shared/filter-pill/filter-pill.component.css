@@ -20,7 +20,7 @@ select {
   outline: 0;
   box-shadow: none;
   border: 0;
-  background: var(--dark-bg-200);
+  background: var(--bg-200);
   flex: 1;
   padding: 0 .5em;
   color: #fff;
@@ -37,7 +37,7 @@ select::-ms-expand {
   width: 100%;
   height: 3em;
   line-height: 3;
-  background: var(--dark-bg-100);
+  background: var(--bg-100);
   overflow: hidden;
   border-radius: .25em;
 }
@@ -48,13 +48,13 @@ select::-ms-expand {
   top: 0;
   right: 0;
   padding: 0 1em;
-  background: var(--dark-bg-100);
+  background: var(--bg-100);
   pointer-events: none;
   transition: .25s all ease;
 }
 
 .car-select:hover::after {
-  color: var(--dark-primary-100);
+  color: var(--primary-100);
 }
 
 select:disabled {

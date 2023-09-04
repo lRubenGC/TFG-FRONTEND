@@ -8,6 +8,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     border-radius: 5px;
+}
 
 .profile-img-container {
     width: 100px;
@@ -63,11 +64,11 @@
 }
 
 .car-menu-item:hover {
-    color: var(--dark-primary-200);
+    color: var(--primary-200);
 }
 
 .car-menu-item-selected {
-    border-bottom: 1px solid var(--dark-primary-100);
+    border-bottom: 1px solid var(--primary-100);
 }
 
 @media (max-width: 1200px) {
