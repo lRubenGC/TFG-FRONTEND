@@ -6,7 +6,7 @@ export const mapAndSortCustomCars = (res: any, userVotes: number[] = [] as numbe
             ...car,
             imgs: car.imgs.split(',')
         }
-        if (userVotes.length > 0) {
+        if (userId) {
             carData = {
                 ...carData,
                 userId: userId,

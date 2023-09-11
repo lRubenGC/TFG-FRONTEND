@@ -36,7 +36,6 @@ export class CustomCarsPageComponent implements OnInit {
     this.getCustomCars();
   }
 
-
   getCustomCars() {
     this.loaderService.startLoading();
 
@@ -65,7 +64,6 @@ export class CustomCarsPageComponent implements OnInit {
         });
     }
   }
-
 
   uploadCar() {
     this.loaderService.startLoading();
