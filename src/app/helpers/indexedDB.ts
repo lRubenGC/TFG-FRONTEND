@@ -69,7 +69,7 @@ export const setTokenInIndexedDB = (token: string): void => {
     
         const transaction = db.transaction([storeName], "readwrite");
         const store = transaction.objectStore(storeName);
-        store.add(token, "dt-token");
+        store.put(token, "dt-token");
     };
     
     openRequest.onerror = function(e) {
