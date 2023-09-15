@@ -40,7 +40,7 @@ export class UserProfileComponent implements OnInit {
   selectedSerie = '';
   selectedMainSerie = 'All';
   selectedSecondarySerie = '';
-  availableYears = ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016'];
+  availableYears = ['2023', '2022', '2021', '2020', '2019', '2018'];
   availableSeries = [];
   availableMainSeries = ['Boulevard (original)', 'Boulevard (reboot)', 'Car Culture', 'Fast & Furious (Premium)', 'Fast & Furious', 'Pop Culture'];
   availableSecondarySeries = [];
