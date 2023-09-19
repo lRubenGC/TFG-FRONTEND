@@ -19,12 +19,14 @@ import { MsgCardComponent } from './shared/msg-card/msg-card.component';
 import { DCButtonComponent } from './shared/dc-button/dc-button.component';
 import { FilterPillComponent } from './shared/filter-pill/filter-pill.component';
 import { DCSecondaryButtonComponent } from './shared/dc-secondary-button/dc-secondary-button.component';
+import { ButtonsLegendComponent } from './shared/buttons-legend/buttons-legend.component';
 
 
 
 @NgModule({
   declarations: [
     BasicCardComponent,
+    ButtonsLegendComponent,
     CustomCardComponent,
     DCButtonComponent,
     DCSecondaryButtonComponent,
@@ -48,6 +50,7 @@ import { DCSecondaryButtonComponent } from './shared/dc-secondary-button/dc-seco
   ],
   exports: [
     BasicCardComponent,
+    ButtonsLegendComponent,
     CustomCardComponent,
     DCButtonComponent,
     DCSecondaryButtonComponent,
