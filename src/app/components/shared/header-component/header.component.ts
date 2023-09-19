@@ -105,8 +105,10 @@ export class HeaderComponent implements OnInit {
   }
 
   async goToUserProfile() {
-    this.loaderService.startLoading();
-    
+    if (!this.router.url.includes('/user/profile')) {
+      this.loaderService.startLoading();
+    }
+
     const tokenDecoded = await decodeToken();
     this.closeMobileMenu();
 
