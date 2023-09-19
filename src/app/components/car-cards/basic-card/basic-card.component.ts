@@ -15,8 +15,6 @@ export class BasicCardComponent implements OnInit {
   @Output() errorEvent = new EventEmitter<string>();
   @Input() car!: basicCarShowedInterface;
 
-  carClicked: boolean = false;
-
   constructor(
     private carsService: CarsService
   ) { }
@@ -85,9 +83,9 @@ export class BasicCardComponent implements OnInit {
       );
     }
   }
-
-  onCarClick() {
-    this.carClicked = !this.carClicked;
+  
+  goToDetailedCar() {
+    console.log('A implementar');
   }
   
 }

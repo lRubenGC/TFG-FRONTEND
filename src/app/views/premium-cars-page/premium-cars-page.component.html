@@ -37,12 +37,18 @@
 
         </header>
 
-        <section *ngIf="isSerieSelected" class="d_flex justify-content_center align-items_center gap_2 text-align_center mt_1">
+        <!-- Header list -->
+        <section *ngIf="isSerieSelected" class="header-list d_flex justify-content_center align-items_center gap_3 text-align_center mt_1">
+
             <app-dc-button [buttonTitle]="'GO_BACK'" (click)="disableSerieSelected()"></app-dc-button>
+
+            <app-buttons-legend></app-buttons-legend>
+            
             <div *ngIf="isSerieSelected" class="owned-cars-quantity">
                 <div *ngIf="userToken.userId"><h4>{{ 'CARS_OWNED_LITERAL' | translate}}: {{ userCarsShowed.length }} / {{ showedCars.length }}</h4></div>
                 <div *ngIf="!userToken.userId"><h4>{{ 'CARS_OWNED_LITERAL' | translate}}: X / {{ showedCars.length }}</h4></div>
             </div>
+
         </section>
 
         <!-- Main Serie Selector -->

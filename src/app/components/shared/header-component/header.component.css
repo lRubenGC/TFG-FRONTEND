@@ -98,8 +98,8 @@ button {
     background-color: var(--primary-100);
 }
 
-i {
-    font-size: 18px;
+#mobile-menu img {
+    width: 1.5em;
 }
 
 .search-box {
@@ -141,6 +141,10 @@ i {
     color: #ffffff;
     background-color: transparent;
     pointer-events: painted;
+}
+
+.search-box img {
+    width: 1.75em;
 }
 
 .btn-search:focus~.input-search {

@@ -2,7 +2,7 @@
 
     <!-- Mobile Menu Button -->
     <div id="mobile-menu" (click)="toggleMobileMenu()">
-        <i class="fas fa-bars"></i>
+        <img src="assets/icons/burger_nav_icon.svg" alt="Burger nav icon" />
     </div>
 
     <!-- Logo -->
@@ -16,7 +16,7 @@
         <!-- Search Bar -->
         <li class="header-item search-container">
             <div class="search-box">
-                <button (click)="searchCar()" class="btn-search" aria-label="Search Button"><i class="fas fa-search"></i></button>
+                <img src="assets/icons/search_icon.svg" (click)="searchCar()" class="btn-search" aria-label="Search Button">
                 <input
                     #searchInput
                     [(ngModel)]="carSearched"

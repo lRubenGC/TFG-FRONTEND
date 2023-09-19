@@ -11,7 +11,7 @@ import { LoaderService } from 'src/app/services/loader.service';
 @Component({
   selector: 'app-custom-cars-page',
   templateUrl: './custom-cars-page.component.html',
-  styleUrls: ['./custom-cars-page.component.css', '../../../styles/cars-list.css']
+  styleUrls: ['./custom-cars-page.component.css', '../../../styles/cars-views.css']
 })
 export class CustomCarsPageComponent implements OnInit {
 
