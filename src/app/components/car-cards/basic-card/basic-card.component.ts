@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { basicCarShowedInterface } from 'src/app/models/cardTypes.interface';
 import { CarsService } from '../services/cars.service';
@@ -16,7 +17,8 @@ export class BasicCardComponent implements OnInit {
   @Input() car!: basicCarShowedInterface;
 
   constructor(
-    private carsService: CarsService
+    private carsService: CarsService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -85,7 +87,7 @@ export class BasicCardComponent implements OnInit {
   }
   
   goToDetailedCar() {
-    console.log('A implementar');
+    this.router.navigate([`/detailed-car/${this.car.id}`]);
   }
   
 }
