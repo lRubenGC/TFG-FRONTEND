@@ -5,6 +5,7 @@ import { decodeToken, tokenObject } from 'src/app/helpers/generics';
 import { LoaderService } from 'src/app/services/loader.service';
 import { DetailedCarService } from './detailed-car.service';
 import { ActivatedRoute } from '@angular/router';
+import { basicCarInterface, premiumCarInterface } from 'src/app/models/cardTypes.interface';
 
 @Component({
   selector: 'app-detailed-car-page',
@@ -14,7 +15,10 @@ import { ActivatedRoute } from '@angular/router';
 export class DetailedCarPageComponent implements OnInit {
 
   userToken!: tokenObject;
+  
+  car!: any;
   carId!: string | null;
+  carType!: string | null;
 
 
   constructor(
@@ -28,12 +32,19 @@ export class DetailedCarPageComponent implements OnInit {
   async ngOnInit() {
     this.userToken = await decodeToken();
     this.carId = this.route.snapshot.paramMap.get('id');
+    this.carType = this.route.snapshot.paramMap.get('type');
 
     this.getCar();
   }
 
   getCar() {
-    // const car = this.detailedCarService.getCarById(this.carId);
+    if (this.carId && this.carType) {
+      this.detailedCarService.getCarById(this.carId, this.carType).subscribe(
+        (car: basicCarInterface | premiumCarInterface) => {
+          this.car = car;
+        }
+      )
+    }
   }
 
 }

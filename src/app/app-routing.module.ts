@@ -25,7 +25,7 @@ const routes: Routes = [
     loadChildren: () => import('./views/custom-cars/custom-cars-routing.module').then(m => m.CustomCarsRoutingModule)
   },
   { 
-    path: 'detailed-car/:id',
+    path: 'detailed-car/:type/:id',
     loadChildren: () => import('./views/detailed-car-page/detailed-car-routing.module').then(m => m.DetailedCarRoutingModule)
   },
   { 

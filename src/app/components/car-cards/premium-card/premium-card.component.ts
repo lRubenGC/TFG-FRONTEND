@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { premiumCarShowedInterface } from 'src/app/models/cardTypes.interface';
 import { CarsService } from '../services/cars.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-premium-card',
@@ -16,6 +17,7 @@ export class PremiumCardComponent implements OnInit {
 
   constructor(
     private carsService: CarsService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -85,7 +87,7 @@ export class PremiumCardComponent implements OnInit {
   }
 
   goToDetailedCar() {
-    
+    this.router.navigate([`/detailed-car/premium/${this.car.id}`]);
   }
 
 }

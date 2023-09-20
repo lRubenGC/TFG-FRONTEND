@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
+import { basicCarInterface, premiumCarInterface } from 'src/app/models/cardTypes.interface';
 
 
 @Injectable({
@@ -13,8 +14,9 @@ export class DetailedCarService {
   constructor(private http: HttpClient) { }
   
 
-  getCarById(carId: string): Observable<any> {
-    return this.http.get(`${environment.apiBaseUrl}/api/basic-cars/?carId=${carId}`);
-  }
+  // Returns 1 Basic or Premium (carType) car
+  getCarById(carId: string, carType: string): Observable<basicCarInterface | premiumCarInterface> {
+    return this.http.get<basicCarInterface | premiumCarInterface>(`${environment.apiBaseUrl}/api/${carType}-cars/getCar/${carId}`);
+  }  
 
 }

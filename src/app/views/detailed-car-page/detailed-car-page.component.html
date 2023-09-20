@@ -1,1 +1,63 @@
-<p>coche detallado: {{carId}}</p>
+<br>
+
+<div *ngIf="car">
+
+    <main class="d_flex justify-content_center gap_2">
+
+        <aside class="car-properties_container d_flex flex-direction_column gap_0_5">
+            <fieldset class="car-properties_item">
+                <legend>Car ID</legend>
+                <p>{{car.car_id}}</p>
+            </fieldset>
+    
+            <fieldset class="car-properties_item">
+                <legend>Model name</legend>
+                <p>{{car.model_name}}</p>
+            </fieldset>
+    
+            <fieldset class="car-properties_item">
+                <legend>Col</legend>
+                <p>{{car.col}}</p>
+            </fieldset>
+    
+            <fieldset class="car-properties_item">
+                <legend>Version</legend>
+                <p>{{car.version}}</p>
+            </fieldset>
+
+            <fieldset class="car-properties_item">
+                <legend>Series</legend>
+                <p>{{car.series}}</p>
+            </fieldset>
+
+            <fieldset class="car-properties_item">
+                <legend>Col Serie</legend>
+                <p>{{car.col_serie}}</p>
+            </fieldset>
+
+            <fieldset class="car-properties_item">
+                <legend>Year</legend>
+                <p>{{car.year}}</p>
+            </fieldset>
+
+            <fieldset class="car-properties_item">
+                <legend>Secondary serie</legend>
+                <p>{{car.secondary_serie}}</p>
+            </fieldset>
+        </aside>
+    
+        <section class="car-image_container">
+            <!-- Basic car image -->
+            <div *ngIf="car.col">
+                <img [src]="car.img" />
+            </div>
+    
+            <!-- Premium car image -->
+            <div *ngIf="!car.col">
+                <img [src]="car.card_img" />
+            </div>
+        </section>
+    
+    </main>
+    
+</div>

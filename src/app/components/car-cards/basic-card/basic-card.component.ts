@@ -87,7 +87,7 @@ export class BasicCardComponent implements OnInit {
   }
   
   goToDetailedCar() {
-    this.router.navigate([`/detailed-car/${this.car.id}`]);
+    this.router.navigate([`/detailed-car/basic/${this.car.id}`]);
   }
   
 }

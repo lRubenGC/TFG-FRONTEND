@@ -1,3 +1,11 @@
-p {
-    color: red;
+main {
+    margin-top: 5em;
+}
+
+.car-properties_item {
+    padding: .5em;
+}
+
+.car-properties_item p {
+    font-size: 1.2em;
 }
