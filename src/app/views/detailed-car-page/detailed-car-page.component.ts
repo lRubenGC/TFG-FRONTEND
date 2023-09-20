@@ -47,4 +47,8 @@ export class DetailedCarPageComponent implements OnInit {
     }
   }
 
+  // goBack() {
+    
+  // }
+
 }
