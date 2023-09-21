@@ -1,5 +1,5 @@
 .dc-secondary-button {
-    background-color: var(--dark-bg-100);
+    background-color: var(--bg-100);
     border: 1px solid #fff;
     color: #fff;
     border-radius: 10px;
@@ -9,11 +9,11 @@
 }
 
 .dc-secondary-button:hover {
-    color: var(--dark-primary-200);
-    border-color: var(--dark-primary-200);
+    color: var(--primary-200);
+    border-color: var(--primary-200);
 }
 
 .dc-secondary-button[disabled] {
     cursor: not-allowed;
-    color: var(--dark-bg-100);
+    color: var(--bg-100);
 }

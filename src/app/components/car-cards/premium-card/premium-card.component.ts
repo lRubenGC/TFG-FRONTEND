@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { premiumCarShowedInterface } from 'src/app/models/cardTypes.interface';
 import { CarsService } from '../services/cars.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-premium-card',
@@ -14,10 +15,9 @@ export class PremiumCardComponent implements OnInit {
   @Output() errorEvent = new EventEmitter<string>();
   @Input() car!: premiumCarShowedInterface;
 
-  carClicked: boolean = false;
-
   constructor(
     private carsService: CarsService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -86,8 +86,8 @@ export class PremiumCardComponent implements OnInit {
     }
   }
 
-  onCarClick() {
-    this.carClicked = !this.carClicked;
+  goToDetailedCar() {
+    this.router.navigate([`/detailed-car/premium/${this.car.id}`]);
   }
 
 }

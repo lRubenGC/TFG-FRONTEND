@@ -1,46 +1,68 @@
 .img-container {
     position: relative;
     display: inline-block;
+    perspective: 1000px;
+}
+
+.img-container:hover .flip-card {
+    transform: rotateY(180deg);
+}
+
+.flip-card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform .6s;
+    transform-style: preserve-3d;
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.flip-card-back {
+    transform: rotateY(180deg);
+    background: url('src/assets/images/login_page/login_bg.webp');
+    border-radius: .6em;
 }
 
 .car-img-opacity {
     opacity: .3;
 }
 
-.car-card-button-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .car-card-button {
-    position: absolute;
-    transform: translateY(-50%);
+    border: 3px solid;
     border-radius: 5px;
-    font-weight: 600;
-    color: white;
-    text-shadow: 2px 2px 2px #000;
     cursor: pointer;
-    padding: .8rem 0;
-    width: 45%;
-    text-align: center;
+    padding: 1em;
 }
 
-.add-to-wishlist {
-    left: .5rem;
-    border: 2px solid var(--dark-primary-100);
-    background-color: rgba(132, 41, 8, 0.7);
+.button-svg {
+    width: 2em;
+}
+
+.go-to-detailed {
+    border-color: rgb(241, 241, 35);
+    background-color: rgba(203, 206, 20, 0.7);
 }
 
 .add-to-collection {
-    right: .5rem;
-    border: 2px solid rgb(23, 194, 35);
-    background-color: rgba(5, 82, 10, 0.7);
+    border-color: rgb(23, 194, 35);
+    background-color: rgba(15, 118, 21, 0.7);
+}
+
+.add-to-wishlist {
+    border-color: var(--primary-100);
+    background-color: rgba(189, 70, 27, 0.7);
 }
 
 .remove-from-x {
-    border: 2px solid rgb(255, 20, 20);
-    background-color: rgba(177, 16, 16, 0.7);
+    border-color: rgb(255, 20, 20);
+    background-color: rgba(187, 12, 12, 0.7);
 }
 
 .car-description {
@@ -61,7 +83,7 @@
 }
 
 .item-car-title-wanted {
-    color: var(--dark-primary-200);
+    color: var(--primary-200);
 }
 
 .item-car-title h4 {
@@ -74,33 +96,19 @@
     margin-right: .3rem;
 }
 
-/* .car-collected-data {
-    text-align: center;
-    margin: auto;
-    margin-top: .5rem;
-    width: 80%;
-    height: .5rem;
-    border-radius: 1rem;
+@media (max-width: 1200px) {
+    .button-svg-basic,
+    .button-svg-premium {
+        width: 1.5em;
+    }
 }
 
-.car-collected-has {
-    background-color: rgb(23, 194, 35);
-}
-
-.car-collected-wants {
-    background-color: var(--dark-primary-100);
-} */
-
-@media (max-width: 600px) {
-    .add-to-wishlist {
-        left: .3rem;
+@media (max-width: 685px) {
+    .button-svg-basic {
+        width: 1em;
     }
 
-    .add-to-collection {
-        right: .3rem;
-    }
-
-    .item-car-th {
-        width: 1.2rem;
+    .car-card-button-basic {
+        padding: .65em;
     }
 }

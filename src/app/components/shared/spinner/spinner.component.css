@@ -10,7 +10,7 @@
 
 .spinner {
     border: 16px solid #f3f3f3;
-    border-top: 16px solid var(--dark-primary-200);
+    border-top: 16px solid var(--primary-200);
     border-radius: 50%;
     width: 120px;
     height: 120px;

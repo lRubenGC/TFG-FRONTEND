@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { basicCarShowedInterface } from 'src/app/models/cardTypes.interface';
 import { CarsService } from '../services/cars.service';
@@ -15,10 +16,9 @@ export class BasicCardComponent implements OnInit {
   @Output() errorEvent = new EventEmitter<string>();
   @Input() car!: basicCarShowedInterface;
 
-  carClicked: boolean = false;
-
   constructor(
-    private carsService: CarsService
+    private carsService: CarsService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -85,9 +85,9 @@ export class BasicCardComponent implements OnInit {
       );
     }
   }
-
-  onCarClick() {
-    this.carClicked = !this.carClicked;
+  
+  goToDetailedCar() {
+    this.router.navigate([`/detailed-car/basic/${this.car.id}`]);
   }
   
 }

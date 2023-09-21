@@ -45,9 +45,10 @@
     "USERNAME_IN_USE": "Ese Username ya está en uso",
     "EMAIL_IN_USE": "Ese Email ya está en uso",
     "REGISTER_SUCCESFUL": "Registro exitoso. Ya puedes Iniciar Sesión",
-    "ADD_CAR_COLLECTION": "Coleccion",
-    "ADD_CAR_WISHED": "Deseados",
-    "REMOVE_CAR_X": "Eliminar",
+    "GO_TO_DETAILED": "Ir al coche detallado",
+    "ADD_CAR_COLLECTION": "Añadir a tu colección",
+    "ADD_CAR_WISHED": "Añadir a tu lista de deseados",
+    "REMOVE_CAR_X": "Eliminar de tus listas",
     "GN_UNEXPECTED_ERROR": "Error inesperado, hable con el administrador por favor",
     "GN_TOKEN_EXPIRED": "No puedes añadir un coche sin cuenta. Inicia sesión por favor",
     "PREMIUM_CARS_YEAR": "Año",
@@ -134,5 +135,10 @@
     "UPDATES_VERSION_102_2": "Nuevo filtro (en propiedad / no en propiedad) en vistas Básicos y Premium",
     "UPDATES_VERSION_102_3": "Alojar imágenes de los coches básicos de 2022",
     "UPDATES_VERSION_102_4": "Modularizar código para optimizar la aplicación",
-    "UPDATES_VERSION_102_5": "Mejorar la seguridad de los usuarios cambiando la gestión de los tokens"
+    "UPDATES_VERSION_102_5": "Mejorar la seguridad de los usuarios cambiando la gestión de los tokens",
+    "UPDATES_VERSION_103": "Versión 1.0.3 - 21/09/2023",
+    "UPDATES_VERSION_103_1": "Mejora en la calidad de las imágenes",
+    "UPDATES_VERSION_103_2": "Mejora en las tarjetas de los coches",
+    "UPDATES_VERSION_103_3": "Vista detallada de los coches",
+    "UPDATES_VERSION_103_4": "(Bug fix) Ahora se puede votar coche custom desde el listado"
 }

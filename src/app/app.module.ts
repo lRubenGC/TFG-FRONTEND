@@ -20,6 +20,7 @@ import { SearchResultsPageModule } from './views/search-results/search-results-p
 import { AuthGuard } from './guards/auth.guard';
 import { ComponentsModule } from './components/components.module';
 import { InfoModule } from './views/info/info.module';
+import { DetailedCarPageModule } from './views/detailed-car-page/detailed-car-page.module';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { InfoModule } from './views/info/info.module';
     ComponentsModule,
     BasicCarsPageModule,
     CustomCarsModule,
+    DetailedCarPageModule,
     InfoModule,
     LandingPageModule,
     PremiumCarsPageModule,

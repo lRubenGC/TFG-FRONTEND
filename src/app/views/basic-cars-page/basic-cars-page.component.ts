@@ -11,7 +11,7 @@ import { LoaderService } from 'src/app/services/loader.service';
 @Component({
   selector: 'app-basic-cars-page',
   templateUrl: './basic-cars-page.component.html',
-  styleUrls: ['./basic-cars-page.component.css', '../../styles/cars-list.css']
+  styleUrls: ['./basic-cars-page.component.css', '../../styles/cars-views.css']
 })
 export class BasicCarsPageComponent implements OnInit {
 

@@ -44,11 +44,11 @@
 
 .custom-car-user-creator h4:hover {
     transition: .2s;
-    color: var(--dark-primary-200);
+    color: var(--primary-200);
 }
 
 .car-voted {
-    color: var(--dark-primary-200);
+    color: var(--primary-200);
 }
 
 @media (max-width: 1650px) {

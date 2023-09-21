@@ -1,0 +1,82 @@
+<br>
+
+<div class="detailed-car-page mt_5" *ngIf="car">
+    
+    <!-- <header class="mb_2">
+        <app-dc-button (click)="goBack()" [buttonTitle]="'GO_BACK'"></app-dc-button>
+    </header> -->
+
+    <main class="d_flex justify-content_center gap_2 m_2">
+
+
+        <aside class="car-properties_container d_flex flex-direction_column gap_0_5">
+            <!-- Car ID for Both cars -->
+            <fieldset class="car-properties_item">
+                <legend>Car ID</legend>
+                <p>{{car.car_id}}</p>
+            </fieldset>
+    
+            <!-- Model name for Both cars -->
+            <fieldset class="car-properties_item">
+                <legend>Model name</legend>
+                <p>{{car.model_name}}</p>
+            </fieldset>
+    
+            <!-- Col number for Basic cars -->
+            <fieldset *ngIf="car.col" class="car-properties_item">
+                <legend>Col number</legend>
+                <p>{{car.col}}</p>
+            </fieldset>
+    
+            <!-- Version for Basic cars -->
+            <fieldset *ngIf="car.version" class="car-properties_item">
+                <legend>Version</legend>
+                <p>{{car.version}}</p>
+            </fieldset>
+
+            <!-- Series for Basic cars -->
+            <fieldset *ngIf="car.series" class="car-properties_item">
+                <legend>Series</legend>
+                <p>{{car.series}}</p>
+            </fieldset>
+
+            <!-- Col Series for Premium cars -->
+            <fieldset *ngIf="car.main_serie" class="car-properties_item">
+                <legend>Main serie</legend>
+                <p>{{car.main_serie}}</p>
+            </fieldset>
+
+            <!-- Col Series for Premium cars -->
+            <fieldset *ngIf="car.secondary_serie" class="car-properties_item">
+                <legend>Secondary serie</legend>
+                <p>{{car.secondary_serie}}</p>
+            </fieldset>
+
+            <!-- Col Series for Both cars -->
+            <fieldset *ngIf="car.col_serie" class="car-properties_item">
+                <legend>Col Series</legend>
+                <p>{{car.col_serie}}</p>
+            </fieldset>
+
+            <!-- Year for Both cars -->
+            <fieldset class="car-properties_item">
+                <legend>Year</legend>
+                <p>{{car.year}}</p>
+            </fieldset>
+        </aside>
+    
+        <section class="car-image_container d_flex align-items_center justify-content_center">
+            <!-- Basic car image -->
+            <div *ngIf="car.col">
+                <img class="basic-img" [src]="car.img" />
+            </div>
+    
+            <!-- Premium car image -->
+            <div *ngIf="!car.col">
+                <img class="premium-img" [src]="car.card_img" />
+            </div>
+        </section>
+    
+    </main>
+    
+</div>

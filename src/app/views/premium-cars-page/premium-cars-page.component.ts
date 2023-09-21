@@ -13,7 +13,7 @@ import { LoaderService } from 'src/app/services/loader.service';
 @Component({
   selector: 'app-premium-cars-page',
   templateUrl: './premium-cars-page.component.html',
-  styleUrls: ['./premium-cars-page.component.css', '../../styles/cars-list.css']
+  styleUrls: ['./premium-cars-page.component.css', '../../styles/cars-views.css']
 })
 export class PremiumCarsPageComponent implements OnInit {
 

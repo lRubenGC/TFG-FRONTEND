@@ -23,7 +23,7 @@
 }
 
 .user-creator:hover {
-    color: var(--dark-primary-200);
+    color: var(--primary-200);
     transition: .2s ease;
 }
 
@@ -33,7 +33,7 @@
 }
 
 .car-voted {
-    color: var(--dark-primary-200);
+    color: var(--primary-200);
 }
 
 @media (max-width: 1400px) {

@@ -1,7 +1,7 @@
 .dc-button {
   padding: .4em 1.5em;
-  border: 0.16em solid var(--dark-primary-100);
-  background-color: var(--dark-bg-100-opacity);
+  border: 0.16em solid var(--primary-100);
+  background-color: var(--bg-100-opacity);
   color: #fff;
   border-radius: 15px;
   box-sizing: border-box;
@@ -11,11 +11,11 @@
 }
 
 .dc-button:hover {
-  background-color: var(--dark-primary-100);
+  background-color: var(--primary-100);
   text-shadow: none;
 }
 
 .dc-secondary-button[disabled] {
   cursor: not-allowed;
-  color: var(--dark-bg-100);
+  color: var(--bg-100);
 }

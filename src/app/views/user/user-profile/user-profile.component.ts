@@ -8,12 +8,11 @@ import { basicCarInterface, basicCarShowedInterface, customCarInterface, premium
 import { decodeToken } from 'src/app/helpers/generics';
 import { CustomCarsService } from '../../custom-cars/custom-cars.service';
 import { LoaderService } from 'src/app/services/loader.service';
-import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css', '../../../styles/cars-list.css']
+  styleUrls: ['./user-profile.component.css', '../../../styles/cars-views.css']
 })
 export class UserProfileComponent implements OnInit {
 

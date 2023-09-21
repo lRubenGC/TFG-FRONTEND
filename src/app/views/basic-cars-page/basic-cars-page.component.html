@@ -47,13 +47,21 @@
 
         </header>
 
-        <section class="owned-cars-quantity d_flex justify-content_end">
-            <div *ngIf="userToken?.userId"><h4>{{ 'CARS_OWNED_LITERAL' | translate}}: {{ userCarsShowed.length }} / {{ showedCars.length }}</h4></div>
-            <div *ngIf="!userToken?.userId"><h4>{{ 'CARS_OWNED_LITERAL' | translate}}: X / {{ showedCars.length }}</h4></div>
+        <!-- Header list -->
+        <section class="header-list d_flex justify-content_center align-items_end gap_5 p_1 mt_0_5">
+
+            <app-buttons-legend></app-buttons-legend>
+
+            <section class="owned-cars-quantity d_flex justify-content_end">
+                <div *ngIf="userToken?.userId"><h4>{{ 'CARS_OWNED_LITERAL' | translate}}: {{ userCarsShowed.length }} / {{ showedCars.length }}</h4></div>
+                <div *ngIf="!userToken?.userId"><h4>{{ 'CARS_OWNED_LITERAL' | translate}}: X / {{ showedCars.length }}</h4></div>
+            </section>
+
         </section>
 
         <!-- Car list -->
         <main class="basic-cars-list">
+            
             <!-- Car items -->
             <div *ngFor="let car of showedCars">
                 <app-basic-card
