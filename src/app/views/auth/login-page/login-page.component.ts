@@ -205,19 +205,19 @@ export class LoginPageComponent implements OnInit {
   registerFormValid(username: string, email: string, password: string) {    
     if (!isValidUsername(username)) {
       this.registerError = true;
-      this.registerErrorMsg = 'LOGIN_BAD_USERNAME'
+      this.registerErrorMsg = 'LOGIN_BAD_USERNAME';
       return false;
     }
 
     if (!isValidEmail(email)) {
       this.registerError = true;
-      this.registerErrorMsg = 'LOGIN_BAD_EMAIL'
+      this.registerErrorMsg = 'LOGIN_BAD_EMAIL';
       return false;
     }
 
     if (!isValidPassword(password)) {
       this.registerError = true;
-      this.registerErrorMsg = 'LOGIN_BAD_PASSWORD'
+      this.registerErrorMsg = 'LOGIN_BAD_PASSWORD';
       return false;
     }
 
