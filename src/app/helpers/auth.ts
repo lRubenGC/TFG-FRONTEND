@@ -6,14 +6,14 @@ export const isValidEmail = (email: string) => {
 
 // Validation: Valid password format
 export const isValidPassword = (password: string) => {
-    const passwordPattern = new RegExp('^[a-zA-Z0-9_,-.*!?¿çñ@]{8,16}$');
+    const passwordPattern = new RegExp('^[a-zA-Z0-9_,-.*!?¿çñ@]{8,20}$');
     
     return passwordPattern.test(password);
 }
 
 // Validation: Valid username format
 export const isValidUsername = (username: string) => {
-    const usernamePattern = new RegExp('^[a-zA-Z0-9_ñç]{3,10}$');
+    const usernamePattern = new RegExp('^[a-zA-Z0-9_ñç]{3,16}$');
 
     return usernamePattern.test(username);
 }
