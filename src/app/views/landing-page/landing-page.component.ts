@@ -23,19 +23,19 @@ export class LandingPageComponent implements OnInit, OnDestroy {
       backgroundImg: '../../../assets/images/landing_page/basic_bg.webp',
       popImg: '../../../assets/images/landing_page/basic_pop.webp',
       linkTo: 'basic-cars',
-      title: 'Basic'
+      title: 'SEARCH_BASIC_CARS'
     },
     {
       backgroundImg: '../../../assets/images/landing_page/premium_bg.webp',
       popImg: '../../../assets/images/landing_page/premium_pop.webp',
       linkTo: 'premium-cars',
-      title: 'Premium'
+      title: 'SEARCH_PREMIUM_CARS'
     },
     {
       backgroundImg: '../../../assets/images/landing_page/custom_bg.webp',
       popImg: '../../../assets/images/landing_page/custom_pop.webp',
       linkTo: 'custom-cars',
-      title: 'Custom'
+      title: 'CUSTOM_CARS'
     }
   ]
 
