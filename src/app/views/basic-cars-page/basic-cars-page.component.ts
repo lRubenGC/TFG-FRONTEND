@@ -18,10 +18,6 @@ export class BasicCarsPageComponent implements OnInit {
   userToken!: tokenObject;
 
   carsGrouped!: basicCarsGrouped[]; // All cars of the year selected
-  showedCarsGrouped!: basicCarsGrouped[]; // Cars to display
-
-  userCars: basicCarInterface[] = []; // All the cars that user owns
-  userCarsShowed: basicCarInterface[] = []; // Cars that user owns to show (for the number)
 
   // Selected filters
   selectedYear: string = '2023';
@@ -31,7 +27,7 @@ export class BasicCarsPageComponent implements OnInit {
   // Filter options
   availableYears = ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016'];
   availableSeries = [];
-  ownedCarsFilter = ['FILTER_ALL', 'FILTER_CARS_OWNED', 'FILTER_CARS_NOT_OWNED'];
+  ownedCarsFilter = ['FILTER_ALL', 'FILTER_CARS_OWNED', 'FILTER_CARS_NOT_OWNED', 'FILTER_CARS_WISHED'];
 
   // Error handler
   error = false;
@@ -67,7 +63,8 @@ export class BasicCarsPageComponent implements OnInit {
 
   async getCars(year: string) {
     this.loaderService.startLoading();
-  
+    this.selectedYear = year;
+
     try {
       const carsResponse = await lastValueFrom(this.basicCarsService.getCarsByYear(year));
 
@@ -76,24 +73,25 @@ export class BasicCarsPageComponent implements OnInit {
           return {
             ...car,
             series: car.series.split(','),
-            user_profile: true
+            user_profile: true,
+            visible: true
           }
         });
 
         return {
           ...group,
-          cars: modifiedCars
+          cars: modifiedCars,
+          visible: true
         };
       });
 
       this.carsGrouped = carsTransformed;
-      this.showedCarsGrouped = carsTransformed;
 
       // Si existe usuario logueado
       if (this.userToken.hasToken && this.userToken.userId) {
-        this.matchCars(carsTransformed, year);
+        this.matchCars(carsTransformed);
       }
-      
+
     } catch (error) {
       console.error(error);
       this.enableErrorMsg(error);
@@ -104,113 +102,92 @@ export class BasicCarsPageComponent implements OnInit {
     }
   }
 
-  async matchCars(carsTransformed: basicCarsGrouped[], year: string) {
+  async matchCars(groupedCars: basicCarsGrouped[]) {
     const userCarsResponse = await this.getUserCars() as { carsOwned: any[]; carsWished: any[] };
 
-    // Se añade la propiedad has_car | wants_car a cada coche que tenga | quiera
-    this.userCars = userCarsResponse.carsOwned.filter((carOwned: any) => carOwned.year === year);
-    this.userCarsShowed = userCarsResponse.carsOwned.filter((carOwned: any) => carOwned.year === year);
+    // Se añade la propiedad has_car | wants_car a cada coche que tenga | quiera y el ID del usuario
+    for (let group of groupedCars) {
+      group.cars = group.cars.map((car: basicCarInterface) => {
+        let has_car = false;
+        let wants_car = false;
+        if (userCarsResponse.carsOwned.some((carOwned: basicCarInterface) => carOwned.id === car.id)) has_car = true;
+        if (userCarsResponse.carsWished.some((carWished: basicCarInterface) => carWished.id === car.id)) wants_car = true;
 
-    userCarsResponse.carsOwned.forEach((carOwned: any) => {
-      carsTransformed.map((group: basicCarsGrouped) => {
-        const matchedCar = group.cars.find((car: basicCarInterface) => car.id === carOwned.id);
-        if (matchedCar) {
-          matchedCar.has_car = true;
-        }
-      });
-    });
-
-    userCarsResponse.carsWished.forEach((carWished: any) => {
-      carsTransformed.map((group: basicCarsGrouped) => {
-        const matchedCar = group.cars.find((car: basicCarInterface) => car.id === carWished.id);
-        if (matchedCar) {
-          matchedCar.wants_car = true;
-        }
-      });
-    });
-
-    // Se añade el ID del User a cada coche para añadirlo | quitarlo de sus listas
-    carsTransformed = carsTransformed.map((group: basicCarsGrouped) => {
-      const modifiedCars = group.cars.map((car: basicCarInterface) => {
         return {
           ...car,
+          has_car,
+          wants_car,
           token: this.userToken.userId!
-        }
+        };
       });
+    }
 
-      return {
-        ...group,
-        cars: modifiedCars
-      };
-    });
-
-    this.carsGrouped = carsTransformed;
-    this.showedCarsGrouped = carsTransformed;
+    this.carsGrouped = groupedCars;
   }
-  
+
 
   getAvailableSeries(year: string) {
     this.basicCarsService.getAvailableSeries(year).subscribe(res => {
       const series = res.series.split(',');
       this.availableSeries = series.sort();
-    })
+    });
   }
 
   filterSerie(serie: string) {
-    // this.selectedSerie = serie;
+    this.selectedSerie = serie;
 
-    // let filteredCars = this.carsGrouped;
-    // let filteredUserCars = this.userCars;
+    // TODO: crear una funcion para crear nuevos grupos para TH, STH, Zamac, etc.
+    this.carsGrouped = this.carsGrouped.map((group: basicCarsGrouped) => {
+      switch (serie) {
+        case 'All':
+          return {
+            ...group,
+            visible: true
+          }
 
-    // if (serie !== 'All') {
-    //   filteredCars = this.carsGrouped.filter((car: basicCarInterface) => car.series.includes(serie));
-    //   filteredUserCars = this.userCars.filter(car => car.series.includes(serie));
-    // }
+        default:
+          return {
+            ...group,
+            visible: group.serieName === serie
+          }
+      }
+    });
 
-    // switch (this.selectedOwned) {
-    //   case 'FILTER_CARS_OWNED':
-    //     this.userCarsShowed = filteredUserCars;
-    //     this.showedCarsGrouped = filteredCars.filter((car: basicCarInterface) => car.has_car);
-    //     break;
-
-    //   case 'FILTER_CARS_NOT_OWNED':
-    //     this.userCarsShowed = [];
-    //     this.showedCarsGrouped = filteredCars.filter((car: basicCarInterface) => !car.has_car);
-    //     break;
-  
-    //   default:
-    //     this.userCarsShowed = filteredUserCars;
-    //     this.showedCarsGrouped = filteredCars;
-    //     break;
-    // }
+    this.filterSerieOwned();
   }
 
-  filterSerieOwned(serie: string) {
-    // this.selectedOwned = serie;
-    // const filterBasedOnOwnership = (car: basicCarInterface) => {
-    //   switch (serie) {
-    //     case 'FILTER_ALL':
-    //       return true;
-    //     case 'FILTER_CARS_OWNED':
-    //       return car.has_car;
-    //     case 'FILTER_CARS_NOT_OWNED':
-    //       return !car.has_car;
-    //     default:
-    //       return true;
-    //   }
-    // };
-  
-    // const filterBasedOnSerie = (car: basicCarInterface) => {
-    //   if (this.selectedSerie === 'All') return true;
-    //   return car.series.includes(this.selectedSerie);
-    // };
-  
-    // const combinedFilter = (car: basicCarInterface) => filterBasedOnOwnership(car) && filterBasedOnSerie(car);
-  
-    // this.userCarsShowed = serie === 'FILTER_CARS_NOT_OWNED' 
-    //   ? [] 
-    //   : this.userCars.filter(filterBasedOnSerie);
-    // this.showedCarsGrouped = this.carsGrouped.filter(combinedFilter);
+  // filtrado de coches en propiedad | deseados teniendo en cuenta que serie está filtrada
+  filterSerieOwned(serie?: string) {
+    if (serie) this.selectedOwned = serie;
+
+    for (let group of this.carsGrouped) {
+      if (this.selectedSerie === group.serieName || this.selectedSerie === 'All') {
+        group.cars = group.cars.map((car: basicCarInterface) => {
+          let visible = true;
+
+          switch (this.selectedOwned) {
+            case 'FILTER_CARS_OWNED':
+              visible = car.has_car;
+              break;
+            case 'FILTER_CARS_NOT_OWNED':
+              visible = !car.has_car;
+              break;
+            case 'FILTER_CARS_WISHED':
+              visible = car.wants_car;
+              break;
+          }
+
+          return {
+            ...car,
+            visible
+          }          
+        });
+
+        if (!group.cars.some(car => car.visible)) {
+          group.visible = false;
+        } else group.visible = true;
+      }
+    }
   }
 
   resetSeries() {
@@ -238,7 +215,6 @@ export class BasicCarsPageComponent implements OnInit {
       this.errorMsg = 'GN_UNEXPECTED_ERROR';
     }
   }
-  
 
   async changeLanguage() {
     const cardTitle = this.translate.get('BASIC_CARS_TITLE');
@@ -260,18 +236,19 @@ export class BasicCarsPageComponent implements OnInit {
     this.msg_card.description[3] = await lastValueFrom(cardDesc5);
   }
 
+  // TODO: adaptar estas funciones a la nueva estructura (Tambien al HTML) para volver a implementar el contador
   onDeleteCar(carDeleted: any) {
-    this.userCars = this.userCars.filter(car => car.id !== carDeleted.id);
-    this.userCarsShowed = this.userCarsShowed.filter(car => car.id !== carDeleted.id);
+    // this.userCars = this.userCars.filter(car => car.id !== carDeleted.id);
+    // this.userCarsShowed = this.userCarsShowed.filter(car => car.id !== carDeleted.id);
   }
 
   onAddedCar(carAdded: any) {
-    const existingCar = this.userCars.find(car => car.id === carAdded.id);
+    // const existingCar = this.userCars.find(car => car.id === carAdded.id);
 
-    if (!existingCar) {
-      this.userCars.push(carAdded);
-      this.userCarsShowed.push(carAdded);
-    }
+    // if (!existingCar) {
+    //   this.userCars.push(carAdded);
+    //   this.userCarsShowed.push(carAdded);
+    // }
   }
 
 }

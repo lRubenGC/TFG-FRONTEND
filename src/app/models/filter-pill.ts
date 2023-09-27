@@ -28,10 +28,6 @@ export const BasicDefaultSeries: IDefaultSeries[] = [
     text: 'Super Treasure Hunt',
   },
   {
-    value: 'Red Edition',
-    text: 'Red Edition',
-  },
-  {
     value: 'Walmart Exclusive',
     text: 'Zamac',
   },

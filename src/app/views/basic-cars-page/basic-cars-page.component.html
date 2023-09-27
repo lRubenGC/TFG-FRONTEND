@@ -65,25 +65,29 @@
             <section>
                 
                 <!-- Car items -->
-                <div *ngFor="let group of showedCarsGrouped" class="mb_5">
+                <ng-container *ngFor="let group of carsGrouped">
 
-                    <div class="serie-name-group">
-                        <h1 class="mb_0_25">{{ group.serieName }}</h1>
-                        <hr>
-                    </div>
-
-                    <div class="basic-cars-list">
-                        <div *ngFor="let car of group.cars">
-                            <app-basic-card
-                                (deleteCar)="onDeleteCar($event)"
-                                (addedCar)="onAddedCar($event)"
-                                (errorEvent)="enableErrorMsg($event)"
-                                [car]="car">
-                            </app-basic-card>
+                    <ng-container *ngIf="group.visible">
+                        <div class="serie-name-group">
+                            <h1 class="mb_0_25">{{ group.serieName }}</h1>
+                            <hr>
                         </div>
-                    </div>
+    
+                        <div class="basic-cars-list">
+                            <ng-container *ngFor="let car of group.cars">
+                                <ng-container *ngIf="car.visible">
+                                    <app-basic-card
+                                        (deleteCar)="onDeleteCar($event)"
+                                        (addedCar)="onAddedCar($event)"
+                                        (errorEvent)="enableErrorMsg($event)"
+                                        [car]="car">
+                                    </app-basic-card>
+                                </ng-container>
+                            </ng-container>
+                        </div>
+                    </ng-container>
 
-                </div>
+                </ng-container>
 
             </section>
 

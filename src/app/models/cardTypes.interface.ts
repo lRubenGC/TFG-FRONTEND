@@ -17,6 +17,7 @@ export interface basicCarInterface {
     search?: boolean; // property to show year property in card
     profile_view?: boolean; // property that confirms that card is used in user_profile view
     user_profile?: boolean; // property that confirms that user is in his own profile
+    visible: boolean;
 }
 
 export interface premiumCarInterface {
@@ -37,6 +38,7 @@ export interface premiumCarInterface {
     search?: boolean;
     user_profile?: boolean;
     profile_view?: boolean;
+    visible: boolean;
 }
 
 export interface customCarInterface {
@@ -63,9 +65,11 @@ export interface customCarUpdateRequest {
 export interface basicCarsGrouped {
     serieName: string;
     cars: basicCarInterface[];
+    visible: boolean;
 }
 
 export interface premiumCarsGrouped {
     serieName: string;
     cars: premiumCarInterface[];
+    visible: boolean;
 }

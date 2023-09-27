@@ -27,6 +27,7 @@
     "BASIC_CARS_SERIE": "Series",
     "FILTER_CARS_OWNED": "Owned",
     "FILTER_CARS_NOT_OWNED": "Not owned",
+    "FILTER_CARS_WISHED": "Wished",
     "LOGIN_TITLE": "Welcome Back!",
     "LOGIN_SIGNIN": "Sign In",
     "LOGIN_USERNAME": "Username",
