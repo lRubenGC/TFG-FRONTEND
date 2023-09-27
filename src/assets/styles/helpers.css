@@ -214,6 +214,10 @@
     margin-bottom: 2rem;
 }
 
+.mb_5 {
+    margin-bottom: 5rem;
+}
+
 .ml_2 {
     margin-left: 2rem;
 }
@@ -324,6 +328,10 @@
 /* Width y height */
 .w_100 {
     width: 100%;
+}
+
+.w_90 {
+    width: 90%;
 }
 
 .h_100 {
