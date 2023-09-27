@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { basicCarShowedInterface } from 'src/app/models/cardTypes.interface';
+import { basicCarInterface } from 'src/app/models/cardTypes.interface';
 import { CarsService } from '../services/cars.service';
 
 @Component({
@@ -11,10 +11,10 @@ import { CarsService } from '../services/cars.service';
 })
 export class BasicCardComponent implements OnInit {
 
-  @Output() deleteCar = new EventEmitter<basicCarShowedInterface>();
-  @Output() addedCar = new EventEmitter<basicCarShowedInterface>();
+  @Output() deleteCar = new EventEmitter<basicCarInterface>();
+  @Output() addedCar = new EventEmitter<basicCarInterface>();
   @Output() errorEvent = new EventEmitter<string>();
-  @Input() car!: basicCarShowedInterface;
+  @Input() car!: basicCarInterface;
 
   constructor(
     private carsService: CarsService,

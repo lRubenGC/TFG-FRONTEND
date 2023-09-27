@@ -9,20 +9,6 @@ export interface basicCarInterface {
     img: string;
     brand: string;
     year: string;
-    serie_class: string;
-}
-
-export interface basicCarShowedInterface {
-    id: number;
-    car_id: string;
-    col: string;
-    model_name: string;
-    version: string;
-    series: string;
-    col_serie: string;
-    img: string;
-    brand: string;
-    year: string;
     // ^ car properties from backend ^
     serie_class: string; // property for printing a colored square
     has_car: boolean; // property that confirms user has car
@@ -34,19 +20,6 @@ export interface basicCarShowedInterface {
 }
 
 export interface premiumCarInterface {
-    id: number;
-    car_id: string;
-    model_name: string;
-    main_serie: string;
-    secondary_serie: string;
-    col_serie: string;
-    year: string;
-    brand: string;
-    img: string;
-    card_img: string;
-}
-
-export interface premiumCarShowedInterface {
     id: number;
     car_id: string;
     model_name: string;
@@ -85,4 +58,14 @@ export interface customCarUpdateRequest {
     model_name?: string;
     year?: number;
     brand?: string;
+}
+
+export interface basicCarsGrouped {
+    serieName: string;
+    cars: basicCarInterface[];
+}
+
+export interface premiumCarsGrouped {
+    serieName: string;
+    cars: premiumCarInterface[];
 }
