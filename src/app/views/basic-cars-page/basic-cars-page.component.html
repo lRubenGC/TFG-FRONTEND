@@ -54,10 +54,10 @@
 
                 <app-buttons-legend></app-buttons-legend>
 
-                <!-- <section class="owned-cars-quantity d_flex justify-content_end">
-                    <div *ngIf="userToken?.userId"><h4>{{ 'CARS_OWNED_LITERAL' | translate}}: {{ userCarsShowed.length }} / {{ showedCars.length }}</h4></div>
-                    <div *ngIf="!userToken?.userId"><h4>{{ 'CARS_OWNED_LITERAL' | translate}}: X / {{ showedCars.length }}</h4></div>
-                </section> -->
+                <section class="owned-cars-quantity d_flex justify-content_end">
+                    <div *ngIf="userToken?.userId"><h4>{{ 'CARS_OWNED_LITERAL' | translate}}: {{ carsOwned }} / {{ carsShowed }}</h4></div>
+                    <div *ngIf="!userToken?.userId"><h4>{{ 'CARS_OWNED_LITERAL' | translate}}: X / {{ carsShowed }}</h4></div>
+                </section>
 
             </section>
 
@@ -78,7 +78,7 @@
                                 <ng-container *ngIf="car.visible">
                                     <app-basic-card
                                         (deleteCar)="onDeleteCar($event)"
-                                        (addedCar)="onAddedCar($event)"
+                                        (addedCar)="onAddedCar()"
                                         (errorEvent)="enableErrorMsg($event)"
                                         [car]="car">
                                     </app-basic-card>

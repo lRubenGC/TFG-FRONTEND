@@ -16,26 +16,21 @@ export interface IDefaultSeries {
 
 export const BasicDefaultSeries: IDefaultSeries[] = [
   {
-    value: 'All',
+    value: 'ALL',
     text: 'FILTER_ALL',
-  },
-  {
-    value: 'Treasure Hunt',
-    text: 'Treasure Hunt',
-  },
-  {
-    value: 'Super Treasure Hunt',
-    text: 'Super Treasure Hunt',
-  },
-  {
-    value: 'Walmart Exclusive',
-    text: 'Zamac',
-  },
+  }
 ];
 
 export const PremiumDefaultSeries: IDefaultSeries[] = [
   {
-    value: 'All',
+    value: 'ALL',
+    text: 'FILTER_ALL',
+  },
+];
+
+export const BasicDefaultYears: IDefaultSeries[] = [
+  {
+    value: 'ALL',
     text: 'FILTER_ALL',
   },
 ];
@@ -52,12 +47,5 @@ export const CustomDefaultOptions: IDefaultSeries[] = [
   {
     value: 'upvotes',
     text: 'UPVOTES',
-  },
-];
-
-export const BasicDefaultYears: IDefaultSeries[] = [
-  {
-    value: 'All',
-    text: 'FILTER_ALL',
   },
 ];

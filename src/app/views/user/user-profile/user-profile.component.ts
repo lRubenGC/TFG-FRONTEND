@@ -35,9 +35,9 @@ export class UserProfileComponent implements OnInit {
   
   customCarsOwned = [];
 
-  selectedYear = 'All';
+  selectedYear = 'ALL';
   selectedSerie = '';
-  selectedMainSerie = 'All';
+  selectedMainSerie = 'ALL';
   selectedSecondarySerie = '';
   availableYears = ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016'];
   availableSeries = [];
@@ -340,10 +340,10 @@ processPremiumCars(res: any, isUserOwner: boolean) {
 
   filterYear(year: string) {
     this.selectedYear = year;
-    this.selectedSerie = 'All';
+    this.selectedSerie = 'ALL';
     this.getAvailableSeries(year);
 
-    if (year === 'All') {
+    if (year === 'ALL') {
       this.basicCarsOwnedShowed = this.basicCarsOwned;
       this.basicCarsWishedShowed = this.basicCarsWished;
       this.selectedSerie = '';
@@ -356,7 +356,7 @@ processPremiumCars(res: any, isUserOwner: boolean) {
 
   filterSerie(serie: string) {    
     switch (serie) {
-      case 'All':
+      case 'ALL':
         this.basicCarsOwnedShowed = this.basicCarsOwned.filter(car => car.year === this.selectedYear);
         this.basicCarsWishedShowed = this.basicCarsWished.filter(car => car.year === this.selectedYear);
         break;
@@ -377,10 +377,10 @@ processPremiumCars(res: any, isUserOwner: boolean) {
 
   filterPremiumSerie(serie: string) {
     this.selectedMainSerie = serie;
-    this.selectedSecondarySerie = 'All';
+    this.selectedSecondarySerie = 'ALL';
     this.getAvailablePremiumSeries(serie);
 
-    if (serie === 'All') {
+    if (serie === 'ALL') {
       this.premiumCarsOwnedShowed = this.premiumCarsOwned;
       this.premiumCarsWishedShowed = this.premiumCarsWished;
       this.selectedSecondarySerie = '';
@@ -392,7 +392,7 @@ processPremiumCars(res: any, isUserOwner: boolean) {
   }
 
   filterPremiumSecundarySerie(serie: string) {
-    if (serie === 'All') {
+    if (serie === 'ALL') {
       this.premiumCarsOwnedShowed = this.premiumCarsOwned.filter(car => car.main_serie === this.selectedMainSerie);
       this.premiumCarsWishedShowed = this.premiumCarsWished.filter(car => car.main_serie === this.selectedMainSerie);
       return;

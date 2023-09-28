@@ -28,7 +28,7 @@ export class PremiumCarsPageComponent implements OnInit {
   isSerieSelected: boolean = false; // When main serie is selected
 
   selectedMainSerie: string = '';
-  selectedSecondarySerie: string = 'All';
+  selectedSecondarySerie: string = 'ALL';
   selectedOwned: string = 'FILTER_ALL';
 
   availableSecondarySeries = [];
@@ -180,7 +180,7 @@ export class PremiumCarsPageComponent implements OnInit {
     let filteredCars = this.cars;
     let filteredUserCars = this.userCars;
 
-    if (serie !== 'All') {
+    if (serie !== 'ALL') {
       filteredCars = this.cars.filter(car => car.secondary_serie.includes(serie));
       filteredUserCars = this.userCars.filter(car => car.secondary_serie.includes(serie));
     }
@@ -220,7 +220,7 @@ export class PremiumCarsPageComponent implements OnInit {
     };
   
     const filterBasedOnSerie = (car: any) => {
-      if (this.selectedSecondarySerie === 'All') return true;
+      if (this.selectedSecondarySerie === 'ALL') return true;
       return car.secondary_serie.includes(this.selectedSecondarySerie);
     };
   
@@ -233,7 +233,7 @@ export class PremiumCarsPageComponent implements OnInit {
   }
   
   resetSeries() {
-    this.selectedSecondarySerie = 'All';
+    this.selectedSecondarySerie = 'ALL';
     this.selectedOwned = 'FILTER_ALL';
   }
 

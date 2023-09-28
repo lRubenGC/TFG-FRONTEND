@@ -17,17 +17,23 @@ export class BasicCarsPageComponent implements OnInit {
 
   userToken!: tokenObject;
 
-  carsGrouped!: basicCarsGrouped[]; // All cars of the year selected
+  carsGrouped!: basicCarsGrouped[]; // Grupos de coches de la API
+  carsGroupedSeries: number = 0; // Número de grupos (Sirve para el grupo especial en la última posicion + 1)
+  carsShowed: number = 0; // Número de coches mostrados | filtrados
+  carsOwned: number = 0; // Número de coches en propiedad de los que están mostrados
 
-  // Selected filters
+  // Filtros seleccionados
   selectedYear: string = '2023';
-  selectedSerie: string = 'All';
+  selectedSerie: string = 'ALL';
   selectedOwned: string = 'FILTER_ALL';
 
-  // Filter options
+  // Opciones de los filtros
   availableYears = ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016'];
   availableSeries = [];
   ownedCarsFilter = ['FILTER_ALL', 'FILTER_CARS_OWNED', 'FILTER_CARS_NOT_OWNED', 'FILTER_CARS_WISHED'];
+
+  // Series especiales
+  specialSeries = ['Treasure Hunt', 'Super Treasure Hunt', 'Walmart Exclusive', 'Kroger Exclusive'];
 
   // Error handler
   error = false;
@@ -64,12 +70,15 @@ export class BasicCarsPageComponent implements OnInit {
   async getCars(year: string) {
     this.loaderService.startLoading();
     this.selectedYear = year;
+    this.carsShowed = 0;
 
     try {
       const carsResponse = await lastValueFrom(this.basicCarsService.getCarsByYear(year));
 
       const carsTransformed = carsResponse.map((group: basicCarsGrouped) => {
         const modifiedCars = group.cars.map((car: basicCarInterface) => {
+          this.carsShowed++;
+
           return {
             ...car,
             series: car.series.split(','),
@@ -86,6 +95,7 @@ export class BasicCarsPageComponent implements OnInit {
       });
 
       this.carsGrouped = carsTransformed;
+      this.carsGroupedSeries = carsTransformed.length;
 
       // Si existe usuario logueado
       if (this.userToken.hasToken && this.userToken.userId) {
@@ -103,6 +113,7 @@ export class BasicCarsPageComponent implements OnInit {
   }
 
   async matchCars(groupedCars: basicCarsGrouped[]) {
+    this.carsOwned = 0;
     const userCarsResponse = await this.getUserCars() as { carsOwned: any[]; carsWished: any[] };
 
     // Se añade la propiedad has_car | wants_car a cada coche que tenga | quiera y el ID del usuario
@@ -110,7 +121,11 @@ export class BasicCarsPageComponent implements OnInit {
       group.cars = group.cars.map((car: basicCarInterface) => {
         let has_car = false;
         let wants_car = false;
-        if (userCarsResponse.carsOwned.some((carOwned: basicCarInterface) => carOwned.id === car.id)) has_car = true;
+
+        if (userCarsResponse.carsOwned.some((carOwned: basicCarInterface) => carOwned.id === car.id)) {
+          has_car = true;
+          this.carsOwned++;
+        }
         if (userCarsResponse.carsWished.some((carWished: basicCarInterface) => carWished.id === car.id)) wants_car = true;
 
         return {
@@ -136,22 +151,26 @@ export class BasicCarsPageComponent implements OnInit {
   filterSerie(serie: string) {
     this.selectedSerie = serie;
 
-    // TODO: crear una funcion para crear nuevos grupos para TH, STH, Zamac, etc.
-    this.carsGrouped = this.carsGrouped.map((group: basicCarsGrouped) => {
-      switch (serie) {
-        case 'All':
-          return {
-            ...group,
-            visible: true
-          }
+    if (this.specialSeries.includes(serie)) {
+      this.createSpecialGroup(serie);
 
-        default:
-          return {
-            ...group,
-            visible: group.serieName === serie
-          }
-      }
-    });
+    } else {
+      this.carsGrouped = this.carsGrouped.map((group: basicCarsGrouped) => {
+        switch (serie) {
+          case 'ALL':
+            return {
+              ...group,
+              visible: true
+            }
+            
+          default:
+            return {
+              ...group,
+              visible: group.serieName === serie
+            }
+        }
+      });
+    }
 
     this.filterSerieOwned();
   }
@@ -160,10 +179,16 @@ export class BasicCarsPageComponent implements OnInit {
   filterSerieOwned(serie?: string) {
     if (serie) this.selectedOwned = serie;
 
+    this.carsShowed = 0;
+    this.carsOwned = 0;
+
     for (let group of this.carsGrouped) {
-      if (this.selectedSerie === group.serieName || this.selectedSerie === 'All') {
+      if (this.selectedSerie === group.serieName || this.selectedSerie === 'ALL') {
         group.cars = group.cars.map((car: basicCarInterface) => {
           let visible = true;
+          this.carsShowed++;
+
+          car.has_car ? this.carsOwned++ : null;
 
           switch (this.selectedOwned) {
             case 'FILTER_CARS_OWNED':
@@ -180,7 +205,7 @@ export class BasicCarsPageComponent implements OnInit {
           return {
             ...car,
             visible
-          }          
+          }
         });
 
         if (!group.cars.some(car => car.visible)) {
@@ -190,8 +215,53 @@ export class BasicCarsPageComponent implements OnInit {
     }
   }
 
+  createSpecialGroup(serieName: string) {
+    this.hideAllGroups();
+
+    const especialGroup: basicCarsGrouped = {
+      serieName,
+      cars: [],
+      visible: true
+    }
+
+    this.carsGrouped.forEach((group: basicCarsGrouped) => {
+      group.cars.forEach((car: basicCarInterface) => {
+        if (car.series.includes(serieName)) {
+          especialGroup.cars.push({
+            ...car,
+            visible: true
+          });
+        }
+      })
+    });
+
+    this.carsGrouped[this.carsGroupedSeries] = especialGroup;
+  }
+
+  hideAllGroups() {
+    this.carsGrouped[this.carsGroupedSeries] = {
+      serieName: '',
+      cars: [],
+      visible: false
+    };
+
+    this.carsGrouped = this.carsGrouped.map((group: basicCarsGrouped) => {
+      group.cars = group.cars.map((car: basicCarInterface) => {
+        return {
+          ...car,
+          visible: false
+        }
+      });
+
+      return {
+        ...group,
+        visible: false
+      }
+    })
+  }
+
   resetSeries() {
-    this.selectedSerie = 'All';
+    this.selectedSerie = 'ALL';
     this.selectedOwned = 'FILTER_ALL';
   }
 
@@ -236,19 +306,14 @@ export class BasicCarsPageComponent implements OnInit {
     this.msg_card.description[3] = await lastValueFrom(cardDesc5);
   }
 
-  // TODO: adaptar estas funciones a la nueva estructura (Tambien al HTML) para volver a implementar el contador
-  onDeleteCar(carDeleted: any) {
-    // this.userCars = this.userCars.filter(car => car.id !== carDeleted.id);
-    // this.userCarsShowed = this.userCarsShowed.filter(car => car.id !== carDeleted.id);
+  onDeleteCar(ev: any) {
+    if (ev === 'OWNED_DELETED') {
+      this.carsOwned--;
+    }
   }
 
-  onAddedCar(carAdded: any) {
-    // const existingCar = this.userCars.find(car => car.id === carAdded.id);
-
-    // if (!existingCar) {
-    //   this.userCars.push(carAdded);
-    //   this.userCarsShowed.push(carAdded);
-    // }
+  onAddedCar() {
+    this.carsOwned++;
   }
 
 }
