@@ -7,6 +7,9 @@ import { LanguageService } from 'src/app/services/language.service';
 import { basicCarInterface, basicCarsGrouped } from 'src/app/models/cardTypes.interface';
 import { decodeToken, tokenObject } from 'src/app/helpers/generics';
 import { LoaderService } from 'src/app/services/loader.service';
+import { matchCars } from 'src/app/helpers/match-cars';
+import { filterSeries } from 'src/app/helpers/filter-series';
+import { filterSeriesOwned } from '../../helpers/filter-series';
 
 @Component({
   selector: 'app-basic-cars-page',
@@ -27,12 +30,12 @@ export class BasicCarsPageComponent implements OnInit {
   selectedSerie: string = 'ALL';
   selectedOwned: string = 'FILTER_ALL';
 
-  // Opciones de los filtros
+  // Opciones de los filtros (Mover a BE)
   availableYears = ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016'];
   availableSeries = [];
   ownedCarsFilter = ['FILTER_ALL', 'FILTER_CARS_OWNED', 'FILTER_CARS_NOT_OWNED', 'FILTER_CARS_WISHED'];
 
-  // Series especiales
+  // Series especiales (Mover a BE)
   specialSeries = ['Treasure Hunt', 'Super Treasure Hunt', 'Walmart Exclusive', 'Kroger Exclusive'];
 
   // Error handler
@@ -99,7 +102,11 @@ export class BasicCarsPageComponent implements OnInit {
 
       // Si existe usuario logueado
       if (this.userToken.hasToken && this.userToken.userId) {
-        this.matchCars(carsTransformed);
+        const userCarsResponse = await this.getUserCars() as { carsOwned: any[]; carsWished: any[] };
+
+        const matchedCars = matchCars(userCarsResponse, carsTransformed, this.userToken.userId!);
+        this.carsGrouped = matchedCars.groupedCars;
+        this.carsOwned = matchedCars.carsOwned;
       }
 
     } catch (error) {
@@ -111,35 +118,6 @@ export class BasicCarsPageComponent implements OnInit {
       this.resetSeries();
     }
   }
-
-  async matchCars(groupedCars: basicCarsGrouped[]) {
-    this.carsOwned = 0;
-    const userCarsResponse = await this.getUserCars() as { carsOwned: any[]; carsWished: any[] };
-
-    // Se añade la propiedad has_car | wants_car a cada coche que tenga | quiera y el ID del usuario
-    for (let group of groupedCars) {
-      group.cars = group.cars.map((car: basicCarInterface) => {
-        let has_car = false;
-        let wants_car = false;
-
-        if (userCarsResponse.carsOwned.some((carOwned: basicCarInterface) => carOwned.id === car.id)) {
-          has_car = true;
-          this.carsOwned++;
-        }
-        if (userCarsResponse.carsWished.some((carWished: basicCarInterface) => carWished.id === car.id)) wants_car = true;
-
-        return {
-          ...car,
-          has_car,
-          wants_car,
-          token: this.userToken.userId!
-        };
-      });
-    }
-
-    this.carsGrouped = groupedCars;
-  }
-
 
   getAvailableSeries(year: string) {
     this.basicCarsService.getAvailableSeries(year).subscribe(res => {
@@ -155,21 +133,7 @@ export class BasicCarsPageComponent implements OnInit {
       this.createSpecialGroup(serie);
 
     } else {
-      this.carsGrouped = this.carsGrouped.map((group: basicCarsGrouped) => {
-        switch (serie) {
-          case 'ALL':
-            return {
-              ...group,
-              visible: true
-            }
-            
-          default:
-            return {
-              ...group,
-              visible: group.serieName === serie
-            }
-        }
-      });
+      this.carsGrouped = filterSeries(this.carsGrouped, serie);
     }
 
     this.filterSerieOwned();
@@ -179,40 +143,11 @@ export class BasicCarsPageComponent implements OnInit {
   filterSerieOwned(serie?: string) {
     if (serie) this.selectedOwned = serie;
 
-    this.carsShowed = 0;
-    this.carsOwned = 0;
+    const filterOnwedRes = filterSeriesOwned(this.carsGrouped, this.selectedOwned, this.selectedSerie);
 
-    for (let group of this.carsGrouped) {
-      if (this.selectedSerie === group.serieName || this.selectedSerie === 'ALL') {
-        group.cars = group.cars.map((car: basicCarInterface) => {
-          let visible = true;
-          this.carsShowed++;
-
-          car.has_car ? this.carsOwned++ : null;
-
-          switch (this.selectedOwned) {
-            case 'FILTER_CARS_OWNED':
-              visible = car.has_car;
-              break;
-            case 'FILTER_CARS_NOT_OWNED':
-              visible = !car.has_car;
-              break;
-            case 'FILTER_CARS_WISHED':
-              visible = car.wants_car;
-              break;
-          }
-
-          return {
-            ...car,
-            visible
-          }
-        });
-
-        if (!group.cars.some(car => car.visible)) {
-          group.visible = false;
-        } else group.visible = true;
-      }
-    }
+    this.carsGrouped = filterOnwedRes.groupedCars;
+    this.carsShowed = filterOnwedRes.carsShowed;
+    this.carsOwned = filterOnwedRes.carsOwned;
   }
 
   createSpecialGroup(serieName: string) {
@@ -287,23 +222,15 @@ export class BasicCarsPageComponent implements OnInit {
   }
 
   async changeLanguage() {
-    const cardTitle = this.translate.get('BASIC_CARS_TITLE');
-    this.msg_card.title = await lastValueFrom(cardTitle);
-
-    const cardDescr1 = this.translate.get('BASIC_CARS_DESCRIPTION_1');
-    this.msg_card.description[0] = await lastValueFrom(cardDescr1);
-
-    const cardDesc2 = this.translate.get('BASIC_CARS_DESCRIPTION_2');
-    this.msg_card.description[1] = await lastValueFrom(cardDesc2);
-
-    const cardDesc3 = this.translate.get('BASIC_CARS_DESCRIPTION_3');
-    this.msg_card.description[2] = await lastValueFrom(cardDesc3);
-
-    const cardDesc4 = this.translate.get('BASIC_CARS_DESCRIPTION_4');
-    this.msg_card.description[3] = await lastValueFrom(cardDesc4);
-
-    const cardDesc5 = this.translate.get('BASIC_CARS_DESCRIPTION_5');
-    this.msg_card.description[3] = await lastValueFrom(cardDesc5);
+    try {
+      this.msg_card.title = await lastValueFrom(this.translate.get('BASIC_CARS_TITLE'));
+      this.msg_card.description[0] = await lastValueFrom(this.translate.get('BASIC_CARS_DESCRIPTION_1'));
+      this.msg_card.description[1] = await lastValueFrom(this.translate.get('BASIC_CARS_DESCRIPTION_2'));
+      this.msg_card.description[2] = await lastValueFrom(this.translate.get('BASIC_CARS_DESCRIPTION_3'));
+      this.msg_card.description[3] = await lastValueFrom(this.translate.get('BASIC_CARS_DESCRIPTION_4'));
+    } catch (error) {
+      console.error('Error changing language:', error);
+    }
   }
 
   onDeleteCar(ev: any) {

@@ -3,7 +3,7 @@
     grid-template-columns: repeat(auto-fill,minmax(16rem, 1fr));
     justify-content: center;
     gap: 0 3em;
-    margin: 0 20px;
+    margin-bottom: 5rem;
 }
 
 .premium-cars-list {
@@ -11,7 +11,7 @@
     grid-template-columns: repeat(auto-fill,minmax(16rem, 1fr));
     justify-content: center;
     gap: 3em;
-    margin: 0 20px;
+    margin-bottom: 5rem;
 }
 
 .custom-cars-list {
@@ -29,7 +29,7 @@ main {
 }
 
 .serie-name-group {
-    width: 40%;
+    width: 50%;
     margin: 0 auto;
     text-align: center;
 }
@@ -47,13 +47,16 @@ main {
     .custom-cars-list {
         grid-template-columns: 1fr 1fr 1fr;
     }
+
+    .serie-name-group {
+        width: 65%;
+    }
 }
 
 @media (max-width: 1166px) {
     .basic-cars-list {
         grid-template-columns: 1fr 1fr 1fr;
         gap: 0;
-        margin: 0;
     }
 
     .premium-cars-list {
@@ -85,5 +88,9 @@ main {
     .custom-cars-list {
         margin-left: 5px;
         margin-right: 5px;
+    }
+
+    .serie-name-group {
+        width: 95%;
     }
 }
