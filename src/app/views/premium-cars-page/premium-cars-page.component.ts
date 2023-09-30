@@ -134,7 +134,7 @@ export class PremiumCarsPageComponent implements OnInit {
         if (this.userToken.hasToken && this.userToken.userId) {
           const userCarsResponse = await this.getUserCars() as { carsOwned: any[]; carsWished: any[] };
 
-          const matchedCars = matchCars(userCarsResponse, carsTransformed, this.userToken.userId!);
+          const matchedCars = matchCars(userCarsResponse, carsTransformed, this.userToken.userId!, 'PREMIUM_CAR');
           this.carsGrouped = matchedCars.groupedCars;
           this.carsOwned = matchedCars.carsOwned;
         }

@@ -1,10 +1,11 @@
-import { basicCarInterface, premiumCarInterface } from "../models/cardTypes.interface";
+import { basicCarInterface, basicCarsGrouped, basicGlobalGroup, premiumCarInterface, premiumCarsGrouped, premiumGlobalGroup } from "../models/cardTypes.interface";
 
 
 export const matchCars = (
   userCarsResponse: any,
   groupedCars: any[], 
-  token: number
+  token: number,
+  typeCar: string
 ) => {
   let carsOwned = 0;
 
@@ -14,11 +15,42 @@ export const matchCars = (
       let has_car = false;
       let wants_car = false;
 
-      if (userCarsResponse.carsOwned.some((carOwned: premiumCarInterface | basicCarInterface) => carOwned.id === car.id)) {
-        has_car = true;
-        carsOwned++;
+      if (typeCar === 'BASIC_CAR') {
+        userCarsResponse.groupedOwnedCars.map((group: basicGlobalGroup) => {
+          group.series.map((serie: basicCarsGrouped) => {
+            if (serie.cars.some((carOwned: basicCarInterface) => carOwned.id === car.id)) {
+              has_car = true;
+              carsOwned++;
+            }
+          })
+        });
+
+        userCarsResponse.groupedWishedCars.map((group: basicGlobalGroup) => {
+          group.series.map((serie: basicCarsGrouped) => {
+            if (serie.cars.some((carWished: basicCarInterface) => carWished.id === car.id)) {
+              wants_car = true;
+            }
+          })
+        });
+
+      } else if (typeCar === 'PREMIUM_CAR') {
+        userCarsResponse.groupedOwnedCars.map((group: premiumGlobalGroup) => {
+          group.secondarySeries.map((serie: premiumCarsGrouped) => {
+            if (serie.cars.some((carOwned: premiumCarInterface) => carOwned.id === car.id)) {
+              has_car = true;
+              carsOwned++;
+            }
+          })
+        });
+
+        userCarsResponse.groupedWishedCars.map((group: premiumGlobalGroup) => {
+          group.secondarySeries.map((serie: premiumCarsGrouped) => {
+            if (serie.cars.some((carWished: premiumCarInterface) => carWished.id === car.id)) {
+              wants_car = true;
+            }
+          })
+        });
       }
-      if (userCarsResponse.carsWished.some((carWished: premiumCarInterface | basicCarInterface) => carWished.id === car.id)) wants_car = true;
 
       return {
         ...car,
