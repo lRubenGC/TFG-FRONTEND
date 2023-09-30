@@ -73,3 +73,15 @@ export interface premiumCarsGrouped {
     cars: premiumCarInterface[];
     visible: boolean;
 }
+
+export interface basicGlobalGroup {
+    year: string;
+    series: basicCarsGrouped[];
+    visible: boolean
+}
+
+export interface premiumGlobalGroup {
+    mainSerie: string;
+    secondarySeries: premiumCarsGrouped[];
+    visible: boolean
+}

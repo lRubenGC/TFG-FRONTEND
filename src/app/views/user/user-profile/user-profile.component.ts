@@ -4,7 +4,7 @@ import { BasicCarsService } from '../../basic-cars-page/basic-cars.service';
 import { PremiumCarsService } from '../../premium-cars-page/premium-cars.service';
 import { UserService } from '../../../services/user.service';
 import { userInterface } from 'src/app/models/user.interface';
-import { basicCarInterface, customCarInterface, premiumCarInterface } from 'src/app/models/cardTypes.interface';
+import { basicCarInterface, basicCarsGrouped, basicGlobalGroup, customCarInterface, premiumCarInterface, premiumCarsGrouped, premiumGlobalGroup } from 'src/app/models/cardTypes.interface';
 import { decodeToken } from 'src/app/helpers/generics';
 import { CustomCarsService } from '../../custom-cars/custom-cars.service';
 import { LoaderService } from 'src/app/services/loader.service';
@@ -21,30 +21,29 @@ export class UserProfileComponent implements OnInit {
   user?: userInterface;
   userVisitor = false;
 
-  carsType = 'basic';
-  collectedType = 'owned';
+  // Tipo de coche seleccionado
+  carsTypeSelected = 'basic';
+  collectedTypeSelected = 'owned';
 
-  basicCarsOwned: basicCarInterface[] = [];
-  basicCarsOwnedShowed: basicCarInterface[] = [];
-  basicCarsWished: basicCarInterface[] = [];
-  basicCarsWishedShowed: basicCarInterface[] = [];
-  premiumCarsOwned: premiumCarInterface[] = [];
-  premiumCarsOwnedShowed: premiumCarInterface[] = [];
-  premiumCarsWished: premiumCarInterface[] = [];
-  premiumCarsWishedShowed: premiumCarInterface[] = [];
-  
+  basicCarsOwned: any[] = [];
+  basicCarsWished: any[] = [];
+  premiumCarsOwned: any[] = [];
+  premiumCarsWished: any[] = [];  
   customCarsOwned = [];
 
+  // Filtro seleccionado y disponibles (Basic cars)
   selectedYear = 'ALL';
   selectedSerie = '';
-  selectedMainSerie = 'ALL';
-  selectedSecondarySerie = '';
   availableYears = ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016'];
   availableSeries = [];
+
+  // Filtro seleccionado y disponibles (Premium cars)
+  selectedMainSerie = 'ALL';
+  selectedSecondarySerie = '';
   availableMainSeries = ['Boulevard (original)', 'Boulevard (reboot)', 'Car Culture', 'Fast & Furious (Premium)', 'Fast & Furious', 'Pop Culture'];
   availableSecondarySeries = [];
 
-
+  // Error handlers
   error = false;
   errorMsg = '';
   exportToCsvError = false;
@@ -82,7 +81,7 @@ export class UserProfileComponent implements OnInit {
               this.basicCarsObservable().toPromise(),
               this.premiumCarsObservable().toPromise()
             ]);
-            
+
             this.processBasicCars(basicCarsResponse, isUserOwner);
             this.processPremiumCars(premiumCarsResponse, isUserOwner);
           } catch (err) {
@@ -105,7 +104,18 @@ export class UserProfileComponent implements OnInit {
   
  }
 
- processBasicCars(res: any, isUserOwner: boolean) {
+processBasicCars(res: any, isUserOwner: boolean) {
+  const transformGroup = (group: basicGlobalGroup) => {
+    group.series.map((serie: any) => {
+      serie.cars = serie.cars.map(transformCar);
+    });
+    
+    return {
+      ...group,
+      visible: true
+    }    
+  }
+
   const transformCar = (car: basicCarInterface) => {
     const series = car.series.split(',');
     const serie_class = series[0].replace(/ /g, '-').toLowerCase();
@@ -118,31 +128,40 @@ export class UserProfileComponent implements OnInit {
       user_profile: isUserOwner,
       profile_view: true,
       has_car: isUserOwner,
-      token: isUserOwner ? this.user!.id : undefined
+      token: isUserOwner ? this.user!.id : undefined,
+      visible: true
     };
   };
 
-  this.basicCarsOwned = res.carsOwned.map(transformCar);
-  this.basicCarsOwnedShowed = [...this.basicCarsOwned];
-  this.basicCarsWished = res.carsWished.map(transformCar);
-  this.basicCarsWishedShowed = [...this.basicCarsWished];
+  this.basicCarsOwned = res.groupedOwnedCars.map(transformGroup);
+  this.basicCarsWished = res.groupedWishedCars.map(transformGroup);
 }
 
 processPremiumCars(res: any, isUserOwner: boolean) {
+  const transformGroup = (group: premiumGlobalGroup) => {
+    group.secondarySeries.map((serie: any) => {
+      serie.cars = serie.cars.map(transformCar);
+    });
+    
+    return {
+      ...group,
+      visible: true
+    }    
+  }
+
   const transformCar = (car: premiumCarInterface) => {
     return {
       ...car,
       user_profile: isUserOwner,
       profile_view: true,
       has_car: isUserOwner,
-      token: isUserOwner ? this.user!.id : undefined
+      token: isUserOwner ? this.user!.id : undefined,
+      visible: true
     };
   };
 
-  this.premiumCarsOwned = res.carsOwned.map(transformCar);
-  this.premiumCarsOwnedShowed = [...this.premiumCarsOwned];
-  this.premiumCarsWished = res.carsWished.map(transformCar);
-  this.premiumCarsWishedShowed = [...this.premiumCarsWished];
+  this.premiumCarsOwned = res.groupedOwnedCars.map(transformGroup);
+  this.premiumCarsWished = res.groupedWishedCars.map(transformGroup);
 }
 
 
@@ -215,9 +234,7 @@ processPremiumCars(res: any, isUserOwner: boolean) {
         });
 
         this.basicCarsOwned = basicCarsOwned;
-        this.basicCarsOwnedShowed = basicCarsOwned;
         this.basicCarsWished = basicCarsWished;
-        this.basicCarsWishedShowed = basicCarsWished;
       })
     }
   }
@@ -268,9 +285,7 @@ processPremiumCars(res: any, isUserOwner: boolean) {
 
 
         this.premiumCarsOwned = premiumCarsOwned;
-        this.premiumCarsOwnedShowed = premiumCarsOwned;
         this.premiumCarsWished = premiumCarsWished;
-        this.premiumCarsWishedShowed = premiumCarsWished;
       })
     }
   }
@@ -285,15 +300,15 @@ processPremiumCars(res: any, isUserOwner: boolean) {
   }
 
   changeCarType(type: string) {
-    this.carsType = type;
+    this.carsTypeSelected = type;
 
     if(type === 'custom') {
-      this.collectedType = 'owned'
+      this.collectedTypeSelected = 'owned'
     }
   }
 
   changeCarCollected(type: string) {
-    this.collectedType = type;
+    this.collectedTypeSelected = type;
   }
 
   onDeleteCar(event: any, typeCar: string) {
@@ -307,7 +322,6 @@ processPremiumCars(res: any, isUserOwner: boolean) {
         index = this.basicCarsOwned.findIndex(car => car.id === carEvent.id);
         if (index !== -1) {
           this.basicCarsOwned.splice(index, 1);
-          this.basicCarsOwnedShowed.splice(index, 1);
         }
         break;
       
@@ -315,7 +329,6 @@ processPremiumCars(res: any, isUserOwner: boolean) {
         index = this.basicCarsWished.findIndex(car => car.id === carEvent.id);
         if (index !== -1) {
           this.basicCarsWished.splice(index, 1);
-          this.basicCarsWishedShowed.splice(index, 1);
         }
         break;
 
@@ -323,7 +336,6 @@ processPremiumCars(res: any, isUserOwner: boolean) {
         index = this.premiumCarsOwned.findIndex(car => car.id === carEvent.id);
         if (index !== -1) {
           this.premiumCarsOwned.splice(index, 1);
-          this.premiumCarsOwnedShowed.splice(index, 1);
         }
         break;
 
@@ -331,7 +343,6 @@ processPremiumCars(res: any, isUserOwner: boolean) {
         index = this.premiumCarsWished.findIndex(car => car.id === carEvent.id);
         if (index !== -1) {
           this.premiumCarsWished.splice(index, 1);
-          this.premiumCarsWishedShowed.splice(index, 1);
         }
         break;
     }
@@ -339,33 +350,33 @@ processPremiumCars(res: any, isUserOwner: boolean) {
   }
 
   filterYear(year: string) {
-    this.selectedYear = year;
-    this.selectedSerie = 'ALL';
-    this.getAvailableSeries(year);
+    // this.selectedYear = year;
+    // this.selectedSerie = 'ALL';
+    // this.getAvailableSeries(year);
 
-    if (year === 'ALL') {
-      this.basicCarsOwnedShowed = this.basicCarsOwned;
-      this.basicCarsWishedShowed = this.basicCarsWished;
-      this.selectedSerie = '';
-      return;
-    }
+    // if (year === 'ALL') {
+    //   this.basicCarsOwnedShowed = this.basicCarsOwned;
+    //   this.basicCarsWishedShowed = this.basicCarsWished;
+    //   this.selectedSerie = '';
+    //   return;
+    // }
 
-    this.basicCarsOwnedShowed = this.basicCarsOwned.filter(car => car.year === year);
-    this.basicCarsWishedShowed = this.basicCarsWished.filter(car => car.year === year);
+    // this.basicCarsOwnedShowed = this.basicCarsOwned.filter(car => car.year === year);
+    // this.basicCarsWishedShowed = this.basicCarsWished.filter(car => car.year === year);
   }
 
   filterSerie(serie: string) {    
-    switch (serie) {
-      case 'ALL':
-        this.basicCarsOwnedShowed = this.basicCarsOwned.filter(car => car.year === this.selectedYear);
-        this.basicCarsWishedShowed = this.basicCarsWished.filter(car => car.year === this.selectedYear);
-        break;
+    // switch (serie) {
+    //   case 'ALL':
+    //     this.basicCarsOwnedShowed = this.basicCarsOwned.filter(car => car.year === this.selectedYear);
+    //     this.basicCarsWishedShowed = this.basicCarsWished.filter(car => car.year === this.selectedYear);
+    //     break;
 
-      default:
-        this.basicCarsOwnedShowed = this.basicCarsOwned.filter(car => car.series.includes(serie) && car.year === this.selectedYear);
-        this.basicCarsWishedShowed = this.basicCarsWished.filter(car => car.series.includes(serie) && car.year === this.selectedYear);
-        break;
-      }
+    //   default:
+    //     this.basicCarsOwnedShowed = this.basicCarsOwned.filter(car => car.series.includes(serie) && car.year === this.selectedYear);
+    //     this.basicCarsWishedShowed = this.basicCarsWished.filter(car => car.series.includes(serie) && car.year === this.selectedYear);
+    //     break;
+    //   }
   }
 
   getAvailableSeries(year: string) {
@@ -376,30 +387,30 @@ processPremiumCars(res: any, isUserOwner: boolean) {
   }
 
   filterPremiumSerie(serie: string) {
-    this.selectedMainSerie = serie;
-    this.selectedSecondarySerie = 'ALL';
-    this.getAvailablePremiumSeries(serie);
+    // this.selectedMainSerie = serie;
+    // this.selectedSecondarySerie = 'ALL';
+    // this.getAvailablePremiumSeries(serie);
 
-    if (serie === 'ALL') {
-      this.premiumCarsOwnedShowed = this.premiumCarsOwned;
-      this.premiumCarsWishedShowed = this.premiumCarsWished;
-      this.selectedSecondarySerie = '';
-      return;
-    }
+    // if (serie === 'ALL') {
+    //   this.premiumCarsOwnedShowed = this.premiumCarsOwned;
+    //   this.premiumCarsWishedShowed = this.premiumCarsWished;
+    //   this.selectedSecondarySerie = '';
+    //   return;
+    // }
 
-    this.premiumCarsOwnedShowed = this.premiumCarsOwned.filter(car => car.main_serie === serie);
-    this.premiumCarsWishedShowed = this.premiumCarsWished.filter(car => car.main_serie === serie);
+    // this.premiumCarsOwnedShowed = this.premiumCarsOwned.filter(car => car.main_serie === serie);
+    // this.premiumCarsWishedShowed = this.premiumCarsWished.filter(car => car.main_serie === serie);
   }
 
   filterPremiumSecundarySerie(serie: string) {
-    if (serie === 'ALL') {
-      this.premiumCarsOwnedShowed = this.premiumCarsOwned.filter(car => car.main_serie === this.selectedMainSerie);
-      this.premiumCarsWishedShowed = this.premiumCarsWished.filter(car => car.main_serie === this.selectedMainSerie);
-      return;
-    }
+    // if (serie === 'ALL') {
+    //   this.premiumCarsOwnedShowed = this.premiumCarsOwned.filter(car => car.main_serie === this.selectedMainSerie);
+    //   this.premiumCarsWishedShowed = this.premiumCarsWished.filter(car => car.main_serie === this.selectedMainSerie);
+    //   return;
+    // }
 
-    this.premiumCarsOwnedShowed = this.premiumCarsOwned.filter(car => car.secondary_serie === serie);
-    this.premiumCarsWishedShowed = this.premiumCarsWished.filter(car => car.secondary_serie === serie);
+    // this.premiumCarsOwnedShowed = this.premiumCarsOwned.filter(car => car.secondary_serie === serie);
+    // this.premiumCarsWishedShowed = this.premiumCarsWished.filter(car => car.secondary_serie === serie);
   }
 
   getAvailablePremiumSeries(main_serie: string) {
@@ -436,6 +447,7 @@ processPremiumCars(res: any, isUserOwner: boolean) {
     if (this.user) {
       this.userService.downloadUserCollection(this.user.id)
         .catch(err => {
+          console.error(err);
           this.exportToCsvError = true;
         })
     }

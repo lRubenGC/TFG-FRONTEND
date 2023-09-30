@@ -28,10 +28,18 @@ main {
     margin: 0 auto;
 }
 
-.serie-name-group {
-    width: 50%;
-    margin: 0 auto;
+.serie-name {
     text-align: center;
+}
+
+.serie-name-year {
+    margin: 1rem auto;
+    width: 70%;
+}
+
+.serie-name-group {
+    margin: 0 auto;
+    width: 50%;
 }
 
 @media (max-width: 1650px) {
@@ -46,6 +54,10 @@ main {
 @media (max-width: 1270px) {
     .custom-cars-list {
         grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .serie-name-year {
+        width: 100%;
     }
 
     .serie-name-group {
@@ -90,7 +102,11 @@ main {
         margin-right: 5px;
     }
 
-    .serie-name-group {
+    .serie-name-year {
         width: 95%;
+    }
+
+    .serie-name-group {
+        width: 85%;
     }
 }

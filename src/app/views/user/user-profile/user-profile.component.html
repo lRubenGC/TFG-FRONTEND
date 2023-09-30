@@ -24,7 +24,7 @@
 
             <!-- Cars data -->
             <section class="profile-data-cars d_flex justify-content_center align-items_center text-align_center">
-                <div class="data-cars-item d_flex justify-content_center flex-direction_column text-align_center">
+                <!-- <div class="data-cars-item d_flex justify-content_center flex-direction_column text-align_center">
                     <p class="data-item-number">{{ basicCarsOwned.length }}</p>
                     <p>{{ 'USER_PROFILE_BASIC_MENU' | translate }}</p>
                 </div>
@@ -41,7 +41,7 @@
                 <div class="data-cars-item d_flex justify-content_center flex-direction_column text-align_center">
                     <p class="data-item-number">{{ customCarsOwned.length }}</p>
                     <p>{{ 'USER_PROFILE_CUSTOM_MENU' | translate }}</p>
-                </div>
+                </div> -->
             </section>
 
         </header>
@@ -64,17 +64,17 @@
                 <div class="car-menu-list__group d_flex gap_1">
                     <div
                         class="car-menu-item"
-                        [ngClass]="carsType == 'basic' ? 'car-menu-item-selected' : ''"
+                        [ngClass]="carsTypeSelected == 'basic' ? 'car-menu-item-selected' : ''"
                         (click)="changeCarType('basic')"
                         >{{ 'USER_PROFILE_BASIC_MENU' | translate }}</div>
                     <div
                         class="car-menu-item"
-                        [ngClass]="carsType == 'premium' ? 'car-menu-item-selected' : ''"
+                        [ngClass]="carsTypeSelected == 'premium' ? 'car-menu-item-selected' : ''"
                         (click)="changeCarType('premium')"
                         >{{ 'USER_PROFILE_PREMIUM_MENU' | translate }}</div>
                     <div
                         class="car-menu-item"
-                        [ngClass]="carsType == 'custom' ? 'car-menu-item-selected' : ''"
+                        [ngClass]="carsTypeSelected == 'custom' ? 'car-menu-item-selected' : ''"
                         (click)="changeCarType('custom')"
                         >{{ 'USER_PROFILE_CUSTOM_MENU' | translate }}</div>
                 </div>
@@ -84,13 +84,13 @@
                 <div class="car-menu-list__group d_flex gap_1">
                     <div
                         class="car-menu-item"
-                        [ngClass]="collectedType == 'owned' ? 'car-menu-item-selected' : ''"
+                        [ngClass]="collectedTypeSelected == 'owned' ? 'car-menu-item-selected' : ''"
                         (click)="changeCarCollected('owned')"
                         >{{ 'USER_PROFILE_OWNED_MENU' | translate }}</div>
                     <div
-                        *ngIf="carsType !== 'custom'"
+                        *ngIf="carsTypeSelected !== 'custom'"
                         class="car-menu-item"
-                        [ngClass]="collectedType == 'wished' ? 'car-menu-item-selected' : ''"
+                        [ngClass]="collectedTypeSelected == 'wished' ? 'car-menu-item-selected' : ''"
                         (click)="changeCarCollected('wished')"
                         >{{ 'USER_PROFILE_WISHED_MENU' | translate }}</div> 
                 </div>
@@ -98,7 +98,7 @@
         </section>
 
         <!-- Filter section for Basic Cars-->
-        <section *ngIf="carsType === 'basic'" class="filter-section d_flex justify-content_center gap_4">
+        <section *ngIf="carsTypeSelected === 'basic'" class="filter-section d_flex justify-content_center gap_4">
 
             <app-filter-pill
                     [props]="{
@@ -125,7 +125,7 @@
         </section>
 
         <!-- Filter section for Premium Cars-->
-        <section *ngIf="carsType === 'premium'" class="filter-section d_flex justify-content_center gap_4">
+        <section *ngIf="carsTypeSelected === 'premium'" class="filter-section d_flex justify-content_center gap_4">
 
             <app-filter-pill
                 [props]="{
@@ -155,35 +155,27 @@
         <main>
 
             <!-- Basic Cars Owned-->
-            <section *ngIf="carsType === 'basic' && collectedType === 'owned'" class="basic-cars-list">
-                <div *ngFor="let car of basicCarsOwnedShowed">
-                    <app-basic-card (errorEvent)="enableErrorMsg($event)" [car]="car" (deleteCar)="onDeleteCar($event, 'basic owned')"></app-basic-card>
-                </div>
+            <section *ngIf="carsTypeSelected === 'basic' && collectedTypeSelected === 'owned'">
+                <app-basic-group [groups]="basicCarsOwned"></app-basic-group>
             </section>
 
             <!-- Basic Cars Wished-->
-            <section *ngIf="carsType === 'basic' && collectedType === 'wished'" class="basic-cars-list">
-                <div *ngFor="let car of basicCarsWishedShowed">
-                    <app-basic-card (errorEvent)="enableErrorMsg($event)" [car]="car" (deleteCar)="onDeleteCar($event, 'basic wished')"></app-basic-card>
-                </div>
+            <section *ngIf="carsTypeSelected === 'basic' && collectedTypeSelected === 'wished'">
+                <app-basic-group [groups]="basicCarsWished"></app-basic-group>
             </section>
 
             <!-- Premium Cars Owned-->
-            <section *ngIf="carsType === 'premium' && collectedType === 'owned'" class="premium-cars-list">
-                <div *ngFor="let car of premiumCarsOwnedShowed">
-                    <app-premium-card (errorEvent)="enableErrorMsg($event)" [car]="car" (deleteCar)="onDeleteCar($event, 'premium owned')"></app-premium-card>
-                </div>
+            <section *ngIf="carsTypeSelected === 'premium' && collectedTypeSelected === 'owned'">
+                <app-premium-group [groups]="premiumCarsOwned"></app-premium-group>
             </section>
 
             <!-- Premium Cars Wished-->
-            <section *ngIf="carsType === 'premium' && collectedType === 'wished'" class="premium-cars-list">
-                <div *ngFor="let car of premiumCarsWishedShowed">
-                    <app-premium-card (errorEvent)="enableErrorMsg($event)" [car]="car" (deleteCar)="onDeleteCar($event, 'premium wished')"></app-premium-card>
-                </div>
+            <section *ngIf="carsTypeSelected === 'premium' && collectedTypeSelected === 'wished'">
+                <app-premium-group [groups]="premiumCarsWished"></app-premium-group>
             </section>
 
             <!-- Custom Cars Owned-->
-            <section *ngIf="carsType === 'custom'" class="custom-cars-list">
+            <section *ngIf="carsTypeSelected === 'custom'" class="custom-cars-list">
                 <div *ngFor="let car of customCarsOwned">
                     <app-custom-card (errorEvent)="enableErrorMsg($event)" [userProfile]="true" [car]="car"></app-custom-card>
                 </div>
