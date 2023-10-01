@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  appVersion: '1.0.3',
+  appVersion: '1.0.4',
   apiBaseUrl: 'https://api.diecasttracker.com'
 };

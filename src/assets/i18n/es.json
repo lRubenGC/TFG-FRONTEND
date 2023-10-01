@@ -27,6 +27,7 @@
     "BASIC_CARS_SERIE": "Serie",
     "FILTER_CARS_OWNED": "En propiedad",
     "FILTER_CARS_NOT_OWNED": "No en propiedad",
+    "FILTER_CARS_WISHED": "Deseados",
     "LOGIN_TITLE": "Bienvenido de nuevo!",
     "LOGIN_SIGNIN": "Inicia Sesión",
     "LOGIN_USERNAME": "Username",
@@ -62,6 +63,7 @@
     "PREMIUM_CARS_DESCRIPTION_4": "Por ahora no están publicados todos los coches, poco a poco se irán publicando los que faltan.",
     "SEARCH_BASIC_CARS": "Coches Básicos",
     "SEARCH_PREMIUM_CARS": "Coches Premium",
+    "CUSTOM_CARS": "Coches Custom",
     "SEARCH_USERS": "Usuarios",
     "SEARCH_NO_CARS": "No existen coches llamados:",
     "SEARCH_NO_USERS": "No existen usuarios llamados:",
@@ -140,5 +142,9 @@
     "UPDATES_VERSION_103_1": "Mejora en la calidad de las imágenes",
     "UPDATES_VERSION_103_2": "Mejora en las tarjetas de los coches",
     "UPDATES_VERSION_103_3": "Vista detallada de los coches",
-    "UPDATES_VERSION_103_4": "(Bug fix) Ahora se puede votar coche custom desde el listado"
+    "UPDATES_VERSION_103_4": "(Bug fix) Ahora se puede votar coche custom desde el listado",
+    "UPDATES_VERSION_104": "Versión 1.0.4 - 01/10/2023",
+    "UPDATES_VERSION_104_1": "Coches nuevos añadidos a los años/series existentes",
+    "UPDATES_VERSION_104_2": "Coches básicos añadidos: 2016 y 2017",
+    "UPDATES_VERSION_104_3": "Mejora en la organización de los coches (Vistas de básicos, premium y usuario)"
 }

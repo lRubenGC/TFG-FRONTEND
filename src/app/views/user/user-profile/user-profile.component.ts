@@ -4,10 +4,11 @@ import { BasicCarsService } from '../../basic-cars-page/basic-cars.service';
 import { PremiumCarsService } from '../../premium-cars-page/premium-cars.service';
 import { UserService } from '../../../services/user.service';
 import { userInterface } from 'src/app/models/user.interface';
-import { basicCarInterface, basicCarShowedInterface, customCarInterface, premiumCarInterface, premiumCarShowedInterface } from 'src/app/models/cardTypes.interface';
+import { basicCarInterface, basicCarsGrouped, basicGlobalGroup, customCarInterface, premiumCarInterface, premiumCarsGrouped, premiumGlobalGroup } from 'src/app/models/cardTypes.interface';
 import { decodeToken } from 'src/app/helpers/generics';
 import { CustomCarsService } from '../../custom-cars/custom-cars.service';
 import { LoaderService } from 'src/app/services/loader.service';
+import { createSpecialGroup, filterMainSerie, filterSeries, filterYear } from 'src/app/helpers/filter-series';
 
 @Component({
   selector: 'app-user-profile',
@@ -21,30 +22,37 @@ export class UserProfileComponent implements OnInit {
   user?: userInterface;
   userVisitor = false;
 
-  carsType = 'basic';
-  collectedType = 'owned';
+  // Tipo de coche seleccionado
+  carsTypeSelected = 'basic';
+  collectedTypeSelected = 'owned';
 
-  basicCarsOwned: basicCarShowedInterface[] = [];
-  basicCarsOwnedShowed: basicCarShowedInterface[] = [];
-  basicCarsWished: basicCarShowedInterface[] = [];
-  basicCarsWishedShowed: basicCarShowedInterface[] = [];
-  premiumCarsOwned: premiumCarShowedInterface[] = [];
-  premiumCarsOwnedShowed: premiumCarShowedInterface[] = [];
-  premiumCarsWished: premiumCarShowedInterface[] = [];
-  premiumCarsWishedShowed: premiumCarShowedInterface[] = [];
-  
-  customCarsOwned = [];
+  basicCarsOwned: basicGlobalGroup[] = []; // Básicos en propiedad
+  basicCarsWished: basicGlobalGroup[] = []; // Básicos deseados
+  basicCarsOwnedNumber: number = 0;
+  carsGroupedSeries: number = 0; // Número de grupos básicos (Sirve para el grupo especial en la última posicion + 1)
 
-  selectedYear = 'All';
+  premiumCarsOwned: premiumGlobalGroup[] = []; // Premium en propiedad
+  premiumCarsWished: premiumGlobalGroup[] = []; // Premium deseados
+  premiumCarsOwnedNumber: number = 0;
+
+  customCarsOwned = []; // Customs en propiedad
+
+  // Filtro seleccionado y disponibles (Basic cars)
+  selectedYear = 'ALL';
   selectedSerie = '';
-  selectedMainSerie = 'All';
-  selectedSecondarySerie = '';
-  availableYears = ['2023', '2022', '2021', '2020', '2019', '2018'];
+  availableYears = ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016'];
   availableSeries = [];
+
+  // Filtro seleccionado y disponibles (Premium cars)
+  selectedMainSerie = 'ALL';
+  selectedSecondarySerie = '';
   availableMainSeries = ['Boulevard (original)', 'Boulevard (reboot)', 'Car Culture', 'Fast & Furious (Premium)', 'Fast & Furious', 'Pop Culture'];
   availableSecondarySeries = [];
 
+  // Series especiales (Mover a BE)
+  specialSeries = ['Treasure Hunt', 'Super Treasure Hunt', 'Walmart Exclusive', 'Kroger Exclusive'];
 
+  // Error handlers
   error = false;
   errorMsg = '';
   exportToCsvError = false;
@@ -82,7 +90,7 @@ export class UserProfileComponent implements OnInit {
               this.basicCarsObservable().toPromise(),
               this.premiumCarsObservable().toPromise()
             ]);
-            
+
             this.processBasicCars(basicCarsResponse, isUserOwner);
             this.processPremiumCars(premiumCarsResponse, isUserOwner);
           } catch (err) {
@@ -90,7 +98,7 @@ export class UserProfileComponent implements OnInit {
           }
         }
       } catch (error) {
-        console.error('Error al obtener el usuario:', error);
+        console.error('User not found:', error);
         this.error = true;
         this.router.navigate(['/']);
       } finally {
@@ -105,46 +113,89 @@ export class UserProfileComponent implements OnInit {
   
  }
 
- processBasicCars(res: any, isUserOwner: boolean) {
-  const transformCar = (car: basicCarInterface) => {
-    const series = car.series.split(',');
-    const serie_class = series[0].replace(/ /g, '-').toLowerCase();
+  processBasicCars(res: any, isUserOwner: boolean) {
+    const transformGroup = (group: basicGlobalGroup) => {
+      group.series = group.series.map((serie: any) => {
+        serie.cars = serie.cars.map(transformCar);
 
-    return {
-      ...car,
-      series,
-      serie_class,
-      search: true,
-      user_profile: isUserOwner,
-      profile_view: true,
-      has_car: isUserOwner,
-      token: isUserOwner ? this.user!.id : undefined
+        return {
+          ...serie,
+          visible: true
+        }
+      });
+      
+      return {
+        ...group,
+        visible: true
+      }    
+    }
+  
+    const transformCar = (car: basicCarInterface) => {
+      const series = car.series.split(',');
+      const serie_class = series[0].replace(/ /g, '-').toLowerCase();
+  
+      return {
+        ...car,
+        series,
+        serie_class,
+        search: true,
+        user_profile: isUserOwner,
+        profile_view: true,
+        has_car: isUserOwner,
+        token: isUserOwner ? this.user!.id : undefined,
+        visible: true
+      };
     };
-  };
+  
+    this.basicCarsOwned = res.groupedOwnedCars.map(transformGroup);
+    this.basicCarsWished = res.groupedWishedCars.map(transformGroup);
 
-  this.basicCarsOwned = res.carsOwned.map(transformCar);
-  this.basicCarsOwnedShowed = [...this.basicCarsOwned];
-  this.basicCarsWished = res.carsWished.map(transformCar);
-  this.basicCarsWishedShowed = [...this.basicCarsWished];
-}
+    // Contar el número de coches básicos que tiene el usuario
+    this.basicCarsOwned.forEach((group: basicGlobalGroup) => {
+      group.series.forEach((serie: basicCarsGrouped) => {
+        serie.cars.forEach(() => this.basicCarsOwnedNumber++);
+      })
+    });
+  }
+  
+  processPremiumCars(res: any, isUserOwner: boolean) {
+    const transformGroup = (group: premiumGlobalGroup) => {
+      group.secondarySeries = group.secondarySeries.map((serie: any) => {
+        serie.cars = serie.cars.map(transformCar);
 
-processPremiumCars(res: any, isUserOwner: boolean) {
-  const transformCar = (car: premiumCarInterface) => {
-    return {
-      ...car,
-      user_profile: isUserOwner,
-      profile_view: true,
-      has_car: isUserOwner,
-      token: isUserOwner ? this.user!.id : undefined
+        return {
+          ...serie,
+          visible: true
+        }
+      });
+      
+      return {
+        ...group,
+        visible: true
+      }    
+    }
+  
+    const transformCar = (car: premiumCarInterface) => {
+      return {
+        ...car,
+        user_profile: isUserOwner,
+        profile_view: true,
+        has_car: isUserOwner,
+        token: isUserOwner ? this.user!.id : undefined,
+        visible: true
+      };
     };
-  };
+  
+    this.premiumCarsOwned = res.groupedOwnedCars.map(transformGroup);
+    this.premiumCarsWished = res.groupedWishedCars.map(transformGroup);
 
-  this.premiumCarsOwned = res.carsOwned.map(transformCar);
-  this.premiumCarsOwnedShowed = [...this.premiumCarsOwned];
-  this.premiumCarsWished = res.carsWished.map(transformCar);
-  this.premiumCarsWishedShowed = [...this.premiumCarsWished];
-}
-
+    // Contar el número de coches premium que tiene el usuario
+    this.premiumCarsOwned.forEach((group: premiumGlobalGroup) => {
+      group.secondarySeries.forEach((serie: premiumCarsGrouped) => {
+        serie.cars.forEach(() => this.premiumCarsOwnedNumber++);
+      });
+    });
+  }
 
   basicCarsObservable() {
     return this.basicCarsService.getUserCars(this.user!.id);
@@ -152,127 +203,6 @@ processPremiumCars(res: any, isUserOwner: boolean) {
   
   premiumCarsObservable() {
     return this.premiumCarsService.getUserCars(this.user!.id);
-  }
-  
-  getUserBasicCars(isUserOwner: boolean) {
-    if (this.user) {
-      this.basicCarsService.getUserCars(this.user.id).subscribe(res => {
-
-        const basicCarsOwned = res.carsOwned.map((car: basicCarInterface) => {
-          const series = car.series.split(',');
-          const serie_class = series[0].replace(/ /g, '-').toLowerCase();
-  
-          // If profile is of the user visitor
-          if (isUserOwner) {
-            return {
-              ...car,
-              series,
-              serie_class,
-              search: true,
-              user_profile: true,
-              profile_view: true,
-              has_car: true,
-              token: this.user!.id
-            }
-          } else {
-            return {
-              ...car,
-              series,
-              serie_class,
-              search: true,
-              user_profile: false,
-              profile_view: true,
-            }
-          }
-        });
-
-        const basicCarsWished = res.carsWished.map((car: basicCarInterface) => {
-          const series = car.series.split(',');
-          const serie_class = series[0].replace(/ /g, '-').toLowerCase();
-  
-          // If profile is of the user visitor
-          if (isUserOwner) {
-            return {
-              ...car,
-              series,
-              serie_class,
-              search: true,
-              user_profile: true,
-              profile_view: true,
-              has_car: true,
-              token: this.user!.id
-            }
-          } else {
-            return {
-              ...car,
-              series,
-              serie_class,
-              search: true,
-              user_profile: false,
-              profile_view: true,
-            }
-          }
-        });
-
-        this.basicCarsOwned = basicCarsOwned;
-        this.basicCarsOwnedShowed = basicCarsOwned;
-        this.basicCarsWished = basicCarsWished;
-        this.basicCarsWishedShowed = basicCarsWished;
-      })
-    }
-  }
-
-  getUserPremiumCars(isUserOwner: boolean) {
-    if (this.user) {
-      this.premiumCarsService.getUserCars(this.user.id).subscribe(res => {
-
-        const premiumCarsOwned = res.carsOwned.map((car: premiumCarInterface) => {
-
-          // If profile is of the user visitor
-          if (isUserOwner) {
-            return {
-              ...car,
-              user_profile: true,
-              profile_view: true,
-              has_car: true,
-              token: this.user!.id
-            }
-          } else {
-            return {
-              ...car,
-              user_profile: false,
-              profile_view: true,
-            }
-          }
-        });
-
-        const premiumCarsWished = res.carsWished.map((car: premiumCarInterface) => {
-
-          // If profile is of the user visitor
-          if (isUserOwner) {
-            return {
-              ...car,
-              user_profile: true,
-              profile_view: true,
-              has_car: true,
-              token: this.user!.id
-            }
-          } else {
-            return {
-              ...car,
-              user_profile: false,
-              profile_view: true,
-            }
-          }
-        });
-
-
-        this.premiumCarsOwned = premiumCarsOwned;
-        this.premiumCarsOwnedShowed = premiumCarsOwned;
-        this.premiumCarsWished = premiumCarsWished;
-        this.premiumCarsWishedShowed = premiumCarsWished;
-      })
-    }
   }
 
   enableErrorMsg(msg: string | any) {
@@ -285,87 +215,54 @@ processPremiumCars(res: any, isUserOwner: boolean) {
   }
 
   changeCarType(type: string) {
-    this.carsType = type;
+    this.carsTypeSelected = type;
 
     if(type === 'custom') {
-      this.collectedType = 'owned'
+      this.collectedTypeSelected = 'owned'
     }
   }
 
   changeCarCollected(type: string) {
-    this.collectedType = type;
+    this.collectedTypeSelected = type;
   }
 
-  onDeleteCar(event: any, typeCar: string) {
-    const carEvent = {
-      id: event.id,
-    }
-    let index;
-    
-    switch (typeCar) {
-      case 'basic owned':
-        index = this.basicCarsOwned.findIndex(car => car.id === carEvent.id);
-        if (index !== -1) {
-          this.basicCarsOwned.splice(index, 1);
-          this.basicCarsOwnedShowed.splice(index, 1);
-        }
-        break;
-      
-      case 'basic wished':
-        index = this.basicCarsWished.findIndex(car => car.id === carEvent.id);
-        if (index !== -1) {
-          this.basicCarsWished.splice(index, 1);
-          this.basicCarsWishedShowed.splice(index, 1);
-        }
-        break;
-
-      case 'premium owned':
-        index = this.premiumCarsOwned.findIndex(car => car.id === carEvent.id);
-        if (index !== -1) {
-          this.premiumCarsOwned.splice(index, 1);
-          this.premiumCarsOwnedShowed.splice(index, 1);
-        }
-        break;
-
-      case 'premium wished':
-        index = this.premiumCarsWished.findIndex(car => car.id === carEvent.id);
-        if (index !== -1) {
-          this.premiumCarsWished.splice(index, 1);
-          this.premiumCarsWishedShowed.splice(index, 1);
-        }
-        break;
-    }
-    
-  }
-
-  filterYear(year: string) {
+  filterBasicYear(year: string) {
     this.selectedYear = year;
-    this.selectedSerie = 'All';
-    this.getAvailableSeries(year);
+    this.selectedSerie = 'ALL';
 
-    if (year === 'All') {
-      this.basicCarsOwnedShowed = this.basicCarsOwned;
-      this.basicCarsWishedShowed = this.basicCarsWished;
-      this.selectedSerie = '';
-      return;
+    year !== 'ALL' ? this.getAvailableSeries(year) : null;
+    
+
+    if (year === 'ALL') {
+      this.basicCarsOwned = filterYear(this.basicCarsOwned);
+      this.basicCarsWished = filterYear(this.basicCarsWished);
+    } else {
+      this.basicCarsOwned = filterYear(this.basicCarsOwned, year);
+      this.basicCarsWished = filterYear(this.basicCarsWished, year);
     }
-
-    this.basicCarsOwnedShowed = this.basicCarsOwned.filter(car => car.year === year);
-    this.basicCarsWishedShowed = this.basicCarsWished.filter(car => car.year === year);
   }
 
-  filterSerie(serie: string) {    
-    switch (serie) {
-      case 'All':
-        this.basicCarsOwnedShowed = this.basicCarsOwned.filter(car => car.year === this.selectedYear);
-        this.basicCarsWishedShowed = this.basicCarsWished.filter(car => car.year === this.selectedYear);
-        break;
+  filterBasicSeries(serie: string) {
+    this.selectedSerie = serie;
 
-      default:
-        this.basicCarsOwnedShowed = this.basicCarsOwned.filter(car => car.series.includes(serie) && car.year === this.selectedYear);
-        this.basicCarsWishedShowed = this.basicCarsWished.filter(car => car.series.includes(serie) && car.year === this.selectedYear);
-        break;
-      }
+    if (this.specialSeries.includes(serie)) {
+      this.basicCarsOwned.forEach(group => {
+        group.series = createSpecialGroup(group.series, serie, this.carsGroupedSeries);
+      });
+
+      this.basicCarsWished.forEach(group => {
+        group.series = createSpecialGroup(group.series, serie, this.carsGroupedSeries);
+      });
+
+    } else {
+      this.basicCarsOwned.forEach((group: basicGlobalGroup) => {
+        group.series = filterSeries(group.series, serie);
+      });
+
+      this.basicCarsWished.forEach((group: basicGlobalGroup) => {
+        group.series = filterSeries(group.series, serie);
+      });
+    }
   }
 
   getAvailableSeries(year: string) {
@@ -375,31 +272,30 @@ processPremiumCars(res: any, isUserOwner: boolean) {
     })
   }
 
-  filterPremiumSerie(serie: string) {
+  filterPremiumSeries(serie: string) {
     this.selectedMainSerie = serie;
-    this.selectedSecondarySerie = 'All';
-    this.getAvailablePremiumSeries(serie);
+    this.selectedSecondarySerie = 'ALL';
 
-    if (serie === 'All') {
-      this.premiumCarsOwnedShowed = this.premiumCarsOwned;
-      this.premiumCarsWishedShowed = this.premiumCarsWished;
-      this.selectedSecondarySerie = '';
-      return;
+    serie !== 'ALL' ? this.getAvailablePremiumSeries(serie) : null;
+
+    if (serie === 'ALL') {
+      this.premiumCarsOwned = filterMainSerie(this.premiumCarsOwned);
+      this.premiumCarsWished = filterMainSerie(this.premiumCarsWished);
+    } else {
+      this.premiumCarsOwned = filterMainSerie(this.premiumCarsOwned, serie);
+      this.premiumCarsWished = filterMainSerie(this.premiumCarsWished, serie);
     }
-
-    this.premiumCarsOwnedShowed = this.premiumCarsOwned.filter(car => car.main_serie === serie);
-    this.premiumCarsWishedShowed = this.premiumCarsWished.filter(car => car.main_serie === serie);
   }
 
-  filterPremiumSecundarySerie(serie: string) {
-    if (serie === 'All') {
-      this.premiumCarsOwnedShowed = this.premiumCarsOwned.filter(car => car.main_serie === this.selectedMainSerie);
-      this.premiumCarsWishedShowed = this.premiumCarsWished.filter(car => car.main_serie === this.selectedMainSerie);
-      return;
-    }
+  filterPremiumSecundarySeries(serie: string) {
+    this.premiumCarsOwned.forEach((group: premiumGlobalGroup) => {
+      group.secondarySeries = filterSeries(group.secondarySeries, serie);
+    });
 
-    this.premiumCarsOwnedShowed = this.premiumCarsOwned.filter(car => car.secondary_serie === serie);
-    this.premiumCarsWishedShowed = this.premiumCarsWished.filter(car => car.secondary_serie === serie);
+    this.premiumCarsWished.forEach((group: premiumGlobalGroup) => {
+      group.secondarySeries = filterSeries(group.secondarySeries, serie);
+    });
+    console.log(this.premiumCarsOwned)
   }
 
   getAvailablePremiumSeries(main_serie: string) {
@@ -436,8 +332,9 @@ processPremiumCars(res: any, isUserOwner: boolean) {
     if (this.user) {
       this.userService.downloadUserCollection(this.user.id)
         .catch(err => {
+          console.error(err);
           this.exportToCsvError = true;
-        })
+        });
     }
   }
 

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { premiumCarShowedInterface } from 'src/app/models/cardTypes.interface';
 import { CarsService } from '../services/cars.service';
 import { Router } from '@angular/router';
+import { premiumCarInterface } from 'src/app/models/cardTypes.interface';
 
 @Component({
   selector: 'app-premium-card',
@@ -10,10 +10,10 @@ import { Router } from '@angular/router';
 })
 export class PremiumCardComponent implements OnInit {
 
-  @Output() deleteCar = new EventEmitter<premiumCarShowedInterface>();
-  @Output() addedCar = new EventEmitter<premiumCarShowedInterface>();
+  @Output() deleteCar = new EventEmitter<string>();
+  @Output() addedCar = new EventEmitter<premiumCarInterface>();
   @Output() errorEvent = new EventEmitter<string>();
-  @Input() car!: premiumCarShowedInterface;
+  @Input() car!: premiumCarInterface;
 
   constructor(
     private carsService: CarsService,
@@ -65,11 +65,12 @@ export class PremiumCardComponent implements OnInit {
         (res) => {
           if (this.car.has_car) {
             this.car.has_car = false;
+            this.deleteCar.emit('OWNED_DELETED');
           } else if (this.car.wants_car) {
             this.car.wants_car = false;
+            this.deleteCar.emit('WISHED_DELETED');
           }
 
-          this.deleteCar.emit(this.car);
 
         },
         (err) => {

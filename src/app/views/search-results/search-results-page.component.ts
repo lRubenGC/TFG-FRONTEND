@@ -5,8 +5,7 @@ import { Subscription } from 'rxjs';
 import { BasicCarsService } from '../basic-cars-page/basic-cars.service';
 import { PremiumCarsService } from '../premium-cars-page/premium-cars.service';
 import { decodeToken, tokenObject } from 'src/app/helpers/generics';
-import { basicCarInterface, basicCarShowedInterface, premiumCarInterface } from 'src/app/models/cardTypes.interface';
-import { premiumCarShowedInterface } from 'src/app/models/cardTypes.interface';
+import { basicCarInterface, premiumCarInterface } from 'src/app/models/cardTypes.interface';
 import { LoaderService } from '../../services/loader.service';
 import { UserCars } from '../../models/userCars.interface';
 
@@ -25,8 +24,8 @@ export class SearchResultsPageComponent implements OnInit, OnDestroy {
   query = '';
   searchType = 'cars';
 
-  basicCars: basicCarShowedInterface[] = [];
-  premiumCars: premiumCarShowedInterface[] = [];
+  basicCars: basicCarInterface[] = [];
+  premiumCars: premiumCarInterface[] = [];
 
   users = [];
 

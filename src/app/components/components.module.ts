@@ -20,12 +20,15 @@ import { DCButtonComponent } from './shared/dc-button/dc-button.component';
 import { FilterPillComponent } from './shared/filter-pill/filter-pill.component';
 import { DCSecondaryButtonComponent } from './shared/dc-secondary-button/dc-secondary-button.component';
 import { ButtonsLegendComponent } from './shared/buttons-legend/buttons-legend.component';
+import { BasicGroupComponent } from './car-groups/basic-group/basic-group.component';
+import { PremiumGroupComponent } from './car-groups/premium-group/premium-group.component';
 
 
 
 @NgModule({
   declarations: [
     BasicCardComponent,
+    BasicGroupComponent,
     ButtonsLegendComponent,
     CustomCardComponent,
     DCButtonComponent,
@@ -34,6 +37,7 @@ import { ButtonsLegendComponent } from './shared/buttons-legend/buttons-legend.c
     HeaderComponent,
     MsgCardComponent,
     PremiumCardComponent,
+    PremiumGroupComponent,
     PremiumPillComponent,
     GlobalNotificationComponent,
     ScrollToTopComponent,
@@ -50,6 +54,7 @@ import { ButtonsLegendComponent } from './shared/buttons-legend/buttons-legend.c
   ],
   exports: [
     BasicCardComponent,
+    BasicGroupComponent,
     ButtonsLegendComponent,
     CustomCardComponent,
     DCButtonComponent,
@@ -58,6 +63,7 @@ import { ButtonsLegendComponent } from './shared/buttons-legend/buttons-legend.c
     HeaderComponent,
     MsgCardComponent,
     PremiumCardComponent,
+    PremiumGroupComponent,
     PremiumPillComponent,
     GlobalNotificationComponent,
     ScrollToTopComponent,

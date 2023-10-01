@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { LandingCardComponent } from './components/landing-card/landing-card.component';
 import { LandingPageComponent } from './landing-page.component';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -14,7 +15,8 @@ import { ComponentsModule } from 'src/app/components/components.module';
   ],
   imports: [
     CommonModule,
-    ComponentsModule
+    ComponentsModule,
+    TranslateModule,
   ]
 })
 export class LandingPageModule { }

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { basicCarShowedInterface } from 'src/app/models/cardTypes.interface';
+import { basicCarInterface } from 'src/app/models/cardTypes.interface';
 import { CarsService } from '../services/cars.service';
 
 @Component({
@@ -11,10 +11,10 @@ import { CarsService } from '../services/cars.service';
 })
 export class BasicCardComponent implements OnInit {
 
-  @Output() deleteCar = new EventEmitter<basicCarShowedInterface>();
-  @Output() addedCar = new EventEmitter<basicCarShowedInterface>();
+  @Output() deleteCar = new EventEmitter<string>();
+  @Output() addedCar = new EventEmitter<basicCarInterface>();
   @Output() errorEvent = new EventEmitter<string>();
-  @Input() car!: basicCarShowedInterface;
+  @Input() car!: basicCarInterface;
 
   constructor(
     private carsService: CarsService,
@@ -66,11 +66,12 @@ export class BasicCardComponent implements OnInit {
         (res) => {
           if (this.car.has_car) {
             this.car.has_car = false;
+            this.deleteCar.emit('OWNED_DELETED');
           } else if (this.car.wants_car) {
             this.car.wants_car = false;
+            this.deleteCar.emit('WISHED_DELETED');
           }
 
-          this.deleteCar.emit(this.car);
         },
         (err) => {
           switch (err.status) {
