@@ -142,5 +142,9 @@
     "UPDATES_VERSION_103_1": "Improved image quality",
     "UPDATES_VERSION_103_2": "Enhanced car cards",
     "UPDATES_VERSION_103_3": "Detailed view of cars",
-    "UPDATES_VERSION_103_4": "(Bug fix) Now you can vote for custom car from the list"
+    "UPDATES_VERSION_103_4": "(Bug fix) Now you can vote for custom car from the list",
+    "UPDATES_VERSION_104": "Version 1.0.4 - 10/01/2023",
+    "UPDATES_VERSION_104_1": "New cars added to existing years/series",
+    "UPDATES_VERSION_104_2": "Basic cars added: 2016 and 2017",
+    "UPDATES_VERSION_104_3": "Improvement in the organization of cars (basic, premium and user views)"
 }
