@@ -9,21 +9,23 @@
             </div>
     
             <ng-container *ngFor="let serie of group.secondarySeries">
-                <div class="serie-name serie-name-group">
-                    <h2 class="mb_0_25">{{ serie.serieName }}</h2>
-                    <hr>
-                </div>
-    
-                <div class="premium-cars-list">
-                    <ng-container *ngFor="let car of serie.cars">
-                        <ng-container *ngIf="car.visible">
-                            <app-premium-card
-                                (errorEvent)="enableErrorMsg($event)"
-                                [car]="car">
-                            </app-premium-card>
+                <ng-container *ngIf="serie.visible">
+                    <div class="serie-name serie-name-group">
+                        <h2 class="mb_0_25">{{ serie.serieName }}</h2>
+                        <hr>
+                    </div>
+        
+                    <div class="premium-cars-list">
+                        <ng-container *ngFor="let car of serie.cars">
+                            <ng-container *ngIf="car.visible">
+                                <app-premium-card
+                                    (errorEvent)="enableErrorMsg($event)"
+                                    [car]="car">
+                                </app-premium-card>
+                            </ng-container>
                         </ng-container>
-                    </ng-container>
-                </div>
+                    </div>
+                </ng-container>
             </ng-container>
     
         </ng-container>

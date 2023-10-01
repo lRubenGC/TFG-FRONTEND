@@ -24,15 +24,15 @@
 
             <!-- Cars data -->
             <section class="profile-data-cars d_flex justify-content_center align-items_center text-align_center">
-                <!-- <div class="data-cars-item d_flex justify-content_center flex-direction_column text-align_center">
-                    <p class="data-item-number">{{ basicCarsOwned.length }}</p>
+                <div class="data-cars-item d_flex justify-content_center flex-direction_column text-align_center">
+                    <p class="data-item-number">{{ basicCarsOwnedNumber }}</p>
                     <p>{{ 'USER_PROFILE_BASIC_MENU' | translate }}</p>
                 </div>
 
                 <div class="vertical-divider"></div>
                 
                 <div class="data-cars-item d_flex justify-content_center flex-direction_column text-align_center">
-                    <p class="data-item-number">{{ premiumCarsOwned.length }}</p>
+                    <p class="data-item-number">{{ premiumCarsOwnedNumber }}</p>
                     <p>{{ 'USER_PROFILE_PREMIUM_MENU' | translate }}</p>
                 </div>
                 
@@ -41,7 +41,7 @@
                 <div class="data-cars-item d_flex justify-content_center flex-direction_column text-align_center">
                     <p class="data-item-number">{{ customCarsOwned.length }}</p>
                     <p>{{ 'USER_PROFILE_CUSTOM_MENU' | translate }}</p>
-                </div> -->
+                </div>
             </section>
 
         </header>
@@ -108,7 +108,7 @@
                     basicDefaultOptions: true,
                     selectDisabled: false
                 }"
-                (onChange)="filterYear($event)"
+                (onChange)="filterBasicYear($event)"
             ></app-filter-pill>
 
             <app-filter-pill
@@ -119,7 +119,7 @@
                     basicDefaultSeries: true,
                     selectDisabled: selectedYear === 'ALL'
                 }"
-                (onChange)="filterSerie($event)"
+                (onChange)="filterBasicSeries($event)"
             ></app-filter-pill>
 
         </section>
@@ -135,7 +135,7 @@
                     premiumDefaultSeries: true,
                     selectDisabled: false
                 }"
-                (onChange)="filterPremiumSerie($event)"
+                (onChange)="filterPremiumSeries($event)"
             ></app-filter-pill>
 
             <app-filter-pill
@@ -146,7 +146,7 @@
                     premiumDefaultSeries: true,
                     selectDisabled: selectedMainSerie === 'All'
                 }"
-                (onChange)="filterPremiumSecundarySerie($event)"
+                (onChange)="filterPremiumSecundarySeries($event)"
             ></app-filter-pill>
 
         </section>

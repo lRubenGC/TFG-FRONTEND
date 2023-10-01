@@ -8,7 +8,7 @@ import { basicCarInterface, basicCarsGrouped } from 'src/app/models/cardTypes.in
 import { decodeToken, tokenObject } from 'src/app/helpers/generics';
 import { LoaderService } from 'src/app/services/loader.service';
 import { matchCars } from 'src/app/helpers/match-cars';
-import { filterSeries } from 'src/app/helpers/filter-series';
+import { createSpecialGroup, filterSeries } from 'src/app/helpers/filter-series';
 import { filterSeriesOwned } from '../../helpers/filter-series';
 
 @Component({
@@ -130,8 +130,7 @@ export class BasicCarsPageComponent implements OnInit {
     this.selectedSerie = serie;
 
     if (this.specialSeries.includes(serie)) {
-      this.createSpecialGroup(serie);
-
+      this.carsGrouped = createSpecialGroup(this.carsGrouped, serie, this.carsGroupedSeries);
     } else {
       this.carsGrouped = filterSeries(this.carsGrouped, serie);
     }
@@ -148,51 +147,6 @@ export class BasicCarsPageComponent implements OnInit {
     this.carsGrouped = filterOnwedRes.groupedCars;
     this.carsShowed = filterOnwedRes.carsShowed;
     this.carsOwned = filterOnwedRes.carsOwned;
-  }
-
-  createSpecialGroup(serieName: string) {
-    this.hideAllGroups();
-
-    const especialGroup: basicCarsGrouped = {
-      serieName,
-      cars: [],
-      visible: true
-    }
-
-    this.carsGrouped.forEach((group: basicCarsGrouped) => {
-      group.cars.forEach((car: basicCarInterface) => {
-        if (car.series.includes(serieName)) {
-          especialGroup.cars.push({
-            ...car,
-            visible: true
-          });
-        }
-      })
-    });
-
-    this.carsGrouped[this.carsGroupedSeries] = especialGroup;
-  }
-
-  hideAllGroups() {
-    this.carsGrouped[this.carsGroupedSeries] = {
-      serieName: '',
-      cars: [],
-      visible: false
-    };
-
-    this.carsGrouped = this.carsGrouped.map((group: basicCarsGrouped) => {
-      group.cars = group.cars.map((car: basicCarInterface) => {
-        return {
-          ...car,
-          visible: false
-        }
-      });
-
-      return {
-        ...group,
-        visible: false
-      }
-    })
   }
 
   resetSeries() {
