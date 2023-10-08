@@ -3,7 +3,7 @@ import { basicCarInterface, basicCarsGrouped, basicGlobalGroup, premiumCarInterf
 
 export const matchCars = (
   userCarsResponse: any,
-  groupedCars: any[], 
+  groupedCars: any[],
   token: number,
   typeCar: string
 ) => {

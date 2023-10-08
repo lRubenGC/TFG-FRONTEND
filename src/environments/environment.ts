@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   appVersion: '1.0.4',
-  apiBaseUrl: 'http://localhost:8000'
+  apiBaseUrl: 'https://api.diecasttracker.com'
 };
 
 // apiBaseUrl: 'http://localhost:8000'

@@ -5,9 +5,8 @@ import { Subscription } from 'rxjs';
 import { BasicCarsService } from '../basic-cars-page/basic-cars.service';
 import { PremiumCarsService } from '../premium-cars-page/premium-cars.service';
 import { decodeToken, tokenObject } from 'src/app/helpers/generics';
-import { basicCarInterface, premiumCarInterface } from 'src/app/models/cardTypes.interface';
+import { basicCarInterface, basicCarsGrouped, basicGlobalGroup, premiumCarInterface, premiumCarsGrouped, premiumGlobalGroup } from 'src/app/models/cardTypes.interface';
 import { LoaderService } from '../../services/loader.service';
-import { UserCars } from '../../models/userCars.interface';
 
 @Component({
   selector: 'app-search-results',
@@ -119,14 +118,23 @@ export class SearchResultsPageComponent implements OnInit, OnDestroy {
   async processUserBasicCars(basicCars: any) {
     try {
       const userCars = await this.getUserBasicCars();
-      userCars.carsOwned.forEach((carOwned: any) => {
-        const matchedCar = basicCars.find((car: any) => car.id === carOwned.id);
-        if (matchedCar) matchedCar.has_car = true;
+
+      userCars.groupedOwnedCars.forEach((globalGroup: basicGlobalGroup) => {
+        globalGroup.series.forEach((group: basicCarsGrouped) => {
+          group.cars.forEach((carOwned: basicCarInterface) => {
+            const matchedCar = basicCars.find((car: basicCarInterface) => car.id === carOwned.id);
+            if (matchedCar) matchedCar.has_car = true;
+          });
+        });
       });
 
-      userCars.carsWished.forEach((carWished: any) => {
-        const matchedCar = basicCars.find((car: any) => car.id === carWished.id);
-        if (matchedCar) matchedCar.wants_car = true;
+      userCars.groupedWishedCars.forEach((globalGroup: basicGlobalGroup) => {
+        globalGroup.series.forEach((group: basicCarsGrouped) => {
+          group.cars.forEach((carOwned: basicCarInterface) => {
+            const matchedCar = basicCars.find((car: basicCarInterface) => car.id === carOwned.id);
+            if (matchedCar) matchedCar.wants_car = true;
+          });
+        });
       });
 
       return basicCars.map((car: any) => ({
@@ -141,14 +149,23 @@ export class SearchResultsPageComponent implements OnInit, OnDestroy {
   async processUserPremiumCars(premiumCars: any) {
     try {
       const userCars = await this.getUserPremiumCars();
-      userCars.carsOwned.forEach((carOwned: any) => {
-        const matchedCar = premiumCars.find((car: any) => car.id === carOwned.id);
-        if (matchedCar) matchedCar.has_car = true;
+
+      userCars.groupedOwnedCars.forEach((globalGroup: premiumGlobalGroup) => {
+        globalGroup.secondarySeries.forEach((group: premiumCarsGrouped) => {
+          group.cars.forEach((carOwned: premiumCarInterface) => {
+            const matchedCar = premiumCars.find((car: premiumCarInterface) => car.id === carOwned.id);
+            if (matchedCar) matchedCar.has_car = true;
+          });
+        });
       });
 
-      userCars.carsWished.forEach((carWished: any) => {
-        const matchedCar = premiumCars.find((car: any) => car.id === carWished.id);
-        if (matchedCar) matchedCar.wants_car = true;
+      userCars.groupedWishedCars.forEach((globalGroup: premiumGlobalGroup) => {
+        globalGroup.secondarySeries.forEach((group: premiumCarsGrouped) => {
+          group.cars.forEach((carOwned: premiumCarInterface) => {
+            const matchedCar = premiumCars.find((car: premiumCarInterface) => car.id === carOwned.id);
+            if (matchedCar) matchedCar.wants_car = true;
+          });
+        });
       });
 
       return premiumCars.map((car: any) => ({
@@ -161,7 +178,7 @@ export class SearchResultsPageComponent implements OnInit, OnDestroy {
   }
 
 
-  getUserBasicCars(): Promise<UserCars> {
+  getUserBasicCars(): Promise<any> {
     return new Promise((resolve, reject) => {
       if (this.userToken.hasToken && this.userToken.userId) {
         this.basicCarsService.getUserCars(this.userToken.userId).subscribe(res => {
@@ -173,7 +190,7 @@ export class SearchResultsPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  getUserPremiumCars(): Promise<UserCars> {
+  getUserPremiumCars(): Promise<any> {
     return new Promise((resolve, reject) => {
       if (this.userToken.hasToken && this.userToken.userId) {
         this.premiumCarsService.getUserCars(this.userToken.userId).subscribe(res => {
