@@ -40,7 +40,7 @@ export class UserProfileComponent implements OnInit {
   // Filtro seleccionado y disponibles (Basic cars)
   selectedYear = 'ALL';
   selectedSerie = '';
-  availableYears = ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016'];
+  availableYears = ['2024', '2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016'];
   availableSeries = [];
 
   // Filtro seleccionado y disponibles (Premium cars)

@@ -31,7 +31,7 @@ export class BasicCarsPageComponent implements OnInit {
   selectedOwned: string = 'FILTER_ALL';
 
   // Opciones de los filtros (Mover a BE)
-  availableYears = ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016'];
+  availableYears = ['2024', '2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016'];
   availableSeries = [];
   ownedCarsFilter = ['FILTER_ALL', 'FILTER_CARS_OWNED', 'FILTER_CARS_NOT_OWNED', 'FILTER_CARS_WISHED'];
 
