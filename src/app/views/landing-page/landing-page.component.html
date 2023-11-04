@@ -13,7 +13,8 @@
             <app-landing-card
                 *ngFor="let card of landingCards"
                 class="landing-card"
-                [config]="card">
+                [config]="card"
+                (click)="trackEvent(card.linkTo)">
             </app-landing-card>
         </footer>
 
