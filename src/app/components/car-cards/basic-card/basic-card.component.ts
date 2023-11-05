@@ -14,7 +14,7 @@ export class BasicCardComponent implements OnInit {
   @Output() deleteCar = new EventEmitter<string>();
   @Output() addedCar = new EventEmitter<basicCarInterface>();
   @Output() errorEvent = new EventEmitter<string>();
-  @Input() car!: basicCarInterface;
+  @Input() car!: any;
 
   constructor(
     private carsService: CarsService,

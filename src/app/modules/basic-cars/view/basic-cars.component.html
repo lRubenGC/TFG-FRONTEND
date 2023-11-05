@@ -1,0 +1,8 @@
+<ng-container *ngIf="mainVM$ | async as vm">
+  <div *ngFor="let group of vm">
+    <h1>{{ group.serieName }}</h1>
+    <div *ngFor="let car of group.cars">
+      <app-basic-card [car]='car'></app-basic-card>
+    </div>
+  </div>
+</ng-container>

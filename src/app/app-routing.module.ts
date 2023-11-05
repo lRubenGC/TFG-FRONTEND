@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   { 
     path: 'basic-cars',
-    loadChildren: () => import('./views/basic-cars-page/basic-cars-routing.module').then(m => m.BasicCarsRoutingModule)
+    loadChildren: () => import('./modules/basic-cars/basic-cars-routing.module').then(m => m.BasicCarsRoutingModule)
   },
   { 
     path: 'custom-cars',

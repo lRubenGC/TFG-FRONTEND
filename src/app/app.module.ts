@@ -16,7 +16,7 @@ import { GtagModule } from 'angular-gtag';
 import { ComponentsModule } from './components/components.module';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthModule } from './views/auth/auth.module';
-import { BasicCarsPageModule } from './views/basic-cars-page/basic-cars-page.module';
+import { BasicCarsPageModule } from './modules/basic-cars/basic-cars.module';
 import { CustomCarsModule } from './views/custom-cars/custom-cars.module';
 import { DetailedCarPageModule } from './views/detailed-car-page/detailed-car-page.module';
 import { InfoModule } from './views/info/info.module';
