@@ -3,7 +3,6 @@ import { customCarInterface } from 'src/app/models/cardTypes.interface';
 import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
 import { CarsService } from '../services/cars.service';
-import { LoaderService } from 'src/app/services/loader.service';
 
 
 @Component({
@@ -19,7 +18,6 @@ export class CustomCardComponent implements OnInit {
 
   constructor(
     private carsService: CarsService,
-    private loaderService: LoaderService,
     private userService: UserService,
     private router: Router,
   ) {}
@@ -68,8 +66,6 @@ export class CustomCardComponent implements OnInit {
   }
 
   goToCustomCarView() {
-    this.loaderService.startLoading();
-
     this.router.navigate([`/custom-cars/car/${this.car.id}`]);
   }
 

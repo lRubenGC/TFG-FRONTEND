@@ -7,7 +7,6 @@ import { Gtag } from 'angular-gtag';
 import { decodeToken } from 'src/app/helpers/generics';
 import { landingCardInterface } from 'src/app/models/landingPage.interface';
 import { msgCardInterface } from 'src/app/models/shared.interface';
-import { LoaderService } from 'src/app/services/loader.service';
 import { LanguageService } from '../../services/language.service';
 
 @Component({
@@ -52,7 +51,6 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   constructor(
     private translate: TranslateService,
     private languageService: LanguageService,
-    private loaderService: LoaderService,
     private gtag: Gtag
   ) {}
 
@@ -68,10 +66,6 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     );
 
     this.changeLanguage();
-  }
-
-  ngAfterContentInit() {
-    this.loaderService.stopLoading();
   }
 
   async changeLanguage() {

@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { customCarInterface } from 'src/app/models/cardTypes.interface';
-import { CustomCarsService } from '../custom-cars.service';
-import { UserService } from 'src/app/services/user.service';
+import { forkJoin } from 'rxjs';
 import { CarsService } from 'src/app/components/car-cards/services/cars.service';
 import { decodeToken, tokenObject } from 'src/app/helpers/generics';
-import { forkJoin } from 'rxjs';
-import { mapAndSortCustomCars } from 'src/app/helpers/map-cars';
-import { LoaderService } from '../../../services/loader.service';
+import { customCarInterface } from 'src/app/models/cardTypes.interface';
+import { UserService } from 'src/app/services/user.service';
+import { CustomCarsService } from '../custom-cars.service';
 
 @Component({
   selector: 'app-custom-car-detailed',
@@ -15,7 +13,6 @@ import { LoaderService } from '../../../services/loader.service';
   styleUrls: ['./custom-car-detailed.component.css'],
 })
 export class CustomCarDetailedComponent implements OnInit {
-  
   userToken!: tokenObject;
 
   car!: customCarInterface;
@@ -30,10 +27,9 @@ export class CustomCarDetailedComponent implements OnInit {
     private route: ActivatedRoute,
     private carsService: CarsService,
     private customCarsService: CustomCarsService,
-    private loaderService: LoaderService,
     private router: Router,
-    private userService: UserService,
-    ) {}
+    private userService: UserService
+  ) {}
 
   async ngOnInit() {
     this.userToken = await decodeToken();
@@ -51,51 +47,52 @@ export class CustomCarDetailedComponent implements OnInit {
   getCustomCar(carId: number) {
     if (this.userToken.hasToken && this.userToken.userId) {
       forkJoin({
-          car: this.customCarsService.getCarById(carId),
-          userVotes: this.carsService.getUserVotes(this.userToken.userId),
-      }).subscribe(({ car, userVotes }) => {
-        this.userService.getUserData(car.car.userCreator).then(userCreatorData => {
+        car: this.customCarsService.getCarById(carId),
+        userVotes: this.carsService.getUserVotes(this.userToken.userId),
+      }).subscribe(
+        ({ car, userVotes }) => {
+          this.userService
+            .getUserData(car.car.userCreator)
+            .then((userCreatorData) => {
+              this.checkUserViewer(this.userToken.userId!, car.car.userCreator);
 
-          this.checkUserViewer(this.userToken.userId!, car.car.userCreator);
-
-          this.car = {
-            ...car.car,
-            imgs: car.car.imgs.split(','),
-            userCreator: userCreatorData.user.username,
-            voted: userVotes.includes(car.car.id)
-          }
-        });
-
-        this.loaderService.stopLoading();
-      }, (err) => {
-          this.loaderService.stopLoading();
+              this.car = {
+                ...car.car,
+                imgs: car.car.imgs.split(','),
+                userCreator: userCreatorData.user.username,
+                voted: userVotes.includes(car.car.id),
+              };
+            });
+        },
+        (err) => {
           console.error(err);
-      });
+        }
+      );
     } else {
-        this.customCarsService.getCarById(carId).subscribe((res) => {
-          this.userService.getUserData(res.car.userCreator).then(userCreatorData => {
-            this.car = {
-              ...res.car,
-              imgs: res.car.imgs.split(','),
-              userCreator: userCreatorData.user.username,
-            }
-          });
-
-          this.loaderService.stopLoading();
-        }, (err) => {
-          this.loaderService.stopLoading();
+      this.customCarsService.getCarById(carId).subscribe(
+        (res) => {
+          this.userService
+            .getUserData(res.car.userCreator)
+            .then((userCreatorData) => {
+              this.car = {
+                ...res.car,
+                imgs: res.car.imgs.split(','),
+                userCreator: userCreatorData.user.username,
+              };
+            });
+        },
+        (err) => {
           console.error(err);
-        });
+        }
+      );
     }
   }
-
 
   checkUserViewer(userVisitorId: number, userCreatorId: number) {
     if (userVisitorId === userCreatorId) {
       this.isUserCreatorViewer = true;
     }
   }
-
 
   nextImage() {
     if (this.currentImageIndex < this.car.imgs.length - 2) {
@@ -104,7 +101,6 @@ export class CustomCarDetailedComponent implements OnInit {
       this.currentImageIndex = 0;
     }
   }
-  
 
   prevImage() {
     if (this.currentImageIndex > 0) {
@@ -114,10 +110,7 @@ export class CustomCarDetailedComponent implements OnInit {
     }
   }
 
-
   goTo(route: string) {
-    this.loaderService.startLoading();
-
     switch (route) {
       case 'userCreator':
         this.router.navigate([`/user/profile/${this.car.userCreator}`]);
@@ -131,13 +124,13 @@ export class CustomCarDetailedComponent implements OnInit {
     }
   }
 
-
   voteCar() {
     // If user is logged in
     if (this.userToken.hasToken && this.userToken.userId) {
       // If user has not voted the car
       if (!this.car.voted) {
-        this.carsService.voteCustomCar(this.car.id, this.userToken.userId)
+        this.carsService
+          .voteCustomCar(this.car.id, this.userToken.userId)
           .subscribe(
             (res) => {
               this.car.upvotes++;
@@ -147,9 +140,9 @@ export class CustomCarDetailedComponent implements OnInit {
               console.error(err);
             }
           );
-
       } else {
-        this.carsService.unvoteCustomCar(this.car.id, this.userToken.userId)
+        this.carsService
+          .unvoteCustomCar(this.car.id, this.userToken.userId)
           .subscribe(
             (res) => {
               this.car.upvotes--;
@@ -158,7 +151,7 @@ export class CustomCarDetailedComponent implements OnInit {
             (err) => {
               console.error(err);
             }
-          )
+          );
       }
       // If user is not logged in
     } else {
@@ -166,7 +159,6 @@ export class CustomCarDetailedComponent implements OnInit {
       this.error = true;
     }
   }
-
 
   enableErrorMsg(msg: string | any) {
     this.error = true;

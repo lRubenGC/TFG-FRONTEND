@@ -4,20 +4,24 @@ import { msgCardInterface } from 'src/app/models/shared.interface';
 import { Subscription, lastValueFrom } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from 'src/app/services/language.service';
-import { basicCarInterface, basicCarsGrouped } from 'src/app/models/cardTypes.interface';
+import {
+  basicCarInterface,
+  basicCarsGrouped,
+} from 'src/app/models/cardTypes.interface';
 import { decodeToken, tokenObject } from 'src/app/helpers/generics';
-import { LoaderService } from 'src/app/services/loader.service';
 import { matchCars } from 'src/app/helpers/match-cars';
-import { createSpecialGroup, filterSeries } from 'src/app/helpers/filter-series';
+import {
+  createSpecialGroup,
+  filterSeries,
+} from 'src/app/helpers/filter-series';
 import { filterSeriesOwned } from '../../helpers/filter-series';
 
 @Component({
   selector: 'app-basic-cars-page',
   templateUrl: './basic-cars-page.component.html',
-  styleUrls: ['./basic-cars-page.component.css', '../../styles/cars-views.css']
+  styleUrls: ['./basic-cars-page.component.css', '../../styles/cars-views.css'],
 })
 export class BasicCarsPageComponent implements OnInit {
-
   userToken!: tokenObject;
 
   carsGrouped!: basicCarsGrouped[]; // Grupos de coches de la API
@@ -31,12 +35,32 @@ export class BasicCarsPageComponent implements OnInit {
   selectedOwned: string = 'FILTER_ALL';
 
   // Opciones de los filtros (Mover a BE)
-  availableYears = ['2024', '2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016'];
+  availableYears = [
+    '2024',
+    '2023',
+    '2022',
+    '2021',
+    '2020',
+    '2019',
+    '2018',
+    '2017',
+    '2016',
+  ];
   availableSeries = [];
-  ownedCarsFilter = ['FILTER_ALL', 'FILTER_CARS_OWNED', 'FILTER_CARS_NOT_OWNED', 'FILTER_CARS_WISHED'];
+  ownedCarsFilter = [
+    'FILTER_ALL',
+    'FILTER_CARS_OWNED',
+    'FILTER_CARS_NOT_OWNED',
+    'FILTER_CARS_WISHED',
+  ];
 
   // Series especiales (Mover a BE)
-  specialSeries = ['Treasure Hunt', 'Super Treasure Hunt', 'Walmart Exclusive', 'Kroger Exclusive'];
+  specialSeries = [
+    'Treasure Hunt',
+    'Super Treasure Hunt',
+    'Walmart Exclusive',
+    'Kroger Exclusive',
+  ];
 
   // Error handler
   error = false;
@@ -47,36 +71,38 @@ export class BasicCarsPageComponent implements OnInit {
     title: '',
     description: [],
     button: false,
-  }
+  };
 
   private subscription!: Subscription;
 
   constructor(
     private basicCarsService: BasicCarsService,
-    private loaderService: LoaderService,
     private languageService: LanguageService,
-    private translate: TranslateService,
+    private translate: TranslateService
   ) {}
 
   async ngOnInit() {
     this.userToken = await decodeToken();
     this.getCars(this.selectedYear);
 
-    this.subscription = this.languageService.languageChanged$.subscribe(lang => {
-      this.translate.use(lang);
-      this.changeLanguage();
-    })
-    
+    this.subscription = this.languageService.languageChanged$.subscribe(
+      (lang) => {
+        this.translate.use(lang);
+        this.changeLanguage();
+      }
+    );
+
     this.changeLanguage();
   }
 
   async getCars(year: string) {
-    this.loaderService.startLoading();
     this.selectedYear = year;
     this.carsShowed = 0;
 
     try {
-      const carsResponse = await lastValueFrom(this.basicCarsService.getCarsByYear(year));
+      const carsResponse = await lastValueFrom(
+        this.basicCarsService.getCarsByYear(year)
+      );
 
       const carsTransformed = carsResponse.map((group: basicCarsGrouped) => {
         const modifiedCars = group.cars.map((car: basicCarInterface) => {
@@ -86,14 +112,14 @@ export class BasicCarsPageComponent implements OnInit {
             ...car,
             series: car.series.split(','),
             user_profile: true,
-            visible: true
-          }
+            visible: true,
+          };
         });
 
         return {
           ...group,
           cars: modifiedCars,
-          visible: true
+          visible: true,
         };
       });
 
@@ -102,25 +128,31 @@ export class BasicCarsPageComponent implements OnInit {
 
       // Si existe usuario logueado
       if (this.userToken.hasToken && this.userToken.userId) {
-        const userCarsResponse = await this.getUserCars() as { carsOwned: any[]; carsWished: any[] };
+        const userCarsResponse = (await this.getUserCars()) as {
+          carsOwned: any[];
+          carsWished: any[];
+        };
 
-        const matchedCars = matchCars(userCarsResponse, carsTransformed, this.userToken.userId!, 'BASIC_CAR');
+        const matchedCars = matchCars(
+          userCarsResponse,
+          carsTransformed,
+          this.userToken.userId!,
+          'BASIC_CAR'
+        );
         this.carsGrouped = matchedCars.groupedCars;
         this.carsOwned = matchedCars.carsOwned;
       }
-
     } catch (error) {
       console.error(error);
       this.enableErrorMsg(error);
     } finally {
-      this.loaderService.stopLoading();
       this.getAvailableSeries(year);
       this.resetSeries();
     }
   }
 
   getAvailableSeries(year: string) {
-    this.basicCarsService.getAvailableSeries(year).subscribe(res => {
+    this.basicCarsService.getAvailableSeries(year).subscribe((res) => {
       const series = res.series.split(',');
       this.availableSeries = series.sort();
     });
@@ -130,7 +162,11 @@ export class BasicCarsPageComponent implements OnInit {
     this.selectedSerie = serie;
 
     if (this.specialSeries.includes(serie)) {
-      this.carsGrouped = createSpecialGroup(this.carsGrouped, serie, this.carsGroupedSeries);
+      this.carsGrouped = createSpecialGroup(
+        this.carsGrouped,
+        serie,
+        this.carsGroupedSeries
+      );
     } else {
       this.carsGrouped = filterSeries(this.carsGrouped, serie);
     }
@@ -142,7 +178,11 @@ export class BasicCarsPageComponent implements OnInit {
   filterSerieOwned(serie?: string) {
     if (serie) this.selectedOwned = serie;
 
-    const filterOnwedRes = filterSeriesOwned(this.carsGrouped, this.selectedOwned, this.selectedSerie);
+    const filterOnwedRes = filterSeriesOwned(
+      this.carsGrouped,
+      this.selectedOwned,
+      this.selectedSerie
+    );
 
     this.carsGrouped = filterOnwedRes.groupedCars;
     this.carsShowed = filterOnwedRes.carsShowed;
@@ -157,11 +197,14 @@ export class BasicCarsPageComponent implements OnInit {
   getUserCars() {
     return new Promise((resolve, reject) => {
       if (this.userToken.hasToken && this.userToken.userId) {
-        this.basicCarsService.getUserCars(this.userToken.userId).subscribe(res => {
-          resolve(res);
-        }, error => {
-          reject(error);
-        });
+        this.basicCarsService.getUserCars(this.userToken.userId).subscribe(
+          (res) => {
+            resolve(res);
+          },
+          (error) => {
+            reject(error);
+          }
+        );
       }
     });
   }
@@ -177,11 +220,21 @@ export class BasicCarsPageComponent implements OnInit {
 
   async changeLanguage() {
     try {
-      this.msg_card.title = await lastValueFrom(this.translate.get('BASIC_CARS_TITLE'));
-      this.msg_card.description[0] = await lastValueFrom(this.translate.get('BASIC_CARS_DESCRIPTION_1'));
-      this.msg_card.description[1] = await lastValueFrom(this.translate.get('BASIC_CARS_DESCRIPTION_2'));
-      this.msg_card.description[2] = await lastValueFrom(this.translate.get('BASIC_CARS_DESCRIPTION_3'));
-      this.msg_card.description[3] = await lastValueFrom(this.translate.get('BASIC_CARS_DESCRIPTION_4'));
+      this.msg_card.title = await lastValueFrom(
+        this.translate.get('BASIC_CARS_TITLE')
+      );
+      this.msg_card.description[0] = await lastValueFrom(
+        this.translate.get('BASIC_CARS_DESCRIPTION_1')
+      );
+      this.msg_card.description[1] = await lastValueFrom(
+        this.translate.get('BASIC_CARS_DESCRIPTION_2')
+      );
+      this.msg_card.description[2] = await lastValueFrom(
+        this.translate.get('BASIC_CARS_DESCRIPTION_3')
+      );
+      this.msg_card.description[3] = await lastValueFrom(
+        this.translate.get('BASIC_CARS_DESCRIPTION_4')
+      );
     } catch (error) {
       console.error('Error changing language:', error);
     }
@@ -196,5 +249,4 @@ export class BasicCarsPageComponent implements OnInit {
   onAddedCar() {
     this.carsOwned++;
   }
-
 }

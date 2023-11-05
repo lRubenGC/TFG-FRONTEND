@@ -11,7 +11,6 @@ import { AuthService } from '../../../views/auth/auth.service';
 import { GenericAuthService } from 'src/app/services/generic-auth.service';
 import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/services/app.service';
-import { LoaderService } from 'src/app/services/loader.service';
 import { removeTokenFromIndexedDB } from 'src/app/helpers/indexedDB';
 
 @Component({
@@ -45,7 +44,6 @@ export class HeaderComponent implements OnInit {
     private genericAuthService: GenericAuthService,
     private elementRef: ElementRef, 
     private languageService: LanguageService,
-    private loaderService: LoaderService,
     private router: Router,
     private translate: TranslateService,
     private userService: UserService,
@@ -80,7 +78,6 @@ export class HeaderComponent implements OnInit {
       return;
     }
 
-    this.loaderService.startLoading();
 
     // If there is data, search bar gets closed
     this.searchInput.nativeElement.blur();
@@ -97,7 +94,6 @@ export class HeaderComponent implements OnInit {
 
   goTo(link: string): void {
     if (link !== this.router.url) {
-      this.loaderService.startLoading();
     }
 
     this.closeMobileMenu();
@@ -105,10 +101,6 @@ export class HeaderComponent implements OnInit {
   }
 
   async goToUserProfile() {
-    if (!this.router.url.includes('/user/profile')) {
-      this.loaderService.startLoading();
-    }
-
     const tokenDecoded = await decodeToken();
     this.closeMobileMenu();
 
@@ -189,7 +181,6 @@ export class HeaderComponent implements OnInit {
   }
 
   async logOut() {
-    this.loaderService.startLoading();
     this.closeMobileMenu();
 
     this.genericAuthService.logout();
@@ -199,7 +190,6 @@ export class HeaderComponent implements OnInit {
     this.authService.setUserLoggedIn(false);
     this.checkUserLoggedIn();
     window.location.reload();
-    this.loaderService.stopLoading();
   }
 
   isBlockView() {
