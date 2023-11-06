@@ -1,9 +1,10 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, from, mergeMap } from 'rxjs';
 
+import { getTokenFromIndexedDB } from 'src/app/helpers/indexedDB';
 import { environment } from 'src/environments/environment';
-import { BasicCar, BasicCarsResponse } from '../models/basic-cars.models';
+import { BasicCarsResponse, FiltersBody } from '../models/basic-cars.models';
 
 @Injectable({
   providedIn: 'root',
@@ -11,9 +12,28 @@ import { BasicCar, BasicCarsResponse } from '../models/basic-cars.models';
 export class BasicCarsService {
   constructor(private http: HttpClient) {}
 
-  getCarsByYear(year: string): Observable<BasicCarsResponse[]> {
-    return this.http.get<BasicCarsResponse[]>(
-      `${environment.apiBaseUrl}/api/basic-cars/?year=${year}`, {}
+  getCarsByYear(
+    year: string,
+    filters?: FiltersBody
+  ): Observable<BasicCarsResponse[]> {
+    return from(getTokenFromIndexedDB()).pipe(
+      mergeMap((token) => {
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'r-token': token!,
+        });
+
+        return this.http.post<BasicCarsResponse[]>(
+          `${environment.apiBaseUrl}/api/basic-cars/?year=${year}`,
+          {
+            filters: {
+              mainSerie: filters?.mainSerie,
+              userProperty: filters?.userProperty,
+            },
+          },
+          { headers }
+        );
+      })
     );
   }
 

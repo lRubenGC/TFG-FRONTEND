@@ -14,7 +14,7 @@ export class BasicCarsView {
   //#endregion MAIN VM
 
   constructor(private basicCarsService: BasicCarsService) {
-    this.mainVM$ = this.getBasicCars('2023');
+    this.mainVM$ = this.getBasicCars('2022');
   }
 
   private getBasicCars(year: string): Observable<BasicCarsResponse[]> {
