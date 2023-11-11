@@ -1,4 +1,13 @@
 {
+    "basic_cars": {
+        "filter_year": "Año",
+        "filter_serie": "Serie",
+        "filter_property": "Propiedad"
+    },
+    "ALL": "Todos",
+    "OWNED": "En propiedad",
+    "WISHED": "Deseados",
+    "NOT_OWNED": "No en propiedad",
     "UNEXPECTED_ERROR": "Error inesperado. Habla con el administrador por favor",
     "LANDING_CARD_TITLE": "Bienvenido a Diecast Tracker",
     "LANDING_CARD_DESCRIPTION_1": "Una aplicacion web para coleccionistas creada por otro coleccionista",

@@ -13,7 +13,6 @@ import { UserCardComponent } from './user-card/user-card.component';
 import { ScrollToTopComponent } from './shared/scroll-to-top/scroll-to-top.component';
 import { UploadImgComponent } from './shared/upload-img/upload-img.component';
 import { CustomCardComponent } from './car-cards/custom-card/custom-card.component';
-import { HeaderComponent } from './shared/header-component/header.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { MsgCardComponent } from './shared/msg-card/msg-card.component';
 import { DCButtonComponent } from './shared/dc-button/dc-button.component';
@@ -22,8 +21,6 @@ import { DCSecondaryButtonComponent } from './shared/dc-secondary-button/dc-seco
 import { ButtonsLegendComponent } from './shared/buttons-legend/buttons-legend.component';
 import { BasicGroupComponent } from './car-groups/basic-group/basic-group.component';
 import { PremiumGroupComponent } from './car-groups/premium-group/premium-group.component';
-
-
 
 @NgModule({
   declarations: [
@@ -34,7 +31,6 @@ import { PremiumGroupComponent } from './car-groups/premium-group/premium-group.
     DCButtonComponent,
     DCSecondaryButtonComponent,
     FilterPillComponent,
-    HeaderComponent,
     MsgCardComponent,
     PremiumCardComponent,
     PremiumGroupComponent,
@@ -60,7 +56,6 @@ import { PremiumGroupComponent } from './car-groups/premium-group/premium-group.
     DCButtonComponent,
     DCSecondaryButtonComponent,
     FilterPillComponent,
-    HeaderComponent,
     MsgCardComponent,
     PremiumCardComponent,
     PremiumGroupComponent,
@@ -70,6 +65,6 @@ import { PremiumGroupComponent } from './car-groups/premium-group/premium-group.
     SpinnerComponent,
     UserCardComponent,
     UploadImgComponent,
-  ]
+  ],
 })
-export class ComponentsModule { }
+export class ComponentsModule {}

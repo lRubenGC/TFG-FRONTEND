@@ -14,11 +14,11 @@ import { AppService } from 'src/app/services/app.service';
 import { removeTokenFromIndexedDB } from 'src/app/helpers/indexedDB';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
+  selector: 'dc-header',
+  templateUrl: './dc-header.component.html',
+  styleUrls: ['./dc-header.component.css'],
 })
-export class HeaderComponent implements OnInit {
+export class DcHeaderComponent implements OnInit {
 
   private subscription!: Subscription;
 

@@ -1,8 +1,48 @@
-<ng-container *ngIf="mainVM$ | async as vm">
-  <div *ngFor="let group of vm">
-    <h1>{{ group.serieName }}</h1>
-    <div *ngFor="let car of group.cars">
-      <app-basic-card [car]='car'></app-basic-card>
-    </div>
+<ng-container
+  *ngIf="{
+    cars: carsVM$ | async,
+    yearFilterOptions: yearFilterOptions$ | async,
+    seriesFilterOptions: seriesFilterOptions$ | async,
+    propertyFilterOptions: propertyFilterOptions
+  } as vm"
+>
+  <!-- Main container -->
+  <div class="main-container d_flex">
+    <!-- Side section -->
+    <aside class="w_25">
+      <dc-filter
+        [header]="'basic_cars.filter_year'"
+        [options]="vm.yearFilterOptions ?? []"
+        (selectedOption)="onYearSelected($event)"
+      >
+      </dc-filter>
+      <dc-filter
+        [header]="'basic_cars.filter_serie'"
+        [options]="vm.seriesFilterOptions ?? []"
+        (selectedOption)="onSeriesSelected($event)"
+      >
+      </dc-filter>
+      <dc-filter
+        [header]="'basic_cars.filter_serie'"
+        [options]="vm.propertyFilterOptions"
+        (selectedOption)="onPropertySelected($event)"
+      >
+      </dc-filter>
+    </aside>
+    <!-- List of cars -->
+    <main class="w_75">
+      <div class="group-container d_flex flex-direction_column gap_5">
+        <ng-container *ngFor="let group of vm.cars">
+          <div>
+            <h1>{{ group.serieName }}</h1>
+            <div class="cars-group d_flex flex_wrap gap_2">
+              <ng-container *ngFor="let car of group.cars">
+                <app-basic-card [car]="car"></app-basic-card>
+              </ng-container>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </main>
   </div>
 </ng-container>

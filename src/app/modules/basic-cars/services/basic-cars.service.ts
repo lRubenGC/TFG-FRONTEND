@@ -12,9 +12,9 @@ import { BasicCarsResponse, FiltersBody } from '../models/basic-cars.models';
 export class BasicCarsService {
   constructor(private http: HttpClient) {}
 
-  getCarsByYear(
+  public getCarsByYear(
     year: string,
-    filters?: FiltersBody
+    filters?: FiltersBody,
   ): Observable<BasicCarsResponse[]> {
     return from(getTokenFromIndexedDB()).pipe(
       mergeMap((token) => {
@@ -34,6 +34,18 @@ export class BasicCarsService {
           { headers }
         );
       })
+    );
+  }
+
+  public getAvailableYears(): Observable<string[]> {
+    return this.http.get<string[]>(
+      `${environment.apiBaseUrl}/api/available-filters/basic-years`
+    );
+  }
+
+  public getAvailableSeries(year: string): Observable<string[]> {
+    return this.http.get<string[]>(
+      `${environment.apiBaseUrl}/api/available-filters/basic-series?main=${year}`
     );
   }
 

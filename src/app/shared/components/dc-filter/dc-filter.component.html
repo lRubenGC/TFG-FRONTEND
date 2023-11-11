@@ -1,0 +1,8 @@
+<div class="dc-filter">
+  <h4>{{ header | translate }}</h4>
+  <select [formControl]="selectionControl">
+    <option *ngFor="let option of options$ | async" [value]="option">
+      {{ option | translate }}
+    </option>
+  </select>
+</div>

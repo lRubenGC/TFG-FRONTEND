@@ -15,8 +15,9 @@ import { GtagModule } from 'angular-gtag';
 // Module Views
 import { ComponentsModule } from './components/components.module';
 import { AuthGuard } from './guards/auth.guard';
-import { AuthModule } from './views/auth/auth.module';
 import { BasicCarsPageModule } from './modules/basic-cars/basic-cars.module';
+import { SharedModule } from './shared/shared.module';
+import { AuthModule } from './views/auth/auth.module';
 import { CustomCarsModule } from './views/custom-cars/custom-cars.module';
 import { DetailedCarPageModule } from './views/detailed-car-page/detailed-car-page.module';
 import { InfoModule } from './views/info/info.module';
@@ -56,6 +57,7 @@ import { UserModule } from './views/user/user.module';
     LandingPageModule,
     PremiumCarsPageModule,
     SearchResultsPageModule,
+    SharedModule,
     UserModule,
   ],
   providers: [AuthGuard],

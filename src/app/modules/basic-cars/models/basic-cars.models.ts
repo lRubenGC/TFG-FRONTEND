@@ -22,7 +22,17 @@ export interface FiltersBody {
 }
 
 export enum USER_PROPERTY {
+  ALL = 'ALL',
   OWNED = 'OWNED',
   WISHED = 'WISHED',
   NOT_OWNED = 'NOT_OWNED',
+}
+
+export function isUserProperty(value: string): value is USER_PROPERTY {
+  return (
+    value === 'ALL' ||
+    value === 'OWNED' ||
+    value === 'WISHED' ||
+    value === 'NOT_OWNED'
+  );
 }
