@@ -9,9 +9,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-// GA4
-import { GtagModule } from 'angular-gtag';
-
 // Module Views
 import { ComponentsModule } from './components/components.module';
 import { AuthGuard } from './guards/auth.guard';
@@ -43,9 +40,6 @@ import { UserModule } from './views/user/user.module';
         deps: [HttpClient],
       },
     }),
-
-    // GA4
-    GtagModule.forRoot({ trackingId: 'G-P9GYT9HZTD', trackPageviews: true }),
 
     // App Modules
     AuthModule,
