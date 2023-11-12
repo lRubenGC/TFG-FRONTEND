@@ -4,6 +4,9 @@
         "filter_serie": "Series",
         "filter_property": "Property"
     },
+    "header": {
+        "search_placeholder": "Search..."
+    },
     "ALL": "All",
     "OWNED": "Owned",
     "WISHED": "Wished",

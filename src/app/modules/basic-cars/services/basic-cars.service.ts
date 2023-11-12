@@ -14,7 +14,7 @@ export class BasicCarsService {
 
   public getCarsByYear(
     year: string,
-    filters?: FiltersBody,
+    filters?: FiltersBody
   ): Observable<BasicCarsResponse[]> {
     return from(getTokenFromIndexedDB()).pipe(
       mergeMap((token) => {
@@ -48,16 +48,4 @@ export class BasicCarsService {
       `${environment.apiBaseUrl}/api/available-filters/basic-series?main=${year}`
     );
   }
-
-  // getAvailableSeries(year: string): Observable<any> {
-  //   return this.http.get(
-  //     `${environment.apiBaseUrl}/api/available-series?main=${year}`
-  //   );
-  // }
-
-  // getUserCars(idUser: number): Observable<any> {
-  //   return this.http.get(
-  //     `${environment.apiBaseUrl}/api/user-basic-cars/${idUser}`
-  //   );
-  // }
 }

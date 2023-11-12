@@ -1,59 +1,36 @@
 :root {
-    --dark-primary-100:#FF4500;
-    --dark-primary-200:#ee6724;
-    --dark-primary-300:#ffe49a;
-    --dark-accent-100:#FFA500;
-    --dark-accent-200:#904a00;
-    --dark-text-100:#FFFFFF;
-    --dark-text-200:#e0e0e0;
-    --dark-bg-100:#01090e;
-    --dark-bg-100-opacity:rgb(8, 18, 25, .9);
-    --dark-bg-200:#2d2d2d;
-    --dark-bg-300:#454545;
+  /* DARK THEME */
+  --dark-text: #fff;
+  --dark-background: #010608;
+  --dark-primary: #ff4500;
+  --dark-secondary: #ee6724;
+  --dark-accent: #ffe49a;
+  --dark-divider: rgba(170, 170, 170, 0.2);
+  --dark-background-opacity: rgb(1, 6, 8, 0.9);
 
-    --light-primary-100:#FFC107;
-    --light-primary-200:#dda400;
-    --light-primary-300:#916400;
-    --light-accent-100:#FF5722;
-    --light-accent-200:#fff3b0;
-    --light-text-100:#212121;
-    --light-text-200:#484848;
-    --light-bg-100:#F5F5F5;
-    --light-bg-200:#ebebeb;
-    --light-bg-300:#c2c2c2;
+  /* LIGHGT THEME Por definir */
+  --light-text: #fff;
+  --light-background: #040301;
+  --light-primary: #ff4500;
+  --light-secondary: #ee6724;
+  --light-accent: #ffe49a;
+  --light-divider: #c9c9c9;
+  --light-background-opacity: rgb(8, 18, 25, 0.9);
 
-    --primary-100: var(--dark-primary-100);
-    --primary-200: var(--dark-primary-200);
-    --primary-300: var(--dark-primary-300);
-    --accent-100: var(--dark-accent-100);
-    --accent-200: var(--dark-accent-200);
-    --text-100: var(--dark-text-100);
-    --text-200: var(--dark-text-200);
-    --bg-100: var(--dark-bg-100);
-    --bg-100-opacity: var(--dark-bg-100-opacity);
-    --bg-200: var(--dark-bg-200);
-    --bg-300: var(--dark-bg-300);
-}
-
-body.light-theme {
-    --primary-100: var(--light-primary-100);
-    --primary-200: var(--light-primary-200);
-    --primary-300: var(--light-primary-300);
-    --accent-100: var(--light-accent-100);
-    --accent-200: var(--light-accent-200);
-    --text-100: var(--light-text-100);
-    --text-200: var(--light-text-200);
-    --bg-100: var(--light-bg-100);
-    --bg-100-opacity: var(--light-bg-100-opacity);
-    --bg-200: var(--light-bg-200);
-    --bg-300: var(--light-bg-300);
+  --text: var(--dark-text);
+  --background: var(--dark-background);
+  --primary: var(--dark-primary);
+  --secondary: var(--dark-secondary);
+  --accent: var(--dark-accent);
+  --divider: var(--dark-divider);
+  --background-opacity: var(--dark-background-opacity);
 }
 
 @font-face {
-    font-family: 'Inter';
-    src: url('./fonts/Inter-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "Inter";
+  src: url("./fonts/Inter-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 /* @font-face {
@@ -64,121 +41,124 @@ body.light-theme {
 } */
 
 * {
-    margin: 0;
-    padding: 0;
-    font-size: 16px;
-    font-family: 'Inter';
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-family: "Inter";
 }
 
 span {
-    font-size: 1em;
+  font-size: 1em;
 }
 
 body {
-    background: var(--dark-bg-100);
-    color: var(--dark-text-100);
+  background: var(--background);
+  color: var(--text);
 }
 
-h1, h2, h3, h4 {
-    /* font-family: 'DMSerif'; */
-    font-family: 'Righteous', sans-serif;
+h1,
+h2,
+h3,
+h4 {
+  /* font-family: 'DMSerif'; */
+  font-family: "Righteous", sans-serif;
 }
 
 h1 {
-    font-size: 38px;
+  font-size: 38px;
 }
 
 h2 {
-    font-size: 30px;
+  font-size: 30px;
 }
 
 h3 {
-    font-size: 26px;
+  font-size: 26px;
 }
 
 h4 {
-    font-size: 22px;
+  font-size: 22px;
 }
 
 @media only screen and (max-width: 1100px) {
-    h1 {
-        font-size: 34px;
-    }
-    
-    h2 {
-        font-size: 28px;
-    }
-    
-    h3 {
-        font-size: 24px;
-    }
-    
-    h4 {
-        font-size: 18px;
-    }
+  h1 {
+    font-size: 34px;
+  }
 
-    p,
-    button,
-    select,
-    option,
-    li {
-        font-size: 14px;
-    }
+  h2 {
+    font-size: 28px;
+  }
+
+  h3 {
+    font-size: 24px;
+  }
+
+  h4 {
+    font-size: 18px;
+  }
+
+  p,
+  button,
+  select,
+  option,
+  li {
+    font-size: 14px;
+  }
 }
 
 @media only screen and (max-width: 900px) {
-    h1 {
-        font-size: 33px;
-    }
-    
-    h2 {
-        font-size: 26px;
-    }
-    
-    h3 {
-        font-size: 22px;
-    }
-    
-    h4 {
-        font-size: 16px;
-    }
+  h1 {
+    font-size: 33px;
+  }
 
-    p,
-    button,
-    select,
-    option,
-    li {
-        font-size: 13px;
-    }
+  h2 {
+    font-size: 26px;
+  }
 
-    label,
-    input {
-        font-size: 14px;
-    }
+  h3 {
+    font-size: 22px;
+  }
+
+  h4 {
+    font-size: 16px;
+  }
+
+  p,
+  button,
+  select,
+  option,
+  li {
+    font-size: 13px;
+  }
+
+  label,
+  input {
+    font-size: 14px;
+  }
 }
 
 @media only screen and (max-width: 600px) {
-    h1 {
-        font-size: 32px;
-    }
-    
-    h2 {
-        font-size: 26px;
-    }
-    
-    h3 {
-        font-size: 22px;
-    }
-    
-    h4 {
-        font-size: 16px;
-    }
+  h1 {
+    font-size: 32px;
+  }
 
-    p,
-    button,
-    select,
-    option,
-    li {
-        font-size: 12px;
-    }
+  h2 {
+    font-size: 26px;
+  }
+
+  h3 {
+    font-size: 22px;
+  }
+
+  h4 {
+    font-size: 16px;
+  }
+
+  p,
+  button,
+  select,
+  option,
+  li {
+    font-size: 12px;
+  }
 }

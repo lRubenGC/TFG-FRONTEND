@@ -1,0 +1,43 @@
+.header-container {
+  position: fixed;
+  top: 0;
+  z-index: 8000;
+  padding: 0.25rem 2rem;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--divider);
+
+  .dt-logo {
+    cursor: pointer;
+    img {
+      width: 60px;
+    }
+  }
+
+  .dt-search-bar {
+    border: 1px solid grey;
+    border-radius: 4px;
+
+    input {
+      padding: 0.5rem;
+      border: none;
+      outline: none;
+      width: 500px;
+    }
+
+    .search-icon_container {
+      padding: 0 0.75rem;
+      cursor: pointer;
+
+      img {
+        width: 25px;
+      }
+    }
+  }
+
+  .dt-navbar {
+    img {
+      width: 40px;
+      border-radius: 50%;
+    }
+  }
+}
