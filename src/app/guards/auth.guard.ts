@@ -1,4 +1,4 @@
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { GenericAuthService } from '../services/generic-auth.service';
 import { getTokenFromIndexedDB } from '../helpers/indexedDB';
@@ -6,7 +6,7 @@ import { getTokenFromIndexedDB } from '../helpers/indexedDB';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AuthGuard  {
 
   constructor(
     private genericAuthService: GenericAuthService,
