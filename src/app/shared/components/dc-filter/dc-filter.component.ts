@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { BehaviorSubject, map } from 'rxjs';
 
 @Component({
@@ -25,7 +25,7 @@ export class DcFilterComponent {
   //#endregion OPTIONS
 
   //#region FORM
-  public selectionControl = new FormControl();
+  public selectionControl = new UntypedFormControl();
   //#endregion FORM
 
   constructor() {
