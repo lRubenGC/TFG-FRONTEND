@@ -11,18 +11,14 @@ import { UserData } from '../../models/user.models';
   styleUrls: ['./dc-header.component.scss'],
 })
 export class DcHeaderComponent {
-  //#region USERLOGO
-  public userLogoImage$: Observable<string> = from(decodeToken()).pipe(
+  //#region USER DATA
+  public userData$: Observable<UserData> = from(decodeToken()).pipe(
     switchMap((userIdToken: userIdToken) => {
       if (userIdToken && userIdToken.userId) {
-        return from(
-          this.userService
-            .getUserById(userIdToken.userId)
-            .pipe(switchMap((user: UserData) => of(user.img)))
-        );
-      } else return of('');
+        return from(this.userService.getUserById(userIdToken.userId));
+      } else return of();
     })
   );
-  //#endregion USERLOGO
+  //#endregion USER DATA
   constructor(private userService: UserService) {}
 }

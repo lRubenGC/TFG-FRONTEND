@@ -15,15 +15,29 @@
       type="text"
       [placeholder]="'header.search_placeholder' | translate"
     />
-    <div class="search-icon_container">
-        <img src="assets/icons/search_icon.svg">
+    <div class="search-icon_container d_flex align-items_center">
+      <img src="assets/icons/search_icon.svg" />
     </div>
   </div>
 
   <!-- Navbar -->
   <div class="dt-navbar">
-    <ng-container *ngIf="userLogoImage$ | async as userLogo">
-        <img [src]="userLogo" alt="">
+    <ng-container *ngIf="userData$ | async as userData">
+      <img
+        [src]="userData.img"
+        alt="user profile pic"
+        (click)="userMenu.toggle($event)"
+      />
+      <p-overlayPanel
+        #userMenu
+        [style]="{ 'min-width': '150px' }"
+        [appendTo]="'body'"
+      >
+        <div class="d_flex">
+          <img [src]="userData.img" style="width: 50px" />
+          <p>{{ userData.username }}</p>
+        </div>
+      </p-overlayPanel>
     </ng-container>
   </div>
 </header>
