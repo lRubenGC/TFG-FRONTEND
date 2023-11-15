@@ -1,6 +1,6 @@
 .header-container {
   position: fixed;
-  background-color: var(--background-dark);
+  background-color: var(--background-darker);
   top: 0;
   padding: 0.25rem 2rem;
   box-sizing: border-box;
@@ -14,7 +14,7 @@
   }
 
   .dt-search-bar {
-    border: 1px solid var(--divider);
+    border: 1px solid var(--grey);
     border-radius: 20px;
     background-color: var(--background);
 
@@ -44,5 +44,12 @@
       border-radius: 50%;
       cursor: pointer;
     }
+  }
+}
+
+.user-menu {
+  img {
+    width: 60px;
+    border-radius: 50%;
   }
 }

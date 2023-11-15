@@ -1,13 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject, map } from 'rxjs';
 
 @Component({
-  selector: 'dc-filter',
-  templateUrl: './dc-filter.component.html',
-  styleUrls: ['./dc-filter.component.css'],
+  selector: 'dc-dropdown',
+  standalone: true,
+  templateUrl: './dc-dropdown.component.html',
+  styleUrls: ['./dc-dropdown.component.css'],
+  imports: [CommonModule, TranslateModule, ReactiveFormsModule],
 })
-export class DcFilterComponent {
+export class DcDropdownComponent {
   //#region INPUTS
   @Input() header: string = '';
   @Input() set options(val: string[]) {

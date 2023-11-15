@@ -1,24 +1,27 @@
 @import "~primeng/resources/themes/saga-blue/theme.css";
 @import "~primeng/resources/primeng.min.css";
 @import "~primeicons/primeicons.css";
+@import "primeflex/primeflex.css";
 
 :root {
   /* DARK THEME */
   --dark-text: #fff;
   --dark-background: #010608;
-  --dark-background-dark: #000304;
+  --dark-background-lighter: #202020;
+  --dark-background-darker: #000304;
   --dark-background-contrast: #040814;
   --dark-primary: #ff4500;
   --dark-secondary: #ee6724;
   --dark-accent: #ffe49a;
-  --dark-divider: rgba(170, 170, 170, 0.2);
+  --dark-divider: rgba(238, 133, 22, 0.6);
   --dark-background-opacity: rgb(1, 6, 8, 0.9);
 
   /* LIGHGT THEME Por definir */
 
   --text: var(--dark-text);
   --background: var(--dark-background);
-  --background-dark: var(--dark-background-dark);
+  --background-lighter: var(--dark-background-lighter);
+  --background-darker: var(--dark-background-darker);
   --background-contrast: var(--dark-background-contrast);
   --primary: var(--dark-primary);
   --secondary: var(--dark-secondary);
@@ -27,7 +30,7 @@
   --background-opacity: var(--dark-background-opacity);
 
   /* GLOBAL COLORS */
-  --grey: rgb(24, 24, 24);
+  --grey: #626364;
 }
 
 @font-face {

@@ -32,7 +32,6 @@
             ],
             "styles": [
               "src/styles.css",
-              "src/assets/styles/helpers.css",
               "src/assets/styles/car-series.css"
             ],
             "scripts": []
@@ -101,7 +100,6 @@
             ],
             "styles": [
               "src/styles.css",
-              "src/assets/styles/helpers.css",
               "src/assets/styles/car-series.css"
             ],
             "scripts": []

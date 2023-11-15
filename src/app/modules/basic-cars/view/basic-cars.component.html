@@ -7,35 +7,35 @@
   } as vm"
 >
   <!-- Main container -->
-  <div class="main-container d_flex">
+  <div class="main-container flex">
     <!-- Side section -->
-    <aside class="w_25">
-      <dc-filter
+    <aside class="w-3">
+      <dc-dropdown>
         [header]="'basic_cars.filter_year'"
         [options]="vm.yearFilterOptions ?? []"
         (selectedOption)="onYearSelected($event)"
       >
-      </dc-filter>
-      <dc-filter
+      </dc-dropdown>
+      <dc-dropdown
         [header]="'basic_cars.filter_serie'"
         [options]="vm.seriesFilterOptions ?? []"
         (selectedOption)="onSeriesSelected($event)"
       >
-      </dc-filter>
-      <dc-filter
+      </dc-dropdown>
+      <dc-dropdown
         [header]="'basic_cars.filter_serie'"
         [options]="vm.propertyFilterOptions"
         (selectedOption)="onPropertySelected($event)"
       >
-      </dc-filter>
+      </dc-dropdown>
     </aside>
     <!-- List of cars -->
-    <main class="w_75">
-      <div class="group-container d_flex flex-direction_column gap_5">
+    <main class="w-9">
+      <div class="group-container flex flex-column gap_8">
         <ng-container *ngFor="let group of vm.cars">
           <div>
             <h1>{{ group.serieName }}</h1>
-            <div class="cars-group d_flex flex_wrap gap_2">
+            <div class="cars-group flex flex-wrap gap-5">
               <ng-container *ngFor="let car of group.cars">
                 <app-basic-card [car]="car"></app-basic-card>
               </ng-container>

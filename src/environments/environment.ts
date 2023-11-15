@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  appVersion: '1.0.5',
+  appVersion: '2.0.0',
   apiBaseUrl: 'http://localhost:8000'
 };
 

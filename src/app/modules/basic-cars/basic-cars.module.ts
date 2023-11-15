@@ -8,6 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BasicCarsView } from './view/basic-cars.component';
+import { DcDropdownComponent } from 'src/app/shared/components/dc-filter/dc-dropdown.component';
 
 @NgModule({
   declarations: [BasicCarsView],
@@ -18,6 +19,7 @@ import { BasicCarsView } from './view/basic-cars.component';
     TranslateModule,
     SharedModule,
     ComponentsModule,
+    DcDropdownComponent
   ],
 })
 export class BasicCarsPageModule {}
