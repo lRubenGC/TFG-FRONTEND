@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { OverlayPanel } from 'primeng/overlaypanel';
 import { Observable, from, of, switchMap } from 'rxjs';
 import { UserService } from 'src/app/shared/services/user.service';
 import { decodeToken } from '../../functions/token-functions';
@@ -21,4 +22,15 @@ export class DcHeaderComponent {
   );
   //#endregion USER DATA
   constructor(private userService: UserService) {}
+
+  //#region USER MENU OVERLAY
+  @ViewChild('userMenu', { static: false }) userMenu!: OverlayPanel;
+  public toggleUserMenu(event: any): void {
+    this.userMenu.toggle(event);
+    document.body.classList.toggle('no-scroll');
+  }
+  public onUserMenuClose(): void {
+    document.body.classList.remove('no-scroll');
+  }
+  //#endregion USER MENU OVERLAY
 }

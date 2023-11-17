@@ -1,6 +1,7 @@
 .header-container {
   position: fixed;
   background-color: var(--background-darker);
+  z-index: 8000;
   top: 0;
   padding: 0.25rem 2rem;
   box-sizing: border-box;
@@ -8,6 +9,9 @@
 
   .dt-logo {
     cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+
     img {
       width: 60px;
     }
@@ -52,4 +56,21 @@
     width: 60px;
     border-radius: 50%;
   }
+
+  .user-menu-button {
+    background-color: #101011;
+    color: #fff;
+    border: none;
+    height: 30px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .user-menu-button:hover {
+    background-color: var(--background-lighter);
+  }
+}
+
+::ng-deep.p-overlaypanel {
+  z-index: 9000 !important;
 }

@@ -19,14 +19,14 @@ import { PROPERTY_FILTER_OPTIONS } from '../models/basic-cars.constants';
 })
 export class BasicCarsView {
   //#region FILTERS
-  private yearFilterSubject = new BehaviorSubject<string>('');
+  public yearFilterSubject = new BehaviorSubject<string>('');
   public yearFilterOptions$: Observable<string[]> = this.basicCarsService
     .getAvailableYears()
     .pipe(
       tap((years) => (years ? this.yearFilterSubject.next(years[0]) : null))
     );
 
-  private seriesFilterSubject = new BehaviorSubject<string>('');
+  public seriesFilterSubject = new BehaviorSubject<string>('');
   public seriesFilterOptions$: Observable<string[]> =
     this.yearFilterSubject.pipe(
       switchMap((year) =>
@@ -37,7 +37,7 @@ export class BasicCarsView {
       )
     );
 
-  private propertyFilterSubject = new BehaviorSubject<USER_PROPERTY>(USER_PROPERTY.ALL);
+  public propertyFilterSubject = new BehaviorSubject<USER_PROPERTY>(USER_PROPERTY.ALL);
   public propertyFilterOptions = PROPERTY_FILTER_OPTIONS;
   //#endregion FILTERS
 
@@ -63,14 +63,6 @@ export class BasicCarsView {
     return this.basicCarsService
       .getCarsByYear(year, { mainSerie, userProperty })
       .pipe(map((response) => response));
-  }
-
-  public onYearSelected(year: string): void {
-    this.yearFilterSubject.next(year);
-  }
-
-  public onSeriesSelected(mainSerie: string): void {
-    this.seriesFilterSubject.next(mainSerie);
   }
 
   public onPropertySelected(userProperty: string): void {

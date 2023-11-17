@@ -10,20 +10,21 @@
   <div class="main-container flex">
     <!-- Side section -->
     <aside class="w-3">
-      <dc-dropdown>
+      <dc-dropdown
         [header]="'basic_cars.filter_year'"
         [options]="vm.yearFilterOptions ?? []"
-        (selectedOption)="onYearSelected($event)"
+        (selectedOption)="yearFilterSubject.next($event)"
       >
       </dc-dropdown>
       <dc-dropdown
         [header]="'basic_cars.filter_serie'"
         [options]="vm.seriesFilterOptions ?? []"
-        (selectedOption)="onSeriesSelected($event)"
+        (selectedOption)="seriesFilterSubject.next($event)"
       >
       </dc-dropdown>
+
       <dc-dropdown
-        [header]="'basic_cars.filter_serie'"
+        [header]="'basic_cars.filter_property'"
         [options]="vm.propertyFilterOptions"
         (selectedOption)="onPropertySelected($event)"
       >
