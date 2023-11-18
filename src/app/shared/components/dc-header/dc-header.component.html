@@ -52,13 +52,25 @@
           </div>
           <dc-divider></dc-divider>
           <div class="flex flex-column pt-2 pb-2">
-            <a
-              [routerLink]="['/user/profile/', userData.username]"
-              class="user-menu-button"
-              >a</a
-            >
-            <button class="user-menu-button">b</button>
-            <button class="user-menu-button">c</button>
+            <dc-user-menu-button
+              [type]="'anchor'"
+              [text]="'header.user_menu.go_to_profile'"
+              [link]="'/user/profile/'"
+              [linkObject]="userData.username"
+              [icon]="'pi pi-user'"
+            ></dc-user-menu-button>
+            <dc-user-menu-button
+              [type]="'anchor'"
+              [text]="'header.user_menu.edit_profile'"
+              [link]="'/user/config'"
+              [icon]="'pi pi-user-edit'"
+            ></dc-user-menu-button>
+            <dc-user-menu-button
+              [type]="'button'"
+              [text]="'header.user_menu.log_out'"
+              [icon]="'pi pi-power-off'"
+              (click)="logOut()"
+            ></dc-user-menu-button>
           </div>
         </div>
       </p-overlayPanel>

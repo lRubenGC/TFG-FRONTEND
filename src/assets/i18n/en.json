@@ -5,7 +5,12 @@
         "filter_property": "Property"
     },
     "header": {
-        "search_placeholder": "Search..."
+        "search_placeholder": "Search...",
+        "user_menu": {
+            "go_to_profile": "Your profile",
+            "edit_profile": "Edit profile",
+            "log_out": "Log out"
+        }
     },
     "ALL": "All",
     "OWNED": "Owned",

@@ -1,0 +1,16 @@
+<a
+  *ngIf="type === 'anchor'"
+  [routerLink]="[link, linkObject]"
+  class="user-menu-button flex align-items-center gap-2"
+>
+  <div [class]="icon"></div>
+  {{ text | translate }}
+</a>
+
+<button
+  *ngIf="type === 'button'"
+  class="user-menu-button flex align-items-center gap-2"
+>
+  <div [class]="icon"></div>
+  {{ text | translate }}
+</button>

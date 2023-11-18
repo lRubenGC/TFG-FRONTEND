@@ -33,4 +33,8 @@ export class DcHeaderComponent {
     document.body.classList.remove('no-scroll');
   }
   //#endregion USER MENU OVERLAY
+
+  public logOut() {
+    console.log('adios')
+  }
 }

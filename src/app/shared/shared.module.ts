@@ -6,6 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { DcDividerComponent } from './components/dc-divider/dc-divider.component';
 import { DcHeaderComponent } from './components/dc-header/dc-header.component';
+import { DcUserMenuButtonComponent } from './components/dc-user-menu-button/dc-user-menu-button.component';
 
 @NgModule({
   declarations: [DcHeaderComponent],
@@ -16,6 +17,7 @@ import { DcHeaderComponent } from './components/dc-header/dc-header.component';
     BrowserAnimationsModule,
     RouterModule,
     DcDividerComponent,
+    DcUserMenuButtonComponent,
   ],
   exports: [DcHeaderComponent],
 })

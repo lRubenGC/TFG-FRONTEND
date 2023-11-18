@@ -1,0 +1,14 @@
+.user-menu-button {
+  background-color: #101011;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  width: 100%;
+  border: none;
+  padding: .5rem 1rem;
+  font-size: 15px;
+}
+
+.user-menu-button:hover {
+  background-color: var(--background-lighter);
+}
