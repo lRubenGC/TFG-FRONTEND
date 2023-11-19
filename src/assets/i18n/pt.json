@@ -1,0 +1,23 @@
+{
+    "basic_cars": {
+        "filter_year": "Ano",
+        "filter_serie": "Series",
+        "filter_property": "Propriedade"
+    },
+    "header": {
+        "search_placeholder": "Procurar...",
+        "user_menu": {
+            "sign_in": "Iniciar sessão",
+            "go_to_profile": "Seu perfil",
+            "edit_profile": "Editar perfil",
+            "log_out": "Sair",
+            "lang": "Idioma",
+            "theme": "Aspecto",
+            "language_options": {
+                "en": "Inglês",
+                "es": "Espanhol",
+                "pt": "Português"
+            }
+        }
+    }
+}

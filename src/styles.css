@@ -13,7 +13,7 @@
   --dark-primary: #ee8516;
   --dark-secondary: red;
   --dark-accent: #ffe49a;
-  --dark-divider: rgba(238, 133, 22, 0.6);
+  --dark-orange-divider: rgba(238, 133, 22, 0.6);
   --dark-background-opacity: rgb(1, 6, 8, 0.9);
 
   /* LIGHGT THEME Por definir */
@@ -26,7 +26,7 @@
   --primary: var(--dark-primary);
   --secondary: var(--dark-secondary);
   --accent: var(--dark-accent);
-  --divider: var(--dark-divider);
+  --orange-divider: var(--dark-orange-divider);
   --background-opacity: var(--dark-background-opacity);
 
   /* GLOBAL COLORS */

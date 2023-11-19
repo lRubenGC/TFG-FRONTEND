@@ -7,9 +7,17 @@
     "header": {
         "search_placeholder": "Search...",
         "user_menu": {
+            "sign_in": "Sign in",
             "go_to_profile": "Your profile",
             "edit_profile": "Edit profile",
-            "log_out": "Log out"
+            "log_out": "Log out",
+            "lang": "Language",
+            "theme": "Theme",
+            "language_options": {
+                "en": "English",
+                "es": "Spanish",
+                "pt": "Portuguese"
+            }
         }
     },
     "ALL": "All",

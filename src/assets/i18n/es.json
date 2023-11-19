@@ -1,15 +1,23 @@
 {
     "basic_cars": {
         "filter_year": "Año",
-        "filter_serie": "Serie",
+        "filter_serie": "Series",
         "filter_property": "Propiedad"
     },
     "header": {
         "search_placeholder": "Buscar...",
         "user_menu": {
+            "sign_in": "Iniciar sesión",
             "go_to_profile": "Tu perfil",
             "edit_profile": "Editar perfil",
-            "log_out": "Desconectarse"
+            "log_out": "Cerrar sesión",
+            "lang": "Idioma",
+            "theme": "Aspecto",
+            "language_options": {
+                "en": "Inglés",
+                "es": "Español",
+                "pt": "Portugués"
+            }
         }
     },
     "ALL": "Todos",

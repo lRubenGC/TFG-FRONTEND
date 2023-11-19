@@ -1,10 +1,18 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, HostListener, ViewChild } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { Observable, from, of, switchMap } from 'rxjs';
+import { GenericAuthService } from 'src/app/services/generic-auth.service';
+import { LanguageService } from 'src/app/services/language.service';
 import { UserService } from 'src/app/shared/services/user.service';
-import { decodeToken } from '../../functions/token-functions';
+import { AuthService } from 'src/app/views/auth/auth.service';
+import {
+  decodeToken,
+  removeTokenFromIndexedDB,
+} from '../../functions/token-functions';
 import { userIdToken } from '../../models/token.models';
 import { UserData } from '../../models/user.models';
+import { LANGUAGE_OPTIONS } from './dc-header.constants';
 
 @Component({
   selector: 'dc-header',
@@ -13,28 +21,45 @@ import { UserData } from '../../models/user.models';
 })
 export class DcHeaderComponent {
   //#region USER DATA
-  public userData$: Observable<UserData> = from(decodeToken()).pipe(
+  public userData$: Observable<UserData | null> = from(decodeToken()).pipe(
     switchMap((userIdToken: userIdToken) => {
       if (userIdToken && userIdToken.userId) {
         return from(this.userService.getUserById(userIdToken.userId));
-      } else return of();
+      } else return of(null);
     })
   );
   //#endregion USER DATA
-  constructor(private userService: UserService) {}
 
-  //#region USER MENU OVERLAY
+  //#region USER MENU SCROLL
   @ViewChild('userMenu', { static: false }) userMenu!: OverlayPanel;
-  public toggleUserMenu(event: any): void {
-    this.userMenu.toggle(event);
-    document.body.classList.toggle('no-scroll');
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(e: Event) {
+    this.userMenu.hide();
   }
-  public onUserMenuClose(): void {
-    document.body.classList.remove('no-scroll');
-  }
-  //#endregion USER MENU OVERLAY
+  //#endregion USER MENU SCROLL
 
-  public logOut() {
-    console.log('adios')
+  constructor(
+    private userService: UserService,
+    private languageService: LanguageService,
+    private translate: TranslateService,
+    private authService: AuthService,
+    private genericAuthService: GenericAuthService
+  ) {}
+
+  //#region LANGUAGE OPTIONS
+  public languageOptions = LANGUAGE_OPTIONS;
+  //#endregion LANGUAGE OPTIONS
+
+  public changeLanguage(languageSelected: string): void {
+    this.translate.use(languageSelected);
+    this.languageService.changeLanguage(languageSelected);
+  }
+
+  public async logOut() {
+    this.genericAuthService.logout();
+
+    await removeTokenFromIndexedDB();
+    this.authService.setUserLoggedIn(false);
+    window.location.reload();
   }
 }
