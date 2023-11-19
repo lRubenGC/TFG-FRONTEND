@@ -3,13 +3,14 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject, map } from 'rxjs';
+import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
   selector: 'dc-dropdown',
   standalone: true,
   templateUrl: './dc-dropdown.component.html',
   styleUrls: ['./dc-dropdown.component.css'],
-  imports: [CommonModule, TranslateModule, ReactiveFormsModule],
+  imports: [CommonModule, TranslateModule, ReactiveFormsModule, DropdownModule],
 })
 export class DcDropdownComponent {
   //#region INPUTS
