@@ -9,12 +9,19 @@
   --dark-background: #010608;
   --dark-background-lighter: #202020;
   --dark-background-darker: #000304;
-  --dark-background-contrast: #040814;
-  --dark-primary: #ee8516;
-  --dark-secondary: red;
-  --dark-accent: #ffe49a;
-  --dark-orange-divider: rgba(238, 133, 22, 0.6);
   --dark-background-opacity: rgb(1, 6, 8, 0.9);
+  --dark-primary-50: #fef9ee;
+  --dark-primary-100: #fdf1d7;
+  --dark-primary-200: #fadfae;
+  --dark-primary-300: #f7c77a;
+  --dark-primary-400: #f2a545;
+  --dark-primary-500: #ee8516;
+  --dark-primary-600: #e07016;
+  --dark-primary-700: #ba5514;
+  --dark-primary-800: #944418;
+  --dark-primary-900: #773917;
+  --dark-primary-950: #401c0a;
+  --dark-orange-divider: rgba(238, 133, 22, 0.6);
 
   /* LIGHGT THEME Por definir */
 
@@ -22,15 +29,43 @@
   --background: var(--dark-background);
   --background-lighter: var(--dark-background-lighter);
   --background-darker: var(--dark-background-darker);
-  --background-contrast: var(--dark-background-contrast);
-  --primary: var(--dark-primary);
-  --secondary: var(--dark-secondary);
-  --accent: var(--dark-accent);
-  --orange-divider: var(--dark-orange-divider);
   --background-opacity: var(--dark-background-opacity);
+  --primary-50: var(--dark-primary-50);
+  --primary-100: var(--dark-primary-100);
+  --primary-200: var(--dark-primary-200);
+  --primary-300: var(--dark-primary-300);
+  --primary-400: var(--dark-primary-400);
+  --primary-500: var(--dark-primary-500);
+  --primary-600: var(--dark-primary-600);
+  --primary-700: var(--dark-primary-700);
+  --primary-800: var(--dark-primary-800);
+  --primary-900: var(--dark-primary-900);
+  --primary-950: var(--dark-primary-950);
+  --orange-divider: var(--dark-orange-divider);
 
   /* GLOBAL COLORS */
-  --grey: #626364;
+  --grey-50: #f5f6f6;
+  --grey-100: #e6e7e7;
+  --grey-200: #d0d1d1;
+  --grey-300: #afb0b1;
+  --grey-400: #878889;
+  --grey-500: #6c6d6e;
+  --grey-600: #626364;
+  --grey-700: #4e4e50;
+  --grey-800: #444446;
+  --grey-900: #3c3d3d;
+  --grey-950: #262626;
+  --green-50: #f1fdf0;
+  --green-100: #ddfcdc;
+  --green-200: #bcf7bb;
+  --green-300: #87ef86;
+  --green-400: #49df49;
+  --green-500: #21c621;
+  --green-600: #17b017;
+  --green-700: #158016;
+  --green-800: #166517;
+  --green-900: #145316;
+  --green-950: #052e07;
 }
 
 @font-face {
@@ -66,7 +101,9 @@ body {
 h1,
 h2,
 h3,
-h4 {
+h4,
+h5,
+h6 {
   /* font-family: 'DMSerif'; */
   font-family: "Righteous", sans-serif;
 }
@@ -85,6 +122,14 @@ h3 {
 
 h4 {
   font-size: 22px;
+}
+
+h5 {
+  font-size: 20px;
+}
+
+h6 {
+  font-size: 18px;
 }
 
 @media only screen and (max-width: 1100px) {

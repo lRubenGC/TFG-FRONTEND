@@ -1,9 +1,9 @@
 export interface BasicCarsResponse {
   serieName: string;
-  cars: BasicCar[];
+  cars: IBasicCar[];
 }
 
-export interface BasicCar {
+export interface IBasicCar {
   id: number;
   car_id: string;
   col: string;
@@ -14,6 +14,8 @@ export interface BasicCar {
   year: string;
   brand: string;
   img: string;
+  has_car?: boolean;
+  wants_car?: boolean;
 }
 
 export interface FiltersBody {

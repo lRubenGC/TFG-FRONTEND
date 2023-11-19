@@ -7,5 +7,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./dc-divider.component.scss'],
 })
 export class DcDividerComponent {
-  @Input() backgroundColor: string = 'var(--grey)';
+  @Input() backgroundColor: string = 'var(--grey-500)';
+  @Input() opacity: string = '1';
 }

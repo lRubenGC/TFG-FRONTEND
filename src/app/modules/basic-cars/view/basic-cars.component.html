@@ -9,41 +9,43 @@
   <!-- Main container -->
   <div class="main-container flex">
     <!-- Aside section -->
-    <aside class="w-2">
-      <dc-dropdown
+    <aside class="w-2 flex flex-column gap-2">
+      <dc-filter
         [header]="'basic_cars.filter_year'"
         [options]="vm.yearFilterOptions ?? []"
         (selectedOption)="yearFilterSubject.next($event)"
       >
-      </dc-dropdown>
-      <dc-dropdown
+      </dc-filter>
+      <dc-filter
         [header]="'basic_cars.filter_serie'"
         [options]="vm.seriesFilterOptions ?? []"
         (selectedOption)="seriesFilterSubject.next($event)"
       >
-      </dc-dropdown>
+      </dc-filter>
 
-      <dc-dropdown
+      <dc-filter
         [header]="'basic_cars.filter_property'"
         [options]="vm.propertyFilterOptions"
         (selectedOption)="onPropertySelected($event)"
       >
-      </dc-dropdown>
+      </dc-filter>
     </aside>
     <!-- List of cars -->
-    <main class="w-10">
-      <div class="group-container flex flex-column gap_8">
-        <ng-container *ngFor="let group of vm.cars">
-          <div>
-            <h1>{{ group.serieName }}</h1>
-            <div class="cars-group flex flex-wrap gap-5">
-              <ng-container *ngFor="let car of group.cars">
-                <app-basic-card [car]="car"></app-basic-card>
-              </ng-container>
-            </div>
+    <main class="w-10 flex flex-column gap-8">
+      <ng-container *ngFor="let group of vm.cars">
+        <div>
+          <h4>{{ group.serieName }}</h4>
+          <dc-divider
+            [backgroundColor]="'var(--grey-300)'"
+            [opacity]="'0.5'"
+          ></dc-divider>
+          <div class="cars-grouped">
+            <ng-container *ngFor="let car of group.cars">
+              <dc-basic-card [car]="car"></dc-basic-card>
+            </ng-container>
           </div>
-        </ng-container>
-      </div>
+        </div>
+      </ng-container>
     </main>
   </div>
 </ng-container>

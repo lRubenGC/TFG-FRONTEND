@@ -1,0 +1,19 @@
+<div class="basic-card-container w-full flex flex-column">
+  <img [src]="car.img" alt="Car Image" />
+  <p class="item">{{ car.model_name }}</p>
+  <div class="item flex justify-content-between">
+    <p>{{ car.version }}</p>
+    <p>{{ car.col_serie }}</p>
+  </div>
+  <div class="item flex justify-content-between">
+    <p>{{ car.car_id }}</p>
+    <i
+      *ngIf="car.has_car || car.wants_car"
+      class="pi pi-heart-fill"
+      [ngClass]="{
+        owned: car.has_car,
+        wished: car.wants_car
+      }"
+    ></i>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+.basic-card-container {
+  overflow: hidden;
+  img {
+    height: 125px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  .item {
+    padding: 0 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .owned {
+    color: var(--green-500);
+  }
+  .wished {
+    color: var(--primary-500);
+  }
+}

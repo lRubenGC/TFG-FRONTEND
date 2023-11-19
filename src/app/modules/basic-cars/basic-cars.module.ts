@@ -6,9 +6,11 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { ComponentsModule } from 'src/app/components/components.module';
+import { DcFilterComponent } from 'src/app/shared/components/dc-filter/dc-filter.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BasicCarsView } from './view/basic-cars.component';
-import { DcDropdownComponent } from 'src/app/shared/components/dc-dropdown/dc-dropdown.component';
+import { DcDividerComponent } from 'src/app/shared/components/dc-divider/dc-divider.component';
+import { DcBasicCardComponent } from 'src/app/shared/components/dc-basic-card/dc-basic-card.component';
 
 @NgModule({
   declarations: [BasicCarsView],
@@ -18,8 +20,9 @@ import { DcDropdownComponent } from 'src/app/shared/components/dc-dropdown/dc-dr
     HttpClientModule,
     TranslateModule,
     SharedModule,
-    ComponentsModule,
-    DcDropdownComponent
+    DcFilterComponent,
+    DcDividerComponent,
+    DcBasicCardComponent
   ],
 })
 export class BasicCarsPageModule {}
