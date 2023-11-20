@@ -24,5 +24,13 @@
         "pt": "Português"
       }
     }
+  },
+  "toast": {
+    "success": "Sucesso",
+    "error": "Erro",
+    "car_added_collection": "Carro adicionado à sua coleção",
+    "car_added_wishlist": "Carro adicionado à sua lista de desejos",
+    "car_removed_collection": "Carro removido da sua coleção",
+    "car_removed_wishlist": "Carro removido da sua lista de desejos"
   }
 }

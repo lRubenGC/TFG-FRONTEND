@@ -25,6 +25,14 @@
       }
     }
   },
+  "toast": {
+    "success": "Success",
+    "error": "Error",
+    "car_added_collection": "Car added to your collection",
+    "car_added_wishlist": "Car added to your wishlist",
+    "car_removed_collection": "Car removed from your collection",
+    "car_removed_wishlist": "Car removed from your wishlist"
+  },
   "ABOUT_CW_PARAGRAPH1": "Hello everyone and welcome to Diecast Tracker. My name is Ruben, and among other things I am a web developer and collector.",
   "ABOUT_CW_PARAGRAPH2": "As a collector, I have always missed a tool to help me keep track of my collection, especially when I started, I didn't know how the cars were organized, basic series, premium, by years, by secondary series... I looked for it and didn't find much.",
   "ABOUT_CW_PARAGRAPH3": "As a developer, to finish my studies, I needed to create a web project, I thought about the aforementioned and that's how Diecast Tracker was born. I asked on Reddit if people liked the idea and to my surprise there were several people who supported it, so I got to work. I finished the course and everything went very well.",

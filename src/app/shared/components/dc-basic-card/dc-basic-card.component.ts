@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IBasicCar } from 'src/app/modules/basic-cars/models/basic-cars.models';
 import { decodeToken } from '../../functions/token-functions';
 import { IPROPERTY_TYPE } from '../../models/basic-cars-shared.models';
+import { ITOAST_OBJECT } from '../../models/toast-shared.models';
 import { userIdToken } from '../../models/token-shared.models';
 import { BasicCarsSharedService } from '../../services/basic-cars-shared.service';
 
@@ -18,6 +19,10 @@ export class DcBasicCardComponent implements OnInit {
   @Input() car!: IBasicCar;
   @Input() showYear?: boolean = false;
   //#endregion INPUTS
+
+  //#region OUTPUTS
+  @Output() triggerToast = new EventEmitter<ITOAST_OBJECT>();
+  //#endregion OUTPUTS
 
   //#region PROPS
   private userToken: userIdToken = { hasToken: false };
@@ -35,10 +40,26 @@ export class DcBasicCardComponent implements OnInit {
         .addCarToUser(this.userToken.userId, this.car.id, propertyType)
         .subscribe({
           next: (resp) => {
-            if (propertyType.hasCar) {
-              this.car.has_car = true;
-              this.car.wants_car = false;
-            } else this.car.wants_car = true;
+            if (resp.ok) {
+              if (propertyType.hasCar) {
+                this.car.has_car = true;
+                this.car.wants_car = false;
+
+                this.triggerToast.emit({
+                  severity: 'success',
+                  summary: 'toast.success',
+                  detail: 'toast.car_added_collection',
+                });
+              }
+              if (propertyType.wantsCar) {
+                this.car.wants_car = true;
+                this.triggerToast.emit({
+                  severity: 'success',
+                  summary: 'toast.success',
+                  detail: 'toast.car_added_wishlist',
+                });
+              }
+            }
           },
           error: (error) => {},
         });
@@ -51,8 +72,24 @@ export class DcBasicCardComponent implements OnInit {
         .removeBasicCar(this.userToken.userId, this.car.id)
         .subscribe({
           next: (resp) => {
-            this.car.has_car = false;
-            this.car.wants_car = false;
+            if (resp.ok) {
+              if (this.car.has_car) {
+                this.car.has_car = false;
+                this.triggerToast.emit({
+                  severity: 'success',
+                  summary: 'toast.success',
+                  detail: 'toast.car_removed_collection',
+                });
+              }
+              if (this.car.wants_car) {
+                this.car.wants_car = false;
+                this.triggerToast.emit({
+                  severity: 'success',
+                  summary: 'toast.success',
+                  detail: 'toast.car_removed_wishlist',
+                });
+              }
+            }
           },
           error: (error) => {},
         });

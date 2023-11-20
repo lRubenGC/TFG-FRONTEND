@@ -1,16 +1,24 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { MessageService } from 'primeng/api';
 import {
   BehaviorSubject,
   Observable,
   combineLatest,
+  lastValueFrom,
   map,
   of,
   switchMap,
   tap,
 } from 'rxjs';
-import { BasicCarsResponse, USER_PROPERTY, isUserProperty } from '../models/basic-cars.models';
-import { BasicCarsService } from '../services/basic-cars.service';
+import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
 import { PROPERTY_FILTER_OPTIONS } from '../models/basic-cars.constants';
+import {
+  BasicCarsResponse,
+  USER_PROPERTY,
+  isUserProperty,
+} from '../models/basic-cars.models';
+import { BasicCarsService } from '../services/basic-cars.service';
 
 @Component({
   selector: 'basic-cars',
@@ -37,7 +45,9 @@ export class BasicCarsView {
       )
     );
 
-  public propertyFilterSubject = new BehaviorSubject<USER_PROPERTY>(USER_PROPERTY.ALL);
+  public propertyFilterSubject = new BehaviorSubject<USER_PROPERTY>(
+    USER_PROPERTY.ALL
+  );
   public propertyFilterOptions = PROPERTY_FILTER_OPTIONS;
   //#endregion FILTERS
 
@@ -45,15 +55,21 @@ export class BasicCarsView {
   public carsVM$: Observable<BasicCarsResponse[]> = combineLatest([
     this.yearFilterSubject,
     this.seriesFilterSubject,
-    this.propertyFilterSubject
+    this.propertyFilterSubject,
   ]).pipe(
     switchMap(([year, serie, property]) =>
-      year && serie && property ? this.getBasicCars(year, serie, property) : of([])
+      year && serie && property
+        ? this.getBasicCars(year, serie, property)
+        : of([])
     )
   );
   //#endregion CARS VM
 
-  constructor(private basicCarsService: BasicCarsService) {}
+  constructor(
+    private basicCarsService: BasicCarsService,
+    private messageService: MessageService,
+    private translate: TranslateService
+  ) {}
 
   private getBasicCars(
     year: string,
@@ -69,5 +85,20 @@ export class BasicCarsView {
     if (isUserProperty(userProperty)) {
       this.propertyFilterSubject.next(userProperty);
     }
+  }
+
+  public async showToast(toastObject: ITOAST_OBJECT) {
+    const summaryT = this.translate.get(toastObject.summary);
+    const summary = await lastValueFrom(summaryT);
+
+    const detailT = this.translate.get(toastObject.detail);
+    const detail = await lastValueFrom(detailT);
+    
+    this.messageService.add({
+      key: 'br',
+      severity: toastObject.severity,
+      summary: summary,
+      detail: detail,
+    });
   }
 }

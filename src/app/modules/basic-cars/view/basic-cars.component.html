@@ -41,7 +41,10 @@
           ></dc-divider>
           <div class="cars-grouped">
             <ng-container *ngFor="let car of group.cars">
-              <dc-basic-card [car]="car"></dc-basic-card>
+              <dc-basic-card
+                [car]="car"
+                (triggerToast)="showToast($event)"
+              ></dc-basic-card>
             </ng-container>
           </div>
         </div>
@@ -49,3 +52,5 @@
     </main>
   </div>
 </ng-container>
+
+<p-toast position="bottom-right" key="br"></p-toast>

@@ -1,4 +1,5 @@
 .header-container {
+  height: 70px;
   position: fixed;
   background-color: var(--background-darker);
   z-index: 5000;
@@ -60,4 +61,7 @@
 
 ::ng-deep.p-overlaypanel {
   z-index: 6000 !important;
+}
+::ng-deep.p-overlaypanel .p-overlaypanel-content {
+  padding: 0 !important;
 }
