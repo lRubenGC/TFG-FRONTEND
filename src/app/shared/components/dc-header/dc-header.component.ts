@@ -4,14 +4,14 @@ import { OverlayPanel } from 'primeng/overlaypanel';
 import { Observable, from, of, switchMap } from 'rxjs';
 import { GenericAuthService } from 'src/app/services/generic-auth.service';
 import { LanguageService } from 'src/app/services/language.service';
-import { UserService } from 'src/app/shared/services/user.service';
+import { UserSharedService } from 'src/app/shared/services/user-shared.service';
 import { AuthService } from 'src/app/views/auth/auth.service';
 import {
   decodeToken,
   removeTokenFromIndexedDB,
 } from '../../functions/token-functions';
-import { userIdToken } from '../../models/token.models';
-import { UserData } from '../../models/user.models';
+import { userIdToken } from '../../models/token-shared.models';
+import { UserData } from '../../models/user-shared.models';
 import { LANGUAGE_OPTIONS } from './dc-header.constants';
 
 @Component({
@@ -24,7 +24,7 @@ export class DcHeaderComponent {
   public userData$: Observable<UserData | null> = from(decodeToken()).pipe(
     switchMap((userIdToken: userIdToken) => {
       if (userIdToken && userIdToken.userId) {
-        return from(this.userService.getUserById(userIdToken.userId));
+        return from(this.userSharedService.getUserById(userIdToken.userId));
       } else return of(null);
     })
   );
@@ -39,7 +39,7 @@ export class DcHeaderComponent {
   //#endregion USER MENU SCROLL
 
   constructor(
-    private userService: UserService,
+    private userSharedService: UserSharedService,
     private languageService: LanguageService,
     private translate: TranslateService,
     private authService: AuthService,
