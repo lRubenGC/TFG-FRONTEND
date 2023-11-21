@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
 import {
@@ -26,30 +27,60 @@ import { BasicCarsService } from '../services/basic-cars.service';
   styleUrls: ['./basic-cars.component.scss'],
 })
 export class BasicCarsView {
-  //#region FILTERS
+  //#region YEAR FILTER
   public yearFilterSubject = new BehaviorSubject<string>('');
-  public yearFilterOptions$: Observable<string[]> = this.basicCarsService
-    .getAvailableYears()
-    .pipe(
-      tap((years) => (years ? this.yearFilterSubject.next(years[0]) : null))
-    );
+  public yearFilterOptions$: Observable<string[]> = combineLatest([
+    this.basicCarsService.getAvailableYears(),
+    this.activatedRoute.queryParams,
+  ]).pipe(
+    tap(([years, queryParams]) => {
+      if (queryParams['year']) {
+        this.yearFilterSubject.next(queryParams['year']);
+      } else if (years) {
+        this.yearFilterSubject.next(years[0]);
+      }
+    }),
+    map(([years]) => years)
+  );
+  //#endregion YEAR FILTER
 
+  //#region SERIES FILTER
   public seriesFilterSubject = new BehaviorSubject<string>('');
-  public seriesFilterOptions$: Observable<string[]> =
-    this.yearFilterSubject.pipe(
-      switchMap((year) =>
-        year ? this.basicCarsService.getAvailableSeries(year) : of([])
-      ),
-      tap((series) =>
-        series ? this.seriesFilterSubject.next(series[0]) : of([])
-      )
-    );
+  public seriesFilterOptions$: Observable<string[]> = combineLatest([
+    this.yearFilterSubject,
+    this.activatedRoute.queryParams,
+  ]).pipe(
+    switchMap(([year, queryParams]) =>
+      year
+        ? this.basicCarsService
+            .getAvailableSeries(year)
+            .pipe(map((series) => ({ series, queryParams })))
+        : of({ series: [], queryParams })
+    ),
+    tap(({ series, queryParams }) => {
+      if (queryParams['series']) {
+        this.seriesFilterSubject.next(queryParams['series']);
+      } else if (series) {
+        this.seriesFilterSubject.next(series[0]);
+      }
+    }),
+    map(({ series }) => series)
+  );
+  //#endregion SERIES FILTER
 
+  //#region PROPERTY FILTER
   public propertyFilterSubject = new BehaviorSubject<USER_PROPERTY>(
     USER_PROPERTY.ALL
   );
-  public propertyFilterOptions = PROPERTY_FILTER_OPTIONS;
-  //#endregion FILTERS
+  public propertyFilterOptions = this.activatedRoute.queryParams.pipe(
+    tap((queryParams) => {
+      if (queryParams['property']) {
+        this.propertyFilterSubject.next(queryParams['property']);
+      }
+    }),
+    map(() => PROPERTY_FILTER_OPTIONS)
+  );
+  //#endregion PROPERTY FILTER
 
   //#region CARS VM
   public carsVM$: Observable<BasicCarsResponse[]> = combineLatest([
@@ -57,17 +88,26 @@ export class BasicCarsView {
     this.seriesFilterSubject,
     this.propertyFilterSubject,
   ]).pipe(
-    switchMap(([year, serie, property]) =>
-      year && serie && property
-        ? this.getBasicCars(year, serie, property)
+    tap(([year, series, property]) => {
+      this.router.navigate([], {
+        relativeTo: this.activatedRoute,
+        queryParams: { year, series, property },
+        queryParamsHandling: 'merge',
+      });
+    }),
+    switchMap(([year, series, property]) =>
+      year && series && property
+        ? this.getBasicCars(year, series, property)
         : of([])
     )
   );
   //#endregion CARS VM
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     private basicCarsService: BasicCarsService,
     private messageService: MessageService,
+    private router: Router,
     private translate: TranslateService
   ) {}
 
@@ -93,7 +133,7 @@ export class BasicCarsView {
 
     const detailT = this.translate.get(toastObject.detail);
     const detail = await lastValueFrom(detailT);
-    
+
     this.messageService.add({
       key: 'br',
       severity: toastObject.severity,

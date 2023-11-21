@@ -3,7 +3,7 @@
     cars: carsVM$ | async,
     yearFilterOptions: yearFilterOptions$ | async,
     seriesFilterOptions: seriesFilterOptions$ | async,
-    propertyFilterOptions: propertyFilterOptions
+    propertyFilterOptions: propertyFilterOptions | async
   } as vm"
 >
   <!-- Main container -->
@@ -13,19 +13,22 @@
       <dc-filter
         [header]="'basic_cars.filter_year'"
         [options]="vm.yearFilterOptions ?? []"
+        [filterInit]="(yearFilterSubject | async) ?? ''"
         (selectedOption)="yearFilterSubject.next($event)"
       >
       </dc-filter>
       <dc-filter
         [header]="'basic_cars.filter_serie'"
         [options]="vm.seriesFilterOptions ?? []"
+        [filterInit]="(seriesFilterSubject | async) ?? ''"
         (selectedOption)="seriesFilterSubject.next($event)"
       >
       </dc-filter>
 
       <dc-filter
         [header]="'basic_cars.filter_property'"
-        [options]="vm.propertyFilterOptions"
+        [options]="vm.propertyFilterOptions ?? []"
+        [filterInit]="(propertyFilterSubject | async) ?? ''"
         (selectedOption)="onPropertySelected($event)"
       >
       </dc-filter>

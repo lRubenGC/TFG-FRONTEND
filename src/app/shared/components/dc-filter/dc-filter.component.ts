@@ -17,6 +17,9 @@ export class DcFilterComponent {
   @Input() set options(val: string[]) {
     this.optionsSubject.next(val);
   }
+  @Input() set filterInit(val: string) {
+    this.filterInitSubject.next(val);
+  }
   //#endregion INPUTS
 
   //#region OUTPUTS
@@ -28,16 +31,18 @@ export class DcFilterComponent {
   public options$ = this.optionsSubject.asObservable();
   //#endregion OPTIONS
 
+  //#region FILTER INIT
+  private filterInitSubject = new BehaviorSubject<string>('');
+  //#endregion FILTER INIT
+
   //#region FORM
   public selectionControl = new UntypedFormControl();
   //#endregion FORM
 
   constructor() {
-    this.options$
-      .pipe(map((options) => (options.length > 0 ? [options[0]] : null)))
-      .subscribe((value) => {
-        this.selectionControl.setValue(value, { emitEvent: false });
-      });
+    this.filterInitSubject.subscribe((val) => {
+      this.selectionControl.setValue(val, { emitEvent: false });
+    })
 
     this.selectionControl.valueChanges.subscribe((selection) => {
       this.selectedOption.emit(selection);
