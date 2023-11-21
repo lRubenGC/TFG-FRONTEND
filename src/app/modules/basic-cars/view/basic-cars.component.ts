@@ -58,7 +58,7 @@ export class BasicCarsView {
         : of({ series: [], queryParams })
     ),
     tap(({ series, queryParams }) => {
-      if (queryParams['series']) {
+      if (queryParams['series'] && series.includes(queryParams['series'])) {
         this.seriesFilterSubject.next(queryParams['series']);
       } else if (series) {
         this.seriesFilterSubject.next(series[0]);
