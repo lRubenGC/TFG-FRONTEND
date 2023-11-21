@@ -1,9 +1,9 @@
 {
   "All": "Todos",
-  "ALL": "Todos",
-  "OWNED": "Colecionados",
-  "WISHED": "Desejados",
-  "NOT_OWNED": "Não colecionados",
+  "all": "Todos",
+  "owned": "Colecionados",
+  "wished": "Desejados",
+  "not_owned": "Não colecionados",
   "basic_cars": {
     "filter_year": "Ano",
     "filter_serie": "Series",

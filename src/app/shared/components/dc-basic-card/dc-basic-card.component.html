@@ -1,7 +1,10 @@
 <div class="basic-card-container w-full flex flex-column gap-1">
   <div class="img-container">
     <div class="buttons-container">
-      <button class="pi pi-window-maximize open-modal"></button>
+      <button
+        class="pi pi-window-maximize open-modal"
+        (click)="openModal()"
+      ></button>
       <button
         *ngIf="!car.has_car && !car.wants_car"
         class="pi pi-heart wish-car"

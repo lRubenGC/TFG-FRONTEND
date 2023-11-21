@@ -1,11 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IBasicCar } from 'src/app/modules/basic-cars/models/basic-cars.models';
 import { decodeToken } from '../../functions/token-functions';
-import { IPROPERTY_TYPE } from '../../models/basic-cars-shared.models';
+import {
+  IBASIC_CAR,
+  IPROPERTY_TYPE,
+} from '../../models/basic-cars-shared.models';
 import { ITOAST_OBJECT } from '../../models/toast-shared.models';
 import { userIdToken } from '../../models/token-shared.models';
 import { BasicCarsSharedService } from '../../services/basic-cars-shared.service';
+import { DialogService } from 'primeng/dynamicdialog';
+import { DcBasicCarDetailedComponent } from '../dc-basic-car-detailed/dc-basic-car-detailed.component';
 
 @Component({
   selector: 'dc-basic-card',
@@ -13,10 +17,11 @@ import { BasicCarsSharedService } from '../../services/basic-cars-shared.service
   templateUrl: './dc-basic-card.component.html',
   styleUrls: ['./dc-basic-card.component.scss'],
   imports: [CommonModule],
+  providers: [DialogService]
 })
 export class DcBasicCardComponent implements OnInit {
   //#region INPUTS
-  @Input() car!: IBasicCar;
+  @Input() car!: IBASIC_CAR;
   @Input() showYear?: boolean = false;
   //#endregion INPUTS
 
@@ -32,7 +37,10 @@ export class DcBasicCardComponent implements OnInit {
     this.userToken = await decodeToken();
   }
 
-  constructor(private basicCarsSharedService: BasicCarsSharedService) {}
+  constructor(
+    private basicCarsSharedService: BasicCarsSharedService,
+    private dialogService: DialogService
+  ) {}
 
   public addCar(propertyType: IPROPERTY_TYPE) {
     if (this.userToken.userId) {
@@ -94,5 +102,15 @@ export class DcBasicCardComponent implements OnInit {
           error: (error) => {},
         });
     }
+  }
+
+  public openModal() {
+    const ref = this.dialogService.open(DcBasicCarDetailedComponent, {
+      data: {
+        car: this.car,
+      },
+      header: 'Detalles del coche',
+      width: '70%',
+    });
   }
 }
