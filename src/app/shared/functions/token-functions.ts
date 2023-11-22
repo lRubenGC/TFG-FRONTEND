@@ -1,5 +1,5 @@
 import jwtDecode from 'jwt-decode';
-import { tokenDecoded, userIdToken } from '../models/token.models';
+import { tokenDecoded, userIdToken } from '../models/token-shared.models';
 
 const dbName = 'dt-database';
 

@@ -3,7 +3,6 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { lastValueFrom, Subscription } from 'rxjs';
 
-import { Gtag } from 'angular-gtag';
 import { decodeToken } from 'src/app/helpers/generics';
 import { landingCardInterface } from 'src/app/models/landingPage.interface';
 import { msgCardInterface } from 'src/app/models/shared.interface';
@@ -51,7 +50,6 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   constructor(
     private translate: TranslateService,
     private languageService: LanguageService,
-    private gtag: Gtag
   ) {}
 
   async ngOnInit() {
@@ -86,13 +84,6 @@ export class LandingPageComponent implements OnInit, OnDestroy {
 
     const cardButton = this.translate.get('LANDING_CARD_BUTTON');
     this.msg_card.buttonName = await lastValueFrom(cardButton);
-  }
-
-  trackEvent(view: string) {
-    this.gtag.event('click', {
-      event_category: 'button',
-      event_label: view,
-    });
   }
 
   ngOnDestroy() {

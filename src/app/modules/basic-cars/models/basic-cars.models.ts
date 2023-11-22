@@ -1,19 +1,8 @@
+import { IBASIC_CAR } from "src/app/shared/models/basic-cars-shared.models";
+
 export interface BasicCarsResponse {
   serieName: string;
-  cars: BasicCar[];
-}
-
-export interface BasicCar {
-  id: number;
-  car_id: string;
-  col: string;
-  model_name: string;
-  version: string;
-  series: string;
-  col_serie: string;
-  year: string;
-  brand: string;
-  img: string;
+  cars: IBASIC_CAR[];
 }
 
 export interface FiltersBody {
@@ -22,17 +11,17 @@ export interface FiltersBody {
 }
 
 export enum USER_PROPERTY {
-  ALL = 'ALL',
-  OWNED = 'OWNED',
-  WISHED = 'WISHED',
-  NOT_OWNED = 'NOT_OWNED',
+  ALL = 'all',
+  OWNED = 'owned',
+  WISHED = 'wished',
+  NOT_OWNED = 'not_owned',
 }
 
 export function isUserProperty(value: string): value is USER_PROPERTY {
   return (
-    value === 'ALL' ||
-    value === 'OWNED' ||
-    value === 'WISHED' ||
-    value === 'NOT_OWNED'
+    value === 'all' ||
+    value === 'owned' ||
+    value === 'wished' ||
+    value === 'not_owned'
   );
 }

@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { UserData } from '../models/user.models';
+import { UserData } from '../models/user-shared.models';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
+export class UserSharedService {
   constructor(private http: HttpClient) {}
 
   public getUserById(id: number): Observable<UserData> {

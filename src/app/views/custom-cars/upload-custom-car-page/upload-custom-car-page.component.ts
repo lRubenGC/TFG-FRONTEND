@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { decodeToken, tokenObject } from 'src/app/helpers/generics';
 import { CustomCarsService } from '../custom-cars.service';
@@ -10,7 +10,7 @@ import { CustomCarsService } from '../custom-cars.service';
   styleUrls: ['./upload-custom-car-page.component.css'],
 })
 export class UploadCustomCarPageComponent implements OnInit {
-  customCarForm!: FormGroup;
+  customCarForm!: UntypedFormGroup;
 
   @ViewChild('uploadButton', { static: true }) submitButtonRef!: ElementRef;
 
@@ -30,7 +30,7 @@ export class UploadCustomCarPageComponent implements OnInit {
 
   constructor(
     private customCarsService: CustomCarsService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private router: Router
   ) {
     this.customCarForm = this.formBuilder.group({

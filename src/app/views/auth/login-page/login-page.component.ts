@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { LanguageService } from 'src/app/services/language.service';
 import { AuthService } from '../auth.service';
 import {
@@ -22,8 +22,8 @@ export class LoginPageComponent implements OnInit {
   isSmallScreen = false;
   private breakpointSubscription?: Subscription;
 
-  registerForm!: FormGroup;
-  loginForm!: FormGroup;
+  registerForm!: UntypedFormGroup;
+  loginForm!: UntypedFormGroup;
   loginActivo = true;
 
   loginError = false;
@@ -41,7 +41,7 @@ export class LoginPageComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private languageService: LanguageService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private authService: AuthService,
     private genericAuthService: GenericAuthService,
     private router: Router

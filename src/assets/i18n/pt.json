@@ -1,0 +1,36 @@
+{
+  "All": "Todos",
+  "all": "Todos",
+  "owned": "Colecionados",
+  "wished": "Desejados",
+  "not_owned": "Não colecionados",
+  "basic_cars": {
+    "filter_year": "Ano",
+    "filter_serie": "Series",
+    "filter_property": "Propriedade"
+  },
+  "header": {
+    "search_placeholder": "Procurar...",
+    "user_menu": {
+      "sign_in": "Iniciar sessão",
+      "go_to_profile": "Seu perfil",
+      "edit_profile": "Editar perfil",
+      "log_out": "Sair",
+      "lang": "Idioma",
+      "theme": "Aspecto",
+      "language_options": {
+        "en": "Inglês",
+        "es": "Espanhol",
+        "pt": "Português"
+      }
+    }
+  },
+  "toast": {
+    "success": "Sucesso",
+    "error": "Erro",
+    "car_added_collection": "Carro adicionado à sua coleção",
+    "car_added_wishlist": "Carro adicionado à sua lista de desejos",
+    "car_removed_collection": "Carro removido da sua coleção",
+    "car_removed_wishlist": "Carro removido da sua lista de desejos"
+  }
+}

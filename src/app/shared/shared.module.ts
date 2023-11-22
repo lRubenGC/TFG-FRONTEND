@@ -1,21 +1,24 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { DcFilterComponent } from './components/dc-filter/dc-filter.component';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { DcDividerComponent } from './components/dc-divider/dc-divider.component';
 import { DcHeaderComponent } from './components/dc-header/dc-header.component';
+import { DcUserMenuButtonComponent } from './components/dc-user-menu-button/dc-user-menu-button.component';
 
 @NgModule({
-  declarations: [DcFilterComponent, DcHeaderComponent],
+  declarations: [DcHeaderComponent],
   imports: [
     CommonModule,
-    FormsModule,
-    HttpClientModule,
-    ReactiveFormsModule,
     TranslateModule,
+    OverlayPanelModule,
+    BrowserAnimationsModule,
+    RouterModule,
+    DcDividerComponent,
+    DcUserMenuButtonComponent,
   ],
-  exports: [DcFilterComponent, DcHeaderComponent],
+  exports: [DcHeaderComponent],
 })
 export class SharedModule {}

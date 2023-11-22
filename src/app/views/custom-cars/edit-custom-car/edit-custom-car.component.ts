@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { isValidYear } from 'src/app/helpers/custom-car-validators';
 import { decodeToken, tokenObject } from 'src/app/helpers/generics';
@@ -23,7 +23,7 @@ export class EditCustomCarComponent implements OnInit {
   img3Deleted: boolean = false;
   img4Deleted: boolean = false;
 
-  editCarForm!: FormGroup;
+  editCarForm!: UntypedFormGroup;
 
   error: boolean = false;
   errorMsg: string = '';
@@ -35,7 +35,7 @@ export class EditCustomCarComponent implements OnInit {
 
   constructor(
     private customCarsService: CustomCarsService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private route: ActivatedRoute,
     private router: Router
   ) {

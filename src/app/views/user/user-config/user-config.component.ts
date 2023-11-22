@@ -12,7 +12,7 @@ import {
   userInterfaceApi,
   userUpdateRequest,
 } from 'src/app/models/user.interface';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import {
   isValidEmail,
   isValidPassword,
@@ -29,7 +29,7 @@ export class UserConfigComponent implements OnInit {
 
   @ViewChild('submitButton', { static: true }) submitButtonRef!: ElementRef;
 
-  configForm!: FormGroup;
+  configForm!: UntypedFormGroup;
 
   userToken!: tokenObject;
   data!: userInterfaceApi;
@@ -48,7 +48,7 @@ export class UserConfigComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private formBuilder: FormBuilder
+    private formBuilder: UntypedFormBuilder
   ) {
     this.configForm = this.formBuilder.group({
       username: ['', Validators.required],

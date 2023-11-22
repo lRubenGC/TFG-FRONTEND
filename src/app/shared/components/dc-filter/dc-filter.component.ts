@@ -1,11 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject, map } from 'rxjs';
 
 @Component({
   selector: 'dc-filter',
+  standalone: true,
   templateUrl: './dc-filter.component.html',
   styleUrls: ['./dc-filter.component.css'],
+  imports: [CommonModule, TranslateModule, ReactiveFormsModule],
 })
 export class DcFilterComponent {
   //#region INPUTS
@@ -25,7 +29,7 @@ export class DcFilterComponent {
   //#endregion OPTIONS
 
   //#region FORM
-  public selectionControl = new FormControl();
+  public selectionControl = new UntypedFormControl();
   //#endregion FORM
 
   constructor() {

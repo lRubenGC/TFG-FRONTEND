@@ -1,1 +1,1 @@
-export const PROPERTY_FILTER_OPTIONS = ['ALL', 'OWNED', 'WISHED', 'NOT_OWNED'];
+export const PROPERTY_FILTER_OPTIONS = ['all', 'owned', 'wished', 'not_owned'];
