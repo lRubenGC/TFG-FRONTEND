@@ -5,7 +5,7 @@
 
 :root {
   /* DARK THEME */
-  --dark-text: #fff;
+  --dark-color: #fff;
   --dark-background: #010608;
   --dark-background-lighter: #202020;
   --dark-background-darker: #000304;
@@ -14,7 +14,7 @@
 
   /* LIGHGT THEME Por definir */
 
-  --text: var(--dark-text);
+  --color: var(--dark-color);
   --background: var(--dark-background);
   --background-lighter: var(--dark-background-lighter);
   --background-darker: var(--dark-background-darker);
@@ -114,7 +114,7 @@ span {
 
 body {
   background: var(--background);
-  color: var(--text);
+  color: var(--color);
 }
 
 h1,

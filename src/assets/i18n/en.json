@@ -1,5 +1,4 @@
 {
-  "All": "All",
   "all": "All",
   "owned": "Collected",
   "wished": "Wished",
@@ -8,6 +7,16 @@
     "filter_year": "Year",
     "filter_serie": "Series",
     "filter_property": "Property"
+  },
+  "detailed_car": {
+    "id": "ID",
+    "col": "Col number",
+    "version": "Version",
+    "series": "Series",
+    "col_serie": "Main series col",
+    "add_car": "Collection",
+    "wish_car": "Wishlist",
+    "remove_car": "Remove"
   },
   "header": {
     "search_placeholder": "Search...",

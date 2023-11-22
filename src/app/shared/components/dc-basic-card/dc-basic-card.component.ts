@@ -17,7 +17,7 @@ import { DcBasicCarDetailedComponent } from '../dc-basic-car-detailed/dc-basic-c
   templateUrl: './dc-basic-card.component.html',
   styleUrls: ['./dc-basic-card.component.scss'],
   imports: [CommonModule],
-  providers: [DialogService]
+  providers: [DialogService],
 })
 export class DcBasicCardComponent implements OnInit {
   //#region INPUTS
@@ -109,8 +109,8 @@ export class DcBasicCardComponent implements OnInit {
       data: {
         car: this.car,
       },
-      header: 'Detalles del coche',
-      width: '70%',
+      header: this.car.model_name,
+      width: '50%'
     });
   }
 }
