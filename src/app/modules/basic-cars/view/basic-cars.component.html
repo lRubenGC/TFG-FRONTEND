@@ -9,26 +9,28 @@
   <!-- Main container -->
   <div class="main-container flex">
     <!-- Aside section -->
-    <aside class="w-2 flex flex-column gap-2">
-      <dc-filter
-        [header]="'basic_cars.filter_year'"
-        [options]="vm.yearFilterOptions ?? []"
-        (selectedOption)="yearFilterSubject.next($event)"
-      >
-      </dc-filter>
-      <dc-filter
-        [header]="'basic_cars.filter_serie'"
-        [options]="vm.seriesFilterOptions ?? []"
-        (selectedOption)="seriesFilterSubject.next($event)"
-      >
-      </dc-filter>
-
-      <dc-filter
-        [header]="'basic_cars.filter_property'"
-        [options]="vm.propertyFilterOptions"
-        (selectedOption)="onPropertySelected($event)"
-      >
-      </dc-filter>
+    <aside class="w-2 relative">
+      <div class="fixed w-2 flex flex-column gap-2">
+        <dc-filter
+          [header]="'basic_cars.filter_year'"
+          [options]="vm.yearFilterOptions ?? []"
+          (selectedOption)="yearFilterSubject.next($event)"
+        >
+        </dc-filter>
+        <dc-filter
+          [header]="'basic_cars.filter_serie'"
+          [options]="vm.seriesFilterOptions ?? []"
+          (selectedOption)="seriesFilterSubject.next($event)"
+        >
+        </dc-filter>
+  
+        <dc-filter
+          [header]="'basic_cars.filter_property'"
+          [options]="vm.propertyFilterOptions"
+          (selectedOption)="onPropertySelected($event)"
+        >
+        </dc-filter>
+      </div>
     </aside>
     <!-- List of cars -->
     <main class="w-10 flex flex-column gap-8">
