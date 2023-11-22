@@ -16,7 +16,9 @@
     "col_serie": "Main series col",
     "add_car": "Collection",
     "wish_car": "Wishlist",
-    "remove_car": "Remove"
+    "remove_car": "Remove",
+    "collected": "In your collection",
+    "wished": "In your wishlist"
   },
   "header": {
     "search_placeholder": "Search...",

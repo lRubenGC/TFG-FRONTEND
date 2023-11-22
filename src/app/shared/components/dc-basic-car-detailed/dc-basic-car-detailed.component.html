@@ -43,5 +43,14 @@
         {{ "detailed_car.add_car" | translate }}
       </button>
     </div>
+    <p style="color: var(--green-400); text-align: center" *ngIf="car.has_car">
+      ({{ "detailed_car.collected" | translate }})
+    </p>
+    <p
+      style="color: var(--primary-400); text-align: center"
+      *ngIf="car.wants_car"
+    >
+      ({{ "detailed_car.wished" | translate }})
+    </p>
   </div>
 </div>

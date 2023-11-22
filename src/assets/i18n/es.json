@@ -16,7 +16,9 @@
     "col_serie": "Núm. serie principal",
     "add_car": "Colección",
     "wish_car": "Deseados",
-    "remove_car": "Eliminar"
+    "remove_car": "Eliminar",
+    "collected": "En tu colección",
+    "wished": "En tu wishlist"
   },
   "header": {
     "search_placeholder": "Buscar...",
