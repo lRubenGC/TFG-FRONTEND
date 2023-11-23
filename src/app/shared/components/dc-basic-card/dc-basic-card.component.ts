@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { DialogService } from 'primeng/dynamicdialog';
+import { filter, tap } from 'rxjs';
 import { decodeToken } from '../../functions/token-functions';
 import {
   IBASIC_CAR,
@@ -8,8 +11,8 @@ import {
 import { ITOAST_OBJECT } from '../../models/toast-shared.models';
 import { userIdToken } from '../../models/token-shared.models';
 import { BasicCarsSharedService } from '../../services/basic-cars-shared.service';
-import { DialogService } from 'primeng/dynamicdialog';
 import { DcBasicCarDetailedComponent } from '../dc-basic-car-detailed/dc-basic-car-detailed.component';
+import { DcBasicCarDetailedService } from '../dc-basic-car-detailed/dc-basic-car-detailed.service';
 
 @Component({
   selector: 'dc-basic-card',
@@ -33,13 +36,35 @@ export class DcBasicCardComponent implements OnInit {
   private userToken: userIdToken = { hasToken: false };
   //#endregion PROPS
 
+  public carProperty$ = this.dcBasicCarDetailedService.carProperty$.pipe(
+    filter(({ carId }) => carId === this.car.id),
+    tap(({ carProperty }) => {
+      switch (carProperty) {
+        case 'has_car':
+          this.car.has_car = true;
+          this.car.wants_car = false;
+          break;
+        case 'wants_car':
+          this.car.has_car = false;
+          this.car.wants_car = true;
+          break;
+        case 'remove_car':
+          this.car.has_car = false;
+          this.car.wants_car = false;
+      }
+    })
+  );
+
   async ngOnInit() {
     this.userToken = await decodeToken();
   }
 
   constructor(
+    private route: ActivatedRoute,
     private basicCarsSharedService: BasicCarsSharedService,
-    private dialogService: DialogService
+    private dcBasicCarDetailedService: DcBasicCarDetailedService,
+    private dialogService: DialogService,
+    private router: Router
   ) {}
 
   public addCar(propertyType: IPROPERTY_TYPE) {
@@ -105,12 +130,32 @@ export class DcBasicCardComponent implements OnInit {
   }
 
   public openModal() {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { detailedCar: this.car.id },
+      queryParamsHandling: 'merge',
+    });
+
     const ref = this.dialogService.open(DcBasicCarDetailedComponent, {
       data: {
         car: this.car,
       },
       header: this.car.model_name,
-      width: '50%'
+      width: '50%',
+    });
+
+    ref.onClose.subscribe(() => {
+      this.removeDetailedCarFromUrl();
+    });
+  }
+
+  private removeDetailedCarFromUrl() {
+    const queryParams: Params = { ...this.route.snapshot.queryParams };
+    delete queryParams['detailedCar'];
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams,
     });
   }
 }

@@ -12,6 +12,7 @@ import {
 import { ITOAST_OBJECT } from '../../models/toast-shared.models';
 import { userIdToken } from '../../models/token-shared.models';
 import { BasicCarsSharedService } from '../../services/basic-cars-shared.service';
+import { DcBasicCarDetailedService } from './dc-basic-car-detailed.service';
 
 @Component({
   selector: 'dc-basic-car-detailed',
@@ -24,8 +25,9 @@ export class DcBasicCarDetailedComponent implements OnInit {
   public car!: IBASIC_CAR;
 
   constructor(
-    public ref: DynamicDialogRef,
-    public config: DynamicDialogConfig,
+    private dcBasicCarDetailedService: DcBasicCarDetailedService,
+    private ref: DynamicDialogRef,
+    private config: DynamicDialogConfig,
     private basicCarsSharedService: BasicCarsSharedService,
     private messageService: MessageService,
     private translate: TranslateService
@@ -48,6 +50,10 @@ export class DcBasicCarDetailedComponent implements OnInit {
           next: (resp) => {
             if (resp.ok) {
               if (propertyType.hasCar) {
+                this.dcBasicCarDetailedService.updateCarProperty(
+                  'has_car',
+                  this.car.id
+                );
                 this.car.has_car = true;
                 this.car.wants_car = false;
 
@@ -58,6 +64,10 @@ export class DcBasicCarDetailedComponent implements OnInit {
                 });
               }
               if (propertyType.wantsCar) {
+                this.dcBasicCarDetailedService.updateCarProperty(
+                  'wants_car',
+                  this.car.id
+                );
                 this.car.wants_car = true;
                 this.showToast({
                   severity: 'success',
@@ -95,6 +105,10 @@ export class DcBasicCarDetailedComponent implements OnInit {
                   detail: 'toast.car_removed_wishlist',
                 });
               }
+              this.dcBasicCarDetailedService.updateCarProperty(
+                'remove_car',
+                this.car.id
+              );
             }
           },
           error: (error) => {},

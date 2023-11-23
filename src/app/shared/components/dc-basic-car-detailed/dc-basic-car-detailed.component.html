@@ -1,5 +1,5 @@
 <div class="flex gap-5 p-2">
-  <img class="w-8" [src]="car.img" [alt]="car.model_name" />
+  <img class="w-8 h-full" [src]="car.img" [alt]="car.model_name" />
   <div class="w-full flex flex-column gap-3">
     <div class="flex flex-column gap-1">
       <p>
@@ -18,6 +18,10 @@
       <p>
         {{ "detailed_car.col_serie" | translate }}:
         <span>{{ car.col_serie }}</span>
+      </p>
+      <p>
+        {{ "detailed_car.year" | translate }}:
+        <span>{{ car.year }}</span>
       </p>
     </div>
     <div class="flex justify-content-center gap-4">

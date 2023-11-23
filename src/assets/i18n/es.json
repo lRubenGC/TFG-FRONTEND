@@ -18,7 +18,8 @@
     "wish_car": "Deseados",
     "remove_car": "Eliminar",
     "collected": "En tu colección",
-    "wished": "En tu wishlist"
+    "wished": "En tu wishlist",
+    "year": "Año"
   },
   "header": {
     "search_placeholder": "Buscar...",

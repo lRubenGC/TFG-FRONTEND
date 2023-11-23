@@ -126,6 +126,7 @@ export async function decodeToken(): Promise<userIdToken> {
       };
     } else {
       const userId = decodedToken.id;
+      localStorage.setItem('userId', String(userId));
 
       return {
         hasToken: true,

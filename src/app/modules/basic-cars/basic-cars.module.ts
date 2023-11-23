@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 import { ToastModule } from 'primeng/toast';
 import { DcBasicCardComponent } from 'src/app/shared/components/dc-basic-card/dc-basic-card.component';
 import { DcDividerComponent } from 'src/app/shared/components/dc-divider/dc-divider.component';
@@ -23,6 +24,6 @@ import { BasicCarsView } from './view/basic-cars.component';
     DcBasicCardComponent,
     ToastModule,
   ],
-  providers: [MessageService],
+  providers: [MessageService, DialogService],
 })
 export class BasicCarsPageModule {}

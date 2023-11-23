@@ -25,3 +25,8 @@ export function isUserProperty(value: string): value is USER_PROPERTY {
     value === 'not_owned'
   );
 }
+
+export interface GET_CAR_BY_ID_RESPONSE {
+  car: IBASIC_CAR;
+  year: string;
+}

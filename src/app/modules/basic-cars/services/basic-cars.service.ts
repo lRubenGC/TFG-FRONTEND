@@ -4,7 +4,11 @@ import { Observable, from, mergeMap } from 'rxjs';
 
 import { getTokenFromIndexedDB } from 'src/app/helpers/indexedDB';
 import { environment } from 'src/environments/environment';
-import { BasicCarsResponse, FiltersBody } from '../models/basic-cars.models';
+import {
+  BasicCarsResponse,
+  FiltersBody,
+  GET_CAR_BY_ID_RESPONSE,
+} from '../models/basic-cars.models';
 
 @Injectable({
   providedIn: 'root',
@@ -46,6 +50,18 @@ export class BasicCarsService {
   public getAvailableSeries(year: string): Observable<string[]> {
     return this.http.get<string[]>(
       `${environment.apiBaseUrl}/api/available-filters/basic-series?main=${year}`
+    );
+  }
+
+  public getCarById(
+    carId: number,
+    userId: number | undefined
+  ): Observable<GET_CAR_BY_ID_RESPONSE> {
+    return this.http.post<GET_CAR_BY_ID_RESPONSE>(
+      `${environment.apiBaseUrl}/api/basic-cars/getCar?carId=${carId}`,
+      {
+        userId,
+      }
     );
   }
 }

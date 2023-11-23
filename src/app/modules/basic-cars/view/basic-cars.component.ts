@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 import {
   BehaviorSubject,
   Observable,
@@ -10,8 +11,10 @@ import {
   map,
   of,
   switchMap,
+  take,
   tap,
 } from 'rxjs';
+import { DcBasicCarDetailedComponent } from 'src/app/shared/components/dc-basic-car-detailed/dc-basic-car-detailed.component';
 import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
 import { PROPERTY_FILTER_OPTIONS } from '../models/basic-cars.constants';
 import {
@@ -100,19 +103,16 @@ export class BasicCarsView implements OnInit {
   //#endregion CARS VM
 
   constructor(
-    private basicCarsService: BasicCarsService,
-    private messageService: MessageService,
-    private translate: TranslateService,
     private route: ActivatedRoute,
-    private router: Router
+    private basicCarsService: BasicCarsService,
+    private dialogService: DialogService,
+    private messageService: MessageService,
+    private router: Router,
+    private translate: TranslateService
   ) {}
 
-  ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      const { year, series, property } = params;
-      if (year) this.yearFromQueryParams = year;
-      if (series) this.seriesFromQueryParams = series;
-    });
+  ngOnInit() {
+    this.manageQueryParams();
   }
 
   private getBasicCars(
@@ -141,8 +141,47 @@ export class BasicCarsView implements OnInit {
     this.messageService.add({
       key: 'br',
       severity: toastObject.severity,
-      summary: summary,
-      detail: detail,
+      summary,
+      detail,
+    });
+  }
+
+  private manageQueryParams() {
+    this.route.queryParams.pipe(take(1)).subscribe(async (params) => {
+      const { year, series, detailedCar } = params;
+      if (year) this.yearFromQueryParams = year;
+      if (series) this.seriesFromQueryParams = series;
+      if (detailedCar) {
+        const userId = localStorage.getItem('userId');
+        if (userId) {
+          this.basicCarsService
+            .getCarById(detailedCar, Number(userId))
+            .subscribe((resp) => {
+              this.yearFromQueryParams = resp.year;
+              const ref = this.dialogService.open(DcBasicCarDetailedComponent, {
+                data: {
+                  car: resp.car,
+                },
+                header: resp.car.model_name,
+                width: '50%',
+              });
+
+              ref.onClose.subscribe(() => {
+                this.removeDetailedCarFromUrl();
+              });
+            });
+        }
+      }
+    });
+  }
+
+  private removeDetailedCarFromUrl() {
+    const queryParams: Params = { ...this.route.snapshot.queryParams };
+    delete queryParams['detailedCar'];
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams,
     });
   }
 }
