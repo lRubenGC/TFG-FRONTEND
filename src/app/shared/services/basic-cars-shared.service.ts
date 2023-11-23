@@ -42,7 +42,7 @@ export class BasicCarsSharedService {
     );
   }
 
-  public removeBasicCar(
+  public removeCarFromUser(
     userId: number,
     carId: number
   ): Observable<IADD_CAR_TO_USER> {

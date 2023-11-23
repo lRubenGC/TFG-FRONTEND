@@ -18,7 +18,7 @@ export class DcFilterComponent {
     this.optionsSubject.next(val);
   }
   @Input() set filterInit(val: string | null) {
-    this.filtetInitSubject.next(val);
+    this.filterInitSubject.next(val);
   }
   //#endregion INPUTS
 
@@ -35,10 +35,10 @@ export class DcFilterComponent {
   public selectionControl = new UntypedFormControl();
   //#endregion FORM
 
-  private filtetInitSubject = new Subject();
+  private filterInitSubject = new Subject();
 
   constructor() {
-    this.filtetInitSubject.subscribe((value) => {
+    this.filterInitSubject.subscribe((value) => {
       this.selectionControl.setValue(value, { emitEvent: false });
     });
 

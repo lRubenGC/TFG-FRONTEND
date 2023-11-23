@@ -14,21 +14,22 @@
         <dc-filter
           [header]="'basic_cars.filter_year'"
           [options]="vm.yearFilterOptions ?? []"
-          (selectedOption)="yearFilterSubject.next($event)"
           [filterInit]="yearFilterSubject | async"
+          (selectedOption)="yearFilterSubject.next($event)"
         >
         </dc-filter>
         <dc-filter
           [header]="'basic_cars.filter_serie'"
           [options]="vm.seriesFilterOptions ?? []"
-          (selectedOption)="seriesFilterSubject.next($event)"
           [filterInit]="seriesFilterSubject | async"
+          (selectedOption)="seriesFilterSubject.next($event)"
         >
         </dc-filter>
 
         <dc-filter
           [header]="'basic_cars.filter_property'"
           [options]="vm.propertyFilterOptions"
+          [filterInit]="propertyFilterSubject | async"
           (selectedOption)="onPropertySelected($event)"
         >
         </dc-filter>

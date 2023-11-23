@@ -77,7 +77,7 @@ export class DcBasicCardComponent implements OnInit {
   public removeCar() {
     if (this.userToken.userId) {
       this.basicCarsSharedService
-        .removeBasicCar(this.userToken.userId, this.car.id)
+        .removeCarFromUser(this.userToken.userId, this.car.id)
         .subscribe({
           next: (resp) => {
             if (resp.ok) {
