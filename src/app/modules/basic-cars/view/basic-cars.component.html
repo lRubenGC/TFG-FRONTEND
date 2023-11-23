@@ -15,15 +15,17 @@
           [header]="'basic_cars.filter_year'"
           [options]="vm.yearFilterOptions ?? []"
           (selectedOption)="yearFilterSubject.next($event)"
+          [filterInit]="yearFilterSubject | async"
         >
         </dc-filter>
         <dc-filter
           [header]="'basic_cars.filter_serie'"
           [options]="vm.seriesFilterOptions ?? []"
           (selectedOption)="seriesFilterSubject.next($event)"
+          [filterInit]="seriesFilterSubject | async"
         >
         </dc-filter>
-  
+
         <dc-filter
           [header]="'basic_cars.filter_property'"
           [options]="vm.propertyFilterOptions"

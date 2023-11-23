@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Component({
   selector: 'dc-filter',
@@ -16,6 +16,9 @@ export class DcFilterComponent {
   @Input() header: string = '';
   @Input() set options(val: string[]) {
     this.optionsSubject.next(val);
+  }
+  @Input() set filterInit(val: string | null) {
+    this.filtetInitSubject.next(val);
   }
   //#endregion INPUTS
 
@@ -32,12 +35,12 @@ export class DcFilterComponent {
   public selectionControl = new UntypedFormControl();
   //#endregion FORM
 
+  private filtetInitSubject = new Subject();
+
   constructor() {
-    this.options$
-      .pipe(map((options) => (options.length > 0 ? [options[0]] : null)))
-      .subscribe((value) => {
-        this.selectionControl.setValue(value, { emitEvent: false });
-      });
+    this.filtetInitSubject.subscribe((value) => {
+      this.selectionControl.setValue(value, { emitEvent: false });
+    });
 
     this.selectionControl.valueChanges.subscribe((selection) => {
       this.selectedOption.emit(selection);
