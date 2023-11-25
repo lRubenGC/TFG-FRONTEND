@@ -24,7 +24,7 @@ export class BasicCarsService {
       mergeMap((token) => {
         const headers = new HttpHeaders({
           'Content-Type': 'application/json',
-          'r-token': token!,
+          'r-token': token ? token : '',
         });
 
         return this.http.post<BasicCarsResponse[]>(

@@ -35,7 +35,7 @@ export const getTokenFromIndexedDB = (): Promise<string> => {
       const db = (<IDBOpenDBRequest>e.target).result;
       const transaction = db.transaction(['tokens'], 'readonly');
       const store = transaction.objectStore('tokens');
-      const getRequest = store.get('dt-token');
+      const getRequest = store.get('r-token');
 
       getRequest.onsuccess = function () {
         resolve(getRequest.result as string);
@@ -72,7 +72,7 @@ export const setTokenInIndexedDB = (token: string): void => {
 
     const transaction = db.transaction([storeName], 'readwrite');
     const store = transaction.objectStore(storeName);
-    store.put(token, 'dt-token');
+    store.put(token, 'r-token');
   };
 
   openRequest.onerror = function (e) {
@@ -91,7 +91,7 @@ export const removeTokenFromIndexedDB = (): Promise<void> => {
       const db = (<IDBOpenDBRequest>e.target).result;
       const transaction = db.transaction(['tokens'], 'readwrite');
       const store = transaction.objectStore('tokens');
-      const deleteRequest = store.delete('dt-token');
+      const deleteRequest = store.delete('r-token');
 
       deleteRequest.onsuccess = function () {
         resolve();
