@@ -96,6 +96,12 @@ export class DcBasicCardComponent implements OnInit {
           },
           error: (error) => {},
         });
+    } else {
+      this.triggerToast.emit({
+        severity: 'error',
+        summary: 'toast.error',
+        detail: 'toast.not_logged_in',
+      });
     }
   }
 

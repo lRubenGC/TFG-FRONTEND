@@ -29,7 +29,8 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     console.log(`Version: ${environment.appVersion}`);
     this.primengConfig.zIndex = {
-      modal: 6000
+      modal: 6000,
+      toast: 7000
     }
   }
 

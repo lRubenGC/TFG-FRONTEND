@@ -40,6 +40,7 @@
   "toast": {
     "success": "Sucesso",
     "error": "Erro",
+    "not_logged_in": "Faça login para fazer isso",
     "car_added_collection": "Carro adicionado à sua coleção",
     "car_added_wishlist": "Carro adicionado à sua lista de desejos",
     "car_removed_collection": "Carro removido da sua coleção",

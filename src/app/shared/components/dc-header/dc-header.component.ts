@@ -59,6 +59,7 @@ export class DcHeaderComponent {
     this.genericAuthService.logout();
 
     await removeTokenFromIndexedDB();
+    localStorage.removeItem('userId');
     this.authService.setUserLoggedIn(false);
     window.location.reload();
   }

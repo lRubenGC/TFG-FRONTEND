@@ -79,6 +79,12 @@ export class DcBasicCarDetailedComponent implements OnInit {
           },
           error: (error) => {},
         });
+    } else {
+      this.showToast({
+        severity: 'error',
+        summary: 'toast.error',
+        detail: 'toast.not_logged_in',
+      });
     }
   }
 
@@ -113,6 +119,12 @@ export class DcBasicCarDetailedComponent implements OnInit {
           },
           error: (error) => {},
         });
+    } else {
+      this.showToast({
+        severity: 'error',
+        summary: 'toast.error',
+        detail: 'toast.not_logged_in',
+      });
     }
   }
 

@@ -153,24 +153,22 @@ export class BasicCarsView implements OnInit {
       if (series) this.seriesFromQueryParams = series;
       if (detailedCar) {
         const userId = localStorage.getItem('userId');
-        if (userId) {
-          this.basicCarsService
-            .getCarById(detailedCar, Number(userId))
-            .subscribe((resp) => {
-              this.yearFromQueryParams = resp.year;
-              const ref = this.dialogService.open(DcBasicCarDetailedComponent, {
-                data: {
-                  car: resp.car,
-                },
-                header: resp.car.model_name,
-                width: '50%',
-              });
-
-              ref.onClose.subscribe(() => {
-                this.removeDetailedCarFromUrl();
-              });
+        this.basicCarsService
+          .getCarById(detailedCar, Number(userId))
+          .subscribe((resp) => {
+            this.yearFromQueryParams = resp.year;
+            const ref = this.dialogService.open(DcBasicCarDetailedComponent, {
+              data: {
+                car: resp.car,
+              },
+              header: resp.car.model_name,
+              width: '50%',
             });
-        }
+
+            ref.onClose.subscribe(() => {
+              this.removeDetailedCarFromUrl();
+            });
+          });
       }
     });
   }
