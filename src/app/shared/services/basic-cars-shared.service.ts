@@ -30,7 +30,7 @@ export class BasicCarsSharedService {
         });
 
         return this.http.post<IADD_CAR_TO_USER>(
-          `${environment.apiBaseUrl}/api/user-basic-cars/${userId}`,
+          `${environment.apiBaseUrl}/api/user-basic-cars/add/${userId}`,
           {
             BasicCarId: carId,
             hasCar,
@@ -61,7 +61,7 @@ export class BasicCarsSharedService {
         };
 
         return this.http.delete<IADD_CAR_TO_USER>(
-          `${environment.apiBaseUrl}/api/user-basic-cars/${userId}`,
+          `${environment.apiBaseUrl}/api/user-basic-cars/remove/${userId}`,
           options
         );
       })

@@ -8,6 +8,7 @@ import {
   BasicCarsResponse,
   FiltersBody,
   GET_CAR_BY_ID_RESPONSE,
+  IOWNED_CARS,
 } from '../models/basic-cars.models';
 
 @Injectable({
@@ -53,15 +54,23 @@ export class BasicCarsService {
     );
   }
 
-  public getCarById(
-    carId: number,
-    userId: number | undefined
-  ): Observable<GET_CAR_BY_ID_RESPONSE> {
-    return this.http.post<GET_CAR_BY_ID_RESPONSE>(
-      `${environment.apiBaseUrl}/api/basic-cars/getCar?carId=${carId}`,
-      {
-        userId,
-      }
-    );
+  public getCarById(carId: number): Observable<GET_CAR_BY_ID_RESPONSE> {
+    const userId = localStorage.getItem('userId');
+    const url = userId
+      ? `${environment.apiBaseUrl}/api/basic-cars/getCar?carId=${carId}`
+      : `${environment.apiBaseUrl}/api/basic-cars/getCar`;
+    return this.http.post<GET_CAR_BY_ID_RESPONSE>(url, {
+      userId,
+    });
+  }
+
+  public getOwnedCars(year: string): Observable<IOWNED_CARS> {
+    const userId = localStorage.getItem('userId');
+    const url = userId
+      ? `${environment.apiBaseUrl}/api/user-basic-cars/getAmount?userId=${userId}`
+      : `${environment.apiBaseUrl}/api/user-basic-cars/getAmount`;
+    return this.http.post<IOWNED_CARS>(url, {
+      year,
+    });
   }
 }

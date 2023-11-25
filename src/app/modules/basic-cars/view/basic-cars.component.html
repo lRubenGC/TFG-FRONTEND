@@ -3,36 +3,46 @@
     cars: carsVM$ | async,
     yearFilterOptions: yearFilterOptions$ | async,
     seriesFilterOptions: seriesFilterOptions$ | async,
-    propertyFilterOptions: propertyFilterOptions
+    ownedCars: ownedCars$ | async,
   } as vm"
 >
   <!-- Main container -->
   <div class="main-container flex">
     <!-- Aside section -->
     <aside class="w-2 relative">
-      <div class="fixed w-2 flex flex-column gap-2">
-        <dc-filter
-          [header]="'basic_cars.filter_year'"
-          [options]="vm.yearFilterOptions ?? []"
-          [filterInit]="yearFilterSubject | async"
-          (selectedOption)="yearFilterSubject.next($event)"
-        >
-        </dc-filter>
-        <dc-filter
-          [header]="'basic_cars.filter_serie'"
-          [options]="vm.seriesFilterOptions ?? []"
-          [filterInit]="seriesFilterSubject | async"
-          (selectedOption)="seriesFilterSubject.next($event)"
-        >
-        </dc-filter>
+      <div class="fixed w-2 flex flex-column gap-4">
+        <div class="flex flex-column gap-2">
+          <dc-filter
+            [header]="'basic_cars.filter_year'"
+            [options]="vm.yearFilterOptions ?? []"
+            [filterInit]="yearFilterSubject | async"
+            (selectedOption)="yearFilterSubject.next($event)"
+          >
+          </dc-filter>
+          <dc-filter
+            [header]="'basic_cars.filter_serie'"
+            [options]="vm.seriesFilterOptions ?? []"
+            [filterInit]="seriesFilterSubject | async"
+            (selectedOption)="seriesFilterSubject.next($event)"
+          >
+          </dc-filter>
 
-        <dc-filter
-          [header]="'basic_cars.filter_property'"
-          [options]="vm.propertyFilterOptions"
-          [filterInit]="propertyFilterSubject | async"
-          (selectedOption)="onPropertySelected($event)"
-        >
-        </dc-filter>
+          <dc-filter
+            [header]="'basic_cars.filter_property'"
+            [options]="propertyFilterOptions"
+            [filterInit]="propertyFilterSubject | async"
+            (selectedOption)="onPropertySelected($event)"
+          >
+          </dc-filter>
+        </div>
+
+        <dc-divider></dc-divider>
+
+        <p>
+          {{ "basic_cars.owned_cars" | translate }}:
+          {{ vm.ownedCars?.carsOwned }} /
+          {{ vm.ownedCars?.carsShowed }}
+        </p>
       </div>
     </aside>
     <!-- List of cars -->

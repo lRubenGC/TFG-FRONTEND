@@ -1,4 +1,4 @@
-import { IBASIC_CAR } from "src/app/shared/models/basic-cars-shared.models";
+import { IBASIC_CAR } from 'src/app/shared/models/basic-cars-shared.models';
 
 export interface BasicCarsResponse {
   serieName: string;
@@ -29,4 +29,14 @@ export function isUserProperty(value: string): value is USER_PROPERTY {
 export interface GET_CAR_BY_ID_RESPONSE {
   car: IBASIC_CAR;
   year: string;
+}
+
+export interface IOWNED_CARS {
+  carsOwned: number;
+  carsShowed: number;
+}
+
+export class owned_cars {
+  carsOwned: number = 0;
+  carsShowed: number = 0;
 }

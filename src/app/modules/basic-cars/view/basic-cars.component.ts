@@ -19,8 +19,10 @@ import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
 import { PROPERTY_FILTER_OPTIONS } from '../models/basic-cars.constants';
 import {
   BasicCarsResponse,
+  IOWNED_CARS,
   USER_PROPERTY,
   isUserProperty,
+  owned_cars,
 } from '../models/basic-cars.models';
 import { BasicCarsService } from '../services/basic-cars.service';
 
@@ -80,6 +82,16 @@ export class BasicCarsView implements OnInit {
   );
   public propertyFilterOptions = PROPERTY_FILTER_OPTIONS;
   //#endregion PROPERTY FILTER
+
+  //#region OWNED CARS
+  public ownedCars$: Observable<IOWNED_CARS> = this.yearFilterSubject.pipe(
+    switchMap((year) =>
+      year
+        ? this.basicCarsService.getOwnedCars(year)
+        : of(new owned_cars())
+    )
+  );
+  //#endregion OWNED CARS
 
   //#region CARS VM
   public carsVM$: Observable<BasicCarsResponse[]> = combineLatest([
@@ -152,9 +164,8 @@ export class BasicCarsView implements OnInit {
       if (year) this.yearFromQueryParams = year;
       if (series) this.seriesFromQueryParams = series;
       if (detailedCar) {
-        const userId = localStorage.getItem('userId');
         this.basicCarsService
-          .getCarById(detailedCar, Number(userId))
+          .getCarById(detailedCar)
           .subscribe((resp) => {
             this.yearFromQueryParams = resp.year;
             const ref = this.dialogService.open(DcBasicCarDetailedComponent, {

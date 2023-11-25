@@ -6,7 +6,8 @@
   "basic_cars": {
     "filter_year": "Year",
     "filter_serie": "Series",
-    "filter_property": "Property"
+    "filter_property": "Property",
+    "owned_cars": "Owned cars"
   },
   "detailed_car": {
     "id": "ID",

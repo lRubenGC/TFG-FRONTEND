@@ -88,6 +88,7 @@ export class LoginPageComponent implements OnInit {
 
             // Save token in Indexed DB
             setTokenInIndexedDB(res.token);
+            localStorage.setItem('userId', res.user.id);
 
             // Dispatch login event
             this.authService.setUserLoggedIn(true);
