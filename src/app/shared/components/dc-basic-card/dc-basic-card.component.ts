@@ -12,7 +12,11 @@ import { ITOAST_OBJECT } from '../../models/toast-shared.models';
 import { userIdToken } from '../../models/token-shared.models';
 import { BasicCarsSharedService } from '../../services/basic-cars-shared.service';
 import { DcBasicCarDetailedComponent } from '../dc-basic-car-detailed/dc-basic-car-detailed.component';
-import { DcBasicCarDetailedService } from '../dc-basic-car-detailed/dc-basic-car-detailed.service';
+import {
+  CAR_PROPERTY_SUBJECT,
+  DcBasicCarDetailedService,
+  isCarProperty,
+} from '../dc-basic-car-detailed/dc-basic-car-detailed.service';
 
 @Component({
   selector: 'dc-basic-card',
@@ -37,9 +41,13 @@ export class DcBasicCardComponent implements OnInit {
   //#endregion PROPS
 
   public carProperty$ = this.dcBasicCarDetailedService.carProperty$.pipe(
-    filter(({ carId }) => carId === this.car.id),
-    tap(({ carProperty }) => {
-      switch (carProperty) {
+    filter(
+      (carPropertySubject): carPropertySubject is CAR_PROPERTY_SUBJECT =>
+        isCarProperty(carPropertySubject) &&
+        carPropertySubject.carId === this.car.id
+    ),
+    tap((carProperty) => {
+      switch (carProperty.carId) {
         case 'has_car':
           this.car.has_car = true;
           this.car.wants_car = false;
@@ -75,6 +83,7 @@ export class DcBasicCardComponent implements OnInit {
           next: (resp) => {
             if (resp.ok) {
               if (propertyType.hasCar) {
+                this.dcBasicCarDetailedService.carPropertySubject.next('');
                 this.car.has_car = true;
                 this.car.wants_car = false;
 
@@ -114,6 +123,7 @@ export class DcBasicCardComponent implements OnInit {
             if (resp.ok) {
               if (this.car.has_car) {
                 this.car.has_car = false;
+                this.dcBasicCarDetailedService.carPropertySubject.next('');
                 this.triggerToast.emit({
                   severity: 'success',
                   summary: 'toast.success',

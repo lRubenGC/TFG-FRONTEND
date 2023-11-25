@@ -12,9 +12,10 @@ import {
   of,
   switchMap,
   take,
-  tap,
+  tap
 } from 'rxjs';
 import { DcBasicCarDetailedComponent } from 'src/app/shared/components/dc-basic-car-detailed/dc-basic-car-detailed.component';
+import { DcBasicCarDetailedService } from 'src/app/shared/components/dc-basic-car-detailed/dc-basic-car-detailed.service';
 import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
 import { PROPERTY_FILTER_OPTIONS } from '../models/basic-cars.constants';
 import {
@@ -84,11 +85,12 @@ export class BasicCarsView implements OnInit {
   //#endregion PROPERTY FILTER
 
   //#region OWNED CARS
-  public ownedCars$: Observable<IOWNED_CARS> = this.yearFilterSubject.pipe(
-    switchMap((year) =>
-      year
-        ? this.basicCarsService.getOwnedCars(year)
-        : of(new owned_cars())
+  public ownedCars$: Observable<IOWNED_CARS> = combineLatest([
+    this.yearFilterSubject,
+    this.dcBasicCarDetailedService.carPropertySubject,
+  ]).pipe(
+    switchMap(([year, _]) =>
+      year ? this.basicCarsService.getOwnedCars(year) : of(new owned_cars())
     )
   );
   //#endregion OWNED CARS
@@ -117,6 +119,7 @@ export class BasicCarsView implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private basicCarsService: BasicCarsService,
+    private dcBasicCarDetailedService: DcBasicCarDetailedService,
     private dialogService: DialogService,
     private messageService: MessageService,
     private router: Router,
@@ -164,22 +167,20 @@ export class BasicCarsView implements OnInit {
       if (year) this.yearFromQueryParams = year;
       if (series) this.seriesFromQueryParams = series;
       if (detailedCar) {
-        this.basicCarsService
-          .getCarById(detailedCar)
-          .subscribe((resp) => {
-            this.yearFromQueryParams = resp.year;
-            const ref = this.dialogService.open(DcBasicCarDetailedComponent, {
-              data: {
-                car: resp.car,
-              },
-              header: resp.car.model_name,
-              width: '50%',
-            });
-
-            ref.onClose.subscribe(() => {
-              this.removeDetailedCarFromUrl();
-            });
+        this.basicCarsService.getCarById(detailedCar).subscribe((resp) => {
+          this.yearFromQueryParams = resp.year;
+          const ref = this.dialogService.open(DcBasicCarDetailedComponent, {
+            data: {
+              car: resp.car,
+            },
+            header: resp.car.model_name,
+            width: '50%',
           });
+
+          ref.onClose.subscribe(() => {
+            this.removeDetailedCarFromUrl();
+          });
+        });
       }
     });
   }
