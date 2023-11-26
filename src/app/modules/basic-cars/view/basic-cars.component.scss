@@ -32,7 +32,7 @@
     padding: 0 1rem;
   }
   .dc-filter {
-    width: 28%;
+    width: 30%;
   }
   .dc-divider {
     display: none;
@@ -45,6 +45,14 @@
 @media (max-width: 768px) {
   .cars-grouped {
     grid-template-columns: 30% 30% 30% !important;
+  }
+
+  aside > div {
+    gap: 1rem !important;
+  }
+
+  aside > div > div {
+    gap: 1rem !important;
   }
 }
 
