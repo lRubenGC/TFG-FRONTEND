@@ -56,7 +56,10 @@
   }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 580px) {
+  main {
+    margin: 12rem 0rem !important;
+  }
   .cars-grouped {
     grid-template-columns: 45% 45% !important;
   }

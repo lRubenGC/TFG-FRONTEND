@@ -169,12 +169,21 @@ export class BasicCarsView implements OnInit {
       if (detailedCar) {
         this.basicCarsService.getCarById(detailedCar).subscribe((resp) => {
           this.yearFromQueryParams = resp.year;
+          const innerWidth = window.innerWidth;
+          let width;
+          if (innerWidth <= 1230) {
+            width = '90%';
+          } else if (innerWidth <= 1440) {
+            width = '75%';
+          } else if (innerWidth <= 1630) {
+            width = '60%';
+          } else width = '50%';
           const ref = this.dialogService.open(DcBasicCarDetailedComponent, {
             data: {
               car: resp.car,
             },
             header: resp.car.model_name,
-            width: '50%',
+            width,
           });
 
           ref.onClose.subscribe(() => {
