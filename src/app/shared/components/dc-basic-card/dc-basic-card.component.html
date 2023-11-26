@@ -1,7 +1,9 @@
 <ng-container *ngIf="carProperty$ | async"></ng-container>
 <div class="basic-card-container w-full flex flex-column gap-1">
   <div class="img-container">
-    <div class="buttons-container">
+    <div
+      class="buttons-container w-full h-full absolute flex justify-content-center align-items-end gap-2"
+    >
       <button
         class="pi pi-window-maximize open-modal"
         (click)="openModal()"
@@ -31,7 +33,9 @@
       <p class="card-description-item">{{ car.col_serie }}</p>
     </div>
     <div class="card-description-row flex justify-content-between">
-      <p class="card-description-item">{{ car.car_id }} <span *ngIf="showYear">- {{ car.year }}</span></p>
+      <p class="card-description-item">
+        {{ car.car_id }} <span *ngIf="showYear">- {{ car.year }}</span>
+      </p>
       <div class="flex align-items-center gap-1">
         <i
           *ngIf="car.has_car || car.wants_car"
@@ -45,7 +49,7 @@
           *ngIf="car.exclusive"
           [src]="getSeriesIcon(car.exclusive)"
           class="card-series-img"
-        >
+        />
       </div>
     </div>
   </div>
