@@ -11,6 +11,7 @@ export interface IBASIC_CAR {
   img: string;
   has_car?: boolean;
   wants_car?: boolean;
+  exclusive?: number;
 }
 
 export interface IPROPERTY_TYPE {

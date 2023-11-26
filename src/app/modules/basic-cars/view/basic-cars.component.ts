@@ -12,7 +12,7 @@ import {
   of,
   switchMap,
   take,
-  tap
+  tap,
 } from 'rxjs';
 import { DcBasicCarDetailedComponent } from 'src/app/shared/components/dc-basic-car-detailed/dc-basic-car-detailed.component';
 import { DcBasicCarDetailedService } from 'src/app/shared/components/dc-basic-car-detailed/dc-basic-car-detailed.service';

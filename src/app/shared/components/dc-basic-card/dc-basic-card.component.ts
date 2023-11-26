@@ -174,4 +174,8 @@ export class DcBasicCardComponent implements OnInit {
       queryParams,
     });
   }
+
+  public getSeriesIcon(num: number): string {
+    return `assets/icons/series/${num}.webp`;
+  }
 }

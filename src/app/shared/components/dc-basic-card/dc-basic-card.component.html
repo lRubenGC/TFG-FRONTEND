@@ -31,16 +31,22 @@
       <p class="card-description-item">{{ car.col_serie }}</p>
     </div>
     <div class="card-description-row flex justify-content-between">
-      <p class="card-description-item">{{ car.car_id }}</p>
-      <i
-        *ngIf="car.has_car || car.wants_car"
-        class="pi pi-heart-fill card-description-item"
-        [ngClass]="{
-          owned: car.has_car,
-          wished: car.wants_car
-        }"
-      ></i>
-      <p *ngIf="showYear" class="card-description-item">{{ car.year }}</p>
+      <p class="card-description-item">{{ car.car_id }} <span *ngIf="showYear">- {{ car.year }}</span></p>
+      <div class="flex align-items-center gap-1">
+        <i
+          *ngIf="car.has_car || car.wants_car"
+          class="pi pi-heart-fill"
+          [ngClass]="{
+            owned: car.has_car,
+            wished: car.wants_car
+          }"
+        ></i>
+        <img
+          *ngIf="car.exclusive"
+          [src]="getSeriesIcon(car.exclusive)"
+          class="card-series-img"
+        >
+      </div>
     </div>
   </div>
 </div>
