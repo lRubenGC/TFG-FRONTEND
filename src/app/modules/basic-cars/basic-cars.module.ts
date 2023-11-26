@@ -9,6 +9,7 @@ import { ToastModule } from 'primeng/toast';
 import { DcBasicCardComponent } from 'src/app/shared/components/dc-basic-card/dc-basic-card.component';
 import { DcDividerComponent } from 'src/app/shared/components/dc-divider/dc-divider.component';
 import { DcFilterComponent } from 'src/app/shared/components/dc-filter/dc-filter.component';
+import { DcScrollToTopComponent } from 'src/app/shared/components/dc-scroll-to-top/dc-scroll-to-top.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BasicCarsView } from './view/basic-cars.component';
 @NgModule({
@@ -23,6 +24,7 @@ import { BasicCarsView } from './view/basic-cars.component';
     DcDividerComponent,
     DcBasicCardComponent,
     ToastModule,
+    DcScrollToTopComponent,
   ],
   providers: [MessageService, DialogService],
 })
