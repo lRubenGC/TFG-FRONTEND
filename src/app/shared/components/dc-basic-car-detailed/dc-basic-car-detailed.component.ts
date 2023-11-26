@@ -142,4 +142,8 @@ export class DcBasicCarDetailedComponent implements OnInit {
       detail: detail,
     });
   }
+
+  public getSeriesIcon(num: number): string {
+    return `assets/icons/series/${num}.webp`;
+  }
 }

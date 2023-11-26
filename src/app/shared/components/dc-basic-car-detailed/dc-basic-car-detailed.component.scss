@@ -32,6 +32,9 @@ button {
   background-color: var(--red-400);
   color: #000;
 }
+.card-series-img {
+  width: 24px;
+}
 
 ::ng-deep.p-dialog-header,
 ::ng-deep.p-dialog-content {

@@ -20,7 +20,8 @@
     "remove_car": "Remove",
     "collected": "In your collection",
     "wished": "In your wishlist",
-    "year": "Year"
+    "year": "Year",
+    "exclusive": "Exclusive"
   },
   "header": {
     "search_placeholder": "Search...",

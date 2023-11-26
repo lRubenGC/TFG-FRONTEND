@@ -2,6 +2,10 @@
   <img class="w-8 h-full" [src]="car.img" [alt]="car.model_name" />
   <div class="w-full flex flex-column gap-3">
     <div class="flex flex-column gap-1">
+      <div *ngIf="car.exclusive" class="flex align-items-center gap-1">
+        <img [src]="getSeriesIcon(car.exclusive)" class="card-series-img" />
+        <span>({{ "detailed_car.exclusive" | translate }})</span>
+      </div>
       <p>
         {{ "detailed_car.id" | translate }}: <span>{{ car.car_id }}</span>
       </p>
