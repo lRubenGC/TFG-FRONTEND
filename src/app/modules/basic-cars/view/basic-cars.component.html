@@ -7,16 +7,17 @@
   } as vm"
 >
   <!-- Main container -->
-  <div class="main-container flex">
+  <div class="main-container flex sm:flex-column lg:flex-row w-full">
     <!-- Aside section -->
-    <aside class="w-2 relative">
-      <div class="fixed w-2 flex flex-column gap-4">
-        <div class="flex flex-column gap-2">
+    <aside class="relative sm:w-12 lg:w-2 h-4rem">
+      <div class="fixed flex flex-column sm:gap-2 lg:gap-4 sm:w-full lg:w-2">
+        <div class="flex sm:gap-4 lg:gap-2 justify-content-center sm:flex-row lg:flex-column">
           <dc-filter
             [header]="'basic_cars.filter_year'"
             [options]="vm.yearFilterOptions ?? []"
             [filterInit]="yearFilterSubject | async"
             (selectedOption)="yearFilterSubject.next($event)"
+            class="dc-filter"
           >
           </dc-filter>
           <dc-filter
@@ -24,6 +25,7 @@
             [options]="vm.seriesFilterOptions ?? []"
             [filterInit]="seriesFilterSubject | async"
             (selectedOption)="seriesFilterSubject.next($event)"
+            class="dc-filter"
           >
           </dc-filter>
 
@@ -32,13 +34,14 @@
             [options]="propertyFilterOptions"
             [filterInit]="propertyFilterSubject | async"
             (selectedOption)="onPropertySelected($event)"
+            class="dc-filter"
           >
           </dc-filter>
         </div>
 
-        <dc-divider></dc-divider>
+        <dc-divider class="dc-divider"></dc-divider>
 
-        <p>
+        <p class="text-center">
           {{ "basic_cars.owned_cars" | translate }}:
           {{ vm.ownedCars?.carsOwned }} /
           {{ vm.ownedCars?.carsShowed }}
@@ -46,7 +49,7 @@
       </div>
     </aside>
     <!-- List of cars -->
-    <main class="w-10 flex flex-column gap-8">
+    <main class="sm:w-12 lg:w-10 flex flex-column gap-8">
       <ng-container *ngFor="let group of vm.cars">
         <div>
           <h4>{{ group.serieName }}</h4>

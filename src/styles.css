@@ -161,7 +161,8 @@ p,
 button,
 select,
 option,
-li {
+li,
+body {
   padding: 0;
   margin: 0;
 }
