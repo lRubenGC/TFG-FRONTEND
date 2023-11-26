@@ -59,6 +59,15 @@
   }
 }
 
+@media (max-width: 768px) {
+  .header-container {
+    padding: 0.25rem 1rem !important;
+  }
+  input {
+    width: 300px !important;
+  }
+}
+
 ::ng-deep.p-overlaypanel {
   z-index: 6000 !important;
 }
