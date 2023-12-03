@@ -11,7 +11,7 @@ import {
   isValidEmail,
   isValidPassword,
   isValidUsername,
-} from 'src/app/helpers/auth';
+} from '../../models/auth.functions';
 import { AuthService } from '../../services/auth.service';
 
 @Component({

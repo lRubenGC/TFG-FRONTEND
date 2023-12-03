@@ -3,7 +3,6 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { lastValueFrom, Subscription } from 'rxjs';
 
-import { decodeToken } from 'src/app/helpers/generics';
 import { landingCardInterface } from 'src/app/models/landingPage.interface';
 import { msgCardInterface } from 'src/app/models/shared.interface';
 import { LanguageService } from '../../services/language.service';
@@ -49,13 +48,10 @@ export class LandingPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private translate: TranslateService,
-    private languageService: LanguageService,
+    private languageService: LanguageService
   ) {}
 
   async ngOnInit() {
-    const token = await decodeToken();
-    this.msg_card.button = !token.hasToken;
-
     this.subscription = this.languageService.languageChanged$.subscribe(
       (lang) => {
         this.translate.use(lang);

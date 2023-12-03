@@ -1,8 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, from, mergeMap } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { getTokenFromIndexedDB } from 'src/app/helpers/indexedDB';
 import { environment } from 'src/environments/environment';
 import {
   BasicCarsResponse,
@@ -21,24 +20,21 @@ export class BasicCarsService {
     year: string,
     filters?: FiltersBody
   ): Observable<BasicCarsResponse[]> {
-    return from(getTokenFromIndexedDB()).pipe(
-      mergeMap((token) => {
-        const headers = new HttpHeaders({
-          'Content-Type': 'application/json',
-          'r-token': token ? token : '',
-        });
+    const token = localStorage.getItem('dt-token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'r-token': token ? token : '',
+    });
 
-        return this.http.post<BasicCarsResponse[]>(
-          `${environment.apiBaseUrl}/api/basic-cars/?year=${year}`,
-          {
-            filters: {
-              mainSerie: filters?.mainSerie,
-              userProperty: filters?.userProperty,
-            },
-          },
-          { headers }
-        );
-      })
+    return this.http.post<BasicCarsResponse[]>(
+      `${environment.apiBaseUrl}/api/basic-cars/?year=${year}`,
+      {
+        filters: {
+          mainSerie: filters?.mainSerie,
+          userProperty: filters?.userProperty,
+        },
+      },
+      { headers }
     );
   }
 

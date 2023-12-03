@@ -5,7 +5,6 @@ import { mergeMap } from 'rxjs/operators';
 import { userInterfaceApi, userUpdateRequest } from '../models/user.interface';
 
 import { environment } from 'src/environments/environment';
-import { getTokenFromIndexedDB } from '../helpers/indexedDB';
 
 @Injectable({
   providedIn: 'root',
@@ -28,84 +27,75 @@ export class UserService {
   }
 
   updateUser(id_user: number, userParams: userUpdateRequest): Observable<any> {
-    return from(getTokenFromIndexedDB()).pipe(
-      mergeMap((token) => {
-        if (token) {
-          const headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-            'r-token': token,
-          });
+    const token = localStorage.getItem('dt-token');
+    if (token) {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'r-token': token,
+      });
 
-          const requestBody: userUpdateRequest = {};
+      const requestBody: userUpdateRequest = {};
 
-          if (userParams.username) {
-            requestBody.username = userParams.username;
-          }
-          if (userParams.email) {
-            requestBody.email = userParams.email;
-          }
-          if (userParams.password) {
-            requestBody.password = userParams.password;
-          }
+      if (userParams.username) {
+        requestBody.username = userParams.username;
+      }
+      if (userParams.email) {
+        requestBody.email = userParams.email;
+      }
+      if (userParams.password) {
+        requestBody.password = userParams.password;
+      }
 
-          return this.http.put(
-            `${environment.apiBaseUrl}/api/users/${id_user}`,
-            requestBody,
-            { headers }
-          );
-        } else return of(false);
-      })
-    );
+      return this.http.put(
+        `${environment.apiBaseUrl}/api/users/${id_user}`,
+        requestBody,
+        { headers }
+      );
+    } else return of(false);
   }
 
   updateImg(id_user: number, file: File, bg: boolean = false): Observable<any> {
-    return from(getTokenFromIndexedDB()).pipe(
-      mergeMap((token) => {
-        const headers = new HttpHeaders({ 'r-token': token! });
-        const formData = new FormData();
+    const token = localStorage.getItem('dt-token');
+    const headers = new HttpHeaders({ 'r-token': token! });
+    const formData = new FormData();
 
-        formData.append('file', file);
+    formData.append('file', file);
 
-        if (bg) {
-          return this.http.post(
-            `${environment.apiBaseUrl}/api/users/bg-img/${id_user}`,
-            formData,
-            { headers }
-          );
-        }
+    if (bg) {
+      return this.http.post(
+        `${environment.apiBaseUrl}/api/users/bg-img/${id_user}`,
+        formData,
+        { headers }
+      );
+    }
 
-        return this.http.post(
-          `${environment.apiBaseUrl}/api/users/img/${id_user}`,
-          formData,
-          { headers }
-        );
-      })
+    return this.http.post(
+      `${environment.apiBaseUrl}/api/users/img/${id_user}`,
+      formData,
+      { headers }
     );
   }
 
   deleteImg(id_user: number, bg: boolean = false): Observable<any> {
-    return from(getTokenFromIndexedDB()).pipe(
-      mergeMap((token) => {
-        const headers = new HttpHeaders({ 'r-token': token! });
+    const token = localStorage.getItem('dt-token');
+    const headers = new HttpHeaders({ 'r-token': token! });
 
-        if (bg) {
-          return this.http.delete(
-            `${environment.apiBaseUrl}/api/users/bg-img/${id_user}`,
-            { headers }
-          );
-        }
+    if (bg) {
+      return this.http.delete(
+        `${environment.apiBaseUrl}/api/users/bg-img/${id_user}`,
+        { headers }
+      );
+    }
 
-        return this.http.delete(
-          `${environment.apiBaseUrl}/api/users/img/${id_user}`,
-          { headers }
-        );
-      })
+    return this.http.delete(
+      `${environment.apiBaseUrl}/api/users/img/${id_user}`,
+      { headers }
     );
   }
 
   async downloadUserCollection(id: number): Promise<void> {
     try {
-      const token = await getTokenFromIndexedDB();
+      const token = localStorage.getItem('dt-token');
       if (token) {
         const headers = new HttpHeaders({ 'r-token': token });
 

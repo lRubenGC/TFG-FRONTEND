@@ -1,7 +1,7 @@
 import { Component, HostListener, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { OverlayPanel } from 'primeng/overlaypanel';
-import { Observable, switchMap, tap } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { UserData } from 'src/app/modules/auth/models/auth.models';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { LanguageService } from 'src/app/services/language.service';
@@ -16,8 +16,7 @@ export class DcHeaderComponent {
   //#region USER DATA
   public userData$: Observable<UserData | null> =
     this.authService.isUserLoggedIn$.pipe(
-      switchMap(() => this.authService.getUserById()),
-      tap((a) => console.log(a))
+      switchMap(() => this.authService.getUserById())
     );
   //#endregion USER DATA
 
