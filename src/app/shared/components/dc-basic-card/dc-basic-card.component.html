@@ -24,7 +24,7 @@
         (click)="addCar({ hasCar: true })"
       ></button>
     </div>
-    <img [src]="car.img" alt="Car Image" />
+    <img [src]="car.img" alt="Car Image" loading="lazy"/>
   </div>
   <div class="card-description">
     <p class="card-description-row">{{ car.model_name }}</p>
