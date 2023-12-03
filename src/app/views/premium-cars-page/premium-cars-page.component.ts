@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription, lastValueFrom } from 'rxjs';
 import { msgCardInterface } from 'src/app/models/shared.interface';
-import { LanguageService } from 'src/app/services/language.service';
+import { LanguageService } from 'src/app/shared/services/language.service';
 
 import { filterSeries, filterSeriesOwned } from 'src/app/helpers/filter-series';
 import { decodeToken, tokenObject } from 'src/app/helpers/generics';

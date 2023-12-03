@@ -5,7 +5,7 @@ import { lastValueFrom, Subscription } from 'rxjs';
 
 import { landingCardInterface } from 'src/app/models/landingPage.interface';
 import { msgCardInterface } from 'src/app/models/shared.interface';
-import { LanguageService } from '../../services/language.service';
+import { LanguageService } from '../../shared/services/language.service';
 
 @Component({
   selector: 'app-landing-page',

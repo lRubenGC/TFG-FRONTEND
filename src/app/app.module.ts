@@ -10,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 // Module Views
-import { AuthGuard } from './guards/auth.guard';
+import { AuthGuard } from './shared/guards/auth.guard';
 import { AuthModule } from './modules/auth/auth.module';
 import { BasicCarsPageModule } from './modules/basic-cars/basic-cars.module';
 import { SharedModule } from './shared/shared.module';

@@ -5,30 +5,30 @@
   "not_owned": "Não colecionados",
   "auth": {
     "login": {
-      "header": "Bienvenido de nuevo!",
+      "header": "Bem vindo de novo!",
       "email": "Email",
-      "password": "Contraseña",
-      "login": "Inicia sesión",
-      "overlay": "¿Ya tienes una cuenta?"
+      "password": "Senha",
+      "login": "Iniciar sessão",
+      "overlay": "Você já tem uma conta?"
     },
     "signup": {
-      "header": "Crea una cuenta",
-      "username": "Nombre de usuario",
+      "header": "Crie a sua conta aqui",
+      "username": "Nome de usuário",
       "email": "Email",
-      "password": "Contraseña",
-      "signup": "Regístrate",
-      "overlay": "¿Todavía no tienes una cuenta?"
+      "password": "Senha",
+      "signup": "Cadastre-se",
+      "overlay": "Ainda não tem uma conta?"
     },
     "notification": {
-      "unexpected_error": "Error inesperado",
-      "login_success": "Inicio de sesión correcto",
-      "login_fail": "Email o contraseña incorrectos",
-      "signup_success": "Usuario registrado correctamente",
-      "username_used": "Usuario ya en uso",
-      "email_used": "Email ya en uso",
-      "bad_username": "Introduce un nombre de usuario válido",
-      "bad_email": "Introduce un email válido",
-      "bad_password": "Introduce una contraseña válida (8-20 caracteres)"
+      "unexpected_error": "Erro inesperado",
+      "login_success": "Login realizado com sucesso",
+      "login_fail": "Email ou senha incorretos",
+      "signup_success": "Usuário cadastrado com sucesso",
+      "username_used": "Usuário já em uso",
+      "email_used": "Email já em uso",
+      "bad_username": "Insira um nome de usuário válido",
+      "bad_email": "Insira um email válido",
+      "bad_password": "Insira uma senha válida (8 a 20 caracteres)"
     }
   },
   "basic_cars": {

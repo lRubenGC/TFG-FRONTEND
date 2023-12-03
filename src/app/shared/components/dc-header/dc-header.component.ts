@@ -4,7 +4,7 @@ import { OverlayPanel } from 'primeng/overlaypanel';
 import { Observable, switchMap } from 'rxjs';
 import { UserData } from 'src/app/modules/auth/models/auth.models';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
-import { LanguageService } from 'src/app/services/language.service';
+import { LanguageService } from 'src/app/shared/services/language.service';
 import { LANGUAGE_OPTIONS } from './dc-header.constants';
 
 @Component({

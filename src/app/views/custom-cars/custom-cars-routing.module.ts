@@ -4,7 +4,7 @@ import { CustomCarsPageComponent } from './custom-cars-page/custom-cars-page.com
 import { UploadCustomCarPageComponent } from './upload-custom-car-page/upload-custom-car-page.component';
 import { CustomCarDetailedComponent } from './custom-car-detailed/custom-car-detailed.component';
 import { EditCustomCarComponent } from './edit-custom-car/edit-custom-car.component';
-import { AuthGuard } from 'src/app/guards/auth.guard';
+import { AuthGuard } from 'src/app/shared/guards/auth.guard';
 
 
 const routes: Routes = [

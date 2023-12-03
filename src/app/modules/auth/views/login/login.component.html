@@ -9,27 +9,27 @@
       (ngSubmit)="submitRegister()"
       class="flex justify-content-center align-items-center flex-column h-full text-center"
     >
-      <h1>{{ "REGISTER_TITLE" | translate }}</h1>
+      <h1>{{ "auth.signup.header" | translate }}</h1>
       <input
         type="text"
         formControlName="register_username"
-        placeholder="{{ 'LOGIN_USERNAME' | translate }}"
+        placeholder="{{ 'auth.signup.username' | translate }}"
       />
       <input
         type="email"
         formControlName="register_email"
-        placeholder="{{ 'LOGIN_EMAIL' | translate }}"
+        placeholder="{{ 'auth.signup.email' | translate }}"
       />
       <input
         type="password"
         formControlName="register_password"
-        placeholder="{{ 'LOGIN_PASSWORD' | translate }}"
+        placeholder="{{ 'auth.signup.password' | translate }}"
       />
 
       <dc-button
-        [buttonTitle]="'REGISTER_SIGNUP'"
+        [buttonTitle]="'auth.signup.signup'"
         type="submit"
-        class="mt-1"
+        class="mt-2"
       ></dc-button>
 
       <p *ngIf="registerError" class="auth-notification auth-error">
@@ -61,9 +61,9 @@
       />
 
       <dc-button
-        [buttonTitle]="'LOGIN_SIGNIN'"
+        [buttonTitle]="'auth.login.login'"
         type="submit"
-        class="mt-1"
+        class="mt-2"
       ></dc-button>
 
       <p *ngIf="loginError" class="auth-notification auth-error">
@@ -83,8 +83,8 @@
       *ngIf="!loginActivo"
       (click)="toggleLogin()"
       id="signIn"
-      class="mt_1"
-      [buttonTitle]="'LOGIN_SIGNIN'"
+      class="m-2"
+      [buttonTitle]="'auth.login.login'"
     ></dc-button>
 
     <!-- Register toggle button -->
@@ -92,8 +92,8 @@
       *ngIf="loginActivo"
       (click)="toggleLogin()"
       id="signUp"
-      class="mt_1"
-      [buttonTitle]="'REGISTER_SIGNUP'"
+      class="m-2"
+      [buttonTitle]="'auth.signup.signup'"
     ></dc-button>
   </div>
 </main>
