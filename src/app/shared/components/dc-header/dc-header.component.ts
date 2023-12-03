@@ -1,7 +1,7 @@
 import { Component, HostListener, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { OverlayPanel } from 'primeng/overlaypanel';
-import { Observable, combineLatest, of, switchMap } from 'rxjs';
+import { Observable, combineLatest, of, switchMap, tap } from 'rxjs';
 import { UserData } from 'src/app/modules/auth/models/auth.models';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { GenericAuthService } from 'src/app/services/generic-auth.service';
@@ -15,17 +15,11 @@ import { LANGUAGE_OPTIONS } from './dc-header.constants';
 })
 export class DcHeaderComponent {
   //#region USER DATA
-  public userData$: Observable<UserData | null> = combineLatest([
-    this.authService.isUserLoggedIn$,
-    this.authService.isValidToken(),
-  ]).pipe(
-    switchMap(([isUserLoggedIn, tokenObject]) => {
-      console.log(tokenObject);
-      if (tokenObject.userId) {
-        return this.authService.getUserById(tokenObject.userId);
-      } else return of(null);
-    })
-  );
+  public userData$: Observable<UserData | null> =
+    this.authService.isUserLoggedIn$.pipe(
+      switchMap(() => this.authService.getUserById()),
+      tap(a=>console.log(a))
+    );
   //#endregion USER DATA
 
   //#region USER MENU SCROLL

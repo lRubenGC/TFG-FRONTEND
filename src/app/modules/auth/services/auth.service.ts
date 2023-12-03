@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import jwtDecode from 'jwt-decode';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {
   UserData,
@@ -60,7 +60,12 @@ export class AuthService {
     });
   }
 
-  public getUserById(id: number): Observable<UserData> {
-    return this.http.get<UserData>(`${environment.apiBaseUrl}/api/users/${id}`);
+  public getUserById(): Observable<UserData | null> {
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      return this.http.get<UserData>(
+        `${environment.apiBaseUrl}/api/users/${userId}`
+      );
+    } else return of(null);
   }
 }

@@ -24,8 +24,10 @@
   <div class="dt-navbar">
     <ng-container *ngIf="userData$ | async as userData">
       <img
-        [src]="userData.img"
-        alt="user profile pic"
+        [src]="
+          userData.img || 'assets/images/user-profile/no-user-profile.webp'
+        "
+        alt="user-pic"
         (click)="userMenu.toggle($event)"
       />
       <p-overlayPanel
@@ -44,7 +46,13 @@
       >
         <div class="user-menu flex flex-column">
           <div class="flex gap-2 p-3">
-            <img [src]="userData.img" />
+            <img
+              [src]="
+                userData.img ||
+                'assets/images/user-profile/no-user-profile.webp'
+              "
+              alt="user-pic"
+            />
             <div class="flex flex-column">
               <p>{{ userData.username }}</p>
             </div>

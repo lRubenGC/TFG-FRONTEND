@@ -29,7 +29,7 @@ export interface UserData {
   status: boolean;
   recoverToken: Date | null;
   recoverTokenDate: Date | null;
-  img: string;
+  img?: string;
   bg_img: string;
   csvDownloadDate: Date | null;
 }

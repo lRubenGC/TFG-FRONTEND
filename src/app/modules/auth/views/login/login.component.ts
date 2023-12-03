@@ -94,7 +94,6 @@ export class LoginComponent implements OnInit {
 
             // Dispatch login event
             this.authService.isUserLoggedIn$.next(true);
-            this.genericAuthService.login();
 
             // Redirect
             this.router.navigate(['/']);
@@ -135,7 +134,8 @@ export class LoginComponent implements OnInit {
               .subscribe(
                 (res) => {
                   // Save token in Indexed DB
-                  setTokenInIndexedDB(res.token);
+                  localStorage.setItem('dt-token', res.token);
+                  localStorage.setItem('userId', res.user.id);
 
                   // Dispatch login event
                   this.authService.isUserLoggedIn$.next(true);
