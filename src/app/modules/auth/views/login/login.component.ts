@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { LanguageService } from 'src/app/services/language.service';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../services/auth.service';
 import {
   isValidPassword,
   isValidEmail,
@@ -14,11 +14,11 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { setTokenInIndexedDB } from 'src/app/helpers/indexedDB';
 
 @Component({
-  selector: 'app-login-page',
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.css'],
+  selector: 'login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
 })
-export class LoginPageComponent implements OnInit {
+export class LoginComponent implements OnInit {
   isSmallScreen = false;
   private breakpointSubscription?: Subscription;
 

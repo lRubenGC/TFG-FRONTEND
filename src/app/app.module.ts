@@ -10,18 +10,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 // Module Views
-import { ComponentsModule } from './components/components.module';
 import { AuthGuard } from './guards/auth.guard';
+import { AuthModule } from './modules/auth/auth.module';
 import { BasicCarsPageModule } from './modules/basic-cars/basic-cars.module';
 import { SharedModule } from './shared/shared.module';
-import { AuthModule } from './views/auth/auth.module';
-import { CustomCarsModule } from './views/custom-cars/custom-cars.module';
-import { DetailedCarPageModule } from './views/detailed-car-page/detailed-car-page.module';
-import { InfoModule } from './views/info/info.module';
 import { LandingPageModule } from './views/landing-page/landing-page.module';
-import { PremiumCarsPageModule } from './views/premium-cars-page/premium-cars-page.module';
-import { SearchResultsPageModule } from './views/search-results/search-results-page.module';
-import { UserModule } from './views/user/user.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -43,16 +36,9 @@ import { UserModule } from './views/user/user.module';
 
     // App Modules
     AuthModule,
-    ComponentsModule,
     BasicCarsPageModule,
-    CustomCarsModule,
-    DetailedCarPageModule,
-    InfoModule,
     LandingPageModule,
-    PremiumCarsPageModule,
-    SearchResultsPageModule,
     SharedModule,
-    UserModule,
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],

@@ -2,10 +2,10 @@ import { Component, HostListener, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { Observable, from, of, switchMap } from 'rxjs';
+import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { GenericAuthService } from 'src/app/services/generic-auth.service';
 import { LanguageService } from 'src/app/services/language.service';
 import { UserSharedService } from 'src/app/shared/services/user-shared.service';
-import { AuthService } from 'src/app/views/auth/auth.service';
 import {
   decodeToken,
   removeTokenFromIndexedDB,

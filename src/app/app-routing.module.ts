@@ -10,36 +10,32 @@ const routes: Routes = [
   },
   {
     path: 'auth',
-    loadChildren: () => import('./views/auth/auth-routing.module').then(m => m.AuthRoutingModule)
+    loadChildren: () => import('./modules/auth/auth-routing.module').then(m => m.AuthRoutingModule)
   },
-  { 
-    path: 'info',
-    loadChildren: () => import('./views/info/info-routing.module').then(m => m.InfoRoutingModule)
-  },
+  // { 
+  //   path: 'info',
+  //   loadChildren: () => import('./views/info/info-routing.module').then(m => m.InfoRoutingModule)
+  // },
   { 
     path: 'basic-cars',
     loadChildren: () => import('./modules/basic-cars/basic-cars-routing.module').then(m => m.BasicCarsRoutingModule)
   },
-  { 
-    path: 'custom-cars',
-    loadChildren: () => import('./views/custom-cars/custom-cars-routing.module').then(m => m.CustomCarsRoutingModule)
-  },
-  { 
-    path: 'detailed-car/:type/:id',
-    loadChildren: () => import('./views/detailed-car-page/detailed-car-routing.module').then(m => m.DetailedCarRoutingModule)
-  },
-  { 
-    path: 'premium-cars',
-    loadChildren: () => import('./views/premium-cars-page/premium-cars-routing.module').then(m => m.PremiumCarsRoutingModule)
-  },
-  { 
-    path: 'search/:query',
-    loadChildren: () => import('./views/search-results/search-results-routing.module').then(m => m.SearchResultsRoutingModule)
-  },
-  { 
-    path: 'user',
-    loadChildren: () => import('./views/user/user-routing.module').then(m => m.UserRoutingModule)
-  },
+  // { 
+  //   path: 'custom-cars',
+  //   loadChildren: () => import('./views/custom-cars/custom-cars-routing.module').then(m => m.CustomCarsRoutingModule)
+  // },
+  // { 
+  //   path: 'premium-cars',
+  //   loadChildren: () => import('./views/premium-cars-page/premium-cars-routing.module').then(m => m.PremiumCarsRoutingModule)
+  // },
+  // { 
+  //   path: 'search/:query',
+  //   loadChildren: () => import('./views/search-results/search-results-routing.module').then(m => m.SearchResultsRoutingModule)
+  // },
+  // { 
+  //   path: 'user',
+  //   loadChildren: () => import('./views/user/user-routing.module').then(m => m.UserRoutingModule)
+  // },
   {
     path: '**',
     redirectTo: ''
