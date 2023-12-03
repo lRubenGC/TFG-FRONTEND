@@ -1,16 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DialogService } from 'primeng/dynamicdialog';
 import { filter, tap } from 'rxjs';
-import { decodeToken } from '../../functions/token-functions';
 import {
   IBASIC_CAR,
   IPROPERTY_TYPE,
-} from '../../models/basic-cars-shared.models';
+} from 'src/app/modules/basic-cars/models/basic-cars.models';
 import { ITOAST_OBJECT } from '../../models/toast-shared.models';
-import { userIdToken } from '../../models/token-shared.models';
-import { BasicCarsSharedService } from '../../services/basic-cars-shared.service';
+import { BasicCarsService } from './dc-basic-cars.service';
 import { DcBasicCarDetailedComponent } from '../dc-basic-car-detailed/dc-basic-car-detailed.component';
 import {
   CAR_PROPERTY_SUBJECT,
@@ -26,7 +24,7 @@ import {
   imports: [CommonModule],
   providers: [DialogService],
 })
-export class DcBasicCardComponent implements OnInit {
+export class DcBasicCardComponent {
   //#region INPUTS
   @Input() car!: IBASIC_CAR;
   @Input() showYear?: boolean = false;
@@ -35,10 +33,6 @@ export class DcBasicCardComponent implements OnInit {
   //#region OUTPUTS
   @Output() triggerToast = new EventEmitter<ITOAST_OBJECT>();
   //#endregion OUTPUTS
-
-  //#region PROPS
-  private userToken: userIdToken = { hasToken: false };
-  //#endregion PROPS
 
   public carProperty$ = this.dcBasicCarDetailedService.carProperty$.pipe(
     filter(
@@ -63,86 +57,82 @@ export class DcBasicCardComponent implements OnInit {
     })
   );
 
-  async ngOnInit() {
-    this.userToken = await decodeToken();
-  }
-
   constructor(
     private route: ActivatedRoute,
-    private basicCarsSharedService: BasicCarsSharedService,
+    private basicCarsService: BasicCarsService,
     private dcBasicCarDetailedService: DcBasicCarDetailedService,
     private dialogService: DialogService,
     private router: Router
   ) {}
 
   public addCar(propertyType: IPROPERTY_TYPE) {
-    if (this.userToken.userId) {
-      this.basicCarsSharedService
-        .addCarToUser(this.userToken.userId, this.car.id, propertyType)
-        .subscribe({
-          next: (resp) => {
-            if (resp.ok) {
-              if (propertyType.hasCar) {
-                this.dcBasicCarDetailedService.carPropertySubject.next('');
-                this.car.has_car = true;
-                this.car.wants_car = false;
+    this.basicCarsService
+      .addCarToUser(this.car.id, propertyType)
+      .subscribe({
+        next: (resp) => {
+          if (resp.ok) {
+            if (propertyType.hasCar) {
+              this.dcBasicCarDetailedService.carPropertySubject.next('');
+              this.car.has_car = true;
+              this.car.wants_car = false;
 
-                this.triggerToast.emit({
-                  severity: 'success',
-                  summary: 'toast.success',
-                  detail: 'toast.car_added_collection',
-                });
-              }
-              if (propertyType.wantsCar) {
-                this.car.wants_car = true;
-                this.triggerToast.emit({
-                  severity: 'success',
-                  summary: 'toast.success',
-                  detail: 'toast.car_added_wishlist',
-                });
-              }
+              this.triggerToast.emit({
+                severity: 'success',
+                summary: 'toast.success',
+                detail: 'toast.car_added_collection',
+              });
             }
-          },
-          error: (error) => {},
-        });
-    } else {
-      this.triggerToast.emit({
-        severity: 'error',
-        summary: 'toast.error',
-        detail: 'toast.not_logged_in',
+            if (propertyType.wantsCar) {
+              this.car.wants_car = true;
+              this.triggerToast.emit({
+                severity: 'success',
+                summary: 'toast.success',
+                detail: 'toast.car_added_wishlist',
+              });
+            }
+          } else {
+            this.triggerToast.emit({
+              severity: 'error',
+              summary: 'toast.error',
+              detail: 'toast.not_logged_in',
+            });
+          }
+        },
+        error: (error) => {},
       });
-    }
   }
 
   public removeCar() {
-    if (this.userToken.userId) {
-      this.basicCarsSharedService
-        .removeCarFromUser(this.userToken.userId, this.car.id)
-        .subscribe({
-          next: (resp) => {
-            if (resp.ok) {
-              if (this.car.has_car) {
-                this.car.has_car = false;
-                this.dcBasicCarDetailedService.carPropertySubject.next('');
-                this.triggerToast.emit({
-                  severity: 'success',
-                  summary: 'toast.success',
-                  detail: 'toast.car_removed_collection',
-                });
-              }
-              if (this.car.wants_car) {
-                this.car.wants_car = false;
-                this.triggerToast.emit({
-                  severity: 'success',
-                  summary: 'toast.success',
-                  detail: 'toast.car_removed_wishlist',
-                });
-              }
-            }
-          },
-          error: (error) => {},
-        });
-    }
+    this.basicCarsService.removeCarFromUser(this.car.id).subscribe({
+      next: (resp) => {
+        if (resp.ok) {
+          if (this.car.has_car) {
+            this.car.has_car = false;
+            this.dcBasicCarDetailedService.carPropertySubject.next('');
+            this.triggerToast.emit({
+              severity: 'success',
+              summary: 'toast.success',
+              detail: 'toast.car_removed_collection',
+            });
+          }
+          if (this.car.wants_car) {
+            this.car.wants_car = false;
+            this.triggerToast.emit({
+              severity: 'success',
+              summary: 'toast.success',
+              detail: 'toast.car_removed_wishlist',
+            });
+          }
+        } else {
+          this.triggerToast.emit({
+            severity: 'error',
+            summary: 'toast.error',
+            detail: 'toast.not_logged_in',
+          });
+        }
+      },
+      error: (error) => {},
+    });
   }
 
   public openModal() {

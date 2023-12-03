@@ -1,17 +1,11 @@
 import { Component, HostListener, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { OverlayPanel } from 'primeng/overlaypanel';
-import { Observable, from, of, switchMap } from 'rxjs';
+import { Observable, combineLatest, of, switchMap } from 'rxjs';
+import { UserData } from 'src/app/modules/auth/models/auth.models';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { GenericAuthService } from 'src/app/services/generic-auth.service';
 import { LanguageService } from 'src/app/services/language.service';
-import { UserSharedService } from 'src/app/shared/services/user-shared.service';
-import {
-  decodeToken,
-  removeTokenFromIndexedDB,
-} from '../../functions/token-functions';
-import { userIdToken } from '../../models/token-shared.models';
-import { UserData } from '../../models/user-shared.models';
 import { LANGUAGE_OPTIONS } from './dc-header.constants';
 
 @Component({
@@ -21,10 +15,14 @@ import { LANGUAGE_OPTIONS } from './dc-header.constants';
 })
 export class DcHeaderComponent {
   //#region USER DATA
-  public userData$: Observable<UserData | null> = from(decodeToken()).pipe(
-    switchMap((userIdToken: userIdToken) => {
-      if (userIdToken && userIdToken.userId) {
-        return from(this.userSharedService.getUserById(userIdToken.userId));
+  public userData$: Observable<UserData | null> = combineLatest([
+    this.authService.isUserLoggedIn$,
+    this.authService.isValidToken(),
+  ]).pipe(
+    switchMap(([isUserLoggedIn, tokenObject]) => {
+      console.log(tokenObject);
+      if (tokenObject.userId) {
+        return this.authService.getUserById(tokenObject.userId);
       } else return of(null);
     })
   );
@@ -39,7 +37,6 @@ export class DcHeaderComponent {
   //#endregion USER MENU SCROLL
 
   constructor(
-    private userSharedService: UserSharedService,
     private languageService: LanguageService,
     private translate: TranslateService,
     private authService: AuthService,
@@ -58,9 +55,9 @@ export class DcHeaderComponent {
   public async logOut() {
     this.genericAuthService.logout();
 
-    await removeTokenFromIndexedDB();
     localStorage.removeItem('userId');
-    this.authService.setUserLoggedIn(false);
+    localStorage.removeItem('dt-token');
+    this.authService.isUserLoggedIn$.next(false);
     window.location.reload();
   }
 }

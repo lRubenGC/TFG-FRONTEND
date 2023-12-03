@@ -89,11 +89,11 @@ export class LoginComponent implements OnInit {
             this.loginSuccessMsg = 'auth.notification.login_success';
 
             // Save token in Indexed DB
-            setTokenInIndexedDB(res.token);
+            localStorage.setItem('dt-token', res.token);
             localStorage.setItem('userId', res.user.id);
 
             // Dispatch login event
-            this.authService.userLoggedIn.next(true);
+            this.authService.isUserLoggedIn$.next(true);
             this.genericAuthService.login();
 
             // Redirect
@@ -138,7 +138,7 @@ export class LoginComponent implements OnInit {
                   setTokenInIndexedDB(res.token);
 
                   // Dispatch login event
-                  this.authService.userLoggedIn.next(true);
+                  this.authService.isUserLoggedIn$.next(true);
 
                   // Redirect
                   this.router.navigate(['/']);
