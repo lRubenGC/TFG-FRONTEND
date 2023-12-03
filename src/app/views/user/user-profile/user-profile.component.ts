@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css', '../../../styles/cars-views.css'],
+  styleUrls: ['./user-profile.component.css'],
 })
 export class UserProfileComponent {
   // @Output() errorEvent = new EventEmitter<string>();

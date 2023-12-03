@@ -10,10 +10,7 @@ import { CustomCarsService } from '../custom-cars.service';
 @Component({
   selector: 'app-custom-cars-page',
   templateUrl: './custom-cars-page.component.html',
-  styleUrls: [
-    './custom-cars-page.component.css',
-    '../../../styles/cars-views.css',
-  ],
+  styleUrls: ['./custom-cars-page.component.css'],
 })
 export class CustomCarsPageComponent implements OnInit {
   userToken!: tokenObject;

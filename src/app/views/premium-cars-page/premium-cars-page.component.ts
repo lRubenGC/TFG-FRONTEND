@@ -17,10 +17,7 @@ import { PremiumCarsService } from './premium-cars.service';
 @Component({
   selector: 'app-premium-cars-page',
   templateUrl: './premium-cars-page.component.html',
-  styleUrls: [
-    './premium-cars-page.component.css',
-    '../../styles/cars-views.css',
-  ],
+  styleUrls: ['./premium-cars-page.component.css'],
 })
 export class PremiumCarsPageComponent implements OnInit {
   userToken!: tokenObject;
