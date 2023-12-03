@@ -11,7 +11,7 @@ export class LanguageService {
   languageChanged$ = this.languageChangedSource.asObservable();
 
   changeLanguage(lang: string) {
-    localStorage.setItem('cw-lang', lang);
+    localStorage.setItem('dt-lang', lang);
     this.languageChangedSource.next(lang);
   }
 }

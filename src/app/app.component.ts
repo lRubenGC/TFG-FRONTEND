@@ -3,7 +3,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { PrimeNGConfig } from 'primeng/api';
 import { environment } from '../environments/environment';
 import { initializeDB } from './helpers/indexedDB';
-import { AppService } from './services/app.service';
 
 @Component({
   selector: 'app-root',
@@ -15,27 +14,22 @@ export class AppComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
-    private appService: AppService,
     private primengConfig: PrimeNGConfig
   ) {
     this.initializeDB();
 
-    const lang = localStorage.getItem('cw-lang');
+    const lang = localStorage.getItem('dt-lang');
     if (lang) {
-      translate.setDefaultLang(lang);
-    } else translate.setDefaultLang('en');
+      this.translate.setDefaultLang(lang);
+    } else this.translate.setDefaultLang('en');
   }
 
   ngOnInit(): void {
     console.log(`Version: ${environment.appVersion}`);
     this.primengConfig.zIndex = {
       modal: 6000,
-      toast: 7000
-    }
-  }
-
-  onBodyClick(event: MouseEvent): void {
-    this.appService.onBodyClick(event);
+      toast: 7000,
+    };
   }
 
   async initializeDB() {

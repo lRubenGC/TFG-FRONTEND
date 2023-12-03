@@ -1,10 +1,9 @@
 import { Component, HostListener, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { OverlayPanel } from 'primeng/overlaypanel';
-import { Observable, combineLatest, of, switchMap, tap } from 'rxjs';
+import { Observable, switchMap, tap } from 'rxjs';
 import { UserData } from 'src/app/modules/auth/models/auth.models';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
-import { GenericAuthService } from 'src/app/services/generic-auth.service';
 import { LanguageService } from 'src/app/services/language.service';
 import { LANGUAGE_OPTIONS } from './dc-header.constants';
 
@@ -18,7 +17,7 @@ export class DcHeaderComponent {
   public userData$: Observable<UserData | null> =
     this.authService.isUserLoggedIn$.pipe(
       switchMap(() => this.authService.getUserById()),
-      tap(a=>console.log(a))
+      tap((a) => console.log(a))
     );
   //#endregion USER DATA
 
@@ -33,8 +32,7 @@ export class DcHeaderComponent {
   constructor(
     private languageService: LanguageService,
     private translate: TranslateService,
-    private authService: AuthService,
-    private genericAuthService: GenericAuthService
+    private authService: AuthService
   ) {}
 
   //#region LANGUAGE OPTIONS
@@ -47,8 +45,6 @@ export class DcHeaderComponent {
   }
 
   public async logOut() {
-    this.genericAuthService.logout();
-
     localStorage.removeItem('userId');
     localStorage.removeItem('dt-token');
     this.authService.isUserLoggedIn$.next(false);

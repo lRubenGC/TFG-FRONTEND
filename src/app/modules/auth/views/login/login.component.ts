@@ -12,8 +12,6 @@ import {
   isValidPassword,
   isValidUsername,
 } from 'src/app/helpers/auth';
-import { setTokenInIndexedDB } from 'src/app/helpers/indexedDB';
-import { GenericAuthService } from 'src/app/services/generic-auth.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -45,7 +43,6 @@ export class LoginComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private formBuilder: UntypedFormBuilder,
     private authService: AuthService,
-    private genericAuthService: GenericAuthService,
     private router: Router
   ) {
     this.registerForm = this.formBuilder.group({
