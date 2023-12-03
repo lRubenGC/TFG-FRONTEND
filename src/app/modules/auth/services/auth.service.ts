@@ -1,18 +1,16 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
-import { Observable, Subject } from 'rxjs';
-
-import { loginInterface, registerInterface } from 'src/app/models/auth.interface';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-
+import { loginInterface, registerInterface } from '../models/auth.models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private userLoggedIn = new Subject<boolean>();
+  public userLoggedIn = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {}
 
@@ -21,14 +19,6 @@ export class AuthService {
       email: body.email,
       password: body.password,
     });
-  }
-
-  setUserLoggedIn(value: boolean) {
-    this.userLoggedIn.next(value);
-  }
-
-  getUserLoggedIn() {
-    return this.userLoggedIn.asObservable();
   }
 
   register(body: registerInterface): Observable<any> {

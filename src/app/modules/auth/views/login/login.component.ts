@@ -1,17 +1,20 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { LanguageService } from 'src/app/services/language.service';
-import { AuthService } from '../../services/auth.service';
 import {
-  isValidPassword,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import {
   isValidEmail,
+  isValidPassword,
   isValidUsername,
 } from 'src/app/helpers/auth';
-import { Router } from '@angular/router';
-import { GenericAuthService } from 'src/app/services/generic-auth.service';
-import { Subscription } from 'rxjs';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { setTokenInIndexedDB } from 'src/app/helpers/indexedDB';
+import { GenericAuthService } from 'src/app/services/generic-auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'login',
@@ -40,7 +43,6 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private languageService: LanguageService,
     private formBuilder: UntypedFormBuilder,
     private authService: AuthService,
     private genericAuthService: GenericAuthService,
@@ -84,14 +86,14 @@ export class LoginComponent implements OnInit {
           (res) => {
             // Login Notification
             this.loginSuccess = true;
-            this.loginSuccessMsg = 'LOGIN_SUCCESFUL';
+            this.loginSuccessMsg = 'auth.notification.login_success';
 
             // Save token in Indexed DB
             setTokenInIndexedDB(res.token);
             localStorage.setItem('userId', res.user.id);
 
             // Dispatch login event
-            this.authService.setUserLoggedIn(true);
+            this.authService.userLoggedIn.next(true);
             this.genericAuthService.login();
 
             // Redirect
@@ -99,8 +101,8 @@ export class LoginComponent implements OnInit {
           },
           (err) => {
             if (err.error.err === 1) {
-              this.loginErrorMsg = 'LOGIN_BAD_REQUEST';
-            } else this.loginErrorMsg = 'UNEXPECTED_ERROR';
+              this.loginErrorMsg = 'auth.notification.login_fail';
+            } else this.loginErrorMsg = 'auth.notification.unexpected_error';
             this.loginError = true;
           }
         );
@@ -122,7 +124,7 @@ export class LoginComponent implements OnInit {
         .subscribe(
           (res) => {
             this.loginSuccess = true;
-            this.loginSuccessMsg = 'REGISTER_SUCCESFUL';
+            this.loginSuccessMsg = 'auth.notification.signup_success';
 
             // Login automatically
             this.authService
@@ -136,28 +138,29 @@ export class LoginComponent implements OnInit {
                   setTokenInIndexedDB(res.token);
 
                   // Dispatch login event
-                  this.authService.setUserLoggedIn(true);
+                  this.authService.userLoggedIn.next(true);
 
                   // Redirect
                   this.router.navigate(['/']);
                 },
                 (err) => {
                   if (err.error.err === 1) {
-                    this.loginErrorMsg = 'LOGIN_BAD_REQUEST';
-                  } else this.loginErrorMsg = 'UNEXPECTED_ERROR';
+                    this.loginErrorMsg = 'auth.notification.login_fail';
+                  } else
+                    this.loginErrorMsg = 'auth.notification.unexpected_error';
                   this.loginError = true;
                 }
               );
           },
           (err) => {
             if (err.error.errors[0].param === 'username') {
-              this.registerErrorMsg = 'USERNAME_IN_USE';
+              this.registerErrorMsg = 'auth.notification.username_used';
               this.registerError = true;
               return;
             }
 
             if (err.error.errors[0].param === 'email') {
-              this.registerErrorMsg = 'EMAIL_IN_USE';
+              this.registerErrorMsg = 'auth.notification.email_used';
               this.registerError = true;
               return;
             }
@@ -173,13 +176,13 @@ export class LoginComponent implements OnInit {
   loginFormValid(email: string, password: string) {
     if (!isValidEmail(email)) {
       this.loginError = true;
-      this.loginErrorMsg = 'LOGIN_BAD_EMAIL';
+      this.loginErrorMsg = 'auth.notification.bad_email';
       return false;
     }
 
     if (!isValidPassword(password)) {
       this.loginError = true;
-      this.loginErrorMsg = 'LOGIN_BAD_PASSWORD';
+      this.loginErrorMsg = 'auth.notification.bad_password';
       return false;
     }
 
@@ -190,19 +193,19 @@ export class LoginComponent implements OnInit {
   registerFormValid(username: string, email: string, password: string) {
     if (!isValidUsername(username)) {
       this.registerError = true;
-      this.registerErrorMsg = 'LOGIN_BAD_USERNAME';
+      this.registerErrorMsg = 'auth.notification.bad_username';
       return false;
     }
 
     if (!isValidEmail(email)) {
       this.registerError = true;
-      this.registerErrorMsg = 'LOGIN_BAD_EMAIL';
+      this.registerErrorMsg = 'auth.notification.bad_email';
       return false;
     }
 
     if (!isValidPassword(password)) {
       this.registerError = true;
-      this.registerErrorMsg = 'LOGIN_BAD_PASSWORD';
+      this.registerErrorMsg = 'auth.notification.bad_password';
       return false;
     }
 

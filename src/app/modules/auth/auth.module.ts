@@ -5,7 +5,9 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { ComponentsModule } from 'src/app/components/components.module';
+import {
+  DCButtonComponent
+} from 'src/app/shared/components/dc-secondary-button/dc-button.component';
 import { LoginComponent } from './views/login/login.component';
 import { RecoverAccountComponent } from './views/recover-account/recover-account.component';
 
@@ -13,11 +15,11 @@ import { RecoverAccountComponent } from './views/recover-account/recover-account
   declarations: [LoginComponent, RecoverAccountComponent],
   imports: [
     CommonModule,
-    ComponentsModule,
     HttpClientModule,
     ReactiveFormsModule,
     TranslateModule,
     LayoutModule,
+    DCButtonComponent,
   ],
 })
 export class AuthModule {}

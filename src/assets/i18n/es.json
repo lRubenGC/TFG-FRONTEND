@@ -3,6 +3,34 @@
   "owned": "Coleccionados",
   "wished": "Deseados",
   "not_owned": "No coleccionados",
+  "auth": {
+    "login": {
+      "header": "Bienvenido de nuevo!",
+      "email": "Email",
+      "password": "Contraseña",
+      "login": "Inicia sesión",
+      "overlay": "¿Ya tienes una cuenta?"
+    },
+    "signup": {
+      "header": "Crea una cuenta",
+      "username": "Nombre de usuario",
+      "email": "Email",
+      "password": "Contraseña",
+      "signup": "Regístrate",
+      "overlay": "¿Todavía no tienes una cuenta?"
+    },
+    "notification": {
+      "unexpected_error": "Error inesperado",
+      "login_success": "Inicio de sesión correcto",
+      "login_fail": "Email o contraseña incorrectos",
+      "signup_success": "Usuario registrado correctamente",
+      "username_used": "Usuario ya en uso",
+      "email_used": "Email ya en uso",
+      "bad_username": "Introduce un nombre de usuario válido",
+      "bad_email": "Introduce un email válido",
+      "bad_password": "Introduce una contraseña válida (8-20 caracteres)"
+    }
+  },
   "basic_cars": {
     "filter_year": "Año",
     "filter_serie": "Series",
