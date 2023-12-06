@@ -1,0 +1,75 @@
+<ng-container
+  *ngIf="{
+    cars: carsVM$ | async,
+    mainSerieFilterOptions: mainSerieFilterOptions$ | async,
+    secondarySerieFilterOptions: secondarySerieFilterOptions$ | async,
+    ownedCars: ownedCars$ | async,
+  } as vm"
+>
+  <!-- Main container -->
+  <div class="main-container flex sm:flex-column lg:flex-row w-full">
+    <!-- Aside section -->
+    <aside class="sm:w-12 lg:w-2 h-4rem">
+      <div class="fixed w-full flex flex-column sm:gap-2 lg:gap-4 sm:w-full lg:w-2">
+        <div class="flex sm:gap-4 lg:gap-2 justify-content-center sm:flex-row lg:flex-column">
+          <dc-filter
+            [header]="'basic_cars.filter_year'"
+            [options]="vm.mainSerieFilterOptions ?? []"
+            [filterInit]="mainSerieFilterSubject | async"
+            (selectedOption)="mainSerieFilterSubject.next($event)"
+            class="dc-filter"
+          >
+          </dc-filter>
+          <dc-filter
+            [header]="'basic_cars.filter_serie'"
+            [options]="vm.secondarySerieFilterOptions ?? []"
+            [filterInit]="secondarySerieFilterSubject | async"
+            (selectedOption)="secondarySerieFilterSubject.next($event)"
+            class="dc-filter"
+          >
+          </dc-filter>
+
+          <dc-filter
+            [header]="'basic_cars.filter_property'"
+            [options]="propertyFilterOptions"
+            [filterInit]="propertyFilterSubject | async"
+            (selectedOption)="onPropertySelected($event)"
+            class="dc-filter"
+          >
+          </dc-filter>
+        </div>
+
+        <dc-divider class="dc-divider"></dc-divider>
+
+        <p class="text-center">
+          {{ "basic_cars.owned_cars" | translate }}:
+          {{ vm.ownedCars?.carsOwned }} /
+          {{ vm.ownedCars?.carsShowed }}
+        </p>
+      </div>
+    </aside>
+    <!-- List of cars -->
+    <main class="sm:w-12 lg:w-10 flex flex-column gap-8">
+      <ng-container *ngFor="let group of vm.cars">
+        <div>
+          <h4>{{ group.serieName }}</h4>
+          <dc-divider
+            [backgroundColor]="'var(--grey-300)'"
+            [opacity]="'0.5'"
+          ></dc-divider>
+          <div class="cars-grouped">
+            <ng-container *ngFor="let car of group.cars">
+              <!-- <dc-basic-card
+                [car]="car"
+                (triggerToast)="showToast($event)"
+              ></dc-basic-card> -->
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+    </main>
+  </div>
+</ng-container>
+
+<dc-scroll-to-top></dc-scroll-to-top>
+<p-toast position="bottom-right" key="br"></p-toast>

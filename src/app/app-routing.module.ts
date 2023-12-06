@@ -29,10 +29,10 @@ const routes: Routes = [
   //   path: 'custom-cars',
   //   loadChildren: () => import('./views/custom-cars/custom-cars-routing.module').then(m => m.CustomCarsRoutingModule)
   // },
-  // {
-  //   path: 'premium-cars',
-  //   loadChildren: () => import('./views/premium-cars-page/premium-cars-routing.module').then(m => m.PremiumCarsRoutingModule)
-  // },
+  {
+    path: 'premium-cars',
+    loadChildren: () => import('./modules/premium-cars/premium-cars-routing.module').then(m => m.PremiumCarsRoutingModule)
+  },
   // {
   //   path: 'search/:query',
   //   loadChildren: () => import('./views/search-results/search-results-routing.module').then(m => m.SearchResultsRoutingModule)

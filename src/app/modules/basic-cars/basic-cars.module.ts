@@ -11,9 +11,9 @@ import { DcDividerComponent } from 'src/app/shared/components/dc-divider/dc-divi
 import { DcFilterComponent } from 'src/app/shared/components/dc-filter/dc-filter.component';
 import { DcScrollToTopComponent } from 'src/app/shared/components/dc-scroll-to-top/dc-scroll-to-top.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { BasicCarsView } from './view/basic-cars.component';
+import { BasicCarsPage } from './view/basic-cars.component';
 @NgModule({
-  declarations: [BasicCarsView],
+  declarations: [BasicCarsPage],
   imports: [
     CommonModule,
     FormsModule,

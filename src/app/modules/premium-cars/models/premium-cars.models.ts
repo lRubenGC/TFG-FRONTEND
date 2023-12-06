@@ -1,10 +1,10 @@
-export interface BasicCarsResponse {
+export interface PremiumCarsResponse {
   serieName: string;
-  cars: IBASIC_CAR[];
+  cars: IPREMIUM_CAR[];
 }
 
 export interface FiltersBody {
-  mainSerie?: string;
+  secondarySerie?: string;
   userProperty?: USER_PROPERTY;
 }
 
@@ -25,7 +25,7 @@ export function isUserProperty(value: string): value is USER_PROPERTY {
 }
 
 export interface GET_CAR_BY_ID_RESPONSE {
-  car: IBASIC_CAR;
+  car: IPREMIUM_CAR;
   year: string;
 }
 
@@ -39,21 +39,20 @@ export class owned_cars {
   carsShowed: number = 0;
 }
 
-export interface IBASIC_CAR {
+export interface IPREMIUM_CAR {
   id: number;
   car_id: string;
-  col: string;
   model_name: string;
-  version: string;
-  series: string;
+  main_serie: string;
+  secondary_serie: string;
   col_serie: string;
   year: string;
   brand: string;
   img: string;
+  card_img: string;
   has_car?: boolean;
   wants_car?: boolean;
   token?: string;
-  exclusive?: number;
 }
 
 export interface IPROPERTY_TYPE {

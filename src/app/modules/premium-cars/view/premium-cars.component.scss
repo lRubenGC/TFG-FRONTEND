@@ -1,0 +1,66 @@
+.main-container {
+  main,
+  aside {
+    margin: 5rem 2rem;
+  }
+  aside > div {
+    z-index: 200;
+    background-color: var(--background);
+  }
+  .cars-grouped {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 990px) {
+  .main-container {
+    margin: 0 !important;
+  }
+  aside {
+    margin: 3.9rem 0 0 0 !important;
+  }
+  aside > div {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--orange-divider);
+  }
+  main {
+    margin: 4rem 0rem !important;
+    padding: 0 1rem;
+  }
+  .dc-filter {
+    width: 30%;
+  }
+  .dc-divider {
+    display: none;
+  }
+  .cars-grouped {
+    grid-template-columns: 22% 22% 22% 22% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .cars-grouped {
+    grid-template-columns: 30% 30% 30% !important;
+  }
+
+  aside > div {
+    gap: 1rem !important;
+  }
+
+  aside > div > div {
+    gap: 1rem !important;
+  }
+}
+
+@media (max-width: 580px) {
+  main {
+    margin: 12rem 0rem !important;
+  }
+  .cars-grouped {
+    grid-template-columns: 45% 45% !important;
+  }
+}

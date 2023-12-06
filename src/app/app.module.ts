@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './modules/auth/auth.module';
 import { BasicCarsPageModule } from './modules/basic-cars/basic-cars.module';
 import { LandingPageModule } from './modules/landing-page/landing-page.module';
+import { PremiumCarsPageModule } from './modules/premium-cars/premium-cars.module';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { SharedModule } from './shared/shared.module';
 
@@ -38,6 +39,7 @@ import { SharedModule } from './shared/shared.module';
     AuthModule,
     BasicCarsPageModule,
     LandingPageModule,
+    PremiumCarsPageModule,
     SharedModule,
   ],
   providers: [AuthGuard],

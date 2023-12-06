@@ -15,67 +15,52 @@ import {
   tap,
 } from 'rxjs';
 import { DcBasicCarDetailedComponent } from 'src/app/shared/components/dc-basic-car-detailed/dc-basic-car-detailed.component';
-import { DcBasicCarDetailedService } from 'src/app/shared/components/dc-basic-car-detailed/dc-basic-car-detailed.service';
 import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
-import { PROPERTY_FILTER_OPTIONS } from '../models/basic-cars.constants';
+import { PROPERTY_FILTER_OPTIONS } from '../models/premium-cars.constants';
 import {
-  BasicCarsResponse,
   IOWNED_CARS,
+  PremiumCarsResponse,
   USER_PROPERTY,
   isUserProperty,
   owned_cars,
-} from '../models/basic-cars.models';
-import { BasicCarsService } from '../services/basic-cars.service';
+} from '../models/premium-cars.models';
+import { PremiumCarsService } from '../services/premium-cars.service';
 
 @Component({
-  selector: 'basic-cars',
-  templateUrl: './basic-cars.component.html',
-  styleUrls: ['./basic-cars.component.scss'],
+  selector: 'premium-cars',
+  templateUrl: './premium-cars.component.html',
+  styleUrls: ['./premium-cars.component.scss'],
 })
-export class BasicCarsPage implements OnInit {
-  //#region YEAR FILTER
-  private yearFromQueryParams: string | null = '';
-  public yearFilterSubject = new BehaviorSubject<string>('');
-  public yearFilterOptions$: Observable<string[]> = this.basicCarsService
-    .getAvailableYears()
+export class PremiumCarsPage implements OnInit {
+  //#region MAIN SERIE FILTER
+  public mainSerieFilterSubject = new BehaviorSubject<string>('');
+  public mainSerieFilterOptions$: Observable<string[]> = this.premiumCarsService
+    .getAvailableMainSeries()
     .pipe(
-      tap((years) => {
-        if (
-          this.yearFromQueryParams &&
-          years &&
-          years.includes(this.yearFromQueryParams)
-        ) {
-          this.yearFilterSubject.next(this.yearFromQueryParams);
-          this.yearFromQueryParams = null;
-        } else if (years) {
-          this.yearFilterSubject.next(years[0]);
+      tap((series) => {
+        if (series) {
+          this.mainSerieFilterSubject.next(series[0]);
         }
       })
     );
-  //#endregion YEAR FILTER
+  //#endregion MAIN SERIE FILTER
 
-  //#region SERIES FILTER
-  private seriesFromQueryParams: string | null = '';
-  public seriesFilterSubject = new BehaviorSubject<string>('');
-  public seriesFilterOptions$: Observable<string[]> =
-    this.yearFilterSubject.pipe(
-      switchMap((year) =>
-        year ? this.basicCarsService.getAvailableSeries(year) : of([])
+  //#region SECONDARY SERIES FILTER
+  public secondarySerieFilterSubject = new BehaviorSubject<string>('');
+  public secondarySerieFilterOptions$: Observable<string[]> =
+    this.mainSerieFilterSubject.pipe(
+      switchMap((serie) =>
+        serie
+          ? this.premiumCarsService.getAvailableSecondarySeries(serie)
+          : of([])
       ),
       tap((series) => {
-        if (
-          this.seriesFromQueryParams &&
-          series &&
-          series.includes(this.seriesFromQueryParams)
-        ) {
-          this.seriesFilterSubject.next(this.seriesFromQueryParams);
-          this.seriesFromQueryParams = null;
-        } else if (series) {
-          this.seriesFilterSubject.next(series[0]);
+        if (series) {
+          this.secondarySerieFilterSubject.next(series[0]);
         }
       })
     );
-  //#endregion SERIES FILTER
+  //#endregion SECONDARY SERIES FILTER
 
   //#region PROPERTY FILTER
   public propertyFilterSubject = new BehaviorSubject<USER_PROPERTY>(
@@ -86,31 +71,24 @@ export class BasicCarsPage implements OnInit {
 
   //#region OWNED CARS NUMBERED
   public ownedCars$: Observable<IOWNED_CARS> = combineLatest([
-    this.yearFilterSubject,
-    this.dcBasicCarDetailedService.carPropertySubject,
+    this.mainSerieFilterSubject,
+    // this.dcBasicCarDetailedService.carPropertySubject,
   ]).pipe(
-    switchMap(([year, _]) =>
-      year ? this.basicCarsService.getOwnedCars(year) : of(new owned_cars())
+    switchMap(([year]) =>
+      year ? this.premiumCarsService.getOwnedCars(year) : of(new owned_cars())
     )
   );
   //#endregion OWNED CARS NUMBERED
 
   //#region CARS VM
-  public carsVM$: Observable<BasicCarsResponse[]> = combineLatest([
-    this.yearFilterSubject,
-    this.seriesFilterSubject,
+  public carsVM$: Observable<PremiumCarsResponse[]> = combineLatest([
+    this.mainSerieFilterSubject,
+    this.secondarySerieFilterSubject,
     this.propertyFilterSubject,
   ]).pipe(
-    tap(([year, series, property]) => {
-      this.router.navigate([], {
-        relativeTo: this.route,
-        queryParams: { year, series },
-        queryParamsHandling: 'merge',
-      });
-    }),
-    switchMap(([year, serie, property]) =>
-      year && serie && property
-        ? this.getBasicCars(year, serie, property)
+    switchMap(([mainSerie, secondarySerie, property]) =>
+      mainSerie && secondarySerie && property
+        ? this.getPremiumCars(mainSerie, secondarySerie, property)
         : of([])
     )
   );
@@ -118,8 +96,7 @@ export class BasicCarsPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private basicCarsService: BasicCarsService,
-    private dcBasicCarDetailedService: DcBasicCarDetailedService,
+    private premiumCarsService: PremiumCarsService,
     private dialogService: DialogService,
     private messageService: MessageService,
     private router: Router,
@@ -130,13 +107,13 @@ export class BasicCarsPage implements OnInit {
     this.manageQueryParams();
   }
 
-  private getBasicCars(
+  private getPremiumCars(
     year: string,
-    mainSerie: string,
+    secondarySerie: string,
     userProperty: USER_PROPERTY
-  ): Observable<BasicCarsResponse[]> {
-    return this.basicCarsService
-      .getCarsByYear(year, { mainSerie, userProperty })
+  ): Observable<PremiumCarsResponse[]> {
+    return this.premiumCarsService
+      .getCarsByMainSerie(year, { secondarySerie, userProperty })
       .pipe(map((response) => response));
   }
 
@@ -163,12 +140,10 @@ export class BasicCarsPage implements OnInit {
 
   private manageQueryParams() {
     this.route.queryParams.pipe(take(1)).subscribe(async (params) => {
-      const { year, series, detailedCar } = params;
-      if (year) this.yearFromQueryParams = year;
-      if (series) this.seriesFromQueryParams = series;
+      const { detailedCar } = params;
       if (detailedCar) {
-        this.basicCarsService.getCarById(detailedCar).subscribe((resp) => {
-          this.yearFromQueryParams = resp.year;
+        this.premiumCarsService.getCarById(detailedCar).subscribe((resp) => {
+          // this.yearFromQueryParams = resp.year;
           const innerWidth = window.innerWidth;
           let width;
           if (innerWidth <= 1230) {
