@@ -52,12 +52,12 @@ export class BasicCarsService {
 
   public getCarById(carId: number): Observable<GET_CAR_BY_ID_RESPONSE> {
     const userId = localStorage.getItem('userId');
-    const url = userId
-      ? `${environment.apiBaseUrl}/api/basic-cars/getCar?carId=${carId}`
-      : `${environment.apiBaseUrl}/api/basic-cars/getCar`;
-    return this.http.post<GET_CAR_BY_ID_RESPONSE>(url, {
-      userId,
-    });
+    return this.http.post<GET_CAR_BY_ID_RESPONSE>(
+      `${environment.apiBaseUrl}/api/basic-cars/getCar?carId=${carId}`,
+      {
+        userId,
+      }
+    );
   }
 
   public getOwnedCars(year: string): Observable<IOWNED_CARS> {
