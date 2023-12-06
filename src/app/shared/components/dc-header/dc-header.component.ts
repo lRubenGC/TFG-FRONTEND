@@ -1,4 +1,4 @@
-import { Component, HostListener, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { Observable, switchMap } from 'rxjs';
@@ -28,15 +28,19 @@ export class DcHeaderComponent {
   }
   //#endregion USER MENU SCROLL
 
+  //#region LANGUAGE OPTIONS
+  public languageOptions = LANGUAGE_OPTIONS;
+  //#endregion LANGUAGE OPTIONS
+
+  //#region SCREEN WIDTH
+  public readonly screenWidth = window.innerWidth
+  //#endregion SCREEN WIDTH
+
   constructor(
     private languageService: LanguageService,
     private translate: TranslateService,
     private authService: AuthService
   ) {}
-
-  //#region LANGUAGE OPTIONS
-  public languageOptions = LANGUAGE_OPTIONS;
-  //#endregion LANGUAGE OPTIONS
 
   public changeLanguage(languageSelected: string): void {
     this.translate.use(languageSelected);

@@ -44,6 +44,7 @@
   }
 
   .dt-navbar {
+    padding: 0 .5rem;
     img {
       width: 40px;
       border-radius: 50%;
@@ -59,12 +60,13 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 890px) {
   .header-container {
-    padding: 0.25rem 1rem !important;
+    padding: 0 !important;
   }
+  .dt-search-bar,
   input {
-    width: 300px !important;
+    width: 100% !important;
   }
 }
 
