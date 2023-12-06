@@ -10,11 +10,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 // Module Views
-import { AuthGuard } from './shared/guards/auth.guard';
 import { AuthModule } from './modules/auth/auth.module';
 import { BasicCarsPageModule } from './modules/basic-cars/basic-cars.module';
+import { LandingPageModule } from './modules/landing-page/landing-page.module';
+import { AuthGuard } from './shared/guards/auth.guard';
 import { SharedModule } from './shared/shared.module';
-import { LandingPageModule } from './views/landing-page/landing-page.module';
 
 @NgModule({
   declarations: [AppComponent],

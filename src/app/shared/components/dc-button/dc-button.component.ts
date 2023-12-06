@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -10,5 +11,14 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class DCButtonComponent {
   @Input() buttonTitle: string = '';
-  @Input() buttonDisabled: boolean = false;
+  @Input() buttonHref?: string = '';
+  @Input() buttonDisabled?: boolean = false;
+
+  constructor(private router: Router) {}
+
+  public goTo(): void {
+    if (this.buttonHref) {
+      this.router.navigate([this.buttonHref]);
+    }
+  }
 }

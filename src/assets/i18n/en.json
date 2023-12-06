@@ -67,6 +67,20 @@
       }
     }
   },
+  "landing_page": {
+    "cards": {
+      "basic_cars": "Basic cars",
+      "premium_cars": "Premium cars",
+      "custom_cars": "Custom cars"
+    },
+    "text_card": {
+      "title": "Welcome to Diecast Tracker",
+      "text": "Diecast Tracker is a web application for Hot Wheels collectors. Here you can find many of the brand's cars and add them to your collection or wishlist. The goal over time is to add all the cars to the platform and also include other brands like Matchbox, MiniGT, etc.",
+      "button": {
+        "title": "Log in / Sign up"
+      }
+    }
+  },
   "toast": {
     "success": "Success",
     "error": "Error",

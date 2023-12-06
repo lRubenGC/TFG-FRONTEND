@@ -5,9 +5,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import {
-  DCButtonComponent
-} from 'src/app/shared/components/dc-secondary-button/dc-button.component';
+import { DCButtonComponent } from 'src/app/shared/components/dc-button/dc-button.component';
 import { LoginComponent } from './views/login/login.component';
 import { RecoverAccountComponent } from './views/recover-account/recover-account.component';
 
