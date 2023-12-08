@@ -49,7 +49,10 @@
     "collected": "Em sua coleção",
     "wished": "Em sua wishlist",
     "year": "Ano",
-    "exclusive": "Exclusivo"
+    "exclusive": "Exclusivo",
+    "premium_col_serie": "Núm. série secundária",
+    "main_serie": "Série principal",
+    "secondary_serie": "Série secundária"
   },
   "header": {
     "search_placeholder": "Procurar...",
@@ -80,6 +83,12 @@
         "title": "Entrar / Inscrever-se"
       }
     }
+  },
+  "premium_cars": {
+    "filter_main_serie": "Série principal",
+    "filter_secondary_serie": "Série secundária",
+    "filter_property": "Propriedade",
+    "owned_cars": "Carros próprios"
   },
   "toast": {
     "success": "Sucesso",

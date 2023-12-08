@@ -1,9 +1,9 @@
-.basic-card-container {
+.premium-card-container {
   overflow: hidden;
   .img-container {
     position: relative;
     width: 100%;
-    height: 125px;
+    height: 300px;
     img {
       transition: opacity .1s ease;
       height: 100%;
@@ -19,7 +19,7 @@
       button {
         font-size: 1.25rem;
         z-index: 200;
-        padding: .6rem 1.25rem;
+        padding: 1rem 1.25rem;
         border: 3px solid transparent;
         border-radius: 5px;
         cursor: pointer;

@@ -49,7 +49,10 @@
     "collected": "In your collection",
     "wished": "In your wishlist",
     "year": "Year",
-    "exclusive": "Exclusive"
+    "exclusive": "Exclusive",
+    "premium_col_serie": "Secondary series col",
+    "main_serie": "Main series",
+    "secondary_serie": "Secondary series"
   },
   "header": {
     "search_placeholder": "Search...",
@@ -80,6 +83,12 @@
         "title": "Log in / Sign up"
       }
     }
+  },
+  "premium_cars": {
+    "filter_main_serie": "Main series",
+    "filter_secondary_serie": "Secondary series",
+    "filter_property": "Property",
+    "owned_cars": "Owned cars"
   },
   "toast": {
     "success": "Success",

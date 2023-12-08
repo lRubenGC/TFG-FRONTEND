@@ -45,8 +45,11 @@ export class BasicCarsService {
   }
 
   public getAvailableSeries(year: string): Observable<string[]> {
-    return this.http.get<string[]>(
-      `${environment.apiBaseUrl}/api/available-filters/basic-series?main=${year}`
+    return this.http.post<string[]>(
+      `${environment.apiBaseUrl}/api/available-filters/basic-series`,
+      {
+        main: year,
+      }
     );
   }
 

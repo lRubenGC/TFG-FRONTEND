@@ -13,7 +13,7 @@
       <div class="fixed w-full flex flex-column sm:gap-2 lg:gap-4 sm:w-full lg:w-2">
         <div class="flex sm:gap-4 lg:gap-2 justify-content-center sm:flex-row lg:flex-column">
           <dc-filter
-            [header]="'basic_cars.filter_year'"
+            [header]="'premium_cars.filter_main_serie'"
             [options]="vm.mainSerieFilterOptions ?? []"
             [filterInit]="mainSerieFilterSubject | async"
             (selectedOption)="mainSerieFilterSubject.next($event)"
@@ -21,7 +21,7 @@
           >
           </dc-filter>
           <dc-filter
-            [header]="'basic_cars.filter_serie'"
+            [header]="'premium_cars.filter_secondary_serie'"
             [options]="vm.secondarySerieFilterOptions ?? []"
             [filterInit]="secondarySerieFilterSubject | async"
             (selectedOption)="secondarySerieFilterSubject.next($event)"
@@ -30,7 +30,7 @@
           </dc-filter>
 
           <dc-filter
-            [header]="'basic_cars.filter_property'"
+            [header]="'premium_cars.filter_property'"
             [options]="propertyFilterOptions"
             [filterInit]="propertyFilterSubject | async"
             (selectedOption)="onPropertySelected($event)"
@@ -42,14 +42,14 @@
         <dc-divider class="dc-divider"></dc-divider>
 
         <p class="text-center">
-          {{ "basic_cars.owned_cars" | translate }}:
+          {{ "premium_cars.owned_cars" | translate }}:
           {{ vm.ownedCars?.carsOwned }} /
           {{ vm.ownedCars?.carsShowed }}
         </p>
       </div>
     </aside>
     <!-- List of cars -->
-    <main class="sm:w-12 lg:w-10 flex flex-column gap-8">
+    <main class="sm:w-12 lg:w-10 flex flex-column w-full gap-8">
       <ng-container *ngFor="let group of vm.cars">
         <div>
           <h4>{{ group.serieName }}</h4>
@@ -59,10 +59,10 @@
           ></dc-divider>
           <div class="cars-grouped">
             <ng-container *ngFor="let car of group.cars">
-              <!-- <dc-basic-card
+              <dc-premium-card
                 [car]="car"
                 (triggerToast)="showToast($event)"
-              ></dc-basic-card> -->
+              ></dc-premium-card>
             </ng-container>
           </div>
         </div>

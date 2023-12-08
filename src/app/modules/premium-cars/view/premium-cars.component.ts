@@ -14,7 +14,8 @@ import {
   take,
   tap,
 } from 'rxjs';
-import { DcBasicCarDetailedComponent } from 'src/app/shared/components/dc-basic-car-detailed/dc-basic-car-detailed.component';
+import { DcPremiumCarDetailedComponent } from 'src/app/shared/components/dc-premium-car-detailed/dc-premium-car-detailed.component';
+import { DcPremiumCarDetailedService } from 'src/app/shared/components/dc-premium-car-detailed/dc-premium-car-detailed.service';
 import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
 import { PROPERTY_FILTER_OPTIONS } from '../models/premium-cars.constants';
 import {
@@ -55,7 +56,7 @@ export class PremiumCarsPage implements OnInit {
           : of([])
       ),
       tap((series) => {
-        if (series) {
+        if (series.length) {
           this.secondarySerieFilterSubject.next(series[0]);
         }
       })
@@ -72,7 +73,7 @@ export class PremiumCarsPage implements OnInit {
   //#region OWNED CARS NUMBERED
   public ownedCars$: Observable<IOWNED_CARS> = combineLatest([
     this.mainSerieFilterSubject,
-    // this.dcBasicCarDetailedService.carPropertySubject,
+    this.premiumCarDetailedService.carPropertySubject,
   ]).pipe(
     switchMap(([year]) =>
       year ? this.premiumCarsService.getOwnedCars(year) : of(new owned_cars())
@@ -99,6 +100,7 @@ export class PremiumCarsPage implements OnInit {
     private premiumCarsService: PremiumCarsService,
     private dialogService: DialogService,
     private messageService: MessageService,
+    private premiumCarDetailedService: DcPremiumCarDetailedService,
     private router: Router,
     private translate: TranslateService
   ) {}
@@ -147,13 +149,13 @@ export class PremiumCarsPage implements OnInit {
           const innerWidth = window.innerWidth;
           let width;
           if (innerWidth <= 1230) {
-            width = '90%';
+            width = '80%';
           } else if (innerWidth <= 1440) {
-            width = '75%';
-          } else if (innerWidth <= 1630) {
             width = '60%';
-          } else width = '50%';
-          const ref = this.dialogService.open(DcBasicCarDetailedComponent, {
+          } else if (innerWidth <= 1630) {
+            width = '50%';
+          } else width = '40%';
+          const ref = this.dialogService.open(DcPremiumCarDetailedComponent, {
             data: {
               car: resp.car,
             },

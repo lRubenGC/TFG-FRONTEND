@@ -70,7 +70,7 @@ export class BasicCarsPage implements OnInit {
         ) {
           this.seriesFilterSubject.next(this.seriesFromQueryParams);
           this.seriesFromQueryParams = null;
-        } else if (series) {
+        } else if (series.length) {
           this.seriesFilterSubject.next(series[0]);
         }
       })

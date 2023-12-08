@@ -48,28 +48,31 @@ export class PremiumCarsService {
   public getAvailableSecondarySeries(
     secondarySerie: string
   ): Observable<string[]> {
-    return this.http.get<string[]>(
-      `${environment.apiBaseUrl}/api/available-filters/premium-secondary-series?main=${secondarySerie}`
+    return this.http.post<string[]>(
+      `${environment.apiBaseUrl}/api/available-filters/premium-secondary-series`,
+      {
+        main: secondarySerie,
+      }
     );
   }
 
   public getCarById(carId: number): Observable<GET_CAR_BY_ID_RESPONSE> {
     const userId = localStorage.getItem('userId');
     return this.http.post<GET_CAR_BY_ID_RESPONSE>(
-      `${environment.apiBaseUrl}/api/basic-cars/getCar?carId=${carId}`,
+      `${environment.apiBaseUrl}/api/premium-cars/getCar?carId=${carId}`,
       {
         userId,
       }
     );
   }
 
-  public getOwnedCars(year: string): Observable<IOWNED_CARS> {
+  public getOwnedCars(main_serie: string): Observable<IOWNED_CARS> {
     const userId = localStorage.getItem('userId');
     const url = userId
-      ? `${environment.apiBaseUrl}/api/user-basic-cars/getAmount?userId=${userId}`
-      : `${environment.apiBaseUrl}/api/user-basic-cars/getAmount`;
+      ? `${environment.apiBaseUrl}/api/user-premium-cars/getAmount?userId=${userId}`
+      : `${environment.apiBaseUrl}/api/user-premium-cars/getAmount`;
     return this.http.post<IOWNED_CARS>(url, {
-      year,
+      main_serie,
     });
   }
 }
