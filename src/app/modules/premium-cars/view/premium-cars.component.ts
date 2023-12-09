@@ -35,12 +35,15 @@ import { PremiumCarsService } from '../services/premium-cars.service';
 })
 export class PremiumCarsPage implements OnInit {
   //#region MAIN SERIE FILTER
+  private mainSerieStoraged: string | null = null;
   public mainSerieFilterSubject = new BehaviorSubject<string>('');
   public mainSerieFilterOptions$: Observable<string[]> = this.premiumCarsService
     .getAvailableMainSeries()
     .pipe(
       tap((series) => {
-        if (series) {
+        if (this.mainSerieStoraged) {
+          this.mainSerieFilterSubject.next(this.mainSerieStoraged);
+        } else if (series) {
           this.mainSerieFilterSubject.next(series[0]);
         }
       })
@@ -48,6 +51,7 @@ export class PremiumCarsPage implements OnInit {
   //#endregion MAIN SERIE FILTER
 
   //#region SECONDARY SERIES FILTER
+  private secondarySerieStoraged: string | null = null;
   public secondarySerieFilterSubject = new BehaviorSubject<string>('');
   public secondarySerieFilterOptions$: Observable<string[]> =
     this.mainSerieFilterSubject.pipe(
@@ -57,7 +61,9 @@ export class PremiumCarsPage implements OnInit {
           : of([])
       ),
       tap((series) => {
-        if (series.length) {
+        if (this.secondarySerieStoraged) {
+          this.secondarySerieFilterSubject.next(this.secondarySerieStoraged);
+        } else if (series.length) {
           this.secondarySerieFilterSubject.next(series[0]);
         }
       })
@@ -89,6 +95,10 @@ export class PremiumCarsPage implements OnInit {
     this.propertyFilterSubject,
   ]).pipe(
     debounceTime(100),
+    tap(([mainSerie, secondarySerie, _]) => {
+      localStorage.setItem('p-mainSerie', mainSerie);
+      localStorage.setItem('p-secondarySerie', secondarySerie);
+    }),
     switchMap(([mainSerie, secondarySerie, property]) =>
       mainSerie && secondarySerie && property
         ? this.getPremiumCars(mainSerie, secondarySerie, property)
@@ -108,7 +118,7 @@ export class PremiumCarsPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.manageQueryParams();
+    this.manageInit();
   }
 
   private getPremiumCars(
@@ -142,7 +152,8 @@ export class PremiumCarsPage implements OnInit {
     });
   }
 
-  private manageQueryParams() {
+  private manageInit() {
+    // Detailed car modal
     this.route.queryParams.pipe(take(1)).subscribe(async (params) => {
       const { detailedCar } = params;
       if (detailedCar) {
@@ -171,6 +182,13 @@ export class PremiumCarsPage implements OnInit {
         });
       }
     });
+
+    // Main serie storaged in localStorage
+    const mainSerie = localStorage.getItem('p-mainSerie');
+    if (mainSerie) this.mainSerieStoraged = mainSerie;
+    // Secondary serie storaged in localStorage
+    const secondarySerie = localStorage.getItem('p-secondarySerie');
+    if (secondarySerie) this.secondarySerieStoraged = secondarySerie;
   }
 
   private removeDetailedCarFromUrl() {
