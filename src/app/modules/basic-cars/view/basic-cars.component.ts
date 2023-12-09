@@ -35,19 +35,14 @@ import { BasicCarsService } from '../services/basic-cars.service';
 })
 export class BasicCarsPage implements OnInit {
   //#region YEAR FILTER
-  private yearFromQueryParams: string | null = '';
+  private yearStoraged: string | null = null;
   public yearFilterSubject = new BehaviorSubject<string>('');
   public yearFilterOptions$: Observable<string[]> = this.basicCarsService
     .getAvailableYears()
     .pipe(
       tap((years) => {
-        if (
-          this.yearFromQueryParams &&
-          years &&
-          years.includes(this.yearFromQueryParams)
-        ) {
-          this.yearFilterSubject.next(this.yearFromQueryParams);
-          this.yearFromQueryParams = null;
+        if (this.yearStoraged) {
+          this.yearFilterSubject.next(this.yearStoraged);
         } else if (years) {
           this.yearFilterSubject.next(years[0]);
         }
@@ -56,7 +51,6 @@ export class BasicCarsPage implements OnInit {
   //#endregion YEAR FILTER
 
   //#region SERIES FILTER
-  private seriesFromQueryParams: string | null = '';
   public seriesFilterSubject = new BehaviorSubject<string>('');
   public seriesFilterOptions$: Observable<string[]> =
     this.yearFilterSubject.pipe(
@@ -64,14 +58,7 @@ export class BasicCarsPage implements OnInit {
         year ? this.basicCarsService.getAvailableSeries(year) : of([])
       ),
       tap((series) => {
-        if (
-          this.seriesFromQueryParams &&
-          series &&
-          series.includes(this.seriesFromQueryParams)
-        ) {
-          this.seriesFilterSubject.next(this.seriesFromQueryParams);
-          this.seriesFromQueryParams = null;
-        } else if (series.length) {
+        if (series.length) {
           this.seriesFilterSubject.next(series[0]);
         }
       })
@@ -103,12 +90,8 @@ export class BasicCarsPage implements OnInit {
     this.propertyFilterSubject,
   ]).pipe(
     debounceTime(100),
-    tap(([year, series, property]) => {
-      this.router.navigate([], {
-        relativeTo: this.route,
-        queryParams: { year, series },
-        queryParamsHandling: 'merge',
-      });
+    tap(([year]) => {
+      localStorage.setItem('b-yearStoraged', year);
     }),
     switchMap(([year, serie, property]) =>
       year && serie && property
@@ -129,7 +112,7 @@ export class BasicCarsPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.manageQueryParams();
+    this.manageInit();
   }
 
   private getBasicCars(
@@ -160,18 +143,16 @@ export class BasicCarsPage implements OnInit {
       severity: toastObject.severity,
       summary,
       detail,
-      life: 1500
+      life: 1500,
     });
   }
 
-  private manageQueryParams() {
+  private manageInit() {
     this.route.queryParams.pipe(take(1)).subscribe(async (params) => {
-      const { year, series, detailedCar } = params;
-      if (year) this.yearFromQueryParams = year;
-      if (series) this.seriesFromQueryParams = series;
+      const { detailedCar } = params;
       if (detailedCar) {
         this.basicCarsService.getCarById(detailedCar).subscribe((resp) => {
-          this.yearFromQueryParams = resp.year;
+          this.yearStoraged = resp.year;
           const innerWidth = window.innerWidth;
           let width;
           if (innerWidth <= 1230) {
@@ -193,6 +174,10 @@ export class BasicCarsPage implements OnInit {
             this.removeDetailedCarFromUrl();
           });
         });
+      } else {
+        // Year storaged in localStorage
+        const yearStoraged = localStorage.getItem('b-yearStoraged');
+        if (yearStoraged) this.yearStoraged = yearStoraged;
       }
     });
   }

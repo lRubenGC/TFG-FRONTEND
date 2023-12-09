@@ -93,7 +93,7 @@ export class PremiumCarsPage implements OnInit {
   ]).pipe(
     debounceTime(100),
     tap(([mainSerie]) => {
-      localStorage.setItem('p-mainSerie', mainSerie);
+      localStorage.setItem('p-mainSerieStoraged', mainSerie);
     }),
     switchMap(([mainSerie, secondarySerie, property]) =>
       mainSerie && secondarySerie && property
@@ -155,7 +155,7 @@ export class PremiumCarsPage implements OnInit {
       const { detailedCar } = params;
       if (detailedCar) {
         this.premiumCarsService.getCarById(detailedCar).subscribe((resp) => {
-          // this.yearFromQueryParams = resp.year;
+          this.mainSerieStoraged = resp.car.main_serie;
           const innerWidth = window.innerWidth;
           let width;
           if (innerWidth <= 1230) {
@@ -177,12 +177,13 @@ export class PremiumCarsPage implements OnInit {
             this.removeDetailedCarFromUrl();
           });
         });
+      } else {
+        // Main serie storaged in localStorage
+        const mainSerieStoraged = localStorage.getItem('p-mainSerieStoraged');
+        if (mainSerieStoraged) this.mainSerieStoraged = mainSerieStoraged;
       }
     });
 
-    // Main serie storaged in localStorage
-    const mainSerie = localStorage.getItem('p-mainSerie');
-    if (mainSerie) this.mainSerieStoraged = mainSerie;
   }
 
   private removeDetailedCarFromUrl() {
