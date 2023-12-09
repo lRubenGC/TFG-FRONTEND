@@ -22,7 +22,7 @@
 
   <!-- Navbar -->
   <div class="dt-navbar">
-    <ng-container *ngIf="userData$ | async as userData">
+    <ng-container *ngIf="userData$ | async as userData; else noUserTemplate">
       <img
         [src]="
           userData.img || 'assets/images/user-profile/no-user-profile.webp'
@@ -101,7 +101,7 @@
       </p-overlayPanel>
     </ng-container>
 
-    <ng-container *ngIf="(userData$ | async) === null">
+    <ng-template #noUserTemplate>
       <img
         src="assets/images/user-profile/no-user-profile.webp"
         alt="user profile pic"
@@ -149,6 +149,6 @@
           </div>
         </div>
       </p-overlayPanel>
-    </ng-container>
+    </ng-template>
   </div>
 </header>

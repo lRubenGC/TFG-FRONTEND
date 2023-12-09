@@ -54,10 +54,6 @@ export class DcPremiumCarDetailedComponent implements OnInit {
             });
           }
           if (propertyType.wantsCar) {
-            this.dcPremiumCarDetailedService.updateCarProperty(
-              'wants_car',
-              this.car.id
-            );
             this.car.wants_car = true;
             this.showToast({
               severity: 'success',
@@ -88,6 +84,10 @@ export class DcPremiumCarDetailedComponent implements OnInit {
               summary: 'toast.success',
               detail: 'toast.car_removed_collection',
             });
+            this.dcPremiumCarDetailedService.updateCarProperty(
+              'remove_car',
+              this.car.id
+            );
           }
           if (this.car.wants_car) {
             this.car.wants_car = false;
@@ -97,10 +97,6 @@ export class DcPremiumCarDetailedComponent implements OnInit {
               detail: 'toast.car_removed_wishlist',
             });
           }
-          this.dcPremiumCarDetailedService.updateCarProperty(
-            'remove_car',
-            this.car.id
-          );
         } else {
           this.showToast({
             severity: 'error',
@@ -125,7 +121,7 @@ export class DcPremiumCarDetailedComponent implements OnInit {
       severity: toastObject.severity,
       summary: summary,
       detail: detail,
-      life: 1500
+      life: 1500,
     });
   }
 
