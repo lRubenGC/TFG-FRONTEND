@@ -1,7 +1,7 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { OverlayPanel } from 'primeng/overlaypanel';
-import { Observable, switchMap } from 'rxjs';
+import { Observable, switchMap, tap } from 'rxjs';
 import { UserData } from 'src/app/modules/auth/models/auth.models';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { LanguageService } from 'src/app/shared/services/language.service';
@@ -16,7 +16,15 @@ export class DcHeaderComponent {
   //#region USER DATA
   public userData$: Observable<UserData | null> =
     this.authService.isUserLoggedIn$.pipe(
-      switchMap(() => this.authService.getUserById())
+      switchMap(() =>
+        this.authService.getUserById().pipe(
+          tap((userData) => {
+            if (!userData) {
+              this.logOut();
+            }
+          })
+        )
+      )
     );
   //#endregion USER DATA
 
@@ -33,7 +41,7 @@ export class DcHeaderComponent {
   //#endregion LANGUAGE OPTIONS
 
   //#region SCREEN WIDTH
-  public readonly screenWidth = window.innerWidth
+  public readonly screenWidth = window.innerWidth;
   //#endregion SCREEN WIDTH
 
   constructor(
@@ -48,9 +56,12 @@ export class DcHeaderComponent {
   }
 
   public async logOut() {
-    localStorage.removeItem('userId');
-    localStorage.removeItem('dt-token');
-    this.authService.isUserLoggedIn$.next(false);
-    window.location.reload();
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      localStorage.removeItem('userId');
+      localStorage.removeItem('dt-token');
+      this.authService.isUserLoggedIn$.next(false);
+      window.location.reload();
+    }
   }
 }

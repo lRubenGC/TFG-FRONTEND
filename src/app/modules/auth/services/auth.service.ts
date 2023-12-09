@@ -8,7 +8,6 @@ import {
   loginInterface,
   registerInterface,
   tokenDecoded,
-  userIdToken,
 } from '../models/auth.models';
 
 @Injectable({
@@ -19,30 +18,22 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  public isValidToken(): Observable<userIdToken> {
-    return new Observable((observer) => {
-      const token = localStorage.getItem('dt-token');
-      if (token) {
-        const decodedToken: tokenDecoded = jwtDecode(token);
-        const expirationTime = decodedToken.exp;
-        const currentTimestamp = Math.floor(Date.now() / 1000);
+  private isValidToken(): boolean {
+    const token = localStorage.getItem('dt-token');
+    if (token) {
+      const decodedToken: tokenDecoded = jwtDecode(token);
+      const expirationTime = decodedToken.exp;
+      const currentTimestamp = Math.floor(Date.now() / 1000);
 
-        if (currentTimestamp > expirationTime) {
-          observer.next({ isValidToken: false });
-        } else {
-          this.isUserLoggedIn$.next(true);
-          const userId = decodedToken.id;
-          observer.next({
-            isValidToken: true,
-            token,
-            userId,
-          });
-        }
+      if (currentTimestamp > expirationTime) {
+        return false;
       } else {
-        observer.next({ isValidToken: false });
+        const userId = decodedToken.id;
+        return true;
       }
-      observer.complete();
-    });
+    } else {
+      return false;
+    }
   }
 
   public login(body: loginInterface): Observable<any> {
@@ -62,7 +53,9 @@ export class AuthService {
 
   public getUserById(): Observable<UserData | null> {
     const userId = localStorage.getItem('userId');
-    if (userId) {
+    const isValidToken = this.isValidToken();
+
+    if (isValidToken && userId) {
       return this.http.get<UserData>(
         `${environment.apiBaseUrl}/api/users/${userId}`
       );

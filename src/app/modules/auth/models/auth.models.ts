@@ -15,13 +15,6 @@ export interface tokenDecoded {
   exp: number;
 }
 
-export interface userIdToken {
-  isValidToken: boolean;
-  userId?: number;
-  token?: string;
-}
-
-
 export interface UserData {
   id: number;
   username: string;
