@@ -160,6 +160,7 @@ export class BasicCarsPage implements OnInit {
       severity: toastObject.severity,
       summary,
       detail,
+      life: 1500
     });
   }
 

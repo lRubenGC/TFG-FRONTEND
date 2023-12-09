@@ -127,6 +127,7 @@ export class DcBasicCarDetailedComponent implements OnInit {
       severity: toastObject.severity,
       summary: summary,
       detail: detail,
+      life: 1500
     });
   }
 
