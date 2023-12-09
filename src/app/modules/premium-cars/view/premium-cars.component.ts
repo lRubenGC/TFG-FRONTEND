@@ -7,6 +7,7 @@ import {
   BehaviorSubject,
   Observable,
   combineLatest,
+  debounceTime,
   lastValueFrom,
   map,
   of,
@@ -87,6 +88,7 @@ export class PremiumCarsPage implements OnInit {
     this.secondarySerieFilterSubject,
     this.propertyFilterSubject,
   ]).pipe(
+    debounceTime(100),
     switchMap(([mainSerie, secondarySerie, property]) =>
       mainSerie && secondarySerie && property
         ? this.getPremiumCars(mainSerie, secondarySerie, property)

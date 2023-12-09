@@ -7,6 +7,7 @@ import {
   BehaviorSubject,
   Observable,
   combineLatest,
+  debounceTime,
   lastValueFrom,
   map,
   of,
@@ -101,6 +102,7 @@ export class BasicCarsPage implements OnInit {
     this.seriesFilterSubject,
     this.propertyFilterSubject,
   ]).pipe(
+    debounceTime(100),
     tap(([year, series, property]) => {
       this.router.navigate([], {
         relativeTo: this.route,
