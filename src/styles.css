@@ -158,6 +158,8 @@ h4,
 h5,
 h6,
 p,
+span,
+i,
 button,
 select,
 option,
@@ -168,6 +170,8 @@ body {
 }
 
 p,
+span,
+i,
 button,
 select,
 option,
@@ -194,6 +198,8 @@ input {
   }
 
   p,
+  span,
+  i,
   button,
   select,
   option,
@@ -220,6 +226,8 @@ input {
   }
 
   p,
+  span,
+  i,
   button,
   select,
   option,
@@ -251,6 +259,8 @@ input {
   }
 
   p,
+  i,
+  span,
   button,
   select,
   option,

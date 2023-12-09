@@ -47,12 +47,9 @@
     grid-template-columns: 30% 30% 30% !important;
   }
 
-  aside > div {
-    gap: 1rem !important;
-  }
-
+  aside > div,
   aside > div > div {
-    gap: 1rem !important;
+    gap: 0.5rem !important;
   }
 }
 

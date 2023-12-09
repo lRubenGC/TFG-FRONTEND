@@ -35,7 +35,9 @@
       <p class="card-description-item">{{ car.car_id }}</p>
     </div>
     <div class="card-description-row flex justify-content-between">
-      <div class="card-description-item">{{ car.year }}</div>
+      <p class="card-description-item">
+        {{ car.year }}
+      </p>
       <div class="flex align-items-center gap-1">
         <i
           *ngIf="car.has_car || car.wants_car"

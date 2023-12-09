@@ -38,29 +38,27 @@
     display: none;
   }
   .cars-grouped {
-    grid-template-columns: 22% 22% 22% 22% !important;
+    grid-template-columns: 30% 30% 30% !important;
   }
 }
 
 @media (max-width: 768px) {
-  .cars-grouped {
-    grid-template-columns: 30% 30% 30% !important;
-  }
-
-  aside > div {
-    gap: 1rem !important;
-  }
-
+  aside > div,
   aside > div > div {
-    gap: 1rem !important;
+    gap: 0.5rem !important;
+  }
+
+  .cars-grouped {
+    grid-template-columns: 45% 45% !important;
   }
 }
 
 @media (max-width: 580px) {
   main {
-    margin: 12rem 0rem !important;
+    margin-top: 12rem !important;
+    padding: 0 !important;
   }
   .cars-grouped {
-    grid-template-columns: 45% 45% !important;
+    gap: 1rem !important;
   }
 }
