@@ -51,7 +51,6 @@ export class PremiumCarsPage implements OnInit {
   //#endregion MAIN SERIE FILTER
 
   //#region SECONDARY SERIES FILTER
-  private secondarySerieStoraged: string | null = null;
   public secondarySerieFilterSubject = new BehaviorSubject<string>('');
   public secondarySerieFilterOptions$: Observable<string[]> =
     this.mainSerieFilterSubject.pipe(
@@ -61,9 +60,7 @@ export class PremiumCarsPage implements OnInit {
           : of([])
       ),
       tap((series) => {
-        if (this.secondarySerieStoraged) {
-          this.secondarySerieFilterSubject.next(this.secondarySerieStoraged);
-        } else if (series.length) {
+        if (series.length) {
           this.secondarySerieFilterSubject.next(series[0]);
         }
       })
@@ -95,9 +92,8 @@ export class PremiumCarsPage implements OnInit {
     this.propertyFilterSubject,
   ]).pipe(
     debounceTime(100),
-    tap(([mainSerie, secondarySerie, _]) => {
+    tap(([mainSerie]) => {
       localStorage.setItem('p-mainSerie', mainSerie);
-      localStorage.setItem('p-secondarySerie', secondarySerie);
     }),
     switchMap(([mainSerie, secondarySerie, property]) =>
       mainSerie && secondarySerie && property
@@ -186,9 +182,6 @@ export class PremiumCarsPage implements OnInit {
     // Main serie storaged in localStorage
     const mainSerie = localStorage.getItem('p-mainSerie');
     if (mainSerie) this.mainSerieStoraged = mainSerie;
-    // Secondary serie storaged in localStorage
-    const secondarySerie = localStorage.getItem('p-secondarySerie');
-    if (secondarySerie) this.secondarySerieStoraged = secondarySerie;
   }
 
   private removeDetailedCarFromUrl() {
