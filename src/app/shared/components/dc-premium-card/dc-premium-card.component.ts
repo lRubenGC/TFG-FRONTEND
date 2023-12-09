@@ -87,15 +87,15 @@ export class DcPremiumCardComponent {
               detail: 'toast.car_added_wishlist',
             });
           }
-        } else {
-          this.triggerToast.emit({
-            severity: 'error',
-            summary: 'toast.error',
-            detail: 'toast.not_logged_in',
-          });
         }
       },
-      error: (error) => {},
+      error: (error) => {
+        this.triggerToast.emit({
+          severity: 'error',
+          summary: 'toast.error',
+          detail: 'toast.not_logged_in',
+        });
+      },
     });
   }
 
@@ -120,15 +120,15 @@ export class DcPremiumCardComponent {
               detail: 'toast.car_removed_wishlist',
             });
           }
-        } else {
-          this.triggerToast.emit({
-            severity: 'error',
-            summary: 'toast.error',
-            detail: 'toast.not_logged_in',
-          });
         }
       },
-      error: (error) => {},
+      error: (error) => {
+        this.triggerToast.emit({
+          severity: 'error',
+          summary: 'toast.error',
+          detail: 'toast.not_logged_in',
+        });
+      },
     });
   }
 

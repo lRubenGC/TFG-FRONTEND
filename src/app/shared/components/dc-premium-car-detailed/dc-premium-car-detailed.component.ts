@@ -61,15 +61,15 @@ export class DcPremiumCarDetailedComponent implements OnInit {
               detail: 'toast.car_added_wishlist',
             });
           }
-        } else {
-          this.showToast({
-            severity: 'error',
-            summary: 'toast.error',
-            detail: 'toast.not_logged_in',
-          });
         }
       },
-      error: (error) => {},
+      error: (error) => {
+        this.showToast({
+          severity: 'error',
+          summary: 'toast.error',
+          detail: 'toast.not_logged_in',
+        });
+      },
     });
   }
 
@@ -97,15 +97,15 @@ export class DcPremiumCarDetailedComponent implements OnInit {
               detail: 'toast.car_removed_wishlist',
             });
           }
-        } else {
-          this.showToast({
-            severity: 'error',
-            summary: 'toast.error',
-            detail: 'toast.not_logged_in',
-          });
         }
       },
-      error: (error) => {},
+      error: (error) => {
+        this.showToast({
+          severity: 'error',
+          summary: 'toast.error',
+          detail: 'toast.not_logged_in',
+        });
+      },
     });
   }
 

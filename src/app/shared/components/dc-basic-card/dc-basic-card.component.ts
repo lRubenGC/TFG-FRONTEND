@@ -66,40 +66,38 @@ export class DcBasicCardComponent {
   ) {}
 
   public addCar(propertyType: IPROPERTY_TYPE) {
-    this.basicCarsService
-      .addCarToUser(this.car.id, propertyType)
-      .subscribe({
-        next: (resp) => {
-          if (resp.ok) {
-            if (propertyType.hasCar) {
-              this.dcBasicCarDetailedService.carPropertySubject.next('');
-              this.car.has_car = true;
-              this.car.wants_car = false;
+    this.basicCarsService.addCarToUser(this.car.id, propertyType).subscribe({
+      next: (resp) => {
+        if (resp.ok) {
+          if (propertyType.hasCar) {
+            this.dcBasicCarDetailedService.carPropertySubject.next('');
+            this.car.has_car = true;
+            this.car.wants_car = false;
 
-              this.triggerToast.emit({
-                severity: 'success',
-                summary: 'toast.success',
-                detail: 'toast.car_added_collection',
-              });
-            }
-            if (propertyType.wantsCar) {
-              this.car.wants_car = true;
-              this.triggerToast.emit({
-                severity: 'success',
-                summary: 'toast.success',
-                detail: 'toast.car_added_wishlist',
-              });
-            }
-          } else {
             this.triggerToast.emit({
-              severity: 'error',
-              summary: 'toast.error',
-              detail: 'toast.not_logged_in',
+              severity: 'success',
+              summary: 'toast.success',
+              detail: 'toast.car_added_collection',
             });
           }
-        },
-        error: (error) => {},
-      });
+          if (propertyType.wantsCar) {
+            this.car.wants_car = true;
+            this.triggerToast.emit({
+              severity: 'success',
+              summary: 'toast.success',
+              detail: 'toast.car_added_wishlist',
+            });
+          }
+        }
+      },
+      error: (error) => {
+        this.triggerToast.emit({
+          severity: 'error',
+          summary: 'toast.error',
+          detail: 'toast.not_logged_in',
+        });
+      },
+    });
   }
 
   public removeCar() {
@@ -123,15 +121,15 @@ export class DcBasicCardComponent {
               detail: 'toast.car_removed_wishlist',
             });
           }
-        } else {
-          this.triggerToast.emit({
-            severity: 'error',
-            summary: 'toast.error',
-            detail: 'toast.not_logged_in',
-          });
         }
       },
-      error: (error) => {},
+      error: (error) => {
+        this.triggerToast.emit({
+          severity: 'error',
+          summary: 'toast.error',
+          detail: 'toast.not_logged_in',
+        });
+      },
     });
   }
 
