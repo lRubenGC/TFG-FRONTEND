@@ -1,7 +1,7 @@
 .main-container {
   main,
   aside {
-    margin: 5rem 2rem;
+    margin: 1rem 2rem;
   }
   aside > div {
     z-index: 200;
@@ -17,11 +17,9 @@
 }
 
 @media (max-width: 990px) {
-  .main-container {
-    margin: 0 !important;
-  }
+  .main-container,
   aside {
-    margin: 3.9rem 0 0 0 !important;
+    margin: 0 !important;
   }
   aside > div {
     padding: 1rem 0;
@@ -55,8 +53,11 @@
 
 @media (max-width: 580px) {
   main {
-    margin-top: 12rem !important;
+    margin-top: 7rem !important;
     padding: 0 !important;
+    h4 {
+      padding: 0 0.5rem 0.2rem;
+    }
   }
   .cars-grouped {
     gap: 1rem !important;
