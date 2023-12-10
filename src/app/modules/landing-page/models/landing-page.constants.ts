@@ -17,7 +17,7 @@ export const LANDING_CARDS: ILANDING_CARDS[] = [
     title: 'landing_page.cards.custom_cars',
     backgroundImg: 'assets/images/landing_page/cards/custom_bg.webp',
     popImg: 'assets/images/landing_page/cards/custom_pop.webp',
-    linkTo: 'custom-cars',
+    linkTo: 'custom-cars/list',
   },
 ];
 

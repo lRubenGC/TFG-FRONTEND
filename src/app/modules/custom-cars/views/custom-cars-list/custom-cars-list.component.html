@@ -1,0 +1,46 @@
+<ng-container
+  *ngIf="{
+    cars: customCarsVM$ | async,
+    a: orderCarsSubject | async
+  } as vm"
+>
+  <!-- Main container -->
+  <div class="main-container flex sm:flex-column gap-4 lg:flex-row w-full">
+    <!-- Aside section -->
+    <aside class="sm:w-12 lg:w-2 h-4rem">
+      <div
+        class="fixed w-full flex flex-column sm:gap-2 lg:gap-4 sm:w-full lg:w-2"
+      >
+        <div
+          class="flex sm:gap-4 lg:gap-2 justify-content-center sm:flex-row lg:flex-column"
+        >
+          <dc-filter
+            [header]="'custom_cars.order'"
+            [options]="orderCarsOptions"
+            [filterInit]="orderCarsOptions[0]"
+            (selectedOption)="orderCarsSubject.next($event)"
+            class="dc-filter"
+          >
+          </dc-filter>
+        </div>
+
+        <dc-divider class="dc-divider"></dc-divider>
+
+        <!-- Boton para subir coches -->
+        <dc-button [buttonTitle]="'custom_cars.upload_car'"></dc-button>
+      </div>
+    </aside>
+    <!-- List of cars -->
+    <main class="sm:w-full lg:w-10 h-4rem cars-grouped">
+      <ng-container *ngFor="let car of vm.cars">
+        <custom-card
+          [car]="car"
+          (triggerToast)="showToast($event)"
+        ></custom-card>
+      </ng-container>
+    </main>
+  </div>
+</ng-container>
+
+<dc-scroll-to-top></dc-scroll-to-top>
+<p-toast position="bottom-right" key="br"></p-toast>

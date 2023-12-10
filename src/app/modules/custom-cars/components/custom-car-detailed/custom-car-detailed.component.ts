@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'custom-car-detailed',
   templateUrl: './custom-car-detailed.component.html',
-  styleUrls: ['./custom-car-detailed.component.css'],
+  styleUrls: ['./custom-car-detailed.component.scss'],
   standalone: true,
   imports: [CommonModule],
 })

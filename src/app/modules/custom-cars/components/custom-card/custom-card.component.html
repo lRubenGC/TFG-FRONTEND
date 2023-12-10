@@ -1,26 +1,36 @@
-<div class="custom-car-item w_100 h_100">
-
-    <!-- Car Title -->
-    <div class="item-car-title">  
-        <h4 [ngClass]="car.model_name.length > 22 ? 'small-title' : ''">{{ car.model_name }}</h4>
+<!-- <ng-container *ngIf="carProperty$ | async"></ng-container> -->
+<div class="custom-card-container w-full flex flex-column gap-1">
+  <div class="img-container">
+    <div
+      class="buttons-container w-full h-full absolute flex justify-content-center align-items-end gap-2"
+    >
+      <button
+        class="pi pi-window-maximize open-modal"
+        (click)="openModal()"
+      ></button>
+      <button
+        *ngIf="true"
+        class="pi pi-thumbs-up upvote-car"
+        (click)="voteCar()"
+      ></button>
+      <button
+        *ngIf="true"
+        class="pi pi-thumbs-down downvote-car"
+        (click)="voteCar()"
+      ></button>
     </div>
-    
-    <!-- Img and upvotes Container -->
-    <div class="img-and-upvotes d_flex justify-content_between align-items_center w_100">
-        <!-- Img Container -->
-        <div class="custom-img-container w_100 c_pointer" (click)="goToCustomCarView()">
-            <img loading="lazy" class="banner-image w_100 object-fit_cover" [src]="car.imgs[0]" [alt]="car.model_name"/>
-        </div>
-        
-        <!-- Upvotes -->
-        <div *ngIf="!userProfile" class="upvotes d_flex ml_1">
-            <p [ngClass]="car.voted ? 'car-voted' : ''">{{ car.upvotes }}</p>
-            <img (click)="voteCar()" class="upvote-button c_pointer" src="../../../assets/images/custom_cars_page/arrow-big-up-line-filled.svg" alt="upvote image">
-        </div>
+    <img [src]="car.imgs[0]" alt="Car Image" loading="lazy" />
+  </div>
+  <div class="card-description">
+    <p class="card-description-row">{{ car.model_name }}</p>
+    <div class="card-description-row flex justify-content-between">
+      <p *ngIf="isListView" class="card-description-item">
+        {{ car.userCreator }}
+      </p>
+      <p class="card-description-item flex gap-1 align-items-center">
+        <span>{{ car.upvotes }}</span
+        ><i class="pi pi-thumbs-up text-sm"></i>
+      </p>
     </div>
-
-    <div *ngIf="!userProfile" class="custom-car-user-creator">
-        <h4 class="c_pointer" (click)="goToCreatorProfile()">{{ car.userCreator }}</h4>
-    </div>
-
+  </div>
 </div>

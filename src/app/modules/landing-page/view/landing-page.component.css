@@ -1,17 +1,17 @@
 header {
-  height: 60vh;
+  height: 50vh;
   background: url("../../../../assets/images/landing_page/background.webp");
   background-position: center center;
   background-size: cover;
 }
 
 .text-card {
-  margin-top: 6rem;
+  margin-top: 2rem;
   width: 50%;
 }
 
 footer {
-  margin-top: 30px;
+  margin-top: 2rem;
 }
 
 .landing-card {

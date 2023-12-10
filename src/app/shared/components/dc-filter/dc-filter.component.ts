@@ -11,7 +11,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
   styleUrls: ['./dc-filter.component.css'],
   imports: [CommonModule, TranslateModule, ReactiveFormsModule],
 })
-export class DcFilterComponent {
+export class DcFilterComponent<T> {
   //#region INPUTS
   @Input() header: string = '';
   @Input() set options(val: string[]) {
@@ -23,7 +23,7 @@ export class DcFilterComponent {
   //#endregion INPUTS
 
   //#region OUTPUTS
-  @Output() selectedOption = new EventEmitter<string>();
+  @Output() selectedOption = new EventEmitter<T>();
   //#endregion OUTPUTS
 
   //#region OPTIONS
