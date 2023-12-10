@@ -28,4 +28,4 @@ import { BasicCarsPage } from './view/basic-cars.component';
   ],
   providers: [MessageService, DialogService],
 })
-export class BasicCarsPageModule {}
+export class BasicCarsModule {}

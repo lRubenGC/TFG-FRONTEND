@@ -11,11 +11,12 @@ import { AppComponent } from './app.component';
 
 // Module Views
 import { AuthModule } from './modules/auth/auth.module';
-import { BasicCarsPageModule } from './modules/basic-cars/basic-cars.module';
+import { BasicCarsModule } from './modules/basic-cars/basic-cars.module';
 import { LandingPageModule } from './modules/landing-page/landing-page.module';
-import { PremiumCarsPageModule } from './modules/premium-cars/premium-cars.module';
+import { PremiumCarsModule } from './modules/premium-cars/premium-cars.module';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { SharedModule } from './shared/shared.module';
+import { CustomCarsModule } from './modules/custom-cars/custom-cars.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,9 +38,10 @@ import { SharedModule } from './shared/shared.module';
 
     // App Modules
     AuthModule,
-    BasicCarsPageModule,
+    BasicCarsModule,
+    CustomCarsModule,
     LandingPageModule,
-    PremiumCarsPageModule,
+    PremiumCarsModule,
     SharedModule,
   ],
   providers: [AuthGuard],

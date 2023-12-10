@@ -25,13 +25,19 @@ const routes: Routes = [
         (m) => m.BasicCarsRoutingModule
       ),
   },
-  // {
-  //   path: 'custom-cars',
-  //   loadChildren: () => import('./views/custom-cars/custom-cars-routing.module').then(m => m.CustomCarsRoutingModule)
-  // },
+  {
+    path: 'custom-cars',
+    loadChildren: () =>
+      import('./modules/custom-cars/custom-cars-routing.module').then(
+        (m) => m.CustomCarsRoutingModule
+      ),
+  },
   {
     path: 'premium-cars',
-    loadChildren: () => import('./modules/premium-cars/premium-cars-routing.module').then(m => m.PremiumCarsRoutingModule)
+    loadChildren: () =>
+      import('./modules/premium-cars/premium-cars-routing.module').then(
+        (m) => m.PremiumCarsRoutingModule
+      ),
   },
   // {
   //   path: 'search/:query',

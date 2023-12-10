@@ -28,4 +28,4 @@ import { PremiumCarsPage } from './view/premium-cars.component';
   ],
   providers: [MessageService, DialogService],
 })
-export class PremiumCarsPageModule {}
+export class PremiumCarsModule {}
