@@ -8,18 +8,18 @@ import {
   IPREMIUM_CAR,
   IPROPERTY_TYPE,
 } from 'src/app/modules/premium-cars/models/premium-cars.models';
-import { ITOAST_OBJECT } from '../../models/toast-shared.models';
-import { PremiumCardService } from '../dc-premium-card/dc-premium-cars.service';
-import { DcPremiumCarDetailedService } from './dc-premium-car-detailed.service';
+import { ITOAST_OBJECT } from '../../../../shared/models/toast-shared.models';
+import { PremiumCardService } from '../premium-card/premium-cars.service';
+import { DcPremiumCarDetailedService } from './premium-car-detailed.service';
 
 @Component({
-  selector: 'dc-premium-car-detailed',
+  selector: 'premium-car-detailed',
   standalone: true,
-  templateUrl: './dc-premium-car-detailed.component.html',
-  styleUrls: ['./dc-premium-car-detailed.component.scss'],
+  templateUrl: './premium-car-detailed.component.html',
+  styleUrls: ['./premium-car-detailed.component.scss'],
   imports: [CommonModule, TranslateModule],
 })
-export class DcPremiumCarDetailedComponent implements OnInit {
+export class PremiumCarDetailedComponent implements OnInit {
   public car!: IPREMIUM_CAR;
 
   constructor(

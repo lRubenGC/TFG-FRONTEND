@@ -59,10 +59,10 @@
           ></dc-divider>
           <div class="cars-grouped">
             <ng-container *ngFor="let car of group.cars">
-              <dc-premium-card
+              <premium-card
                 [car]="car"
                 (triggerToast)="showToast($event)"
-              ></dc-premium-card>
+              ></premium-card>
             </ng-container>
           </div>
         </div>

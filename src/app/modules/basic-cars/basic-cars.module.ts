@@ -6,7 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ToastModule } from 'primeng/toast';
-import { DcBasicCardComponent } from 'src/app/shared/components/dc-basic-card/dc-basic-card.component';
+import { BasicCardComponent } from 'src/app/modules/basic-cars/components/basic-card/basic-card.component';
 import { DcDividerComponent } from 'src/app/shared/components/dc-divider/dc-divider.component';
 import { DcFilterComponent } from 'src/app/shared/components/dc-filter/dc-filter.component';
 import { DcScrollToTopComponent } from 'src/app/shared/components/dc-scroll-to-top/dc-scroll-to-top.component';
@@ -22,7 +22,7 @@ import { BasicCarsPage } from './view/basic-cars.component';
     SharedModule,
     DcFilterComponent,
     DcDividerComponent,
-    DcBasicCardComponent,
+    BasicCardComponent,
     ToastModule,
     DcScrollToTopComponent,
   ],

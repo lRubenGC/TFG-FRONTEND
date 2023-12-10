@@ -8,18 +8,18 @@ import {
   IBASIC_CAR,
   IPROPERTY_TYPE,
 } from 'src/app/modules/basic-cars/models/basic-cars.models';
-import { ITOAST_OBJECT } from '../../models/toast-shared.models';
-import { BasicCarsService } from '../dc-basic-card/dc-basic-cars.service';
-import { DcBasicCarDetailedService } from './dc-basic-car-detailed.service';
+import { ITOAST_OBJECT } from '../../../../shared/models/toast-shared.models';
+import { BasicCarsService } from '../basic-card/basic-cars.service';
+import { DcBasicCarDetailedService } from './basic-car-detailed.service';
 
 @Component({
-  selector: 'dc-basic-car-detailed',
+  selector: 'basic-car-detailed',
   standalone: true,
-  templateUrl: './dc-basic-car-detailed.component.html',
-  styleUrls: ['./dc-basic-car-detailed.component.scss'],
+  templateUrl: './basic-car-detailed.component.html',
+  styleUrls: ['./basic-car-detailed.component.scss'],
   imports: [CommonModule, TranslateModule],
 })
-export class DcBasicCarDetailedComponent implements OnInit {
+export class BasicCarDetailedComponent implements OnInit {
   public car!: IBASIC_CAR;
 
   constructor(

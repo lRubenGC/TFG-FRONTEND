@@ -15,8 +15,8 @@ import {
   take,
   tap,
 } from 'rxjs';
-import { DcBasicCarDetailedComponent } from 'src/app/shared/components/dc-basic-car-detailed/dc-basic-car-detailed.component';
-import { DcBasicCarDetailedService } from 'src/app/shared/components/dc-basic-car-detailed/dc-basic-car-detailed.service';
+import { BasicCarDetailedComponent } from 'src/app/modules/basic-cars/components/basic-car-detailed/basic-car-detailed.component';
+import { DcBasicCarDetailedService } from 'src/app/modules/basic-cars/components/basic-car-detailed/basic-car-detailed.service';
 import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
 import { PROPERTY_FILTER_OPTIONS } from '../models/basic-cars.constants';
 import {
@@ -162,7 +162,7 @@ export class BasicCarsPage implements OnInit {
           } else if (innerWidth <= 1630) {
             width = '60%';
           } else width = '50%';
-          const ref = this.dialogService.open(DcBasicCarDetailedComponent, {
+          const ref = this.dialogService.open(BasicCarDetailedComponent, {
             data: {
               car: resp.car,
             },

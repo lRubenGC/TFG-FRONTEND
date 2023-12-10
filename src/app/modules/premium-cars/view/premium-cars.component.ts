@@ -15,8 +15,8 @@ import {
   take,
   tap,
 } from 'rxjs';
-import { DcPremiumCarDetailedComponent } from 'src/app/shared/components/dc-premium-car-detailed/dc-premium-car-detailed.component';
-import { DcPremiumCarDetailedService } from 'src/app/shared/components/dc-premium-car-detailed/dc-premium-car-detailed.service';
+import { PremiumCarDetailedComponent } from 'src/app/modules/premium-cars/components/premium-car-detailed/premium-car-detailed.component';
+import { DcPremiumCarDetailedService } from 'src/app/modules/premium-cars/components/premium-car-detailed/premium-car-detailed.service';
 import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
 import { PROPERTY_FILTER_OPTIONS } from '../models/premium-cars.constants';
 import {
@@ -165,7 +165,7 @@ export class PremiumCarsPage implements OnInit {
           } else if (innerWidth <= 1630) {
             width = '50%';
           } else width = '40%';
-          const ref = this.dialogService.open(DcPremiumCarDetailedComponent, {
+          const ref = this.dialogService.open(PremiumCarDetailedComponent, {
             data: {
               car: resp.car,
             },

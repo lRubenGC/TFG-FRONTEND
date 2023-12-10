@@ -4,36 +4,37 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DialogService } from 'primeng/dynamicdialog';
 import { filter, tap } from 'rxjs';
 import {
-  IPREMIUM_CAR,
+  IBASIC_CAR,
   IPROPERTY_TYPE,
-} from 'src/app/modules/premium-cars/models/premium-cars.models';
-import { ITOAST_OBJECT } from '../../models/toast-shared.models';
-import { DcPremiumCarDetailedComponent } from '../dc-premium-car-detailed/dc-premium-car-detailed.component';
+} from 'src/app/modules/basic-cars/models/basic-cars.models';
+import { ITOAST_OBJECT } from '../../../../shared/models/toast-shared.models';
+import { BasicCarDetailedComponent } from '../basic-car-detailed/basic-car-detailed.component';
 import {
   CAR_PROPERTY_SUBJECT,
-  DcPremiumCarDetailedService,
+  DcBasicCarDetailedService,
   isCarProperty,
-} from '../dc-premium-car-detailed/dc-premium-car-detailed.service';
-import { PremiumCardService } from './dc-premium-cars.service';
+} from '../basic-car-detailed/basic-car-detailed.service';
+import { BasicCarsService } from './basic-cars.service';
 
 @Component({
-  selector: 'dc-premium-card',
+  selector: 'basic-card',
   standalone: true,
-  templateUrl: './dc-premium-card.component.html',
-  styleUrls: ['./dc-premium-card.component.scss'],
+  templateUrl: './basic-card.component.html',
+  styleUrls: ['./basic-card.component.scss'],
   imports: [CommonModule],
   providers: [DialogService],
 })
-export class DcPremiumCardComponent {
+export class BasicCardComponent {
   //#region INPUTS
-  @Input() car!: IPREMIUM_CAR;
+  @Input() car!: IBASIC_CAR;
+  @Input() showYear?: boolean = false;
   //#endregion INPUTS
 
   //#region OUTPUTS
   @Output() triggerToast = new EventEmitter<ITOAST_OBJECT>();
   //#endregion OUTPUTS
 
-  public carProperty$ = this.dcPremiumCarDetailedService.carProperty$.pipe(
+  public carProperty$ = this.dcBasicCarDetailedService.carProperty$.pipe(
     filter(
       (carPropertySubject): carPropertySubject is CAR_PROPERTY_SUBJECT =>
         isCarProperty(carPropertySubject) &&
@@ -58,18 +59,18 @@ export class DcPremiumCardComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private premiumCardService: PremiumCardService,
-    private dcPremiumCarDetailedService: DcPremiumCarDetailedService,
+    private basicCarsService: BasicCarsService,
+    private dcBasicCarDetailedService: DcBasicCarDetailedService,
     private dialogService: DialogService,
     private router: Router
   ) {}
 
   public addCar(propertyType: IPROPERTY_TYPE) {
-    this.premiumCardService.addCarToUser(this.car.id, propertyType).subscribe({
+    this.basicCarsService.addCarToUser(this.car.id, propertyType).subscribe({
       next: (resp) => {
         if (resp.ok) {
           if (propertyType.hasCar) {
-            this.dcPremiumCarDetailedService.carPropertySubject.next('');
+            this.dcBasicCarDetailedService.carPropertySubject.next('');
             this.car.has_car = true;
             this.car.wants_car = false;
 
@@ -100,12 +101,12 @@ export class DcPremiumCardComponent {
   }
 
   public removeCar() {
-    this.premiumCardService.removeCarFromUser(this.car.id).subscribe({
+    this.basicCarsService.removeCarFromUser(this.car.id).subscribe({
       next: (resp) => {
         if (resp.ok) {
           if (this.car.has_car) {
             this.car.has_car = false;
-            this.dcPremiumCarDetailedService.carPropertySubject.next('');
+            this.dcBasicCarDetailedService.carPropertySubject.next('');
             this.triggerToast.emit({
               severity: 'success',
               summary: 'toast.success',
@@ -142,13 +143,13 @@ export class DcPremiumCardComponent {
     const innerWidth = window.innerWidth;
     let width;
     if (innerWidth <= 1230) {
-      width = '80%';
+      width = '90%';
     } else if (innerWidth <= 1440) {
-      width = '60%';
+      width = '75%';
     } else if (innerWidth <= 1630) {
-      width = '50%';
-    } else width = '40%';
-    const ref = this.dialogService.open(DcPremiumCarDetailedComponent, {
+      width = '60%';
+    } else width = '50%';
+    const ref = this.dialogService.open(BasicCarDetailedComponent, {
       data: {
         car: this.car,
       },

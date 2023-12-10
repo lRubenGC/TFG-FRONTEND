@@ -6,9 +6,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ToastModule } from 'primeng/toast';
+import { PremiumCardComponent } from 'src/app/modules/premium-cars/components/premium-card/premium-card.component';
 import { DcDividerComponent } from 'src/app/shared/components/dc-divider/dc-divider.component';
 import { DcFilterComponent } from 'src/app/shared/components/dc-filter/dc-filter.component';
-import { DcPremiumCardComponent } from 'src/app/shared/components/dc-premium-card/dc-premium-card.component';
 import { DcScrollToTopComponent } from 'src/app/shared/components/dc-scroll-to-top/dc-scroll-to-top.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PremiumCarsPage } from './view/premium-cars.component';
@@ -24,7 +24,7 @@ import { PremiumCarsPage } from './view/premium-cars.component';
     DcDividerComponent,
     ToastModule,
     DcScrollToTopComponent,
-    DcPremiumCardComponent,
+    PremiumCardComponent,
   ],
   providers: [MessageService, DialogService],
 })
