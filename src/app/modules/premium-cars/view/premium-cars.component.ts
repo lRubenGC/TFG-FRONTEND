@@ -145,7 +145,7 @@ export class PremiumCarsPage implements OnInit {
       severity: toastObject.severity,
       summary,
       detail,
-      life: 1500
+      life: 2000
     });
   }
 

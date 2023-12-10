@@ -61,7 +61,7 @@ export class CustomCarsListView {
       severity: toastObject.severity,
       summary,
       detail,
-      life: 1500,
+      life: 2000,
     });
   }
 }

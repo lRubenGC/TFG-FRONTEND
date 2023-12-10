@@ -9,14 +9,14 @@
         (click)="openModal()"
       ></button>
       <button
-        *ngIf="true"
+        *ngIf="!car.isVoted"
         class="pi pi-thumbs-up upvote-car"
-        (click)="voteCar()"
+        (click)="upvoteCar(car.id)"
       ></button>
       <button
-        *ngIf="true"
+        *ngIf="car.isVoted"
         class="pi pi-thumbs-down downvote-car"
-        (click)="voteCar()"
+        (click)="downvoteCar(car.id)"
       ></button>
     </div>
     <img [src]="car.imgs[0]" alt="Car Image" loading="lazy" />
@@ -29,7 +29,12 @@
       </p>
       <p class="card-description-item flex gap-1 align-items-center">
         <span>{{ car.upvotes }}</span
-        ><i class="pi pi-thumbs-up text-sm"></i>
+        ><i
+          [ngClass]="{
+            'text-primary-500': car.isVoted
+          }"
+          class="pi pi-thumbs-up text-sm"
+        ></i>
       </p>
     </div>
   </div>

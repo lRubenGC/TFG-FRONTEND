@@ -123,7 +123,7 @@ export class BasicCarDetailedComponent implements OnInit {
       severity: toastObject.severity,
       summary: summary,
       detail: detail,
-      life: 1500,
+      life: 2000,
     });
   }
 

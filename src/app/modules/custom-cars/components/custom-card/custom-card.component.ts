@@ -5,6 +5,8 @@ import { ICUSTOM_CAR } from '../../models/custom-cars.models';
 import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
 import { DialogService } from 'primeng/dynamicdialog';
 import { BasicCarDetailedComponent } from 'src/app/modules/basic-cars/components/basic-car-detailed/basic-car-detailed.component';
+import { CustomCarsService } from '../../services/custom-cars.service';
+import { map, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'custom-card',
@@ -26,10 +28,55 @@ export class CustomCardComponent {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private customCarsService: CustomCarsService
   ) {}
 
-  voteCar() {}
+  upvoteCar(carId: number) {
+    this.customCarsService.upvoteCar(carId).subscribe({
+      next: (resp) => {
+        if (resp.ok) {
+          this.car.isVoted = true;
+          this.car.upvotes++;
+          this.triggerToast.emit({
+            severity: 'success',
+            summary: 'toast.success',
+            detail: 'toast.car_upvoted',
+          });
+        }
+      },
+      error: (error) => {
+        this.triggerToast.emit({
+          severity: 'error',
+          summary: 'toast.error',
+          detail: 'toast.not_logged_in',
+        });
+      },
+    });
+  }
+
+  downvoteCar(carId: number) {
+    this.customCarsService.downvoteCar(carId).subscribe({
+      next: (resp) => {
+        if (resp.ok) {
+          this.car.isVoted = false;
+          this.car.upvotes--;
+          this.triggerToast.emit({
+            severity: 'success',
+            summary: 'toast.success',
+            detail: 'toast.car_downvoted',
+          });
+        }
+      },
+      error: (error) => {
+        this.triggerToast.emit({
+          severity: 'error',
+          summary: 'toast.error',
+          detail: 'toast.not_logged_in',
+        });
+      },
+    });
+  }
 
   public openModal() {
     this.router.navigate([], {

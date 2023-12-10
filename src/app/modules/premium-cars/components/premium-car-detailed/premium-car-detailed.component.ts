@@ -121,7 +121,7 @@ export class PremiumCarDetailedComponent implements OnInit {
       severity: toastObject.severity,
       summary: summary,
       detail: detail,
-      life: 1500,
+      life: 2000,
     });
   }
 

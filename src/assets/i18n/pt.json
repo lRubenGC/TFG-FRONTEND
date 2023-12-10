@@ -3,6 +3,10 @@
   "owned": "Colecionados",
   "wished": "Desejados",
   "not_owned": "Não colecionados",
+  "DATE_DESC": "Data (Descendente)",
+  "DATE_ASC": "Data (Ascendente)",
+  "UPVOTES_DESC": "Votos (Descendente)",
+  "UPVOTES_ASC": "Votos (Ascendente)",
   "auth": {
     "login": {
       "header": "Bem vindo de novo!",
@@ -36,6 +40,10 @@
     "filter_serie": "Series",
     "filter_property": "Propriedade",
     "owned_cars": "Carros próprios"
+  },
+  "custom_cars": {
+    "order": "Organizar por",
+    "upload_car" : "Subir carro"
   },
   "detailed_car": {
     "id": "ID",
@@ -97,6 +105,8 @@
     "car_added_collection": "Carro adicionado à sua coleção",
     "car_added_wishlist": "Carro adicionado à sua lista de desejos",
     "car_removed_collection": "Carro removido da sua coleção",
-    "car_removed_wishlist": "Carro removido da sua lista de desejos"
+    "car_removed_wishlist": "Carro removido da sua lista de desejos",
+    "car_upvoted": "Carro votado corretamente",
+    "car_downvoted": "Voto removido corretamente"
   }
 }

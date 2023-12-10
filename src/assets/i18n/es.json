@@ -3,6 +3,10 @@
   "owned": "Coleccionados",
   "wished": "Deseados",
   "not_owned": "No coleccionados",
+  "DATE_DESC": "Fecha (Descendente)",
+  "DATE_ASC": "Fecha (Ascendente)",
+  "UPVOTES_DESC": "Votos (Descendente)",
+  "UPVOTES_ASC": "Votos (Ascendente)",
   "auth": {
     "login": {
       "header": "Bienvenido de nuevo!",
@@ -36,6 +40,10 @@
     "filter_serie": "Series",
     "filter_property": "Propiedad",
     "owned_cars": "Tus coches"
+  },
+  "custom_cars": {
+    "order": "Ordenar por",
+    "upload_car" : "Subir coche"
   },
   "detailed_car": {
     "id": "ID",
@@ -97,7 +105,9 @@
     "car_added_collection": "Coche añadido a tu colección",
     "car_added_wishlist": "Coche añadido a tu lista de deseados",
     "car_removed_collection": "Coche eliminado de tu colección",
-    "car_removed_wishlist": "Coche eliminado de lista de deseados"
+    "car_removed_wishlist": "Coche eliminado de lista de deseados",
+    "car_upvoted": "Coche votado correctamente",
+    "car_downvoted": "Voto eliminado correctamente"
   },
   "ABOUT_CW_PARAGRAPH1": "Hola a todos y bienvenidos a Diecast Tracker. Mi nombre es Rubén, y entre otras cosas soy desarrollador web y coleccionista.",
   "ABOUT_CW_PARAGRAPH2": "Como coleccionista, siempre he echado en falta alguna herramienta para ayudarme a llevar un seguimiento de mi colección, sobretodo cuando empecé, no sabia como estaban organizados los coches, series básicas, premium, por años, por series secundarias… Estuve buscando y no encontré mucho.",
