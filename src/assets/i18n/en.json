@@ -60,7 +60,11 @@
     "exclusive": "Exclusive",
     "premium_col_serie": "Secondary series col",
     "main_serie": "Main series",
-    "secondary_serie": "Secondary series"
+    "secondary_serie": "Secondary series",
+    "upvotes": "Upvotes",
+    "upvote": "Upvote",
+    "downvote": "Downvote",
+    "upvoted_car": "Voted car"
   },
   "header": {
     "search_placeholder": "Search...",

@@ -1,19 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { ICUSTOM_CAR } from '../../models/custom-cars.models';
-import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
+import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { DialogService } from 'primeng/dynamicdialog';
-import { BasicCarDetailedComponent } from 'src/app/modules/basic-cars/components/basic-car-detailed/basic-car-detailed.component';
+import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
+import { ICUSTOM_CAR } from '../../models/custom-cars.models';
 import { CustomCarsService } from '../../services/custom-cars.service';
-import { map, switchMap, tap } from 'rxjs';
+import { CustomCarDetailedComponent } from '../custom-car-detailed/custom-car-detailed.component';
 
 @Component({
   selector: 'custom-card',
   templateUrl: './custom-card.component.html',
   styleUrls: ['./custom-card.component.scss'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
 })
 export class CustomCardComponent {
   //#region INPUTS
@@ -93,8 +92,8 @@ export class CustomCardComponent {
       width = '75%';
     } else if (innerWidth <= 1630) {
       width = '60%';
-    } else width = '50%';
-    const ref = this.dialogService.open(BasicCarDetailedComponent, {
+    } else width = '40%';
+    const ref = this.dialogService.open(CustomCarDetailedComponent, {
       data: {
         car: this.car,
       },

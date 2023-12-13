@@ -24,9 +24,9 @@
   <div class="card-description">
     <p class="card-description-row">{{ car.model_name }}</p>
     <div class="card-description-row flex justify-content-between">
-      <p *ngIf="isListView" class="card-description-item">
+      <a *ngIf="isListView" [routerLink]="['/user']" class="card-description-item">
         {{ car.userCreator }}
-      </p>
+      </a>
       <p class="card-description-item flex gap-1 align-items-center">
         <span>{{ car.upvotes }}</span
         ><i

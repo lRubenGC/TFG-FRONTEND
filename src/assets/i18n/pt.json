@@ -43,7 +43,7 @@
   },
   "custom_cars": {
     "order": "Organizar por",
-    "upload_car" : "Subir carro"
+    "upload_car": "Subir carro"
   },
   "detailed_car": {
     "id": "ID",
@@ -60,7 +60,11 @@
     "exclusive": "Exclusivo",
     "premium_col_serie": "Núm. série secundária",
     "main_serie": "Série principal",
-    "secondary_serie": "Série secundária"
+    "secondary_serie": "Série secundária",
+    "upvotes": "Votos positivos",
+    "upvote": "Eu gosto",
+    "downvote": "Não gosto",
+    "upvoted_car": "Carro qualificado"
   },
   "header": {
     "search_placeholder": "Procurar...",

@@ -60,7 +60,11 @@
     "exclusive": "Exclusivo",
     "premium_col_serie": "Núm. serie secundaria",
     "main_serie": "Serie principal",
-    "secondary_serie": "Serie secundaria"
+    "secondary_serie": "Serie secundaria",
+    "upvotes": "Votos positivos",
+    "upvote": "Me gusta",
+    "downvote": "No me gusta",
+    "upvoted_car": "Coche calificado"
   },
   "header": {
     "search_placeholder": "Buscar...",
