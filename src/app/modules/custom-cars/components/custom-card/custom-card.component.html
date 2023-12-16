@@ -19,12 +19,20 @@
         (click)="downvoteCar(car.id)"
       ></button>
     </div>
-    <img [src]="car.imgs[0]" alt="Car Image" loading="lazy" />
+    <img
+      [src]="car.imgs[0]?.itemImageSrc ?? ''"
+      [alt]="car.imgs[0]?.alt ?? 'Custom car image'"
+      loading="lazy"
+    />
   </div>
   <div class="card-description">
     <p class="card-description-row">{{ car.model_name }}</p>
     <div class="card-description-row flex justify-content-between">
-      <a *ngIf="isListView" [routerLink]="['/user']" class="card-description-item">
+      <a
+        *ngIf="isListView"
+        [routerLink]="['/user']"
+        class="card-description-item"
+      >
         {{ car.userCreator }}
       </a>
       <p class="card-description-item flex gap-1 align-items-center">

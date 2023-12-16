@@ -1,7 +1,7 @@
 export interface ICUSTOM_CAR {
   id: number;
   model_name: string;
-  imgs: string[];
+  imgs: (CUSTOM_CAR_IMGS | undefined)[];
   upvotes: number;
   userCreator: string;
   createdAt: Date;
@@ -14,3 +14,9 @@ export type CUSTOM_CARS_ORDER_TYPE =
   | 'UPVOTES_ASC'
   | 'UPVOTES_DESC';
 
+export interface CUSTOM_CAR_IMGS {
+  itemImageSrc?: string;
+  thumbnailImageSrc?: string;
+  alt?: string;
+  title?: string;
+}

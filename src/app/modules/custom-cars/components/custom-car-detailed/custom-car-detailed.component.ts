@@ -19,32 +19,6 @@ import { CustomCarsService } from '../../services/custom-cars.service';
 export class CustomCarDetailedComponent {
   public car!: ICUSTOM_CAR;
 
-  public imgs: any[] = [
-    {
-      itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria6.jpg',
-      thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria6s.jpg',
-      alt: 'Description for Image 1',
-      title: 'Title 1',
-    },
-    {
-      itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria7.jpg',
-      thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria7s.jpg',
-      alt: 'Description for Image 1',
-      title: 'Title 1',
-    },
-    {
-      itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria8.jpg',
-      thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria8s.jpg',
-      alt: 'Description for Image 1',
-      title: 'Title 1',
-    },
-    {
-      itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria9.jpg',
-      thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria9s.jpg',
-      alt: 'Description for Image 1',
-      title: 'Title 1',
-    },
-  ];
   constructor(
     private ref: DynamicDialogRef,
     private config: DynamicDialogConfig,

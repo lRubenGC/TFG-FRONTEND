@@ -68,3 +68,8 @@
     font-size: 0.7rem !important;
   }
 }
+
+::ng-deep.grid-nogutter img {
+  max-width: 125px !important;
+  max-height: 75px !important;
+}
