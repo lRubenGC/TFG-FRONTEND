@@ -19,18 +19,21 @@
   }
 
   .dt-search-bar {
-    border: 1px solid var(--grey-600);
+    border: 1px solid var(--grey-900);
     border-radius: 20px;
-    background-color: var(--background);
+    background-color: var(--background-lighter);
 
     input {
       padding: 0.5rem;
+      background-color: var(--background);
       border: none;
       outline: none;
       border-top-left-radius: 20px;
       border-bottom-left-radius: 20px;
       width: 500px;
       height: 40px;
+      color: white;
+      padding-left: 1.5rem;
     }
 
     .search-icon_container {
@@ -44,7 +47,7 @@
   }
 
   .dt-navbar {
-    padding: 0 .5rem;
+    padding: 0 0.5rem;
     img {
       width: 40px;
       border-radius: 50%;
