@@ -16,6 +16,7 @@ import {
   ICUSTOM_CAR,
 } from '../../models/custom-cars.models';
 import { CustomCarsService } from '../../services/custom-cars.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'custom-cars-list',
@@ -24,7 +25,9 @@ import { CustomCarsService } from '../../services/custom-cars.service';
 })
 export class CustomCarsListView {
   //#region ORDER CARS
-  public orderCarsSubject = new BehaviorSubject<CUSTOM_CARS_ORDER_TYPE>('DATE_DESC');
+  public orderCarsSubject = new BehaviorSubject<CUSTOM_CARS_ORDER_TYPE>(
+    'DATE_DESC'
+  );
   public orderCarsOptions: CUSTOM_CARS_ORDER_TYPE[] = CUSTOM_CARS_ORDER;
   //#endregion ORDER CARS
 
@@ -38,7 +41,8 @@ export class CustomCarsListView {
   constructor(
     private customCarsService: CustomCarsService,
     private messageService: MessageService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private router: Router
   ) {}
 
   private getCustomCars(
@@ -63,5 +67,9 @@ export class CustomCarsListView {
       detail,
       life: 2000,
     });
+  }
+
+  goToUploadCar(): void {
+    this.router.navigate(['custom-cars/upload']);
   }
 }

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {
   CUSTOM_CARS_ORDER_TYPE,
+  CUSTOM_CAR_FORM,
   ICUSTOM_CAR,
 } from '../models/custom-cars.models';
 
@@ -57,6 +58,28 @@ export class CustomCarsService {
         customCarId,
         userId,
       },
+      { headers }
+    );
+  }
+
+  public uploadCar(form: CUSTOM_CAR_FORM): Observable<any> {
+    const token = localStorage.getItem('dt-token');
+    const userId = localStorage.getItem('userId');
+    const headers = new HttpHeaders({
+      'r-token': token ?? '',
+    });
+
+    const formData = new FormData();
+    form.imgs.forEach((img: File, index: number) => {
+      formData.append(`imgs[${index}]`, img);
+    });
+    if (form.model_name) formData.append('model_name', form.model_name);
+    if (userId) formData.append('userId', userId);
+
+    // TODO: Tipar todo este archivo
+    return this.http.post<any>(
+      `${environment.apiBaseUrl}/api/custom-cars/create`,
+      formData,
       { headers }
     );
   }

@@ -20,3 +20,8 @@ export interface CUSTOM_CAR_IMGS {
   alt?: string;
   title?: string;
 }
+
+export interface CUSTOM_CAR_FORM {
+  model_name: string;
+  imgs: File[];
+}

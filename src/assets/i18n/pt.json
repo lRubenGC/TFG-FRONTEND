@@ -45,6 +45,9 @@
     "order": "Organizar por",
     "upload_car": "Subir carro"
   },
+  "upload_custom": {
+    "select_images": "Selecione ou arraste imagens (4 no máximo)"
+  },
   "detailed_car": {
     "id": "ID",
     "col": "Núm. col",
@@ -111,6 +114,8 @@
     "car_removed_collection": "Carro removido da sua coleção",
     "car_removed_wishlist": "Carro removido da sua lista de desejos",
     "car_upvoted": "Carro votado corretamente",
-    "car_downvoted": "Voto removido corretamente"
+    "car_downvoted": "Voto removido corretamente",
+    "more_than_four_imgs": "Você não pode enviar mais de 4 imagens",
+    "custom_car_fields_required": "O nome do carro e pelo menos uma imagem são obrigatórios"
   }
 }
