@@ -43,7 +43,8 @@
   },
   "custom_cars": {
     "order": "Ordenar por",
-    "upload_car": "Subir coche"
+    "upload_car": "Subir coche",
+    "author": "Autor"
   },
   "upload_custom": {
     "select_images": "Selecciona o arrastra las imágenes (4 máximo)"
@@ -116,7 +117,11 @@
     "car_upvoted": "Coche votado correctamente",
     "car_downvoted": "Voto eliminado correctamente",
     "more_than_four_imgs": "No se pueden subir más de 4 imágenes",
-    "custom_car_fields_required": "El nombre del coche y al menos una imagen son necesarios"
+    "custom_car_fields_required": "El nombre del coche y al menos una imagen son necesarios",
+    "car_successfully_created": "Coche subido correctamente",
+    "invalid_format": "El formato de la imagen es incorrecto",
+    "valid_formats": "Formatos válidos",
+    "at_least_one_image": "Se necesita al menos 1 imágen con formato válido"
   },
   "ABOUT_CW_PARAGRAPH1": "Hola a todos y bienvenidos a Diecast Tracker. Mi nombre es Rubén, y entre otras cosas soy desarrollador web y coleccionista.",
   "ABOUT_CW_PARAGRAPH2": "Como coleccionista, siempre he echado en falta alguna herramienta para ayudarme a llevar un seguimiento de mi colección, sobretodo cuando empecé, no sabia como estaban organizados los coches, series básicas, premium, por años, por series secundarias… Estuve buscando y no encontré mucho.",

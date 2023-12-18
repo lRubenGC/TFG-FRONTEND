@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {
   CUSTOM_CARS_ORDER_TYPE,
+  CUSTOM_CAR_CREATE_RESPONSE,
   CUSTOM_CAR_FORM,
   GET_CAR_BY_ID_RESPONSE,
   ICUSTOM_CAR,
@@ -29,14 +30,14 @@ export class CustomCarsService {
     );
   }
 
-  public upvoteCar(customCarId: number): Observable<any> {
+  public upvoteCar(customCarId: number): Observable<{ ok: boolean }> {
     const token = localStorage.getItem('dt-token');
     const userId = Number(localStorage.getItem('userId'));
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'r-token': token ?? '',
     });
-    return this.http.post<any>(
+    return this.http.post<{ ok: boolean }>(
       `${environment.apiBaseUrl}/api/custom-cars/upvote`,
       {
         customCarId,
@@ -46,14 +47,14 @@ export class CustomCarsService {
     );
   }
 
-  public downvoteCar(customCarId: number): Observable<any> {
+  public downvoteCar(customCarId: number): Observable<{ ok: boolean }> {
     const token = localStorage.getItem('dt-token');
     const userId = Number(localStorage.getItem('userId'));
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'r-token': token ?? '',
     });
-    return this.http.post<any>(
+    return this.http.post<{ ok: boolean }>(
       `${environment.apiBaseUrl}/api/custom-cars/downvote`,
       {
         customCarId,
@@ -63,7 +64,9 @@ export class CustomCarsService {
     );
   }
 
-  public uploadCar(form: CUSTOM_CAR_FORM): Observable<any> {
+  public uploadCar(
+    form: CUSTOM_CAR_FORM
+  ): Observable<CUSTOM_CAR_CREATE_RESPONSE> {
     const token = localStorage.getItem('dt-token');
     const userId = localStorage.getItem('userId');
     const headers = new HttpHeaders({
@@ -77,8 +80,7 @@ export class CustomCarsService {
     if (form.model_name) formData.append('model_name', form.model_name);
     if (userId) formData.append('userId', userId);
 
-    // TODO: Tipar todo este archivo
-    return this.http.post<any>(
+    return this.http.post<CUSTOM_CAR_CREATE_RESPONSE>(
       `${environment.apiBaseUrl}/api/custom-cars/create`,
       formData,
       { headers }

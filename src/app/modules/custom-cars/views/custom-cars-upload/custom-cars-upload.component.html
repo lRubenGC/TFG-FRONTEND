@@ -4,7 +4,7 @@
     (imagesSelected)="onImagesSelected($event)"
     (errorEmitter)="onErrorEmit()"
   ></dc-images-upload>
-  <button type="button" (click)="submitForm()">Enviar</button>
+  <dc-button [buttonTitle]="'Enviar'" (click)="submitForm()"></dc-button>
 </form>
 
 <p-toast position="bottom-right" key="br"></p-toast>

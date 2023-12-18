@@ -43,7 +43,8 @@
   },
   "custom_cars": {
     "order": "Order by",
-    "upload_car" : "Upload car"
+    "upload_car" : "Upload car",
+    "author": "Author"
   },
   "upload_custom": {
     "select_images": "Select or drag images (4 maximum)"
@@ -116,7 +117,11 @@
     "car_upvoted": "Car upvoted correctly",
     "car_downvoted": "Vote removed correctly",
     "more_than_four_imgs": "You cannot upload more than 4 images",
-    "custom_car_fields_required": "Model name and at least one image are required"
+    "custom_car_fields_required": "Model name and at least one image are required",
+    "car_successfully_created": "Car loaded correctly",
+    "invalid_format": "The image format is incorrect",
+    "valid_formats": "Valid formats",
+    "at_least_one_image": "At least 1 image with valid format is needed"
   },
   "ABOUT_CW_PARAGRAPH1": "Hello everyone and welcome to Diecast Tracker. My name is Ruben, and among other things I am a web developer and collector.",
   "ABOUT_CW_PARAGRAPH2": "As a collector, I have always missed a tool to help me keep track of my collection, especially when I started, I didn't know how the cars were organized, basic series, premium, by years, by secondary series... I looked for it and didn't find much.",

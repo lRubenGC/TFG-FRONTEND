@@ -47,10 +47,38 @@ export class CustomCarsUploadView implements OnInit {
   }
 
   submitForm() {
-    // TODO: Manejar correctamente la respuesta del back
     if (this.carForm.valid) {
       this.customCarsService.uploadCar(this.carForm.value).subscribe({
-        next: (response) => console.log('Respuesta del servidor:', response),
+        next: (resp) => {
+          if (resp.ok) {
+            this.showToast({
+              severity: 'success',
+              summary: 'toast.success',
+              detail: 'toast.car_successfully_created',
+            });
+            if (resp.invalidImages) {
+              resp.invalidImages.forEach((img: string) => {
+                this.showToast(
+                  {
+                    severity: 'error',
+                    summary: 'toast.error',
+                    detail: 'toast.invalid_format',
+                  },
+                  6000,
+                  img,
+                  resp.validFormats
+                );
+              });
+            }
+            // TODO: Invalidar el botón de subir coche y añadir elemento HTML para que acceda a su coche
+          } else if (!resp.ok && !!resp.validFormats) {
+            this.showToast({
+              severity: 'error',
+              summary: 'toast.error',
+              detail: 'toast.at_least_one_image',
+            });
+          }
+        },
         error: (error) => console.error('Error:', error),
       });
     } else {
@@ -62,19 +90,32 @@ export class CustomCarsUploadView implements OnInit {
     }
   }
 
-  private async showToast(toastObject: ITOAST_OBJECT) {
+  private async showToast(
+    toastObject: ITOAST_OBJECT,
+    life?: number,
+    img?: string,
+    formats?: string[]
+  ) {
     const summaryT = this.translate.get(toastObject.summary);
     const summary = await lastValueFrom(summaryT);
 
     const detailT = this.translate.get(toastObject.detail);
-    const detail = await lastValueFrom(detailT);
+    let detail = await lastValueFrom(detailT);
+
+    if (img && formats) {
+      const invalid_formatT = this.translate.get('toast.invalid_format');
+      const invalid_format = await lastValueFrom(invalid_formatT);
+      const valid_formatsT = this.translate.get('toast.valid_formats');
+      const valid_formats = await lastValueFrom(valid_formatsT);
+      detail = `${invalid_format}: ${img} ... ${valid_formats}: ${formats}`;
+    }
 
     this.messageService.add({
       key: 'br',
       severity: toastObject.severity,
       summary,
       detail,
-      life: 3000,
+      life: life ?? 3000,
     });
   }
 }

@@ -30,3 +30,10 @@ export interface GET_CAR_BY_ID_RESPONSE {
   car: ICUSTOM_CAR;
   year: string;
 }
+
+export interface CUSTOM_CAR_CREATE_RESPONSE {
+  customCar?: ICUSTOM_CAR;
+  invalidImages?: string[];
+  ok: boolean;
+  validFormats: string[];
+}

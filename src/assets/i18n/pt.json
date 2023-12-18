@@ -43,7 +43,8 @@
   },
   "custom_cars": {
     "order": "Organizar por",
-    "upload_car": "Subir carro"
+    "upload_car": "Subir carro",
+    "author": "Autor"
   },
   "upload_custom": {
     "select_images": "Selecione ou arraste imagens (4 no máximo)"
@@ -116,6 +117,10 @@
     "car_upvoted": "Carro votado corretamente",
     "car_downvoted": "Voto removido corretamente",
     "more_than_four_imgs": "Você não pode enviar mais de 4 imagens",
-    "custom_car_fields_required": "O nome do carro e pelo menos uma imagem são obrigatórios"
+    "custom_car_fields_required": "O nome do carro e pelo menos uma imagem são obrigatórios",
+    "car_successfully_created": "Carro carregado corretamente",
+    "invalid_format": "O formato da imagem está incorret",
+    "valid_formats": "Formatos válidos",
+    "at_least_one_image": "É necessária pelo menos 1 imagem com formato válido"
   }
 }
