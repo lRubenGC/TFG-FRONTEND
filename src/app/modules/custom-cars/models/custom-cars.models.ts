@@ -25,3 +25,8 @@ export interface CUSTOM_CAR_FORM {
   model_name: string;
   imgs: File[];
 }
+
+export interface GET_CAR_BY_ID_RESPONSE {
+  car: ICUSTOM_CAR;
+  year: string;
+}

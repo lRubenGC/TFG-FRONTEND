@@ -21,6 +21,9 @@ button {
   background-color: var(--red-400);
   color: #000;
 }
+a {
+  color: var(--grey-200);
+}
 
 ::ng-deep.p-dialog-header,
 ::ng-deep.p-dialog-content {

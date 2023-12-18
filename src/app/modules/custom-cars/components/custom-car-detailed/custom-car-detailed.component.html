@@ -22,24 +22,14 @@
       </ng-template>
     </p-galleria>
   </div>
-  <div class="description-container">
-    <div class="w-full flex align-items-center gap-3">
-      <div>
-        <button
-          *ngIf="!car.isVoted"
-          (click)="upvoteCar(car.id)"
-          class="upvote-car"
-        >
-          {{ "detailed_car.upvote" | translate }}
-        </button>
-        <button
-          *ngIf="car.isVoted"
-          (click)="downvoteCar(car.id)"
-          class="downvote-car"
-        >
-          {{ "detailed_car.downvote" | translate }}
-        </button>
-      </div>
+  <div class="w-full flex justify-content-evenly align-items-center">
+    <div class="flex align-items-center gap-2">
+      <p>Autor:</p>
+      <a [routerLink]="car.userCreator" target="_blank">{{
+        car.userCreator
+      }}</a>
+    </div>
+    <div class="flex gap-3 align-items-center">
       <p>
         {{ "detailed_car.upvotes" | translate }}:
         <span>{{ car.upvotes }}</span>
@@ -50,6 +40,20 @@
           class="pi pi-thumbs-up text-sm ml-1"
         ></i>
       </p>
+      <button
+        *ngIf="!car.isVoted"
+        (click)="upvoteCar(car.id)"
+        class="upvote-car"
+      >
+        {{ "detailed_car.upvote" | translate }}
+      </button>
+      <button
+        *ngIf="car.isVoted"
+        (click)="downvoteCar(car.id)"
+        class="downvote-car"
+      >
+        {{ "detailed_car.downvote" | translate }}
+      </button>
     </div>
   </div>
 </div>

@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 import {
   BehaviorSubject,
   Observable,
@@ -8,22 +10,23 @@ import {
   map,
   of,
   switchMap,
+  take,
 } from 'rxjs';
 import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
+import { CustomCarDetailedComponent } from '../../components/custom-car-detailed/custom-car-detailed.component';
 import { CUSTOM_CARS_ORDER } from '../../models/custom-cars.constants';
 import {
   CUSTOM_CARS_ORDER_TYPE,
   ICUSTOM_CAR,
 } from '../../models/custom-cars.models';
 import { CustomCarsService } from '../../services/custom-cars.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'custom-cars-list',
   templateUrl: './custom-cars-list.component.html',
   styleUrls: ['./custom-cars-list.component.scss'],
 })
-export class CustomCarsListView {
+export class CustomCarsListView implements OnInit {
   //#region ORDER CARS
   public orderCarsSubject = new BehaviorSubject<CUSTOM_CARS_ORDER_TYPE>(
     'DATE_DESC'
@@ -38,12 +41,58 @@ export class CustomCarsListView {
   );
   //#endregion CUSTOM CARS VM
 
+  ngOnInit(): void {
+    this.manageInit();
+  }
+
   constructor(
     private customCarsService: CustomCarsService,
     private messageService: MessageService,
     private translate: TranslateService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
+    private dialogService: DialogService
   ) {}
+
+  private manageInit() {
+    this.route.queryParams.pipe(take(1)).subscribe(async (params) => {
+      const { detailedCar } = params;
+      if (detailedCar) {
+        this.customCarsService.getCarById(detailedCar).subscribe((resp) => {
+          const innerWidth = window.innerWidth;
+          let width;
+          if (innerWidth <= 1230) {
+            width = '90%';
+          } else if (innerWidth <= 1440) {
+            width = '75%';
+          } else if (innerWidth <= 1630) {
+            width = '60%';
+          } else width = '40%';
+          const ref = this.dialogService.open(CustomCarDetailedComponent, {
+            data: {
+              car: resp.car,
+            },
+            header: resp.car.model_name,
+            width,
+          });
+
+          ref.onClose.subscribe(() => {
+            this.removeDetailedCarFromUrl();
+          });
+        });
+      }
+    });
+  }
+
+  private removeDetailedCarFromUrl() {
+    const queryParams: Params = { ...this.route.snapshot.queryParams };
+    delete queryParams['detailedCar'];
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams,
+    });
+  }
 
   private getCustomCars(
     order: CUSTOM_CARS_ORDER_TYPE
@@ -69,7 +118,7 @@ export class CustomCarsListView {
     });
   }
 
-  goToUploadCar(): void {
+  public goToUploadCar(): void {
     this.router.navigate(['custom-cars/upload']);
   }
 }

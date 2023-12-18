@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -14,7 +15,7 @@ import { CustomCarsService } from '../../services/custom-cars.service';
   templateUrl: './custom-car-detailed.component.html',
   styleUrls: ['./custom-car-detailed.component.scss'],
   standalone: true,
-  imports: [CommonModule, TranslateModule, GalleriaModule],
+  imports: [CommonModule, TranslateModule, GalleriaModule, RouterModule],
 })
 export class CustomCarDetailedComponent {
   public car!: ICUSTOM_CAR;
@@ -76,42 +77,6 @@ export class CustomCarDetailedComponent {
       },
     });
   }
-
-  // public removeCar() {
-  //   this.basicCarsSharedService.removeCarFromUser(this.car.id).subscribe({
-  //     next: (resp) => {
-  //       if (resp.ok) {
-  //         if (this.car.has_car) {
-  //           this.car.has_car = false;
-  //           this.showToast({
-  //             severity: 'success',
-  //             summary: 'toast.success',
-  //             detail: 'toast.car_removed_collection',
-  //           });
-  //           this.dcBasicCarDetailedService.updateCarProperty(
-  //             'remove_car',
-  //             this.car.id
-  //           );
-  //         }
-  //         if (this.car.wants_car) {
-  //           this.car.wants_car = false;
-  //           this.showToast({
-  //             severity: 'success',
-  //             summary: 'toast.success',
-  //             detail: 'toast.car_removed_wishlist',
-  //           });
-  //         }
-  //       }
-  //     },
-  //     error: (error) => {
-  //       this.showToast({
-  //         severity: 'error',
-  //         summary: 'toast.error',
-  //         detail: 'toast.not_logged_in',
-  //       });
-  //     },
-  //   });
-  // }
 
   public async showToast(toastObject: ITOAST_OBJECT) {
     const summaryT = this.translate.get(toastObject.summary);

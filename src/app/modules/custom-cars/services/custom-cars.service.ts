@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import {
   CUSTOM_CARS_ORDER_TYPE,
   CUSTOM_CAR_FORM,
+  GET_CAR_BY_ID_RESPONSE,
   ICUSTOM_CAR,
 } from '../models/custom-cars.models';
 
@@ -81,6 +82,16 @@ export class CustomCarsService {
       `${environment.apiBaseUrl}/api/custom-cars/create`,
       formData,
       { headers }
+    );
+  }
+
+  public getCarById(carId: number): Observable<GET_CAR_BY_ID_RESPONSE> {
+    const userId = localStorage.getItem('userId');
+    return this.http.post<GET_CAR_BY_ID_RESPONSE>(
+      `${environment.apiBaseUrl}/api/custom-cars/getCar?carId=${carId}`,
+      {
+        userId,
+      }
     );
   }
 }
