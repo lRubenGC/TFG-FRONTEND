@@ -81,7 +81,7 @@
     <!-- Login toggle button -->
     <dc-button
       *ngIf="!loginActivo"
-      (click)="toggleLogin()"
+      (onClickButton)="toggleLogin()"
       id="signIn"
       class="m-2"
       [buttonTitle]="'auth.login.login'"
@@ -90,7 +90,7 @@
     <!-- Register toggle button -->
     <dc-button
       *ngIf="loginActivo"
-      (click)="toggleLogin()"
+      (onClickButton)="toggleLogin()"
       id="signUp"
       class="m-2"
       [buttonTitle]="'auth.signup.signup'"
@@ -186,7 +186,7 @@
         >
           <h1 class="overlay-texts">{{ "auth.login.overlay" | translate }}</h1>
           <dc-button
-            (click)="toggleLogin()"
+            (onClickButton)="toggleLogin()"
             id="signIn"
             [buttonTitle]="'auth.login.login'"
           ></dc-button>
@@ -200,7 +200,7 @@
             {{ "auth.signup.overlay" | translate }}
           </h1>
           <dc-button
-            (click)="toggleLogin()"
+            (onClickButton)="toggleLogin()"
             id="signUp"
             [buttonTitle]="'auth.signup.signup'"
           ></dc-button>

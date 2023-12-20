@@ -1,5 +1,10 @@
 <div class="flex justify-content-center align-items-center">
-  <button [disabled]="buttonDisabled" class="dc-button" (click)="goTo()">
+  <button
+    [disabled]="buttonDisabled"
+    class="dc-button"
+    (click)="onClickButton.emit()"
+    [class]="class"
+  >
     {{ buttonTitle | translate }}
   </button>
 </div>

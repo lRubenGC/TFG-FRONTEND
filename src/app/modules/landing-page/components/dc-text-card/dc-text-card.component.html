@@ -5,6 +5,6 @@
     *ngIf="!userId"
     class="mt-2"
     [buttonTitle]="buttonTitle"
-    [buttonHref]="buttonHref"
+    (onClickButton)="goTo()"
   ></dc-button>
 </section>

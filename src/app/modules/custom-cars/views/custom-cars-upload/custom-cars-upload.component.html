@@ -1,11 +1,26 @@
-<form [formGroup]="carForm">
-  <input formControlName="model_name" type="text" placeholder="Model Name" />
-  <dc-images-upload
-    (imagesSelected)="onImagesSelected($event)"
-    (errorEmitter)="onErrorEmit()"
-  ></dc-images-upload>
-  <dc-button [buttonTitle]="'Enviar'" (click)="submitForm()"></dc-button>
-</form>
+<div class="w-full flex justify-content-center">
+  <form [formGroup]="carForm">
+    <div class="upload-container flex flex-column justify-content-center gap-3">
+      <label class="w-full">
+        Model name
+        <input
+          formControlName="model_name"
+          type="text"
+          placeholder="Model Name"
+        />
+      </label>
+      <dc-images-upload
+        (imagesSelected)="onImagesSelected($event)"
+        (errorEmitter)="onErrorEmit()"
+      ></dc-images-upload>
+      <dc-button
+        [buttonTitle]="'custom_cars.upload_car' | translate"
+        (onClickButton)="submitForm()"
+      ></dc-button>
+    </div>
+  </form>
+</div>
 
 <p-toast position="bottom-right" key="br"></p-toast>
+
 <!-- TODO: Hacer bonita esta vista -->

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'dc-text-card',
@@ -18,5 +19,13 @@ export class DCTextCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = localStorage.getItem('userId');
+  }
+
+  constructor(private router: Router) {}
+
+  public goTo(): void {
+    if (this.buttonHref) {
+      this.router.navigate([this.buttonHref]);
+    }
   }
 }

@@ -10,10 +10,9 @@
     hidden
     #fileInput
   />
-  <dc-button
-    [buttonTitle]="'upload_custom.select_images'"
-    (click)="fileInput.click()"
-  ></dc-button>
+  <span (click)="fileInput.click()">
+    {{ "upload_custom.select_images" | translate }}
+  </span>
   <div class="flex justify-content-center gap-3 mt-3 image-preview">
     <ng-container *ngFor="let img of images; let i = index">
       <div class="image-container">

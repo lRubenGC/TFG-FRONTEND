@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -7,18 +7,12 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   templateUrl: './dc-button.component.html',
   styleUrls: ['./dc-button.component.css'],
-  imports: [TranslateModule],
+  imports: [CommonModule, TranslateModule],
 })
 export class DCButtonComponent {
   @Input() buttonTitle: string = '';
-  @Input() buttonHref?: string = '';
   @Input() buttonDisabled?: boolean = false;
+  @Input() class: string = '';
 
-  constructor(private router: Router) {}
-
-  public goTo(): void {
-    if (this.buttonHref) {
-      this.router.navigate([this.buttonHref]);
-    }
-  }
+  @Output() onClickButton = new EventEmitter<void>();
 }
