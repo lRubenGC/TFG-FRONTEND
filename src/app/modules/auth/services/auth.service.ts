@@ -18,17 +18,16 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  private isValidToken(): boolean {
+  public isValidToken(): boolean {
     const token = localStorage.getItem('dt-token');
     if (token) {
       const decodedToken: tokenDecoded = jwtDecode(token);
       const expirationTime = decodedToken.exp;
       const currentTimestamp = Math.floor(Date.now() / 1000);
-
       if (currentTimestamp > expirationTime) {
         return false;
       } else {
-        const userId = decodedToken.id;
+        this.isUserLoggedIn$.next(true);
         return true;
       }
     } else {
@@ -53,9 +52,7 @@ export class AuthService {
 
   public getUserById(): Observable<UserData | null> {
     const userId = localStorage.getItem('userId');
-    const isValidToken = this.isValidToken();
-
-    if (isValidToken && userId) {
+    if (userId) {
       return this.http.get<UserData>(
         `${environment.apiBaseUrl}/api/users/${userId}`
       );

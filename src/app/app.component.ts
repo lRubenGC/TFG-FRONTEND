@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { PrimeNGConfig } from 'primeng/api';
 import { environment } from '../environments/environment';
+import { AuthService } from './modules/auth/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
-    private primengConfig: PrimeNGConfig
+    private primengConfig: PrimeNGConfig,
+    private authService: AuthService
   ) {
     const lang = localStorage.getItem('dt-lang');
     if (lang) {
@@ -22,6 +24,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authService.isValidToken();
     console.log(`Version: ${environment.appVersion}`);
     this.primengConfig.zIndex = {
       modal: 6000,

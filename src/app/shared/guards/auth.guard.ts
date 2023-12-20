@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
 import { Observable, lastValueFrom, map } from 'rxjs';
@@ -13,7 +13,8 @@ export class AuthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
     private messageService: MessageService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private router: Router
   ) {}
 
   canActivate(): Observable<boolean> | boolean {
@@ -25,6 +26,9 @@ export class AuthGuard implements CanActivate {
             summary: 'toast.error',
             detail: 'toast.not_logged_in',
           });
+          setTimeout(() => {
+            this.router.navigate(['/auth']);
+          }, 2000);
           return false;
         }
 
