@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LandingPageComponent } from './modules/landing-page/view/landing-page.component';
+import { CheckToken } from './shared/guards/checkToken.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: LandingPageComponent,
+    canActivate: [CheckToken],
   },
   {
     path: 'auth',

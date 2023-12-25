@@ -1,7 +1,7 @@
 import { Component, HostListener, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { OverlayPanel } from 'primeng/overlaypanel';
-import { Observable, switchMap, tap } from 'rxjs';
+import { Observable, of, switchMap, tap } from 'rxjs';
 import { UserData } from 'src/app/modules/auth/models/auth.models';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { LanguageService } from 'src/app/shared/services/language.service';
@@ -16,15 +16,18 @@ export class DcHeaderComponent {
   //#region USER DATA
   public userData$: Observable<UserData | null> =
     this.authService.isUserLoggedIn$.pipe(
-      switchMap(() =>
-        this.authService.getUserById().pipe(
+      switchMap((isUserLoggedIn) => {
+        if (!isUserLoggedIn) {
+          return of(null);
+        }
+        return this.authService.getUserById().pipe(
           tap((userData) => {
             if (!userData) {
               this.logOut();
             }
           })
-        )
-      )
+        );
+      })
     );
   //#endregion USER DATA
 
@@ -55,13 +58,8 @@ export class DcHeaderComponent {
     this.languageService.changeLanguage(languageSelected);
   }
 
-  public async logOut() {
-    const userId = localStorage.getItem('userId');
-    if (userId) {
-      localStorage.removeItem('userId');
-      localStorage.removeItem('dt-token');
-      this.authService.isUserLoggedIn$.next(false);
-      window.location.reload();
-    }
+  public logOut() {
+    localStorage.removeItem('userId');
+    localStorage.removeItem('dt-token');
   }
 }

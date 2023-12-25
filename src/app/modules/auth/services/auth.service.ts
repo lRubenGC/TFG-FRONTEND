@@ -25,6 +25,9 @@ export class AuthService {
       const expirationTime = decodedToken.exp;
       const currentTimestamp = Math.floor(Date.now() / 1000);
       if (currentTimestamp > expirationTime) {
+        this.isUserLoggedIn$.next(false);
+        localStorage.removeItem('dt-token');
+        localStorage.removeItem('userId');
         return false;
       } else {
         this.isUserLoggedIn$.next(true);
