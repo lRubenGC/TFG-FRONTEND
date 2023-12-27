@@ -61,5 +61,6 @@ export class DcHeaderComponent {
   public logOut() {
     localStorage.removeItem('userId');
     localStorage.removeItem('dt-token');
+    location.reload();
   }
 }

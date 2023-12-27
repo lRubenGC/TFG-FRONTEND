@@ -142,7 +142,7 @@ export class PremiumCardComponent {
     const innerWidth = window.innerWidth;
     let width;
     if (innerWidth <= 1230) {
-      width = '80%';
+      width = '90%';
     } else if (innerWidth <= 1440) {
       width = '60%';
     } else if (innerWidth <= 1630) {

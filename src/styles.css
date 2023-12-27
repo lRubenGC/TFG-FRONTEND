@@ -159,6 +159,7 @@ h5,
 h6,
 p,
 span,
+a,
 i,
 button,
 select,
@@ -171,6 +172,7 @@ body {
 
 p,
 span,
+a,
 i,
 button,
 select,
@@ -199,6 +201,7 @@ input {
 
   p,
   span,
+  a,
   i,
   button,
   select,
@@ -259,6 +262,7 @@ input {
   }
 
   p,
+  a,
   i,
   span,
   button,

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
@@ -17,8 +17,9 @@ import { CustomCarsService } from '../../services/custom-cars.service';
   standalone: true,
   imports: [CommonModule, TranslateModule, GalleriaModule, RouterModule],
 })
-export class CustomCarDetailedComponent {
+export class CustomCarDetailedComponent implements OnInit {
   public car!: ICUSTOM_CAR;
+  public numVisible: number = 4;
 
   constructor(
     private ref: DynamicDialogRef,
@@ -30,6 +31,7 @@ export class CustomCarDetailedComponent {
 
   async ngOnInit() {
     this.car = this.config.data.car;
+    if (window.innerWidth <= 600) this.numVisible = 2;
   }
 
   upvoteCar(carId: number) {

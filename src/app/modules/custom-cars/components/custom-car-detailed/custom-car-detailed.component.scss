@@ -38,3 +38,19 @@ a {
     margin-left: 1rem;
   }
 }
+
+::ng-deep.grid-nogutter img {
+  max-width: 125px !important;
+  max-height: 75px !important;
+}
+
+@media (max-width: 700px) {
+  ::ng-deep.grid-nogutter img {
+    max-width: 100px !important;
+  }
+
+  .description-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
