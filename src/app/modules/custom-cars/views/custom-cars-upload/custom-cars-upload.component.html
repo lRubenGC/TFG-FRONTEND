@@ -1,12 +1,12 @@
 <div class="w-full flex justify-content-center">
   <form [formGroup]="carForm">
     <div class="upload-container flex flex-column justify-content-center gap-3">
-      <label class="w-full">
-        Model name
+      <label class="w-full p-2">
+        {{ "upload_custom.model_name" | translate }}
         <input
           formControlName="model_name"
           type="text"
-          placeholder="Model Name"
+          class="ml-1"
         />
       </label>
       <dc-images-upload
@@ -22,5 +22,3 @@
 </div>
 
 <p-toast position="bottom-right" key="br"></p-toast>
-
-<!-- TODO: Hacer bonita esta vista -->

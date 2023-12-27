@@ -1,9 +1,24 @@
 form {
-  background-color: #101011;
+  background-color: var(--background-darker);
   margin-top: 2rem;
   width: 50%;
   padding: 2rem;
   border-radius: 5px;
   border-bottom: 1px solid var(--orange-divider);
   border-right: 1px solid var(--orange-divider);
+}
+@media (max-width: 1500px) {
+  form {
+    width: 90%;
+  }
+}
+
+@media (max-width: 950px) {
+  form {
+    padding: 0.5rem;
+  }
+  input {
+    width: 100%;
+    margin: 0 !important;
+  }
 }

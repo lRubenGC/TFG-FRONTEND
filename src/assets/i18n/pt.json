@@ -47,7 +47,8 @@
     "author": "Autor"
   },
   "upload_custom": {
-    "select_images": "Selecione ou arraste imagens (4 no máximo)"
+    "select_images": "Selecione ou arraste imagens",
+    "model_name": "Nome do carro"
   },
   "detailed_car": {
     "id": "ID",
