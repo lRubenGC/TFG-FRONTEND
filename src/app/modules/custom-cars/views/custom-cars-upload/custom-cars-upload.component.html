@@ -3,20 +3,27 @@
     <div class="upload-container flex flex-column justify-content-center gap-3">
       <label class="w-full p-2">
         {{ "upload_custom.model_name" | translate }}
-        <input
-          formControlName="model_name"
-          type="text"
-          class="ml-1"
-        />
+        <input formControlName="model_name" type="text" class="ml-1" />
       </label>
       <dc-images-upload
         (imagesSelected)="onImagesSelected($event)"
         (errorEmitter)="onErrorEmit()"
-      ></dc-images-upload>
+      />
       <dc-button
-        [buttonTitle]="'custom_cars.upload_car' | translate"
+        buttonTitle="custom_cars.upload_car"
+        [disabled]="!!carCreatedId"
         (onClickButton)="submitForm()"
-      ></dc-button>
+      />
+    </div>
+    <div
+      *ngIf="carCreatedId"
+      class="mt-5 text-center flex flex-column justify-content-center gap-2"
+    >
+      <p>{{ "upload_custom.car_created_successfuly" | translate }}</p>
+      <dc-button
+        buttonTitle="upload_custom.see_car"
+        (onClickButton)="goToCreatedCar(carCreatedId)"
+      />
     </div>
   </form>
 </div>

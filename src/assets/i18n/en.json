@@ -48,7 +48,9 @@
   },
   "upload_custom": {
     "select_images": "Select or drag images",
-    "model_name": "Model name"
+    "model_name": "Model name",
+    "car_created_successfuly": "Car uploaded successfully",
+    "see_car": "See car"
   },
   "detailed_car": {
     "id": "ID",

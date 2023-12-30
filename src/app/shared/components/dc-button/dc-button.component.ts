@@ -6,12 +6,12 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'dc-button',
   standalone: true,
   templateUrl: './dc-button.component.html',
-  styleUrls: ['./dc-button.component.css'],
+  styleUrls: ['./dc-button.component.scss'],
   imports: [CommonModule, TranslateModule],
 })
 export class DCButtonComponent {
   @Input() buttonTitle: string = '';
-  @Input() buttonDisabled?: boolean = false;
+  @Input() disabled?: boolean = false;
   @Input() class: string = '';
 
   @Output() onClickButton = new EventEmitter<void>();

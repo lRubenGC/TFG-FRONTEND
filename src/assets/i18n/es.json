@@ -48,7 +48,9 @@
   },
   "upload_custom": {
     "select_images": "Selecciona las imagenes",
-    "model_name": "Nombre del coche"
+    "model_name": "Nombre del coche",
+    "car_created_successfuly": "Coche subido satisfactoriamente",
+    "see_car": "Ver coche"
   },
   "detailed_car": {
     "id": "ID",

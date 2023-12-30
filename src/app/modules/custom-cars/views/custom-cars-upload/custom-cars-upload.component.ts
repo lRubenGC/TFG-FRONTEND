@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CustomCarsService } from '../../services/custom-cars.service';
-import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
+import { NavigationExtras, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { lastValueFrom } from 'rxjs';
 import { MessageService } from 'primeng/api';
+import { lastValueFrom } from 'rxjs';
 import { minArrayLength } from 'src/app/shared/functions/formValidators';
+import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
+import { CustomCarsService } from '../../services/custom-cars.service';
 
 @Component({
   selector: 'custom-cars-upload',
@@ -13,13 +14,16 @@ import { minArrayLength } from 'src/app/shared/functions/formValidators';
   styleUrls: ['./custom-cars-upload.component.scss'],
 })
 export class CustomCarsUploadView implements OnInit {
-  carForm!: FormGroup;
+  public carForm!: FormGroup;
+  public uploadCarButtonDisabled: boolean = false;
+  public carCreatedId: number | null = null;
 
   constructor(
     private fb: FormBuilder,
     private customCarsService: CustomCarsService,
     private translate: TranslateService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -50,7 +54,7 @@ export class CustomCarsUploadView implements OnInit {
     if (this.carForm.valid) {
       this.customCarsService.uploadCar(this.carForm.value).subscribe({
         next: (resp) => {
-          if (resp.ok) {
+          if (resp.ok && resp.customCar) {
             this.showToast({
               severity: 'success',
               summary: 'toast.success',
@@ -70,7 +74,8 @@ export class CustomCarsUploadView implements OnInit {
                 );
               });
             }
-            // TODO: Invalidar el botón de subir coche y añadir elemento HTML para que acceda a su coche
+            this.uploadCarButtonDisabled = true;
+            this.carCreatedId = resp.customCar.id;
           } else if (!resp.ok && !!resp.validFormats) {
             this.showToast({
               severity: 'error',
@@ -88,6 +93,15 @@ export class CustomCarsUploadView implements OnInit {
         detail: 'toast.custom_car_fields_required',
       });
     }
+  }
+
+  public goToCreatedCar(id: number | null): void {
+    const params: NavigationExtras = {
+      queryParams: {
+        detailedCar: id,
+      },
+    };
+    this.router.navigate(['/custom-cars/list'], params);
   }
 
   private async showToast(

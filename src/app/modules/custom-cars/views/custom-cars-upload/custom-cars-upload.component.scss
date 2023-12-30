@@ -6,7 +6,12 @@ form {
   border-radius: 5px;
   border-bottom: 1px solid var(--orange-divider);
   border-right: 1px solid var(--orange-divider);
+  p {
+    color: var(--green-500);
+    font-size: 1.1rem;
+  }
 }
+
 @media (max-width: 1500px) {
   form {
     width: 90%;
