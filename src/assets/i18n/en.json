@@ -2,6 +2,8 @@
   "all": "All",
   "owned": "Collected",
   "wished": "Wished",
+  "basic": "Basic",
+  "premium": "Premium",
   "not_owned": "Not collected",
   "DATE_DESC": "Date (Descending)",
   "DATE_ASC": "Date (Ascending)",
@@ -108,6 +110,12 @@
     "filter_secondary_serie": "Secondary series",
     "filter_property": "Property",
     "owned_cars": "Owned cars"
+  },
+  "search_results": {
+    "basic_cars": "Basic cars",
+    "premium_cars": "Premium cars",
+    "filter_car_type": "Filter",
+    "order": "Order"
   },
   "toast": {
     "success": "Success",

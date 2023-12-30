@@ -12,11 +12,12 @@ import { AppComponent } from './app.component';
 // Module Views
 import { AuthModule } from './modules/auth/auth.module';
 import { BasicCarsModule } from './modules/basic-cars/basic-cars.module';
+import { CustomCarsModule } from './modules/custom-cars/custom-cars.module';
 import { LandingPageModule } from './modules/landing-page/landing-page.module';
 import { PremiumCarsModule } from './modules/premium-cars/premium-cars.module';
+import { SearchResultsModule } from './modules/search-results/search-results.module';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { SharedModule } from './shared/shared.module';
-import { CustomCarsModule } from './modules/custom-cars/custom-cars.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -42,6 +43,7 @@ import { CustomCarsModule } from './modules/custom-cars/custom-cars.module';
     CustomCarsModule,
     LandingPageModule,
     PremiumCarsModule,
+    SearchResultsModule,
     SharedModule,
   ],
   providers: [AuthGuard],

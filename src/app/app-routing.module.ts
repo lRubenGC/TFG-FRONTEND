@@ -16,10 +16,6 @@ const routes: Routes = [
         (m) => m.AuthRoutingModule
       ),
   },
-  // {
-  //   path: 'info',
-  //   loadChildren: () => import('./views/info/info-routing.module').then(m => m.InfoRoutingModule)
-  // },
   {
     path: 'basic-cars',
     loadChildren: () =>
@@ -41,10 +37,13 @@ const routes: Routes = [
         (m) => m.PremiumCarsRoutingModule
       ),
   },
-  // {
-  //   path: 'search/:query',
-  //   loadChildren: () => import('./views/search-results/search-results-routing.module').then(m => m.SearchResultsRoutingModule)
-  // },
+  {
+    path: 'search/:query',
+    loadChildren: () =>
+      import('./modules/search-results/search-results-routing.module').then(
+        (m) => m.SearchResultsRoutingModule
+      ),
+  },
   // {
   //   path: 'user',
   //   loadChildren: () => import('./views/user/user-routing.module').then(m => m.UserRoutingModule)

@@ -1,0 +1,79 @@
+<!-- 
+ (selectedOption)="vm.filter.next($event)"
+ (selectedOption)="vm.order.next($event)"
+ -->
+
+<ng-container
+  *ngIf="{
+    cars: carsVM$ | async,
+    filter: carTypeFilterSubject$ | async,
+    order: orderSubject$ | async
+  } as vm"
+>
+  <!-- Main container -->
+  <div class="main-container flex sm:flex-column lg:flex-row w-full">
+    <!-- Aside section -->
+    <aside class="sm:w-12 lg:w-2 h-4rem">
+      <div
+        class="fixed w-full flex flex-column sm:gap-2 lg:gap-4 sm:w-full lg:w-2"
+      >
+        <div
+          class="flex sm:gap-4 lg:gap-2 justify-content-center sm:flex-row lg:flex-column"
+        >
+          <dc-filter
+            [header]="'search_results.filter_car_type'"
+            [options]="CAR_TYPE_FILTER_OPTIONS"
+            [filterInit]="vm.filter"
+            class="dc-filter"
+          />
+          <dc-filter
+            [header]="'search_results.order'"
+            [options]="ORDER_OPTIONS"
+            [filterInit]="vm.order"
+            class="dc-filter"
+          />
+        </div>
+        <!--
+        <dc-divider class="dc-divider" />
+
+         <p class="text-center">
+          {{ "premium_cars.owned_cars" | translate }}:
+          {{ vm.ownedCars?.carsOwned }} /
+          {{ vm.ownedCars?.carsShowed }}
+        </p> -->
+      </div>
+    </aside>
+    <!-- List of cars -->
+    <main class="sm:w-12 lg:w-10 flex flex-column w-full gap-8">
+      <ng-container *ngIf="vm.cars && vm.cars.basicCars.length">
+        <div>
+          <h4>{{ "search_results.basic_cars" | translate }}</h4>
+          <dc-divider [backgroundColor]="'var(--grey-300)'" [opacity]="'0.5'" />
+          <div class="basic-cars-grouped">
+            <ng-container *ngFor="let basicCar of vm.cars.basicCars">
+              <basic-card [showYear]="true" [car]="basicCar" (triggerToast)="showToast($event)" />
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="vm.cars && vm.cars.premiumCars.length">
+        <div>
+          <h4>{{ "search_results.premium_cars" | translate }}</h4>
+          <dc-divider [backgroundColor]="'var(--grey-300)'" [opacity]="'0.5'" />
+          <div class="premium-cars-grouped">
+            <ng-container *ngFor="let premiumCar of vm.cars.premiumCars">
+              <premium-card
+                [car]="premiumCar"
+                (triggerToast)="showToast($event)"
+              />
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+    </main>
+  </div>
+</ng-container>
+
+<dc-scroll-to-top></dc-scroll-to-top>
+<p-toast position="bottom-right" key="br"></p-toast>

@@ -2,6 +2,8 @@
   "all": "Todos",
   "owned": "Coleccionados",
   "wished": "Deseados",
+  "basic": "Básicos",
+  "premium": "Premium",
   "not_owned": "No coleccionados",
   "DATE_DESC": "Fecha (Descendente)",
   "DATE_ASC": "Fecha (Ascendente)",
@@ -108,6 +110,12 @@
     "filter_secondary_serie": "Serie secundaria",
     "filter_property": "Propiedad",
     "owned_cars": "Tus coches"
+  },
+  "search_results": {
+    "basic_cars": "Coches básicos",
+    "premium_cars": "Coches premium",
+    "filter_car_type": "Filtrar",
+    "order": "Ordenar"
   },
   "toast": {
     "success": "Éxito",
