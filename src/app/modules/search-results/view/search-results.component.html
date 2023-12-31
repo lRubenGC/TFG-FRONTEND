@@ -1,8 +1,4 @@
-<ng-container
-  *ngIf="{
-    cars: carsVM$ | async,
-  } as vm"
->
+<ng-container *ngIf="carsVM$ | async as cars">
   <!-- Main container -->
   <div class="main-container flex sm:flex-column lg:flex-row w-full">
     <!-- Aside section -->
@@ -28,24 +24,31 @@
             class="dc-filter"
           />
         </div>
-        <!--
+
         <dc-divider class="dc-divider" />
 
-         <p class="text-center">
-          {{ "premium_cars.owned_cars" | translate }}:
-          {{ vm.ownedCars?.carsOwned }} /
-          {{ vm.ownedCars?.carsShowed }}
-        </p> -->
+        <section class="flex justify-content-center flex-column gap-3 cars-owned-container">
+          <p *ngIf="cars.basicCarsShowedNumbered > 0" class="text-center">
+            {{ "search_results.basic_owned" | translate }}:
+            <span class="text-primary">{{ cars.basicCarsOwnedNumbered }}</span> /
+            {{ cars.basicCarsShowedNumbered }}
+          </p>
+          <p *ngIf="cars.premiumCarsShowedNumbered > 0" class="text-center">
+            {{ "search_results.premium_owned" | translate }}:
+            <span class="text-primary">{{ cars.premiumCarsOwnedNumbered }}</span> /
+            {{ cars.premiumCarsShowedNumbered }}
+          </p>
+        </section>
       </div>
     </aside>
     <!-- List of cars -->
     <main class="sm:w-12 lg:w-10 flex flex-column w-full gap-8">
-      <ng-container *ngIf="vm.cars && vm.cars.basicCars.length">
+      <ng-container *ngIf="cars && cars.basicCars.length">
         <div>
           <h4>{{ "search_results.basic_cars" | translate }}</h4>
           <dc-divider [backgroundColor]="'var(--grey-300)'" [opacity]="'0.5'" />
           <div class="basic-cars-grouped">
-            <ng-container *ngFor="let basicCar of vm.cars.basicCars">
+            <ng-container *ngFor="let basicCar of cars.basicCars">
               <basic-card
                 [showYear]="true"
                 [car]="basicCar"
@@ -56,12 +59,12 @@
         </div>
       </ng-container>
 
-      <ng-container *ngIf="vm.cars && vm.cars.premiumCars.length">
+      <ng-container *ngIf="cars && cars.premiumCars.length">
         <div>
           <h4>{{ "search_results.premium_cars" | translate }}</h4>
           <dc-divider [backgroundColor]="'var(--grey-300)'" [opacity]="'0.5'" />
           <div class="premium-cars-grouped">
-            <ng-container *ngFor="let premiumCar of vm.cars.premiumCars">
+            <ng-container *ngFor="let premiumCar of cars.premiumCars">
               <premium-card
                 [car]="premiumCar"
                 (triggerToast)="showToast($event)"

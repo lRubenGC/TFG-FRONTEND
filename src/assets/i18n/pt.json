@@ -115,7 +115,9 @@
     "basic_cars": "Carros básicos",
     "premium_cars": "Carros premium",
     "filter_car_type": "Filtro",
-    "order": "Ordem"
+    "order": "Ordem",
+    "basic_owned": "Básicos",
+    "premium_owned": "Premium"
   },
   "toast": {
     "success": "Sucesso",

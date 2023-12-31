@@ -21,6 +21,9 @@
     gap: 2rem;
     margin-top: 1rem;
   }
+  .text-primary {
+    color: var(--primary-400) !important;
+  }
 }
 
 @media (max-width: 990px) {
@@ -48,6 +51,10 @@
   .premium-cars-grouped {
     grid-template-columns: 22% 22% 22% 22% !important;
   }
+  .cars-owned-container {
+    flex-direction: row !important;
+    gap: 2rem !important;
+  }
 }
 
 @media (max-width: 768px) {
@@ -69,7 +76,7 @@
 
 @media (max-width: 575px) {
   main {
-    margin-top: 5.5rem !important;
+    margin-top: 7rem !important;
     padding: 0 !important;
     h4 {
       padding: 0 0.5rem 0.2rem;

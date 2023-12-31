@@ -14,5 +14,9 @@ export type YEAR_TYPE = 'DATE_ASC' | 'DATE_DESC';
 
 export interface SEARCH_CARS_RESPONSE {
   basicCars: IBASIC_CAR[];
+  basicCarsShowedNumbered: number;
+  basicCarsOwnedNumbered: number;
   premiumCars: IPREMIUM_CAR[];
+  premiumCarsShowedNumbered: number;
+  premiumCarsOwnedNumbered: number;
 }
