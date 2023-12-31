@@ -10,15 +10,20 @@
     <h4 *ngIf="screenWidth > 890">Diecast Tracker</h4>
   </a>
   <!-- Search bar -->
-  <div class="dt-search-bar flex align-items-center">
+  <form
+    [formGroup]="searchBarForm"
+    class="dt-search-bar flex align-items-center"
+  >
     <input
       type="text"
+      formControlName="search_input"
       [placeholder]="'header.search_placeholder' | translate"
+      (keydown.enter)="searchInput()"
     />
     <div class="search-icon_container flex align-items-center">
-      <img src="assets/icons/search_icon.svg" />
+      <img (click)="searchInput()" src="assets/icons/search_icon.svg" />
     </div>
-  </div>
+  </form>
 
   <!-- Navbar -->
   <div class="dt-navbar">
