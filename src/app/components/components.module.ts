@@ -5,11 +5,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-import { UploadImgComponent } from './shared/upload-img/upload-img.component';
 import { UserCardComponent } from './user-card/user-card.component';
 
 @NgModule({
-  declarations: [UserCardComponent, UploadImgComponent],
+  declarations: [UserCardComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -17,6 +16,6 @@ import { UserCardComponent } from './user-card/user-card.component';
     ReactiveFormsModule,
     TranslateModule,
   ],
-  exports: [UserCardComponent, UploadImgComponent],
+  exports: [UserCardComponent],
 })
 export class ComponentsModule {}
