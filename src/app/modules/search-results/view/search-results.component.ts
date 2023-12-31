@@ -34,19 +34,21 @@ import { SearchResultsService } from '../services/search-results.service';
 export class SearchResultsPage {
   //#region CAR TYPE FILTER
   public readonly CAR_TYPE_FILTER_OPTIONS = SEARCH_CARS_FILTERS_OPTIONS;
-  public carTypeFilterSubject$ = new BehaviorSubject<CAR_TYPE>('all');
+  public carTypeFilter = new BehaviorSubject<CAR_TYPE>('all');
+  public carTypeFilter$ = this.carTypeFilter.pipe(map((car_type) => car_type));
   //#endregion CAR TYPE FILTER
 
   //#region ORDER
   public readonly ORDER_OPTIONS = SEARCH_CARS_ORDER_OPTIONS;
-  public orderSubject$ = new BehaviorSubject<YEAR_TYPE>('DATE_DESC');
+  public carOrder = new BehaviorSubject<YEAR_TYPE>('DATE_DESC');
+  public carOrder$ = this.carOrder.pipe(map((order) => order));
   //#endregion ORDER
 
   //#region CARS VM
   public carsVM$: Observable<SEARCH_CARS_RESPONSE> = combineLatest([
     this.route.params,
-    this.carTypeFilterSubject$,
-    this.orderSubject$,
+    this.carTypeFilter$,
+    this.carOrder$,
   ]).pipe(
     switchMap(([params, car_type, year]) => {
       if (params && car_type && year) {

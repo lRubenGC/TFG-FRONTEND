@@ -1,13 +1,6 @@
-<!-- 
- (selectedOption)="vm.filter.next($event)"
- (selectedOption)="vm.order.next($event)"
- -->
-
 <ng-container
   *ngIf="{
     cars: carsVM$ | async,
-    filter: carTypeFilterSubject$ | async,
-    order: orderSubject$ | async
   } as vm"
 >
   <!-- Main container -->
@@ -23,13 +16,15 @@
           <dc-filter
             [header]="'search_results.filter_car_type'"
             [options]="CAR_TYPE_FILTER_OPTIONS"
-            [filterInit]="vm.filter"
+            [filterInit]="carTypeFilter | async"
+            (selectedOption)="carTypeFilter.next($event)"
             class="dc-filter"
           />
           <dc-filter
             [header]="'search_results.order'"
             [options]="ORDER_OPTIONS"
-            [filterInit]="vm.order"
+            [filterInit]="carOrder | async"
+            (selectedOption)="carOrder.next($event)"
             class="dc-filter"
           />
         </div>
@@ -51,7 +46,11 @@
           <dc-divider [backgroundColor]="'var(--grey-300)'" [opacity]="'0.5'" />
           <div class="basic-cars-grouped">
             <ng-container *ngFor="let basicCar of vm.cars.basicCars">
-              <basic-card [showYear]="true" [car]="basicCar" (triggerToast)="showToast($event)" />
+              <basic-card
+                [showYear]="true"
+                [car]="basicCar"
+                (triggerToast)="showToast($event)"
+              />
             </ng-container>
           </div>
         </div>
