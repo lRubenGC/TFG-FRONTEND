@@ -2,6 +2,8 @@
   "all": "Todos",
   "owned": "Coleccionados",
   "wished": "Deseados",
+  "cars": "Coches",
+  "users": "Usuarios",  
   "basic": "Básicos",
   "premium": "Premium",
   "not_owned": "No coleccionados",
@@ -117,7 +119,9 @@
     "filter_car_type": "Filtrar",
     "order": "Ordenar",
     "basic_owned": "Básicos",
-    "premium_owned": "Premium"
+    "premium_owned": "Premium",
+    "users": "Usuarios",
+    "search_type": "Tipo de búsqueda"
   },
   "toast": {
     "success": "Éxito",

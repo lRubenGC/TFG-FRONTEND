@@ -1,0 +1,22 @@
+<a
+  class="user-item flex align-items-center cursor-pointer"
+  [routerLink]="['/user/profile/' + user.username]"
+  [ngStyle]="{
+    'background-image': user.bg_img
+      ? 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' +
+        user.bg_img +
+        ')'
+      : 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../../assets/images/login_page/login_bg.webp)'
+  }"
+>
+  <div class="profile-img-container">
+    <img
+      class="user-profile-pic w-full h-full"
+      [src]="
+        user.img ? user.img : 'assets/images/user-profile/no-user-profile.webp'
+      "
+      alt="user image pic"
+    />
+  </div>
+  <h4 class="ml-2">{{ user.username }}</h4>
+</a>

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { Observable, of, switchMap, tap } from 'rxjs';
-import { UserData } from 'src/app/modules/auth/models/auth.models';
+import { USER_DATA } from 'src/app/modules/auth/models/auth.models';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { LanguageService } from 'src/app/shared/services/language.service';
 import { LANGUAGE_OPTIONS } from './dc-header.constants';
@@ -16,7 +16,7 @@ import { LANGUAGE_OPTIONS } from './dc-header.constants';
 })
 export class DcHeaderComponent {
   //#region USER DATA
-  public userData$: Observable<UserData | null> =
+  public userData$: Observable<USER_DATA | null> =
     this.authService.isUserLoggedIn$.pipe(
       switchMap((isUserLoggedIn) => {
         if (!isUserLoggedIn) {

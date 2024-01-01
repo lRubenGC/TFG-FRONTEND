@@ -30,7 +30,7 @@
     <div class="card-description-row flex justify-content-between">
       <a
         *ngIf="isListView"
-        [routerLink]="['/user']"
+        [routerLink]="['/user/profile/' + car.userCreator]"
         class="card-description-item"
       >
         {{ car.userCreator }}

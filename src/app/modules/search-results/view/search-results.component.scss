@@ -7,19 +7,22 @@
     z-index: 200;
     background-color: var(--background);
   }
-  .basic-cars-grouped {
+  .basic-cars-grouped,
+  .premium-cars-grouped,
+  .users-grouped {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
     justify-content: center;
     gap: 2rem;
     margin-top: 1rem;
   }
+  .basic-cars-grouped {
+    grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+  }
   .premium-cars-grouped {
-    display: grid;
     grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-    justify-content: center;
-    gap: 2rem;
-    margin-top: 1rem;
+  }
+  .users-grouped {
+    grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
   }
   .text-primary {
     color: var(--primary-400) !important;
@@ -40,7 +43,7 @@
     padding: 0 1rem;
   }
   .dc-filter {
-    width: 40%;
+    width: 30%;
   }
   .dc-divider {
     display: none;
@@ -51,15 +54,12 @@
   .premium-cars-grouped {
     grid-template-columns: 22% 22% 22% 22% !important;
   }
+  .users-grouped {
+    grid-template-columns: 30% 30% 30% !important;
+  }
   .cars-owned-container {
     flex-direction: row !important;
     gap: 2rem !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .basic-cars-grouped {
-    grid-template-columns: 45% 45% !important;
   }
 }
 
@@ -74,15 +74,29 @@
   }
 }
 
+@media (max-width: 768px) {
+  .basic-cars-grouped,
+  .users-grouped {
+    grid-template-columns: 45% 45% !important;
+  }
+}
+
 @media (max-width: 575px) {
   main {
-    margin-top: 7rem !important;
+    margin: 0rem !important;
     padding: 0 !important;
     h4 {
       padding: 0 0.5rem 0.2rem;
     }
   }
-  .basic-cars-grouped {
+  .users-global-container {
+    margin-top: 5.5rem !important;
+  }
+  .cars-global-container {
+    margin-top: 7rem !important;
+  }
+  .basic-cars-grouped,
+  .users-grouped {
     gap: 1rem !important;
   }
   .premium-cars-grouped {

@@ -9,6 +9,7 @@ export interface SEARCH_CARS_ORDER {
   year: YEAR_TYPE;
 }
 
+export type SEARCH_TYPE = 'cars' | 'users';
 export type CAR_TYPE = 'all' | 'basic' | 'premium';
 export type YEAR_TYPE = 'DATE_ASC' | 'DATE_DESC';
 

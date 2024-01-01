@@ -6,22 +6,25 @@ import {
   BehaviorSubject,
   Observable,
   combineLatest,
+  filter,
   lastValueFrom,
   map,
   of,
   switchMap,
-  tap,
 } from 'rxjs';
 import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
+import { USER_DATA } from '../../auth/models/auth.models';
 import {
   SEARCH_CARS_FILTERS_OPTIONS,
   SEARCH_CARS_ORDER_OPTIONS,
+  SEARCH_TYPE_OPTIONS,
 } from '../models/search-results.constants';
 import {
   CAR_TYPE,
   SEARCH_CARS_FILTERS,
   SEARCH_CARS_ORDER,
   SEARCH_CARS_RESPONSE,
+  SEARCH_TYPE,
   YEAR_TYPE,
 } from '../models/search-results.models';
 import { SearchResultsService } from '../services/search-results.service';
@@ -33,24 +36,32 @@ import { SearchResultsService } from '../services/search-results.service';
 })
 export class SearchResultsPage {
   //#region CAR TYPE FILTER
+  public readonly SEARCH_TYPE_OPTIONS = SEARCH_TYPE_OPTIONS;
+  public searchType = new BehaviorSubject<SEARCH_TYPE>('cars');
+  private searchType$ = this.searchType.pipe(map((search_type) => search_type));
+  //#endregion CAR TYPE FILTER
+
+  //#region CAR TYPE FILTER
   public readonly CAR_TYPE_FILTER_OPTIONS = SEARCH_CARS_FILTERS_OPTIONS;
   public carTypeFilter = new BehaviorSubject<CAR_TYPE>('all');
-  public carTypeFilter$ = this.carTypeFilter.pipe(map((car_type) => car_type));
+  private carTypeFilter$ = this.carTypeFilter.pipe(map((car_type) => car_type));
   //#endregion CAR TYPE FILTER
 
   //#region ORDER
   public readonly ORDER_OPTIONS = SEARCH_CARS_ORDER_OPTIONS;
   public carOrder = new BehaviorSubject<YEAR_TYPE>('DATE_DESC');
-  public carOrder$ = this.carOrder.pipe(map((order) => order));
+  private carOrder$ = this.carOrder.pipe(map((order) => order));
   //#endregion ORDER
 
   //#region CARS VM
   public carsVM$: Observable<SEARCH_CARS_RESPONSE> = combineLatest([
+    this.searchType$,
     this.route.params,
     this.carTypeFilter$,
     this.carOrder$,
   ]).pipe(
-    switchMap(([params, car_type, year]) => {
+    filter(([search_type]) => search_type === 'cars'),
+    switchMap(([search_type, params, car_type, year]) => {
       if (params && car_type && year) {
         const filters: SEARCH_CARS_FILTERS = {
           car_type,
@@ -64,6 +75,16 @@ export class SearchResultsPage {
     })
   );
   //#endregion CARS VM
+
+  //#region USERS VM
+  public usersVM$: Observable<USER_DATA[]> = combineLatest([
+    this.searchType$,
+    this.route.params,
+  ]).pipe(
+    filter(([search_type]) => search_type === 'users'),
+    switchMap(([search_type, params]) => this.getUsers(params['query']))
+  );
+  //#endregion USERS VM
 
   constructor(
     private route: ActivatedRoute,
@@ -79,6 +100,12 @@ export class SearchResultsPage {
   ): Observable<SEARCH_CARS_RESPONSE> {
     return this.searchResultsService
       .getCars(model_name, car_type, order)
+      .pipe(map((response) => response));
+  }
+
+  private getUsers(username: string): Observable<USER_DATA[]> {
+    return this.searchResultsService
+      .getUsers(username)
       .pipe(map((response) => response));
   }
 

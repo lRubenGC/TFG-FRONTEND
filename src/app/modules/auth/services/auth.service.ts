@@ -4,7 +4,7 @@ import jwtDecode from 'jwt-decode';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {
-  UserData,
+  USER_DATA,
   loginInterface,
   registerInterface,
   tokenDecoded,
@@ -53,10 +53,10 @@ export class AuthService {
     });
   }
 
-  public getUserById(): Observable<UserData | null> {
+  public getUserById(): Observable<USER_DATA | null> {
     const userId = localStorage.getItem('userId');
     if (userId) {
-      return this.http.get<UserData>(
+      return this.http.get<USER_DATA>(
         `${environment.apiBaseUrl}/api/users/${userId}`
       );
     } else return of(null);

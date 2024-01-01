@@ -7,7 +7,6 @@
       [showItemNavigators]="true"
       [showThumbnailNavigators]="false"
       [numVisible]="numVisible"
-     
     >
       <ng-template pTemplate="item" let-item>
         <img [src]="item.itemImageSrc" style="width: 100%" />
@@ -19,10 +18,12 @@
       </ng-template>
     </p-galleria>
   </div>
-  <div class="description-container w-full flex justify-content-evenly align-items-center">
+  <div
+    class="description-container w-full flex justify-content-evenly align-items-center"
+  >
     <div class="flex align-items-center gap-2">
       <p>{{ "custom_cars.author" | translate }}:</p>
-      <a [routerLink]="car.userCreator" target="_blank">{{
+      <a [routerLink]="['/user/profile/' + car.userCreator]" target="_blank">{{
         car.userCreator
       }}</a>
     </div>

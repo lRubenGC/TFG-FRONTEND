@@ -15,7 +15,7 @@ export interface tokenDecoded {
   exp: number;
 }
 
-export interface UserData {
+export interface USER_DATA {
   id: number;
   username: string;
   email: string;
@@ -23,6 +23,6 @@ export interface UserData {
   recoverToken: Date | null;
   recoverTokenDate: Date | null;
   img?: string;
-  bg_img: string;
+  bg_img: string | null;
   csvDownloadDate: Date | null;
 }
