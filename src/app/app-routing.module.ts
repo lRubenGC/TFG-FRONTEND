@@ -44,10 +44,13 @@ const routes: Routes = [
         (m) => m.SearchResultsRoutingModule
       ),
   },
-  // {
-  //   path: 'user',
-  //   loadChildren: () => import('./views/user/user-routing.module').then(m => m.UserRoutingModule)
-  // },
+  {
+    path: 'user',
+    loadChildren: () =>
+      import('./modules/user/user-routing.module').then(
+        (m) => m.UserRoutingModule
+      ),
+  },
   {
     path: '**',
     redirectTo: '',

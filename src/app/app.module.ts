@@ -16,6 +16,7 @@ import { CustomCarsModule } from './modules/custom-cars/custom-cars.module';
 import { LandingPageModule } from './modules/landing-page/landing-page.module';
 import { PremiumCarsModule } from './modules/premium-cars/premium-cars.module';
 import { SearchResultsModule } from './modules/search-results/search-results.module';
+import { UserModule } from './modules/user/user.module';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { SharedModule } from './shared/shared.module';
 
@@ -45,6 +46,7 @@ import { SharedModule } from './shared/shared.module';
     PremiumCarsModule,
     SearchResultsModule,
     SharedModule,
+    UserModule,
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],
