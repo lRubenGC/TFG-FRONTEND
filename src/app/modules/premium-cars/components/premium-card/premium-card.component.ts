@@ -7,6 +7,7 @@ import {
   IPREMIUM_CAR,
   IPROPERTY_TYPE,
 } from 'src/app/modules/premium-cars/models/premium-cars.models';
+import { getPremiumInnerWidth } from 'src/app/shared/functions/queryParams';
 import { ITOAST_OBJECT } from '../../../../shared/models/toast-shared.models';
 import { PremiumCarDetailedComponent } from '../premium-car-detailed/premium-car-detailed.component';
 import {
@@ -31,6 +32,7 @@ export class PremiumCardComponent {
 
   //#region OUTPUTS
   @Output() triggerToast = new EventEmitter<ITOAST_OBJECT>();
+  @Output() carType = new EventEmitter<'premium'>();
   //#endregion OUTPUTS
 
   public carProperty$ = this.dcPremiumCarDetailedService.carProperty$.pipe(
@@ -133,21 +135,13 @@ export class PremiumCardComponent {
   }
 
   public openModal() {
+    this.carType.emit('premium');
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: { detailedCar: this.car.id },
       queryParamsHandling: 'merge',
     });
-
-    const innerWidth = window.innerWidth;
-    let width;
-    if (innerWidth <= 1230) {
-      width = '90%';
-    } else if (innerWidth <= 1440) {
-      width = '60%';
-    } else if (innerWidth <= 1630) {
-      width = '50%';
-    } else width = '40%';
+    const width = getPremiumInnerWidth();
     const ref = this.dialogService.open(PremiumCarDetailedComponent, {
       data: {
         car: this.car,
@@ -164,6 +158,7 @@ export class PremiumCardComponent {
   private removeDetailedCarFromUrl() {
     const queryParams: Params = { ...this.route.snapshot.queryParams };
     delete queryParams['detailedCar'];
+    delete queryParams['carType'];
 
     this.router.navigate([], {
       relativeTo: this.route,

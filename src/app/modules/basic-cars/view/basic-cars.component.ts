@@ -17,6 +17,7 @@ import {
 } from 'rxjs';
 import { BasicCarDetailedComponent } from 'src/app/modules/basic-cars/components/basic-car-detailed/basic-car-detailed.component';
 import { DcBasicCarDetailedService } from 'src/app/modules/basic-cars/components/basic-car-detailed/basic-car-detailed.service';
+import { getBasicInnerWidth } from 'src/app/shared/functions/queryParams';
 import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
 import { PROPERTY_FILTER_OPTIONS } from '../models/basic-cars.constants';
 import {
@@ -153,15 +154,7 @@ export class BasicCarsPage implements OnInit {
       if (detailedCar) {
         this.basicCarsService.getCarById(detailedCar).subscribe((resp) => {
           this.yearStoraged = resp.year;
-          const innerWidth = window.innerWidth;
-          let width;
-          if (innerWidth <= 1230) {
-            width = '90%';
-          } else if (innerWidth <= 1440) {
-            width = '75%';
-          } else if (innerWidth <= 1630) {
-            width = '60%';
-          } else width = '50%';
+          const width = getBasicInnerWidth();
           const ref = this.dialogService.open(BasicCarDetailedComponent, {
             data: {
               car: resp.car,

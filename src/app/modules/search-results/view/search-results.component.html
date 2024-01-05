@@ -60,7 +60,10 @@
     <!-- List of cars -->
     <main class="sm:w-12 lg:w-10 flex flex-column w-full gap-8">
       <ng-container *ngIf="cars && cars.basicCars.length">
-        <div class="cars-global-container" *ngIf="(searchType | async) === 'cars'">
+        <div
+          class="cars-global-container"
+          *ngIf="(searchType | async) === 'cars'"
+        >
           <h4>{{ "search_results.basic_cars" | translate }}</h4>
           <dc-divider [backgroundColor]="'var(--grey-300)'" [opacity]="'0.5'" />
           <div class="basic-cars-grouped">
@@ -69,6 +72,7 @@
                 [showYear]="true"
                 [car]="basicCar"
                 (triggerToast)="showToast($event)"
+                (carType)="setCarTypeInRoute($event)"
               />
             </ng-container>
           </div>
@@ -76,7 +80,10 @@
       </ng-container>
 
       <ng-container *ngIf="cars && cars.premiumCars.length">
-        <div class="cars-global-container" *ngIf="(searchType | async) === 'cars'">
+        <div
+          class="cars-global-container"
+          *ngIf="(searchType | async) === 'cars'"
+        >
           <h4>{{ "search_results.premium_cars" | translate }}</h4>
           <dc-divider [backgroundColor]="'var(--grey-300)'" [opacity]="'0.5'" />
           <div class="premium-cars-grouped">
@@ -84,6 +91,7 @@
               <premium-card
                 [car]="premiumCar"
                 (triggerToast)="showToast($event)"
+                (carType)="setCarTypeInRoute($event)"
               />
             </ng-container>
           </div>
@@ -91,7 +99,10 @@
       </ng-container>
 
       <ng-container *ngIf="usersVM$ | async as users">
-        <div class="users-global-container" *ngIf="(searchType | async) === 'users'">
+        <div
+          class="users-global-container"
+          *ngIf="(searchType | async) === 'users'"
+        >
           <h4>{{ "search_results.users" | translate }}</h4>
           <dc-divider [backgroundColor]="'var(--grey-300)'" [opacity]="'0.5'" />
           <div class="users-grouped">

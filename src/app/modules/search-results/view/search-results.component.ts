@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 import {
   BehaviorSubject,
   Observable,
@@ -11,9 +12,18 @@ import {
   map,
   of,
   switchMap,
+  take,
 } from 'rxjs';
+import {
+  getBasicInnerWidth,
+  getPremiumInnerWidth,
+} from 'src/app/shared/functions/queryParams';
 import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
 import { USER_DATA } from '../../auth/models/auth.models';
+import { BasicCarDetailedComponent } from '../../basic-cars/components/basic-car-detailed/basic-car-detailed.component';
+import { BasicCarsService } from '../../basic-cars/services/basic-cars.service';
+import { PremiumCarDetailedComponent } from '../../premium-cars/components/premium-car-detailed/premium-car-detailed.component';
+import { PremiumCarsService } from '../../premium-cars/services/premium-cars.service';
 import {
   SEARCH_CARS_FILTERS_OPTIONS,
   SEARCH_CARS_ORDER_OPTIONS,
@@ -34,7 +44,7 @@ import { SearchResultsService } from '../services/search-results.service';
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.scss'],
 })
-export class SearchResultsPage {
+export class SearchResultsPage implements OnInit {
   //#region CAR TYPE FILTER
   public readonly SEARCH_TYPE_OPTIONS = SEARCH_TYPE_OPTIONS;
   public searchType = new BehaviorSubject<SEARCH_TYPE>('cars');
@@ -90,8 +100,15 @@ export class SearchResultsPage {
     private route: ActivatedRoute,
     private messageService: MessageService,
     private searchResultsService: SearchResultsService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private router: Router,
+    private dialogService: DialogService,
+    private basicCarsService: BasicCarsService,
+    private premiumCarsService: PremiumCarsService
   ) {}
+  ngOnInit(): void {
+    this.manageInit();
+  }
 
   private getCars(
     model_name: string,
@@ -107,6 +124,69 @@ export class SearchResultsPage {
     return this.searchResultsService
       .getUsers(username)
       .pipe(map((response) => response));
+  }
+
+  private manageInit() {
+    this.route.queryParams.pipe(take(1)).subscribe(async (params) => {
+      const { detailedCar } = params;
+      const { carType } = params;
+      if (detailedCar) {
+        if (carType && carType === 'basic') {
+          this.basicCarsService.getCarById(detailedCar).subscribe((resp) => {
+            const width = getBasicInnerWidth();
+            const ref = this.dialogService.open(BasicCarDetailedComponent, {
+              data: {
+                car: resp.car,
+              },
+              header: resp.car.model_name,
+              width,
+            });
+
+            ref.onClose.subscribe(() => {
+              this.removeDetailedCarFromUrl();
+            });
+          });
+        } else if (carType && carType === 'premium') {
+          this.premiumCarsService.getCarById(detailedCar).subscribe((resp) => {
+            const width = getPremiumInnerWidth();
+            const ref = this.dialogService.open(PremiumCarDetailedComponent, {
+              data: {
+                car: resp.car,
+              },
+              header: resp.car.model_name,
+              width,
+            });
+
+            ref.onClose.subscribe(() => {
+              this.removeDetailedCarFromUrl();
+            });
+          });
+        }
+      }
+    });
+  }
+
+  private removeDetailedCarFromUrl() {
+    const queryParams: Params = { ...this.route.snapshot.queryParams };
+    delete queryParams['detailedCar'];
+    delete queryParams['carType'];
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams,
+    });
+  }
+
+  public setCarTypeInRoute(carType: string) {
+    setTimeout(
+      () =>
+        this.router.navigate([], {
+          relativeTo: this.route,
+          queryParams: { carType },
+          queryParamsHandling: 'merge',
+        }),
+      1
+    );
   }
 
   public async showToast(toastObject: ITOAST_OBJECT) {

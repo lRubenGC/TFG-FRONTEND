@@ -17,6 +17,7 @@ import {
 } from 'rxjs';
 import { PremiumCarDetailedComponent } from 'src/app/modules/premium-cars/components/premium-car-detailed/premium-car-detailed.component';
 import { DcPremiumCarDetailedService } from 'src/app/modules/premium-cars/components/premium-car-detailed/premium-car-detailed.service';
+import { getPremiumInnerWidth } from 'src/app/shared/functions/queryParams';
 import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
 import { PROPERTY_FILTER_OPTIONS } from '../models/premium-cars.constants';
 import {
@@ -145,26 +146,17 @@ export class PremiumCarsPage implements OnInit {
       severity: toastObject.severity,
       summary,
       detail,
-      life: 2000
+      life: 2000,
     });
   }
 
   private manageInit() {
-    // Detailed car modal
     this.route.queryParams.pipe(take(1)).subscribe(async (params) => {
       const { detailedCar } = params;
       if (detailedCar) {
         this.premiumCarsService.getCarById(detailedCar).subscribe((resp) => {
           this.mainSerieStoraged = resp.car.main_serie;
-          const innerWidth = window.innerWidth;
-          let width;
-          if (innerWidth <= 1230) {
-            width = '90%';
-          } else if (innerWidth <= 1440) {
-            width = '60%';
-          } else if (innerWidth <= 1630) {
-            width = '50%';
-          } else width = '40%';
+          const width = getPremiumInnerWidth();
           const ref = this.dialogService.open(PremiumCarDetailedComponent, {
             data: {
               car: resp.car,
@@ -183,7 +175,6 @@ export class PremiumCarsPage implements OnInit {
         if (mainSerieStoraged) this.mainSerieStoraged = mainSerieStoraged;
       }
     });
-
   }
 
   private removeDetailedCarFromUrl() {

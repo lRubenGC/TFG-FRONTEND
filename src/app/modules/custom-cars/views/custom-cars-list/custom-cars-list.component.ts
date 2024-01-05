@@ -12,6 +12,7 @@ import {
   switchMap,
   take,
 } from 'rxjs';
+import { getBasicInnerWidth } from 'src/app/shared/functions/queryParams';
 import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
 import { CustomCarDetailedComponent } from '../../components/custom-car-detailed/custom-car-detailed.component';
 import { CUSTOM_CARS_ORDER } from '../../models/custom-cars.constants';
@@ -59,15 +60,7 @@ export class CustomCarsListView implements OnInit {
       const { detailedCar } = params;
       if (detailedCar) {
         this.customCarsService.getCarById(detailedCar).subscribe((resp) => {
-          const innerWidth = window.innerWidth;
-          let width;
-          if (innerWidth <= 1230) {
-            width = '90%';
-          } else if (innerWidth <= 1440) {
-            width = '75%';
-          } else if (innerWidth <= 1630) {
-            width = '60%';
-          } else width = '40%';
+          const width = getBasicInnerWidth();
           const ref = this.dialogService.open(CustomCarDetailedComponent, {
             data: {
               car: resp.car,

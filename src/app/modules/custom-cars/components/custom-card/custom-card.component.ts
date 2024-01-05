@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { DialogService } from 'primeng/dynamicdialog';
+import { getBasicInnerWidth } from 'src/app/shared/functions/queryParams';
 import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
 import { ICUSTOM_CAR } from '../../models/custom-cars.models';
 import { CustomCarsService } from '../../services/custom-cars.service';
@@ -84,15 +85,7 @@ export class CustomCardComponent {
       queryParamsHandling: 'merge',
     });
 
-    const innerWidth = window.innerWidth;
-    let width;
-    if (innerWidth <= 1230) {
-      width = '90%';
-    } else if (innerWidth <= 1440) {
-      width = '75%';
-    } else if (innerWidth <= 1630) {
-      width = '60%';
-    } else width = '40%';
+    const width = getBasicInnerWidth();
     const ref = this.dialogService.open(CustomCarDetailedComponent, {
       data: {
         car: this.car,

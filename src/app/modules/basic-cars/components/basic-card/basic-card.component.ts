@@ -7,6 +7,7 @@ import {
   IBASIC_CAR,
   IPROPERTY_TYPE,
 } from 'src/app/modules/basic-cars/models/basic-cars.models';
+import { getBasicInnerWidth } from 'src/app/shared/functions/queryParams';
 import { ITOAST_OBJECT } from '../../../../shared/models/toast-shared.models';
 import { BasicCarDetailedComponent } from '../basic-car-detailed/basic-car-detailed.component';
 import {
@@ -32,6 +33,7 @@ export class BasicCardComponent {
 
   //#region OUTPUTS
   @Output() triggerToast = new EventEmitter<ITOAST_OBJECT>();
+  @Output() carType = new EventEmitter<'basic'>();
   //#endregion OUTPUTS
 
   public carProperty$ = this.dcBasicCarDetailedService.carProperty$.pipe(
@@ -134,21 +136,13 @@ export class BasicCardComponent {
   }
 
   public openModal() {
+    this.carType.emit('basic');
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: { detailedCar: this.car.id },
       queryParamsHandling: 'merge',
     });
-
-    const innerWidth = window.innerWidth;
-    let width;
-    if (innerWidth <= 1230) {
-      width = '90%';
-    } else if (innerWidth <= 1440) {
-      width = '75%';
-    } else if (innerWidth <= 1630) {
-      width = '60%';
-    } else width = '50%';
+    const width = getBasicInnerWidth();
     const ref = this.dialogService.open(BasicCarDetailedComponent, {
       data: {
         car: this.car,
@@ -165,6 +159,7 @@ export class BasicCardComponent {
   private removeDetailedCarFromUrl() {
     const queryParams: Params = { ...this.route.snapshot.queryParams };
     delete queryParams['detailedCar'];
+    delete queryParams['carType'];
 
     this.router.navigate([], {
       relativeTo: this.route,
