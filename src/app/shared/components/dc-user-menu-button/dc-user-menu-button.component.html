@@ -1,6 +1,6 @@
 <a
   *ngIf="type === 'anchor'"
-  [routerLink]="[link, linkObject]"
+  [routerLink]="[link]"
   class="user-menu-button flex align-items-center gap-2"
 >
   <div [class]="icon"></div>
@@ -20,13 +20,13 @@
   class="user-menu-button flex align-items-center gap-2"
   (click)="op.toggle($event)"
 >
-<div class="flex align-items-center justify-content-between w-full">
-  <div class="flex align-items-center gap-2">
-    <div [class]="icon"></div>
-    {{ text | translate }}
+  <div class="flex align-items-center justify-content-between w-full">
+    <div class="flex align-items-center gap-2">
+      <div [class]="icon"></div>
+      {{ text | translate }}
+    </div>
+    <div class="pi pi-angle-down"></div>
   </div>
-  <div class="pi pi-angle-down"></div>
-</div>
 </button>
 
 <p-overlayPanel

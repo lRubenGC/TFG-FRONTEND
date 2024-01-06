@@ -1,0 +1,60 @@
+<section class="container flex justify-content-between">
+  <section class="flex gap-3">
+    <img [src]="userData.img" />
+    <div class="mt-2">
+      <div class="flex align-items-center gap-2">
+        <h4>{{ userData.username }}</h4>
+        <div
+          class="pi pi-ellipsis-h"
+          (click)="headerDropdown.toggle($event)"
+        ></div>
+      </div>
+    </div>
+  </section>
+  <section class="flex align-items-center gap-4">
+    <div class="flex align-items-center flex-column">
+      <h5>{{ userCarsNumbers.basicCars }}</h5>
+      <span>{{ "user.header.basicCars" | translate }}</span>
+    </div>
+    <div class="flex align-items-center flex-column">
+      <h5>{{ userCarsNumbers.premiumCars }}</h5>
+      <span>{{ "user.header.premiumCars" | translate }}</span>
+    </div>
+    <div class="flex align-items-center flex-column">
+      <h5>{{ userCarsNumbers.customCars }}</h5>
+      <span>{{ "user.header.customCars" | translate }}</span>
+    </div>
+  </section>
+</section>
+
+<p-overlayPanel
+  #headerDropdown
+  [appendTo]="'body'"
+  [style]="{
+    width: '225px',
+    color: '#fff',
+    'background-color': '#101011',
+    'border-bottom': '1px solid var(--orange-divider)',
+    'border-left': '1px solid var(--orange-divider)',
+    'border-radius': '5px',
+    'box-shadow':
+      '0px 1px 7px #000, 0px 4px 5px -2px #000, 0px 10px 15px -5px #000'
+  }"
+>
+  <div class="user-menu flex flex-column">
+    <div class="flex flex-column pt-2 pb-2">
+      <dc-user-menu-button
+        [type]="'anchor'"
+        [text]="'user.header.edit_profile'"
+        [link]="'/user/edit'"
+        [icon]="'pi pi-user-edit'"
+      ></dc-user-menu-button>
+      <dc-user-menu-button
+        [type]="'button'"
+        [text]="'user.header.export_collection'"
+        [icon]="'pi pi-download'"
+        (click)="exportCollectionClicked.emit()"
+      ></dc-user-menu-button>
+    </div>
+  </div>
+</p-overlayPanel>

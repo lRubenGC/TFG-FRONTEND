@@ -67,15 +67,14 @@
             <dc-user-menu-button
               [type]="'anchor'"
               [text]="'header.user_menu.go_to_profile'"
-              [link]="'/user/profile/'"
-              [linkObject]="userData.username"
+              [link]="'/user/profile/' + userData.username"
               [icon]="'pi pi-user'"
               (click)="userMenu.hide()"
             ></dc-user-menu-button>
             <dc-user-menu-button
               [type]="'anchor'"
               [text]="'header.user_menu.edit_profile'"
-              [link]="'/user/config'"
+              [link]="'/user/edit'"
               [icon]="'pi pi-user-edit'"
               (click)="userMenu.hide()"
             ></dc-user-menu-button>

@@ -3,7 +3,7 @@
   "owned": "Coleccionados",
   "wished": "Deseados",
   "cars": "Coches",
-  "users": "Usuarios",  
+  "users": "Usuarios",
   "basic": "Básicos",
   "premium": "Premium",
   "not_owned": "No coleccionados",
@@ -122,6 +122,16 @@
     "premium_owned": "Premium",
     "users": "Usuarios",
     "search_type": "Tipo de búsqueda"
+  },
+  "user": {
+    "header": {
+      "basicCars": "Básicos",
+      "premiumCars": "Premium",
+      "customCars": "Custom",
+      "edit_profile": "Editar perfil",
+      "export_collection": "Exportar colección",
+      "export_error": "Necesitas esperar 2 horas desde la última descarga"
+    }
   },
   "toast": {
     "success": "Éxito",

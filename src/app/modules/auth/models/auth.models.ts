@@ -15,7 +15,7 @@ export interface tokenDecoded {
   exp: number;
 }
 
-export interface USER_DATA {
+export interface IUSER_DATA {
   id: number;
   username: string;
   email: string;

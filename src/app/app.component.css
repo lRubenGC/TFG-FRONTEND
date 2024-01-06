@@ -1,3 +1,7 @@
-::ng-deep.p-component-overlay {
-    z-index: 6000 !important;
+::ng-deep.p-component-overlay,
+::ng-deep.p-overlaypanel {
+  z-index: 6000 !important;
+}
+::ng-deep.p-overlaypanel .p-overlaypanel-content {
+  padding: 0 !important;
 }

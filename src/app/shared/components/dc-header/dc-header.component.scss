@@ -72,10 +72,3 @@
     width: 100% !important;
   }
 }
-
-::ng-deep.p-overlaypanel {
-  z-index: 6000 !important;
-}
-::ng-deep.p-overlaypanel .p-overlaypanel-content {
-  padding: 0 !important;
-}

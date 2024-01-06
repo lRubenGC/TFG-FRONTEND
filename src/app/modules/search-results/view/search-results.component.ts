@@ -19,7 +19,7 @@ import {
   getPremiumInnerWidth,
 } from 'src/app/shared/functions/queryParams';
 import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
-import { USER_DATA } from '../../auth/models/auth.models';
+import { IUSER_DATA } from '../../auth/models/auth.models';
 import { BasicCarDetailedComponent } from '../../basic-cars/components/basic-car-detailed/basic-car-detailed.component';
 import { BasicCarsService } from '../../basic-cars/services/basic-cars.service';
 import { PremiumCarDetailedComponent } from '../../premium-cars/components/premium-car-detailed/premium-car-detailed.component';
@@ -87,7 +87,7 @@ export class SearchResultsPage implements OnInit {
   //#endregion CARS VM
 
   //#region USERS VM
-  public usersVM$: Observable<USER_DATA[]> = combineLatest([
+  public usersVM$: Observable<IUSER_DATA[]> = combineLatest([
     this.searchType$,
     this.route.params,
   ]).pipe(
@@ -120,7 +120,7 @@ export class SearchResultsPage implements OnInit {
       .pipe(map((response) => response));
   }
 
-  private getUsers(username: string): Observable<USER_DATA[]> {
+  private getUsers(username: string): Observable<IUSER_DATA[]> {
     return this.searchResultsService
       .getUsers(username)
       .pipe(map((response) => response));

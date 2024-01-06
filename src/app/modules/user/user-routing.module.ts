@@ -8,18 +8,18 @@ import { UserProfileView } from './views/user-profile/user-profile.component';
 
 const routes: Routes = [
   {
-    path: '/:username',
+    path: 'profile/:username',
     component: UserProfileView,
     canActivate: [CheckToken],
   },
   {
-    path: 'config',
+    path: 'edit',
     component: UserEditView,
     canActivate: [AuthGuard, CheckToken],
   },
   {
     path: '**',
-    redirectTo: '',
+    redirectTo: '/',
   },
 ];
 

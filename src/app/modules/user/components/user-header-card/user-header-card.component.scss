@@ -1,0 +1,16 @@
+.container {
+  img {
+    width: 100px;
+    border-radius: 50%;
+  }
+  span {
+    color: var(--gray-200);
+    font-size: 0.9rem;
+  }
+  .pi-ellipsis-h {
+    padding: 0.3rem;
+    background-color: var(--background-lighter);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+}

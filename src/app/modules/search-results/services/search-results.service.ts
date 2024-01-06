@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { USER_DATA } from '../../auth/models/auth.models';
+import { IUSER_DATA } from '../../auth/models/auth.models';
 import {
   SEARCH_CARS_FILTERS,
   SEARCH_CARS_ORDER,
@@ -37,8 +37,8 @@ export class SearchResultsService {
     );
   }
 
-  public getUsers(username: string): Observable<USER_DATA[]> {
-    return this.http.get<USER_DATA[]>(
+  public getUsers(username: string): Observable<IUSER_DATA[]> {
+    return this.http.get<IUSER_DATA[]>(
       `${environment.apiBaseUrl}/api/search/users/${username}`
     );
   }

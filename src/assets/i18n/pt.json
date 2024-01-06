@@ -97,7 +97,7 @@
     "cards": {
       "basic_cars": "Carros básicos",
       "premium_cars": "Carros premium",
-      "custom_cars": "Carros personalizados"
+      "custom_cars": "Carros custom"
     },
     "text_card": {
       "title": "Bem-vindo ao Diecast Tracker",
@@ -122,6 +122,16 @@
     "premium_owned": "Premium",
     "users": "Usuários",
     "search_type": "Tipo de pesquisa"
+  },
+  "user": {
+    "header": {
+      "basicCars": "Básicos",
+      "premiumCars": "Premium",
+      "customCars": "Custom",
+      "edit_profile": "Editar perfil",
+      "export_collection": "Coleta de exportação",
+      "export_error": "Você precisa esperar 2 horas desde o último download"
+    }
   },
   "toast": {
     "success": "Sucesso",

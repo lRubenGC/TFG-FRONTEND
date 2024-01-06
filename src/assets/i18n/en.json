@@ -123,6 +123,16 @@
     "users": "Users",
     "search_type": "Search type"
   },
+  "user": {
+    "header": {
+      "basicCars": "Basic",
+      "premiumCars": "Premium",
+      "customCars": "Custom",
+      "edit_profile": "Edit profile",
+      "export_collection": "Export collection",
+      "export_error": "You need to wait 2 hours from the last download"
+    }
+  },
   "toast": {
     "success": "Success",
     "error": "Error",

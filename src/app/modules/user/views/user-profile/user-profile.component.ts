@@ -1,29 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import {
-  BehaviorSubject,
   Observable,
   lastValueFrom,
   map,
-  of,
+  merge,
+  mergeMap,
   switchMap,
-  take,
+  tap,
 } from 'rxjs';
-import { CustomCarDetailedComponent } from 'src/app/modules/custom-cars/components/custom-car-detailed/custom-car-detailed.component';
-import { ICUSTOM_CAR } from 'src/app/modules/custom-cars/models/custom-cars.models';
 import { CustomCarsService } from 'src/app/modules/custom-cars/services/custom-cars.service';
-import { getBasicInnerWidth } from 'src/app/shared/functions/queryParams';
 import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
+import { UserService } from '../../services/user.service';
+import { IUSER_DATA } from 'src/app/modules/auth/models/auth.models';
+import { IUSER_CARS_NUMBERS, USER_VM } from '../../models/user.models';
 
 @Component({
   selector: 'user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss'],
 })
-export class UserProfileView implements OnInit {
+export class UserProfileView {
   // //#region ORDER CARS
   // public orderCarsSubject = new BehaviorSubject<CUSTOM_CARS_ORDER_TYPE>(
   //   'DATE_DESC'
@@ -38,11 +38,22 @@ export class UserProfileView implements OnInit {
   // );
   // //#endregion CUSTOM CARS VM
 
-  ngOnInit(): void {
-    this.manageInit();
-  }
+  //#region USER DATA
+  public userVM$: Observable<USER_VM> = this.route.params.pipe(
+    switchMap(({ username }) =>
+      this.getUserData(username).pipe(
+        switchMap((userData) =>
+          this.getUserNumbers(userData.id).pipe(
+            map((userNumbers) => ({ userData, userNumbers }))
+          )
+        )
+      )
+    )
+  );
+  //#endregion USER DATA
 
   constructor(
+    private userService: UserService,
     private customCarsService: CustomCarsService,
     private messageService: MessageService,
     private translate: TranslateService,
@@ -51,25 +62,27 @@ export class UserProfileView implements OnInit {
     private dialogService: DialogService
   ) {}
 
-  private manageInit() {
-    this.route.queryParams.pipe(take(1)).subscribe(async (params) => {
-      const { detailedCar } = params;
-      if (detailedCar) {
-        this.customCarsService.getCarById(detailedCar).subscribe((resp) => {
-          const width = getBasicInnerWidth();
-          const ref = this.dialogService.open(CustomCarDetailedComponent, {
-            data: {
-              car: resp.car,
-            },
-            header: resp.car.model_name,
-            width,
-          });
+  private getUserData(username: string) {
+    return this.userService.getUserData(username);
+  }
 
-          ref.onClose.subscribe(() => {
-            this.removeDetailedCarFromUrl();
-          });
-        });
-      }
+  private getUserNumbers(id: number) {
+    return this.userService.getUserNumbers(id);
+  }
+
+  // private getCustomCars(): Observable<ICUSTOM_CAR[]> {
+  //   return this.customCarsService
+  //     .getCarsList('DATE_ASC')
+  //     .pipe(map((response) => response));
+  // }
+
+  public exportUserCollection(id: number) {
+    this.userService.downloadUserCollection(id).catch((err) => {
+      this.showToast({
+        severity: 'error',
+        summary: 'toast.error',
+        detail: 'user.header.export_error',
+      });
     });
   }
 
@@ -82,12 +95,6 @@ export class UserProfileView implements OnInit {
       relativeTo: this.route,
       queryParams,
     });
-  }
-
-  private getCustomCars(): Observable<ICUSTOM_CAR[]> {
-    return this.customCarsService
-      .getCarsList('DATE_ASC')
-      .pipe(map((response) => response));
   }
 
   public async showToast(toastObject: ITOAST_OBJECT) {
@@ -104,9 +111,5 @@ export class UserProfileView implements OnInit {
       detail,
       life: 2000,
     });
-  }
-
-  public goToUploadCar(): void {
-    this.router.navigate(['custom-cars/upload']);
   }
 }
