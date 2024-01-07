@@ -3,7 +3,7 @@
   "owned": "Collected",
   "wished": "Wished",
   "cars": "Cars",
-  "users": "Users", 
+  "users": "Users",
   "basic": "Basic",
   "premium": "Premium",
   "not_owned": "Not collected",
@@ -47,7 +47,7 @@
   },
   "custom_cars": {
     "order": "Order by",
-    "upload_car" : "Upload car",
+    "upload_car": "Upload car",
     "author": "Author"
   },
   "upload_custom": {
@@ -131,6 +131,14 @@
       "edit_profile": "Edit profile",
       "export_collection": "Export collection",
       "export_error": "You need to wait 2 hours from the last download"
+    },
+    "filter": {
+      "ownedCars": "Owned",
+      "wishedCars": "Wished",
+      "basic_main": "Year",
+      "basic_secondary": "Series",
+      "premium_main": "Main series",
+      "premium_secondary": "Sec. series"
     }
   },
   "toast": {

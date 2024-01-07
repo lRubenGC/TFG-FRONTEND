@@ -131,6 +131,14 @@
       "edit_profile": "Editar perfil",
       "export_collection": "Coleta de exportação",
       "export_error": "Você precisa esperar 2 horas desde o último download"
+    },
+    "filter": {
+      "ownedCars": "Coletados",
+      "wishedCars": "Desejados",
+      "basic_main": "Ano",
+      "basic_secondary": "Series",
+      "premium_main": "Series prin.",
+      "premium_secondary": "Series sec."
     }
   },
   "toast": {

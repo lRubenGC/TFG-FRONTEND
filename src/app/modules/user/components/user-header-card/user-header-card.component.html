@@ -5,6 +5,7 @@
       <div class="flex align-items-center gap-2">
         <h4>{{ userData.username }}</h4>
         <div
+          *ngIf="userVisitorId === userData.id"
           class="pi pi-ellipsis-h"
           (click)="headerDropdown.toggle($event)"
         ></div>
@@ -13,15 +14,15 @@
   </section>
   <section class="flex align-items-center gap-4">
     <div class="flex align-items-center flex-column">
-      <h5>{{ userCarsNumbers.basicCars }}</h5>
+      <h4>{{ userCarsNumbers.basicCars }}</h4>
       <span>{{ "user.header.basicCars" | translate }}</span>
     </div>
     <div class="flex align-items-center flex-column">
-      <h5>{{ userCarsNumbers.premiumCars }}</h5>
+      <h4>{{ userCarsNumbers.premiumCars }}</h4>
       <span>{{ "user.header.premiumCars" | translate }}</span>
     </div>
     <div class="flex align-items-center flex-column">
-      <h5>{{ userCarsNumbers.customCars }}</h5>
+      <h4>{{ userCarsNumbers.customCars }}</h4>
       <span>{{ "user.header.customCars" | translate }}</span>
     </div>
   </section>

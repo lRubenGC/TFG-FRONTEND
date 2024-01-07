@@ -3,10 +3,83 @@
     <user-header-card
       [userData]="userVM.userData"
       [userCarsNumbers]="userVM.userNumbers"
+      [userVisitorId]="userVM.userVisitorId"
       (exportCollectionClicked)="exportUserCollection(userVM.userData.id)"
     />
   </header>
 </ng-container>
+
+<ng-container
+  *ngIf="{
+    carType: carType$ | async,
+    carOwnership: carOwnership$ | async
+  } as slideVM"
+>
+  <section class="car-type-section flex gap-4 justify-content-center">
+    <slide-menu
+      [options]="CAR_TYPE_OPTIONS"
+      (optionSelected)="carTypeSubject.next($event)"
+      [selected]="slideVM.carType"
+    />
+    <slide-menu
+      [options]="CAR_OWNERSHIP_OPTIONS"
+      (optionSelected)="carOwnershipSubject.next($event)"
+      [selected]="slideVM.carOwnership"
+    />
+  </section>
+
+  <section class="flex justify-content-center gap-4 w-full">
+    <ng-container *ngIf="slideVM.carType === 'basic'">
+      <ng-container *ngIf="basicMainFilterOptions | async as mainFilterOptions">
+        <dc-filter
+          [header]="'user.filter.basic_main'"
+          [options]="mainFilterOptions"
+          [filterInit]="mainFilterOptions[0]"
+          (selectedOption)="basicMainFilter$.next($event)"
+          class="w-2"
+        />
+      </ng-container>
+      <ng-container
+        *ngIf="basicSecondaryFilterOptions | async as secondaryFilterOptions"
+      >
+        <dc-filter
+          [header]="'user.filter.basic_secondary'"
+          [options]="secondaryFilterOptions"
+          [filterInit]="secondaryFilterOptions[0]"
+          (selectedOption)="basicSecondaryFilter$.next($event)"
+          class="w-2"
+        />
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="slideVM.carType === 'premium'">
+      <ng-container
+        *ngIf="premiumMainFilterOptions | async as mainFilterOptions"
+      >
+        <dc-filter
+          [header]="'user.filter.premium_main'"
+          [options]="mainFilterOptions"
+          [filterInit]="mainFilterOptions[0]"
+          (selectedOption)="premiumMainFilter$.next($event)"
+          class="w-2"
+        />
+      </ng-container>
+      <ng-container
+        *ngIf="premiumSecondaryFilterOptions | async as secondaryFilterOptions"
+      >
+        <dc-filter
+          [header]="'user.filter.premium_secondary'"
+          [options]="secondaryFilterOptions"
+          [filterInit]="secondaryFilterOptions[0]"
+          (selectedOption)="premiumSecondaryFilter$.next($event)"
+          class="w-2"
+        />
+      </ng-container>
+    </ng-container>
+  </section>
+
+  <ng-container *ngIf="basicCarsVM$ | async as cars">{{cars | json}}</ng-container>
+</ng-container>
+
 
 <dc-scroll-to-top />
 <p-toast position="bottom-right" key="br" />

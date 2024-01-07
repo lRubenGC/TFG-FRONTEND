@@ -14,10 +14,12 @@ import { BehaviorSubject, Subject } from 'rxjs';
 export class DcFilterComponent<T> {
   //#region INPUTS
   @Input() header: string = '';
-  @Input() set options(val: string[]) {
+  @Input() set options(val: string[] | null | undefined) {
+    if (!val) return;
     this.optionsSubject.next(val);
   }
-  @Input() set filterInit(val: string | null) {
+  @Input() set filterInit(val: string | null | undefined) {
+    if (!val) return;
     this.filterInitSubject.next(val);
   }
   //#endregion INPUTS

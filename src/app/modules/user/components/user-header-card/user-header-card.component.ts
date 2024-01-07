@@ -10,5 +10,6 @@ import { IUSER_CARS_NUMBERS } from '../../models/user.models';
 export class UserHeaderCardComponent {
   @Input() userData!: IUSER_DATA;
   @Input() userCarsNumbers!: IUSER_CARS_NUMBERS;
+  @Input() userVisitorId: number = 0;
   @Output() exportCollectionClicked = new EventEmitter<void>();
 }
