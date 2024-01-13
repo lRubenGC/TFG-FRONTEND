@@ -8,6 +8,8 @@ import {
   Observable,
   Subject,
   combineLatest,
+  debounceTime,
+  distinctUntilChanged,
   lastValueFrom,
   map,
   shareReplay,
@@ -15,15 +17,21 @@ import {
   tap,
   withLatestFrom,
 } from 'rxjs';
-import { BasicCarsService } from 'src/app/modules/basic-cars/services/basic-cars.service';
+import { BasicCarsResponse } from 'src/app/modules/basic-cars/models/basic-cars.models';
 import { CustomCarsService } from 'src/app/modules/custom-cars/services/custom-cars.service';
-import { PremiumCarsService } from 'src/app/modules/premium-cars/services/premium-cars.service';
+import { PremiumCarsResponse } from 'src/app/modules/premium-cars/models/premium-cars.models';
 import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
 import {
   CAR_OWNERSHIP_OPTIONS,
   CAR_TYPE_OPTIONS,
 } from '../../models/user.constants';
-import { CAR_OWNERSHIP, CAR_TYPE, USER_VM } from '../../models/user.models';
+import {
+  CAR_OWNERSHIP,
+  CAR_TYPE,
+  USER_VM,
+  isCarType,
+  isOwnershipType,
+} from '../../models/user.models';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -60,18 +68,26 @@ export class UserProfileView {
   //#endregion USER DATA
 
   //#region SLIDE MENU
+  private carTypeStoraged: CAR_TYPE = 'basic'; // TODO: FUNCION
   public readonly CAR_TYPE_OPTIONS = CAR_TYPE_OPTIONS;
-  public carTypeSubject = new BehaviorSubject<CAR_TYPE>('basic');
+  public carTypeSubject = new BehaviorSubject<CAR_TYPE>(this.carTypeStoraged);
   public carType$ = this.carTypeSubject.pipe(
+    tap((car_type) => localStorage.setItem('up-carTypeStoraged', car_type)),
     map((car_type) => car_type),
     shareReplay({
       refCount: true,
       bufferSize: 1,
     })
   );
+  private carOwnershipStoraged: CAR_OWNERSHIP = this.getCarOwnership();
   public readonly CAR_OWNERSHIP_OPTIONS = CAR_OWNERSHIP_OPTIONS;
-  public carOwnershipSubject = new BehaviorSubject<CAR_OWNERSHIP>('owned');
+  public carOwnershipSubject = new BehaviorSubject<CAR_OWNERSHIP>(
+    this.carOwnershipStoraged
+  );
   public carOwnership$ = this.carOwnershipSubject.pipe(
+    tap((car_ownership) =>
+      localStorage.setItem('up-carOwnershipStoraged', car_ownership)
+    ),
     map((car_ownership) => car_ownership),
     shareReplay({
       refCount: true,
@@ -115,36 +131,64 @@ export class UserProfileView {
     withLatestFrom(this.userVM$),
     switchMap(([mainFilter, { userData }]) =>
       this.userService.getSecondaryFilters(userData.id, 'premium', mainFilter)
+    ),
+    tap((secondaryFilterOptions) =>
+      this.premiumSecondaryFilter$.next(secondaryFilterOptions[0])
     )
   );
   //#endregion PREMIUM FILTERS
 
   //#region BASIC CARS VM
-  public basicCarsVM$ = combineLatest(
-    this.carOwnership$,
-    this.userVM$,
-    this.basicMainFilter$,
-    this.basicSecondaryFilter$
+  public basicCarsVM$: Observable<BasicCarsResponse[]> = combineLatest(
+    this.carOwnership$.pipe(distinctUntilChanged()),
+    this.basicMainFilter$.pipe(distinctUntilChanged()),
+    this.basicSecondaryFilter$.pipe(distinctUntilChanged())
   ).pipe(
-    switchMap(([carOwnership, { userData }, year, mainSerie]) =>
-      this.userService
-        .getUserBasicCars(userData.id, year, mainSerie, carOwnership)
-        .pipe(tap((a) => console.log(a)))
+    debounceTime(100),
+    withLatestFrom(this.userVM$),
+    switchMap(([[carOwnership, year, mainSerie], { userData }]) =>
+      this.userService.getUserBasicCars(
+        userData.id,
+        year,
+        mainSerie,
+        carOwnership
+      )
     )
   );
   //#endregion BASIC CARS VM
 
+  //#region PREMIUM CARS VM
+  public premiumCarsVM$: Observable<PremiumCarsResponse[]> = combineLatest(
+    this.carOwnership$.pipe(distinctUntilChanged()),
+    this.premiumMainFilter$.pipe(distinctUntilChanged()),
+    this.premiumSecondaryFilter$.pipe(distinctUntilChanged())
+  ).pipe(
+    debounceTime(100),
+    withLatestFrom(this.userVM$),
+    switchMap(([[carOwnership, year, mainSerie], { userData }]) =>
+      this.userService.getUserPremiumCars(
+        userData.id,
+        year,
+        mainSerie,
+        carOwnership
+      )
+    )
+  );
+  //#endregion PREMIUM CARS VM
+
   constructor(
     private userService: UserService,
-    private basicCarsService: BasicCarsService,
-    private premiumCarsService: PremiumCarsService,
     private customCarsService: CustomCarsService,
     private messageService: MessageService,
     private translate: TranslateService,
     private router: Router,
     private route: ActivatedRoute,
     private dialogService: DialogService
-  ) {}
+  ) {
+    const carTypeStoraged = localStorage.getItem('up-carTypeStoraged');
+    if (carTypeStoraged && isCarType(carTypeStoraged))
+      this.carTypeStoraged = carTypeStoraged;
+  }
 
   public exportUserCollection(id: number) {
     this.userService.downloadUserCollection(id).catch((err) => {
@@ -165,6 +209,16 @@ export class UserProfileView {
       relativeTo: this.route,
       queryParams,
     });
+  }
+
+  // TODO CAR TYPE
+  private getCarOwnership(): CAR_OWNERSHIP {
+    const carOwnershipStoraged = localStorage.getItem(
+      'up-carOwnershipStoraged'
+    );
+    if (carOwnershipStoraged && isOwnershipType(carOwnershipStoraged))
+      return carOwnershipStoraged;
+    return 'owned';
   }
 
   public async showToast(toastObject: ITOAST_OBJECT) {

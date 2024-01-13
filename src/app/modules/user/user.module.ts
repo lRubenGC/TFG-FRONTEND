@@ -12,6 +12,7 @@ import { BasicCardComponent } from '../basic-cars/components/basic-card/basic-ca
 import { BasicCarsGroupComponent } from '../basic-cars/components/basic-cars-group/basic-cars-group.component';
 import { CustomCardComponent } from '../custom-cars/components/custom-card/custom-card.component';
 import { PremiumCardComponent } from '../premium-cars/components/premium-card/premium-card.component';
+import { PremiumCarsGroupComponent } from '../premium-cars/components/premium-cars-group/premium-cars-group.component';
 import { SlideMenuComponent } from './components/slide-menu/slide-menu.component';
 import { UserHeaderCardComponent } from './components/user-header-card/user-header-card.component';
 import { UserEditView } from './views/user-edit/user-edit.component';
@@ -34,6 +35,7 @@ import { UserProfileView } from './views/user-profile/user-profile.component';
     BasicCardComponent,
     BasicCarsGroupComponent,
     PremiumCardComponent,
+    PremiumCarsGroupComponent,
     CustomCardComponent,
     ToastModule,
     OverlayPanelModule,

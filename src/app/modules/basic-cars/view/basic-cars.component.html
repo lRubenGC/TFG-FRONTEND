@@ -19,7 +19,6 @@
           <dc-filter
             [header]="'basic_cars.filter_year'"
             [options]="vm.yearFilterOptions ?? []"
-            [filterInit]="yearFilterSubject | async"
             (selectedOption)="yearFilterSubject.next($event)"
             class="dc-filter"
           >
@@ -27,7 +26,6 @@
           <dc-filter
             [header]="'basic_cars.filter_serie'"
             [options]="vm.seriesFilterOptions ?? []"
-            [filterInit]="seriesFilterSubject | async"
             (selectedOption)="seriesFilterSubject.next($event)"
             class="dc-filter"
           >
@@ -36,7 +34,6 @@
           <dc-filter
             [header]="'basic_cars.filter_property'"
             [options]="propertyFilterOptions"
-            [filterInit]="propertyFilterSubject | async"
             (selectedOption)="onPropertySelected($event)"
             class="dc-filter"
           >

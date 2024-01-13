@@ -19,7 +19,6 @@
           <dc-filter
             [header]="'premium_cars.filter_main_serie'"
             [options]="vm.mainSerieFilterOptions ?? []"
-            [filterInit]="mainSerieFilterSubject | async"
             (selectedOption)="mainSerieFilterSubject.next($event)"
             class="dc-filter"
           >
@@ -27,7 +26,6 @@
           <dc-filter
             [header]="'premium_cars.filter_secondary_serie'"
             [options]="vm.secondarySerieFilterOptions ?? []"
-            [filterInit]="secondarySerieFilterSubject | async"
             (selectedOption)="secondarySerieFilterSubject.next($event)"
             class="dc-filter"
           >
@@ -36,7 +34,6 @@
           <dc-filter
             [header]="'premium_cars.filter_property'"
             [options]="propertyFilterOptions"
-            [filterInit]="propertyFilterSubject | async"
             (selectedOption)="onPropertySelected($event)"
             class="dc-filter"
           >

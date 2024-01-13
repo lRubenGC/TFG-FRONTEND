@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { triggerDownload } from 'src/app/shared/functions/download';
 import { environment } from 'src/environments/environment';
 import { IUSER_DATA } from '../../auth/models/auth.models';
+import { BasicCarsResponse } from '../../basic-cars/models/basic-cars.models';
+import { PremiumCarsResponse } from '../../premium-cars/models/premium-cars.models';
 import {
   CAR_TYPE,
   IUSER_CARS_NUMBERS,
@@ -92,15 +94,33 @@ export class UserService {
     year: string,
     mainSerie: string,
     userProperty: USER_PROPERTY
-  ): Observable<string[]> {
+  ): Observable<BasicCarsResponse[]> {
     const token = localStorage.getItem('dt-token');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'r-token': token ? token : '',
     });
-    return this.http.post<string[]>(
+    return this.http.post<BasicCarsResponse[]>(
       `${environment.apiBaseUrl}/api/user-basic-cars/get-basic/?year=${year}`,
       { id, filters: { mainSerie, userProperty } },
+      { headers }
+    );
+  }
+
+  public getUserPremiumCars(
+    id: number,
+    mainSerie: string,
+    secondarySerie: string,
+    userProperty: USER_PROPERTY
+  ): Observable<PremiumCarsResponse[]> {
+    const token = localStorage.getItem('dt-token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'r-token': token ? token : '',
+    });
+    return this.http.post<PremiumCarsResponse[]>(
+      `${environment.apiBaseUrl}/api/user-premium-cars/get-premium/?mainSerie=${mainSerie}`,
+      { id, filters: { secondarySerie, userProperty } },
       { headers }
     );
   }

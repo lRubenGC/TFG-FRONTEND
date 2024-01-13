@@ -1,3 +1,4 @@
+<!-- Header -->
 <ng-container *ngIf="userVM$ | async as userVM">
   <header>
     <user-header-card
@@ -15,6 +16,7 @@
     carOwnership: carOwnership$ | async
   } as slideVM"
 >
+  <!-- Select menu -->
   <section class="car-type-section flex gap-4 justify-content-center">
     <slide-menu
       [options]="CAR_TYPE_OPTIONS"
@@ -22,19 +24,19 @@
       [selected]="slideVM.carType"
     />
     <slide-menu
+      *ngIf="slideVM.carType !== 'custom'"
       [options]="CAR_OWNERSHIP_OPTIONS"
       (optionSelected)="carOwnershipSubject.next($event)"
       [selected]="slideVM.carOwnership"
     />
   </section>
-
+  <!-- Filters -->
   <section class="flex justify-content-center gap-4 w-full">
     <ng-container *ngIf="slideVM.carType === 'basic'">
       <ng-container *ngIf="basicMainFilterOptions | async as mainFilterOptions">
         <dc-filter
           [header]="'user.filter.basic_main'"
           [options]="mainFilterOptions"
-          [filterInit]="mainFilterOptions[0]"
           (selectedOption)="basicMainFilter$.next($event)"
           class="w-2"
         />
@@ -45,7 +47,6 @@
         <dc-filter
           [header]="'user.filter.basic_secondary'"
           [options]="secondaryFilterOptions"
-          [filterInit]="secondaryFilterOptions[0]"
           (selectedOption)="basicSecondaryFilter$.next($event)"
           class="w-2"
         />
@@ -58,7 +59,6 @@
         <dc-filter
           [header]="'user.filter.premium_main'"
           [options]="mainFilterOptions"
-          [filterInit]="mainFilterOptions[0]"
           (selectedOption)="premiumMainFilter$.next($event)"
           class="w-2"
         />
@@ -69,7 +69,6 @@
         <dc-filter
           [header]="'user.filter.premium_secondary'"
           [options]="secondaryFilterOptions"
-          [filterInit]="secondaryFilterOptions[0]"
           (selectedOption)="premiumSecondaryFilter$.next($event)"
           class="w-2"
         />
@@ -77,11 +76,32 @@
     </ng-container>
   </section>
 
-  <ng-container *ngIf="basicCarsVM$ | async as cars">{{
-    cars | json
-  }}</ng-container>
+  <ng-container *ngIf="slideVM.carType === 'basic'">
+    <ng-container *ngIf="basicCarsVM$ | async as cars">
+      <main class="sm:w-12 lg:w-9 flex flex-column gap-8">
+        <ng-container *ngFor="let group of cars">
+          <basic-cars-group
+            [group]="group"
+            (triggerToast)="showToast($event)"
+          />
+        </ng-container>
+      </main>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="slideVM.carType === 'premium'">
+    <ng-container *ngIf="premiumCarsVM$ | async as cars">
+      <main class="sm:w-12 lg:w-9 flex flex-column gap-8">
+        <ng-container *ngFor="let group of cars">
+          <premium-cars-group
+            [group]="group"
+            (triggerToast)="showToast($event)"
+          />
+        </ng-container>
+      </main> </ng-container
+  ></ng-container>
 </ng-container>
 
+<!-- Float components -->
 <dc-scroll-to-top />
 <p-toast
   position="bottom-right"

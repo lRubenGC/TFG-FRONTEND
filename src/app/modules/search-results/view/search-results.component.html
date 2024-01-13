@@ -12,7 +12,6 @@
           <dc-filter
             [header]="'search_results.search_type'"
             [options]="SEARCH_TYPE_OPTIONS"
-            [filterInit]="searchType | async"
             (selectedOption)="searchType.next($event)"
             class="dc-filter"
           />
@@ -20,7 +19,6 @@
             *ngIf="(searchType | async) === 'cars'"
             [header]="'search_results.filter_car_type'"
             [options]="CAR_TYPE_FILTER_OPTIONS"
-            [filterInit]="carTypeFilter | async"
             (selectedOption)="carTypeFilter.next($event)"
             class="dc-filter"
           />
@@ -28,7 +26,6 @@
             *ngIf="(searchType | async) === 'cars'"
             [header]="'search_results.order'"
             [options]="ORDER_OPTIONS"
-            [filterInit]="carOrder | async"
             (selectedOption)="carOrder.next($event)"
             class="dc-filter"
           />

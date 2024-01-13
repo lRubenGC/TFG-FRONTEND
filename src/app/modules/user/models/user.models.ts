@@ -33,8 +33,13 @@ export class CarOwnershipOption {
 }
 
 export type CAR_TYPE = 'basic' | 'premium' | 'custom';
+export const isCarType = (prop: string): prop is CAR_TYPE => {
+  return prop === 'basic' || prop === 'premium' || prop === 'custom';
+};
 export type CAR_OWNERSHIP = 'owned' | 'wished';
-
+export const isOwnershipType = (prop: string): prop is CAR_OWNERSHIP => {
+  return prop === 'owned' || prop === 'wished';
+};
 export interface BASIC_FILTERS {
   year: string[];
   mainSerie: string[];

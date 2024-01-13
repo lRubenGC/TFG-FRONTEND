@@ -17,7 +17,6 @@
           <dc-filter
             [header]="'custom_cars.order'"
             [options]="orderCarsOptions"
-            [filterInit]="orderCarsOptions[0]"
             (selectedOption)="orderCarsSubject.next($event)"
             class="dc-filter"
           >
