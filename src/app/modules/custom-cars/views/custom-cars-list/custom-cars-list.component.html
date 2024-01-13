@@ -27,7 +27,10 @@
         <dc-divider class="dc-divider"></dc-divider>
 
         <!-- Boton para subir coches -->
-        <dc-button [buttonTitle]="'custom_cars.upload_car'" (onClickButton)="goToUploadCar()"></dc-button>
+        <dc-button
+          [buttonTitle]="'custom_cars.upload_car'"
+          (onClickButton)="goToUploadCar()"
+        ></dc-button>
       </div>
     </aside>
     <!-- List of cars -->
@@ -43,4 +46,8 @@
 </ng-container>
 
 <dc-scroll-to-top></dc-scroll-to-top>
-<p-toast position="bottom-right" key="br"></p-toast>
+<p-toast
+  position="bottom-right"
+  key="br"
+  [breakpoints]="{ '560px': { width: '90%' } }"
+></p-toast>

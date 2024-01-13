@@ -214,6 +214,7 @@ input:hover {
     font-size: 18px;
   }
 
+  div,
   p,
   span,
   a,
@@ -243,6 +244,7 @@ input:hover {
     font-size: 16px;
   }
 
+  div,
   p,
   span,
   i,
@@ -276,6 +278,7 @@ input:hover {
     font-size: 16px;
   }
 
+  div,
   p,
   a,
   i,

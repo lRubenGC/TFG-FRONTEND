@@ -10,8 +10,12 @@
   <div class="main-container flex sm:flex-column lg:flex-row w-full">
     <!-- Aside section -->
     <aside class="sm:w-12 lg:w-2 h-4rem">
-      <div class="fixed w-full flex flex-column sm:gap-2 lg:gap-4 sm:w-full lg:w-2">
-        <div class="flex sm:gap-4 lg:gap-2 justify-content-center sm:flex-row lg:flex-column">
+      <div
+        class="fixed w-full flex flex-column sm:gap-2 lg:gap-4 sm:w-full lg:w-2"
+      >
+        <div
+          class="flex sm:gap-4 lg:gap-2 justify-content-center sm:flex-row lg:flex-column"
+        >
           <dc-filter
             [header]="'premium_cars.filter_main_serie'"
             [options]="vm.mainSerieFilterOptions ?? []"
@@ -72,4 +76,8 @@
 </ng-container>
 
 <dc-scroll-to-top></dc-scroll-to-top>
-<p-toast position="bottom-right" key="br"></p-toast>
+<p-toast
+  position="bottom-right"
+  key="br"
+  [breakpoints]="{ '560px': { width: '90%' } }"
+></p-toast>
