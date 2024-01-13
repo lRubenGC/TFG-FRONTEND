@@ -11,6 +11,7 @@ import { DcDividerComponent } from 'src/app/shared/components/dc-divider/dc-divi
 import { DcFilterComponent } from 'src/app/shared/components/dc-filter/dc-filter.component';
 import { DcScrollToTopComponent } from 'src/app/shared/components/dc-scroll-to-top/dc-scroll-to-top.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { PremiumCarsGroupComponent } from './components/premium-cars-group/premium-cars-group.component';
 import { PremiumCarsPage } from './view/premium-cars.component';
 @NgModule({
   declarations: [PremiumCarsPage],
@@ -25,6 +26,7 @@ import { PremiumCarsPage } from './view/premium-cars.component';
     ToastModule,
     DcScrollToTopComponent,
     PremiumCardComponent,
+    PremiumCarsGroupComponent,
   ],
   providers: [MessageService, DialogService],
 })

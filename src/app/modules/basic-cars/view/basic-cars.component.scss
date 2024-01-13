@@ -7,13 +7,6 @@
     z-index: 200;
     background-color: var(--background);
   }
-  .cars-grouped {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
-    justify-content: center;
-    gap: 2rem;
-    margin-top: 1rem;
-  }
 }
 
 @media (max-width: 990px) {
@@ -35,19 +28,12 @@
   .dc-divider {
     display: none;
   }
-  .cars-grouped {
-    grid-template-columns: 30% 30% 30% !important;
-  }
 }
 
 @media (max-width: 768px) {
   aside > div,
   aside > div > div {
     gap: 0.5rem !important;
-  }
-
-  .cars-grouped {
-    grid-template-columns: 45% 45% !important;
   }
 }
 
@@ -58,8 +44,5 @@
     h4 {
       padding: 0 0.5rem 0.2rem;
     }
-  }
-  .cars-grouped {
-    gap: 1rem !important;
   }
 }

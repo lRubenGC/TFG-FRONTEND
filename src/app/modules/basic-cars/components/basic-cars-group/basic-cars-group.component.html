@@ -1,0 +1,15 @@
+<div class="basic-cars-group">
+  <h4>{{ group.serieName }}</h4>
+  <dc-divider
+    [backgroundColor]="'var(--grey-300)'"
+    [opacity]="'0.5'"
+  ></dc-divider>
+  <div class="cars-grouped">
+    <ng-container *ngFor="let car of group.cars">
+      <basic-card
+        [car]="car"
+        (triggerToast)="triggerToast.emit($event)"
+      ></basic-card>
+    </ng-container>
+  </div>
+</div>

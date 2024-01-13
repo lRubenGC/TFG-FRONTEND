@@ -55,21 +55,7 @@
     <!-- List of cars -->
     <main class="sm:w-12 lg:w-10 flex flex-column gap-8 w-full">
       <ng-container *ngFor="let group of vm.cars">
-        <div>
-          <h4>{{ group.serieName }}</h4>
-          <dc-divider
-            [backgroundColor]="'var(--grey-300)'"
-            [opacity]="'0.5'"
-          ></dc-divider>
-          <div class="cars-grouped">
-            <ng-container *ngFor="let car of group.cars">
-              <basic-card
-                [car]="car"
-                (triggerToast)="showToast($event)"
-              ></basic-card>
-            </ng-container>
-          </div>
-        </div>
+        <basic-cars-group [group]="group" (triggerToast)="showToast($event)"/>
       </ng-container>
     </main>
   </div>
