@@ -1,6 +1,12 @@
 <section class="container flex justify-content-between">
   <section class="flex gap-3">
-    <img [src]="userData.img" />
+    <img
+      [src]="
+        userData.img
+          ? userData.img
+          : 'assets/images/user-profile/no-user-profile.webp'
+      "
+    />
     <div class="mt-2">
       <div class="flex align-items-center gap-2">
         <h4>{{ userData.username }}</h4>
