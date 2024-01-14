@@ -6,6 +6,7 @@ import { triggerDownload } from 'src/app/shared/functions/download';
 import { environment } from 'src/environments/environment';
 import { IUSER_DATA } from '../../auth/models/auth.models';
 import { BasicCarsResponse } from '../../basic-cars/models/basic-cars.models';
+import { ICUSTOM_CAR } from '../../custom-cars/models/custom-cars.models';
 import { PremiumCarsResponse } from '../../premium-cars/models/premium-cars.models';
 import {
   CAR_TYPE,
@@ -121,6 +122,19 @@ export class UserService {
     return this.http.post<PremiumCarsResponse[]>(
       `${environment.apiBaseUrl}/api/user-premium-cars/get-premium/?mainSerie=${mainSerie}`,
       { id, filters: { secondarySerie, userProperty } },
+      { headers }
+    );
+  }
+
+  public getUserCustomCars(id: number): Observable<ICUSTOM_CAR[]> {
+    const token = localStorage.getItem('dt-token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'r-token': token ? token : '',
+    });
+    return this.http.post<ICUSTOM_CAR[]>(
+      `${environment.apiBaseUrl}/api/users/get-user-custom-cars`,
+      { id },
       { headers }
     );
   }

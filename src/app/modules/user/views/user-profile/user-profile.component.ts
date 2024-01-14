@@ -21,6 +21,8 @@ import {
 import { BasicCarDetailedComponent } from 'src/app/modules/basic-cars/components/basic-car-detailed/basic-car-detailed.component';
 import { BasicCarsResponse } from 'src/app/modules/basic-cars/models/basic-cars.models';
 import { BasicCarsService } from 'src/app/modules/basic-cars/services/basic-cars.service';
+import { CustomCarDetailedComponent } from 'src/app/modules/custom-cars/components/custom-car-detailed/custom-car-detailed.component';
+import { ICUSTOM_CAR } from 'src/app/modules/custom-cars/models/custom-cars.models';
 import { CustomCarsService } from 'src/app/modules/custom-cars/services/custom-cars.service';
 import { PremiumCarDetailedComponent } from 'src/app/modules/premium-cars/components/premium-car-detailed/premium-car-detailed.component';
 import { PremiumCarsResponse } from 'src/app/modules/premium-cars/models/premium-cars.models';
@@ -180,6 +182,12 @@ export class UserProfileView {
   );
   //#endregion PREMIUM CARS VM
 
+  //#region CUSTOM CARS VM
+  public customCarsVM$: Observable<ICUSTOM_CAR[]> = this.userVM$.pipe(
+    switchMap(({ userData }) => this.userService.getUserCustomCars(userData.id))
+  );
+  //#endregion CUSTOM CARS VM
+
   constructor(
     private userService: UserService,
     private basicCarsService: BasicCarsService,
@@ -228,6 +236,21 @@ export class UserProfileView {
           this.premiumCarsService.getCarById(detailedCar).subscribe((resp) => {
             const width = getPremiumInnerWidth();
             const ref = this.dialogService.open(PremiumCarDetailedComponent, {
+              data: {
+                car: resp.car,
+              },
+              header: resp.car.model_name,
+              width,
+            });
+
+            ref.onClose.subscribe(() => {
+              this.removeDetailedCarFromUrl();
+            });
+          });
+        } else if (carType && carType === 'custom') {
+          this.customCarsService.getCarById(detailedCar).subscribe((resp) => {
+            const width = getBasicInnerWidth();
+            const ref = this.dialogService.open(CustomCarDetailedComponent, {
               data: {
                 car: resp.car,
               },

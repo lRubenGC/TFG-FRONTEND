@@ -99,8 +99,22 @@
             (triggerCarType)="setCarTypeInRoute($event)"
           />
         </ng-container>
-      </main> </ng-container
-  ></ng-container>
+      </main>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="slideVM.carType === 'custom'">
+    <ng-container *ngIf="customCarsVM$ | async as cars">
+      <main class="sm:w-full lg:w-10 h-4rem custom-cars-grouped">
+        <ng-container *ngFor="let car of cars">
+          <custom-card
+            [car]="car"
+            (triggerToast)="showToast($event)"
+            (carType)="setCarTypeInRoute($event)"
+          ></custom-card>
+        </ng-container>
+      </main>
+    </ng-container>
+  </ng-container>
 </ng-container>
 
 <!-- Float components -->

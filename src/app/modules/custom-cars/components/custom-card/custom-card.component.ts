@@ -23,6 +23,7 @@ export class CustomCardComponent {
 
   //#region OUTPUTS
   @Output() triggerToast = new EventEmitter<ITOAST_OBJECT>();
+  @Output() carType = new EventEmitter<'custom'>();
   //#endregion OUTPUTS
 
   constructor(
@@ -79,6 +80,7 @@ export class CustomCardComponent {
   }
 
   public openModal() {
+    this.carType.emit('custom');
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: { detailedCar: this.car.id },
@@ -102,6 +104,7 @@ export class CustomCardComponent {
   private removeDetailedCarFromUrl() {
     const queryParams: Params = { ...this.route.snapshot.queryParams };
     delete queryParams['detailedCar'];
+    delete queryParams['carType'];
 
     this.router.navigate([], {
       relativeTo: this.route,
