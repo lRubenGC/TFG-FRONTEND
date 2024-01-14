@@ -14,13 +14,22 @@ import {
   map,
   shareReplay,
   switchMap,
+  take,
   tap,
   withLatestFrom,
 } from 'rxjs';
+import { BasicCarDetailedComponent } from 'src/app/modules/basic-cars/components/basic-car-detailed/basic-car-detailed.component';
 import { BasicCarsResponse } from 'src/app/modules/basic-cars/models/basic-cars.models';
+import { BasicCarsService } from 'src/app/modules/basic-cars/services/basic-cars.service';
 import { CustomCarsService } from 'src/app/modules/custom-cars/services/custom-cars.service';
+import { PremiumCarDetailedComponent } from 'src/app/modules/premium-cars/components/premium-car-detailed/premium-car-detailed.component';
 import { PremiumCarsResponse } from 'src/app/modules/premium-cars/models/premium-cars.models';
+import { PremiumCarsService } from 'src/app/modules/premium-cars/services/premium-cars.service';
 import { getPropStoraged } from 'src/app/shared/functions/localStorage';
+import {
+  getBasicInnerWidth,
+  getPremiumInnerWidth,
+} from 'src/app/shared/functions/queryParams';
 import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
 import {
   CAR_OWNERSHIP_OPTIONS,
@@ -173,13 +182,17 @@ export class UserProfileView {
 
   constructor(
     private userService: UserService,
+    private basicCarsService: BasicCarsService,
+    private premiumCarsService: PremiumCarsService,
     private customCarsService: CustomCarsService,
     private messageService: MessageService,
     private translate: TranslateService,
     private router: Router,
     private route: ActivatedRoute,
     private dialogService: DialogService
-  ) {}
+  ) {
+    this.manageInit();
+  }
 
   public exportUserCollection(id: number) {
     this.userService.downloadUserCollection(id).catch((err) => {
@@ -188,6 +201,46 @@ export class UserProfileView {
         summary: 'toast.error',
         detail: 'user.header.export_error',
       });
+    });
+  }
+
+  private manageInit() {
+    this.route.queryParams.pipe(take(1)).subscribe(async (params) => {
+      const { detailedCar } = params;
+      const { carType } = params;
+      if (detailedCar) {
+        if (carType && carType === 'basic') {
+          this.basicCarsService.getCarById(detailedCar).subscribe((resp) => {
+            const width = getBasicInnerWidth();
+            const ref = this.dialogService.open(BasicCarDetailedComponent, {
+              data: {
+                car: resp.car,
+              },
+              header: resp.car.model_name,
+              width,
+            });
+
+            ref.onClose.subscribe(() => {
+              this.removeDetailedCarFromUrl();
+            });
+          });
+        } else if (carType && carType === 'premium') {
+          this.premiumCarsService.getCarById(detailedCar).subscribe((resp) => {
+            const width = getPremiumInnerWidth();
+            const ref = this.dialogService.open(PremiumCarDetailedComponent, {
+              data: {
+                car: resp.car,
+              },
+              header: resp.car.model_name,
+              width,
+            });
+
+            ref.onClose.subscribe(() => {
+              this.removeDetailedCarFromUrl();
+            });
+          });
+        }
+      }
     });
   }
 
@@ -200,6 +253,18 @@ export class UserProfileView {
       relativeTo: this.route,
       queryParams,
     });
+  }
+
+  public setCarTypeInRoute(carType: String) {
+    setTimeout(
+      () =>
+        this.router.navigate([], {
+          relativeTo: this.route,
+          queryParams: { carType },
+          queryParamsHandling: 'merge',
+        }),
+      1
+    );
   }
 
   public async showToast(toastObject: ITOAST_OBJECT) {

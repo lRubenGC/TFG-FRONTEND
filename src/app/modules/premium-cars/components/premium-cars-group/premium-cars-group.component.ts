@@ -15,4 +15,5 @@ import { PremiumCardComponent } from '../premium-card/premium-card.component';
 export class PremiumCarsGroupComponent {
   @Input() group!: PremiumCarsResponse;
   @Output() triggerToast = new EventEmitter<ITOAST_OBJECT>();
+  @Output() triggerCarType = new EventEmitter<string>();
 }

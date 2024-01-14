@@ -83,6 +83,7 @@
           <basic-cars-group
             [group]="group"
             (triggerToast)="showToast($event)"
+            (triggerCarType)="setCarTypeInRoute($event)"
           />
         </ng-container>
       </main>
@@ -95,6 +96,7 @@
           <premium-cars-group
             [group]="group"
             (triggerToast)="showToast($event)"
+            (triggerCarType)="setCarTypeInRoute($event)"
           />
         </ng-container>
       </main> </ng-container

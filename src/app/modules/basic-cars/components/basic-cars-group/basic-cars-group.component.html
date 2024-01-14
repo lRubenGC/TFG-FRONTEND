@@ -9,6 +9,7 @@
       <basic-card
         [car]="car"
         (triggerToast)="triggerToast.emit($event)"
+        (carType)="triggerCarType.emit($event)"
       ></basic-card>
     </ng-container>
   </div>
