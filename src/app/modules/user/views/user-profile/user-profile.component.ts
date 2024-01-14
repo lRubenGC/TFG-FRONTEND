@@ -20,18 +20,13 @@ import {
 import { BasicCarsResponse } from 'src/app/modules/basic-cars/models/basic-cars.models';
 import { CustomCarsService } from 'src/app/modules/custom-cars/services/custom-cars.service';
 import { PremiumCarsResponse } from 'src/app/modules/premium-cars/models/premium-cars.models';
+import { getPropStoraged } from 'src/app/shared/functions/localStorage';
 import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
 import {
   CAR_OWNERSHIP_OPTIONS,
   CAR_TYPE_OPTIONS,
 } from '../../models/user.constants';
-import {
-  CAR_OWNERSHIP,
-  CAR_TYPE,
-  USER_VM,
-  isCarType,
-  isOwnershipType,
-} from '../../models/user.models';
+import { CAR_OWNERSHIP, CAR_TYPE, USER_VM } from '../../models/user.models';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -68,9 +63,10 @@ export class UserProfileView {
   //#endregion USER DATA
 
   //#region SLIDE MENU
-  private carTypeStoraged: CAR_TYPE = 'basic'; // TODO: FUNCION
   public readonly CAR_TYPE_OPTIONS = CAR_TYPE_OPTIONS;
-  public carTypeSubject = new BehaviorSubject<CAR_TYPE>(this.carTypeStoraged);
+  public carTypeSubject = new BehaviorSubject<CAR_TYPE>(
+    getPropStoraged<CAR_TYPE>('up-carTypeStoraged', 'basic')
+  );
   public carType$ = this.carTypeSubject.pipe(
     tap((car_type) => localStorage.setItem('up-carTypeStoraged', car_type)),
     map((car_type) => car_type),
@@ -79,10 +75,9 @@ export class UserProfileView {
       bufferSize: 1,
     })
   );
-  private carOwnershipStoraged: CAR_OWNERSHIP = this.getCarOwnership();
   public readonly CAR_OWNERSHIP_OPTIONS = CAR_OWNERSHIP_OPTIONS;
   public carOwnershipSubject = new BehaviorSubject<CAR_OWNERSHIP>(
-    this.carOwnershipStoraged
+    getPropStoraged<CAR_OWNERSHIP>('up-carOwnershipStoraged', 'owned')
   );
   public carOwnership$ = this.carOwnershipSubject.pipe(
     tap((car_ownership) =>
@@ -184,11 +179,7 @@ export class UserProfileView {
     private router: Router,
     private route: ActivatedRoute,
     private dialogService: DialogService
-  ) {
-    const carTypeStoraged = localStorage.getItem('up-carTypeStoraged');
-    if (carTypeStoraged && isCarType(carTypeStoraged))
-      this.carTypeStoraged = carTypeStoraged;
-  }
+  ) {}
 
   public exportUserCollection(id: number) {
     this.userService.downloadUserCollection(id).catch((err) => {
@@ -209,16 +200,6 @@ export class UserProfileView {
       relativeTo: this.route,
       queryParams,
     });
-  }
-
-  // TODO CAR TYPE
-  private getCarOwnership(): CAR_OWNERSHIP {
-    const carOwnershipStoraged = localStorage.getItem(
-      'up-carOwnershipStoraged'
-    );
-    if (carOwnershipStoraged && isOwnershipType(carOwnershipStoraged))
-      return carOwnershipStoraged;
-    return 'owned';
   }
 
   public async showToast(toastObject: ITOAST_OBJECT) {
