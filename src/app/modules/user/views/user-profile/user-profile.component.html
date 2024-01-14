@@ -35,6 +35,7 @@
     <ng-container *ngIf="slideVM.carType === 'basic'">
       <ng-container *ngIf="basicMainFilterOptions | async as mainFilterOptions">
         <dc-filter
+          *ngIf="!!mainFilterOptions.length; else noBasicCarsTemplate"
           [header]="'user.filter.basic_main'"
           [options]="mainFilterOptions"
           (selectedOption)="basicMainFilter$.next($event)"
@@ -57,6 +58,7 @@
         *ngIf="premiumMainFilterOptions | async as mainFilterOptions"
       >
         <dc-filter
+          *ngIf="!!mainFilterOptions.length; else noPremiumCarsTemplate"
           [header]="'user.filter.premium_main'"
           [options]="mainFilterOptions"
           (selectedOption)="premiumMainFilter$.next($event)"
@@ -104,18 +106,36 @@
   </ng-container>
   <ng-container *ngIf="slideVM.carType === 'custom'">
     <ng-container *ngIf="customCarsVM$ | async as cars">
-      <main class="sm:w-full lg:w-10 h-4rem custom-cars-grouped">
-        <ng-container *ngFor="let car of cars">
-          <custom-card
-            [car]="car"
-            (triggerToast)="showToast($event)"
-            (carType)="setCarTypeInRoute($event)"
-          ></custom-card>
-        </ng-container>
-      </main>
+      <ng-container *ngIf="!!cars.length; else noCustomCarsTemplate">
+        <main class="sm:w-full lg:w-9 h-4rem custom-cars-grouped">
+          <ng-container *ngFor="let car of cars">
+            <custom-card
+              [car]="car"
+              (triggerToast)="showToast($event)"
+              (carType)="setCarTypeInRoute($event)"
+            ></custom-card>
+          </ng-container>
+        </main>
+      </ng-container>
     </ng-container>
   </ng-container>
 </ng-container>
+
+<ng-template #noBasicCarsTemplate>
+  <div class="text-center">
+    {{ "user.cars.no_basic_cars" | translate }}
+  </div>
+</ng-template>
+<ng-template #noPremiumCarsTemplate>
+  <div class="text-center">
+    {{ "user.cars.no_premium_cars" | translate }}
+  </div>
+</ng-template>
+<ng-template #noCustomCarsTemplate>
+  <div class="text-center">
+    {{ "user.cars.no_custom_cars" | translate }}
+  </div>
+</ng-template>
 
 <!-- Float components -->
 <dc-scroll-to-top />

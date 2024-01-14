@@ -10,6 +10,7 @@ import {
   combineLatest,
   debounceTime,
   distinctUntilChanged,
+  filter,
   lastValueFrom,
   map,
   shareReplay,
@@ -112,6 +113,7 @@ export class UserProfileView {
   );
   public basicSecondaryFilter$ = new Subject<string>();
   public basicSecondaryFilterOptions = this.basicMainFilter$.pipe(
+    filter((series) => !!series),
     withLatestFrom(this.userVM$),
     switchMap(([mainFilter, { userData }]) =>
       this.userService.getSecondaryFilters(userData.id, 'basic', mainFilter)
@@ -134,6 +136,7 @@ export class UserProfileView {
   );
   public premiumSecondaryFilter$ = new Subject<string>();
   public premiumSecondaryFilterOptions = this.premiumMainFilter$.pipe(
+    filter((series) => !!series),
     withLatestFrom(this.userVM$),
     switchMap(([mainFilter, { userData }]) =>
       this.userService.getSecondaryFilters(userData.id, 'premium', mainFilter)

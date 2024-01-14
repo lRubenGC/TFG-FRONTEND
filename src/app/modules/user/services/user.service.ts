@@ -120,8 +120,8 @@ export class UserService {
       'r-token': token ? token : '',
     });
     return this.http.post<PremiumCarsResponse[]>(
-      `${environment.apiBaseUrl}/api/user-premium-cars/get-premium/?mainSerie=${mainSerie}`,
-      { id, filters: { secondarySerie, userProperty } },
+      `${environment.apiBaseUrl}/api/user-premium-cars/get-premium`,
+      { id, mainSerie, filters: { secondarySerie, userProperty } },
       { headers }
     );
   }

@@ -139,6 +139,11 @@
       "basic_secondary": "Series",
       "premium_main": "Main series",
       "premium_secondary": "Sec. series"
+    },
+    "cars": {
+      "no_basic_cars": "The user does not have basic cars",
+      "no_premium_cars": "The user does not have premium cars",
+      "no_custom_cars": "The user does not have custom cars"
     }
   },
   "toast": {
