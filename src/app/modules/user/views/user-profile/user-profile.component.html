@@ -31,7 +31,7 @@
     />
   </section>
   <!-- Filters -->
-  <section class="flex justify-content-center gap-4 w-full">
+  <section class="filters-section flex justify-content-center gap-4 w-full mb-4">
     <ng-container *ngIf="slideVM.carType === 'basic'">
       <ng-container *ngIf="basicMainFilterOptions | async as mainFilterOptions">
         <dc-filter
@@ -80,7 +80,7 @@
 
   <ng-container *ngIf="slideVM.carType === 'basic'">
     <ng-container *ngIf="basicCarsVM$ | async as cars">
-      <main class="sm:w-12 lg:w-9 flex flex-column gap-8">
+      <main class="sm:w-12 lg:w-9 flex flex-column gap-5">
         <ng-container *ngFor="let group of cars">
           <basic-cars-group
             [group]="group"
@@ -93,7 +93,7 @@
   </ng-container>
   <ng-container *ngIf="slideVM.carType === 'premium'">
     <ng-container *ngIf="premiumCarsVM$ | async as cars">
-      <main class="sm:w-12 lg:w-9 flex flex-column gap-8">
+      <main class="sm:w-12 lg:w-9 flex flex-column gap-5">
         <ng-container *ngFor="let group of cars">
           <premium-cars-group
             [group]="group"

@@ -28,8 +28,24 @@ main {
 }
 
 @media (max-width: 580px) {
+  header {
+    width: 100%;
+  }
+  main {
+    padding: 0 0.5rem;
+  }
   .custom-cars-grouped {
     gap: 1rem !important;
     width: 100% !important;
+  }
+  .car-type-section {
+    flex-direction: column;
+    gap: 0 !important;
+  }
+  .filters-section {
+    gap: 1rem !important;
+  }
+  dc-filter {
+    width: 40% !important;
   }
 }

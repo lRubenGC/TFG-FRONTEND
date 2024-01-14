@@ -16,3 +16,19 @@
     cursor: pointer;
   }
 }
+
+@media (max-width: 580px) {
+  .container {
+    justify-content: space-evenly !important;
+    img {
+      width: 75px;
+      height: 75px;
+    }
+    .user-data {
+      flex-direction: column !important;
+    }
+    .user-numbers {
+      gap: 0.5rem !important;
+    }
+  }
+}

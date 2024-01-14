@@ -20,3 +20,12 @@
     }
   }
 }
+
+@media (max-width: 580px) {
+  .container {
+    padding: 0 2rem;
+    ul {
+      justify-content: center;
+    }
+  }
+}
