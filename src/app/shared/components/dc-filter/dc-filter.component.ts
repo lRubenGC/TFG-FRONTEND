@@ -19,6 +19,10 @@ export class DcFilterComponent<T> {
     this.selectionControl.setValue(val[0], { emitEvent: false });
     this.optionsSubject.next(val);
   }
+  @Input() set filterInit(val: string | null | undefined) {
+    if (!val) return;
+    this.filterInitSubject.next(val);
+  }
   //#endregion INPUTS
 
   //#region OUTPUTS

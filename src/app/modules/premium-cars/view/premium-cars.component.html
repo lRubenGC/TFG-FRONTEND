@@ -19,6 +19,7 @@
           <dc-filter
             [header]="'premium_cars.filter_main_serie'"
             [options]="vm.mainSerieFilterOptions ?? []"
+            [filterInit]="mainSerieFilterSubject | async"
             (selectedOption)="mainSerieFilterSubject.next($event)"
             class="dc-filter"
           >

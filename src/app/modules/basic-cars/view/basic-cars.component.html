@@ -19,6 +19,7 @@
           <dc-filter
             [header]="'basic_cars.filter_year'"
             [options]="vm.yearFilterOptions ?? []"
+            [filterInit]="yearFilterSubject | async"
             (selectedOption)="yearFilterSubject.next($event)"
             class="dc-filter"
           >
