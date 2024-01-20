@@ -51,7 +51,7 @@
     "author": "Autor"
   },
   "upload_custom": {
-    "select_images": "Selecione ou arraste imagens",
+    "select_images": "Selecione ou arraste imagen/s",
     "model_name": "Nome do carro",
     "car_created_successfuly": "Carro enviado com sucesso",
     "see_car": "Ver carro"
@@ -144,6 +144,16 @@
       "no_basic_cars": "O usuário não possui carros básicos",
       "no_premium_cars": "O usuário não possui carros premium",
       "no_custom_cars": "O usuário não possui carros custom"
+    },
+    "edit": {
+      "update": "Atualizar",
+      "username": "Usuário",
+      "email": "Email",
+      "password": "Senha",
+      "info": "Altere apenas os campos que deseja atualizar, os demais não serão modificados",
+      "invalid_username": "O formato do nome do usuário não está correto",
+      "invalid_email": "O formato do e-mail não está correto",
+      "invalid_password": "O formato da senha não está correto"
     }
   },
   "toast": {
@@ -157,6 +167,7 @@
     "car_upvoted": "Carro votado corretamente",
     "car_downvoted": "Voto removido corretamente",
     "more_than_four_imgs": "Você não pode enviar mais de 4 imagens",
+    "more_than_one_img": "Você não pode enviar mais de 1 imagen",
     "custom_car_fields_required": "O nome do carro e pelo menos uma imagem são obrigatórios",
     "car_successfully_created": "Carro carregado corretamente",
     "invalid_format": "O formato da imagem está incorret",

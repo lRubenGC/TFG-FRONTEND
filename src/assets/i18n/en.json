@@ -51,7 +51,7 @@
     "author": "Author"
   },
   "upload_custom": {
-    "select_images": "Select or drag images",
+    "select_images": "Select or drag image/s",
     "model_name": "Model name",
     "car_created_successfuly": "Car uploaded successfully",
     "see_car": "See car"
@@ -144,6 +144,16 @@
       "no_basic_cars": "The user does not have basic cars",
       "no_premium_cars": "The user does not have premium cars",
       "no_custom_cars": "The user does not have custom cars"
+    },
+    "edit": {
+      "update": "Update",
+      "username": "Username",
+      "email": "Email",
+      "password": "Password",
+      "info": "Change only the fields you want to update, the others will not be modified",
+      "invalid_username": "Username format is not valid",
+      "invalid_email": "Email format is not valid",
+      "invalid_password": "Password format is not valid"
     }
   },
   "toast": {
@@ -157,6 +167,7 @@
     "car_upvoted": "Car upvoted correctly",
     "car_downvoted": "Vote removed correctly",
     "more_than_four_imgs": "You cannot upload more than 4 images",
+    "more_than_one_img": "You cannot upload more than 1 image",
     "custom_car_fields_required": "Model name and at least one image are required",
     "car_successfully_created": "Car loaded correctly",
     "invalid_format": "The image format is incorrect",

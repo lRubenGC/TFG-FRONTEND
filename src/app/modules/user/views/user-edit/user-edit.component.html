@@ -1,36 +1,61 @@
-edit
-<!-- <div class="w-full flex justify-content-center">
-  <form [formGroup]="carForm">
-    <div class="upload-container flex flex-column justify-content-center gap-3">
-      <label class="p-2">
-        {{ "upload_custom.model_name" | translate }}
-        <input formControlName="model_name" type="text" class="ml-1" />
-      </label>
-      <dc-images-upload
-        (imagesSelected)="onImagesSelected($event)"
-        (errorEmitter)="onErrorEmit()"
-      />
-      <dc-button
-        buttonTitle="custom_cars.upload_car"
-        [disabled]="!!carCreatedId"
-        (onClickButton)="submitForm()"
-      />
-    </div>
-    <div
-      *ngIf="carCreatedId"
-      class="mt-5 text-center flex flex-column justify-content-center gap-2"
-    >
-      <p>{{ "upload_custom.car_created_successfuly" | translate }}</p>
-      <dc-button
-        buttonTitle="upload_custom.see_car"
-        (onClickButton)="goToCreatedCar(carCreatedId)"
-      />
-    </div>
-  </form>
-</div>
+<ng-container *ngIf="submitUserForm$ | async"></ng-container>
+<ng-container *ngIf="userData$ | async as userData">
+  <div class="w-full flex justify-content-center">
+    <form [formGroup]="userForm">
+      <span>({{ "user.edit.info" | translate }})</span>
+      <div class="flex flex-column gap-6 mt-3">
+        <div class="input-container flex justify-content-between">
+          <div class="flex flex-column gap-1">
+            <label for="username">
+              {{ "user.edit.username" | translate }}
+            </label>
+            <input id="username" formControlName="username" type="text" />
+          </div>
+          <div class="flex flex-column gap-1">
+            <label for="email">
+              {{ "user.edit.email" | translate }}
+            </label>
+            <input id="email" formControlName="email" type="email" />
+          </div>
+          <div class="flex flex-column gap-1">
+            <label for="password">
+              {{ "user.edit.password" | translate }}
+            </label>
+            <input id="password" formControlName="password" type="password" />
+          </div>
+        </div>
 
+        <div class="flex gap-4 align-items-center">
+          <img [src]="userData.img" />
+          <dc-images-upload
+            class="w-full"
+            [maxImages]="1"
+            (imagesSelected)="onImagesSelected($event)"
+            (errorEmitter)="onErrorEmit()"
+          />
+        </div>
+
+        <dc-button
+          buttonTitle="user.edit.update"
+          (onClickButton)="submitUserForm.next(userForm)"
+        />
+      </div>
+
+      <p
+        [ngClass]="{
+          'error-form': errorMessage.length,
+          'succes-form': successMessage.length
+        }"
+        *ngIf="errorMessage.length"
+        class="mt-4"
+      >
+        {{ errorMessage | translate }}
+      </p>
+    </form>
+  </div>
+</ng-container>
 <p-toast
   position="bottom-right"
   key="br"
   [breakpoints]="{ '560px': { width: '90%' } }"
-></p-toast> -->
+/>

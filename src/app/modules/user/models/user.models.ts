@@ -46,3 +46,10 @@ export interface PREMIUM_FILTERS {
 }
 
 export type USER_PROPERTY = 'owned' | 'wished';
+
+export interface UPDATE_USER_FORM {
+  username: string;
+  email: string;
+  password: string;
+  imgs: File[];
+}

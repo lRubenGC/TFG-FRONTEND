@@ -1,42 +1,81 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavigationExtras, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
-import { lastValueFrom } from 'rxjs';
-import { minArrayLength } from 'src/app/shared/functions/formValidators';
+import { Subject, filter, lastValueFrom, switchMap, tap } from 'rxjs';
+import {
+  isValidEmail,
+  isValidPassword,
+  isValidUsername,
+} from 'src/app/modules/auth/models/auth.functions';
 import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'user-edit',
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.scss'],
 })
-export class UserEditView implements OnInit {
-  public carForm!: FormGroup;
-  public uploadCarButtonDisabled: boolean = false;
-  public carCreatedId: number | null = null;
+export class UserEditView {
+  //#region MESSAGES
+  public errorMessage: string = '';
+  public successMessage: string = '';
+  //#endregion MESSAGES
+
+  //#region USER DATA
+  public userData$ = this.userService.getUserById().pipe(
+    tap((userData) => {
+      if (userData) {
+        this.userForm.controls['username'].setValue(userData.username);
+        this.userForm.controls['email'].setValue(userData.email);
+      }
+    })
+  );
+  //#endregion USER DATA
+
+  //#region USER FORM
+  public userForm: FormGroup;
+  public submitUserForm = new Subject<FormGroup>();
+  public submitUserForm$ = this.submitUserForm.pipe(
+    filter(({ value }) => {
+      if (!isValidUsername(value.username)) {
+        this.errorMessage = 'user.edit.invalid_username';
+        return false;
+      }
+      if (!isValidEmail(value.email)) {
+        this.errorMessage = 'user.edit.invalid_email';
+        return false;
+      }
+      if (value.password && !isValidPassword(value.password)) {
+        this.errorMessage = 'user.edit.invalid_password';
+        return false;
+      }
+      this.errorMessage = '';
+      return true;
+    }),
+    switchMap(({ value }) => this.userService.updateUser(value))
+  );
+  //#endregion USER FORM
 
   constructor(
     private fb: FormBuilder,
     private translate: TranslateService,
     private messageService: MessageService,
-    private router: Router
-  ) {}
-
-  ngOnInit() {
-    this.carForm = this.fb.group({
-      model_name: ['', Validators.required],
-      imgs: this.fb.array([], minArrayLength(1)),
+    private userService: UserService
+  ) {
+    this.userForm = this.fb.group({
+      username: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+      imgs: this.fb.array([]),
     });
   }
 
   get imgs(): FormArray {
-    return this.carForm.get('imgs') as FormArray;
+    return this.userForm.get('imgs') as FormArray;
   }
 
   onImagesSelected(imgs: File[]) {
-    this.imgs.clear();
     imgs.forEach((image) => this.imgs.push(this.fb.control(image)));
   }
 
@@ -44,62 +83,8 @@ export class UserEditView implements OnInit {
     this.showToast({
       severity: 'error',
       summary: 'toast.error',
-      detail: 'toast.more_than_four_imgs',
+      detail: 'toast.more_than_one_img',
     });
-  }
-
-  submitForm() {
-    if (this.carForm.valid) {
-      // this.customCarsService.uploadCar(this.carForm.value).subscribe({
-      //   next: (resp) => {
-      //     if (resp.ok && resp.customCar) {
-      //       this.showToast({
-      //         severity: 'success',
-      //         summary: 'toast.success',
-      //         detail: 'toast.car_successfully_created',
-      //       });
-      //       if (resp.invalidImages) {
-      //         resp.invalidImages.forEach((img: string) => {
-      //           this.showToast(
-      //             {
-      //               severity: 'error',
-      //               summary: 'toast.error',
-      //               detail: 'toast.invalid_format',
-      //             },
-      //             6000,
-      //             img,
-      //             resp.validFormats
-      //           );
-      //         });
-      //       }
-      //       this.uploadCarButtonDisabled = true;
-      //       this.carCreatedId = resp.customCar.id;
-      //     } else if (!resp.ok && !!resp.validFormats) {
-      //       this.showToast({
-      //         severity: 'error',
-      //         summary: 'toast.error',
-      //         detail: 'toast.at_least_one_image',
-      //       });
-      //     }
-      //   },
-      //   error: (error) => console.error('Error:', error),
-      // });
-    } else {
-      this.showToast({
-        severity: 'error',
-        summary: 'toast.error',
-        detail: 'toast.custom_car_fields_required',
-      });
-    }
-  }
-
-  public goToCreatedCar(id: number | null): void {
-    const params: NavigationExtras = {
-      queryParams: {
-        detailedCar: id,
-      },
-    };
-    this.router.navigate(['/custom-cars/list'], params);
   }
 
   private async showToast(

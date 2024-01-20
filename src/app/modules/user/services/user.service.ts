@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { triggerDownload } from 'src/app/shared/functions/download';
 import { environment } from 'src/environments/environment';
@@ -11,6 +11,7 @@ import { PremiumCarsResponse } from '../../premium-cars/models/premium-cars.mode
 import {
   CAR_TYPE,
   IUSER_CARS_NUMBERS,
+  UPDATE_USER_FORM,
   USER_PROPERTY,
 } from '../models/user.models';
 
@@ -25,6 +26,18 @@ export class UserService {
       `${environment.apiBaseUrl}/api/users/get-user`,
       { username }
     );
+  }
+
+  public getUserById(): Observable<IUSER_DATA | null> {
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      return this.http.post<IUSER_DATA>(
+        `${environment.apiBaseUrl}/api/users/get-user`,
+        {
+          id: userId,
+        }
+      );
+    } else return of(null);
   }
 
   public getUserNumbers(id: number): Observable<IUSER_CARS_NUMBERS> {
@@ -135,6 +148,27 @@ export class UserService {
     return this.http.post<ICUSTOM_CAR[]>(
       `${environment.apiBaseUrl}/api/users/get-user-custom-cars`,
       { id },
+      { headers }
+    );
+  }
+
+  public updateUser(form: UPDATE_USER_FORM): Observable<any> {
+    console.log(form);
+    const token = localStorage.getItem('dt-token');
+    const userId = localStorage.getItem('userId');
+    const headers = new HttpHeaders({
+      'r-token': token ?? '',
+    });
+
+    const formData = new FormData();
+    if (form.imgs.length >= 1) formData.append(`img`, form.imgs[0]);
+    if (form.password.length) formData.append('password', form.password);
+    formData.append('username', form.username);
+    formData.append('email', form.email);
+
+    return this.http.post<any>(
+      `${environment.apiBaseUrl}/api/custom-cars/create`,
+      formData,
       { headers }
     );
   }

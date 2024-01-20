@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { DCButtonComponent } from '../dc-button/dc-button.component';
 import { FileUrlPipe } from '../../pipes/file-url.pipe';
@@ -12,6 +12,7 @@ import { FileUrlPipe } from '../../pipes/file-url.pipe';
   imports: [CommonModule, TranslateModule, DCButtonComponent, FileUrlPipe],
 })
 export class DCImagesUploadComponent {
+  @Input() maxImages: number = 4;
   @Output() imagesSelected = new EventEmitter<File[]>();
   @Output() errorEmitter = new EventEmitter<void>();
   images: File[] = [];
@@ -34,7 +35,7 @@ export class DCImagesUploadComponent {
   }
 
   processFiles(files: FileList) {
-    if (this.images.length + files.length > 4) {
+    if (this.images.length + files.length > this.maxImages) {
       this.errorEmitter.emit();
       return;
     }

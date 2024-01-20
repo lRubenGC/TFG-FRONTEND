@@ -6,24 +6,41 @@ form {
   border-radius: 5px;
   border-bottom: 1px solid var(--orange-divider);
   border-right: 1px solid var(--orange-divider);
+  span {
+    font-size: 0.9em;
+    font-style: italic;
+  }
+  img {
+    width: 125px;
+    border-radius: 50%;
+  }
   p {
-    color: var(--green-500);
-    font-size: 1.1rem;
+    padding: 0.75rem;
+    border-radius: 5px;
+  }
+  .error-form {
+    background-color: var(--red-800);
+  }
+  .success-form {
+    background-color: var(--green-700);
   }
 }
 
-@media (max-width: 1500px) {
+@media (max-width: 1600px) {
+  form {
+    width: 75%;
+  }
+}
+
+@media (max-width: 1065px) {
   form {
     width: 90%;
   }
 }
 
-@media (max-width: 950px) {
-  form {
-    padding: 0.5rem;
-  }
-  input {
-    width: 100%;
-    margin: 0 !important;
+@media (max-width: 825px) {
+  .input-container {
+    flex-direction: column !important;
+    gap: 1rem;
   }
 }
