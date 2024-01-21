@@ -153,7 +153,10 @@
       "info": "Cambia solo los campos que quieras actualizar, los demás no serán modificados",
       "invalid_username": "El formato del nombre de usuario no es correcto",
       "invalid_email": "El formato del email no es correcto",
-      "invalid_password": "El formato de la contraseña no es correcto"
+      "invalid_password": "El formato de la contraseña no es correcto",
+      "taken_username": "El nombre de usuario ya existe",
+      "taken_email": "El email ya existe",
+      "success_update": "Datos actualizados correctamente"
     }
   },
   "toast": {

@@ -153,7 +153,10 @@
       "info": "Change only the fields you want to update, the others will not be modified",
       "invalid_username": "Username format is not valid",
       "invalid_email": "Email format is not valid",
-      "invalid_password": "Password format is not valid"
+      "invalid_password": "Password format is not valid",
+      "taken_username": "Username is already in use",
+      "taken_email": "Email is already in use",
+      "success_update": "Data updated successfully"
     }
   },
   "toast": {

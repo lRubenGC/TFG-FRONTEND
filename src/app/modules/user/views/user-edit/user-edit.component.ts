@@ -2,7 +2,16 @@ import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
-import { Subject, filter, lastValueFrom, switchMap, tap } from 'rxjs';
+import {
+  Subject,
+  catchError,
+  filter,
+  lastValueFrom,
+  map,
+  of,
+  switchMap,
+  tap,
+} from 'rxjs';
 import {
   isValidEmail,
   isValidPassword,
@@ -10,6 +19,7 @@ import {
 } from 'src/app/modules/auth/models/auth.functions';
 import { ITOAST_OBJECT } from 'src/app/shared/models/toast-shared.models';
 import { UserService } from '../../services/user.service';
+import { AuthService } from 'src/app/modules/auth/services/auth.service';
 
 @Component({
   selector: 'user-edit',
@@ -18,6 +28,7 @@ import { UserService } from '../../services/user.service';
 })
 export class UserEditView {
   //#region MESSAGES
+  public submitButtonDisabled: boolean = false;
   public errorMessage: string = '';
   public successMessage: string = '';
   //#endregion MESSAGES
@@ -53,7 +64,22 @@ export class UserEditView {
       this.errorMessage = '';
       return true;
     }),
-    switchMap(({ value }) => this.userService.updateUser(value))
+    switchMap(({ value }) =>
+      this.userService.updateUser(value).pipe(
+        catchError(({ error }) => {
+          this.successMessage = '';
+          if (error.code === 1) this.errorMessage = 'user.edit.taken_username';
+          if (error.code === 2) this.errorMessage = 'user.edit.taken_email';
+          return of();
+        }),
+        tap((res) => {
+          this.authService.isUserLoggedIn$.next(true);
+          this.submitButtonDisabled = true;
+          this.errorMessage = '';
+          this.successMessage = 'user.edit.success_update';
+        })
+      )
+    )
   );
   //#endregion USER FORM
 
@@ -61,7 +87,8 @@ export class UserEditView {
     private fb: FormBuilder,
     private translate: TranslateService,
     private messageService: MessageService,
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthService
   ) {
     this.userForm = this.fb.group({
       username: ['', Validators.required],

@@ -3,6 +3,7 @@ form {
   margin-top: 2rem;
   width: 50%;
   padding: 2rem;
+  margin: 2rem 0;
   border-radius: 5px;
   border-bottom: 1px solid var(--orange-divider);
   border-right: 1px solid var(--orange-divider);
@@ -42,5 +43,11 @@ form {
   .input-container {
     flex-direction: column !important;
     gap: 1rem;
+  }
+  .image-container {
+    flex-direction: column;
+    img {
+      width: 80px;
+    }
   }
 }

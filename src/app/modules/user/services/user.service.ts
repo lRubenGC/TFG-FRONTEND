@@ -153,7 +153,6 @@ export class UserService {
   }
 
   public updateUser(form: UPDATE_USER_FORM): Observable<any> {
-    console.log(form);
     const token = localStorage.getItem('dt-token');
     const userId = localStorage.getItem('userId');
     const headers = new HttpHeaders({
@@ -163,11 +162,12 @@ export class UserService {
     const formData = new FormData();
     if (form.imgs.length >= 1) formData.append(`img`, form.imgs[0]);
     if (form.password.length) formData.append('password', form.password);
+    if (userId) formData.append('userId', userId);
     formData.append('username', form.username);
     formData.append('email', form.email);
 
     return this.http.post<any>(
-      `${environment.apiBaseUrl}/api/custom-cars/create`,
+      `${environment.apiBaseUrl}/api/users/update`,
       formData,
       { headers }
     );
