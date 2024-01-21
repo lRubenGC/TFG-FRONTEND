@@ -1,0 +1,51 @@
+header {
+  width: 50%;
+  margin: 2rem auto 0;
+}
+
+main {
+  margin: 0 auto;
+}
+
+.custom-cars-grouped {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 990px) {
+  .custom-cars-grouped {
+    grid-template-columns: 30% 30% 30% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .custom-cars-grouped {
+    grid-template-columns: 45% 45% !important;
+  }
+}
+
+@media (max-width: 580px) {
+  header {
+    width: 100%;
+  }
+  main {
+    padding: 0 0.5rem;
+  }
+  .custom-cars-grouped {
+    gap: 1rem !important;
+    width: 100% !important;
+  }
+  .car-type-section {
+    flex-direction: column;
+    gap: 0 !important;
+  }
+  .filters-section {
+    gap: 1rem !important;
+  }
+  dc-filter {
+    width: 40% !important;
+  }
+}

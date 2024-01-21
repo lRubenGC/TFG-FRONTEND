@@ -1,0 +1,57 @@
+<div
+  class="detailed-container flex flex-column justify-content-center align-items-center gap-3 p-2"
+>
+  <div class="w-full galleria-container">
+    <p-galleria
+      [value]="car.imgs"
+      [showItemNavigators]="true"
+      [showThumbnailNavigators]="false"
+      [numVisible]="numVisible"
+    >
+      <ng-template pTemplate="item" let-item>
+        <img [src]="item.itemImageSrc" style="width: 100%" />
+      </ng-template>
+      <ng-template pTemplate="thumbnail" let-item>
+        <div class="grid grid-nogutter justify-content-center">
+          <img [src]="item.thumbnailImageSrc" />
+        </div>
+      </ng-template>
+    </p-galleria>
+  </div>
+  <div
+    class="description-container w-full flex justify-content-evenly align-items-center"
+  >
+    <div class="flex align-items-center gap-2">
+      <p>{{ "custom_cars.author" | translate }}:</p>
+      <a [routerLink]="['/user/profile/' + car.userCreator]" target="_blank">{{
+        car.userCreator
+      }}</a>
+    </div>
+    <div class="flex gap-3 align-items-center">
+      <p>
+        {{ "detailed_car.upvotes" | translate }}:
+        <span>{{ car.upvotes }}</span>
+        <i
+          [ngClass]="{
+            'text-primary-500': car.isVoted
+          }"
+          class="pi pi-thumbs-up text-sm ml-1"
+        ></i>
+      </p>
+      <button
+        *ngIf="!car.isVoted"
+        (click)="upvoteCar(car.id)"
+        class="upvote-car"
+      >
+        {{ "detailed_car.upvote" | translate }}
+      </button>
+      <button
+        *ngIf="car.isVoted"
+        (click)="downvoteCar(car.id)"
+        class="downvote-car"
+      >
+        {{ "detailed_car.downvote" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,211 @@
+<br />
+
+<!-- Form for mobile screen -->
+<main class="mobile-form" *ngIf="isSmallScreen; else largeScreen">
+  <!-- Register Form -->
+  <section *ngIf="!loginActivo" class="form-container sign-up-container">
+    <form
+      [formGroup]="registerForm"
+      (ngSubmit)="submitRegister()"
+      class="flex justify-content-center align-items-center flex-column h-full text-center"
+    >
+      <h1>{{ "auth.signup.header" | translate }}</h1>
+      <input
+        type="text"
+        formControlName="register_username"
+        placeholder="{{ 'auth.signup.username' | translate }}"
+      />
+      <input
+        type="email"
+        formControlName="register_email"
+        placeholder="{{ 'auth.signup.email' | translate }}"
+      />
+      <input
+        type="password"
+        formControlName="register_password"
+        placeholder="{{ 'auth.signup.password' | translate }}"
+      />
+
+      <dc-button
+        [buttonTitle]="'auth.signup.signup'"
+        type="submit"
+        class="mt-2"
+      ></dc-button>
+
+      <p *ngIf="registerError" class="auth-notification auth-error">
+        {{ registerErrorMsg | translate }}
+      </p>
+      <p *ngIf="registerSuccess" class="auth-notification auth-success">
+        {{ registerSuccessMsg | translate }}
+      </p>
+    </form>
+  </section>
+
+  <!-- Login Form -->
+  <section *ngIf="loginActivo" class="form-container sign-in-container">
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="submitLogin()"
+      class="flex justify-content-center align-items-center flex-column h-full text-center"
+    >
+      <h1>{{ "auth.login.header" | translate }}</h1>
+      <input
+        type="email"
+        formControlName="login_email"
+        placeholder="{{ 'auth.login.email' | translate }}"
+      />
+      <input
+        type="password"
+        formControlName="login_password"
+        placeholder="{{ 'auth.login.password' | translate }}"
+      />
+
+      <dc-button
+        [buttonTitle]="'auth.login.login'"
+        type="submit"
+        class="mt-2"
+      ></dc-button>
+
+      <p *ngIf="loginError" class="auth-notification auth-error">
+        {{ loginErrorMsg | translate }}
+      </p>
+      <p *ngIf="loginSuccess" class="auth-notification auth-success">
+        {{ loginSuccessMsg | translate }}
+      </p>
+
+      <!-- <p class="password-forgot">{{ 'LOGIN_FORGOT' | translate }}</p> -->
+    </form>
+  </section>
+
+  <div class="d_flex justify-content_center">
+    <!-- Login toggle button -->
+    <dc-button
+      *ngIf="!loginActivo"
+      (onClickButton)="toggleLogin()"
+      id="signIn"
+      class="m-2"
+      [buttonTitle]="'auth.login.login'"
+    ></dc-button>
+
+    <!-- Register toggle button -->
+    <dc-button
+      *ngIf="loginActivo"
+      (onClickButton)="toggleLogin()"
+      id="signUp"
+      class="m-2"
+      [buttonTitle]="'auth.signup.signup'"
+    ></dc-button>
+  </div>
+</main>
+
+<!-- Form for PC screen -->
+<ng-template #largeScreen id="login-page">
+  <main
+    [ngClass]="!loginActivo ? 'right-panel-active' : ''"
+    class="container"
+    id="login-component"
+  >
+    <!-- Register Form -->
+    <section class="form-container sign-up-container">
+      <form
+        [formGroup]="registerForm"
+        (ngSubmit)="submitRegister()"
+        class="flex justify-content-center align-items-center flex-column h-full text-center"
+      >
+        <h1>{{ "auth.signup.header" | translate }}</h1>
+        <input
+          type="text"
+          formControlName="register_username"
+          placeholder="{{ 'auth.signup.username' | translate }}"
+        />
+        <input
+          type="email"
+          formControlName="register_email"
+          placeholder="{{ 'auth.signup.email' | translate }}"
+        />
+        <input
+          type="password"
+          formControlName="register_password"
+          placeholder="{{ 'auth.signup.password' | translate }}"
+        />
+
+        <dc-button
+          type="submit"
+          [buttonTitle]="'auth.signup.signup'"
+        ></dc-button>
+
+        <p *ngIf="registerError" class="auth-notification auth-error">
+          {{ registerErrorMsg | translate }}
+        </p>
+        <p *ngIf="registerSuccess" class="auth-notification auth-success">
+          {{ registerSuccessMsg | translate }}
+        </p>
+      </form>
+    </section>
+
+    <!-- Login Form -->
+    <section class="form-container sign-in-container">
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="submitLogin()"
+        class="flex justify-content-center align-items-center flex-column h-full text-center"
+      >
+        <h1>{{ "auth.login.header" | translate }}</h1>
+        <input
+          type="email"
+          formControlName="login_email"
+          placeholder="{{ 'auth.login.email' | translate }}"
+        />
+        <input
+          type="password"
+          formControlName="login_password"
+          placeholder="{{ 'auth.login.password' | translate }}"
+        />
+
+        <dc-button
+          [buttonTitle]="'auth.login.login'"
+        ></dc-button>
+
+        <p *ngIf="loginError" class="auth-notification auth-error">
+          {{ loginErrorMsg | translate }}
+        </p>
+        <p *ngIf="loginSuccess" class="auth-notification auth-success">
+          {{ loginSuccessMsg | translate }}
+        </p>
+
+        <!-- <p class="password-forgot mt-2">{{ 'LOGIN_FORGOT' | translate }}</p> -->
+      </form>
+    </section>
+
+    <!-- Overlay -->
+    <div class="overlay-container w-6 h-full">
+      <div class="overlay">
+        <!-- Login Overlay -->
+        <div
+          class="overlay-panel flex flex-column justify-content-center align-items-center overlay-left text-center w-6 h-full"
+        >
+          <h1 class="overlay-texts">{{ "auth.login.overlay" | translate }}</h1>
+          <dc-button
+            (onClickButton)="toggleLogin()"
+            id="signIn"
+            [buttonTitle]="'auth.login.login'"
+          ></dc-button>
+        </div>
+
+        <!-- Register Overlay -->
+        <div
+          class="overlay-panel flex flex-column justify-content-center align-items-center overlay-right text-center w-6 h-full"
+        >
+          <h1 class="overlay-texts">
+            {{ "auth.signup.overlay" | translate }}
+          </h1>
+          <dc-button
+            (onClickButton)="toggleLogin()"
+            id="signUp"
+            [buttonTitle]="'auth.signup.signup'"
+          ></dc-button>
+        </div>
+      </div>
+    </div>
+  </main>
+</ng-template>

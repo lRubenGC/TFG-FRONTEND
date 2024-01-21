@@ -1,0 +1,121 @@
+<ng-container *ngIf="carsVM$ | async as cars">
+  <!-- Main container -->
+  <div class="main-container flex sm:flex-column lg:flex-row w-full">
+    <!-- Aside section -->
+    <aside class="sm:w-12 lg:w-2 h-4rem">
+      <div
+        class="fixed w-full flex flex-column sm:gap-2 lg:gap-4 sm:w-full lg:w-2"
+      >
+        <div
+          class="flex sm:gap-4 lg:gap-2 justify-content-center sm:flex-row lg:flex-column"
+        >
+          <dc-filter
+            [header]="'search_results.search_type'"
+            [options]="SEARCH_TYPE_OPTIONS"
+            (selectedOption)="searchType.next($event)"
+            class="dc-filter"
+          />
+          <dc-filter
+            *ngIf="(searchType | async) === 'cars'"
+            [header]="'search_results.filter_car_type'"
+            [options]="CAR_TYPE_FILTER_OPTIONS"
+            (selectedOption)="carTypeFilter.next($event)"
+            class="dc-filter"
+          />
+          <dc-filter
+            *ngIf="(searchType | async) === 'cars'"
+            [header]="'search_results.order'"
+            [options]="ORDER_OPTIONS"
+            (selectedOption)="carOrder.next($event)"
+            class="dc-filter"
+          />
+        </div>
+
+        <dc-divider class="dc-divider" />
+
+        <section
+          *ngIf="(searchType | async) === 'cars'"
+          class="flex justify-content-center flex-column gap-3 cars-owned-container"
+        >
+          <p *ngIf="cars.basicCarsShowedNumbered > 0" class="text-center">
+            {{ "search_results.basic_owned" | translate }}:
+            <span class="text-primary">{{ cars.basicCarsOwnedNumbered }}</span>
+            /
+            {{ cars.basicCarsShowedNumbered }}
+          </p>
+          <p *ngIf="cars.premiumCarsShowedNumbered > 0" class="text-center">
+            {{ "search_results.premium_owned" | translate }}:
+            <span class="text-primary">{{
+              cars.premiumCarsOwnedNumbered
+            }}</span>
+            /
+            {{ cars.premiumCarsShowedNumbered }}
+          </p>
+        </section>
+      </div>
+    </aside>
+    <!-- List of cars -->
+    <main class="sm:w-12 lg:w-10 flex flex-column w-full gap-8">
+      <ng-container *ngIf="cars && cars.basicCars.length">
+        <div
+          class="cars-global-container"
+          *ngIf="(searchType | async) === 'cars'"
+        >
+          <h4>{{ "search_results.basic_cars" | translate }}</h4>
+          <dc-divider [backgroundColor]="'var(--grey-300)'" [opacity]="'0.5'" />
+          <div class="basic-cars-grouped">
+            <ng-container *ngFor="let basicCar of cars.basicCars">
+              <basic-card
+                [showYear]="true"
+                [car]="basicCar"
+                (triggerToast)="showToast($event)"
+                (carType)="setCarTypeInRoute($event)"
+              />
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="cars && cars.premiumCars.length">
+        <div
+          class="cars-global-container"
+          *ngIf="(searchType | async) === 'cars'"
+        >
+          <h4>{{ "search_results.premium_cars" | translate }}</h4>
+          <dc-divider [backgroundColor]="'var(--grey-300)'" [opacity]="'0.5'" />
+          <div class="premium-cars-grouped">
+            <ng-container *ngFor="let premiumCar of cars.premiumCars">
+              <premium-card
+                [car]="premiumCar"
+                (triggerToast)="showToast($event)"
+                (carType)="setCarTypeInRoute($event)"
+              />
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="usersVM$ | async as users">
+        <div
+          class="users-global-container"
+          *ngIf="(searchType | async) === 'users'"
+        >
+          <h4>{{ "search_results.users" | translate }}</h4>
+          <dc-divider [backgroundColor]="'var(--grey-300)'" [opacity]="'0.5'" />
+          <div class="users-grouped">
+            <ng-container *ngFor="let user of users">
+              <user-card [user]="user" />
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+    </main>
+  </div>
+</ng-container>
+
+<dc-scroll-to-top></dc-scroll-to-top>
+<p-toast
+  position="bottom-right"
+  key="br"
+  [breakpoints]="{ '560px': { width: '90%' } }"
+></p-toast>

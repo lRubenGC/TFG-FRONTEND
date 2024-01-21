@@ -1,0 +1,74 @@
+.header-container {
+  height: 70px;
+  position: sticky;
+  background-color: var(--background-darker);
+  z-index: 5000;
+  top: 0;
+  padding: 0.25rem 2rem;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--orange-divider);
+
+  .dt-logo {
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+
+    img {
+      width: 60px;
+    }
+  }
+
+  .dt-search-bar {
+    border: 1px solid var(--grey-900);
+    border-radius: 20px;
+    background-color: var(--background-lighter);
+
+    input {
+      padding: 0.5rem;
+      background-color: var(--background);
+      border: none;
+      outline: none;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+      width: 500px;
+      height: 40px;
+      color: white;
+      padding-left: 1.5rem;
+    }
+
+    .search-icon_container {
+      padding: 0 1rem;
+      cursor: pointer;
+
+      img {
+        width: 25px;
+      }
+    }
+  }
+
+  .dt-navbar {
+    padding: 0 0.5rem;
+    img {
+      width: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  }
+}
+
+.user-menu {
+  img {
+    width: 60px;
+    border-radius: 50%;
+  }
+}
+
+@media (max-width: 890px) {
+  .header-container {
+    padding: 0 !important;
+  }
+  .dt-search-bar,
+  input {
+    width: 100% !important;
+  }
+}

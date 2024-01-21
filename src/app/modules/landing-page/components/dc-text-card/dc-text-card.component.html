@@ -1,0 +1,10 @@
+<section class="flex flex-column gap-1">
+  <h2 class="text-center">{{ title | translate }}</h2>
+  <p class="text-justify">{{ text | translate }}</p>
+  <dc-button
+    *ngIf="!userId"
+    class="mt-2"
+    [buttonTitle]="buttonTitle"
+    (onClickButton)="goTo()"
+  ></dc-button>
+</section>

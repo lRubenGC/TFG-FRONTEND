@@ -1,0 +1,26 @@
+h4 {
+  padding: 0.2rem;
+}
+.cars-grouped {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+@media (max-width: 990px) {
+  .cars-grouped {
+    grid-template-columns: 30% 30% 30% !important;
+  }
+}
+@media (max-width: 768px) {
+  .cars-grouped {
+    grid-template-columns: 45% 45% !important;
+  }
+}
+
+@media (max-width: 580px) {
+  .cars-grouped {
+    gap: 1rem !important;
+  }
+}

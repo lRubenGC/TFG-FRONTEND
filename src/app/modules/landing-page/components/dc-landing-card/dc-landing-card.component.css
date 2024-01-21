@@ -1,0 +1,70 @@
+h2::first-letter {
+  color: var(--primary-600);
+}
+
+article {
+  position: relative;
+  transition: all 0.3s ease;
+}
+article img {
+  object-fit: cover;
+}
+
+article img:first-child {
+  max-height: 250px;
+  margin: auto 0;
+  width: 100%;
+}
+
+article img:last-child {
+  position: absolute;
+  width: 300px;
+  bottom: 25%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  transform: translateY(25%);
+  transition: 0.3s ease;
+  opacity: 0;
+}
+
+article:hover {
+  transform: perspective(250px) translateZ(0);
+}
+
+article::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(
+    to bottom,
+    transparent 10%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0) 90%
+  );
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+article:hover::before {
+  opacity: 1;
+}
+
+article:hover img:last-child {
+  opacity: 1;
+  transform: translateY(10%);
+}
+
+@media (max-width: 900px) {
+  article img:last-child {
+    width: 300px;
+  }
+}
+
+@media (max-width: 600px) {
+  article img:last-child {
+    width: 200px;
+  }
+}

@@ -1,0 +1,13 @@
+<div class="premium-cars-group">
+  <h4>{{ group.serieName }}</h4>
+  <dc-divider [backgroundColor]="'var(--grey-300)'" [opacity]="'0.5'" />
+  <div class="cars-grouped">
+    <ng-container *ngFor="let car of group.cars">
+      <premium-card
+        [car]="car"
+        (triggerToast)="triggerToast.emit($event)"
+        (carType)="triggerCarType.emit($event)"
+      ></premium-card>
+    </ng-container>
+  </div>
+</div>

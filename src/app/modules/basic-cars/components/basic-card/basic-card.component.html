@@ -1,0 +1,56 @@
+<ng-container *ngIf="carProperty$ | async"></ng-container>
+<div class="basic-card-container w-full flex flex-column gap-1">
+  <div class="img-container">
+    <div
+      class="buttons-container w-full h-full absolute flex justify-content-center align-items-end gap-2"
+    >
+      <button
+        class="pi pi-window-maximize open-modal"
+        (click)="openModal()"
+      ></button>
+      <button
+        *ngIf="!car.has_car && !car.wants_car"
+        class="pi pi-heart wish-car"
+        (click)="addCar({ wantsCar: true })"
+      ></button>
+      <button
+        *ngIf="car.has_car || car.wants_car"
+        class="pi pi-times-circle remove-car"
+        (click)="removeCar()"
+      ></button>
+      <button
+        *ngIf="!car.has_car"
+        class="pi pi-plus-circle add-car"
+        (click)="addCar({ hasCar: true })"
+      ></button>
+    </div>
+    <img [src]="car.img" alt="Car Image" loading="lazy"/>
+  </div>
+  <div class="card-description">
+    <p class="card-description-row">{{ car.model_name }}</p>
+    <div class="card-description-row flex justify-content-between">
+      <p class="card-description-item">{{ car.version }}</p>
+      <p class="card-description-item">{{ car.col_serie }}</p>
+    </div>
+    <div class="card-description-row flex justify-content-between">
+      <p class="card-description-item">
+        {{ car.car_id }} <span *ngIf="showYear">- {{ car.year }}</span>
+      </p>
+      <div class="flex align-items-center gap-1">
+        <i
+          *ngIf="car.has_car || car.wants_car"
+          class="pi pi-heart-fill"
+          [ngClass]="{
+            owned: car.has_car,
+            wished: car.wants_car
+          }"
+        ></i>
+        <img
+          *ngIf="car.exclusive"
+          [src]="getSeriesIcon(car.exclusive)"
+          class="card-series-img"
+        />
+      </div>
+    </div>
+  </div>
+</div>

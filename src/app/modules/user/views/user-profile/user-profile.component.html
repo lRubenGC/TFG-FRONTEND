@@ -1,0 +1,146 @@
+<!-- Header -->
+<ng-container *ngIf="userVM$ | async as userVM">
+  <header>
+    <user-header-card
+      [userData]="userVM.userData"
+      [userCarsNumbers]="userVM.userNumbers"
+      [userVisitorId]="userVM.userVisitorId"
+      (exportCollectionClicked)="exportUserCollection(userVM.userData.id)"
+    />
+  </header>
+</ng-container>
+
+<ng-container
+  *ngIf="{
+    carType: carType$ | async,
+    carOwnership: carOwnership$ | async
+  } as slideVM"
+>
+  <!-- Select menu -->
+  <section class="car-type-section flex gap-4 justify-content-center">
+    <slide-menu
+      [options]="CAR_TYPE_OPTIONS"
+      (optionSelected)="carTypeSubject.next($event)"
+      [selected]="slideVM.carType"
+    />
+    <slide-menu
+      *ngIf="slideVM.carType !== 'custom'"
+      [options]="CAR_OWNERSHIP_OPTIONS"
+      (optionSelected)="carOwnershipSubject.next($event)"
+      [selected]="slideVM.carOwnership"
+    />
+  </section>
+  <!-- Filters -->
+  <section class="filters-section flex justify-content-center gap-4 w-full mb-4">
+    <ng-container *ngIf="slideVM.carType === 'basic'">
+      <ng-container *ngIf="basicMainFilterOptions | async as mainFilterOptions">
+        <dc-filter
+          *ngIf="!!mainFilterOptions.length; else noBasicCarsTemplate"
+          [header]="'user.filter.basic_main'"
+          [options]="mainFilterOptions"
+          (selectedOption)="basicMainFilter$.next($event)"
+          class="w-2"
+        />
+      </ng-container>
+      <ng-container
+        *ngIf="basicSecondaryFilterOptions | async as secondaryFilterOptions"
+      >
+        <dc-filter
+          [header]="'user.filter.basic_secondary'"
+          [options]="secondaryFilterOptions"
+          (selectedOption)="basicSecondaryFilter$.next($event)"
+          class="w-2"
+        />
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="slideVM.carType === 'premium'">
+      <ng-container
+        *ngIf="premiumMainFilterOptions | async as mainFilterOptions"
+      >
+        <dc-filter
+          *ngIf="!!mainFilterOptions.length; else noPremiumCarsTemplate"
+          [header]="'user.filter.premium_main'"
+          [options]="mainFilterOptions"
+          (selectedOption)="premiumMainFilter$.next($event)"
+          class="w-2"
+        />
+      </ng-container>
+      <ng-container
+        *ngIf="premiumSecondaryFilterOptions | async as secondaryFilterOptions"
+      >
+        <dc-filter
+          [header]="'user.filter.premium_secondary'"
+          [options]="secondaryFilterOptions"
+          (selectedOption)="premiumSecondaryFilter$.next($event)"
+          class="w-2"
+        />
+      </ng-container>
+    </ng-container>
+  </section>
+
+  <ng-container *ngIf="slideVM.carType === 'basic'">
+    <ng-container *ngIf="basicCarsVM$ | async as cars">
+      <main class="sm:w-12 lg:w-9 flex flex-column gap-5">
+        <ng-container *ngFor="let group of cars">
+          <basic-cars-group
+            [group]="group"
+            (triggerToast)="showToast($event)"
+            (triggerCarType)="setCarTypeInRoute($event)"
+          />
+        </ng-container>
+      </main>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="slideVM.carType === 'premium'">
+    <ng-container *ngIf="premiumCarsVM$ | async as cars">
+      <main class="sm:w-12 lg:w-9 flex flex-column gap-5">
+        <ng-container *ngFor="let group of cars">
+          <premium-cars-group
+            [group]="group"
+            (triggerToast)="showToast($event)"
+            (triggerCarType)="setCarTypeInRoute($event)"
+          />
+        </ng-container>
+      </main>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="slideVM.carType === 'custom'">
+    <ng-container *ngIf="customCarsVM$ | async as cars">
+      <ng-container *ngIf="!!cars.length; else noCustomCarsTemplate">
+        <main class="sm:w-full lg:w-9 h-4rem custom-cars-grouped">
+          <ng-container *ngFor="let car of cars">
+            <custom-card
+              [car]="car"
+              (triggerToast)="showToast($event)"
+              (carType)="setCarTypeInRoute($event)"
+            ></custom-card>
+          </ng-container>
+        </main>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</ng-container>
+
+<ng-template #noBasicCarsTemplate>
+  <div class="text-center">
+    {{ "user.cars.no_basic_cars" | translate }}
+  </div>
+</ng-template>
+<ng-template #noPremiumCarsTemplate>
+  <div class="text-center">
+    {{ "user.cars.no_premium_cars" | translate }}
+  </div>
+</ng-template>
+<ng-template #noCustomCarsTemplate>
+  <div class="text-center">
+    {{ "user.cars.no_custom_cars" | translate }}
+  </div>
+</ng-template>
+
+<!-- Float components -->
+<dc-scroll-to-top />
+<p-toast
+  position="bottom-right"
+  key="br"
+  [breakpoints]="{ '560px': { width: '90%' } }"
+></p-toast>

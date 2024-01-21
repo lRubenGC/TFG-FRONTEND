@@ -1,0 +1,11 @@
+<div class="dc-filter">
+  <p>{{ header | translate }}</p>
+  <div class="select-wrapper">
+    <select [formControl]="selectionControl">
+      <option *ngFor="let option of options$ | async" [value]="option">
+        {{ option | translate }}
+      </option>
+    </select>
+    <i class="pi pi-angle-down"></i>
+  </div>
+</div>

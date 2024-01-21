@@ -31,9 +31,7 @@
               "src/fonts"
             ],
             "styles": [
-              "src/styles.css",
-              "src/assets/styles/helpers.css",
-              "src/assets/styles/car-series.css"
+              "src/styles.css"
             ],
             "scripts": []
           },
@@ -43,7 +41,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -100,15 +98,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-              "src/assets/styles/helpers.css",
-              "src/assets/styles/car-series.css"
+              "src/styles.css"
             ],
             "scripts": []
           }
         }
       }
     }
-  },
-  "defaultProject": "TFG-FRONTEND"
+  }
 }

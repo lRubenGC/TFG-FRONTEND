@@ -1,0 +1,70 @@
+<ng-container
+  *ngIf="{
+    cars: carsVM$ | async,
+    mainSerieFilterOptions: mainSerieFilterOptions$ | async,
+    secondarySerieFilterOptions: secondarySerieFilterOptions$ | async,
+    ownedCars: ownedCars$ | async,
+  } as vm"
+>
+  <!-- Main container -->
+  <div class="main-container flex sm:flex-column lg:flex-row w-full">
+    <!-- Aside section -->
+    <aside class="sm:w-12 lg:w-2 h-4rem">
+      <div
+        class="fixed w-full flex flex-column sm:gap-2 lg:gap-4 sm:w-full lg:w-2"
+      >
+        <div
+          class="flex sm:gap-4 lg:gap-2 justify-content-center sm:flex-row lg:flex-column"
+        >
+          <dc-filter
+            [header]="'premium_cars.filter_main_serie'"
+            [options]="vm.mainSerieFilterOptions ?? []"
+            [filterInit]="mainSerieFilterSubject | async"
+            (selectedOption)="mainSerieFilterSubject.next($event)"
+            class="dc-filter"
+          >
+          </dc-filter>
+          <dc-filter
+            [header]="'premium_cars.filter_secondary_serie'"
+            [options]="vm.secondarySerieFilterOptions ?? []"
+            (selectedOption)="secondarySerieFilterSubject.next($event)"
+            class="dc-filter"
+          >
+          </dc-filter>
+
+          <dc-filter
+            [header]="'premium_cars.filter_property'"
+            [options]="propertyFilterOptions"
+            (selectedOption)="onPropertySelected($event)"
+            class="dc-filter"
+          >
+          </dc-filter>
+        </div>
+
+        <dc-divider class="dc-divider"></dc-divider>
+
+        <p class="text-center">
+          {{ "premium_cars.owned_cars" | translate }}:
+          {{ vm.ownedCars?.carsOwned }} /
+          {{ vm.ownedCars?.carsShowed }}
+        </p>
+      </div>
+    </aside>
+    <!-- List of cars -->
+    <main class="sm:w-12 lg:w-10 flex flex-column w-full gap-8">
+      <ng-container *ngFor="let group of vm.cars">
+        <premium-cars-group
+          [group]="group"
+          (triggerToast)="showToast($event)"
+        />
+      </ng-container>
+    </main>
+  </div>
+</ng-container>
+
+<dc-scroll-to-top></dc-scroll-to-top>
+<p-toast
+  position="bottom-right"
+  key="br"
+  [breakpoints]="{ '560px': { width: '90%' } }"
+></p-toast>

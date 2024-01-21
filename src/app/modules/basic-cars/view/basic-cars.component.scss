@@ -1,0 +1,48 @@
+.main-container {
+  main,
+  aside {
+    margin: 1rem 2rem;
+  }
+  aside > div {
+    z-index: 200;
+    background-color: var(--background);
+  }
+}
+
+@media (max-width: 990px) {
+  .main-container,
+  aside {
+    margin: 0 !important;
+  }
+  aside > div {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--orange-divider);
+  }
+  main {
+    margin: 4rem 0rem !important;
+    padding: 0 1rem;
+  }
+  .dc-filter {
+    width: 30%;
+  }
+  .dc-divider {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  aside > div,
+  aside > div > div {
+    gap: 0.5rem !important;
+  }
+}
+
+@media (max-width: 580px) {
+  main {
+    margin-top: 7rem !important;
+    padding: 0 !important;
+    h4 {
+      padding: 0 0.5rem 0.2rem;
+    }
+  }
+}

@@ -1,0 +1,49 @@
+<!-- <ng-container *ngIf="carProperty$ | async"></ng-container> -->
+<div class="custom-card-container w-full flex flex-column gap-1">
+  <div class="img-container">
+    <div
+      class="buttons-container w-full h-full absolute flex justify-content-center align-items-end gap-2"
+    >
+      <button
+        class="pi pi-window-maximize open-modal"
+        (click)="openModal()"
+      ></button>
+      <button
+        *ngIf="!car.isVoted"
+        class="pi pi-thumbs-up upvote-car"
+        (click)="upvoteCar(car.id)"
+      ></button>
+      <button
+        *ngIf="car.isVoted"
+        class="pi pi-thumbs-down downvote-car"
+        (click)="downvoteCar(car.id)"
+      ></button>
+    </div>
+    <img
+      [src]="car.imgs[0]?.itemImageSrc ?? ''"
+      [alt]="car.imgs[0]?.alt ?? 'Custom car image'"
+      loading="lazy"
+    />
+  </div>
+  <div class="card-description">
+    <p class="card-description-row">{{ car.model_name }}</p>
+    <div class="card-description-row flex justify-content-between">
+      <a
+        *ngIf="isListView"
+        [routerLink]="['/user/profile/' + car.userCreator]"
+        class="card-description-item"
+      >
+        {{ car.userCreator }}
+      </a>
+      <p class="card-description-item flex gap-1 align-items-center">
+        <span>{{ car.upvotes }}</span
+        ><i
+          [ngClass]="{
+            'text-primary-500': car.isVoted
+          }"
+          class="pi pi-thumbs-up text-sm"
+        ></i>
+      </p>
+    </div>
+  </div>
+</div>

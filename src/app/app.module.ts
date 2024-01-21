@@ -9,21 +9,16 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-// GA4
-import { GtagModule } from 'angular-gtag';
-
 // Module Views
-import { ComponentsModule } from './components/components.module';
-import { AuthGuard } from './guards/auth.guard';
-import { AuthModule } from './views/auth/auth.module';
-import { BasicCarsPageModule } from './views/basic-cars-page/basic-cars-page.module';
-import { CustomCarsModule } from './views/custom-cars/custom-cars.module';
-import { DetailedCarPageModule } from './views/detailed-car-page/detailed-car-page.module';
-import { InfoModule } from './views/info/info.module';
-import { LandingPageModule } from './views/landing-page/landing-page.module';
-import { PremiumCarsPageModule } from './views/premium-cars-page/premium-cars-page.module';
-import { SearchResultsPageModule } from './views/search-results/search-results-page.module';
-import { UserModule } from './views/user/user.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { BasicCarsModule } from './modules/basic-cars/basic-cars.module';
+import { CustomCarsModule } from './modules/custom-cars/custom-cars.module';
+import { LandingPageModule } from './modules/landing-page/landing-page.module';
+import { PremiumCarsModule } from './modules/premium-cars/premium-cars.module';
+import { SearchResultsModule } from './modules/search-results/search-results.module';
+import { UserModule } from './modules/user/user.module';
+import { AuthGuard } from './shared/guards/auth.guard';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -43,19 +38,14 @@ import { UserModule } from './views/user/user.module';
       },
     }),
 
-    // GA4
-    GtagModule.forRoot({ trackingId: 'G-P9GYT9HZTD', trackPageviews: true }),
-
     // App Modules
     AuthModule,
-    ComponentsModule,
-    BasicCarsPageModule,
+    BasicCarsModule,
     CustomCarsModule,
-    DetailedCarPageModule,
-    InfoModule,
     LandingPageModule,
-    PremiumCarsPageModule,
-    SearchResultsPageModule,
+    PremiumCarsModule,
+    SearchResultsModule,
+    SharedModule,
     UserModule,
   ],
   providers: [AuthGuard],

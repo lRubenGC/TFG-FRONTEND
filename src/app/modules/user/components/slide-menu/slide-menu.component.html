@@ -1,0 +1,13 @@
+<section class="container">
+  <ul>
+    <li
+      *ngFor="let option of options"
+      (click)="optionSelected.emit(option.value)"
+      [ngClass]="{
+        selected: selected === option.value
+      }"
+    >
+      {{ option.key | translate }}
+    </li>
+  </ul>
+</section>

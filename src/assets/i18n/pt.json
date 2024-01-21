@@ -1,0 +1,180 @@
+{
+  "all": "Todos",
+  "owned": "Colecionados",
+  "wished": "Desejados",
+  "cars": "Carros",
+  "users": "Usuários",
+  "basic": "Básicos",
+  "premium": "Premium",
+  "not_owned": "Não colecionados",
+  "DATE_DESC": "Data (Descendente)",
+  "DATE_ASC": "Data (Ascendente)",
+  "UPVOTES_DESC": "Votos (Descendente)",
+  "UPVOTES_ASC": "Votos (Ascendente)",
+  "auth": {
+    "login": {
+      "header": "Bem vindo de novo!",
+      "email": "Email",
+      "password": "Senha",
+      "login": "Iniciar sessão",
+      "overlay": "Você já tem uma conta?"
+    },
+    "signup": {
+      "header": "Crie a sua conta aqui",
+      "username": "Nome de usuário",
+      "email": "Email",
+      "password": "Senha",
+      "signup": "Cadastre-se",
+      "overlay": "Ainda não tem uma conta?"
+    },
+    "notification": {
+      "unexpected_error": "Erro inesperado",
+      "login_success": "Login realizado com sucesso",
+      "login_fail": "Email ou senha incorretos",
+      "signup_success": "Usuário cadastrado com sucesso",
+      "username_used": "Usuário já em uso",
+      "email_used": "Email já em uso",
+      "bad_username": "Insira um nome de usuário válido",
+      "bad_email": "Insira um email válido",
+      "bad_password": "Insira uma senha válida (8 a 20 caracteres)"
+    }
+  },
+  "basic_cars": {
+    "filter_year": "Ano",
+    "filter_serie": "Series",
+    "filter_property": "Propriedade",
+    "owned_cars": "Carros próprios"
+  },
+  "custom_cars": {
+    "order": "Organizar por",
+    "upload_car": "Subir carro",
+    "author": "Autor"
+  },
+  "upload_custom": {
+    "select_images": "Selecione ou arraste imagen/s",
+    "model_name": "Nome do carro",
+    "car_created_successfuly": "Carro enviado com sucesso",
+    "see_car": "Ver carro"
+  },
+  "detailed_car": {
+    "id": "ID",
+    "col": "Núm. col",
+    "version": "Versão",
+    "series": "Series",
+    "col_serie": "Núm. série principal",
+    "add_car": "Coleção",
+    "wish_car": "Desejos",
+    "remove_car": "Eliminar",
+    "collected": "Em sua coleção",
+    "wished": "Em sua wishlist",
+    "year": "Ano",
+    "exclusive": "Exclusivo",
+    "premium_col_serie": "Núm. série secundária",
+    "main_serie": "Série principal",
+    "secondary_serie": "Série secundária",
+    "upvotes": "Votos positivos",
+    "upvote": "Eu gosto",
+    "downvote": "Não gosto",
+    "upvoted_car": "Carro qualificado"
+  },
+  "header": {
+    "search_placeholder": "Procurar...",
+    "user_menu": {
+      "sign_in": "Iniciar sessão",
+      "go_to_profile": "Seu perfil",
+      "edit_profile": "Editar perfil",
+      "log_out": "Sair",
+      "lang": "Idioma",
+      "theme": "Aspecto",
+      "language_options": {
+        "en": "Inglês",
+        "es": "Espanhol",
+        "pt": "Português"
+      }
+    }
+  },
+  "landing_page": {
+    "cards": {
+      "basic_cars": "Carros básicos",
+      "premium_cars": "Carros premium",
+      "custom_cars": "Carros custom"
+    },
+    "text_card": {
+      "title": "Bem-vindo ao Diecast Tracker",
+      "text": "Diecast Tracker é uma aplicação web para colecionadores de Hot Wheels. Aqui você pode encontrar muitos dos carros da marca e adicioná-los à sua coleção ou à sua lista de desejos. O objetivo ao longo do tempo é adicionar todos os carros à plataforma e também incluir outras marcas como Matchbox, MiniGT, etc.",
+      "button": {
+        "title": "Entrar / Inscrever-se"
+      }
+    }
+  },
+  "premium_cars": {
+    "filter_main_serie": "Série principal",
+    "filter_secondary_serie": "Série secundária",
+    "filter_property": "Propriedade",
+    "owned_cars": "Carros próprios"
+  },
+  "search_results": {
+    "basic_cars": "Carros básicos",
+    "premium_cars": "Carros premium",
+    "filter_car_type": "Filtro",
+    "order": "Ordem",
+    "basic_owned": "Básicos",
+    "premium_owned": "Premium",
+    "users": "Usuários",
+    "search_type": "Tipo de pesquisa"
+  },
+  "user": {
+    "header": {
+      "basicCars": "Básicos",
+      "premiumCars": "Premium",
+      "customCars": "Custom",
+      "edit_profile": "Editar perfil",
+      "export_collection": "Coleta de exportação",
+      "export_error": "Você precisa esperar 2 horas desde o último download"
+    },
+    "filter": {
+      "ownedCars": "Coletados",
+      "wishedCars": "Desejados",
+      "basic_main": "Ano",
+      "basic_secondary": "Series",
+      "premium_main": "Series prin.",
+      "premium_secondary": "Series sec."
+    },
+    "cars": {
+      "no_basic_cars": "O usuário não possui carros básicos",
+      "no_premium_cars": "O usuário não possui carros premium",
+      "no_custom_cars": "O usuário não possui carros custom"
+    },
+    "edit": {
+      "update": "Atualizar",
+      "username": "Usuário",
+      "email": "Email",
+      "password": "Senha",
+      "info": "Altere apenas os campos que deseja atualizar, os demais não serão modificados",
+      "invalid_username": "O formato do nome do usuário não está correto",
+      "invalid_email": "O formato do e-mail não está correto",
+      "invalid_password": "O formato da senha não está correto",
+      "taken_username": "Nome do usuário já em uso",
+      "taken_email": "Email já em uso",
+      "success_update": "Dados atualizados corretamente"
+    }
+  },
+  "toast": {
+    "success": "Sucesso",
+    "error": "Erro",
+    "not_logged_in": "Faça login para fazer isso",
+    "car_added_collection": "Carro adicionado à sua coleção",
+    "car_added_wishlist": "Carro adicionado à sua lista de desejos",
+    "car_removed_collection": "Carro removido da sua coleção",
+    "car_removed_wishlist": "Carro removido da sua lista de desejos",
+    "car_upvoted": "Carro votado corretamente",
+    "car_downvoted": "Voto removido corretamente",
+    "more_than_four_imgs": "Você não pode enviar mais de 4 imagens",
+    "more_than_one_img": "Você não pode enviar mais de 1 imagen",
+    "custom_car_fields_required": "O nome do carro e pelo menos uma imagem são obrigatórios",
+    "car_successfully_created": "Carro carregado corretamente",
+    "invalid_format": "O formato da imagem está incorret",
+    "valid_formats": "Formatos válidos",
+    "at_least_one_image": "É necessária pelo menos 1 imagem com formato válido"
+  }
+}

@@ -1,0 +1,36 @@
+p {
+  padding-left: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.select-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+
+  background-color: var(--background-lighter);
+  border: none;
+  border-radius: 2px;
+  color: #fff;
+  width: 100%;
+  cursor: pointer;
+  padding: 6px 10px;
+}
+
+.pi-angle-down {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary-500);
+  pointer-events: none;
+}

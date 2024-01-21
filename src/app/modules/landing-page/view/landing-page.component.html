@@ -1,0 +1,25 @@
+<div id="landing-page">
+  <main>
+    <header class="flex justify-content-center align-items-start">
+      <dc-text-card
+        class="text-card"
+        [title]="TEXT_CARD.title"
+        [text]="TEXT_CARD.text"
+        [buttonHref]="TEXT_CARD.buttonHref"
+        [buttonTitle]="TEXT_CARD.buttonTitle"
+      ></dc-text-card>
+    </header>
+
+    <footer class="flex justify-content-center">
+      <ng-container *ngFor="let card of LANDING_CARDS">
+        <dc-landing-card
+          class="landing-card"
+          [title]="card.title"
+          [backgroundImg]="card.backgroundImg"
+          [popImg]="card.popImg"
+          [linkTo]="card.linkTo"
+        ></dc-landing-card>
+      </ng-container>
+    </footer>
+  </main>
+</div>

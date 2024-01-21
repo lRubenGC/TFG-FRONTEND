@@ -1,0 +1,47 @@
+<a
+  *ngIf="type === 'anchor'"
+  [routerLink]="[link]"
+  class="user-menu-button flex align-items-center gap-2"
+>
+  <div [class]="icon"></div>
+  {{ text | translate }}
+</a>
+
+<button
+  *ngIf="type === 'button'"
+  class="user-menu-button flex align-items-center gap-2"
+>
+  <div [class]="icon"></div>
+  {{ text | translate }}
+</button>
+
+<button
+  *ngIf="type === 'op'"
+  class="user-menu-button flex align-items-center gap-2"
+  (click)="op.toggle($event)"
+>
+  <div class="flex align-items-center justify-content-between w-full">
+    <div class="flex align-items-center gap-2">
+      <div [class]="icon"></div>
+      {{ text | translate }}
+    </div>
+    <div class="pi pi-angle-down"></div>
+  </div>
+</button>
+
+<p-overlayPanel
+  #op
+  [style]="{
+    width: opWidth,
+    border: '1px solid var(--primary-500)',
+  }"
+>
+  <button
+    *ngFor="let option of opOptions"
+    class="user-menu-button flex align-items-center gap-2"
+    (click)="op.hide(); onOpOptionSelected.emit(option.key)"
+  >
+    <div *ngIf="option.icon" [class]="option.icon"></div>
+    {{ option.text | translate }}
+  </button>
+</p-overlayPanel>

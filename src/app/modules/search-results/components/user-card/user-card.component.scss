@@ -1,0 +1,54 @@
+.user-item {
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 5px;
+  padding: 10px 20px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--primary-400);
+  }
+
+  .profile-img-container {
+    width: 80px;
+    height: 80px;
+    min-width: 80px;
+    min-height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .user-profile-pic {
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 1100px) {
+  .profile-img-container {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    min-height: 60px;
+  }
+}
+
+@media (max-width: 420px) {
+  .profile-img-container {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  .user-item {
+    margin: 0 5px;
+  }
+
+  h4 {
+    font-size: 0.8em;
+  }
+}

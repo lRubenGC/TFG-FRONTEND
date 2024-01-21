@@ -1,0 +1,64 @@
+<div class="detailed-container flex gap-5 p-2">
+  <img class="detailed-img h-full" [src]="car.img" [alt]="car.model_name" />
+  <div class="w-full flex flex-column gap-3">
+    <div class="flex flex-column gap-1">
+      <div *ngIf="car.exclusive" class="exclusive-container flex align-items-center gap-1">
+        <img [src]="getSeriesIcon(car.exclusive)" class="card-series-img" />
+        <span>({{ "detailed_car.exclusive" | translate }})</span>
+      </div>
+      <p>
+        {{ "detailed_car.id" | translate }}: <span>{{ car.car_id }}</span>
+      </p>
+      <p>
+        {{ "detailed_car.col" | translate }}: <span>#{{ car.col }}</span>
+      </p>
+      <p>
+        {{ "detailed_car.version" | translate }}: <span>{{ car.version }}</span>
+      </p>
+      <p>{{ "detailed_car.series" | translate }}:</p>
+      <div *ngFor="let serie of car.series">
+        <span class="ml-1">{{ serie }}</span>
+      </div>
+      <p>
+        {{ "detailed_car.col_serie" | translate }}:
+        <span>{{ car.col_serie }}</span>
+      </p>
+      <p>
+        {{ "detailed_car.year" | translate }}:
+        <span>{{ car.year }}</span>
+      </p>
+    </div>
+    <div class="flex justify-content-center gap-4">
+      <button
+        *ngIf="car.has_car || car.wants_car"
+        (click)="removeCar()"
+        class="remove-car"
+      >
+        {{ "detailed_car.remove_car" | translate }}
+      </button>
+      <button
+        *ngIf="!car.has_car && !car.wants_car"
+        (click)="addCar({ wantsCar: true })"
+        class="wish-car"
+      >
+        {{ "detailed_car.wish_car" | translate }}
+      </button>
+      <button
+        *ngIf="!car.has_car"
+        (click)="addCar({ hasCar: true })"
+        class="add-car"
+      >
+        {{ "detailed_car.add_car" | translate }}
+      </button>
+    </div>
+    <p style="color: var(--green-400); text-align: center" *ngIf="car.has_car">
+      ({{ "detailed_car.collected" | translate }})
+    </p>
+    <p
+      style="color: var(--primary-400); text-align: center"
+      *ngIf="car.wants_car"
+    >
+      ({{ "detailed_car.wished" | translate }})
+    </p>
+  </div>
+</div>
