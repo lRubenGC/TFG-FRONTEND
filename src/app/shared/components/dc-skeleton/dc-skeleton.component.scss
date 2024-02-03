@@ -1,0 +1,62 @@
+// Basic cars section
+.basic-cars-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+
+  .basic-card {
+    height: 125px;
+  }
+}
+@media (max-width: 990px) {
+  .basic-cars-group {
+    margin-top: 3rem;
+    grid-template-columns: 30% 30% 30% !important;
+  }
+}
+@media (max-width: 768px) {
+  .basic-cars-group {
+    grid-template-columns: 45% 45% !important;
+  }
+}
+@media (max-width: 580px) {
+  .basic-cars-group {
+    gap: 1rem !important;
+  }
+  .basic-card {
+    height: 100px !important;
+  }
+}
+
+.premium-cars-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+  .premium-card {
+    height: 320px;
+  }
+}
+@media (max-width: 990px) {
+  .premium-cars-group {
+    grid-template-columns: 22% 22% 22% 22% !important;
+  }
+}
+@media (max-width: 835px) {
+  .premium-cars-group {
+    grid-template-columns: 30% 30% 30% !important;
+  }
+}
+
+@media (max-width: 575px) {
+  .premium-cars-group {
+    gap: 1.5rem !important;
+    grid-template-columns: 45% 45% !important;
+  }
+  .premium-card {
+    height: 310px !important;
+  }
+}

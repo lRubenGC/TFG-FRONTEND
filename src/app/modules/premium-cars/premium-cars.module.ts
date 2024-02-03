@@ -10,6 +10,7 @@ import { PremiumCardComponent } from 'src/app/modules/premium-cars/components/pr
 import { DcDividerComponent } from 'src/app/shared/components/dc-divider/dc-divider.component';
 import { DcFilterComponent } from 'src/app/shared/components/dc-filter/dc-filter.component';
 import { DcScrollToTopComponent } from 'src/app/shared/components/dc-scroll-to-top/dc-scroll-to-top.component';
+import { DCSkeletonComponent } from 'src/app/shared/components/dc-skeleton/dc-skeleton.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PremiumCarsGroupComponent } from './components/premium-cars-group/premium-cars-group.component';
 import { PremiumCarsPage } from './view/premium-cars.component';
@@ -27,6 +28,7 @@ import { PremiumCarsPage } from './view/premium-cars.component';
     DcScrollToTopComponent,
     PremiumCardComponent,
     PremiumCarsGroupComponent,
+    DCSkeletonComponent,
   ],
   providers: [MessageService, DialogService],
 })

@@ -1,0 +1,71 @@
+<div *ngIf="basicCarsSection">
+  <p-skeleton
+    styleClass="mb-2"
+    width="300px"
+    height="1.5rem"
+    [style]="{ backgroundColor }"
+  />
+  <dc-divider />
+  <div class="basic-cars-group">
+    <ng-container *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7]">
+      <div>
+        <div class="basic-card">
+          <p-skeleton
+            styleClass="p-2"
+            width="100%"
+            height="100%"
+            [style]="{ backgroundColor }"
+          />
+        </div>
+        <p-skeleton
+          styleClass="mt-2"
+          width="75%"
+          height="1rem"
+          [style]="{ backgroundColor }"
+        />
+        <p-skeleton
+          styleClass="mt-2"
+          width="30%"
+          height="1rem"
+          [style]="{ backgroundColor }"
+        />
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<div *ngIf="premiumCarsSection">
+  <p-skeleton
+    styleClass="mb-2"
+    width="300px"
+    height="1.5rem"
+    [style]="{ backgroundColor }"
+  />
+  <dc-divider />
+  <div class="premium-cars-group">
+    <ng-container *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 7]">
+      <div>
+        <div class="premium-card">
+          <p-skeleton
+            styleClass="p-2"
+            width="100%"
+            height="100%"
+            [style]="{ backgroundColor }"
+          />
+        </div>
+        <p-skeleton
+          styleClass="mt-2"
+          width="75%"
+          height="1rem"
+          [style]="{ backgroundColor }"
+        />
+        <p-skeleton
+          styleClass="mt-2"
+          width="30%"
+          height="1rem"
+          [style]="{ backgroundColor }"
+        />
+      </div>
+    </ng-container>
+  </div>
+</div>

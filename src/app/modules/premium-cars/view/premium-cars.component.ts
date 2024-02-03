@@ -10,7 +10,10 @@ import {
   debounceTime,
   lastValueFrom,
   map,
+  merge,
   of,
+  shareReplay,
+  skip,
   switchMap,
   take,
   tap,
@@ -103,6 +106,23 @@ export class PremiumCarsPage implements OnInit {
     )
   );
   //#endregion CARS VM
+
+  //#region LOADING
+  public loading$ = merge(
+    merge(
+      this.mainSerieFilterSubject,
+      this.secondarySerieFilterSubject,
+      this.propertyFilterSubject
+    ).pipe(map(() => true)),
+    this.carsVM$.pipe(map(() => false))
+  ).pipe(
+    skip(6),
+    shareReplay({
+      refCount: true,
+      bufferSize: 1,
+    })
+  );
+  //#endregion LOADING
 
   constructor(
     private route: ActivatedRoute,

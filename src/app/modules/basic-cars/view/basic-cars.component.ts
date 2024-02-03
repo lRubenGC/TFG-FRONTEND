@@ -10,10 +10,13 @@ import {
   debounceTime,
   lastValueFrom,
   map,
+  merge,
   of,
+  shareReplay,
+  skip,
   switchMap,
   take,
-  tap,
+  tap
 } from 'rxjs';
 import { BasicCarDetailedComponent } from 'src/app/modules/basic-cars/components/basic-car-detailed/basic-car-detailed.component';
 import { DcBasicCarDetailedService } from 'src/app/modules/basic-cars/components/basic-car-detailed/basic-car-detailed.service';
@@ -47,6 +50,10 @@ export class BasicCarsPage implements OnInit {
         } else if (years) {
           this.yearFilterSubject.next(years[0]);
         }
+      }),
+      shareReplay({
+        refCount: true,
+        bufferSize: 1,
       })
     );
   //#endregion YEAR FILTER
@@ -62,6 +69,10 @@ export class BasicCarsPage implements OnInit {
         if (series.length) {
           this.seriesFilterSubject.next(series[0]);
         }
+      }),
+      shareReplay({
+        refCount: true,
+        bufferSize: 1,
       })
     );
   //#endregion SERIES FILTER
@@ -101,6 +112,23 @@ export class BasicCarsPage implements OnInit {
     )
   );
   //#endregion CARS VM
+
+  //#region LOADING
+  public loading$ = merge(
+    merge(
+      this.yearFilterSubject,
+      this.seriesFilterSubject,
+      this.propertyFilterSubject
+    ).pipe(map(() => true)),
+    this.carsVM$.pipe(map(() => false))
+  ).pipe(
+    skip(6),
+    shareReplay({
+      refCount: true,
+      bufferSize: 1,
+    })
+  );
+  //#endregion LOADING
 
   constructor(
     private route: ActivatedRoute,

@@ -10,9 +10,11 @@ import { BasicCardComponent } from 'src/app/modules/basic-cars/components/basic-
 import { DcDividerComponent } from 'src/app/shared/components/dc-divider/dc-divider.component';
 import { DcFilterComponent } from 'src/app/shared/components/dc-filter/dc-filter.component';
 import { DcScrollToTopComponent } from 'src/app/shared/components/dc-scroll-to-top/dc-scroll-to-top.component';
+import { DCSkeletonComponent } from 'src/app/shared/components/dc-skeleton/dc-skeleton.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BasicCarsGroupComponent } from './components/basic-cars-group/basic-cars-group.component';
 import { BasicCarsPage } from './view/basic-cars.component';
+
 @NgModule({
   declarations: [BasicCarsPage],
   imports: [
@@ -27,6 +29,7 @@ import { BasicCarsPage } from './view/basic-cars.component';
     BasicCarsGroupComponent,
     ToastModule,
     DcScrollToTopComponent,
+    DCSkeletonComponent,
   ],
   providers: [MessageService, DialogService],
 })

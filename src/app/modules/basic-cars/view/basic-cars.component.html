@@ -4,6 +4,7 @@
     yearFilterOptions: yearFilterOptions$ | async,
     seriesFilterOptions: seriesFilterOptions$ | async,
     ownedCars: ownedCars$ | async,
+    loading: loading$ | async,
   } as vm"
 >
   <!-- Main container -->
@@ -52,9 +53,15 @@
     </aside>
     <!-- List of cars -->
     <main class="sm:w-12 lg:w-10 flex flex-column gap-8 w-full">
-      <ng-container *ngFor="let group of vm.cars">
-        <basic-cars-group [group]="group" (triggerToast)="showToast($event)"/>
-      </ng-container>
+      <dc-skeleton *ngIf="!!vm.loading" [basicCarsSection]="true" />
+      <div *ngIf="!vm.loading">
+        <ng-container *ngFor="let group of vm.cars">
+          <basic-cars-group
+            [group]="group"
+            (triggerToast)="showToast($event)"
+          />
+        </ng-container>
+      </div>
     </main>
   </div>
 </ng-container>
