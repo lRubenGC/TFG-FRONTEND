@@ -13,6 +13,7 @@ import {
   filter,
   lastValueFrom,
   map,
+  merge,
   shareReplay,
   switchMap,
   take,
@@ -109,7 +110,13 @@ export class UserProfileView {
     switchMap(({ userData }) =>
       this.userService.getMainFilters(userData.id, 'basic')
     ),
-    tap((mainFilterOptions) => this.basicMainFilter$.next(mainFilterOptions[0]))
+    tap((mainFilterOptions) =>
+      this.basicMainFilter$.next(mainFilterOptions[0])
+    ),
+    shareReplay({
+      refCount: true,
+      bufferSize: 1,
+    })
   );
   public basicSecondaryFilter$ = new Subject<string>();
   public basicSecondaryFilterOptions = this.basicMainFilter$.pipe(
@@ -120,7 +127,11 @@ export class UserProfileView {
     ),
     tap((secondaryFilterOptions) =>
       this.basicSecondaryFilter$.next(secondaryFilterOptions[0])
-    )
+    ),
+    shareReplay({
+      refCount: true,
+      bufferSize: 1,
+    })
   );
   //#endregion BASIC FILTERS
 
@@ -132,7 +143,11 @@ export class UserProfileView {
     ),
     tap((mainFilterOptions) =>
       this.premiumMainFilter$.next(mainFilterOptions[0])
-    )
+    ),
+    shareReplay({
+      refCount: true,
+      bufferSize: 1,
+    })
   );
   public premiumSecondaryFilter$ = new Subject<string>();
   public premiumSecondaryFilterOptions = this.premiumMainFilter$.pipe(
@@ -143,7 +158,11 @@ export class UserProfileView {
     ),
     tap((secondaryFilterOptions) =>
       this.premiumSecondaryFilter$.next(secondaryFilterOptions[0])
-    )
+    ),
+    shareReplay({
+      refCount: true,
+      bufferSize: 1,
+    })
   );
   //#endregion PREMIUM FILTERS
 
@@ -162,7 +181,11 @@ export class UserProfileView {
         mainSerie,
         carOwnership
       )
-    )
+    ),
+    shareReplay({
+      refCount: true,
+      bufferSize: 1,
+    })
   );
   //#endregion BASIC CARS VM
 
@@ -181,7 +204,11 @@ export class UserProfileView {
         mainSerie,
         carOwnership
       )
-    )
+    ),
+    shareReplay({
+      refCount: true,
+      bufferSize: 1,
+    })
   );
   //#endregion PREMIUM CARS VM
 
@@ -190,6 +217,23 @@ export class UserProfileView {
     switchMap(({ userData }) => this.userService.getUserCustomCars(userData.id))
   );
   //#endregion CUSTOM CARS VM
+
+  //#region LOADING
+  public loading$ = merge(
+    merge(
+      this.basicMainFilter$,
+      this.basicSecondaryFilter$,
+      this.premiumMainFilter$,
+      this.premiumSecondaryFilter$
+    ).pipe(map(() => true)),
+    merge(this.premiumCarsVM$, this.basicCarsVM$).pipe(map(() => false))
+  ).pipe(
+    shareReplay({
+      refCount: true,
+      bufferSize: 1,
+    })
+  );
+  //#endregion LOADING
 
   constructor(
     private userService: UserService,

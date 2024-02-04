@@ -9,6 +9,7 @@ import { DcDividerComponent } from 'src/app/shared/components/dc-divider/dc-divi
 import { DcFilterComponent } from 'src/app/shared/components/dc-filter/dc-filter.component';
 import { DCImagesUploadComponent } from 'src/app/shared/components/dc-images-upload/dc-images-upload.component';
 import { DcScrollToTopComponent } from 'src/app/shared/components/dc-scroll-to-top/dc-scroll-to-top.component';
+import { DCSkeletonComponent } from 'src/app/shared/components/dc-skeleton/dc-skeleton.component';
 import { DcUserMenuButtonComponent } from 'src/app/shared/components/dc-user-menu-button/dc-user-menu-button.component';
 import { BasicCardComponent } from '../basic-cars/components/basic-card/basic-card.component';
 import { BasicCarsGroupComponent } from '../basic-cars/components/basic-cars-group/basic-cars-group.component';
@@ -44,6 +45,7 @@ import { UserProfileView } from './views/user-profile/user-profile.component';
     DcUserMenuButtonComponent,
     DCImagesUploadComponent,
     ReactiveFormsModule,
+    DCSkeletonComponent,
   ],
 })
 export class UserModule {}
