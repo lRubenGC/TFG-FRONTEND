@@ -6,12 +6,21 @@ export interface SEARCH_CARS_FILTERS {
 }
 
 export interface SEARCH_CARS_ORDER {
-  year: YEAR_TYPE;
+  year: ORDER_TYPE;
 }
 
 export type SEARCH_TYPE = 'cars' | 'users';
+export function isSearchType(value: string): value is SEARCH_TYPE {
+  return value === 'cars' || value === 'users';
+}
 export type CAR_TYPE = 'all' | 'basic' | 'premium';
-export type YEAR_TYPE = 'DATE_ASC' | 'DATE_DESC';
+export function isCarType(value: string): value is CAR_TYPE {
+  return value === 'all' || value === 'basic' || value === 'premium';
+}
+export type ORDER_TYPE = 'DATE_ASC' | 'DATE_DESC';
+export function isOrderType(value: string): value is ORDER_TYPE {
+  return value === 'DATE_ASC' || value === 'DATE_DESC';
+}
 
 export interface SEARCH_CARS_RESPONSE {
   basicCars: IBASIC_CAR[];

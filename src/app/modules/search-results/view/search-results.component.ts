@@ -31,11 +31,11 @@ import {
 } from '../models/search-results.constants';
 import {
   CAR_TYPE,
+  ORDER_TYPE,
   SEARCH_CARS_FILTERS,
   SEARCH_CARS_ORDER,
   SEARCH_CARS_RESPONSE,
   SEARCH_TYPE,
-  YEAR_TYPE,
 } from '../models/search-results.models';
 import { SearchResultsService } from '../services/search-results.service';
 
@@ -59,7 +59,7 @@ export class SearchResultsPage implements OnInit {
 
   //#region ORDER
   public readonly ORDER_OPTIONS = SEARCH_CARS_ORDER_OPTIONS;
-  public carOrder = new BehaviorSubject<YEAR_TYPE>('DATE_DESC');
+  public carOrder = new BehaviorSubject<ORDER_TYPE>('DATE_DESC');
   private carOrder$ = this.carOrder.pipe(map((order) => order));
   //#endregion ORDER
 

@@ -6,6 +6,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import {
   BehaviorSubject,
   Observable,
+  Subject,
   combineLatest,
   debounceTime,
   lastValueFrom,
@@ -40,7 +41,7 @@ import { PremiumCarsService } from '../services/premium-cars.service';
 export class PremiumCarsPage implements OnInit {
   //#region MAIN SERIE FILTER
   private mainSerieStoraged: string | null = null;
-  public mainSerieFilterSubject = new BehaviorSubject<string>('');
+  public mainSerieFilterSubject = new Subject<string>();
   public mainSerieFilterOptions$: Observable<string[]> = this.premiumCarsService
     .getAvailableMainSeries()
     .pipe(
@@ -55,7 +56,7 @@ export class PremiumCarsPage implements OnInit {
   //#endregion MAIN SERIE FILTER
 
   //#region SECONDARY SERIES FILTER
-  public secondarySerieFilterSubject = new BehaviorSubject<string>('');
+  public secondarySerieFilterSubject = new Subject<string>();
   public secondarySerieFilterOptions$: Observable<string[]> =
     this.mainSerieFilterSubject.pipe(
       switchMap((serie) =>
@@ -103,7 +104,11 @@ export class PremiumCarsPage implements OnInit {
       mainSerie && secondarySerie && property
         ? this.getPremiumCars(mainSerie, secondarySerie, property)
         : of([])
-    )
+    ),
+    shareReplay({
+      refCount: true,
+      bufferSize: 1,
+    })
   );
   //#endregion CARS VM
 
@@ -116,7 +121,6 @@ export class PremiumCarsPage implements OnInit {
     ).pipe(map(() => true)),
     this.carsVM$.pipe(map(() => false))
   ).pipe(
-    skip(6),
     shareReplay({
       refCount: true,
       bufferSize: 1,

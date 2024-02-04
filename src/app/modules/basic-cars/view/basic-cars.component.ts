@@ -6,12 +6,13 @@ import { DialogService } from 'primeng/dynamicdialog';
 import {
   BehaviorSubject,
   Observable,
+  Subject,
   combineLatest,
-  debounceTime,
   lastValueFrom,
   map,
   merge,
   of,
+  share,
   shareReplay,
   skip,
   switchMap,
@@ -40,7 +41,7 @@ import { BasicCarsService } from '../services/basic-cars.service';
 export class BasicCarsPage implements OnInit {
   //#region YEAR FILTER
   private yearStoraged: string | null = null;
-  public yearFilterSubject = new BehaviorSubject<string>('');
+  public yearFilterSubject = new Subject<string>();
   public yearFilterOptions$: Observable<string[]> = this.basicCarsService
     .getAvailableYears()
     .pipe(
@@ -51,15 +52,12 @@ export class BasicCarsPage implements OnInit {
           this.yearFilterSubject.next(years[0]);
         }
       }),
-      shareReplay({
-        refCount: true,
-        bufferSize: 1,
-      })
+      share()
     );
   //#endregion YEAR FILTER
 
   //#region SERIES FILTER
-  public seriesFilterSubject = new BehaviorSubject<string>('');
+  public seriesFilterSubject = new Subject<string>();
   public seriesFilterOptions$: Observable<string[]> =
     this.yearFilterSubject.pipe(
       switchMap((year) =>
@@ -70,10 +68,7 @@ export class BasicCarsPage implements OnInit {
           this.seriesFilterSubject.next(series[0]);
         }
       }),
-      shareReplay({
-        refCount: true,
-        bufferSize: 1,
-      })
+      share()
     );
   //#endregion SERIES FILTER
 
@@ -101,7 +96,6 @@ export class BasicCarsPage implements OnInit {
     this.seriesFilterSubject,
     this.propertyFilterSubject,
   ]).pipe(
-    debounceTime(100),
     tap(([year]) => {
       localStorage.setItem('b-yearStoraged', year);
     }),
@@ -109,7 +103,11 @@ export class BasicCarsPage implements OnInit {
       year && serie && property
         ? this.getBasicCars(year, serie, property)
         : of([])
-    )
+    ),
+    shareReplay({
+      refCount: true,
+      bufferSize: 1,
+    })
   );
   //#endregion CARS VM
 
@@ -122,7 +120,6 @@ export class BasicCarsPage implements OnInit {
     ).pipe(map(() => true)),
     this.carsVM$.pipe(map(() => false))
   ).pipe(
-    skip(6),
     shareReplay({
       refCount: true,
       bufferSize: 1,
