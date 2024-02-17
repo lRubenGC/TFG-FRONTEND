@@ -87,8 +87,8 @@
       "lang": "Idioma",
       "theme": "Aspecto",
       "language_options": {
-        "en": "Inglês",
-        "es": "Espanhol",
+        "en": "English",
+        "es": "Español",
         "pt": "Português"
       }
     }
@@ -158,6 +158,40 @@
       "taken_email": "Email já em uso",
       "success_update": "Dados atualizados corretamente"
     }
+  },
+  "policies": {
+    "title": "Política de Privacidade",
+    "date": "Última atualização: 17/02/2024",
+    "first-li": {
+      "title": "Coleta de Informações:",
+      "first-p": "Dados Pessoais:",
+      "first-d": "- Podemos coletar informações pessoais de usuários, como endereço IP, localização geográfica aproximada e informações do navegador.",
+      "second-p": "Cookies e Tecnologias Semelhantes:",
+      "second-d": "- Utilizamos cookies e tecnologias semelhantes para aprimorar a experiência do usuário e coletar informações sobre a interação com nosso site, incluindo a visualização de anúncios."
+    },
+    "second-li": {
+      "title": "Uso do Google AdSense:",
+      "first-p": "Anúncios Publicitários:",
+      "first-d": "- Nosso site utiliza o Google AdSense para exibir anúncios. O Google AdSense pode coletar informações sobre sua visita ao nosso site para fornecer anúncios mais relevantes.",
+      "second-p": "Cookies de Publicidade:",
+      "second-d": "- O Google AdSense utiliza cookies de publicidade para personalizar os anúncios com base em seus interesses. Você pode gerenciar as preferências de cookies através das configurações do seu navegador."
+    },
+    "third-li": {
+      "title": "Links para Terceiros:",
+      "first-p": "Sites Externos:",
+      "first-d": "- Nosso site pode conter links para sites de terceiros. Não somos responsáveis pelas práticas de privacidade desses sites e recomendamos revisar suas políticas de privacidade."
+    },
+    "fourth-li": {
+      "title": "Configurações de Privacidade:",
+      "first-p": "Preferências de Anúncios:",
+      "first-d": "- Você pode ajustar suas preferências de anúncios personalizados nas Configurações de Anúncios do Google."
+    },
+    "fifth-li": {
+      "title": "Alterações na Política de Privacidade:",
+      "first-p": "Atualizações:",
+      "first-d": "- Reservamos o direito de atualizar nossa política de privacidade. As atualizações serão publicadas nesta página com a data da última revisão."
+    },
+    "last-span": "Ao usar nosso site, você concorda com as práticas descritas nesta política de privacidade. Para obter mais informações ou fazer perguntas sobre nossas políticas de privacidade, entre em contato conosco em rdevgc@gmail.com"
   },
   "toast": {
     "success": "Sucesso",

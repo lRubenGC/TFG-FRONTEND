@@ -52,6 +52,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'privacy-policies',
+    loadChildren: () =>
+      import('./modules/google/privacy-policies/google-routing.module').then(
+        (m) => m.GoogleRoutingModule
+      ),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

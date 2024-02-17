@@ -88,8 +88,8 @@
       "theme": "Theme",
       "language_options": {
         "en": "English",
-        "es": "Spanish",
-        "pt": "Portuguese"
+        "es": "Español",
+        "pt": "Português"
       }
     }
   },
@@ -158,6 +158,40 @@
       "taken_email": "Email is already in use",
       "success_update": "Data updated successfully"
     }
+  },
+  "policies": {
+    "title": "Privacy Policy",
+    "date": "Last Updated: 17/02/2024",
+    "first-li": {
+      "title": "Information Collection:",
+      "first-p": "Personal Data:",
+      "first-d": "- We may collect certain personal information from users, such as IP address, approximate geographic location, and browser information.",
+      "second-p": "Cookies and Similar Technologies:",
+      "second-d": "- We use cookies and similar technologies to enhance the user experience and gather information about the interaction with our website, including ad views."
+    },
+    "second-li": {
+      "title": "Use of Google AdSense:",
+      "first-p": "Advertising:",
+      "first-d": "- Our website uses Google AdSense to display ads. Google AdSense may collect information about your visit to our website to provide more relevant ads.",
+      "second-p": "Advertising Cookies:",
+      "second-d": "- Google AdSense uses advertising cookies to personalize ads based on your interests. You can manage cookie preferences through your browser settings."
+    },
+    "third-li": {
+      "title": "Third-Party Links:",
+      "first-p": "External Websites:",
+      "first-d": "- Our website may contain links to third-party websites. We are not responsible for the privacy practices of these sites and recommend reviewing their privacy policies."
+    },
+    "fourth-li": {
+      "title": "Privacy Settings:",
+      "first-p": "Ad Preferences:",
+      "first-d": "- You can adjust your personalized ad preferences in the Google Ad Settings."
+    },
+    "fifth-li": {
+      "title": "Changes to Privacy Policy:",
+      "first-p": "Updates:",
+      "first-d": "- We reserve the right to update our privacy policy. Updates will be posted on this page with the date of the last revision."
+    },
+    "last-span": "By using our website, you agree to the practices described in this privacy policy. For more information or inquiries about our privacy policies, contact us at rdevgc@gmail.com"
   },
   "toast": {
     "success": "Success",
