@@ -96,10 +96,17 @@
               (onOpOptionSelected)="changeLanguage($event)"
             ></dc-user-menu-button>
             <dc-user-menu-button
+              [type]="'anchor'"
+              [text]="'header.user_menu.privacy-policies'"
+              [icon]="'pi pi-shield'"
+              [link]="'/privacy-policies'"
+              (click)="userMenu.hide()"
+            ></dc-user-menu-button>
+            <!-- <dc-user-menu-button
               [type]="'button'"
               [text]="'header.user_menu.theme'"
               [icon]="'pi pi-moon'"
-            ></dc-user-menu-button>
+            ></dc-user-menu-button> -->
           </div>
         </div>
       </p-overlayPanel>
@@ -146,10 +153,17 @@
               (onOpOptionSelected)="changeLanguage($event)"
             ></dc-user-menu-button>
             <dc-user-menu-button
+              [type]="'anchor'"
+              [text]="'header.user_menu.privacy-policies'"
+              [icon]="'pi pi-shield'"
+              [link]="'/privacy-policies'"
+              (click)="userMenu.hide()"
+            ></dc-user-menu-button>
+            <!-- <dc-user-menu-button
               [type]="'button'"
               [text]="'header.user_menu.theme'"
               [icon]="'pi pi-moon'"
-            ></dc-user-menu-button>
+            ></dc-user-menu-button> -->
           </div>
         </div>
       </p-overlayPanel>
